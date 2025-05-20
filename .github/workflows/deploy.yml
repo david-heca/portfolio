@@ -1,0 +1,55 @@
+name: Deploy to GitHub Pages
+
+on:
+  # Ejecutar cuando hay un push a la rama main
+  push:
+    branches: [ main ]
+  # Permite ejecutar este workflow manualmente desde la pestaña Actions en GitHub
+  workflow_dispatch:
+
+# Permite clonar el repositorio y desplegar a GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Solo permite una implementación simultánea, saltando ejecutar en cola
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v3
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'npm'
+          cache-dependency-path: './app/package-lock.json'
+
+      - name: Instalar dependencias
+        run: cd app && npm ci
+
+      - name: Construir sitio
+        run: cd app && npm run build
+
+      - name: Subir artefactos para despliegue
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: './app/dist'
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Desplegar a GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
