@@ -3,6 +3,5 @@ import tailwind from '@astrojs/tailwind';
 
 export default defineConfig({
   integrations: [tailwind()],
-  site: 'https://davidheca.dev',
-  base: '/portfolio',
+  site: 'https://davidheca.dev'
 });

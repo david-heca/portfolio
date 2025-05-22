@@ -1,0 +1,104 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  size?: string;
+}
+
+const { 
+  src, 
+  alt, 
+  size = "w-32 h-32" 
+} = Astro.props;
+---
+
+<div id="avatar-3d" class={`${size} mx-auto mb-8 relative`}>
+  <div class="morph-bg absolute inset-[-15px] bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 blur-xl opacity-60"></div>
+  <div class="w-full h-full rounded-full overflow-hidden relative z-10 border-2 border-white/10">
+    <div class="avatar-inner w-full h-full relative">
+      <Image 
+        src={src} 
+        alt={alt} 
+        class="w-full h-full object-cover absolute inset-0" 
+        width={1000} 
+        height={1000}
+        quality={90}
+        loading="lazy"
+      />
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const avatar = document.getElementById('avatar-3d');
+    
+    if (avatar) {
+      // Solo aplicar en dispositivos que probablemente tengan mouse
+      if (window.matchMedia('(min-width: 768px)').matches) {
+        
+        // Limitar el ángulo de rotación
+        const maxRotation = 15;
+        
+        document.addEventListener('mousemove', (e) => {
+          const { clientX, clientY } = e;
+          const { left, top, width, height } = avatar.getBoundingClientRect();
+          
+          // Calcular el centro del elemento
+          const centerX = left + width / 2;
+          const centerY = top + height / 2;
+          
+          // Calcular la distancia desde el centro
+          const distanceX = clientX - centerX;
+          const distanceY = clientY - centerY;
+          
+          // Calcular la rotación basada en la distancia al centro (limitada por maxRotation)
+          const rotateY = Math.min(Math.max(-maxRotation, distanceX / 10), maxRotation);
+          const rotateX = Math.min(Math.max(-maxRotation, -distanceY / 10), maxRotation);
+          
+          // Aplicar transformación
+          avatar.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+        });
+        
+        // Resetear al salir de la ventana o dejar de mover el mouse
+        document.addEventListener('mouseleave', () => {
+          avatar.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+        });
+        
+        // Añadir transición suave
+        avatar.style.transition = 'transform 0.2s ease-out';
+      }
+    }
+  });
+</script>
+
+<style>
+  #avatar-3d {
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+  
+  #avatar-3d::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    pointer-events: none;
+    z-index: 20;
+  }
+  
+  .morph-bg {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+    animation: morph 8s ease-in-out infinite;
+  }
+  
+  @keyframes morph {
+    0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+    50% { border-radius: 50% 60% 30% 70% / 40% 60% 70% 30%; }
+    75% { border-radius: 40% 60% 70% 30% / 60% 30% 70% 40%; }
+    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  }
+</style>
