@@ -1,0 +1,73 @@
+---
+---
+
+<button 
+  id="back-to-top" 
+  class="fixed bottom-8 right-8 w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-2xl transition-all duration-300 z-50 opacity-0 invisible transform translate-y-4 hover:scale-110 group"
+  aria-label="Volver arriba"
+>
+  <svg 
+    class="w-5 h-5 md:w-6 md:h-6 text-white mx-auto group-hover:-translate-y-0.5 transition-transform" 
+    fill="none" 
+    stroke="currentColor" 
+    viewBox="0 0 24 24"
+  >
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+  </svg>
+</button>
+
+<style>
+  #back-to-top.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  /* Animación suave para la aparición */
+  #back-to-top {
+    backdrop-filter: blur(10px);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    if (backToTopButton) {
+      // Mostrar/ocultar botón basado en scroll
+      const toggleButton = () => {
+        if (window.scrollY > 300) { // Mostrar después de 300px de scroll
+          backToTopButton.classList.add('show');
+        } else {
+          backToTopButton.classList.remove('show');
+        }
+      };
+      
+      // Escuchar scroll con throttle para mejor performance
+      let ticking = false;
+      const handleScroll = () => {
+        if (!ticking) {
+          requestAnimationFrame(() => {
+            toggleButton();
+            ticking = false;
+          });
+          ticking = true;
+        }
+      };
+      
+      // Event listeners
+      window.addEventListener('scroll', handleScroll);
+      
+      // Función de scroll suave al top
+      backToTopButton.addEventListener('click', () => {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      });
+      
+      // Verificar posición inicial
+      toggleButton();
+    }
+  });
+</script>

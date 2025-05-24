@@ -1,0 +1,115 @@
+---
+const projects = [
+  {
+    id: 1,
+    title: "Connie",
+    description: "Plataforma de IA para empresas, habla con tus datos por medio del procesamiento de lenguaje natural.",
+    image: "/assets/project1.jpg",
+    tech: ["React", "Python", "SQL", "Tailwind", "JWT", "FastAPI"],
+    github: "https://github.com/david-heca/ecommerce",
+    demo: "https://demo.example.com",
+  },
+  {
+    id: 2,
+    title: "HandHeld - Aplicación de RFID",
+    description: "Aplicación para controlar el inventario de una empresa, utilizando tecnología RFID.",
+    image: "/assets/project1.jpg",
+    tech: ["Java", "Android Studio", "Material", "SQL"],
+    github: "https://github.com/david-heca/ecommerce",
+    demo: "https://demo.example.com",
+  },
+  // portafolio (este sitio)
+  {
+    id: 3,
+    title: "Portafolio",
+    description: "Portafolio personal para mostrar mis proyectos y habilidades como desarrollador.",
+    image: "/assets/project1.jpg",
+    tech: ["Astro", "Tailwind", "JavaScript"],
+    github: "",
+    demo: "https://davidheca.com",
+  },
+  // winform con c# y devexpress para la trazabilidad de piezas automotices por medio de estaciones de ensamble
+  {
+    id: 4,
+    title: "Trazabilidad de Piezas Automotrices",
+    description: "Aplicación de escritorio para la trazabilidad de piezas automotrices utilizando C# y DevExpress.",
+    image: "/assets/project1.jpg",
+    tech: ["C#", "DevExpress", "SQL", "WinForms"],
+  },
+];
+---
+
+<section id="projects" class="py-24 relative">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl md:text-6xl font-bold mb-8">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 via-yellow-100 to-cyan-400">
+          Proyectos Destacados
+        </span>
+      </h2>
+      <div
+          class="w-24 h-1 bg-gradient-to-r from-yellow-100 to-cyan-400 mx-auto rounded-full mb-8"
+        ></div>
+      <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+        Una selección de mis trabajos más recientes y significativos
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map((project) => (
+        <div class="project-card group cursor-pointer" data-project-id={project.id}>
+          <div class="relative overflow-hidden rounded-2xl">
+            <img 
+              src={project.image} 
+              alt={project.title}
+              class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            <div class="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
+              <div class="flex gap-2">
+                <a href={project.demo} class="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-colors">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <!-- External link icon -->
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          <div class="p-6">
+            <h3 class="text-xl font-semibold mb-2 group-hover:text-purple-400 transition-colors">
+              {project.title}
+            </h3>
+            <p class="text-gray-400 mb-4 line-clamp-3">
+              {project.description}
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {project.tech.map((tech) => (
+                <span class="px-3 py-1 bg-gray-800 text-gray-300 rounded-full text-sm">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .project-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    transition: all 0.3s ease;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(147, 51, 234, 0.3);
+    box-shadow: 0 20px 40px rgba(147, 51, 234, 0.1);
+  }
+</style>
