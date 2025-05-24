@@ -1,0 +1,221 @@
+---
+const primarySkills = [
+  {
+    name: "C#",
+    category: "Backend",
+    level: "Intermedio",
+    color: "from-purple-500 to-purple-700",
+  },
+  {
+    name: "Tailwind CSS",
+    category: "Frontend",
+    level: "Intermedio",
+    color: "from-cyan-400 to-cyan-600",
+  },
+  {
+    name: "Python",
+    category: "Backend",
+    level: "Intermedio",
+    color: "from-yellow-400 to-green-600",
+  },
+  {
+    name: "Docker",
+    category: "DevOps",
+    level: "Básico",
+    color: "from-blue-400 to-blue-700",
+  },
+  {
+    name: "Azure",
+    category: "Cloud",
+    level: "Intermedio",
+    color: "from-green-400 to-green-600",
+  },
+  {
+    name: "JavaScript",
+    category: "Frontend",
+    level: "Intermedio",
+    color: "from-yellow-400 to-yellow-600",
+  },
+  {
+    name: "SQL",
+    category: "Database",
+    level: "Intermedio",
+    color: "from-red-500 to-red-700",
+  },
+  {
+    name: "Git",
+    category: "Tools",
+    level: "Avanzado",
+    color: "from-orange-500 to-red-600",
+  },
+  {
+    name: "React",
+    category: "Frontend",
+    level: "Básico",
+    color: "from-blue-500 to-blue-700",
+  },
+  {
+    name: "Astro",
+    category: "Frontend",
+    level: "Básico",
+    color: "from-blue-500 to-blue-700",
+  },
+];
+
+const languages = [
+  { name: "Español", level: "Nativo", flag: "🇪🇸" },
+  { name: "Inglés", level: "B2 - Upper Intermediate", flag: "🇺🇸" },
+];
+
+const softSkills = [
+  "Resolución de Problemas",
+  "Trabajo en Equipo",
+  "Comunicación",
+  "Aprendizaje Rápido",
+  "Adaptabilidad",
+  "Pensamiento Crítico",
+  "Responsabilidad",
+  "Creatividad",
+  "Liderazgo",
+  "Empatía",
+  "Organización",
+  "Gestión del Tiempo",
+];
+---
+
+<section id="skills" class="py-24 relative">
+  <div class="container mx-auto px-4">
+    <div class="max-w-5xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-6xl font-bold mb-8">
+          <span
+            class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-white to-cyan-400"
+          >
+            Stack Tecnológico
+          </span>
+        </h2>
+        <div
+          class="w-24 h-1 bg-gradient-to-r from-purple-400 to-cyan-400 mx-auto rounded-full mb-8"
+        >
+        </div>
+        <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+            <!-- creativo -->
+          Las tecnologías y herramientas que utilizo para crear.
+        </p>
+      </div>
+
+      <!-- Technical Skills Grid -->
+      <div class="mb-16">
+        <h3 class="text-3xl font-bold text-white mb-8 text-center">
+          Tecnologías
+        </h3>
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+          {
+            primarySkills.map((skill, index) => (
+              <div
+                class="skill-card group p-6 bg-white/5 rounded-2xl border border-white/10 hover:border-purple-400/30 transition-all duration-300 hover:scale-105"
+                style={`animation-delay: ${index * 0.1}s`}
+              >
+                <div class="text-center">
+                  <div
+                    class={`w-12 h-12 bg-gradient-to-r ${skill.color} rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}
+                  >
+                    <div class="w-6 h-6 bg-white/20 rounded-lg" />
+                  </div>
+                  <h4 class="text-white font-semibold mb-2 group-hover:text-purple-300 transition-colors">
+                    {skill.name}
+                  </h4>
+                  <div class="flex flex-col gap-1">
+                    <span class="text-xs text-gray-400 uppercase tracking-wide">
+                      {skill.category}
+                    </span>
+                    <span
+                      class={`text-xs px-2 py-1 rounded-full ${
+                        skill.level === "Avanzado"
+                          ? "bg-green-500/20 text-green-300"
+                          : skill.level === "Intermedio"
+                            ? "bg-yellow-500/20 text-yellow-300"
+                            : "bg-blue-500/20 text-blue-300"
+                      }`}
+                    >
+                      {skill.level}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Languages -->
+      <div class="mb-16">
+        <h3 class="text-3xl font-bold text-white mb-8 text-center">Idiomas</h3>
+        <div class="flex justify-center gap-8">
+          {
+            languages.map((lang) => (
+              <div class="language-card glass-card p-6 rounded-2xl text-center min-w-[200px]">
+                <div class="text-4xl mb-3">{lang.flag}</div>
+                <h4 class="text-xl font-bold text-white mb-2">{lang.name}</h4>
+                <p class="text-gray-400">{lang.level}</p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Soft Skills -->
+      <div class="text-center">
+        <h3 class="text-2xl font-bold text-white mb-8">
+          Habilidades Interpersonales
+        </h3>
+        <div class="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
+          {
+            softSkills.map((skill, index) => (
+              <div
+                class="soft-skill-tag px-4 py-2 bg-gradient-to-r from-white/10 to-white/5 backdrop-blur-sm border border-white/20 rounded-full text-gray-300 hover:text-white hover:border-purple-400/50 transition-all duration-300 hover:scale-105"
+                style={`animation-delay: ${index * 0.1}s`}
+              >
+                {skill}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .glass-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .skill-card {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  .language-card:hover,
+  .skill-card:hover {
+    border-color: rgba(147, 51, 234, 0.3);
+    box-shadow: 0 10px 30px rgba(147, 51, 234, 0.1);
+  }
+
+  .soft-skill-tag {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

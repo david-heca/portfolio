@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-
+import '../styles/components/avatar.css'
 interface Props {
   src: ImageMetadata;
   alt: string;
@@ -73,32 +73,3 @@ const {
     }
   });
 </script>
-
-<style>
-  #avatar-3d {
-    transform-style: preserve-3d;
-    will-change: transform;
-  }
-  
-  #avatar-3d::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 9999px;
-    pointer-events: none;
-    z-index: 20;
-  }
-  
-  .morph-bg {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    animation: morph 8s ease-in-out infinite;
-  }
-  
-  @keyframes morph {
-    0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-    25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-    50% { border-radius: 50% 60% 30% 70% / 40% 60% 70% 30%; }
-    75% { border-radius: 40% 60% 70% 30% / 60% 30% 70% 40%; }
-    100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-  }
-</style>
