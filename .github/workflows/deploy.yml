@@ -30,18 +30,18 @@ jobs:
         with:
           node-version: 18
           cache: 'npm'
-          cache-dependency-path: './app/package-lock.json'
+          cache-dependency-path: './package-lock.json'
 
       - name: Instalar dependencias
-        run: cd app && npm ci
+        run: npm ci
 
       - name: Construir sitio
-        run: cd app && npm run build
+        run: npm run build
 
       - name: Subir artefactos para despliegue
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './app/dist'
+          path: './dist'
 
   deploy:
     environment:
