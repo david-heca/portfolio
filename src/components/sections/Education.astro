@@ -1,10 +1,12 @@
 ---
+import { sequence } from "astro:middleware";
+
 const education = [
   {
     id: 1,
     type: "education",
     institution: "Tecnológico de Estudios Superiores de Coacalco (TESCo) - TecNM",
-    degree: "Ingeniería en Informática",
+    degree: "Ingeniería en Tecnologías de la Información y Comunicaciones",
     period: "2018 - 2022",
     status: "Graduado",
     description: "Especialización en desarrollo de aplicaciones móviles.",
@@ -27,69 +29,58 @@ const education = [
 const certifications = [
   {
     id: 1,
-    name: "AWS Certified Developer",
-    issuer: "Amazon Web Services",
+    name: "Azure AZ-900: Microsoft Azure Fundamentals",
+    issuer: "Microsoft",
     date: "2024",
-    credentialId: "AWS-CDA-123456",
-    image: "/assets/certifications/aws.png",
-    verifyUrl: "https://aws.amazon.com/verification",
-    skills: ["AWS Lambda", "DynamoDB", "API Gateway", "CloudFormation"],
-    level: "Associate"
+    credentialId: "AZ-900-123456",
+    image: "/assets/certifications/azure.png",
+    verifyUrl: "https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=414&cvid=r+dkpNaAIMQHhll3/TFLLw==",
+    skills: ["Azure", "Cloud Computing", "Networking", "Security"],
+    level: "Fundamentals"
   },
   {
     id: 2,
-    name: "React Developer Professional",
-    issuer: "Meta",
-    date: "2023",
-    credentialId: "META-RDP-789012",
+    name: "Python for Everybody Specialization",
+    issuer: "Michigan University",
+    date: "2022",
+    credentialId: "J7EMYHGRRUH8",
     image: "/assets/certifications/meta.png",
-    verifyUrl: "https://coursera.org/verify",
-    skills: ["React", "Redux", "Testing", "Performance"],
-    level: "Professional"
+    verifyUrl: "https://www.coursera.org/account/accomplishments/verify/J7EMYHGRRUH8",
+    skills: ["Python", "Data Structures", "SQL"],
+    level: "Fundamentals"
   },
   {
     id: 3,
-    name: "TypeScript Fundamentals",
-    issuer: "Microsoft",
+    name: "Introducción a la Inteligencia Artificial",
+    issuer: "Platzi",
     date: "2023",
-    credentialId: "MS-TS-345678",
-    image: "/assets/certifications/microsoft.png",
-    verifyUrl: "https://learn.microsoft.com/verify",
-    skills: ["TypeScript", "Type Safety", "Advanced Types"],
+    credentialId: "bb841264-3516-4421-a1e2-5f5902c117ee",
+    image: "/assets/certifications/google.png",
+    verifyUrl: "https://platzi.com/p/david-heca/curso/11157-introduccion-ai/diploma/detalle/",
+    skills: ["AI", "Machine Learning", "Data Science"],
     level: "Fundamentals"
   },
   {
     id: 4,
-    name: "Google Analytics Certified",
-    issuer: "Google",
+    name: "Desarrollo de Chatbots con Azure OpenAI",
+    issuer: "Platzi",
     date: "2023",
-    credentialId: "GA-IQ-901234",
-    image: "/assets/certifications/google.png",
-    verifyUrl: "https://skillshop.exceedlms.com/verify",
-    skills: ["Analytics", "Data Analysis", "Reporting"],
-    level: "Individual Qualification"
+    credentialId: "60c81aa1-626e-4a7c-9842-8b4a2fabc165",
+    image: "/assets/certifications/platzi.png",
+    verifyUrl: "https://platzi.com/p/david-heca/curso/8946-azureopenia/diploma/detalle/",
+    skills: ["Chatbots", "Azure", "OpenAI"],
+    level: "Intermediate"
   },
   {
     id: 5,
-    name: "Scrum Master Certified",
-    issuer: "Scrum Alliance",
-    date: "2022",
-    credentialId: "CSM-567890",
-    image: "/assets/certifications/scrum.png",
-    verifyUrl: "https://scrumalliance.org/verify",
-    skills: ["Agile", "Scrum", "Team Leadership"],
-    level: "Certified"
-  },
-  {
-    id: 6,
-    name: "UX/UI Design Certificate",
-    issuer: "Google",
-    date: "2022",
-    credentialId: "GOOGLE-UX-123789",
+    name: "Introducción a la Terminal y Línea de Comandos",
+    issuer: "Platzi",
+    date: "2023",
+    credentialId: "5584d92c-c845-442e-819b-2b31a747f230",
     image: "/assets/certifications/google-ux.png",
-    verifyUrl: "https://coursera.org/verify",
-    skills: ["User Research", "Prototyping", "Design Systems"],
-    level: "Certificate"
+    verifyUrl: "https://platzi.com/p/david-heca/curso/2292-terminal/diploma/detalle/",
+    skills: ["Terminal", "Command Line", "Linux"],
+    level: "Fundamentals"
   }
 ];
 ---
