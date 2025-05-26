@@ -5,60 +5,70 @@ const primarySkills = [
     category: "Backend",
     level: "Intermedio",
     color: "from-purple-500 to-purple-700",
+    icon: "csharp",
   },
   {
     name: "Tailwind CSS",
     category: "Frontend",
     level: "Intermedio",
     color: "from-cyan-400 to-cyan-600",
+    icon: "tailwindcss",
   },
   {
     name: "Python",
     category: "Backend",
     level: "Intermedio",
     color: "from-yellow-400 to-green-600",
+    icon: "python",
   },
   {
     name: "Docker",
     category: "DevOps",
     level: "Básico",
     color: "from-blue-400 to-blue-700",
+    icon: "docker",
   },
   {
     name: "Azure",
     category: "Cloud",
     level: "Intermedio",
     color: "from-green-400 to-green-600",
+    icon: "azure",
   },
   {
     name: "JavaScript",
     category: "Frontend",
     level: "Intermedio",
     color: "from-yellow-400 to-yellow-600",
+    icon: "javascript",
   },
   {
     name: "SQL",
     category: "Database",
     level: "Intermedio",
     color: "from-red-500 to-red-700",
+    icon: "sql-server",
   },
   {
     name: "Git",
     category: "Tools",
     level: "Avanzado",
     color: "from-orange-500 to-red-600",
+    icon: "git",
   },
   {
     name: "React",
     category: "Frontend",
     level: "Básico",
     color: "from-blue-500 to-blue-700",
+    icon: "react_dark",
   },
   {
     name: "Astro",
     category: "Frontend",
     level: "Básico",
     color: "from-blue-500 to-blue-700",
+    icon: "astro",
   },
 ];
 
@@ -84,21 +94,14 @@ const softSkills = [
 ---
 
 <section id="skills" class="py-24 relative">
-  <div class="container mx-auto px-4">
-    <div class="max-w-5xl mx-auto">
+  <div class="max-w-6xl mx-auto px-4">
       <!-- Header -->
       <div class="text-center mb-16">
-        <h2 class="text-4xl md:text-6xl font-bold mb-8">
-          <span
-            class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-white to-cyan-400"
-          >
+        <h2 class="text-5xl md:text-6xl font-bold mb-8">
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-sky-400 to-blue-500">
             Stack Tecnológico
           </span>
         </h2>
-        <div
-          class="w-24 h-1 bg-gradient-to-r from-purple-400 to-cyan-400 mx-auto rounded-full mb-8"
-        >
-        </div>
         <p class="text-xl text-gray-400 max-w-2xl mx-auto">
             <!-- creativo -->
           Las tecnologías y herramientas que utilizo para crear.
@@ -118,10 +121,24 @@ const softSkills = [
                 style={`animation-delay: ${index * 0.1}s`}
               >
                 <div class="text-center">
-                  <div
-                    class={`w-12 h-12 bg-gradient-to-r ${skill.color} rounded-xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}
-                  >
-                    <div class="w-6 h-6 bg-white/20 rounded-lg" />
+                  <!-- Ícono desde SVGL -->
+                  <div class="w-10 h-10 mx-auto mb-4 group-hover:scale-110 transition-transform relative">
+                    {skill.icon ? (
+                      <img 
+                        src={`https://svgl.app/library/${skill.icon}.svg`}
+                        alt={`${skill.name} icon`}
+                        class="w-full h-full object-contain filter brightness-110"
+                        loading="lazy"
+                        data-fallback={skill.color}
+                      />
+                    ) : (
+                      <!-- Fallback si no hay ícono -->
+                      <div class={`w-full h-full bg-gradient-to-r ${skill.color} rounded-xl flex items-center justify-center`}>
+                        <span class="text-white font-bold text-lg">
+                          {skill.name.charAt(0)}
+                        </span>
+                      </div>
+                    )}
                   </div>
                   <h4 class="text-white font-semibold mb-2 group-hover:text-purple-300 transition-colors">
                     {skill.name}
@@ -149,16 +166,34 @@ const softSkills = [
         </div>
       </div>
 
-      <!-- Languages -->
+      <!-- Languages mejorada -->
       <div class="mb-16">
         <h3 class="text-3xl font-bold text-white mb-8 text-center">Idiomas</h3>
-        <div class="flex justify-center gap-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6 max-w-2xl mx-auto">
           {
-            languages.map((lang) => (
-              <div class="language-card glass-card p-6 rounded-2xl text-center min-w-[200px]">
-                <div class="text-4xl mb-3">{lang.flag}</div>
-                <h4 class="text-xl font-bold text-white mb-2">{lang.name}</h4>
-                <p class="text-gray-400">{lang.level}</p>
+            languages.map((lang, index) => (
+              <div 
+                class="language-card group bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-400/30 p-6 md:p-8 rounded-2xl text-center transition-all duration-300 hover:scale-105 hover:bg-white/10"
+                style={`animation-delay: ${index * 0.2}s`}
+              >
+                <div class="text-5xl md:text-6xl mb-4 group-hover:scale-110 transition-transform">
+                  {lang.flag}
+                </div>
+                <h4 class="text-xl md:text-2xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">
+                  {lang.name}
+                </h4>
+                <div class="space-y-2">
+                  <p class="text-gray-400 text-sm md:text-base">{lang.level}</p>
+                  <div class="w-full bg-gray-700/50 rounded-full h-2">
+                    <div 
+                      class={`h-2 rounded-full bg-gradient-to-r transition-all duration-500 ${
+                        lang.level === "Nativo" 
+                          ? "from-green-400 to-green-600 w-full" 
+                          : "from-blue-400 to-blue-600 w-4/5"
+                      }`}
+                    />
+                  </div>
+                </div>
               </div>
             ))
           }
@@ -168,7 +203,7 @@ const softSkills = [
       <!-- Soft Skills -->
       <div class="text-center">
         <h3 class="text-2xl font-bold text-white mb-8">
-          Habilidades Interpersonales
+          Soft Skills
         </h3>
         <div class="flex flex-wrap justify-center gap-4 max-w-3xl mx-auto">
           {
@@ -183,7 +218,6 @@ const softSkills = [
           }
         </div>
       </div>
-    </div>
   </div>
 </section>
 

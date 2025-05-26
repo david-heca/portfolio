@@ -5,6 +5,17 @@ const education = [
   {
     id: 1,
     type: "education",
+    institution: "Platzi - Escuela de Tecnología",
+    degree: "Industría de la Tecnonogía",
+    period: "2022 - Actualidad",
+    status: "Self taught",
+    description: "Cursos especializados en desarrollo web, inteligencia artificial y tecnologías emergentes.",
+    grade: "N/A",
+    location: "Online"  
+  },
+  {
+    id: 2,
+    type: "education",
     institution: "Tecnológico de Estudios Superiores de Coacalco (TESCo) - TecNM",
     degree: "Ingeniería en Tecnologías de la Información y Comunicaciones",
     period: "2018 - 2022",
@@ -14,7 +25,7 @@ const education = [
     location: "Estado de México, México"
   },
   {
-    id: 2,
+    id: 3,
     type: "education",
     institution: "Colegio de Estudios Científicos y Tecnológicos del Estado de México (CECyTEM) - Tultepec",
     degree: "Técnico en Programación",
@@ -86,16 +97,13 @@ const certifications = [
 ---
 
 <section id="education" class="py-24 relative">
-  <div class="container mx-auto px-4">
+  <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-6xl font-bold mb-8">
-        <span class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400">
+      <h2 class="text-5xl md:text-6xl font-bold mb-8">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-400 via-cyan-400 to-teal-400">
           Educación & Certificaciones
         </span>
       </h2>
-      <div
-      class="w-24 h-1 bg-gradient-to-r from-yellow-100 to-cyan-400 mx-auto rounded-full mb-8"
-      ></div>   
       <p class="text-xl text-gray-400 max-w-2xl mx-auto">
         Formación continua y aprendizaje constante para mantenerme actualizado
       </p>
@@ -103,49 +111,71 @@ const certifications = [
 
     <!-- Education Section -->
     <div class="max-w-4xl mx-auto mb-16">
-      <h3 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
-        <div class="w-8 h-8 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-lg flex items-center justify-center">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
-          </svg>
-        </div>
+      <h3 class="text-3xl font-bold text-white mb-8 text-center">
         Formación Académica
       </h3>
       
-      <div class="space-y-10">
-        {education.map((edu) => (
-          <div class="education-card glass-card p-6 rounded-2xl hover:scale-105 transition-all duration-300">
-            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+      <div class="space-y-8">
+        {education.map((edu, index) => (
+          <div class="education-card glass-card p-6 md:p-8 rounded-2xl hover:scale-[1.02] transition-all duration-300 group">
+            <!-- Header con mejor layout -->
+            <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-6">
               <div class="flex-1">
-                <h4 class="text-xl font-semibold text-white mb-1">{edu.degree}</h4>
-                <p class="text-purple-300 font-medium mb-2">{edu.institution}</p>
-                <p class="text-gray-400 mb-3">{edu.description}</p>
-                <div class="flex flex-wrap gap-4 text-sm text-gray-400">
-                  <span class="flex items-center gap-1">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    {edu.period}
-                  </span>
-                  <span class="flex items-center gap-1">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    </svg>
-                    {edu.location}
-                  </span>
-                  <span class="flex items-center gap-1">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    Nota: {edu.grade}
-                  </span>
-                </div>
+                <h4 class="text-xl md:text-2xl font-bold text-white mb-2">
+                  {edu.degree}
+                </h4>
+                <p class="text-purple-300 font-semibold mb-3">{edu.institution}</p>
+                <p class="text-gray-300 leading-relaxed">{edu.description}</p>
               </div>
-              <div class="md:text-right">
-                <span class="px-4 py-2 bg-green-500/20 text-green-300 rounded-full text-sm font-medium">
+              
+              <!-- Status badge mejorado -->
+              <div class="flex-shrink-0">
+                <span class="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 border border-green-400/30 text-green-300 rounded-full text-sm font-medium">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                  </svg>
                   {edu.status}
                 </span>
+              </div>
+            </div>
+
+            <!-- Info grid más organizada -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-gray-700/30">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-400 uppercase tracking-wide">Período</p>
+                  <p class="text-white font-medium">{edu.period}</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-400 uppercase tracking-wide">Ubicación</p>
+                  <p class="text-white font-medium text-sm">{edu.location}</p>
+                </div>
+              </div>
+
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-yellow-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                  </svg>
+                </div>
+                <div>
+                  <p class="text-xs text-gray-400 uppercase tracking-wide">Calificación</p>
+                  <p class="text-white font-medium">{edu.grade}</p>
+                </div>
               </div>
             </div>
           </div>
@@ -155,61 +185,63 @@ const certifications = [
 
     <!-- Certifications Section -->
     <div class="max-w-6xl mx-auto">
-      <h3 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
-        <div class="w-8 h-8 bg-gradient-to-r from-cyan-500 to-purple-500 rounded-lg flex items-center justify-center">
-          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-          </svg>
-        </div>
+      <h3 class="text-3xl font-bold text-white mb-8 text-center">
         Certificaciones & Cursos
       </h3>
       
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {certifications.map((cert) => (
-          <div class="certification-card glass-card p-6 rounded-2xl group hover:scale-105 transition-all duration-300">
-            <!-- Badge/Logo -->
-            <div class="w-16 h-16 bg-gradient-to-r from-purple-500/20 to-cyan-500/20 rounded-xl flex items-center justify-center mb-4 border border-white/10 group-hover:border-purple-400/30 transition-colors">
-              <div class="w-10 h-10 bg-white/10 rounded-lg"></div>
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {certifications.map((cert, index) => (
+          <div class="certification-card glass-card p-6 rounded-2xl group hover:scale-105 transition-all duration-300"
+               style={`animation-delay: ${index * 0.1}s`}>
+            <!-- Header con badge mejorado -->
+            <div class="flex items-start justify-between mb-4">
+              <div class="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-xl flex items-center justify-center border border-white/10 group-hover:border-purple-400/30 transition-colors flex-shrink-0">
+                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+              </div>
+              <span class={`px-3 py-1 rounded-full text-xs font-medium ${
+                cert.level === 'Fundamentals' 
+                  ? 'bg-blue-500/20 text-blue-300' 
+                  : 'bg-purple-500/20 text-purple-300'
+              }`}>
+                {cert.level}
+              </span>
             </div>
             
-            <!-- Certification Info -->
+            <!-- Content -->
+            <h4 class="text-lg font-semibold text-white mb-2 group-hover:text-purple-300 transition-colors leading-tight">
+              {cert.name}
+            </h4>
+            <p class="text-cyan-300 font-medium text-sm mb-3">{cert.issuer}</p>
+            
+            <!-- Skills tags mejorados -->
             <div class="mb-4">
-              <h4 class="text-lg font-semibold text-white mb-1 group-hover:text-purple-300 transition-colors">
-                {cert.name}
-              </h4>
-              <p class="text-cyan-300 font-medium text-sm mb-2">{cert.issuer}</p>
-              <div class="flex items-center justify-between text-sm text-gray-400 mb-3">
-                <span>{cert.date}</span>
-                <span class="px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">
-                  {cert.level}
-                </span>
-              </div>
-            </div>
-
-            <!-- Skills -->
-            <div class="mb-4">
-              <div class="flex flex-wrap gap-1">
+              <div class="flex flex-wrap gap-2">
                 {cert.skills.map((skill) => (
-                  <span class="px-2 py-1 bg-gray-800/50 text-gray-300 rounded text-xs">
+                  <span class="px-2.5 py-1 bg-white/5 border border-white/10 text-gray-300 rounded-lg text-xs hover:bg-white/10 hover:border-purple-400/30 hover:text-purple-300 transition-all duration-200 cursor-default">
                     {skill}
                   </span>
                 ))}
               </div>
             </div>
 
-            <!-- Credential ID & Verify -->
-            <div class="pt-4 border-t border-gray-700/50">
-              <p class="text-xs text-gray-500 mb-2">ID: {cert.credentialId}</p>
-              <a 
-                href={cert.verifyUrl} 
-                target="_blank" 
-                class="inline-flex items-center gap-1 text-sm text-cyan-400 hover:text-cyan-300 transition-colors"
-              >
-                Verificar credencial
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
+            <!-- Footer con mejor diseño -->
+            <div class="pt-4 border-t border-gray-700/30 space-y-2">
+              <div class="flex items-center justify-between text-sm">
+                <span class="text-gray-400">{cert.date}</span>
+                <a 
+                  href={cert.verifyUrl} 
+                  target="_blank" 
+                  class="inline-flex items-center gap-1 text-cyan-400 hover:text-cyan-300 transition-colors hover:underline"
+                >
+                  Verificar
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+              <p class="text-xs text-gray-500 font-mono">ID: {cert.credentialId}</p>
             </div>
           </div>
         ))}
@@ -220,19 +252,44 @@ const certifications = [
 
 <style>
   .glass-card {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
   
-  .education-card:hover,
-  .certification-card:hover .glass-card {
+  .education-card:hover {
     border-color: rgba(147, 51, 234, 0.3);
-    box-shadow: 0 5px 15px rgba(147, 51, 234, 0.1);
+    box-shadow: 0 20px 40px rgba(147, 51, 234, 0.1);
   }
   
   .certification-card:hover {
     border-color: rgba(6, 182, 212, 0.3);
-    box-shadow: 0 5px 15px rgba(6, 182, 212, 0.1);
+    box-shadow: 0 15px 30px rgba(6, 182, 212, 0.1);
+  }
+  
+  .education-card,
+  .certification-card {
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive improvements */
+  @media (max-width: 640px) {
+    .education-card .grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    
+    .certification-card {
+      margin: 0 0.5rem;
+    }
   }
 </style>

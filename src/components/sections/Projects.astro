@@ -2,54 +2,50 @@
 const projects = [
   {
     id: 1,
-    title: "Connie",
-    description: "Plataforma de IA para empresas, habla con tus datos por medio del procesamiento de lenguaje natural.",
-    image: "/assets/project1.jpg",
-    tech: ["React", "Python", "SQL", "Tailwind", "JWT", "FastAPI"],
-    github: "https://github.com/david-heca/ecommerce",
-    demo: "https://demo.example.com",
+    title: "Portafolio",
+    description: "Portafolio personal para mostrar mis proyectos y habilidades como desarrollador.",
+    image: "/assets/projects/portfolio.webp",
+    tech: ["Astro", "Tailwind", "JavaScript", "SVG", "Markdown"],
+    github: "https://github.com/david-heca/portfolio",
+    demo: "https://davidheca.com",
+    type: "personal"
   },
   {
     id: 2,
-    title: "HandHeld - Aplicación de RFID",
-    description: "Aplicación para controlar el inventario de una empresa, utilizando tecnología RFID.",
-    image: "/assets/project1.jpg",
-    tech: ["Java", "Android Studio", "Material", "SQL"],
-    github: "https://github.com/david-heca/ecommerce",
-    demo: "https://demo.example.com",
+    title: "Connie",
+    description: "Plataforma de IA para empresas, habla con tus datos por medio del procesamiento de lenguaje natural.",
+    image: "/assets/projects/connie.webp",
+    tech: ["React", "Python", "SQL", "Tailwind", "JWT", "FastAPI"],
+    demo: "https://connie.app/",
+    type: "work"
   },
-  // portafolio (este sitio)
   {
     id: 3,
-    title: "Portafolio",
-    description: "Portafolio personal para mostrar mis proyectos y habilidades como desarrollador.",
-    image: "/assets/project1.jpg",
-    tech: ["Astro", "Tailwind", "JavaScript"],
-    github: "",
-    demo: "https://davidheca.com",
+    title: "HandHeld - Aplicación de RFID",
+    description: "Aplicación para controlar el inventario de una empresa, utilizando tecnología RFID.",
+    image: "/assets/projects/handheld.webp",
+    tech: ["Java", "Android Studio", "Material", "SQL", "Firebase"],
+    type: "work"
   },
-  // winform con c# y devexpress para la trazabilidad de piezas automotices por medio de estaciones de ensamble
   {
     id: 4,
     title: "Trazabilidad de Piezas Automotrices",
     description: "Aplicación de escritorio para la trazabilidad de piezas automotrices utilizando C# y DevExpress.",
-    image: "/assets/project1.jpg",
+    image: "/assets/projects/automotive-traceability.webp",
     tech: ["C#", "DevExpress", "SQL", "WinForms"],
+    type: "work",
   },
 ];
 ---
 
 <section id="projects" class="py-24 relative">
-  <div class="container mx-auto px-4">
+  <div class="max-w-6xl mx-auto px-4">
     <div class="text-center mb-16">
-      <h2 class="text-4xl md:text-6xl font-bold mb-8">
-        <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 via-yellow-100 to-cyan-400">
+      <h2 class="text-5xl md:text-6xl font-bold mb-8">
+        <span class="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-400 to-cyan-400">
           Proyectos Destacados
         </span>
       </h2>
-      <div
-          class="w-24 h-1 bg-gradient-to-r from-yellow-100 to-cyan-400 mx-auto rounded-full mb-8"
-        ></div>
       <p class="text-xl text-gray-400 max-w-2xl mx-auto">
         Una selección de mis trabajos más recientes y significativos
       </p>
@@ -57,22 +53,68 @@ const projects = [
     
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
       {projects.map((project) => (
-        <div class="project-card group cursor-pointer" data-project-id={project.id}>
+        <div class="project-card group" data-project-id={project.id}>
           <div class="relative overflow-hidden rounded-2xl">
+            <!-- Indicador de tipo de proyecto -->
+            <div class="absolute top-4 left-4 z-10">
+              {project.type === 'work' ? (
+                <div class="flex items-center gap-2 px-3 py-1.5 bg-blue-500/20 backdrop-blur-xl rounded-full border border-blue-400/30">
+                  <span class="text-blue-300 text-xs font-medium">Trabajo</span>
+                </div>
+              ) : (
+                <div class="flex items-center gap-2 px-3 py-1.5 bg-green-500/20 backdrop-blur-xl rounded-full border border-green-400/30">
+                  <span class="text-green-300 text-xs font-medium">Personal</span>
+                </div>
+              )}
+            </div>
             <img 
               src={project.image} 
               alt={project.title}
+              loading="lazy"
               class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
             />
             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             
+            <!-- Botones de acción mejorados -->
             <div class="absolute bottom-4 left-4 right-4 transform translate-y-4 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-300">
-              <div class="flex gap-2">
-                <a href={project.demo} class="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-colors">
-                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <!-- External link icon -->
-                  </svg>
-                </a>
+              <div class="flex gap-2 justify-center">
+                {project.demo && (
+                  <a 
+                    href={project.demo} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-xl rounded-lg hover:bg-white/30 transition-colors"
+                    title="Ver demo"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    </svg>
+                    <span class="text-white text-sm font-medium">Demo</span>
+                  </a>
+                )}
+                
+                {project.github && (
+                  <a 
+                    href={project.github} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-xl rounded-lg hover:bg-white/30 transition-colors"
+                    title="Ver código"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/>
+                    </svg>
+                    <span class="text-white text-sm font-medium">Código</span>
+                  </a>
+                )}
+                
+                <!-- Mensaje cuando no hay links -->
+                {!project.demo && !project.github && (
+                  <div class="flex items-center gap-2 px-4 py-2 bg-gray-500/20 backdrop-blur-xl rounded-lg cursor-default">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-gray-300"><path d="M12 12h.01"/><path d="M16 6V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M22 13a18.15 18.15 0 0 1-20 0"/><rect width="20" height="14" x="2" y="6" rx="2"/></svg>
+                    <span class="text-gray-300 text-sm font-medium">Proyecto Privado</span>
+                  </div>
+                )}
               </div>
             </div>
           </div>
