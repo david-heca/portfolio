@@ -1,0 +1,37 @@
+.floating-element {
+  animation: float 8s ease-in-out infinite;
+}
+.animate-float-delayed {
+  animation-delay: -4s;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg) scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateY(-30px) rotate(180deg) scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+/* Mejoras específicas para móvil */
+@media (max-width: 640px) {
+  .floating-element {
+    opacity: 0.4;
+  }
+
+  .container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* Mejorar la animación del avatar en dispositivos táctiles */
+@media (hover: none) and (pointer: coarse) {
+  #avatar-3d {
+    transform: perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1) !important;
+  }
+}
