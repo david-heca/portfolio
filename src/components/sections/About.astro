@@ -127,57 +127,6 @@ const highlights = [
   </div>
 </section>
 
-<style>
-  .highlight-card {
-    animation: fadeInUp 0.8s ease-out forwards;
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  /* Blob shape - forma orgánica como lago */
-  .blob-shape {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  }
-  
-  /* Animación del blob background */
-  .animate-blob {
-    animation: blob 8s ease-in-out infinite;
-  }
-  
-  @keyframes blob {
-    0% {
-      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-      transform: translate(0px, 0px) scale(1);
-    }
-    33% {
-      border-radius: 70% 30% 50% 50% / 30% 60% 40% 70%;
-      transform: translate(30px, -20px) scale(1.1);
-    }
-    66% {
-      border-radius: 100% 60% 60% 100% / 100% 100% 60% 60%;
-      transform: translate(-20px, 20px) scale(0.9);
-    }
-    100% {
-      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-      transform: translate(0px, 0px) scale(1);
-    }
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .highlight-card:hover {
-      transform: translateY(-4px) scale(1.02);
-    }
-    
-    .animate-blob {
-      animation-duration: 10s; /* Más lento en móvil */
-    }
-  }
+<style is:global>
+  @import '../../styles/components/about.css';
 </style>
