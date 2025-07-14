@@ -2,7 +2,7 @@
 const highlights = [
   {
     title: "Pasión por el Código",
-    description: "Me fascina crear soluciones elegantes a problemas complejos",
+    description: "Crear soluciones es algo que disfruto profundamente",
     icon: "code",
     gradient: "from-purple-500 to-indigo-500"
   },
@@ -14,7 +14,7 @@ const highlights = [
   },
   {
     title: "Trabajo en Equipo",
-    description: "Colaborando con otros para crear experiencias excepcionales",
+    description: "Me gusta colaborar y aprender de otros profesionales",
     icon: "user",
     gradient: "from-emerald-500 to-teal-500"
   }
@@ -37,15 +37,15 @@ const highlights = [
       <!-- Main Content Grid -->
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
         
-        <!-- Photo Side - Con forma orgánica -->
+        <!--  -->
         <div class="order-1 lg:order-1 text-center">
           <div class="relative inline-block">
-            <!-- Background blob shape -->
+            <!-- Background blob -->
             <div class="absolute inset-0 w-64 h-64 md:w-72 md:h-72 mx-auto lg:mx-0">
               <div class="w-full h-full bg-gradient-to-br from-purple-500/30 via-cyan-500/20 to-purple-400/30 blob-shape animate-blob"></div>
             </div>
             
-            <!-- Photo container -->
+            <!-- Contenedor de foto -->
             <div class="relative w-64 h-64 md:w-96 md:h-96 mx-auto lg:mx-0 z-10">
               <img 
                 src="/assets/profile-photo.webp"
@@ -53,7 +53,7 @@ const highlights = [
                 alt="David Herrera - Desarrollador"
                 class="w-full h-full object-cover blob-shape border-2 border-white/20 shadow-2xl hover:scale-105 transition-transform duration-500 backdrop-blur-sm"
               />
-              <!-- Overlay con forma orgánica -->
+              <!-- Overlay -->
               <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-purple-500/10 blob-shape"></div>
             </div>
           </div>
@@ -62,44 +62,34 @@ const highlights = [
         <!-- Story Side -->
         <div class="order-2 lg:order-2 space-y-6">
           <div class="space-y-6 text-base md:text-lg text-gray-300 leading-relaxed">
-            <p class="text-xl md:text-2xl text-white font-light leading-relaxed">
-              ¡Hola! Soy <strong class="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400">David Herrera</strong> 👋
-            </p>
-            
             <p>
-              Desarrollador fullstack y entusiasta de los <span class="text-purple-300 font-medium">datos</span> y la 
-              <span class="text-cyan-300 font-medium">inteligencia artificial</span>. 
+              Software Developer y entusiasta de los <span class="font-medium">datos</span> e 
+              <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-amber-400 font-medium">inteligencia artificial</span>. 
               Mi viaje en el desarrollo comenzó con la curiosidad de entender cómo funcionan las cosas por dentro.
             </p>
-            
             <p>
-              Me especializo en <span class="text-cyan-300 font-medium">desarrollo backend</span> y 
-              <span class="text-purple-300 font-medium">arquitectura de sistemas</span>, 
-              pero lo que realmente me motiva es resolver problemas complejos y transformar ideas 
-              en productos que realmente importen.
-            </p>
-            
-            <p>
-              Cuando no estoy programando, me encontrarás explorando nuevas tecnologías, 
-              contribuyendo a proyectos open source, o planeando mi próxima aventura de código. 
-              <span class="text-emerald-300">¡Siempre listo para el próximo desafío!</span>
+              Cuento con experiencia en una variedad de tecnologías, desde 
+              <span class="text-purple-300 font-medium">C#</span> y 
+              <span class="text-amber-300 font-medium">Python</span> hasta 
+              <span class="text-orange-300 font-medium">bases de datos</span> e 
+              <span class="text-cyan-300 font-medium">infraestructura en la nube</span>. 
+              Pero siempre estoy aprendiendo y explorando nuevas herramientas.
             </p>
           </div>
         </div>
       </div>
 
-      <!-- Enhanced Highlights -->
-      <div class="grid md:grid-cols-3 gap-8">
+      <!-- Highlights -->
+      <div class="grid md:grid-cols-3 gap-6">
         {highlights.map((highlight, index) => (
           <div class="highlight-card group relative"
                style={`animation-delay: ${index * 0.2}s`}>
-            <div class="relative bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-3xl hover:bg-white/10 hover:border-purple-400/30 transition-all duration-300 hover:scale-105">
-              <!-- Background gradient -->
+            <div class="relative bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-3xl hover:border-purple-400/30 transition-all duration-300">
               <div class={`absolute inset-0 bg-gradient-to-br ${highlight.gradient} opacity-5 group-hover:opacity-10 rounded-3xl transition-opacity`}></div>
               
               <div class="relative z-10 text-center">
-                <div class={`w-16 h-16 bg-gradient-to-r ${highlight.gradient} bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <div class={`w-16 h-16 bg-gradient-to-r ${highlight.gradient} bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-105 transition-transform duration-300`}>
+                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
                     {highlight.icon === 'code' && (
                       <path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/>
                     )}
@@ -112,7 +102,7 @@ const highlights = [
                   </svg>
                 </div>
                 
-                <h3 class="text-xl font-bold text-white mb-4 group-hover:text-purple-300 transition-colors">
+                <h3 class="text-xl font-bold text-white mb-2 transition-colors">
                   {highlight.title}
                 </h3>
                 <p class="text-gray-400 leading-relaxed">

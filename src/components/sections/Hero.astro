@@ -4,25 +4,18 @@ import profileImage from '/public/assets/dh.webp';
 ---
 
 <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
-  <!-- Background mejorado -->
+  <!-- Background -->
   <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/30 to-slate-900"></div>
   <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
-  
-  <!-- Floating elements mejorados -->
-  <div class="absolute inset-0 overflow-hidden pointer-events-none">
-    <div class="floating-element absolute top-10 left-5 md:top-20 md:left-10 w-48 h-48 md:w-72 md:h-72 bg-purple-500/15 rounded-full blur-3xl animate-float"></div>
-    <div class="floating-element absolute bottom-10 right-5 md:bottom-20 md:right-10 w-64 h-64 md:w-96 md:h-96 bg-cyan-500/15 rounded-full blur-3xl animate-float-delayed"></div>
-    <div class="floating-element absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 md:w-48 md:h-48 bg-indigo-500/10 rounded-full blur-2xl animate-pulse"></div>
-  </div>
 
   <div class="container mx-auto px-4 text-center relative z-10">
-    <!-- Avatar con mejor responsive -->
+    <!-- Avatar -->
     <div class="mb-6 md:mb-8">
       <Avatar3D src={profileImage} alt="David Herrera" size="w-28 h-28 md:w-36 md:h-36 lg:w-36 lg:h-36" />
     </div>
     
     <div class="space-y-4 md:space-y-8">
-      <!-- Título mejorado -->
+      <!-- Título -->
       <div class="space-y-4 md:space-y-6">
         <h1 class="text-5xl sm:text-5xl md:text-5xl lg:text-7xl font-bold tracking-tight">
           <span class="bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-cyan-200">
@@ -31,42 +24,51 @@ import profileImage from '/public/assets/dh.webp';
         </h1>
         
         <p class="text-lg sm:text-xl md:text-2xl text-gray-400 font-light">
-          <span class="text-purple-300">Fullstack Developer</span> & <span class="text-cyan-300">Data Engineer</span>
+          <span class="text-purple-300">AI Solutions Architect</span> & <span class="text-cyan-300">IT Engineer</span>
         </p>
       </div>
       
-      <!-- Descripción mejorada -->
-      <p class="text-base md:text-lg text-gray-300 max-w-xl md:max-w-2xl mx-auto leading-relaxed px-4 md:px-0">
-        Creando experiencias digitales excepcionales con código limpio y diseño intuitivo. 
-        Me apasiona la <span class="text-purple-300">tecnología</span> y la <span class="text-cyan-300">innovación</span>, 
-        siempre buscando aprender y crecer.
-      </p>
+      <!-- Descripción -->
+      <div class="text-base md:text-lg text-gray-300 max-w-xl md:max-w-2xl mx-auto leading-relaxed px-4 md:px-0 space-y-3">
+        <p>
+          Soy <span class="text-white font-medium">David</span>, AI Solutions Architect y Software Developer, amo los 
+          <span class="text-purple-300 font-medium">videojuegos</span>, la 
+          <span class="text-cyan-300 font-medium">música</span> y la 
+          <span class="text-indigo-300 font-medium">tecnología</span>.
+        </p>
+        <p>
+          He trabajado en proyectos que van desde <em class="text-gray-200 not-italic border-b-4 border-purple-400/30">sistemas de gestión</em> 
+          hasta <em class="text-gray-200 not-italic border-b-4 border-cyan-400/30">aplicaciones web complejas</em>, 
+          siempre enfocándome en crear <strong class="text-white font-semibold">soluciones que realmente resuelvan problemas del mundo real</strong>.
+        </p>
+      </div>
       
-      <!-- Botones mejorados para móvil -->
-      <div class="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center mt-6 md:mt-8 px-4 sm:px-0" >
-        <a href="#projects" class="group inline-flex items-center justify-center gap-2 px-6 md:px-8 py-2 md:py-3 bg-white text-gray-900 rounded-full font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105">
-          Ver Proyectos
-          <svg class="w-4 h-4 " fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+      <!-- Botones minimalistas -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10 md:mt-12 px-4 sm:px-0">
+        <a href="#projects" class="group inline-flex items-center gap-3 px-8 py-4 bg-white text-gray-900 rounded-xl font-medium tracking-wide hover:bg-gray-50 transition-all duration-200 hover:shadow-lg hover:shadow-white/10">
+          Ver proyectos
+          <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="#000000" viewBox="0 0 256 256">
+            <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
           </svg>
         </a>
-        <a href="#contact" class="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-2 md:py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full font-semibold hover:bg-white/20 hover:border-purple-400/50 transition-all duration-300 hover:scale-105">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-          </svg>
+        
+        <a href="#contact" class="group inline-flex items-center gap-3 px-8 py-4 border border-white/20 text-white rounded-xl font-medium tracking-wide hover:border-white/40 hover:bg-white/5 transition-all duration-200">
           Contactar
+          <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+          </svg>
         </a>
       </div>
 
-            <!-- Indicador de scroll mejorado -->
+      <!-- Indicador de scroll -->
       <div class="mt-16 md:mt-24">
-        <a href="#about" class="inline-flex flex-col items-center gap-2 group transition-all duration-300 hover:scale-105">
+        <a href="#about" class="inline-flex flex-col items-center space-y-4 group transition-all duration-300 hover:scale-105">
           <span class="text-xs md:text-sm text-gray-500 group-hover:text-gray-300 transition-colors tracking-wide">
-            Scroll para explorar
+            Conoce más sobre mí
           </span>
-          <div class="w-6 h-10 border-2 border-gray-600 group-hover:border-purple-400 rounded-full flex justify-center transition-colors">
-            <div class="w-1 h-3 bg-gray-600 group-hover:bg-purple-400 rounded-full mt-2 transition-colors"></div>
-          </div>
+          <svg class="w-5 h-5 text-gray-500 group-hover:text-gray-300 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+          </svg>
         </a>
       </div>
     </div>
