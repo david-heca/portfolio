@@ -1,5 +1,6 @@
 ---
 import BackToTop from '../components/BackToTop.astro';
+import Navigation from '../components/Navigation.astro';
 
 interface Props {
   title: string;
@@ -23,6 +24,7 @@ const { title, description = "Portfolio de David Herrera - Frontend Developer" }
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="bg-slate-900 text-white font-inter overflow-x-hidden">
+  <Navigation />
   <slot />
   <BackToTop />
 </body>
