@@ -1,18 +1,16 @@
----
----
-
 <button 
   id="back-to-top" 
-  class="fixed bottom-8 right-8 w-10 h-10 md:w-12 md:h-12 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-2xl transition-all duration-300 z-50 opacity-0 invisible transform translate-y-4 hover:scale-110 group"
+  class="fixed bottom-8 right-8 w-10 h-10 md:w-12 md:h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl transition-all duration-300 z-50 opacity-0 invisible transform translate-y-4 hover:bg-white/20 hover:border-white/30 hover:scale-105 group"
   aria-label="Volver arriba"
 >
   <svg 
-    class="w-5 h-5 md:w-6 md:h-6 text-white mx-auto group-hover:-translate-y-0.5 transition-transform" 
+    class="w-4 h-4 md:w-5 md:h-5 text-white mx-auto group-hover:-translate-y-0.5 transition-transform" 
     fill="none" 
     stroke="currentColor" 
     viewBox="0 0 24 24"
+    stroke-width="2"
   >
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
   </svg>
 </button>
 
@@ -23,9 +21,12 @@
     transform: translateY(0);
   }
 
-  /* Animación suave para la aparición */
   #back-to-top {
-    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  #back-to-top:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   }
 </style>
 
@@ -36,7 +37,7 @@
     if (backToTopButton) {
       // Mostrar/ocultar botón basado en scroll
       const toggleButton = () => {
-        if (window.scrollY > 300) { // Mostrar después de 300px de scroll
+        if (window.scrollY > 300) {
           backToTopButton.classList.add('show');
         } else {
           backToTopButton.classList.remove('show');
