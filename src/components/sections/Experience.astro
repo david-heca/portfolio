@@ -9,12 +9,14 @@ const experiences = [
     type: "Tiempo completo",
     description: "Desarrollo de aplicaciones web, móviles y sistemas de backend (microservicios) para clientes en sectores como automotríz, e-commerce y salud.",
     achievements: [
-      "Implementé un sistema de control de inventario con tecnología RFID lo que mejoró el control de stock",
-      "Desarrollé una plataforma de IA para empresas que permite interactuar con datos mediante lenguaje natural",
-      "Optimicé el rendimiento de aplicaciones web, desarrolladas en WebAssembly",
+      "Implementé un sistema de control de inventarios en tiempo real con tecnología RFID (Android y Java)",
+      "Desarrollé una plataforma de IA para empresas que permite interactuar con datos mediante procesamiento de lenguaje natural",
+      "Optimicé el rendimiento de aplicaciones web, desarrolladas en WebAssembly y React, mejorando la experiencia del usuario",
       "Lideré equipos pequeños en proyectos de desarrollo ágil, mejorando la entrega de productos",
+      "Integre herramientas de DevOps como Docker y Azure para mejorar la eficiencia del desarrollo y despliegue",
+      "Administre bases de datos SQL y NoSQL, implementando prácticas de seguridad y optimización",
     ],
-    technologies: ["React", "Python", "Java Script", "Tailwind CSS", "SQL Server", "Android", "FastAPI", "Docker", "Azure OpenAI", "WebAssembly"],
+    technologies: ["React", "Python", "Java Script", "Tailwind CSS", "SQL Server", "Android", ".NET", "Docker", "Azure OpenAI", "MCP", "RAG", "FastAPI", "Git", "API's"],
     logo: "/assets/company/baacc.webp"
   },
   {
@@ -29,7 +31,7 @@ const experiences = [
       "Desarrollé más de 15 proyectos web exitosos con tecnologías como WordPress, OpenCart y Joomla",
       "Administre correos electrónicos y dominios para clientes",
       "Implementé estrategias de SEO que mejoraron la visibilidad en línea de los clientes con Google Ads y Google Analytics",
-      "Mitigue ataques de denegación de servicio (DDoS) en sitios web de clientes con Cloudflare",
+      "Mitigue ataques de denegación de servicio (DDoS) en sitios web de clientes a traves de Cloudflare",
     ],
     technologies: ["HTML", "CSS", "JavaScript", "WordPress", "Figma", "OpenCart", "Joomla", "Google Ads", "Google Analytics"],
     logo: "/assets/company/dec.webp"
@@ -45,32 +47,32 @@ const experiences = [
           Experiencia Profesional
         </span>
       </h2>
-      <p class="text-xl text-gray-400 max-w-2xl mx-auto">
+      <p class="text-lg text-gray-400 max-w-2xl mx-auto">
         Mi trayectoria profesional y los proyectos en los que he trabajado.
       </p>
     </div>
 
     <div class="max-w-6xl mx-auto">
       <div class="relative">
-        <!-- Timeline line mejorado -->
+        <!-- Timeline line -->
         <div class="absolute left-4 md:left-1/2 top-0 w-px bg-gradient-to-b from-purple-500/50 via-cyan-500/50 to-purple-500/20 md:transform md:-translate-x-1/2" style="height: calc(100% - 2rem);"></div>
         
         <div class="space-y-8 md:space-y-12">
           {experiences.map((exp, index) => (
-            <div class={`experience-item relative ${index % 2 === 0 ? 'md:flex md:flex-row' : 'md:flex md:flex-row-reverse'} md:items-start`}>
-              <!-- Timeline dot mejorado -->
+            <div class={` relative ${index % 2 === 0 ? 'md:flex md:flex-row' : 'md:flex md:flex-row-reverse'} md:items-start`}>
+              {/* Timeline dot */}
               <div class="absolute left-2.5 md:left-1/2 w-3 h-3 md:w-4 md:h-4 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full md:transform md:-translate-x-1/2 z-10 shadow-lg shadow-purple-500/30 top-6 md:top-8">
                 <div class="absolute inset-0.5 md:inset-1 bg-slate-900 rounded-full"></div>
               </div>
               
-              <!-- Content Card mejorado -->
+              {/* Content Card */}
               <div class={`ml-8 md:ml-0 ${index % 2 === 0 ? 'md:mr-8 md:pr-8' : 'md:ml-8 md:pl-8'} md:w-6/12 md:pr-0`}>
-                <div class="glass-card p-5 md:p-6 rounded-2xl group hover:scale-[1.02] transition-all duration-300">
-                  <!-- Company Header -->
+                <div class="bg-gray-800/30 backdrop-blur-xl border-slate-700 border hover:border-purple-500/30 p-5 md:p-6 rounded-2xl group hover:scale-[1.01] transition-all duration-300">
+                  {/* Header */}
                   <div class="flex items-start gap-4 mb-4">
-                    <!-- Logo -->
                     <div class="relative w-14 h-14 flex-shrink-0">
-                      <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-xl border border-white/10 group-hover:scale-110 transition-transform"></div>
+                      {/* Logo */}
+                      <div class="absolute inset-0 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-xl border border-white/10"></div>
                       <div class="relative w-full h-full p-2 flex items-center justify-center">
                         {exp.logo ? (
                           <img 
@@ -80,7 +82,7 @@ const experiences = [
                             loading="lazy"
                           />
                         ) : (
-                          <!-- Fallback con inicial de la empresa -->
+                          // Fallback con inicial de la empresa
                           <div class="w-full h-full bg-gradient-to-br from-purple-400/40 to-cyan-400/40 rounded-lg flex items-center justify-center">
                             <span class="text-white font-bold text-lg">
                               {exp.company.charAt(0)}
@@ -95,7 +97,6 @@ const experiences = [
                       </h3>
                       <p class="text-purple-300 font-semibold mb-2">{exp.company}</p>
                       
-                      <!-- Info badges mejorados -->
                       <div class="flex flex-wrap gap-2 mb-3">
                         <span class="inline-flex items-center gap-1 px-2 py-1 bg-gray-800/60 border border-gray-700/50 rounded-lg text-xs text-gray-300">
                           <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,12 +119,12 @@ const experiences = [
                     </div>
                   </div>
 
-                  <!-- Description -->
-                  <p class="text-gray-300 mb-4 leading-relaxed text-sm md:text-base">
+                  {/* Description */}
+                  <p class="text-gray-300 mb-4 leading-relaxed text-sm">
                     {exp.description}
                   </p>
 
-                  <!-- Achievements -->
+                  {/* Achievements */}
                   <div class="mb-4">
                     <h4 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
                       <div class="w-1 h-4 bg-gradient-to-b from-purple-400 to-cyan-400 rounded-full"></div>
@@ -139,7 +140,7 @@ const experiences = [
                     </ul>
                   </div>
 
-                  <!-- Technologies -->
+                  {/* Technologies */}
                   <div>
                     <h4 class="text-sm font-semibold text-white mb-3 flex items-center gap-2">
                       <div class="w-1 h-4 bg-gradient-to-b from-cyan-400 to-purple-400 rounded-full"></div>
@@ -163,6 +164,6 @@ const experiences = [
   </div>
 </section>
 
-<style is:global>
+<!-- <style is:global>
   @import '../../styles/components/experience.css';
-</style>
+</style> -->

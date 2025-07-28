@@ -1,16 +1,3 @@
-.highlight-card {
-  animation: fadeInUp 0.8s ease-out forwards;
-  opacity: 0;
-  transform: translateY(30px);
-}
-
-@keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 /* Blob shape - forma orgánica como lago */
 .blob-shape {
   border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
@@ -40,13 +27,8 @@
   }
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
-  .highlight-card:hover {
-    transform: translateY(-4px) scale(1.02);
-  }
-
   .animate-blob {
-    animation-duration: 10s; /* Más lento en móvil */
+    animation-duration: 10s;
   }
 }
