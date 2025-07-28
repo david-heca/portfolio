@@ -1,6 +1,4 @@
 ---
-import { sequence } from "astro:middleware";
-
 const education = [
   {
     id: 1,
@@ -105,8 +103,8 @@ const certifications = [
           <span class="hidden md:inline">Educación & Certificaciones</span>
         </span>
       </h2>
-      <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-        Formación continua y aprendizaje constante para mantenerme actualizado
+      <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+        Formación continua y aprendizaje, un poco de mi trayectoria académica y certificaciones.
       </p>
     </div>
 
@@ -118,8 +116,8 @@ const certifications = [
       
       <div class="space-y-8">
         {education.map((edu, index) => (
-          <div class="education-card glass-card p-6 md:p-8 rounded-2xl hover:scale-[1.02] transition-all duration-300 group">
-            <!-- Header con mejor layout -->
+          <div class="education-card bg-gray-800/30 backdrop-blur-xl border-slate-700 border p-6 md:p-8 rounded-2xl transition-all duration-300 group">
+            {/* Header */}
             <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-6">
               <div class="flex-1">
                 <h4 class="text-xl md:text-2xl font-bold text-white mb-2">
@@ -129,24 +127,20 @@ const certifications = [
                 <p class="text-gray-300 leading-relaxed">{edu.description}</p>
               </div>
               
-              <!-- Status badge mejorado -->
+              {/* Status badge */}
               <div class="flex-shrink-0">
                 <span class="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 border border-green-400/30 text-green-300 rounded-full text-sm font-medium">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#86efac" viewBox="0 0 256 256"><path d="M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z"></path></svg>
                   {edu.status}
                 </span>
               </div>
             </div>
 
-            <!-- Info grid más organizada -->
+            {/* Info grid */}
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-gray-700/30">
               <div class="flex items-center gap-3">
                 <div class="w-8 h-8 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#c084fc" viewBox="0 0 256 256"><path d="M216,48V88H40V48a8,8,0,0,1,8-8H208A8,8,0,0,1,216,48Z" opacity="0.2"></path><path d="M208,32H184V24a8,8,0,0,0-16,0v8H88V24a8,8,0,0,0-16,0v8H48A16,16,0,0,0,32,48V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V48A16,16,0,0,0,208,32ZM72,48v8a8,8,0,0,0,16,0V48h80v8a8,8,0,0,0,16,0V48h24V80H48V48ZM208,208H48V96H208V208Zm-68-76a12,12,0,1,1-12-12A12,12,0,0,1,140,132Zm44,0a12,12,0,1,1-12-12A12,12,0,0,1,184,132ZM96,172a12,12,0,1,1-12-12A12,12,0,0,1,96,172Zm44,0a12,12,0,1,1-12-12A12,12,0,0,1,140,172Zm44,0a12,12,0,1,1-12-12A12,12,0,0,1,184,172Z"></path></svg>
                 </div>
                 <div>
                   <p class="text-xs text-gray-400 uppercase tracking-wide">Período</p>
@@ -156,10 +150,7 @@ const certifications = [
 
               <div class="flex items-center gap-3">
                 <div class="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#22d3ee" viewBox="0 0 256 256"><path d="M128,24a80,80,0,0,0-80,80c0,72,80,128,80,128s80-56,80-128A80,80,0,0,0,128,24Zm0,112a32,32,0,1,1,32-32A32,32,0,0,1,128,136Z" opacity="0.2"></path><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"></path></svg>
                 </div>
                 <div>
                   <p class="text-xs text-gray-400 uppercase tracking-wide">Ubicación</p>
@@ -169,9 +160,7 @@ const certifications = [
 
               <div class="flex items-center gap-3">
                 <div class="w-8 h-8 bg-yellow-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
-                  </svg>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#facc15" viewBox="0 0 256 256"><path d="M229.06,108.79l-48.7,42,14.88,62.79a8.4,8.4,0,0,1-12.52,9.17L128,189.09,73.28,222.74a8.4,8.4,0,0,1-12.52-9.17l14.88-62.79-48.7-42A8.46,8.46,0,0,1,31.73,94L95.64,88.8l24.62-59.6a8.36,8.36,0,0,1,15.48,0l24.62,59.6L224.27,94A8.46,8.46,0,0,1,229.06,108.79Z" opacity="0.2"></path><path d="M239.18,97.26A16.38,16.38,0,0,0,224.92,86l-59-4.76L143.14,26.15a16.36,16.36,0,0,0-30.27,0L90.11,81.23,31.08,86a16.46,16.46,0,0,0-9.37,28.86l45,38.83L53,211.75a16.38,16.38,0,0,0,24.5,17.82L128,198.49l50.53,31.08A16.4,16.4,0,0,0,203,211.75l-13.76-58.07,45-38.83A16.43,16.43,0,0,0,239.18,97.26Zm-15.34,5.47-48.7,42a8,8,0,0,0-2.56,7.91l14.88,62.8a.37.37,0,0,1-.17.48c-.18.14-.23.11-.38,0l-54.72-33.65a8,8,0,0,0-8.38,0L69.09,215.94c-.15.09-.19.12-.38,0a.37.37,0,0,1-.17-.48l14.88-62.8a8,8,0,0,0-2.56-7.91l-48.7-42c-.12-.1-.23-.19-.13-.5s.18-.27.33-.29l63.92-5.16A8,8,0,0,0,103,91.86l24.62-59.61c.08-.17.11-.25.35-.25s.27.08.35.25L153,91.86a8,8,0,0,0,6.75,4.92l63.92,5.16c.15,0,.24,0,.33.29S224,102.63,223.84,102.73Z"></path></svg>
                 </div>
                 <div>
                   <p class="text-xs text-gray-400 uppercase tracking-wide">Calificación</p>
@@ -192,14 +181,12 @@ const certifications = [
       
       <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {certifications.map((cert, index) => (
-          <div class="certification-card glass-card p-6 rounded-2xl group hover:scale-105 transition-all duration-300"
+          <div class="certification-card bg-gray-800/30 backdrop-blur-xl border-slate-700 border p-6 rounded-2xl group transition-all duration-300"
                style={`animation-delay: ${index * 0.1}s`}>
-            <!-- Header con badge mejorado -->
+            {/* Header */}
             <div class="flex items-start justify-between mb-4">
               <div class="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-cyan-500/20 rounded-xl flex items-center justify-center border border-white/10 group-hover:border-purple-400/30 transition-colors flex-shrink-0">
-                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-                </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#c084fc" viewBox="0 0 256 256"><path d="M224,56V90.06h0a44,44,0,1,0-56,67.88h0V192H40a8,8,0,0,1-8-8V56a8,8,0,0,1,8-8H216A8,8,0,0,1,224,56Z" opacity="0.2"></path><path d="M128,136a8,8,0,0,1-8,8H72a8,8,0,0,1,0-16h48A8,8,0,0,1,128,136Zm-8-40H72a8,8,0,0,0,0,16h48a8,8,0,0,0,0-16Zm112,65.47V224A8,8,0,0,1,220,231l-24-13.74L172,231A8,8,0,0,1,160,224V200H40a16,16,0,0,1-16-16V56A16,16,0,0,1,40,40H216a16,16,0,0,1,16,16V86.53a51.88,51.88,0,0,1,0,74.94ZM160,184V161.47A52,52,0,0,1,216,76V56H40V184Zm56-12a51.88,51.88,0,0,1-40,0v38.22l16-9.16a8,8,0,0,1,7.94,0l16,9.16Zm16-48a36,36,0,1,0-36,36A36,36,0,0,0,232,124Z"></path></svg>
               </div>
               <span class={`px-3 py-1 rounded-full text-xs font-medium ${
                 cert.level === 'Fundamentals' 
@@ -210,13 +197,13 @@ const certifications = [
               </span>
             </div>
             
-            <!-- Content -->
+            {/* Content */}
             <h4 class="text-lg font-semibold text-white mb-2 group-hover:text-purple-300 transition-colors leading-tight">
               {cert.name}
             </h4>
             <p class="text-cyan-300 font-medium text-sm mb-3">{cert.issuer}</p>
             
-            <!-- Skills tags mejorados -->
+            {/* Skills tags */}
             <div class="mb-4">
               <div class="flex flex-wrap gap-2">
                 {cert.skills.map((skill) => (
@@ -227,7 +214,7 @@ const certifications = [
               </div>
             </div>
 
-            <!-- Footer con mejor diseño -->
+            {/* Footer */}
             <div class="pt-4 border-t border-gray-700/30 space-y-2">
               <div class="flex items-center justify-between text-sm">
                 <span class="text-gray-400">{cert.date}</span>

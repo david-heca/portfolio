@@ -2,20 +2,17 @@
 const highlights = [
   {
     title: "Pasión por el Código",
-    description: "Crear soluciones es algo que disfruto profundamente",
-    icon: "code",
+    description: "Crear sistemas y soluciones eficientes es algo que me apasiona",
     gradient: "from-purple-500 to-indigo-500"
   },
   {
     title: "Aprendizaje Continuo",
     description: "Siempre explorando nuevas tecnologías y mejores prácticas",
-    icon: "learning",
     gradient: "from-cyan-500 to-blue-500"
   },
   {
     title: "Trabajo en Equipo",
-    description: "Me gusta colaborar y aprender de otros profesionales",
-    icon: "user",
+    description: "Me gusta colaborar y aprender de otros profesionales en el campo",
     gradient: "from-emerald-500 to-teal-500"
   }
 ];
@@ -37,43 +34,36 @@ const highlights = [
       <!-- Main Content Grid -->
       <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20">
         
-        <!--  -->
+        <!-- Avatar Side -->
         <div class="order-1 lg:order-1 text-center">
           <div class="relative inline-block">
             <!-- Background blob -->
             <div class="absolute inset-0 w-64 h-64 md:w-72 md:h-72 mx-auto lg:mx-0">
               <div class="w-full h-full bg-gradient-to-br from-purple-500/30 via-cyan-500/20 to-purple-400/30 blob-shape animate-blob"></div>
             </div>
-            
             <!-- Contenedor de foto -->
             <div class="relative w-64 h-64 md:w-96 md:h-96 mx-auto lg:mx-0 z-10">
               <img 
                 src="/assets/profile-photo.webp"
                 loading="lazy"
                 alt="David Herrera - Desarrollador"
-                class="w-full h-full object-cover blob-shape border-2 border-white/20 shadow-2xl hover:scale-105 transition-transform duration-500 backdrop-blur-sm"
+                class="w-full h-full object-cover blob-shape border-2 border-white/20"
               />
-              <!-- Overlay -->
-              <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-purple-500/10 blob-shape"></div>
             </div>
           </div>
         </div>
 
         <!-- Story Side -->
         <div class="order-2 lg:order-2 space-y-6">
-          <div class="space-y-6 text-base md:text-lg text-gray-300 leading-relaxed">
+          <div class="space-y-4 text-base md:text-lg text-gray-300 leading-relaxed">
             <p>
-              Software Developer y entusiasta de los <span class="font-medium">datos</span> e 
-              <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-amber-400 font-medium">inteligencia artificial</span>. 
-              Mi viaje en el desarrollo comenzó con la curiosidad de entender cómo funcionan las cosas por dentro.
+              Soy desarrollador de software. Me gusta entender cómo funcionan las cosas y buscar maneras de hacerlas más simples o eficientes.
             </p>
             <p>
-              Cuento con experiencia en una variedad de tecnologías, desde 
-              <span class="text-purple-300 font-medium">C#</span> y 
-              <span class="text-amber-300 font-medium">Python</span> hasta 
-              <span class="text-orange-300 font-medium">bases de datos</span> e 
-              <span class="text-cyan-300 font-medium">infraestructura en la nube</span>. 
-              Pero siempre estoy aprendiendo y explorando nuevas herramientas.
+              Últimamente he estado explorando <span class="font-medium">datos</span> y <span class="bg-clip-text text-transparent bg-gradient-to-r from-teal-400 to-amber-400 font-medium">inteligencia artificial</span>, buscando cómo estas herramientas pueden aportar valor real a los proyectos.
+            </p>
+            <p>
+              He trabajado con <span class="text-purple-300 font-medium">C#</span>, <span class="text-amber-300 font-medium">Python</span>, <span class="text-orange-300 font-medium">bases de datos</span> y <span class="text-cyan-300 font-medium">cloud</span>. Siempre estoy aprendiendo algo nuevo, probando ideas y compartiendo lo que descubro, ya sea en el trabajo o en proyectos personales.
             </p>
           </div>
         </div>
@@ -82,30 +72,28 @@ const highlights = [
       <!-- Highlights -->
       <div class="grid md:grid-cols-3 gap-6">
         {highlights.map((highlight, index) => (
-          <div class="highlight-card group relative"
+          <div class="group relative"
                style={`animation-delay: ${index * 0.2}s`}>
-            <div class="relative bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-3xl hover:border-purple-400/30 transition-all duration-300">
-              <div class={`absolute inset-0 bg-gradient-to-br ${highlight.gradient} opacity-5 group-hover:opacity-10 rounded-3xl transition-opacity`}></div>
+            <div class="relative bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-2xl transition-all duration-300">
+              <div class={`absolute inset-0 bg-gradient-to-br ${highlight.gradient} opacity-5 group-hover:opacity-10 rounded-2xl transition-opacity`}></div>
               
               <div class="relative z-10 text-center">
-                <div class={`w-16 h-16 bg-gradient-to-r ${highlight.gradient} bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-105 transition-transform duration-300`}>
-                  <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
-                    {highlight.icon === 'code' && (
-                      <path d="M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5c0 1.1.9 2 2 2h1"/><path d="M16 21h1a2 2 0 0 0 2-2v-5c0-1.1.9-2 2-2a2 2 0 0 1-2-2V5a2 2 0 0 0-2-2h-1"/>
-                    )}
-                    {highlight.icon === 'learning' && (
-                      <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M9 13a4.5 4.5 0 0 0 3-4"/><path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"/><path d="M3.477 10.896a4 4 0 0 1 .585-.396"/><path d="M6 18a4 4 0 0 1-1.967-.516"/><path d="M12 13h4"/><path d="M12 18h6a2 2 0 0 1 2 2v1"/><path d="M12 8h8"/><path d="M16 8V5a2 2 0 0 1 2-2"/><circle cx="16" cy="13" r=".5"/><circle cx="18" cy="3" r=".5"/><circle cx="20" cy="21" r=".5"/><circle cx="20" cy="8" r=".5"/>
-                    )}
-                    {highlight.icon === 'user' && (
-                      <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" />
-                    )}
-                  </svg>
+                <div class={`w-14 h-14 bg-gradient-to-r ${highlight.gradient} bg-opacity-20 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-105 transition-transform duration-300`}>
+                  {index === 0 && (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#FFFFFF" viewBox="0 0 256 256"><path d="M240,128l-48,40H64L16,128,64,88H192Z" opacity="0.2"></path><path d="M69.12,94.15,28.5,128l40.62,33.85a8,8,0,1,1-10.24,12.29l-48-40a8,8,0,0,1,0-12.29l48-40a8,8,0,0,1,10.24,12.3Zm176,27.7-48-40a8,8,0,1,0-10.24,12.3L227.5,128l-40.62,33.85a8,8,0,1,0,10.24,12.29l48-40a8,8,0,0,0,0-12.29ZM162.73,32.48a8,8,0,0,0-10.25,4.79l-64,176a8,8,0,0,0,4.79,10.26A8.14,8.14,0,0,0,96,224a8,8,0,0,0,7.52-5.27l64-176A8,8,0,0,0,162.73,32.48Z"></path></svg>
+                  )}
+                  {index === 1 && (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#FFFFFF" viewBox="0 0 256 256"><path d="M216,113.07v53.22a8,8,0,0,1-2,5.31c-11.3,12.59-38.9,36.4-86,36.4s-74.68-23.81-86-36.4a8,8,0,0,1-2-5.31V113.07L128,160Z" opacity="0.2"></path><path d="M251.76,88.94l-120-64a8,8,0,0,0-7.52,0l-120,64a8,8,0,0,0,0,14.12L32,117.87v48.42a15.91,15.91,0,0,0,4.06,10.65C49.16,191.53,78.51,216,128,216a130,130,0,0,0,48-8.76V240a8,8,0,0,0,16,0V199.51a115.63,115.63,0,0,0,27.94-22.57A15.91,15.91,0,0,0,224,166.29V117.87l27.76-14.81a8,8,0,0,0,0-14.12ZM128,200c-43.27,0-68.72-21.14-80-33.71V126.4l76.24,40.66a8,8,0,0,0,7.52,0L176,143.47v46.34C163.4,195.69,147.52,200,128,200Zm80-33.75a97.83,97.83,0,0,1-16,14.25V134.93l16-8.53ZM188,118.94l-.22-.13-56-29.87a8,8,0,0,0-7.52,14.12L171,128l-43,22.93L25,96,128,41.07,231,96Z"></path></svg>
+                  )}
+                  {index === 2 && (
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#FFFFFF" viewBox="0 0 256 256"><path d="M168,144a40,40,0,1,1-40-40A40,40,0,0,1,168,144ZM64,56A32,32,0,1,0,96,88,32,32,0,0,0,64,56Zm128,0a32,32,0,1,0,32,32A32,32,0,0,0,192,56Z" opacity="0.2"></path><path d="M244.8,150.4a8,8,0,0,1-11.2-1.6A51.6,51.6,0,0,0,192,128a8,8,0,0,1,0-16,24,24,0,1,0-23.24-30,8,8,0,1,1-15.5-4A40,40,0,1,1,219,117.51a67.94,67.94,0,0,1,27.43,21.68A8,8,0,0,1,244.8,150.4ZM190.92,212a8,8,0,1,1-13.85,8,57,57,0,0,0-98.15,0,8,8,0,1,1-13.84-8,72.06,72.06,0,0,1,33.74-29.92,48,48,0,1,1,58.36,0A72.06,72.06,0,0,1,190.92,212ZM128,176a32,32,0,1,0-32-32A32,32,0,0,0,128,176ZM72,120a8,8,0,0,0-8-8A24,24,0,1,1,87.24,82a8,8,0,1,0,15.5-4A40,40,0,1,0,37,117.51,67.94,67.94,0,0,0,9.6,139.19a8,8,0,1,0,12.8,9.61A51.6,51.6,0,0,1,64,128,8,8,0,0,0,72,120Z"></path></svg>
+                  )}
                 </div>
                 
-                <h3 class="text-xl font-bold text-white mb-2 transition-colors">
+                <h3 class="text-xl font-semibold text-white mb-2 transition-colors">
                   {highlight.title}
                 </h3>
-                <p class="text-gray-400 leading-relaxed">
+                <p class="text-gray-400">
                   {highlight.description}
                 </p>
               </div>

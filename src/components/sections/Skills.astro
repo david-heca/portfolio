@@ -73,8 +73,8 @@ const primarySkills = [
 ];
 
 const languages = [
-  { name: "Español", level: "Nativo", flag: "🇪🇸" },
-  { name: "Inglés", level: "B2 - Upper Intermediate", flag: "🇺🇸" },
+  { name: "Español", level: "Nativo" },
+  { name: "Inglés", level: "B2 - Upper Intermediate" },
 ];
 
 const softSkills = [
@@ -102,9 +102,8 @@ const softSkills = [
             Stack Tecnológico
           </span>
         </h2>
-        <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-            <!-- creativo -->
-          Las tecnologías y herramientas que utilizo para crear.
+        <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+          Un poco de las tecnologías y herramientas que manejo en mis proyectos.
         </p>
       </div>
 
@@ -117,11 +116,10 @@ const softSkills = [
           {
             primarySkills.map((skill, index) => (
               <div
-                class="skill-card group p-6 bg-white/5 rounded-2xl border border-white/10 hover:border-purple-400/30 transition-all duration-300 hover:scale-105"
+                class="skill-card group p-4 bg-white/5 rounded-2xl border border-white/10 hover:border-purple-400/30 transition-all duration-300 hover:scale-105"
                 style={`animation-delay: ${index * 0.1}s`}
               >
                 <div class="text-center">
-                  <!-- Ícono desde SVGL -->
                   <div class="w-10 h-10 mx-auto mb-4 group-hover:scale-110 transition-transform relative">
                     {skill.icon ? (
                       <img 
@@ -166,18 +164,21 @@ const softSkills = [
         </div>
       </div>
 
-      <!-- Languages mejorada -->
+      <!-- Languages -->
       <div class="mb-16">
-        <h3 class="text-3xl font-bold text-white mb-8 text-center">Idiomas</h3>
+        <h3 class="text-3xl font-bold text-white mb-8 text-center">
+          Idiomas
+        </h3>
+
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {
             languages.map((lang, index) => (
               <div 
-                class="language-card group bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-400/30 p-6 rounded-2xl transition-all duration-300 hover:scale-105"
+                class="language-card group bg-white/5 backdrop-blur-sm border border-white/10 hover:border-purple-400/30 p-4 rounded-2xl transition-all duration-300"
                 style={`animation-delay: ${index * 0.1}s`}
               >
                 <div class="flex items-center justify-between mb-4">
-                  <h4 class="text-xl font-bold text-white group-hover:text-purple-300 transition-colors">
+                  <h4 class="text-xl font-semibold text-white group-hover:text-purple-300 transition-colors">
                     {lang.name}
                   </h4>
                   <span class={`text-sm px-3 py-1 rounded-full font-medium ${
