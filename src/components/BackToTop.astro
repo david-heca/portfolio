@@ -1,17 +1,13 @@
+---
+import { PiArrowUp } from "react-icons/pi";
+---
+
 <button 
   id="back-to-top" 
   class="fixed bottom-8 right-8 w-10 h-10 md:w-12 md:h-12 bg-white/10 backdrop-blur-xl border border-white/20 rounded-xl transition-all duration-300 z-50 opacity-0 invisible transform translate-y-4 hover:bg-white/20 hover:border-white/30 hover:scale-105 group"
   aria-label="Volver arriba"
 >
-  <svg 
-    class="w-4 h-4 md:w-5 md:h-5 text-white mx-auto group-hover:-translate-y-0.5 transition-transform" 
-    fill="none" 
-    stroke="currentColor" 
-    viewBox="0 0 24 24"
-    stroke-width="2"
-  >
-    <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
-  </svg>
+  <PiArrowUp className="w-5 h-5 md:w-6 md:h-6 text-white mx-auto group-hover:-translate-y-0.5 transition-transform" />
 </button>
 
 <style>

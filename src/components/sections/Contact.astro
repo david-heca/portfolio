@@ -1,4 +1,6 @@
 ---
+import { PiDownloadDuotone, PiEnvelopeDuotone, PiGithubLogoDuotone, PiInstagramLogoDuotone, PiLinkedinLogoDuotone, PiMapPinDuotone, PiPhoneDuotone, PiReadCvLogoDuotone, PiXLogoDuotone } from "react-icons/pi";
+
 const contactInfo = {
   email: "davidherreradelcastillo2000@gmail.com",
   phone: "+52 442 837 2849",
@@ -64,9 +66,9 @@ const socialLinks = [
           <div class="space-y-4 md:space-y-6">
             <!-- Email -->
             <div class="contact-item group">
-              <div class="contact-item-content flex items-center gap-4 md:gap-6 p-4 md:p-6 rounded-2xl transition-all duration-300">
-                <div class="contact-item-icon w-12 h-12 md:w-14 md:h-14 bg-purple-500/20 rounded-2xl flex items-center justify-center group-hover:bg-purple-500/30 transition-colors flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="text-purple-400" viewBox="0 0 256 256"><path d="M224,56l-96,88L32,56Z" opacity="0.2"></path><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-96,85.15L52.57,64H203.43ZM98.71,128,40,181.81V74.19Zm11.84,10.85,12,11.05a8,8,0,0,0,10.82,0l12-11.05,58,53.15H52.57ZM157.29,128,216,74.18V181.82Z"></path></svg>
+              <div class="contact-item-content flex items-center gap-2 md:gap-4 p-4 md:p-6 rounded-2xl transition-all duration-300">
+                <div class="contact-item-icon w-10 h-10 md:w-14 md:h-14 bg-purple-500/20 rounded-2xl flex items-center justify-center group-hover:bg-purple-500/30 transition-colors flex-shrink-0">
+                  <PiEnvelopeDuotone className="w-6 h-6 md:w-8 md:h-8 text-purple-400" />
                 </div>
                 <div class="flex-1 min-w-0">
                   <p class="text-gray-500 text-sm mb-1">Email</p>
@@ -79,9 +81,9 @@ const socialLinks = [
 
             <!-- Phone -->
             <div class="contact-item group">
-              <div class="contact-item-content flex items-center gap-4 md:gap-6 p-4 md:p-6 rounded-2xl transition-all duration-300">
-                <div class="contact-item-icon w-12 h-12 md:w-14 md:h-14 bg-cyan-500/20 rounded-2xl flex items-center justify-center group-hover:bg-cyan-500/30 transition-colors flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="text-cyan-400" viewBox="0 0 256 256"><path d="M223.94,174.08A48.33,48.33,0,0,1,176,216,136,136,0,0,1,40,80,48.33,48.33,0,0,1,81.92,32.06a8,8,0,0,1,8.3,4.8l21.13,47.2a8,8,0,0,1-.66,7.53L89.32,117a7.93,7.93,0,0,0-.54,7.81c8.27,16.93,25.77,34.22,42.75,42.41a7.92,7.92,0,0,0,7.83-.59l25-21.3a8,8,0,0,1,7.59-.69l47.16,21.13A8,8,0,0,1,223.94,174.08Z" opacity="0.2"></path><path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46ZM176,208A128.14,128.14,0,0,1,48,80,40.2,40.2,0,0,1,82.87,40a.61.61,0,0,0,0,.12l21,47L83.2,111.86a6.13,6.13,0,0,0-.57.77,16,16,0,0,0-1,15.7c9.06,18.53,27.73,37.06,46.46,46.11a16,16,0,0,0,15.75-1.14,8.44,8.44,0,0,0,.74-.56L168.89,152l47,21.05h0s.08,0,.11,0A40.21,40.21,0,0,1,176,208Z"></path></svg>
+              <div class="contact-item-content flex items-center gap-3 md:gap-4 p-4 md:p-6 rounded-2xl transition-all duration-300">
+                <div class="contact-item-icon w-10 h-10 md:w-14 md:h-14 bg-cyan-500/20 rounded-2xl flex items-center justify-center group-hover:bg-cyan-500/30 transition-colors flex-shrink-0">
+                  <PiPhoneDuotone className="w-6 h-6 md:w-8 md:h-8 text-cyan-400" />
                 </div>
                 <div class="flex-1">
                   <p class="text-gray-500 text-sm mb-1">Teléfono</p>
@@ -94,9 +96,9 @@ const socialLinks = [
 
             <!-- Ubicación -->
             <div class="contact-item group">
-              <div class="contact-item-content flex items-center gap-4 md:gap-6 p-4 md:p-6 rounded-2xl transition-all duration-300">
-                <div class="contact-item-icon w-12 h-12 md:w-14 md:h-14 bg-indigo-500/20 rounded-2xl flex items-center justify-center group-hover:bg-indigo-500/30 transition-colors flex-shrink-0">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="text-indigo-400" viewBox="0 0 256 256"><path d="M128,24a80,80,0,0,0-80,80c0,72,80,128,80,128s80-56,80-128A80,80,0,0,0,128,24Zm0,112a32,32,0,1,1,32-32A32,32,0,0,1,128,136Z" opacity="0.2"></path><path d="M128,64a40,40,0,1,0,40,40A40,40,0,0,0,128,64Zm0,64a24,24,0,1,1,24-24A24,24,0,0,1,128,128Zm0-112a88.1,88.1,0,0,0-88,88c0,31.4,14.51,64.68,42,96.25a254.19,254.19,0,0,0,41.45,38.3,8,8,0,0,0,9.18,0A254.19,254.19,0,0,0,174,200.25c27.45-31.57,42-64.85,42-96.25A88.1,88.1,0,0,0,128,16Zm0,206c-16.53-13-72-60.75-72-118a72,72,0,0,1,144,0C200,161.23,144.53,209,128,222Z"></path></svg>
+              <div class="contact-item-content flex items-center gap-3 md:gap-4 p-4 md:p-6 rounded-2xl transition-all duration-300">
+                <div class="contact-item-icon w-10 h-10 md:w-14 md:h-14 bg-indigo-500/20 rounded-2xl flex items-center justify-center group-hover:bg-indigo-500/30 transition-colors flex-shrink-0">
+                  <PiMapPinDuotone className="w-6 h-6 md:w-8 md:h-8 text-indigo-400" />
                 </div>
                 <div class="flex-1">
                   <p class="text-gray-500 text-sm mb-1">Ubicación</p>
@@ -114,9 +116,7 @@ const socialLinks = [
           <div class="cv-section bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl p-6 md:p-8 rounded-3xl border border-white/10">
             <div class="text-center">
               <div class="w-12 h-12 md:w-16 md:h-16 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-2xl flex items-center justify-center mx-auto mb-4 md:mb-6">
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M15 18a3 3 0 1 0-6 0"/><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7z"/><circle cx="12" cy="13" r="2"/>
-                </svg>
+                <PiReadCvLogoDuotone className="w-8 h-8 md:w-10 md:h-10 text-white" />
               </div>
               
               <h3 class="text-lg md:text-2xl font-bold text-white mb-3">Currículum Vitae</h3>
@@ -129,7 +129,7 @@ const socialLinks = [
                 download="davidherrera-spanish.pdf"
                 class="cv-download-btn inline-flex items-center gap-2 md:gap-3 px-6 md:px-8 py-3 bg-white text-gray-900 rounded-2xl font-semibold hover:bg-gray-100 transition-all duration-300 group text-sm md:text-base"
               >
-                <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#000000" viewBox="0 0 256 256"><path d="M232,136v64a8,8,0,0,1-8,8H32a8,8,0,0,1-8-8V136a8,8,0,0,1,8-8H224A8,8,0,0,1,232,136Z" opacity="0.2"></path><path d="M240,136v64a16,16,0,0,1-16,16H32a16,16,0,0,1-16-16V136a16,16,0,0,1,16-16H72a8,8,0,0,1,0,16H32v64H224V136H184a8,8,0,0,1,0-16h40A16,16,0,0,1,240,136Zm-117.66-2.34a8,8,0,0,0,11.32,0l48-48a8,8,0,0,0-11.32-11.32L136,108.69V24a8,8,0,0,0-16,0v84.69L85.66,74.34A8,8,0,0,0,74.34,85.66ZM200,168a12,12,0,1,0-12,12A12,12,0,0,0,200,168Z"></path></svg>
+                <PiDownloadDuotone className="w-6 h-6" />
                 Descargar CV
               </a>
               
@@ -168,16 +168,16 @@ const socialLinks = [
             >
               <div class="w-6 h-6 md:w-8 md:h-8 flex items-center justify-center">
                 {social.icon === 'github' && (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M208,104v8a48,48,0,0,1-48,48H136a32,32,0,0,1,32,32v40H104V192a32,32,0,0,1,32-32H112a48,48,0,0,1-48-48v-8a49.28,49.28,0,0,1,8.51-27.3A51.92,51.92,0,0,1,76,32a52,52,0,0,1,43.83,24h32.34A52,52,0,0,1,196,32a51.92,51.92,0,0,1,3.49,44.7A49.28,49.28,0,0,1,208,104Z" opacity="0.2"></path><path d="M208.3,75.68A59.74,59.74,0,0,0,202.93,28,8,8,0,0,0,196,24a59.75,59.75,0,0,0-48,24H124A59.75,59.75,0,0,0,76,24a8,8,0,0,0-6.93,4,59.78,59.78,0,0,0-5.38,47.68A58.14,58.14,0,0,0,56,104v8a56.06,56.06,0,0,0,48.44,55.47A39.8,39.8,0,0,0,96,192v8H72a24,24,0,0,1-24-24A40,40,0,0,0,8,136a8,8,0,0,0,0,16,24,24,0,0,1,24,24,40,40,0,0,0,40,40H96v16a8,8,0,0,0,16,0V192a24,24,0,0,1,48,0v40a8,8,0,0,0,16,0V192a39.8,39.8,0,0,0-8.44-24.53A56.06,56.06,0,0,0,216,112v-8A58,58,0,0,0,208.3,75.68ZM200,112a40,40,0,0,1-40,40H112a40,40,0,0,1-40-40v-8a41.74,41.74,0,0,1,6.9-22.48A8,8,0,0,0,80,73.83a43.81,43.81,0,0,1,.79-33.58,43.88,43.88,0,0,1,32.32,20.06A8,8,0,0,0,119.82,64h32.35a8,8,0,0,0,6.74-3.69,43.87,43.87,0,0,1,32.32-20.06A43.81,43.81,0,0,1,192,73.83a8.09,8.09,0,0,0,1,7.65A41.76,41.76,0,0,1,200,104Z"></path></svg>
+                  <PiGithubLogoDuotone className="w-6 h-6 md:w-8 md:h-8 text-white group-hover:text-amber-400 transition-colors" />
                 )}
                 {social.icon === 'linkedin' && (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M224,40V216a8,8,0,0,1-8,8H40a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8H216A8,8,0,0,1,224,40Z" opacity="0.2"></path><path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"></path></svg>
+                  <PiLinkedinLogoDuotone className="w-6 h-6 md:w-8 md:h-8 text-white group-hover:text-blue-400 transition-colors" />
                 )}
                 {social.icon === 'twitter' && (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M208,216H160L48,40H96Z" opacity="0.2"></path><path d="M214.75,211.71l-62.6-98.38,61.77-67.95a8,8,0,0,0-11.84-10.76L143.24,99.34,102.75,35.71A8,8,0,0,0,96,32H48a8,8,0,0,0-6.75,12.3l62.6,98.37-61.77,68a8,8,0,1,0,11.84,10.76l58.84-64.72,40.49,63.63A8,8,0,0,0,160,224h48a8,8,0,0,0,6.75-12.29ZM164.39,208,62.57,48h29L193.43,208Z"></path></svg>
+                  <PiXLogoDuotone className="w-6 h-6 md:w-8 md:h-8 text-white group-hover:text-sky-400 transition-colors" />
                 )}
                 {social.icon === 'instagram' && (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M176,32H80A48,48,0,0,0,32,80v96a48,48,0,0,0,48,48h96a48,48,0,0,0,48-48V80A48,48,0,0,0,176,32ZM128,168a40,40,0,1,1,40-40A40,40,0,0,1,128,168Z" opacity="0.2"></path><path d="M176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160Zm64-84a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"></path></svg>
+                  <PiInstagramLogoDuotone className="w-6 h-6 md:w-8 md:h-8 text-white group-hover:text-purple-400 transition-colors" />
                 )}
               </div>
             </a>
