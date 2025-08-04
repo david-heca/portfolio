@@ -28,8 +28,4 @@
     grid-template-columns: 1fr;
     gap: 1rem;
   }
-
-  .certification-card {
-    margin: 0 0.5rem;
-  }
 }

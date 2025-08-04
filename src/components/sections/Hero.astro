@@ -1,6 +1,7 @@
 ---
 import Avatar3D from '../Avatar3D.astro';
 import profileImage from '/public/assets/dh.webp';
+import { PiArrowRight, PiChatCircleTextDuotone, PiArrowDown } from 'react-icons/pi';
 ---
 
 <section id="hero" class="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -8,9 +9,9 @@ import profileImage from '/public/assets/dh.webp';
   <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/30 to-slate-900"></div>
   <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
 
-  <div class="container mx-auto px-4 text-center relative z-10">
+  <div class="container mx-auto px-6 text-center relative z-10">
     <!-- Avatar -->
-    <div class="mb-4 md:mb-2">
+    <div class="mb-4 md:mb-2 mt-10">
       <Avatar3D src={profileImage} alt="David Herrera" size="w-32 h-32 md:w-36 md:h-36" />
     </div>
     
@@ -24,50 +25,48 @@ import profileImage from '/public/assets/dh.webp';
         </h1>
         
         <p class="text-lg sm:text-xl md:text-2xl text-gray-400 font-light pt-4">
-          <span class="text-purple-300">AI Solutions Architect</span> & <span class="text-cyan-300">IT Engineer</span>
+          <span class="text-cyan-300">IT Engineer</span> & <span class="text-purple-300">AI Solutions Architect</span>
         </p>
       </div>
       
       <!-- Descripción -->
-      <div class="text-base md:text-lg text-gray-300 max-w-xl md:max-w-3xl mx-auto px-4 md:px-0 space-y-2">
+       <div class="text-base md:text-lg text-gray-300 max-w-xl md:max-w-3xl mx-auto space-y-4">
         <p>
-          Hey, Soy <span class="text-white font-medium">David</span>, me gustan los 
-          <span class="text-purple-300 font-medium">videojuegos</span>, la 
-          <span class="text-cyan-300 font-medium">música</span> y la 
-          <span class="text-indigo-300 font-medium">tecnología</span>.
-          Me apasiona aprender cosas nuevas cada día y disfrutar el proceso.
+          Apasionado de la <strong class="text-indigo-300">tecnología</strong>, los
+          <strong class="text-purple-300">videojuegos</strong> y la
+          <strong class="text-cyan-300">música</strong>. Me impulsa la curiosidad y
+          disfruto aprendiendo algo nuevo cada día.
         </p>
         <p>
-          He trabajado en proyectos que van desde <em class="text-gray-200 not-italic border-b-4 border-purple-400/30">sistemas de gestión</em> hasta <em class="text-gray-200 not-italic border-b-4 border-cyan-400/30">aplicaciones web complejas</em>, enfocándome en crear <strong class="text-white font-semibold">soluciones que resuelvan problemas</strong>.
+          He colaborado en proyectos que van desde
+          <em class="text-gray-200 not-italic border-b-4 border-purple-400/30">sistemas de gestión</em>
+          hasta
+          <em class="text-gray-200 not-italic border-b-4 border-cyan-400/30">apps web escalables</em>,
+          siempre con foco en un <strong class="text-white">diseño centrado en el usuario</strong> y
+          <strong class="text-white">código limpio</strong>.
         </p>
       </div>
       
-      <!-- Botones minimalistas -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10 md:mt-12 px-4 sm:px-0 t-4">
+      <!-- Botones -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10 md:mt-12 t-4">
         <a href="#projects" class="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-gray-900 rounded-xl font-medium tracking-wide hover:bg-gray-50 transition-all duration-200">
           Ver proyectos
-          <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" fill="#000000" viewBox="0 0 256 256">
-            <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
-          </svg>
+          <PiArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-200 text-xl" />
         </a>
         
         <a href="#contact" class="group inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/20 text-white rounded-xl font-medium tracking-wide hover:border-white/40 hover:bg-white/5 transition-all duration-200">
           Contactar
-          <svg class="w-5 h-5 group-hover:scale-110 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-          </svg>
+          <PiChatCircleTextDuotone className="w-6 h-6 group-hover:scale-110 transition-transform duration-200 text-xl" />
         </a>
       </div>
 
       <!-- Indicador de scroll -->
-      <div class="pt-6 md:pt-10">
+      <div class="py-6 md:pt-10">
         <a href="#about" class="inline-flex flex-col items-center space-y-4 group transition-all duration-300 hover:scale-105">
           <span class="text-xs md:text-sm text-gray-500 group-hover:text-gray-300 transition-colors tracking-wide">
             Conoce más sobre mí
           </span>
-          <svg class="w-5 h-5 text-gray-500 group-hover:text-gray-300 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-          </svg>
+          <PiArrowDown className="w-6 h-6 md:w-8 md:h-8 text-gray-500 group-hover:text-gray-300 animate-bounce" />
         </a>
       </div>
     </div>
