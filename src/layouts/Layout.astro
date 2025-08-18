@@ -1,6 +1,7 @@
 ---
 import BackToTop from '../components/BackToTop.astro';
 import Navigation from '../components/Navigation.astro';
+import '../styles/global.css';
 
 interface Props {
   title: string;
@@ -54,28 +55,10 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="bg-slate-900 text-white font-inter overflow-x-hidden">
+<body class="bg-slate-900 text-white overflow-x-hidden">
   <Navigation />
   <slot />
   <BackToTop />
 </body>
 </html>
-
-<style is:global>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  html {
-    scroll-behavior: smooth;
-  }
-  
-  body {
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    line-height: 1.6;
-  }
-</style>
