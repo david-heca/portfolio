@@ -9,7 +9,7 @@ import { PiArrowRight, PiChatCircleTextDuotone, PiArrowDown } from 'react-icons/
   <div class="absolute inset-0 bg-gradient-to-br from-slate-900 via-purple-900/30 to-slate-900"></div>
   <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
 
-  <div class="container mx-auto px-6 text-center relative z-10">
+  <div class="container mx-auto px-6 pb-12 text-center relative z-10">
     <!-- Avatar -->
     <div class="mb-4 md:mb-2 mt-10">
       <Avatar3D src={profileImage} alt="David Herrera" size="w-32 h-32 md:w-36 md:h-36" />
@@ -50,23 +50,13 @@ import { PiArrowRight, PiChatCircleTextDuotone, PiArrowDown } from 'react-icons/
       <!-- Botones -->
       <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10 md:mt-12 t-4">
         <a href="#projects" class="group inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-gray-900 rounded-xl font-medium tracking-wide hover:bg-gray-50 transition-all duration-200">
-          Ver proyectos
+          Mis Proyectos
           <PiArrowRight className="w-6 h-6 group-hover:translate-x-1 transition-transform duration-200 text-xl" />
         </a>
         
         <a href="#contact" class="group inline-flex items-center justify-center gap-3 px-8 py-4 border border-white/20 text-white rounded-xl font-medium tracking-wide hover:border-white/40 hover:bg-white/5 transition-all duration-200">
-          Contactar
+          Contáctame
           <PiChatCircleTextDuotone className="w-6 h-6 group-hover:scale-110 transition-transform duration-200 text-xl" />
-        </a>
-      </div>
-
-      <!-- Indicador de scroll -->
-      <div class="py-6 md:pt-10">
-        <a href="#about" class="inline-flex flex-col items-center space-y-4 group transition-all duration-300 hover:scale-105">
-          <span class="text-xs md:text-sm text-gray-500 group-hover:text-gray-300 transition-colors tracking-wide">
-            Conoce más sobre mí
-          </span>
-          <PiArrowDown className="w-6 h-6 md:w-8 md:h-8 text-gray-500 group-hover:text-gray-300 animate-bounce" />
         </a>
       </div>
     </div>
