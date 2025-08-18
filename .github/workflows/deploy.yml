@@ -25,18 +25,24 @@ jobs:
       - name: Checkout repositorio
         uses: actions/checkout@v4
 
-      - name: Configurar Node.js
-        uses: actions/setup-node@v4
+      - name: Instalar Bun en el runner
+        run: |
+          curl -fsSL https://bun.sh/install | bash
+          echo "$HOME/.bun/bin" >> $GITHUB_PATH
+
+      - name: Cachear Bun (si hay bun.lock o package.json)
+        uses: actions/cache@v4
         with:
-          node-version: 18
-          cache: 'npm'
-          cache-dependency-path: './package-lock.json'
+          path: ~/.bun
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock','package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
 
-      - name: Instalar dependencias
-        run: npm ci
+      - name: Instalar dependencias con Bun
+        run: bun install
 
-      - name: Construir sitio
-        run: npm run build
+      - name: Construir sitio con Bun
+        run: bun run build
 
       - name: Subir artefactos para despliegue
         uses: actions/upload-pages-artifact@v3
