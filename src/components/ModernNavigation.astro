@@ -1,0 +1,193 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+interface NavItem {
+  href: string;
+  label: string;
+  icon: string;
+}
+
+const navItems: NavItem[] = [
+  { href: lang === 'es' ? '/' : '/en', label: t.nav.home, icon: '🏠' },
+  { href: lang === 'es' ? '/about' : '/en/about', label: t.nav.about, icon: '👤' },
+  { href: lang === 'es' ? '/skills' : '/en/skills', label: t.nav.skills, icon: '💻' },
+  { href: lang === 'es' ? '/work' : '/en/work', label: t.nav.work, icon: '💼' },
+  { href: lang === 'es' ? '/education' : '/en/education', label: t.nav.education, icon: '🎓' },
+  { href: lang === 'es' ? '/projects' : '/en/projects', label: t.nav.projects, icon: '📁' },
+  { href: lang === 'es' ? '/contact' : '/en/contact', label: t.nav.contact, icon: '✉️' },
+];
+
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  if (href === '/' || href === '/en') {
+    return currentPath === href;
+  }
+  return currentPath.startsWith(href);
+}
+---
+
+<!-- Desktop Navigation -->
+<nav class="hidden md:block fixed top-6 left-1/2 transform -translate-x-1/2 z-50">
+  <div class="flex items-center gap-2 px-4 py-3 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50 rounded-2xl shadow-lg shadow-gray-900/5 dark:shadow-gray-900/20">
+    {navItems.map((item) => (
+      <a
+        href={item.href}
+        class={`group relative flex items-center justify-center w-10 h-10 rounded-xl transition-all duration-200 hover:scale-110 ${
+          isActive(item.href)
+            ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/25'
+            : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800'
+        }`}
+        aria-label={item.label}
+        title={item.label}
+      >
+        <span class="text-lg">{item.icon}</span>
+        
+        <!-- Tooltip -->
+        <span class="absolute -bottom-12 left-1/2 transform -translate-x-1/2 px-2 py-1 text-xs font-medium text-white bg-gray-900 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap">
+          {item.label}
+        </span>
+      </a>
+    ))}
+    
+    <!-- Language Switcher -->
+    <div class="ml-2 pl-2 border-l border-gray-200 dark:border-gray-700">
+      <div class="flex items-center gap-1">
+        <a
+          href={lang === 'es' ? '/en' + (currentPath === '/' ? '' : currentPath) : currentPath.replace('/en', '') || '/'}
+          class="flex items-center justify-center w-8 h-8 text-xs font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-200"
+          title={lang === 'es' ? 'Switch to English' : 'Cambiar a Español'}
+        >
+          {lang === 'es' ? 'EN' : 'ES'}
+        </a>
+        
+        <!-- Theme Toggle -->
+        <button
+          id="theme-toggle"
+          class="flex items-center justify-center w-8 h-8 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-all duration-200"
+          aria-label="Toggle theme"
+          title="Toggle theme"
+        >
+          <span id="sun-icon" class="dark:hidden">☀️</span>
+          <span id="moon-icon" class="hidden dark:block">🌙</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Navigation (Floating Menu) -->
+<nav class="md:hidden fixed top-6 right-6 z-50">
+  <!-- Menu Button -->
+  <button
+    id="mobile-menu-btn"
+    class="w-14 h-14 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border border-gray-200/50 dark:border-gray-700/50 rounded-2xl shadow-lg shadow-gray-900/10 dark:shadow-gray-900/30 flex items-center justify-center transition-all duration-200 hover:scale-110"
+    aria-label="Menu"
+  >
+    <span class="text-2xl">☰</span>
+  </button>
+  
+  <!-- Floating Menu -->
+  <div 
+    id="mobile-menu"
+    class="absolute top-16 right-0 w-64 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl border border-gray-200/50 dark:border-gray-700/50 rounded-2xl shadow-xl shadow-gray-900/20 p-4 hidden"
+  >
+    <!-- Navigation Links -->
+    <div class="space-y-1 mb-4">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 w-full ${
+            isActive(item.href)
+              ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/25'
+              : 'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+          }`}
+        >
+          <span class="text-lg">{item.icon}</span>
+          <span class="font-medium">{item.label}</span>
+        </a>
+      ))}
+    </div>
+    
+    <!-- Divider -->
+    <div class="border-t border-gray-200/50 dark:border-gray-700/50 my-4"></div>
+    
+    <!-- Settings -->
+    <div class="space-y-1">
+      <!-- Language -->
+      <a
+        href={lang === 'es' ? '/en' + (currentPath === '/' ? '' : currentPath) : currentPath.replace('/en', '') || '/'}
+        class={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 w-full ${
+          'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+        }`}
+      >
+        <span class="text-lg">🌐</span>
+        <span class="font-medium">{lang === 'es' ? 'Cambiar a Inglés' : 'Switch to Spanish'}</span>
+      </a>
+      
+      <!-- Theme -->
+      <button
+        id="mobile-theme-btn"
+        class={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 w-full ${
+          'text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800'
+        }`}
+      >
+        <span class="text-lg">
+          <span class="dark:hidden">☀️</span>
+          <span class="hidden dark:block">🌙</span>
+        </span>
+        <span class="font-medium">
+          <span class="dark:hidden">{lang === 'es' ? 'Cambiar a Oscuro' : 'Switch to Dark'}</span>
+          <span class="hidden dark:block">{lang === 'es' ? 'Cambiar a Claro' : 'Switch to Light'}</span>
+        </span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Simple mobile menu toggle
+  function initMobileMenu() {
+    const menuBtn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const themeBtn = document.getElementById('mobile-theme-btn');
+    
+    if (!menuBtn || !menu) return;
+    
+    // Toggle menu
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menu.classList.toggle('hidden');
+    });
+    
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target as Node) && !menuBtn.contains(e.target as Node)) {
+        menu.classList.add('hidden');
+      }
+    });
+    
+    // Close on link click
+    menu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        menu.classList.add('hidden');
+      });
+    });
+    
+    // Theme toggle
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const currentTheme = (window as any).getTheme();
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        (window as any).applyTheme(newTheme);
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initMobileMenu);
+  document.addEventListener('astro:after-swap', initMobileMenu);
+</script>
+

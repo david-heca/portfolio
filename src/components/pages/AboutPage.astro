@@ -1,0 +1,172 @@
+---
+import { useTranslations } from '../../i18n/utils';
+
+export interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<main class="min-h-screen px-4 pt-32 pb-20">
+  <div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+        {t.about.title}
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-gray-400">
+        {t.about.subtitle}
+      </p>
+    </div>
+
+    <!-- Content Grid -->
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <!-- Left Column - Photo & Stats -->
+      <div class="space-y-8">
+        <!-- Profile Photo -->
+        <div class="relative">
+          <img
+            src="/assets/profile-photo.webp"
+            alt="David Herrera"
+            class="w-full max-w-md mx-auto rounded-2xl shadow-xl shadow-gray-900/10 dark:shadow-gray-900/30"
+          />
+          <div class="absolute inset-0 rounded-2xl bg-gradient-to-tr from-blue-500/10 to-purple-600/10"></div>
+        </div>
+
+        <!-- Quick Facts -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700">
+          <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+            {lang === 'es' ? 'Datos rápidos' : 'Quick facts'}
+          </h3>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <span class="text-blue-500">📍</span>
+              <span class="text-gray-600 dark:text-gray-400">
+                {lang === 'es' ? 'Ubicación: Ciudad de México, México' : 'Location: Mexico City, Mexico'}
+              </span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-green-500">💼</span>
+              <span class="text-gray-600 dark:text-gray-400">
+                {lang === 'es' ? '5+ años de experiencia' : '5+ years of experience'}
+              </span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-purple-500">🎓</span>
+              <span class="text-gray-600 dark:text-gray-400">
+                {lang === 'es' ? 'Ingeniero en Tecnologías de la Información' : 'IT Engineer'}
+              </span>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-orange-500">🌐</span>
+              <span class="text-gray-600 dark:text-gray-400">
+                {lang === 'es' ? 'Español / Inglés' : 'Spanish / English'}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column - About Content -->
+      <div class="space-y-8">
+        <!-- Introduction -->
+        <div class="prose prose-lg dark:prose-invert max-w-none space-y-3">
+          {lang === 'es' ? (
+            <>
+              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                Soy desarrollador de software. Me gusta entender cómo funcionan las cosas y buscar maneras de hacerlas más simples o eficientes.
+              </p>
+
+              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                Últimamente he estado explorando <strong>datos</strong> y <strong>inteligencia artificial</strong>, buscando cómo estas herramientas pueden aportar valor real a los proyectos.
+              </p>
+
+              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                He trabajado con <strong>C#</strong>, <strong>Python</strong>, <strong>bases de datos</strong> y <strong>cloud</strong>. Siempre estoy aprendiendo algo nuevo, probando ideas y compartiendo lo que descubro, ya sea en el trabajo o en proyectos personales.
+              </p>
+            </>
+          ) : (
+            <>
+              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                I'm a software developer. I like to understand how things work and find ways to make them simpler or more efficient.
+              </p>
+
+              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                Lately I've been exploring <strong>data</strong> and <strong>artificial intelligence</strong>, looking for how these tools can add real value to projects.
+              </p>
+
+              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                I've worked with <strong>C#</strong>, <strong>Python</strong>, <strong>databases</strong> and <strong>cloud</strong>. I'm always learning something new, trying ideas and sharing what I discover, whether at work or in personal projects.
+              </p>
+            </>
+          )}
+        </div>
+
+        <!-- Expertise Areas -->
+        <div class="space-y-6">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+            {lang === 'es' ? 'Áreas de experiencia' : 'Areas of expertise'}
+          </h3>
+
+          <div class="grid gap-4">
+            <div class="bg-blue-50 dark:bg-blue-900/20 rounded-xl p-4 border border-blue-200 dark:border-blue-800">
+              <h4 class="font-medium text-blue-900 dark:text-blue-100 mb-2">
+                {lang === 'es' ? 'Inteligencia Artificial' : 'Artificial Intelligence'}
+              </h4>
+              <p class="text-sm text-blue-700 dark:text-blue-300">
+                {lang === 'es'
+                  ? 'Explorando cómo la IA puede resolver problemas reales y crear valor tangible.'
+                  : 'Exploring how AI can solve real problems and create tangible value.'}
+              </p>
+            </div>
+
+            <div class="bg-green-50 dark:bg-green-900/20 rounded-xl p-4 border border-green-200 dark:border-green-800">
+              <h4 class="font-medium text-green-900 dark:text-green-100 mb-2">
+                {lang === 'es' ? 'Desarrollo Full-Stack' : 'Full-Stack Development'}
+              </h4>
+              <p class="text-sm text-green-700 dark:text-green-300">
+                {lang === 'es'
+                  ? 'Construyendo aplicaciones web con C#, Python, React y bases de datos modernas.'
+                  : 'Building web applications with C#, Python, React and modern databases.'}
+              </p>
+            </div>
+
+            <div class="bg-purple-50 dark:bg-purple-900/20 rounded-xl p-4 border border-purple-200 dark:border-purple-800">
+              <h4 class="font-medium text-purple-900 dark:text-purple-100 mb-2">
+                {lang === 'es' ? 'Aprendizaje Continuo' : 'Continuous Learning'}
+              </h4>
+              <p class="text-sm text-purple-700 dark:text-purple-300">
+                {lang === 'es'
+                  ? 'Siempre probando nuevas tecnologías y compartiendo conocimientos con la comunidad.'
+                  : 'Always testing new technologies and sharing knowledge with the community.'}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="pt-8">
+          <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl p-6 text-white">
+            <h3 class="text-lg font-semibold mb-2">
+              {lang === 'es' ? '¿Tienes un proyecto en mente?' : 'Have a project in mind?'}
+            </h3>
+            <p class="text-blue-100 mb-4">
+              {lang === 'es'
+                ? 'Me encantaría conocer tu idea y explorar cómo podemos hacerla realidad juntos.'
+                : 'I\'d love to learn about your idea and explore how we can make it a reality together.'}
+            </p>
+            <a
+              href={lang === 'es' ? '/contact' : '/en/contact'}
+              class="inline-flex items-center px-6 py-2 bg-white text-blue-600 font-medium rounded-lg hover:bg-blue-50 transition-colors"
+            >
+              {lang === 'es' ? 'Hablemos' : 'Let\'s talk'}
+              <span class="ml-2">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

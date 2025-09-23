@@ -1,0 +1,263 @@
+---
+import { useTranslations } from '../../i18n/utils';
+
+export interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const projects = [
+  {
+    id: 1,
+    title: lang === 'es' ? "Portafolio" : "Portfolio",
+    description: lang === 'es' 
+      ? "Portafolio personal para mostrar mis proyectos y habilidades como desarrollador."
+      : "Personal portfolio to showcase my projects and skills as a developer.",
+    image: "/assets/projects/portfolio.webp",
+    tech: ["Astro", "Tailwind", "JavaScript", "React", "Markdown"],
+    github: "https://github.com/david-heca/portfolio",
+    type: "personal",
+    featured: true
+  },
+  {
+    id: 2,
+    title: "Connie",
+    description: lang === 'es'
+      ? "Plataforma de IA para empresas, habla con tus datos por medio del procesamiento de lenguaje natural."
+      : "AI platform for businesses, talk to your data through natural language processing.",
+    image: "/assets/projects/connie.webp",
+    tech: ["React", "RAG", "SQL", "JWT", "FastAPI", "MCP", "Azure OpenAI"],
+    demo: "https://connie.app",
+    type: "work",
+    featured: true
+  },
+  {
+    id: 3,
+    title: lang === 'es' ? "HandHeld - Aplicación de RFID" : "HandHeld - RFID Application",
+    description: lang === 'es'
+      ? "Aplicación para controlar el inventario de una empresa, utilizando tecnología RFID."
+      : "Application to control company inventory using RFID technology.",
+    image: "/assets/projects/handheld.webp",
+    tech: ["Java", "Android Studio", "Material", "SQL", "Firebase", "Sentry", "ODBC"],
+    type: "work",
+    featured: true
+  },
+  {
+    id: 4,
+    title: lang === 'es' ? "Trazabilidad de Piezas Automotrices" : "Automotive Parts Traceability",
+    description: lang === 'es'
+      ? "Aplicación de escritorio para la trazabilidad de piezas automotrices utilizando C# y DevExpress."
+      : "Desktop application for automotive parts traceability using C# and DevExpress.",
+    image: "/assets/projects/trace.webp",
+    tech: ["C#", "DevExpress", "SQL", "WinForms", ".NET Framework"],
+    type: "work",
+    featured: false
+  },
+];
+---
+
+<main class="min-h-screen px-4 pt-32 pb-20">
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+        {t.projects.title}
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        {t.projects.subtitle}
+      </p>
+    </div>
+    
+    <!-- Proyectos Destacados -->
+    <div class="mb-20">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+        {lang === 'es' ? 'Proyectos Destacados' : 'Featured Projects'}
+      </h2>
+      
+      <div class="grid md:grid-cols-2 gap-8 mb-12">
+        {projects.filter(p => p.featured).slice(0, 2).map((project, index) => (
+          <div class="group relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-2xl hover:scale-[1.02] transition-all duration-500">
+            <!-- Project Image -->
+            <div class="relative h-64 overflow-hidden">
+              <img 
+                src={project.image} 
+                alt={project.title}
+                loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
+              
+              <!-- Project Type Badge -->
+              <div class="absolute top-4 left-4">
+                {project.type === 'work' ? (
+                  <span class="px-3 py-1 bg-blue-500/20 backdrop-blur-md border border-blue-400/30 text-blue-200 rounded-full text-sm font-medium">
+                    {lang === 'es' ? 'Trabajo' : 'Work'}
+                  </span>
+                ) : (
+                  <span class="px-3 py-1 bg-green-500/20 backdrop-blur-md border border-green-400/30 text-green-200 rounded-full text-sm font-medium">
+                    {lang === 'es' ? 'Personal' : 'Personal'}
+                  </span>
+                )}
+              </div>
+              
+              <!-- Action Buttons - Hover Effect -->
+              <div class="absolute bottom-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300">
+                {project.demo && (
+                  <a 
+                    href={project.demo} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-all duration-200"
+                    title={lang === 'es' ? 'Ver demo' : 'View demo'}
+                  >
+                    <span class="text-white text-sm">🔗</span>
+                  </a>
+                )}
+                
+                {project.github && (
+                  <a 
+                    href={project.github} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg hover:bg-white/20 transition-all duration-200"
+                    title={lang === 'es' ? 'Ver código' : 'View code'}
+                  >
+                    <span class="text-white text-sm">📂</span>
+                  </a>
+                )}
+              </div>
+            </div>
+            
+            <!-- Project Content -->
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                {project.title}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                {project.description}
+              </p>
+              
+              <!-- Tech Stack -->
+              <div class="flex flex-wrap gap-2">
+                {project.tech.map((tech) => (
+                  <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors cursor-default">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Otros Proyectos -->
+    <div>
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+        {lang === 'es' ? 'Otros Proyectos' : 'Other Projects'}
+      </h2>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {projects.filter(p => !p.featured).concat(projects.filter(p => p.featured).slice(2)).map((project) => (
+          <div class="group bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-lg hover:scale-105 transition-all duration-300">
+            <!-- Project Image -->
+            <div class="relative h-48 overflow-hidden">
+              <img 
+                src={project.image} 
+                alt={project.title}
+                loading="lazy"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              />
+              <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300"></div>
+              
+              <!-- Project Type Badge -->
+              <div class="absolute top-3 left-3">
+                {project.type === 'work' ? (
+                  <span class="px-2 py-1 bg-blue-500/20 backdrop-blur-sm border border-blue-400/30 text-blue-200 rounded-md text-xs font-medium">
+                    {lang === 'es' ? 'Trabajo' : 'Work'}
+                  </span>
+                ) : (
+                  <span class="px-2 py-1 bg-green-500/20 backdrop-blur-sm border border-green-400/30 text-green-200 rounded-md text-xs font-medium">
+                    {lang === 'es' ? 'Personal' : 'Personal'}
+                  </span>
+                )}
+              </div>
+              
+              <!-- Quick Action Buttons -->
+              <div class="absolute top-3 right-3 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                {project.demo && (
+                  <a 
+                    href={project.demo} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="p-2 bg-white/10 backdrop-blur-sm rounded-md hover:bg-white/20 transition-all duration-200"
+                    title={lang === 'es' ? 'Ver demo' : 'View demo'}
+                  >
+                    <span class="text-white text-xs">🔗</span>
+                  </a>
+                )}
+                
+                {project.github && (
+                  <a 
+                    href={project.github} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="p-2 bg-white/10 backdrop-blur-sm rounded-md hover:bg-white/20 transition-all duration-200"
+                    title={lang === 'es' ? 'Ver código' : 'View code'}
+                  >
+                    <span class="text-white text-xs">📂</span>
+                  </a>
+                )}
+              </div>
+            </div>
+            
+            <!-- Project Content -->
+            <div class="p-5">
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                {project.title}
+              </h3>
+              <p class="text-gray-600 dark:text-gray-400 text-sm mb-3 line-clamp-2">
+                {project.description}
+              </p>
+              
+              <!-- Tech Stack - Simplified -->
+              <div class="flex flex-wrap gap-1">
+                {project.tech.slice(0, 3).map((tech) => (
+                  <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs">
+                    {tech}
+                  </span>
+                ))}
+                {project.tech.length > 3 && (
+                  <span class="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-400 rounded text-xs">
+                    +{project.tech.length - 3}
+                  </span>
+                )}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    
+    <!-- Call to Action -->
+    <div class="text-center mt-16 p-8 bg-gray-50 dark:bg-gray-800/50 rounded-2xl border border-gray-200 dark:border-gray-700">
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+        {lang === 'es' ? '¿Interesado en colaborar?' : 'Interested in collaborating?'}
+      </h3>
+      <p class="text-gray-600 dark:text-gray-400 mb-6 max-w-2xl mx-auto">
+        {lang === 'es' 
+          ? 'Siempre estoy abierto a nuevos proyectos y oportunidades. ¡Hablemos sobre tu próxima idea!'
+          : "I'm always open to new projects and opportunities. Let's talk about your next idea!"}
+      </p>
+      <a 
+        href={lang === 'es' ? '/contact' : '/en/contact'}
+        class="inline-flex items-center px-6 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-xl transition-all duration-200 hover:scale-105 shadow-lg shadow-blue-500/25"
+      >
+        {lang === 'es' ? 'Contáctame' : 'Contact Me'}
+        <span class="ml-2">→</span>
+      </a>
+    </div>
+  </div>
+</main>
