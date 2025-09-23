@@ -1,0 +1,221 @@
+---
+import { useTranslations } from '../../i18n/utils';
+import { PiEnvelopeDuotone, PiPhoneDuotone, PiMapPinDuotone, PiGithubLogoDuotone, PiLinkedinLogoDuotone, PiXLogoDuotone, PiInstagramLogoDuotone, PiDownloadDuotone, PiReadCvLogoDuotone } from 'react-icons/pi';
+
+export interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const contactInfo = {
+  email: "davidherreradelcastillo2000@gmail.com",
+  phone: "+52 442 837 2849",
+  location: lang === 'es' ? "México, México" : "Mexico, Mexico",
+  availability: lang === 'es' ? "Interesado en proyectos colaborativos" : "Interested in collaborative projects",
+  timezone: "GMT-6 (CST) - " + (lang === 'es' ? "Ciudad de México" : "Mexico City"),
+};
+
+const socialLinks = [
+  {
+    name: "GitHub",
+    url: "https://github.com/david-heca",
+    icon: "github",
+    color: "hover:text-gray-900 dark:hover:text-gray-100"
+  },
+  {
+    name: "LinkedIn", 
+    url: "https://www.linkedin.com/in/david-heca/",
+    icon: "linkedin",
+    color: "hover:text-blue-500"
+  },
+  {
+    name: "Twitter",
+    url: "https://x.com/david_heca_",
+    icon: "twitter", 
+    color: "hover:text-gray-900 dark:hover:text-gray-100"
+  },
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/david_heca/",
+    icon: "instagram",
+    color: "hover:text-purple-500"
+  }
+];
+---
+
+<main class="min-h-screen px-4 pt-32 pb-20">
+  <div class="max-w-4xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-20">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+        {t.contact.title}
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+        {t.contact.subtitle}
+      </p>
+    </div>
+    
+    <!-- Contact Cards Grid -->
+    <div class="grid gap-6 mb-16">
+      <!-- Email Card -->
+      <div class="group bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-500 transition-all duration-300 hover:shadow-lg">
+        <div class="flex items-center gap-6">
+          <div class="w-16 h-16 bg-blue-50 dark:bg-blue-900/20 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+            <PiEnvelopeDuotone className="w-8 h-8 text-blue-500" />
+          </div>
+          <div class="flex-1">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+              {lang === 'es' ? 'Correo electrónico' : 'Email'}
+            </h3>
+            <a 
+              href={`mailto:${contactInfo.email}`} 
+              class="text-gray-600 dark:text-gray-400 hover:text-blue-500 dark:hover:text-blue-400 transition-colors text-lg break-all"
+            >
+              {contactInfo.email}
+            </a>
+          </div>
+          <div class="hidden sm:block">
+            <a 
+              href={`mailto:${contactInfo.email}`}
+              class="px-4 py-2 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors text-sm font-medium"
+            >
+              {lang === 'es' ? 'Enviar' : 'Send'}
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Phone Card -->
+      <div class="group bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-500 transition-all duration-300 hover:shadow-lg">
+        <div class="flex items-center gap-6">
+          <div class="w-16 h-16 bg-green-50 dark:bg-green-900/20 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+            <PiPhoneDuotone className="w-8 h-8 text-green-500" />
+          </div>
+          <div class="flex-1">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+              {lang === 'es' ? 'Teléfono' : 'Phone'}
+            </h3>
+            <a 
+              href={`tel:${contactInfo.phone}`} 
+              class="text-gray-600 dark:text-gray-400 hover:text-green-500 dark:hover:text-green-400 transition-colors text-lg"
+            >
+              {contactInfo.phone}
+            </a>
+          </div>
+          <div class="hidden sm:block">
+            <a 
+              href={`tel:${contactInfo.phone}`}
+              class="px-4 py-2 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-colors text-sm font-medium"
+            >
+              {lang === 'es' ? 'Llamar' : 'Call'}
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Location Card -->
+      <div class="group bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-500 transition-all duration-300 hover:shadow-lg">
+        <div class="flex items-center gap-6">
+          <div class="w-16 h-16 bg-purple-50 dark:bg-purple-900/20 rounded-2xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+            <PiMapPinDuotone className="w-8 h-8 text-purple-500" />
+          </div>
+          <div class="flex-1">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-1">
+              {lang === 'es' ? 'Ubicación' : 'Location'}
+            </h3>
+            <p class="text-gray-600 dark:text-gray-400 text-lg">{contactInfo.location}</p>
+            <p class="text-sm text-gray-500 dark:text-gray-500 mt-1">{contactInfo.timezone}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Social Links -->
+    <div class="mb-16">
+      <h2 class="text-2xl font-bold text-gray-900 dark:text-white text-center mb-8">
+        {lang === 'es' ? 'Conecta conmigo' : 'Connect with me'}
+      </h2>
+      
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {socialLinks.map((social) => (
+          <a 
+            href={social.url} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="group flex flex-col items-center gap-3 p-6 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300 hover:scale-105"
+            title={social.name}
+          >
+            <div class={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${social.color}`}>
+              {social.icon === 'github' && (
+                <PiGithubLogoDuotone className="w-7 h-7 text-gray-600 dark:text-gray-400 group-hover:text-current transition-colors" />
+              )}
+              {social.icon === 'linkedin' && (
+                <PiLinkedinLogoDuotone className="w-7 h-7 text-gray-600 dark:text-gray-400 group-hover:text-current transition-colors" />
+              )}
+              {social.icon === 'twitter' && (
+                <PiXLogoDuotone className="w-7 h-7 text-gray-600 dark:text-gray-400 group-hover:text-current transition-colors" />
+              )}
+              {social.icon === 'instagram' && (
+                <PiInstagramLogoDuotone className="w-7 h-7 text-gray-600 dark:text-gray-400 group-hover:text-current transition-colors" />
+              )}
+            </div>
+            <span class="text-sm font-medium text-gray-700 dark:text-gray-300 group-hover:text-current transition-colors text-center">
+              {social.name}
+            </span>
+          </a>
+        ))}
+      </div>
+    </div>
+    
+    <!-- CV Download Section -->
+    <div class="bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 rounded-3xl p-8 md:p-12 text-center border border-gray-200 dark:border-gray-700">
+      <div class="max-w-2xl mx-auto">
+        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl flex items-center justify-center mx-auto mb-6">
+          <PiReadCvLogoDuotone className="w-10 h-10 text-white" />
+        </div>
+        
+        <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+          {lang === 'es' ? 'Descarga mi CV' : 'Download my Resume'}
+        </h2>
+        
+        <p class="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">
+          {lang === 'es' 
+            ? 'Obtén una visión completa de mi experiencia, habilidades y logros profesionales.' 
+            : 'Get a complete view of my experience, skills and professional achievements.'}
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <a 
+            href="/assets/documents/davidherrera-spanish.pdf" 
+            download="davidherrera-spanish.pdf"
+            class="inline-flex items-center gap-3 px-8 py-4 bg-gray-900 dark:bg-white text-white dark:text-gray-900 rounded-2xl font-semibold hover:bg-gray-800 dark:hover:bg-gray-100 transition-all duration-300 hover:scale-105 shadow-lg"
+          >
+            <PiDownloadDuotone className="w-5 h-5" />
+            {lang === 'es' ? 'Descargar CV' : 'Download Resume'}
+          </a>
+          
+          <div class="text-center sm:text-left">
+            <p class="text-gray-500 dark:text-gray-500 text-sm">
+              PDF • {lang === 'es' ? 'Actualizado Sept 2025' : 'Updated Sept 2025'}
+            </p>
+            <p class="text-gray-400 dark:text-gray-600 text-xs">
+              {lang === 'es' ? '~2MB • Español' : '~2MB • Spanish'}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Availability Status -->
+    <div class="mt-12 text-center">
+      <div class="inline-flex items-center gap-3 px-6 py-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-full">
+        <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+        <span class="text-green-700 dark:text-green-300 font-medium">
+          {contactInfo.availability}
+        </span>
+      </div>
+    </div>
+  </div>
+</main>
