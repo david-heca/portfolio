@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "skills": "Skills",
+    "work": "Experience", 
+    "education": "Education",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "title": "Systems Engineer & AI Solutions Architect",
+    "description": "Specialized in developing innovative technological solutions and artificial intelligence architectures. I'm passionate about transforming ideas into realities that generate impact.",
+    "cta": "See my work"
+  },
+  "about": {
+    "title": "About me",
+    "subtitle": "Passion for technology and innovation"
+  },
+  "skills": {
+    "title": "Skills",
+    "subtitle": "Technologies and tools I master"
+  },
+  "work": {
+    "title": "Experience", 
+    "subtitle": "My professional journey"
+  },
+  "education": {
+    "title": "Education",
+    "subtitle": "Education and certifications"
+  },
+  "projects": {
+    "title": "Projects",
+    "subtitle": "Some of my featured work"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Let's talk about your next project?"
+  },
+  "common": {
+    "contactMe": "Contact me"
+  }
+}

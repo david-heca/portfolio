@@ -1,0 +1,170 @@
+---
+import { useTranslations } from '../../i18n/utils';
+
+export interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const experiences = [
+  {
+    id: 1,
+    company: "Baacc Systems",
+    position: lang === 'es' ? "Fullstack & Data Engineer" : "Fullstack & Data Engineer",
+    period: lang === 'es' ? "2023 Sep - Actualidad" : "2023 Sep - Present",
+    location: lang === 'es' ? "Estado de México, México" : "Mexico State, Mexico",
+    type: lang === 'es' ? "Tiempo completo" : "Full-time",
+    description: lang === 'es' 
+      ? "Desarrollo de aplicaciones web, móviles y sistemas de backend (microservicios) para clientes en sectores como automotriz, e-commerce y salud."
+      : "Development of web applications, mobile apps and backend systems (microservices) for clients in automotive, e-commerce and healthcare sectors.",
+    achievements: lang === 'es' ? [
+      "Implementé un sistema de control de inventarios en tiempo real con tecnología RFID (Android y Java)",
+      "Desarrollé una plataforma de IA para empresas que permite interactuar con datos mediante procesamiento de lenguaje natural",
+      "Optimicé el rendimiento de aplicaciones web, desarrolladas en WebAssembly y React, mejorando la experiencia del usuario",
+      "Lideré equipos pequeños en proyectos de desarrollo ágil, mejorando la entrega de productos",
+      "Integré herramientas de DevOps como Docker y Azure para mejorar la eficiencia del desarrollo y despliegue",
+      "Administré bases de datos SQL y NoSQL, implementando prácticas de seguridad y optimización",
+    ] : [
+      "Implemented a real-time inventory control system with RFID technology (Android and Java)",
+      "Developed an AI platform for companies that allows interaction with data through natural language processing",
+      "Optimized web application performance, developed in WebAssembly and React, improving user experience",
+      "Led small teams in agile development projects, improving product delivery",
+      "Integrated DevOps tools like Docker and Azure to improve development and deployment efficiency",
+      "Managed SQL and NoSQL databases, implementing security and optimization practices",
+    ],
+    technologies: ["React", "Python", "JavaScript", "Tailwind CSS", "SQL Server", "Android", ".NET", "Docker", "Azure OpenAI", "MCP", "RAG", "FastAPI", "Git", "APIs"],
+    logo: "/assets/company/baacc.webp"
+  },
+  {
+    id: 2,
+    company: "DEC Marketing",
+    position: lang === 'es' ? "Web Developer Junior" : "Junior Web Developer",
+    period: "2022 Mar - 2023 Sep",
+    location: lang === 'es' ? "Ciudad de México, México" : "Mexico City, Mexico",
+    type: lang === 'es' ? "Contrato de prácticas" : "Internship contract",
+    description: lang === 'es'
+      ? "Desarrollo y administración de sitios web y aplicaciones para clientes diversos, incluyendo temas de SEO y marketing digital."
+      : "Development and administration of websites and applications for diverse clients, including SEO and digital marketing topics.",
+    achievements: lang === 'es' ? [
+      "Desarrollé más de 15 proyectos web exitosos con tecnologías como WordPress, OpenCart y Joomla",
+      "Administré correos electrónicos y dominios para clientes",
+      "Implementé estrategias de SEO que mejoraron la visibilidad en línea de los clientes con Google Ads y Google Analytics",
+      "Mitigué ataques de denegación de servicio (DDoS) en sitios web de clientes a través de Cloudflare",
+    ] : [
+      "Developed over 15 successful web projects with technologies like WordPress, OpenCart and Joomla",
+      "Managed emails and domains for clients",
+      "Implemented SEO strategies that improved clients' online visibility with Google Ads and Google Analytics",
+      "Mitigated denial of service (DDoS) attacks on client websites through Cloudflare",
+    ],
+    technologies: ["HTML", "CSS", "JavaScript", "WordPress", "Figma", "OpenCart", "Joomla", "Google Ads", "Google Analytics"],
+    logo: "/assets/company/dec.webp"
+  },
+];
+---
+
+<main class="min-h-screen px-4 pt-32 pb-20">
+  <div class="max-w-4xl mx-auto">
+    <div class="text-center mb-16">
+      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+        {t.work.title}
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        {t.work.subtitle}
+      </p>
+    </div>
+    
+    <!-- Timeline de experiencia -->
+    <div class="relative">
+      <!-- Timeline line -->
+      <div class="absolute left-6 top-0 w-px bg-gray-200 dark:bg-gray-700 h-full hidden md:block"></div>
+      
+      <div class="space-y-12">
+        {experiences.map((exp, index) => (
+          <div class="relative">
+            <!-- Timeline dot -->
+            <div class="absolute left-4 w-4 h-4 bg-blue-500 rounded-full border-4 border-white dark:border-gray-900 hidden md:block"></div>
+            
+            <!-- Content Card -->
+            <div class="md:ml-16 bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:shadow-lg transition-all duration-300">
+              <!-- Header -->
+              <div class="flex items-start gap-4 mb-4">
+                <div class="w-16 h-16 flex-shrink-0">
+                  {exp.logo ? (
+                    <img 
+                      src={exp.logo} 
+                      alt={`${exp.company} logo`}
+                      class="w-full h-full object-contain rounded-lg"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <!-- Fallback con inicial de la empresa -->
+                    <div class="w-full h-full bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center">
+                      <span class="text-gray-600 dark:text-gray-300 font-bold text-xl">
+                        {exp.company.charAt(0)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+                <div class="flex-1 min-w-0">
+                  <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">
+                    {exp.position}
+                  </h3>
+                  <p class="text-blue-500 font-semibold mb-2">{exp.company}</p>
+                  
+                  <div class="flex flex-wrap gap-2 mb-2">
+                    <span class="inline-flex items-center px-3 py-1 bg-gray-100 dark:bg-gray-700 rounded-full text-sm text-gray-700 dark:text-gray-300">
+                      {exp.period}
+                    </span>
+                    <span class="inline-flex items-center px-3 py-1 bg-blue-100 dark:bg-blue-900/20 rounded-full text-sm text-blue-700 dark:text-blue-300">
+                      {exp.type}
+                    </span>
+                  </div>
+                  
+                  <p class="text-sm text-gray-600 dark:text-gray-400">
+                    {exp.location}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Description -->
+              <p class="text-gray-700 dark:text-gray-300 mb-4 leading-relaxed">
+                {exp.description}
+              </p>
+
+              <!-- Achievements -->
+              <div class="mb-6">
+                <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                  {lang === 'es' ? 'Logros principales' : 'Key Achievements'}
+                </h4>
+                <ul class="space-y-2">
+                  {exp.achievements.map((achievement) => (
+                    <li class="flex items-start gap-3 text-gray-700 dark:text-gray-300">
+                      <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 flex-shrink-0"></div>
+                      <span class="leading-relaxed">{achievement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <!-- Technologies -->
+              <div>
+                <h4 class="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                  {lang === 'es' ? 'Tecnologías utilizadas' : 'Technologies Used'}
+                </h4>
+                <div class="flex flex-wrap gap-2">
+                  {exp.technologies.map((tech) => (
+                    <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</main>
