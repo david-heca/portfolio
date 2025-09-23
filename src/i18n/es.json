@@ -1,0 +1,44 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre mí",
+    "skills": "Habilidades", 
+    "work": "Experiencia",
+    "education": "Formación",
+    "projects": "Proyectos",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "greeting": "Hola, soy",
+    "title": "Ingeniero en TI & Arquitecto de Soluciones IA",
+    "description": "Especializado en el desarrollo de soluciones tecnológicas innovadoras y arquitecturas de inteligencia artificial. Me apasiona transformar ideas en realidades que generan impacto.",
+    "cta": "Ver mi trabajo"
+  },
+  "about": {
+    "title": "Sobre mí",
+    "subtitle": "Pasión por la tecnología e innovación"
+  },
+  "skills": {
+    "title": "Habilidades", 
+    "subtitle": "Tecnologías y herramientas que domino"
+  },
+  "work": {
+    "title": "Experiencia",
+    "subtitle": "Mi trayectoria profesional"
+  },
+  "education": {
+    "title": "Formación",
+    "subtitle": "Educación y certificaciones"
+  },
+  "projects": {
+    "title": "Proyectos",
+    "subtitle": "Algunos de mis trabajos destacados"
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "¿Hablamos de tu próximo proyecto?"
+  },
+  "common": {
+    "contactMe": "Contáctame"
+  }
+}

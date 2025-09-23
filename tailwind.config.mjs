@@ -4,6 +4,7 @@ export default {
     './src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}',
     './public/**/*.html'
   ],
+  darkMode: 'class',
   theme: {
     extend: {},
   },
