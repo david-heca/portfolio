@@ -8,69 +8,55 @@ interface Props {
   size?: string;
 }
 
-const { 
-  src, 
-  alt, 
-  size = "w-32 h-32" 
-} = Astro.props;
+const { src, alt, size = "w-32 h-32" } = Astro.props;
 ---
 
 <div id="avatar-3d" class={`${size} mx-auto mb-8 relative`}>
+  <!-- Fondo degradado animado -->
   <div class="morph-bg absolute inset-[-15px] bg-gradient-to-r from-indigo-500 via-purple-500 to-cyan-500 blur-xl opacity-60"></div>
+  
+  <!-- Contenedor de imagen -->
   <div class="w-full h-full rounded-full overflow-hidden relative z-10 border-2 border-white/10">
-    <div class="avatar-inner w-full h-full relative">
-      <Image 
-        src={src} 
-        alt={alt} 
-        class="w-full h-full object-cover absolute inset-0" 
-        width={1000} 
-        height={1000}
-        quality={90}
-        loading="lazy"
-      />
-    </div>
+    <Image 
+      src={src} 
+      alt={alt} 
+      class="w-full h-full object-cover" 
+      width={1000} 
+      height={1000}
+      quality={90}
+      loading="lazy"
+    />
   </div>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const avatar = document.getElementById('avatar-3d');
+  // Efecto 3D solo en desktop
+  const avatar = document.getElementById('avatar-3d');
+  
+  if (avatar && window.matchMedia('(min-width: 768px)').matches) {
+    const MAX_ROTATION = 15;
     
-    if (avatar) {
-      // Solo aplicar en dispositivos que probablemente tengan mouse
-      if (window.matchMedia('(min-width: 768px)').matches) {
-        
-        // Limitar el ángulo de rotación
-        const maxRotation = 15;
-        
-        document.addEventListener('mousemove', (e) => {
-          const { clientX, clientY } = e;
-          const { left, top, width, height } = avatar.getBoundingClientRect();
-          
-          // Calcular el centro del elemento
-          const centerX = left + width / 2;
-          const centerY = top + height / 2;
-          
-          // Calcular la distancia desde el centro
-          const distanceX = clientX - centerX;
-          const distanceY = clientY - centerY;
-          
-          // Calcular la rotación basada en la distancia al centro (limitada por maxRotation)
-          const rotateY = Math.min(Math.max(-maxRotation, distanceX / 10), maxRotation);
-          const rotateX = Math.min(Math.max(-maxRotation, -distanceY / 10), maxRotation);
-          
-          // Aplicar transformación
-          avatar.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
-        });
-        
-        // Resetear al salir de la ventana o dejar de mover el mouse
-        document.addEventListener('mouseleave', () => {
-          avatar.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-        });
-        
-        // Añadir transición suave
-        avatar.style.transition = 'transform 0.2s ease-out';
-      }
-    }
-  });
+    // Transición suave
+    avatar.style.transition = 'transform 0.2s ease-out';
+    
+    document.addEventListener('mousemove', (e) => {
+      const rect = avatar.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
+      
+      // Calcular ángulos de rotación
+      const distX = e.clientX - centerX;
+      const distY = e.clientY - centerY;
+      
+      const rotateY = Math.min(Math.max(-MAX_ROTATION, distX / 10), MAX_ROTATION);
+      const rotateX = Math.min(Math.max(-MAX_ROTATION, -distY / 10), MAX_ROTATION);
+      
+      avatar.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+    });
+    
+    // Resetear transformación
+    document.addEventListener('mouseleave', () => {
+      avatar.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+    });
+  }
 </script>

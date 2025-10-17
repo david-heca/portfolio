@@ -1,6 +1,8 @@
 ---
 import { useTranslations } from '../../i18n/utils';
 import '../../styles/hero.css';
+import Avatar3D from '../Avatar3D.astro';
+import profileImage from './../../../public/assets/dh.webp';
 
 export interface Props {
   lang: 'es' | 'en';
@@ -14,15 +16,12 @@ const t = useTranslations(lang);
   <div class="max-w-4xl mx-auto text-center relative z-10">
     <!-- Contenido del Hero -->
     <div class="space-y-8">
-      <!-- Avatar/Foto -->
-      <div class="relative w-36 h-36 mx-auto">
-        <img 
-          src="/assets/dh.webp" 
-          alt="David Herrera" 
-          class="w-full h-full rounded-full object-cover border-4 border-white dark:border-gray-800 shadow-lg shadow-gray-900/10 dark:shadow-gray-900/30 avatar-glow"
-        />
-        <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-blue-500 to-purple-600 opacity-10"></div>
-      </div>
+      <!-- Avatar/Foto 3D -->
+      <Avatar3D 
+        src={profileImage} 
+        alt="David Herrera" 
+        size="w-36 h-36 md:w-48 md:h-48"
+      />
       
       <div class="space-y-4">
         <p class="text-lg text-gray-600 dark:text-gray-400 font-medium">
