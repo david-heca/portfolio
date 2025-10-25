@@ -1,5 +1,6 @@
 ---
-import { useTranslations } from '../../i18n/utils';
+import { useTranslations } from '@i18n/utils';
+import { twGlobals } from '@utils/tw-ui';
 
 export interface Props {
   lang: 'es' | 'en';
@@ -134,52 +135,50 @@ const softSkills = lang === 'es' ? [
     </div>
 
     <!-- Technical Skills Grid -->
-    <div class="mb-16">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+    <div class="mb-20">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
         {lang === 'es' ? 'Tecnologías' : 'Technologies'}
       </h2>
-      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
         {primarySkills.map((skill, index) => (
-          <div
-            class="group p-4 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-400 transition-all duration-300 hover:scale-105 hover:shadow-lg"
-          >
-            <div class="text-center">
-              <div class="w-12 h-12 mx-auto mb-4 group-hover:scale-110 transition-transform relative">
-                {skill.icon ? (
-                  <img 
-                    src={`https://svgl.app/library/${skill.icon}.svg`}
-                    alt={`${skill.name} icon`}
-                    class="w-full h-full object-contain filter dark:brightness-110"
-                    loading="lazy"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
-                  />
-                ) : null}
-                <!-- Fallback si no hay ícono -->
-                <div class={`w-full h-full bg-gradient-to-r ${skill.color} rounded-xl items-center justify-center ${skill.icon ? 'hidden' : 'flex'}`}>
-                  <span class="text-white font-bold text-lg">
-                    {skill.name.charAt(0)}
-                  </span>
-                </div>
-              </div>
-              <h3 class="text-gray-900 dark:text-white font-semibold mb-2 group-hover:text-blue-500 transition-colors">
-                {skill.name}
-              </h3>
-              <div class="flex flex-col gap-2">
-                <span class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+          <div class={twGlobals.skillCard}>
+            <div class="flex items-start justify-between mb-3">
+              <div class="flex-1">
+                <h3 class="text-gray-900 dark:text-white font-semibold text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  {skill.name}
+                </h3>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
                   {skill.category}
-                </span>
-                <span
-                  class={`text-xs px-2 py-1 rounded-full font-medium ${
-                    skill.level === "Avanzado" || skill.level === "Advanced"
-                      ? "bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300"
-                      : (skill.level === "Intermedio" || skill.level === "Intermediate")
-                        ? "bg-yellow-100 dark:bg-yellow-900/20 text-yellow-700 dark:text-yellow-300"
-                        : "bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                  }`}
-                >
-                  {skill.level}
+                </p>
+              </div>
+              {skill.icon ? (
+                <img 
+                  src={`https://svgl.app/library/${skill.icon}.svg`}
+                  alt={`${skill.name} icon`}
+                  class="w-8 h-8 object-contain filter dark:brightness-110 flex-shrink-0"
+                  loading="lazy"
+                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+                />
+              ) : null}
+              <div class={`w-8 h-8 bg-gradient-to-r ${skill.color} rounded-lg items-center justify-center flex-shrink-0 ${skill.icon ? 'hidden' : 'flex'}`}>
+                <span class="text-white font-bold text-xs">
+                  {skill.name.charAt(0)}
                 </span>
               </div>
+            </div>
+            
+            <div class="flex items-center gap-2">
+              <span
+                class={`${twGlobals.skillLevelBadge} ${
+                  skill.level === "Avanzado" || skill.level === "Advanced"
+                    ? twGlobals.levelAdvanced
+                    : (skill.level === "Intermedio" || skill.level === "Intermediate")
+                      ? twGlobals.levelIntermediate
+                      : twGlobals.levelBasic
+                }`}
+              >
+                {skill.level}
+              </span>
             </div>
           </div>
         ))}
@@ -187,47 +186,47 @@ const softSkills = lang === 'es' ? [
     </div>
 
     <!-- Languages -->
-    <div class="mb-16">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+    <div class="mb-20">
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
         {lang === 'es' ? 'Idiomas' : 'Languages'}
       </h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
         {languages.map((language, index) => (
-          <div class="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-400 p-6 rounded-2xl transition-all duration-300 hover:shadow-lg">
-            <div class="flex items-center justify-between mb-4">
-              <h3 class="text-xl font-semibold text-gray-900 dark:text-white group-hover:text-blue-500 transition-colors">
+          <div class={twGlobals.languageCard}>
+            <div class="flex items-center justify-between mb-5">
+              <h3 class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                 {language.name}
               </h3>
-              <span class={`text-sm px-3 py-1 rounded-full font-medium ${
+              <span class={`text-xs px-3 py-1 rounded-full font-medium ${
                 language.level === "Nativo" || language.level === "Native"
-                  ? "bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300" 
-                  : "bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
+                  ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300" 
+                  : "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
               }`}>
                 {language.level === "Nativo" || language.level === "Native" ? (lang === 'es' ? "Nativo" : "Native") : "B2"}
               </span>
             </div>
             
-            <div class="space-y-3">
-              <div class="flex justify-between text-sm text-gray-600 dark:text-gray-400">
-                <span>{lang === 'es' ? 'Nivel' : 'Level'}</span>
-                <span>{(language.level === "Nativo" || language.level === "Native") ? "100%" : "70%"}</span>
+            <div class="space-y-4">
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-600 dark:text-gray-400">{lang === 'es' ? 'Proficiencia' : 'Proficiency'}</span>
+                <span class="font-semibold text-gray-900 dark:text-white">{(language.level === "Nativo" || language.level === "Native") ? "100%" : "70%"}</span>
               </div>
               
-              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
                 <div 
-                  class={`h-2 rounded-full transition-all duration-1000 ease-out ${
+                  class={`h-2.5 rounded-full transition-all duration-1000 ease-out ${
                     (language.level === "Nativo" || language.level === "Native")
-                      ? "bg-gradient-to-r from-green-400 to-green-500 w-full" 
-                      : "bg-gradient-to-r from-blue-400 to-blue-500 w-[70%]"
+                      ? "bg-gradient-to-r from-green-500 to-green-600 w-full" 
+                      : "bg-gradient-to-r from-blue-500 to-blue-600 w-[70%]"
                   }`}
                 />
               </div>
               
-              <p class="text-gray-600 dark:text-gray-400 text-sm mt-3">
+              <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed pt-1">
                 {(language.level === "Nativo" || language.level === "Native")
-                  ? (lang === 'es' ? "Lengua materna - Dominio completo" : "Native language - Complete mastery")
-                  : (lang === 'es' ? "Upper Intermediate - Competencia profesional mínima" : "Upper Intermediate - Minimum professional proficiency")
+                  ? (lang === 'es' ? "Lengua materna • Dominio completo" : "Native language • Complete mastery")
+                  : (lang === 'es' ? "Competencia profesional • Comunicación fluida" : "Professional competency • Fluent communication")
                 }
               </p>
             </div>
@@ -237,13 +236,13 @@ const softSkills = lang === 'es' ? [
     </div>
 
     <!-- Soft Skills -->
-    <div class="text-center">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+    <div>
+      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
         {lang === 'es' ? 'Habilidades Blandas' : 'Soft Skills'}
       </h2>
       <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
         {softSkills.map((skill, index) => (
-          <div class="px-4 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-400 dark:hover:border-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-300 hover:scale-105">
+          <div class={twGlobals.softSkillBadge}>
             {skill}
           </div>
         ))}

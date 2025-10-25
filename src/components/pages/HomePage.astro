@@ -1,18 +1,18 @@
 ---
-import { useTranslations } from '../../i18n/utils';
-import '../../styles/hero.css';
-import Avatar3D from '../Avatar3D.astro';
-import profileImage from './../../../public/assets/dh.webp';
+import { useTranslations } from '@i18n/utils';
+import '@styles/hero.css';
+import Avatar3D from '@components/Avatar3D.astro';
+import profileImage from '@assets/dh.webp';
+import { twGlobals } from '@utils/tw-ui';
+import { PiArrowFatRightDuotone, PiEnvelopeDuotone } from 'react-icons/pi';
 
-export interface Props {
-  lang: 'es' | 'en';
-}
+export interface Props { lang: 'es' | 'en'; }
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<main class="min-h-screen flex items-center justify-center px-4 pt-20 pb-12 md:pb-20 relative overflow-hidden">
+<main class="min-h-screen flex items-center justify-center px-6 pt-20 pb-12 md:pb-20 relative overflow-hidden">
   <div class="max-w-4xl mx-auto text-center relative z-10">
     <!-- Contenido del Hero -->
     <div class="space-y-8">
@@ -20,7 +20,7 @@ const t = useTranslations(lang);
       <Avatar3D 
         src={profileImage} 
         alt="David Herrera" 
-        size="w-36 h-36 md:w-48 md:h-48"
+        size="w-32 md:w-36 xl:w-48"
       />
       
       <div class="space-y-4">
@@ -45,17 +45,18 @@ const t = useTranslations(lang);
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8 pb-4 md:pb-0">
         <a 
           href={lang === 'es' ? '/projects' : '/en/projects'}
-          class="inline-flex items-center justify-center px-8 py-3 bg-blue-500 hover:bg-blue-600 text-white font-medium rounded-xl transition-all duration-200 hover:scale-105 shadow-lg shadow-blue-500/25"
+          class={twGlobals.heroPrimaryButton}
         >
           {t.hero.cta}
-          <span class="ml-2">→</span>
+          <PiArrowFatRightDuotone className="ml-2 w-6 h-6" />
         </a>
         
         <a 
           href={lang === 'es' ? '/contact' : '/en/contact'}
-          class="inline-flex items-center justify-center px-8 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white font-medium rounded-xl transition-all duration-200 hover:scale-105 hover:bg-gray-50 dark:hover:bg-gray-700"
+          class={twGlobals.heroSecondaryButton}
         >
           {t.common.contactMe}
+          <PiEnvelopeDuotone className="ml-2 w-6 h-6" />
         </a>
       </div>
     </div>
