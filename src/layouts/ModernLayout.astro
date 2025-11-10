@@ -52,7 +52,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <script is:inline>
       // Función global para aplicar tema
       window.applyTheme = function(theme) {
-        console.log('Applying theme:', theme);
         if (theme === 'dark') {
           document.documentElement.classList.add('dark');
         } else {
@@ -86,7 +85,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
             const expectedTheme = window.getTheme();
             
             if (currentTheme !== expectedTheme) {
-              console.log('Theme mismatch detected! Restoring...', currentTheme, '->', expectedTheme);
               window.applyTheme(expectedTheme);
             }
           }
@@ -102,7 +100,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
   
   <body class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
     <slot />
-    
     <!-- Theme toggle script -->
     <script>
       // Usar las funciones globales con acceso dinámico
@@ -110,9 +107,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         const currentTheme = (window as any).getTheme();
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         
-        console.log('Toggle: from', currentTheme, 'to', newTheme); // Debug
         (window as any).applyTheme(newTheme);
-        console.log('Toggle completed'); // Debug
       }
       
       function setupThemeToggle() {
@@ -120,7 +115,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         if (themeToggle && !themeToggle.hasAttribute('data-theme-setup')) {
           themeToggle.addEventListener('click', toggleTheme);
           themeToggle.setAttribute('data-theme-setup', 'true');
-          console.log('Theme toggle setup complete'); // Debug
         }
       }
       
@@ -129,10 +123,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       
       // Re-aplicar tema después de transiciones
       document.addEventListener('astro:after-swap', function() {
-        console.log('After swap - reapplying theme...'); // Debug
         const theme = (window as any).getTheme();
         (window as any).applyTheme(theme);
-        setupThemeToggle(); // Re-configurar el toggle también
+        setupThemeToggle();
       });
     </script>
   </body>
