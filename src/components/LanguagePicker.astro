@@ -1,0 +1,43 @@
+---
+import { languages } from "../i18n/index";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const currentPath = Astro.url.pathname;
+
+// Simple toggle logic: if es, show link to en, and vice versa
+const targetLang = lang === "es" ? "en" : "es";
+const label = targetLang.toUpperCase();
+
+// Calculate target path
+// This logic needs to be robust.
+// If current is /projects, target is /en/projects
+// If current is /en/projects, target is /projects (if es is default and hidden)
+// But wait, getRouteFromUrl in utils might handle this?
+// Let's look at utils.ts again.
+// It has getRouteFromUrl but it seems to return the current route?
+// Let's implement a simple switcher here.
+
+function getPathForLang(l: string) {
+  // Remove current lang prefix if present
+  let path = currentPath;
+  const parts = path.split("/");
+  if (parts[1] === "en" || parts[1] === "es") {
+    parts.splice(1, 1);
+    path = parts.join("/") || "/";
+  }
+
+  if (l === "es") return path; // es is default, so root
+  return `/${l}${path === "/" ? "" : path}`;
+}
+
+const targetHref = getPathForLang(targetLang);
+---
+
+<a
+  href={targetHref}
+  class="px-3 py-1 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+>
+  {label}
+</a>

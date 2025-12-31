@@ -1,24 +1,15 @@
 ---
-import ModernLayout from '../layouts/ModernLayout.astro';
-import ModernNavigation from '../components/ModernNavigation.astro';
-import HomePage from '../components/pages/HomePage.astro';
-import { useTranslations } from '../i18n/utils';
+import BentoLayout from "../layouts/BentoLayout.astro";
+import BentoHome from "../components/pages/BentoHome.astro";
+import { useTranslations } from "../i18n/utils";
 
-const lang = 'en' as const;
-const t = useTranslations(lang);
-
-// Configurar contenido según idioma
-const pageData = {
-  title: "David Herrera - Systems Engineer & AI Solutions Architect", 
-  description: "David Herrera's portfolio. Engineer specialized in developing innovative technological solutions and artificial intelligence architectures."
-};
+const t = useTranslations("en");
 ---
 
-<ModernLayout 
-  title={pageData.title}
-  description={pageData.description}
-  lang={lang}
+<BentoLayout
+  title="David Herrera | Portfolio"
+  description={t("hero.description")}
+  lang="en"
 >
-  <ModernNavigation />
-  <HomePage lang={lang} />
-</ModernLayout>
+  <BentoHome lang="en" />
+</BentoLayout>

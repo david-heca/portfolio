@@ -1,37 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Parkinsans:wght@300..800&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Parkinsans', sans-serif;
-}
-
-html {
+@layer base {
+  html {
+    font-family: "Inter", system-ui, sans-serif;
     scroll-behavior: smooth;
-}
-
-@keyframes enteringMenuNavBar {
-  0% {
-    transform: scale(0.2) translateX(64px) translateY(-64px);
-    opacity: 0;
   }
 
-  60% {
-    transform: scale(1.15);
-    opacity: 1;
-  }
-
-  100% {
-    transform: scale(1) translateX(0) translateY(0);
-    opacity: 1;
+  body {
+    @apply bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-50 antialiased selection:bg-blue-500/30;
   }
 }
 
-.keyframe-entering-navbar {
-  animation: enteringMenuNavBar 0.5s ease;
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .glass {
+    @apply bg-white/70 dark:bg-gray-900/70 backdrop-blur-lg border border-gray-200 dark:border-gray-800;
+  }
 }
