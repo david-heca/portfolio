@@ -1,43 +1,42 @@
 ---
-import ModernLayout from '../layouts/ModernLayout.astro';
-import ModernNavigation from '../components/ModernNavigation.astro';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import BentoLayout from "../layouts/BentoLayout.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 // Importar componentes de páginas
-import AboutPage from '../components/pages/AboutPage.astro';
-import SkillsPage from '../components/pages/SkillsPage.astro';
-import ProjectsPage from '../components/pages/ProjectsPage.astro';
-import WorkPage from '../components/pages/WorkPage.astro';
-import EducationPage from '../components/pages/EducationPage.astro';
-import ContactPage from '../components/pages/ContactPage.astro';
-import HomePage from '../components/pages/HomePage.astro';
+import AboutPage from "../components/pages/AboutPage.astro";
+import SkillsPage from "../components/pages/SkillsPage.astro";
+import ProjectsPage from "../components/pages/ProjectsPage.astro";
+import WorkPage from "../components/pages/WorkPage.astro";
+import EducationPage from "../components/pages/EducationPage.astro";
+import ContactPage from "../components/pages/ContactPage.astro";
+import BentoHome from "../components/pages/BentoHome.astro";
 
 export async function getStaticPaths() {
-  const pages = ['about', 'skills', 'projects', 'work', 'education', 'contact'];
+  const pages = ["about", "skills", "projects", "work", "education", "contact"];
   const paths: any[] = [];
-  
+
   // Página principal en inglés: /en
   paths.push({
-    params: { slug: 'en' },
-    props: { page: 'home', lang: 'en' }
+    params: { slug: "en" },
+    props: { page: "home", lang: "en" },
   });
-  
+
   // Rutas en español: /about, /skills, etc.
-  pages.forEach(page => {
+  pages.forEach((page) => {
     paths.push({
       params: { slug: page },
-      props: { page, lang: 'es' }
+      props: { page, lang: "es" },
     });
   });
-  
+
   // Rutas en inglés: /en/about, /en/skills, etc.
-  pages.forEach(page => {
+  pages.forEach((page) => {
     paths.push({
       params: { slug: `en/${page}` },
-      props: { page, lang: 'en' }
+      props: { page, lang: "en" },
     });
   });
-  
+
   return paths;
 }
 
@@ -45,72 +44,82 @@ const { page, lang } = Astro.props;
 const t = useTranslations(lang);
 
 // Configurar metadatos de página
-const getPageMeta = (page: string, lang: 'es' | 'en') => {
-  const baseName = 'David Herrera';
-  
-  if (page === 'home') {
+const getPageMeta = (page: string, lang: "es" | "en") => {
+  const baseName = "David Herrera";
+
+  if (page === "home") {
     return {
-      title: lang === 'es' 
-        ? `${baseName} - Ingeniero en Tecnologías de la Información & Arquitecto de Soluciones IA`
-        : `${baseName} - IT Engineer & AI Solutions Architect`,
-      description: lang === 'es'
-        ? 'Portfolio de David Herrera. Ingeniero especializado en desarrollo de soluciones tecnológicas innovadoras y arquitecturas de inteligencia artificial.'
-        : 'David Herrera\'s portfolio. Engineer specialized in developing innovative technological solutions and artificial intelligence architectures.'
+      title:
+        lang === "es"
+          ? `${baseName} - Ingeniero en Tecnologías de la Información & Arquitecto de Soluciones IA`
+          : `${baseName} - IT Engineer & AI Solutions Architect`,
+      description:
+        lang === "es"
+          ? "Portfolio de David Herrera. Ingeniero especializado en desarrollo de soluciones tecnológicas innovadoras y arquitecturas de inteligencia artificial."
+          : "David Herrera's portfolio. Engineer specialized in developing innovative technological solutions and artificial intelligence architectures.",
     };
   }
-  
+
   const titles = {
-    about: lang === 'es' ? `Sobre mí - ${baseName}` : `About me - ${baseName}`,
-    skills: lang === 'es' ? `Habilidades - ${baseName}` : `Skills - ${baseName}`,
-    projects: lang === 'es' ? `Proyectos - ${baseName}` : `Projects - ${baseName}`,
-    work: lang === 'es' ? `Experiencia - ${baseName}` : `Experience - ${baseName}`,
-    education: lang === 'es' ? `Formación - ${baseName}` : `Education - ${baseName}`,
-    contact: lang === 'es' ? `Contacto - ${baseName}` : `Contact - ${baseName}`,
+    about: lang === "es" ? `Sobre mí - ${baseName}` : `About me - ${baseName}`,
+    skills:
+      lang === "es" ? `Habilidades - ${baseName}` : `Skills - ${baseName}`,
+    projects:
+      lang === "es" ? `Proyectos - ${baseName}` : `Projects - ${baseName}`,
+    work:
+      lang === "es" ? `Experiencia - ${baseName}` : `Experience - ${baseName}`,
+    education:
+      lang === "es" ? `Formación - ${baseName}` : `Education - ${baseName}`,
+    contact: lang === "es" ? `Contacto - ${baseName}` : `Contact - ${baseName}`,
   };
-  
+
   const descriptions = {
-    about: lang === 'es' 
-      ? 'Conoce más sobre David Herrera, su experiencia y pasión por la tecnología.' 
-      : 'Learn more about David Herrera, his experience and passion for technology.',
-    skills: lang === 'es' 
-      ? 'Tecnologías y habilidades que domino como desarrollador.' 
-      : 'Technologies and skills I master as a developer.',
-    projects: lang === 'es' 
-      ? 'Proyectos innovadores desarrollados con las últimas tecnologías.' 
-      : 'Innovative projects developed with the latest technologies.',
-    work: lang === 'es' 
-      ? 'Mi experiencia profesional en empresas tecnológicas.' 
-      : 'My professional experience in technology companies.',
-    education: lang === 'es' 
-      ? 'Formación académica y certificaciones en tecnología.' 
-      : 'Academic background and certifications in technology.',
-    contact: lang === 'es' 
-      ? 'Conectemos y exploremos oportunidades de colaboración.' 
-      : 'Let\'s connect and explore collaboration opportunities.',
+    about:
+      lang === "es"
+        ? "Conoce más sobre David Herrera, su experiencia y pasión por la tecnología."
+        : "Learn more about David Herrera, his experience and passion for technology.",
+    skills:
+      lang === "es"
+        ? "Tecnologías y habilidades que domino como desarrollador."
+        : "Technologies and skills I master as a developer.",
+    projects:
+      lang === "es"
+        ? "Proyectos innovadores desarrollados con las últimas tecnologías."
+        : "Innovative projects developed with the latest technologies.",
+    work:
+      lang === "es"
+        ? "Mi experiencia profesional en empresas tecnológicas."
+        : "My professional experience in technology companies.",
+    education:
+      lang === "es"
+        ? "Formación académica y certificaciones en tecnología."
+        : "Academic background and certifications in technology.",
+    contact:
+      lang === "es"
+        ? "Conectemos y exploremos oportunidades de colaboración."
+        : "Let's connect and explore collaboration opportunities.",
   };
-  
+
   return {
     title: titles[page as keyof typeof titles],
-    description: descriptions[page as keyof typeof descriptions]
+    description: descriptions[page as keyof typeof descriptions],
   };
 };
 
 const pageMeta = getPageMeta(page, lang);
 ---
 
-<ModernLayout 
+<BentoLayout
   title={pageMeta.title}
   description={pageMeta.description}
   lang={lang}
 >
-  <ModernNavigation />
-  
   <!-- Renderizar componente según la página -->
-  {page === 'home' && <HomePage lang={lang} />}
-  {page === 'about' && <AboutPage lang={lang} />}
-  {page === 'skills' && <SkillsPage lang={lang} />}
-  {page === 'projects' && <ProjectsPage lang={lang} />}
-  {page === 'work' && <WorkPage lang={lang} />}
-  {page === 'education' && <EducationPage lang={lang} />}
-  {page === 'contact' && <ContactPage lang={lang} />}
-</ModernLayout>
+  {page === "home" && <BentoHome lang={lang} />}
+  {page === "about" && <AboutPage lang={lang} />}
+  {page === "skills" && <SkillsPage lang={lang} />}
+  {page === "projects" && <ProjectsPage lang={lang} />}
+  {page === "work" && <WorkPage lang={lang} />}
+  {page === "education" && <EducationPage lang={lang} />}
+  {page === "contact" && <ContactPage lang={lang} />}
+</BentoLayout>

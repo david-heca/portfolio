@@ -1,0 +1,208 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import ThemeToggle from "./ThemeToggle.astro";
+import LanguagePicker from "./LanguagePicker.astro";
+import {
+  PiHouse,
+  PiUser,
+  PiCode,
+  PiBriefcase,
+  PiGraduationCap,
+  PiFolder,
+  PiEnvelopeSimple,
+} from "react-icons/pi";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const navItems = [
+  { href: lang === "es" ? "/" : "/en", label: t("nav.home"), icon: PiHouse },
+  {
+    href: lang === "es" ? "/about" : "/en/about",
+    label: t("nav.about"),
+    icon: PiUser,
+  },
+  {
+    href: lang === "es" ? "/skills" : "/en/skills",
+    label: t("nav.skills"),
+    icon: PiCode,
+  },
+  {
+    href: lang === "es" ? "/work" : "/en/work",
+    label: t("nav.work"),
+    icon: PiBriefcase,
+  },
+  {
+    href: lang === "es" ? "/education" : "/en/education",
+    label: t("nav.education"),
+    icon: PiGraduationCap,
+  },
+  {
+    href: lang === "es" ? "/projects" : "/en/projects",
+    label: t("nav.projects"),
+    icon: PiFolder,
+  },
+  {
+    href: lang === "es" ? "/contact" : "/en/contact",
+    label: t("nav.contact"),
+    icon: PiEnvelopeSimple,
+  },
+];
+
+const currentPath = Astro.url.pathname;
+
+function isActive(href: string): boolean {
+  if (href === "/" || href === "/en") {
+    return currentPath === href;
+  }
+  return currentPath.startsWith(href);
+}
+---
+
+<header class="fixed top-0 left-0 right-0 z-50">
+  <div
+    class="absolute inset-0 bg-white/70 dark:bg-gray-950/70 backdrop-blur-xl border-b border-gray-200 dark:border-gray-800"
+  >
+  </div>
+
+  <div
+    class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
+  >
+    <!-- Logo -->
+    <a
+      href={lang === "es" ? "/" : "/en"}
+      class="flex items-center gap-2 font-bold text-xl tracking-tight text-gray-900 dark:text-white hover:opacity-80 transition-opacity"
+    >
+      <img
+        src="/assets/dh.webp"
+        alt="David Herrera"
+        class="w-8 h-8 rounded-lg object-contain"
+      />
+      <span>David Herrera</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-1">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center gap-2 ${
+              isActive(item.href)
+                ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
+                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50"
+            }`}
+          >
+            <item.icon className="w-4 h-4" />
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <!-- Actions -->
+    <div class="flex items-center gap-2">
+      <LanguagePicker />
+      <div class="w-px h-4 bg-gray-200 dark:bg-gray-800 mx-1"></div>
+      <ThemeToggle />
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+        aria-label="Toggle menu"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="w-6 h-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 z-40 bg-white dark:bg-gray-950 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden pt-20 px-6"
+  >
+    <button
+      id="close-menu-btn"
+      class="absolute top-5 right-4 p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+      aria-label="Close menu"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+    <nav class="flex flex-col gap-2">
+      {
+        navItems.map((item) => (
+          <a
+            href={item.href}
+            class={`px-4 py-3 rounded-xl text-lg font-medium transition-all duration-200 flex items-center gap-3 ${
+              isActive(item.href)
+                ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
+                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50"
+            }`}
+          >
+            <item.icon className="w-6 h-6" />
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<script>
+  function setupMobileMenu() {
+    const btn = document.getElementById("mobile-menu-btn");
+    const closeBtn = document.getElementById("close-menu-btn");
+    const menu = document.getElementById("mobile-menu");
+    const links = menu?.querySelectorAll("a");
+    let isOpen = false;
+
+    function toggleMenu() {
+      isOpen = !isOpen;
+      if (isOpen) {
+        menu?.classList.remove("translate-x-full");
+        document.body.style.overflow = "hidden"; // Prevent scrolling
+      } else {
+        menu?.classList.add("translate-x-full");
+        document.body.style.overflow = "";
+      }
+    }
+
+    btn?.addEventListener("click", toggleMenu);
+    closeBtn?.addEventListener("click", toggleMenu);
+
+    // Close menu when clicking a link
+    links?.forEach((link) => {
+      link.addEventListener("click", () => {
+        if (isOpen) toggleMenu();
+      });
+    });
+  }
+
+  setupMobileMenu();
+  document.addEventListener("astro:after-swap", setupMobileMenu);
+</script>

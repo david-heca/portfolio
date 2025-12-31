@@ -39,6 +39,7 @@
     "subtitle": "Let's talk about your next project?"
   },
   "common": {
-    "contactMe": "Contact me"
+    "contactMe": "Contact me",
+    "viewProject": "View Projects"
   }
 }

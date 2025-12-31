@@ -1,9 +1,9 @@
 ---
-import { useTranslations } from '@i18n/utils';
-import { twGlobals } from '@utils/tw-ui';
+import { useTranslations } from "../../i18n/utils";
+import { twGlobals } from "../../utils/tw-ui";
 
 export interface Props {
-  lang: 'es' | 'en';
+  lang: "es" | "en";
 }
 
 const { lang } = Astro.props;
@@ -12,240 +12,275 @@ const t = useTranslations(lang);
 const primarySkills = [
   {
     name: "C#",
-    category: lang === 'es' ? "Backend" : "Backend",
-    level: lang === 'es' ? "Intermedio" : "Intermediate",
+    category: lang === "es" ? "Backend" : "Backend",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
     color: "from-purple-500 to-purple-700",
     icon: "csharp",
   },
   {
     name: "Tailwind CSS",
     category: "Frontend",
-    level: lang === 'es' ? "Intermedio" : "Intermediate",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
     color: "from-cyan-400 to-cyan-600",
     icon: "tailwindcss",
   },
   {
     name: "Python",
     category: "Backend",
-    level: lang === 'es' ? "Intermedio" : "Intermediate",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
     color: "from-yellow-400 to-green-600",
     icon: "python",
   },
   {
     name: "Docker",
     category: "DevOps",
-    level: lang === 'es' ? "Básico" : "Basic",
+    level: lang === "es" ? "Básico" : "Basic",
     color: "from-blue-400 to-blue-700",
     icon: "docker",
   },
   {
     name: "Azure",
     category: "Cloud",
-    level: lang === 'es' ? "Intermedio" : "Intermediate",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
     color: "from-green-400 to-green-600",
     icon: "azure",
   },
   {
     name: "JavaScript",
     category: "Frontend",
-    level: lang === 'es' ? "Intermedio" : "Intermediate",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
     color: "from-yellow-400 to-yellow-600",
     icon: "javascript",
   },
   {
     name: "SQL",
     category: "Database",
-    level: lang === 'es' ? "Intermedio" : "Intermediate",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
     color: "from-red-500 to-red-700",
     icon: "sql-server",
   },
   {
     name: "Git",
-    category: lang === 'es' ? "Herramientas" : "Tools",
-    level: lang === 'es' ? "Avanzado" : "Advanced",
+    category: lang === "es" ? "Herramientas" : "Tools",
+    level: lang === "es" ? "Avanzado" : "Advanced",
     color: "from-orange-500 to-red-600",
     icon: "git",
   },
   {
     name: "React",
     category: "Frontend",
-    level: lang === 'es' ? "Básico" : "Basic",
+    level: lang === "es" ? "Básico" : "Basic",
     color: "from-blue-500 to-blue-700",
     icon: "react_dark",
   },
   {
     name: "Astro",
     category: "Frontend",
-    level: lang === 'es' ? "Básico" : "Basic",
+    level: lang === "es" ? "Básico" : "Basic",
     color: "from-blue-500 to-blue-700",
     icon: "astro",
   },
 ];
 
 const languages = [
-  { 
-    name: lang === 'es' ? "Español" : "Spanish", 
-    level: lang === 'es' ? "Nativo" : "Native" 
+  {
+    name: lang === "es" ? "Español" : "Spanish",
+    level: lang === "es" ? "Nativo" : "Native",
   },
-  { 
-    name: lang === 'es' ? "Inglés" : "English", 
-    level: "B2 - Upper Intermediate" 
+  {
+    name: lang === "es" ? "Inglés" : "English",
+    level: "B2 - Upper Intermediate",
   },
 ];
 
-const softSkills = lang === 'es' ? [
-  "Resolución de Problemas",
-  "Trabajo en Equipo", 
-  "Comunicación",
-  "Aprendizaje Rápido",
-  "Adaptabilidad",
-  "Pensamiento Crítico",
-  "Responsabilidad",
-  "Creatividad",
-  "Liderazgo",
-  "Empatía",
-  "Organización",
-  "Gestión del Tiempo",
-] : [
-  "Problem Solving",
-  "Teamwork",
-  "Communication", 
-  "Fast Learning",
-  "Adaptability",
-  "Critical Thinking",
-  "Responsibility",
-  "Creativity",
-  "Leadership",
-  "Empathy",
-  "Organization",
-  "Time Management",
-];
+const softSkills =
+  lang === "es"
+    ? [
+        "Resolución de Problemas",
+        "Trabajo en Equipo",
+        "Comunicación",
+        "Aprendizaje Rápido",
+        "Adaptabilidad",
+        "Pensamiento Crítico",
+        "Responsabilidad",
+        "Creatividad",
+        "Liderazgo",
+        "Empatía",
+        "Organización",
+        "Gestión del Tiempo",
+      ]
+    : [
+        "Problem Solving",
+        "Teamwork",
+        "Communication",
+        "Fast Learning",
+        "Adaptability",
+        "Critical Thinking",
+        "Responsibility",
+        "Creativity",
+        "Leadership",
+        "Empathy",
+        "Organization",
+        "Time Management",
+      ];
 ---
 
 <main class="min-h-screen px-4 pt-32 pb-20">
   <div class="max-w-6xl mx-auto">
     <!-- Header -->
     <div class="text-center mb-16">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-        {t.skills.title}
+      <h1
+        class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+      >
+        {t("skills.title")}
       </h1>
       <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-        {t.skills.subtitle}
+        {t("skills.subtitle")}
       </p>
     </div>
 
     <!-- Technical Skills Grid -->
     <div class="mb-20">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
-        {lang === 'es' ? 'Tecnologías' : 'Technologies'}
+      <h2
+        class="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center"
+      >
+        {lang === "es" ? "Tecnologías" : "Technologies"}
       </h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-        {primarySkills.map((skill, index) => (
-          <div class={twGlobals.skillCard}>
-            <div class="flex items-start justify-between mb-3">
-              <div class="flex-1">
-                <h3 class="text-gray-900 dark:text-white font-semibold text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  {skill.name}
-                </h3>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                  {skill.category}
-                </p>
+      <div
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+      >
+        {
+          primarySkills.map((skill, index) => (
+            <div class={twGlobals.skillCard}>
+              <div class="flex items-start justify-between mb-3">
+                <div class="flex-1">
+                  <h3 class="text-gray-900 dark:text-white font-semibold text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    {skill.name}
+                  </h3>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                    {skill.category}
+                  </p>
+                </div>
+                {skill.icon ? (
+                  <img
+                    src={`https://svgl.app/library/${skill.icon}.svg`}
+                    alt={`${skill.name} icon`}
+                    class="w-8 h-8 object-contain filter dark:brightness-110 flex-shrink-0"
+                    loading="lazy"
+                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
+                  />
+                ) : null}
+                <div
+                  class={`w-8 h-8 bg-gradient-to-r ${skill.color} rounded-lg items-center justify-center flex-shrink-0 ${skill.icon ? "hidden" : "flex"}`}
+                >
+                  <span class="text-white font-bold text-xs">
+                    {skill.name.charAt(0)}
+                  </span>
+                </div>
               </div>
-              {skill.icon ? (
-                <img 
-                  src={`https://svgl.app/library/${skill.icon}.svg`}
-                  alt={`${skill.name} icon`}
-                  class="w-8 h-8 object-contain filter dark:brightness-110 flex-shrink-0"
-                  loading="lazy"
-                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
-                />
-              ) : null}
-              <div class={`w-8 h-8 bg-gradient-to-r ${skill.color} rounded-lg items-center justify-center flex-shrink-0 ${skill.icon ? 'hidden' : 'flex'}`}>
-                <span class="text-white font-bold text-xs">
-                  {skill.name.charAt(0)}
+
+              <div class="flex items-center gap-2">
+                <span
+                  class={`${twGlobals.skillLevelBadge} ${
+                    skill.level === "Avanzado" || skill.level === "Advanced"
+                      ? twGlobals.levelAdvanced
+                      : skill.level === "Intermedio" ||
+                          skill.level === "Intermediate"
+                        ? twGlobals.levelIntermediate
+                        : twGlobals.levelBasic
+                  }`}
+                >
+                  {skill.level}
                 </span>
               </div>
             </div>
-            
-            <div class="flex items-center gap-2">
-              <span
-                class={`${twGlobals.skillLevelBadge} ${
-                  skill.level === "Avanzado" || skill.level === "Advanced"
-                    ? twGlobals.levelAdvanced
-                    : (skill.level === "Intermedio" || skill.level === "Intermediate")
-                      ? twGlobals.levelIntermediate
-                      : twGlobals.levelBasic
-                }`}
-              >
-                {skill.level}
-              </span>
-            </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
 
     <!-- Languages -->
     <div class="mb-20">
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
-        {lang === 'es' ? 'Idiomas' : 'Languages'}
+      <h2
+        class="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center"
+      >
+        {lang === "es" ? "Idiomas" : "Languages"}
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-        {languages.map((language, index) => (
-          <div class={twGlobals.languageCard}>
-            <div class="flex items-center justify-between mb-5">
-              <h3 class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                {language.name}
-              </h3>
-              <span class={`text-xs px-3 py-1 rounded-full font-medium ${
-                language.level === "Nativo" || language.level === "Native"
-                  ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300" 
-                  : "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
-              }`}>
-                {language.level === "Nativo" || language.level === "Native" ? (lang === 'es' ? "Nativo" : "Native") : "B2"}
-              </span>
-            </div>
-            
-            <div class="space-y-4">
-              <div class="flex justify-between text-sm">
-                <span class="text-gray-600 dark:text-gray-400">{lang === 'es' ? 'Proficiencia' : 'Proficiency'}</span>
-                <span class="font-semibold text-gray-900 dark:text-white">{(language.level === "Nativo" || language.level === "Native") ? "100%" : "70%"}</span>
-              </div>
-              
-              <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
-                <div 
-                  class={`h-2.5 rounded-full transition-all duration-1000 ease-out ${
-                    (language.level === "Nativo" || language.level === "Native")
-                      ? "bg-gradient-to-r from-green-500 to-green-600 w-full" 
-                      : "bg-gradient-to-r from-blue-500 to-blue-600 w-[70%]"
+        {
+          languages.map((language, index) => (
+            <div class={twGlobals.languageCard}>
+              <div class="flex items-center justify-between mb-5">
+                <h3 class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  {language.name}
+                </h3>
+                <span
+                  class={`text-xs px-3 py-1 rounded-full font-medium ${
+                    language.level === "Nativo" || language.level === "Native"
+                      ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300"
+                      : "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
                   }`}
-                />
+                >
+                  {language.level === "Nativo" || language.level === "Native"
+                    ? lang === "es"
+                      ? "Nativo"
+                      : "Native"
+                    : "B2"}
+                </span>
               </div>
-              
-              <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed pt-1">
-                {(language.level === "Nativo" || language.level === "Native")
-                  ? (lang === 'es' ? "Lengua materna • Dominio completo" : "Native language • Complete mastery")
-                  : (lang === 'es' ? "Competencia profesional • Comunicación fluida" : "Professional competency • Fluent communication")
-                }
-              </p>
+
+              <div class="space-y-4">
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600 dark:text-gray-400">
+                    {lang === "es" ? "Proficiencia" : "Proficiency"}
+                  </span>
+                  <span class="font-semibold text-gray-900 dark:text-white">
+                    {language.level === "Nativo" || language.level === "Native"
+                      ? "100%"
+                      : "70%"}
+                  </span>
+                </div>
+
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
+                  <div
+                    class={`h-2.5 rounded-full transition-all duration-1000 ease-out ${
+                      language.level === "Nativo" || language.level === "Native"
+                        ? "bg-gradient-to-r from-green-500 to-green-600 w-full"
+                        : "bg-gradient-to-r from-blue-500 to-blue-600 w-[70%]"
+                    }`}
+                  />
+                </div>
+
+                <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed pt-1">
+                  {language.level === "Nativo" || language.level === "Native"
+                    ? lang === "es"
+                      ? "Lengua materna • Dominio completo"
+                      : "Native language • Complete mastery"
+                    : lang === "es"
+                      ? "Competencia profesional • Comunicación fluida"
+                      : "Professional competency • Fluent communication"}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        }
       </div>
     </div>
 
     <!-- Soft Skills -->
     <div>
-      <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center">
-        {lang === 'es' ? 'Habilidades Blandas' : 'Soft Skills'}
+      <h2
+        class="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center"
+      >
+        {lang === "es" ? "Habilidades Blandas" : "Soft Skills"}
       </h2>
       <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-        {softSkills.map((skill, index) => (
-          <div class={twGlobals.softSkillBadge}>
-            {skill}
-          </div>
-        ))}
+        {
+          softSkills.map((skill, index) => (
+            <div class={twGlobals.softSkillBadge}>{skill}</div>
+          ))
+        }
       </div>
     </div>
   </div>

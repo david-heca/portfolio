@@ -1,10 +1,19 @@
 ---
-import { useTranslations } from '@i18n/utils';
-import { PiMapPinDuotone, PiBriefcaseDuotone, PiGraduationCapDuotone, PiTranslateDuotone, PiSparkleDuotone, PiStackDuotone, PiLightbulbDuotone, PiArrowFatRightDuotone } from 'react-icons/pi';
-import { twGlobals } from '@utils/tw-ui';
+import { useTranslations } from "../../i18n/utils";
+import {
+  PiMapPinDuotone,
+  PiBriefcaseDuotone,
+  PiGraduationCapDuotone,
+  PiTranslateDuotone,
+  PiSparkleDuotone,
+  PiStackDuotone,
+  PiLightbulbDuotone,
+  PiArrowFatRightDuotone,
+} from "react-icons/pi";
+import { twGlobals } from "../../utils/tw-ui";
 
 export interface Props {
-  lang: 'es' | 'en';
+  lang: "es" | "en";
 }
 
 const { lang } = Astro.props;
@@ -15,11 +24,13 @@ const t = useTranslations(lang);
   <div class="max-w-4xl mx-auto">
     <!-- Header -->
     <div class="text-center mb-16">
-      <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-        {t.about.title}
+      <h1
+        class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+      >
+        {t("about.title")}
       </h1>
       <p class="text-xl text-gray-600 dark:text-gray-400">
-        {t.about.subtitle}
+        {t("about.subtitle")}
       </p>
     </div>
 
@@ -34,33 +45,62 @@ const t = useTranslations(lang);
             alt="David Herrera"
             class="w-full rounded-3xl shadow-xl shadow-gray-900/10 dark:shadow-gray-900/30"
           />
-          <div class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-blue-500/10 to-purple-600/10"></div>
+          <div
+            class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-blue-500/10 to-purple-600/10"
+          >
+          </div>
         </div>
 
         <!-- Quick Facts -->
         <div class="space-y-3">
-          <div class={`${twGlobals.statsCard} hover:border-blue-300 dark:hover:border-blue-700`}>
+          <div
+            class={`${twGlobals.statsCard} hover:border-blue-300 dark:hover:border-blue-700`}
+          >
             <PiMapPinDuotone className="w-6 h-6 text-blue-500 flex-shrink-0" />
             <span class="text-gray-600 dark:text-gray-300">
-              {lang === 'es' ? 'Ciudad de México, México' : 'Mexico City, Mexico'}
+              {
+                lang === "es"
+                  ? "Ciudad de México, México"
+                  : "Mexico City, Mexico"
+              }
             </span>
           </div>
-          <div class={`${twGlobals.statsCard} hover:border-green-300 dark:hover:border-green-700`}>
-            <PiBriefcaseDuotone className="w-6 h-6 text-green-500 flex-shrink-0" />
+          <div
+            class={`${twGlobals.statsCard} hover:border-green-300 dark:hover:border-green-700`}
+          >
+            <PiBriefcaseDuotone
+              className="w-6 h-6 text-green-500 flex-shrink-0"
+            />
             <span class="text-gray-600 dark:text-gray-300">
-              {lang === 'es' ? '3+ años de experiencia' : '3+ years of experience'}
+              {
+                lang === "es"
+                  ? "3+ años de experiencia"
+                  : "3+ years of experience"
+              }
             </span>
           </div>
-          <div class={`${twGlobals.statsCard} hover:border-purple-300 dark:hover:border-purple-700`}>
-            <PiGraduationCapDuotone className="w-6 h-6 text-purple-500 flex-shrink-0" />
+          <div
+            class={`${twGlobals.statsCard} hover:border-purple-300 dark:hover:border-purple-700`}
+          >
+            <PiGraduationCapDuotone
+              className="w-6 h-6 text-purple-500 flex-shrink-0"
+            />
             <span class="text-gray-600 dark:text-gray-300">
-              {lang === 'es' ? 'Ingeniero en Tecnologías de la Información y Comunicaciones' : 'IT Engineer'}
+              {
+                lang === "es"
+                  ? "Ingeniero en Tecnologías de la Información y Comunicaciones"
+                  : "IT Engineer"
+              }
             </span>
           </div>
-          <div class={`${twGlobals.statsCard} hover:border-orange-300 dark:hover:border-orange-700`}>
-            <PiTranslateDuotone className="w-6 h-6 text-orange-500 flex-shrink-0" />
+          <div
+            class={`${twGlobals.statsCard} hover:border-orange-300 dark:hover:border-orange-700`}
+          >
+            <PiTranslateDuotone
+              className="w-6 h-6 text-orange-500 flex-shrink-0"
+            />
             <span class="text-gray-600 dark:text-gray-300">
-              {lang === 'es' ? 'Español / Inglés' : 'Spanish / English'}
+              {lang === "es" ? "Español / Inglés" : "Spanish / English"}
             </span>
           </div>
         </div>
@@ -70,107 +110,134 @@ const t = useTranslations(lang);
       <div class="space-y-8">
         <!-- Introduction -->
         <div class="prose prose-lg dark:prose-invert max-w-none space-y-3">
-          {lang === 'es' ? (
-            <>
-              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-                Soy desarrollador de software. Me gusta entender cómo funcionan las cosas y buscar maneras de hacerlas más simples o eficientes.
-              </p>
+          {
+            lang === "es" ? (
+              <>
+                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  Soy desarrollador de software. Me gusta entender cómo
+                  funcionan las cosas y buscar maneras de hacerlas más simples o
+                  eficientes.
+                </p>
 
-              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-                Últimamente he estado explorando <strong>datos</strong> y <strong>inteligencia artificial</strong>, buscando cómo estas herramientas pueden aportar valor real a los proyectos.
-              </p>
+                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  Últimamente he estado explorando <strong>datos</strong> y{" "}
+                  <strong>inteligencia artificial</strong>, buscando cómo estas
+                  herramientas pueden aportar valor real a los proyectos.
+                </p>
 
-              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-                He trabajado con <strong>C#</strong>, <strong>Python</strong>, <strong>bases de datos</strong> y <strong>cloud</strong>. Siempre estoy aprendiendo algo nuevo, probando ideas y compartiendo lo que descubro, ya sea en el trabajo o en proyectos personales.
-              </p>
-            </>
-          ) : (
-            <>
-              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-                I'm a software developer. I like to understand how things work and find ways to make them simpler or more efficient.
-              </p>
+                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  He trabajado con <strong>C#</strong>, <strong>Python</strong>,{" "}
+                  <strong>bases de datos</strong> y <strong>cloud</strong>.
+                  Siempre estoy aprendiendo algo nuevo, probando ideas y
+                  compartiendo lo que descubro, ya sea en el trabajo o en
+                  proyectos personales.
+                </p>
+              </>
+            ) : (
+              <>
+                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  I'm a software developer. I like to understand how things work
+                  and find ways to make them simpler or more efficient.
+                </p>
 
-              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-                Lately I've been exploring <strong>data</strong> and <strong>artificial intelligence</strong>, looking for how these tools can add real value to projects.
-              </p>
+                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  Lately I've been exploring <strong>data</strong> and{" "}
+                  <strong>artificial intelligence</strong>, looking for how
+                  these tools can add real value to projects.
+                </p>
 
-              <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
-                I've worked with <strong>C#</strong>, <strong>Python</strong>, <strong>databases</strong> and <strong>cloud</strong>. I'm always learning something new, trying ideas and sharing what I discover, whether at work or in personal projects.
-              </p>
-            </>
-          )}
+                <p class="text-gray-600 dark:text-gray-400 leading-relaxed">
+                  I've worked with <strong>C#</strong>, <strong>Python</strong>,{" "}
+                  <strong>databases</strong> and <strong>cloud</strong>. I'm
+                  always learning something new, trying ideas and sharing what I
+                  discover, whether at work or in personal projects.
+                </p>
+              </>
+            )
+          }
         </div>
 
         <!-- Expertise Areas -->
         <div class="space-y-6">
           <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-            {lang === 'es' ? 'Áreas de experiencia' : 'Areas of expertise'}
+            {lang === "es" ? "Áreas de experiencia" : "Areas of expertise"}
           </h3>
 
           <div class="grid gap-3">
-          <div class={`${twGlobals.expertiseCard} bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800/50 hover:border-blue-300 dark:hover:border-blue-700`}>
-              <PiSparkleDuotone className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+            <div
+              class={`${twGlobals.expertiseCard} bg-blue-50 dark:bg-blue-900/10 border-blue-200 dark:border-blue-800/50 hover:border-blue-300 dark:hover:border-blue-700`}
+            >
+              <PiSparkleDuotone
+                className="w-6 h-6 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform"
+              />
               <div>
                 <h4 class="font-semibold text-blue-900 dark:text-blue-100 mb-1">
-                  {lang === 'es' ? 'Inteligencia Artificial' : 'Artificial Intelligence'}
+                  {
+                    lang === "es"
+                      ? "Inteligencia Artificial"
+                      : "Artificial Intelligence"
+                  }
                 </h4>
                 <p class="text-sm text-blue-700 dark:text-blue-300">
-                  {lang === 'es'
-                    ? 'Explorando cómo la IA puede resolver problemas reales y crear valor tangible.'
-                    : 'Exploring how AI can solve real problems and create tangible value.'}
+                  {
+                    lang === "es"
+                      ? "Explorando cómo la IA puede resolver problemas reales y crear valor tangible."
+                      : "Exploring how AI can solve real problems and create tangible value."
+                  }
                 </p>
               </div>
             </div>
 
-            <div class={`${twGlobals.expertiseCard} bg-green-50 dark:bg-green-900/10 border-green-200 dark:border-green-800/50 hover:border-green-300 dark:hover:border-green-700`}>
-              <PiStackDuotone className="w-6 h-6 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+            <div
+              class={`${twGlobals.expertiseCard} bg-green-50 dark:bg-green-900/10 border-green-200 dark:border-green-800/50 hover:border-green-300 dark:hover:border-green-700`}
+            >
+              <PiStackDuotone
+                className="w-6 h-6 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform"
+              />
               <div>
-                <h4 class="font-semibold text-green-900 dark:text-green-100 mb-1">
-                  {lang === 'es' ? 'Desarrollo Full-Stack' : 'Full-Stack Development'}
+                <h4
+                  class="font-semibold text-green-900 dark:text-green-100 mb-1"
+                >
+                  {
+                    lang === "es"
+                      ? "Desarrollo Full-Stack"
+                      : "Full-Stack Development"
+                  }
                 </h4>
                 <p class="text-sm text-green-700 dark:text-green-300">
-                  {lang === 'es'
-                    ? 'Construyendo aplicaciones web con C#, Python, React y bases de datos modernas.'
-                    : 'Building web applications with C#, Python, React and modern databases.'}
+                  {
+                    lang === "es"
+                      ? "Construyendo aplicaciones web con C#, Python, React y bases de datos modernas."
+                      : "Building web applications with C#, Python, React and modern databases."
+                  }
                 </p>
               </div>
             </div>
 
-            <div class={`${twGlobals.expertiseCard} bg-purple-50 dark:bg-purple-900/10 border-purple-200 dark:border-purple-800/50 hover:border-purple-300 dark:hover:border-purple-700`}>
-              <PiLightbulbDuotone className="w-6 h-6 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" />
+            <div
+              class={`${twGlobals.expertiseCard} bg-purple-50 dark:bg-purple-900/10 border-purple-200 dark:border-purple-800/50 hover:border-purple-300 dark:hover:border-purple-700`}
+            >
+              <PiLightbulbDuotone
+                className="w-6 h-6 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform"
+              />
               <div>
-                <h4 class="font-semibold text-purple-900 dark:text-purple-100 mb-1">
-                  {lang === 'es' ? 'Aprendizaje Continuo' : 'Continuous Learning'}
+                <h4
+                  class="font-semibold text-purple-900 dark:text-purple-100 mb-1"
+                >
+                  {
+                    lang === "es"
+                      ? "Aprendizaje Continuo"
+                      : "Continuous Learning"
+                  }
                 </h4>
                 <p class="text-sm text-purple-700 dark:text-purple-300">
-                  {lang === 'es'
-                    ? 'Siempre probando nuevas tecnologías y compartiendo conocimientos con la comunidad.'
-                    : 'Always testing new technologies and sharing knowledge with the community.'}
+                  {
+                    lang === "es"
+                      ? "Siempre probando nuevas tecnologías y compartiendo conocimientos con la comunidad."
+                      : "Always testing new technologies and sharing knowledge with the community."
+                  }
                 </p>
               </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Call to Action -->
-        <div class="pt-8">
-          <div class={twGlobals.ctaSection}>
-            <div class="space-y-4">
-              <h3 class="text-xl font-semibold text-white dark:text-gray-900">
-                {lang === 'es' ? '¿Tienes un proyecto en mente?' : 'Have a project in mind?'}
-              </h3>
-              <p class="text-gray-300 dark:text-gray-700">
-                {lang === 'es'
-                  ? 'Me encantaría conocer tu idea y explorar cómo podemos hacerla realidad juntos.'
-                  : 'I\'d love to learn about your idea and explore how we can make it a reality together.'}
-              </p>
-              <a
-                href={lang === 'es' ? '/contact' : '/en/contact'}
-                class={`${twGlobals.heroPrimaryButton} w-fit`}
-              >
-                {lang === 'es' ? 'Hablemos' : 'Let\'s talk'}
-                <PiArrowFatRightDuotone className="ml-2 w-5 h-5" />
-              </a>
             </div>
           </div>
         </div>
