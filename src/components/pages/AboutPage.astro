@@ -8,11 +8,11 @@ import {
   PiSparkle,
   PiCode,
   PiLightbulb,
-  PiRocket,
-  PiHeart,
-  PiCoffee,
-  PiGameController,
-  PiMusicNote,
+  PiHeartDuotone,
+  PiCoffeeDuotone,
+  PiGameControllerDuotone,
+  PiMusicNoteDuotone,
+  PiRocketDuotone,
 } from "react-icons/pi";
 
 export interface Props {
@@ -25,7 +25,7 @@ const t = useTranslations(lang);
 const quickFacts = [
   {
     icon: PiMapPin,
-    label: lang === "es" ? "Ciudad de México" : "Mexico City",
+    label: lang === "es" ? "Ciudad de México, México" : "Mexico City, Mexico",
     color: "blue",
   },
   {
@@ -35,7 +35,10 @@ const quickFacts = [
   },
   {
     icon: PiGraduationCap,
-    label: lang === "es" ? "Ing. TIC" : "IT Engineer",
+    label:
+      lang === "es"
+        ? "Ing. Tecnologías de la Información"
+        : "Information Technologies Engineering",
     color: "violet",
   },
   {
@@ -77,10 +80,10 @@ const expertise = [
 ];
 
 const interests = [
-  { icon: PiCoffee, label: lang === "es" ? "Café" : "Coffee" },
-  { icon: PiGameController, label: "Gaming" },
-  { icon: PiMusicNote, label: lang === "es" ? "Música" : "Music" },
-  { icon: PiRocket, label: "Tech" },
+  { icon: PiCoffeeDuotone, label: lang === "es" ? "Café" : "Coffee" },
+  { icon: PiGameControllerDuotone, label: "Gaming" },
+  { icon: PiMusicNoteDuotone, label: lang === "es" ? "Música" : "Music" },
+  { icon: PiRocketDuotone, label: "Tech" },
 ];
 ---
 
@@ -105,7 +108,7 @@ const interests = [
         <div
           class="h-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-4 overflow-hidden"
         >
-          <div class="relative aspect-[4/5] w-full">
+          <div class="relative w-full h-full">
             <img
               src="/assets/profile-photo.webp"
               alt="David Herrera"
@@ -113,7 +116,7 @@ const interests = [
             />
             <!-- Gradient overlay -->
             <div
-              class="absolute inset-0 rounded-2xl bg-gradient-to-t from-zinc-900/60 via-transparent to-transparent"
+              class="absolute inset-0 rounded-2xl bg-gradient-to-t from-black/80 via-black/40 to-transparent"
             >
             </div>
             <!-- Name overlay -->
@@ -136,14 +139,16 @@ const interests = [
         <div
           class="h-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 md:p-8"
         >
-          <div class="flex items-center gap-3 mb-6">
+          <div class="flex items-center gap-3 mb-4">
             <div
               class="w-10 h-10 rounded-2xl bg-zinc-200/50 dark:bg-zinc-800 flex items-center justify-center"
             >
-              <PiHeart className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
+              <PiHeartDuotone
+                className="w-5 h-5 text-zinc-600 dark:text-zinc-400"
+              />
             </div>
             <h3 class="text-lg font-semibold text-zinc-900 dark:text-white">
-              {lang === "es" ? "Sobre mí" : "About me"}
+              {lang === "es" ? "Sobre Mí" : "About Me"}
             </h3>
           </div>
 
@@ -152,78 +157,53 @@ const interests = [
               lang === "es" ? (
                 <>
                   <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    Soy desarrollador de software. Me gusta entender cómo
-                    funcionan las cosas y buscar maneras de hacerlas más simples
-                    o eficientes.
+                    Soy un profesional en Ingeniería de Software y Datos con un
+                    sólido historial en el diseño, construcción y escalado de
+                    soluciones impulsadas por datos e IA que generan valor
+                    empresarial real.
                   </p>
                   <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    Últimamente he estado explorando{" "}
-                    <span class="text-zinc-900 dark:text-white font-medium">
-                      datos
-                    </span>{" "}
-                    y{" "}
-                    <span class="text-zinc-900 dark:text-white font-medium">
-                      inteligencia artificial
-                    </span>
-                    , buscando cómo estas herramientas pueden aportar valor real
-                    a los proyectos.
+                    A lo largo de mi carrera, he trabajado en la intersección de
+                    la ingeniería de software, la ciencia de datos y la
+                    automatización—liderando iniciativas que transforman
+                    desafíos complejos en sistemas robustos y escalables. Mi
+                    experiencia abarca desarrollo backend y frontend, ingeniería
+                    de datos e inteligencia artificial aplicada, con un enfoque
+                    consistente en arquitectura limpia, eficiencia y
+                    mantenibilidad a largo plazo.
                   </p>
                   <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    He trabajado con{" "}
-                    <span class="text-zinc-900 dark:text-white font-medium">
-                      C#
-                    </span>
-                    ,{" "}
-                    <span class="text-zinc-900 dark:text-white font-medium">
-                      Python
-                    </span>
-                    ,{" "}
-                    <span class="text-zinc-900 dark:text-white font-medium">
-                      bases de datos
-                    </span>{" "}
-                    y{" "}
-                    <span class="text-zinc-900 dark:text-white font-medium">
-                      cloud
-                    </span>
-                    . Siempre estoy aprendiendo algo nuevo.
+                    Más allá de la ejecución, contribuyo activamente al
+                    intercambio de conocimientos y al desarrollo de talento. He
+                    impartido conferencias y charlas académicas en universidades
+                    sobre Inteligencia Artificial y Ciencia de Datos, ayudando a
+                    cerrar la brecha entre la teoría y la aplicación en el mundo
+                    real.
                   </p>
                 </>
               ) : (
                 <>
                   <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    I'm a software developer. I like to understand how things
-                    work and find ways to make them simpler or more efficient.
+                    I am a Software and Data Engineering professional with a
+                    strong track record in designing, building, and scaling
+                    data-driven and AI-powered solutions that generate real
+                    business value.
                   </p>
                   <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    Lately I've been exploring{" "}
-                    <span class="text-zinc-900 dark:text-white font-medium">
-                      data
-                    </span>{" "}
-                    and{" "}
-                    <span class="text-zinc-900 dark:text-white font-medium">
-                      artificial intelligence
-                    </span>
-                    , looking for how these tools can add real value to
-                    projects.
+                    Throughout my career, I have worked at the intersection of
+                    software engineering, data science, and automation—leading
+                    initiatives that transform complex challenges into robust,
+                    scalable systems. My expertise spans backend and frontend
+                    development, data engineering, and applied artificial
+                    intelligence, with a consistent focus on clean architecture,
+                    efficiency, and long-term maintainability.
                   </p>
                   <p class="text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                    I've worked with{" "}
-                    <span class="text-zinc-900 dark:text-white font-medium">
-                      C#
-                    </span>
-                    ,{" "}
-                    <span class="text-zinc-900 dark:text-white font-medium">
-                      Python
-                    </span>
-                    ,{" "}
-                    <span class="text-zinc-900 dark:text-white font-medium">
-                      databases
-                    </span>{" "}
-                    and{" "}
-                    <span class="text-zinc-900 dark:text-white font-medium">
-                      cloud
-                    </span>
-                    . I'm always learning something new.
+                    Beyond execution, I actively contribute to knowledge sharing
+                    and talent development. I have delivered conferences and
+                    academic talks at universities on Artificial Intelligence
+                    and Data Science, helping bridge the gap between theory and
+                    real-world application.
                   </p>
                 </>
               )
@@ -319,7 +299,7 @@ const interests = [
             {
               interests.map((interest) => (
                 <div class="flex items-center gap-2 px-4 py-2 bg-zinc-200/50 dark:bg-zinc-800 rounded-full">
-                  <interest.icon className="w-4 h-4 text-zinc-600 dark:text-zinc-400" />
+                  <interest.icon className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
                   <span class="text-sm text-zinc-700 dark:text-zinc-300">
                     {interest.label}
                   </span>
@@ -331,4 +311,4 @@ const interests = [
       </div>
     </div>
   </div>
-</main>
+</section>

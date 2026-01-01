@@ -11,7 +11,8 @@ import {
   PiDownloadSimple,
   PiClock,
   PiPaperPlaneTilt,
-  PiArrowUpRight
+  PiArrowUpRight,
+  PiReadCvLogoDuotone
 } from "react-icons/pi";
 
 export interface Props {
@@ -135,7 +136,7 @@ const socialLinks = [
               class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-blue-600 rounded-2xl font-bold hover:scale-105 transition-all duration-200 shadow-xl shadow-blue-900/20"
             >
               <PiEnvelope className="w-5 h-5" />
-              {lang === "es" ? "Enviar correo" : "Send email"}
+              {lang === "es" ? "Enviar Correo" : "Send Email"}
             </a>
             <a
               href={`tel:${contactInfo.phone}`}
@@ -181,14 +182,6 @@ const socialLinks = [
             <PiClock className="w-4 h-4" />
             {contactInfo.timezone}
           </div>
-
-          <div
-            class="inline-flex items-center gap-2 px-3 py-1.5 bg-green-100 dark:bg-green-900/30 rounded-lg text-xs font-semibold text-green-700 dark:text-green-300"
-          >
-            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"
-            ></span>
-            {lang === "es" ? "Disponible ahora" : "Available now"}
-          </div>
         </div>
       </div>
 
@@ -206,7 +199,7 @@ const socialLinks = [
             <div
               class="w-12 h-12 bg-gradient-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center"
             >
-              <PiDownloadSimple className="w-6 h-6 text-white" />
+              <PiReadCvLogoDuotone className="w-6 h-6 text-white" />
             </div>
             <div>
               <h3 class="font-bold text-gray-900 dark:text-white">
@@ -250,7 +243,7 @@ const socialLinks = [
             <div
               class="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center"
             >
-              <PiDownloadSimple className="w-6 h-6 text-white" />
+              <PiReadCvLogoDuotone className="w-6 h-6 text-white" />
             </div>
             <div>
               <h3 class="font-bold text-gray-900 dark:text-white">
