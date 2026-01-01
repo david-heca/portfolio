@@ -1,6 +1,6 @@
 ---
 import { useTranslations } from "../../i18n/utils";
-import { twGlobals } from "../../utils/tw-ui";
+import { PiCode, PiTranslate, PiLightbulb } from "react-icons/pi";
 
 export interface Props {
   lang: "es" | "en";
@@ -125,10 +125,10 @@ const softSkills =
       ];
 ---
 
-<main class="min-h-screen px-4 pt-32 pb-20">
-  <div class="max-w-6xl mx-auto">
+<main class="min-h-screen px-4 pt-24 pb-20">
+  <div class="max-w-7xl mx-auto">
     <!-- Header -->
-    <div class="text-center mb-16">
+    <div class="text-center mb-12">
       <h1
         class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
       >
@@ -139,148 +139,189 @@ const softSkills =
       </p>
     </div>
 
-    <!-- Technical Skills Grid -->
-    <div class="mb-20">
-      <h2
-        class="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center"
-      >
-        {lang === "es" ? "Tecnologías" : "Technologies"}
-      </h2>
+    <!-- Bento Grid Layout -->
+    <div
+      class="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[minmax(180px,auto)]"
+    >
+      <!-- Technical Skills - Large Card -->
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"
+        class="md:col-span-8 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-8 relative overflow-hidden group"
       >
-        {
-          primarySkills.map((skill, index) => (
-            <div class={twGlobals.skillCard}>
-              <div class="flex items-start justify-between mb-3">
-                <div class="flex-1">
-                  <h3 class="text-gray-900 dark:text-white font-semibold text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                    {skill.name}
-                  </h3>
-                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                    {skill.category}
-                  </p>
-                </div>
-                {skill.icon ? (
-                  <img
-                    src={`https://svgl.app/library/${skill.icon}.svg`}
-                    alt={`${skill.name} icon`}
-                    class="w-8 h-8 object-contain filter dark:brightness-110 flex-shrink-0"
-                    loading="lazy"
-                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"
-                  />
-                ) : null}
-                <div
-                  class={`w-8 h-8 bg-gradient-to-r ${skill.color} rounded-lg items-center justify-center flex-shrink-0 ${skill.icon ? "hidden" : "flex"}`}
-                >
-                  <span class="text-white font-bold text-xs">
-                    {skill.name.charAt(0)}
-                  </span>
-                </div>
-              </div>
+        <div
+          class="absolute top-4 right-4 opacity-5 group-hover:opacity-10 transition-opacity"
+        >
+          <PiCode className="w-32 h-32" />
+        </div>
 
-              <div class="flex items-center gap-2">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="p-2 rounded-xl bg-blue-100 dark:bg-blue-900/30">
+            <PiCode className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+            {lang === "es" ? "Tecnologías" : "Technologies"}
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+          {
+            primarySkills.map((skill) => (
+              <div class="group/skill p-4 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg transition-all duration-300">
+                <div class="flex items-start gap-3 mb-3">
+                  <div class="flex-1 min-w-0">
+                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white truncate group-hover/skill:text-blue-600 dark:group-hover/skill:text-blue-400 transition-colors">
+                      {skill.name}
+                    </h3>
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                      {skill.category}
+                    </p>
+                  </div>
+                  {skill.icon ? (
+                    <img
+                      src={`https://svgl.app/library/${skill.icon}.svg`}
+                      alt={`${skill.name} icon`}
+                      class="w-7 h-7 object-contain filter dark:brightness-110 flex-shrink-0"
+                      loading="lazy"
+                      onerror="this.style.display='none'"
+                    />
+                  ) : (
+                    <div
+                      class={`w-7 h-7 bg-gradient-to-r ${skill.color} rounded-lg flex items-center justify-center flex-shrink-0`}
+                    >
+                      <span class="text-white font-bold text-xs">
+                        {skill.name.charAt(0)}
+                      </span>
+                    </div>
+                  )}
+                </div>
+
                 <span
-                  class={`${twGlobals.skillLevelBadge} ${
+                  class={`inline-block text-xs px-2 py-1 rounded-md font-medium ${
                     skill.level === "Avanzado" || skill.level === "Advanced"
-                      ? twGlobals.levelAdvanced
+                      ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300"
                       : skill.level === "Intermedio" ||
                           skill.level === "Intermediate"
-                        ? twGlobals.levelIntermediate
-                        : twGlobals.levelBasic
+                        ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                        : "bg-gray-100 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300"
                   }`}
                 >
                   {skill.level}
                 </span>
               </div>
-            </div>
-          ))
-        }
+            ))
+          }
+        </div>
       </div>
-    </div>
 
-    <!-- Languages -->
-    <div class="mb-20">
-      <h2
-        class="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center"
+      <!-- Languages Card -->
+      <div
+        class="md:col-span-4 md:row-span-2 rounded-3xl bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800/50 p-8 relative overflow-hidden"
       >
-        {lang === "es" ? "Idiomas" : "Languages"}
-      </h2>
+        <div class="absolute top-4 right-4 opacity-10">
+          <PiTranslate className="w-24 h-24" />
+        </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-        {
-          languages.map((language, index) => (
-            <div class={twGlobals.languageCard}>
-              <div class="flex items-center justify-between mb-5">
-                <h3 class="text-lg font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  {language.name}
-                </h3>
-                <span
-                  class={`text-xs px-3 py-1 rounded-full font-medium ${
-                    language.level === "Nativo" || language.level === "Native"
-                      ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300"
-                      : "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
-                  }`}
-                >
-                  {language.level === "Nativo" || language.level === "Native"
-                    ? lang === "es"
-                      ? "Nativo"
-                      : "Native"
-                    : "B2"}
-                </span>
-              </div>
+        <div class="flex items-center gap-3 mb-8">
+          <div class="p-2 rounded-xl bg-blue-100 dark:bg-blue-900/30">
+            <PiTranslate className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+            {lang === "es" ? "Idiomas" : "Languages"}
+          </h2>
+        </div>
 
-              <div class="space-y-4">
-                <div class="flex justify-between text-sm">
-                  <span class="text-gray-600 dark:text-gray-400">
-                    {lang === "es" ? "Proficiencia" : "Proficiency"}
-                  </span>
-                  <span class="font-semibold text-gray-900 dark:text-white">
-                    {language.level === "Nativo" || language.level === "Native"
-                      ? "100%"
-                      : "70%"}
-                  </span>
-                </div>
-
-                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2.5 overflow-hidden">
-                  <div
-                    class={`h-2.5 rounded-full transition-all duration-1000 ease-out ${
+        <div class="space-y-6 relative z-10">
+          {
+            languages.map((language) => (
+              <div class="p-6 rounded-2xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/50 dark:border-gray-700/50 hover:shadow-lg transition-all duration-300">
+                <div class="flex items-center justify-between mb-4">
+                  <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+                    {language.name}
+                  </h3>
+                  <span
+                    class={`text-xs px-3 py-1 rounded-full font-semibold ${
                       language.level === "Nativo" || language.level === "Native"
-                        ? "bg-gradient-to-r from-green-500 to-green-600 w-full"
-                        : "bg-gradient-to-r from-blue-500 to-blue-600 w-[70%]"
+                        ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300"
+                        : "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
                     }`}
-                  />
+                  >
+                    {language.level === "Nativo" || language.level === "Native"
+                      ? lang === "es"
+                        ? "Nativo"
+                        : "Native"
+                      : "B2"}
+                  </span>
                 </div>
 
-                <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed pt-1">
-                  {language.level === "Nativo" || language.level === "Native"
-                    ? lang === "es"
-                      ? "Lengua materna • Dominio completo"
-                      : "Native language • Complete mastery"
-                    : lang === "es"
-                      ? "Competencia profesional • Comunicación fluida"
-                      : "Professional competency • Fluent communication"}
-                </p>
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    </div>
+                <div class="space-y-3">
+                  <div class="flex justify-between text-sm">
+                    <span class="text-gray-600 dark:text-gray-400">
+                      {lang === "es" ? "Proficiencia" : "Proficiency"}
+                    </span>
+                    <span class="font-bold text-gray-900 dark:text-white">
+                      {language.level === "Nativo" ||
+                      language.level === "Native"
+                        ? "100%"
+                        : "70%"}
+                    </span>
+                  </div>
 
-    <!-- Soft Skills -->
-    <div>
-      <h2
-        class="text-3xl font-bold text-gray-900 dark:text-white mb-12 text-center"
+                  <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                    <div
+                      class={`h-3 rounded-full transition-all duration-1000 ease-out ${
+                        language.level === "Nativo" ||
+                        language.level === "Native"
+                          ? "bg-gradient-to-r from-green-500 to-green-600 w-full"
+                          : "bg-gradient-to-r from-blue-500 to-blue-600 w-[70%]"
+                      }`}
+                    />
+                  </div>
+
+                  <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">
+                    {language.level === "Nativo" || language.level === "Native"
+                      ? lang === "es"
+                        ? "Lengua materna • Dominio completo"
+                        : "Native language • Complete mastery"
+                      : lang === "es"
+                        ? "Competencia profesional • Comunicación fluida"
+                        : "Professional competency • Fluent communication"}
+                  </p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <!-- Soft Skills Card -->
+      <div
+        class="md:col-span-8 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-8 relative overflow-hidden group"
       >
-        {lang === "es" ? "Habilidades Blandas" : "Soft Skills"}
-      </h2>
-      <div class="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-        {
-          softSkills.map((skill, index) => (
-            <div class={twGlobals.softSkillBadge}>{skill}</div>
-          ))
-        }
+        <div
+          class="absolute top-4 right-4 opacity-5 group-hover:opacity-10 transition-opacity"
+        >
+          <PiLightbulb className="w-32 h-32" />
+        </div>
+
+        <div class="flex items-center gap-3 mb-6">
+          <div class="p-2 rounded-xl bg-purple-100 dark:bg-purple-900/30">
+            <PiLightbulb
+              className="w-5 h-5 text-purple-600 dark:text-purple-400"
+            />
+          </div>
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+            {lang === "es" ? "Habilidades Blandas" : "Soft Skills"}
+          </h2>
+        </div>
+
+        <div class="flex flex-wrap gap-2">
+          {
+            softSkills.map((skill) => (
+              <span class="px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-700 dark:hover:text-purple-300 transition-all duration-200">
+                {skill}
+              </span>
+            ))
+          }
+        </div>
       </div>
     </div>
   </div>

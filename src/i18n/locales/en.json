@@ -3,14 +3,14 @@
     "home": "Home",
     "about": "About",
     "skills": "Skills",
-    "work": "Experience", 
+    "work": "Experience",
     "education": "Education",
     "projects": "Projects",
     "contact": "Contact"
   },
   "hero": {
     "greeting": "Hi, I'm",
-    "title": "Systems Engineer & AI Solutions Architect",
+    "title": "IT Engineer & AI Solutions Architect",
     "description": "Specialized in developing innovative technological solutions and artificial intelligence architectures. I'm passionate about transforming ideas into realities that generate impact.",
     "cta": "See my work"
   },
@@ -23,7 +23,7 @@
     "subtitle": "Technologies and tools I master"
   },
   "work": {
-    "title": "Experience", 
+    "title": "Experience",
     "subtitle": "My professional journey"
   },
   "education": {
@@ -41,5 +41,11 @@
   "common": {
     "contactMe": "Contact me",
     "viewProject": "View Projects"
+  },
+  "home": {
+    "available": "Available for work",
+    "connect": "Connect",
+    "currentRole": "Current Role",
+    "viewResume": "View full resume"
   }
 }

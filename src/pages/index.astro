@@ -1,6 +1,6 @@
 ---
 import BentoLayout from "../layouts/BentoLayout.astro";
-import BentoHome from "../components/pages/BentoHome.astro";
+import HomePage from "../components/pages/HomePage.astro";
 import { useTranslations } from "../i18n/utils";
 
 const t = useTranslations("es");
@@ -11,5 +11,5 @@ const t = useTranslations("es");
   description={t("hero.description")}
   lang="es"
 >
-  <BentoHome lang="es" />
+  <HomePage lang="es" />
 </BentoLayout>
