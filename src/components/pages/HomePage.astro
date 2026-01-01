@@ -1,10 +1,10 @@
 ---
 import { useTranslations } from "../../i18n/utils";
 import {
-  PiArrowRight,
   PiCode,
   PiBriefcase,
   PiArrowRightBold,
+  PiArchiveDuotone,
 } from "react-icons/pi";
 
 export interface Props {
@@ -16,7 +16,7 @@ const t = useTranslations(lang);
 
 const currentJob = {
   company: "Baacc Systems",
-  role: "AI Solutions Architect",
+  role: "Head of Data Science",
   period: lang === "es" ? "2023 - Actualidad" : "2023 - Present",
 };
 
@@ -43,9 +43,13 @@ const selectedProjects = [
 ---
 
 <section class="min-h-screen px-4 pt-20 pb-20">
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[minmax(180px,auto)]">
+  <div
+    class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[minmax(180px,auto)]"
+  >
     <!-- Hero Section -->
-    <div class="md:col-span-2 md:row-span-2 rounded-3xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group">
+    <div
+      class="md:col-span-2 md:row-span-2 rounded-3xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group"
+    >
       <div
         class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"
       >
@@ -110,7 +114,7 @@ const selectedProjects = [
       </div>
     </div>
 
-        <!-- Current Experience -->
+    <!-- Current Experience -->
     <div
       class="md:col-span-1 rounded-3xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group min-h-[240px] md:min-h-0"
     >
@@ -151,7 +155,7 @@ const selectedProjects = [
           class="inline-flex items-center gap-2 text-xs md:text-sm font-medium hover:opacity-80 transition-opacity"
         >
           {t("home.viewResume")}
-          <PiArrowRight className="w-3 h-3 md:w-4 md:h-4" />
+          <PiArrowRightBold className="w-3 h-3 md:w-4 md:h-4" />
         </a>
       </div>
     </div>
@@ -164,7 +168,7 @@ const selectedProjects = [
         <h3
           class="text-base md:text-xl font-bold text-zinc-900 dark:text-white flex items-center gap-2"
         >
-          <PiCode className="text-blue-500 w-5 h-5 md:w-6 md:h-6" />
+          <PiArchiveDuotone size={32} className="text-blue-500" />
           {t("projects.title")}
         </h3>
         <a
@@ -172,7 +176,7 @@ const selectedProjects = [
           class="text-xs md:text-sm text-zinc-500 hover:text-blue-500 transition-colors flex items-center gap-1 font-medium"
         >
           {t("common.viewProject")}
-          <PiArrowRight className="w-3 h-3 md:w-4 md:h-4" />
+          <PiArrowRightBold className="w-3 h-3 md:w-4 md:h-4" />
         </a>
       </div>
 

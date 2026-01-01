@@ -10,12 +10,12 @@
   },
   "hero": {
     "greeting": "Hola, soy",
-    "title": "Ingeniero en Tecnologías de la Información & Arquitecto de Soluciones IA",
-    "description": "Especializado en el desarrollo de soluciones tecnológicas innovadoras y arquitecturas de inteligencia artificial. Me apasiona transformar ideas en realidades que generan impacto.",
+    "title": "Ingeniero en Tecnologías de la Información",
+    "description": "Profesional con un sólido historial en el diseño, construcción y escalado de soluciones impulsadas por datos e IA que generan valor empresarial real.",
     "cta": "Ver mi trabajo"
   },
   "about": {
-    "title": "Sobre mí",
+    "title": "Sobre Mí",
     "subtitle": "Pasión por la tecnología e innovación"
   },
   "skills": {
@@ -43,9 +43,9 @@
     "viewProject": "Ver Proyectos"
   },
   "home": {
-    "available": "Disponible para trabajar",
+    "available": "Disponible",
     "connect": "Conectar",
     "currentRole": "Rol Actual",
-    "viewResume": "Ver experiencia completa"
+    "viewResume": "Ver Experiencia Completa"
   }
 }

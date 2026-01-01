@@ -10,12 +10,12 @@
   },
   "hero": {
     "greeting": "Hi, I'm",
-    "title": "IT Engineer & AI Solutions Architect",
-    "description": "Specialized in developing innovative technological solutions and artificial intelligence architectures. I'm passionate about transforming ideas into realities that generate impact.",
+    "title": "Information Technologies Engineer",
+    "description": "Professional with a strong track record in designing, building, and scaling data-driven and AI-powered solutions that generate real business value.",
     "cta": "See my work"
   },
   "about": {
-    "title": "About me",
+    "title": "About Me",
     "subtitle": "Passion for technology and innovation"
   },
   "skills": {
@@ -39,13 +39,13 @@
     "subtitle": "Let's talk about your next project?"
   },
   "common": {
-    "contactMe": "Contact me",
+    "contactMe": "Contact Me",
     "viewProject": "View Projects"
   },
   "home": {
-    "available": "Available for work",
+    "available": "Available",
     "connect": "Connect",
     "currentRole": "Current Role",
-    "viewResume": "View full resume"
+    "viewResume": "View Full Resume"
   }
 }

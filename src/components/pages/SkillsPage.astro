@@ -167,13 +167,13 @@ const softSkills =
         <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
           {
             primarySkills.map((skill) => (
-              <div class="group/skill p-4 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg transition-all duration-300">
+              <div class="group/skill p-3 md:p-4 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg transition-all duration-300">
                 <div class="flex items-start gap-3 mb-3">
                   <div class="flex-1 min-w-0">
                     <h3 class="text-sm font-semibold text-gray-900 dark:text-white truncate group-hover/skill:text-blue-600 dark:group-hover/skill:text-blue-400 transition-colors">
                       {skill.name}
                     </h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
+                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
                       {skill.category}
                     </p>
                   </div>
@@ -181,7 +181,7 @@ const softSkills =
                     <img
                       src={`https://svgl.app/library/${skill.icon}.svg`}
                       alt={`${skill.name} icon`}
-                      class="w-7 h-7 object-contain filter dark:brightness-110 flex-shrink-0"
+                      class="w-5 h-5 md:w-7 md:h-7 object-contain filter dark:brightness-110 flex-shrink-0"
                       loading="lazy"
                       onerror="this.style.display='none'"
                     />
@@ -190,14 +190,14 @@ const softSkills =
                       <img
                         src={skill.iconLight}
                         alt={`${skill.name} icon`}
-                        class="w-7 h-7 object-contain dark:hidden flex-shrink-0"
+                        class="w-5 h-5 md:w-7 md:h-7 object-contain dark:hidden flex-shrink-0"
                         loading="lazy"
                         onerror="this.style.display='none'"
                       />
                       <img
                         src={skill.iconDark}
                         alt={`${skill.name} icon`}
-                        class="w-7 h-7 object-contain hidden dark:block flex-shrink-0"
+                        class="w-5 h-5 md:w-7 md:h-7 object-contain hidden dark:block flex-shrink-0"
                         loading="lazy"
                         onerror="this.style.display='none'"
                       />
