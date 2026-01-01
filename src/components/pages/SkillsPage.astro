@@ -71,14 +71,16 @@ const primarySkills = [
     category: "Frontend",
     level: lang === "es" ? "Básico" : "Basic",
     color: "from-blue-500 to-blue-700",
-    icon: "react_dark",
+    iconLight: "https://svgl.app/library/react_light.svg",
+    iconDark: "https://svgl.app/library/react_dark.svg",
   },
   {
     name: "Astro",
     category: "Frontend",
     level: lang === "es" ? "Básico" : "Basic",
     color: "from-blue-500 to-blue-700",
-    icon: "astro",
+    iconLight: "https://svgl.app/library/astro-icon-light.svg",
+    iconDark: "https://svgl.app/library/astro-icon-dark.svg",
   },
 ];
 
@@ -125,7 +127,7 @@ const softSkills =
       ];
 ---
 
-<main class="min-h-screen px-4 pt-24 pb-20">
+<section class="min-h-screen px-4 pt-20 pb-20">
   <div class="max-w-7xl mx-auto">
     <!-- Header -->
     <div class="text-center mb-12">
@@ -183,6 +185,23 @@ const softSkills =
                       loading="lazy"
                       onerror="this.style.display='none'"
                     />
+                  ) : skill.iconLight && skill.iconDark ? (
+                    <>
+                      <img
+                        src={skill.iconLight}
+                        alt={`${skill.name} icon`}
+                        class="w-7 h-7 object-contain dark:hidden flex-shrink-0"
+                        loading="lazy"
+                        onerror="this.style.display='none'"
+                      />
+                      <img
+                        src={skill.iconDark}
+                        alt={`${skill.name} icon`}
+                        class="w-7 h-7 object-contain hidden dark:block flex-shrink-0"
+                        loading="lazy"
+                        onerror="this.style.display='none'"
+                      />
+                    </>
                   ) : (
                     <div
                       class={`w-7 h-7 bg-gradient-to-r ${skill.color} rounded-lg flex items-center justify-center flex-shrink-0`}
@@ -325,4 +344,4 @@ const softSkills =
       </div>
     </div>
   </div>
-</main>
+</section>

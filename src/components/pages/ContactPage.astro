@@ -68,7 +68,7 @@ const socialLinks = [
 ];
 ---
 
-<main class="min-h-screen px-4 pt-24 pb-20">
+<section class="min-h-screen px-4 pt-20 pb-20">
   <div class="max-w-6xl mx-auto">
     <!-- Header -->
     <div class="text-center mb-12">
@@ -192,42 +192,6 @@ const socialLinks = [
         </div>
       </div>
 
-      <!-- Social Links -->
-      {
-        socialLinks.map((social) => (
-          <a
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class={`md:col-span-3 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 flex items-center gap-4 group hover:shadow-xl transition-all duration-300 ${social.color}`}
-          >
-            <div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center group-hover:bg-transparent transition-all duration-300">
-              {social.icon === "github" && (
-                <PiGithubLogo className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-current transition-colors" />
-              )}
-              {social.icon === "linkedin" && (
-                <PiLinkedinLogo className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-current transition-colors" />
-              )}
-              {social.icon === "twitter" && (
-                <PiXLogo className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-current transition-colors" />
-              )}
-              {social.icon === "instagram" && (
-                <PiInstagramLogo className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-current transition-colors" />
-              )}
-            </div>
-            <div class="flex-1 min-w-0">
-              <p class="font-bold text-gray-900 dark:text-white group-hover:text-current transition-colors">
-                {social.name}
-              </p>
-              <p class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-current/70 transition-colors truncate">
-                {social.username}
-              </p>
-            </div>
-            <PiArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-current opacity-0 group-hover:opacity-100 transition-all" />
-          </a>
-        ))
-      }
-
       <!-- CV Downloads -->
       <div
         class="md:col-span-6 rounded-3xl bg-gradient-to-br from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 border border-gray-200 dark:border-gray-700 p-8 relative overflow-hidden group"
@@ -316,6 +280,42 @@ const socialLinks = [
           </a>
         </div>
       </div>
+
+      <!-- Social Links -->
+      {
+        socialLinks.map((social) => (
+          <a
+            href={social.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={`md:col-span-3 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 flex items-center gap-4 group hover:shadow-xl transition-all duration-300 ${social.color}`}
+          >
+            <div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center group-hover:bg-transparent transition-all duration-300">
+              {social.icon === "github" && (
+                <PiGithubLogo className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-current transition-colors" />
+              )}
+              {social.icon === "linkedin" && (
+                <PiLinkedinLogo className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-current transition-colors" />
+              )}
+              {social.icon === "twitter" && (
+                <PiXLogo className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-current transition-colors" />
+              )}
+              {social.icon === "instagram" && (
+                <PiInstagramLogo className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-current transition-colors" />
+              )}
+            </div>
+            <div class="flex-1 min-w-0">
+              <p class="font-bold text-gray-900 dark:text-white group-hover:text-current transition-colors">
+                {social.name}
+              </p>
+              <p class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-current/70 transition-colors truncate">
+                {social.username}
+              </p>
+            </div>
+            <PiArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-current opacity-0 group-hover:opacity-100 transition-all" />
+          </a>
+        ))
+      }
     </div>
   </div>
-</main>
+</section>
