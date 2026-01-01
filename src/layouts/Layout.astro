@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import Navbar from "../components/Navbar.astro";
 import "../styles/global.css";
 
@@ -44,15 +44,7 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     <meta property="twitter:image" content={socialImageURL} />
 
     <title>{title}</title>
-    <ViewTransitions />
-
-    <!-- Preload fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <ClientRouter />
 
     <script is:inline>
       // Function to set theme

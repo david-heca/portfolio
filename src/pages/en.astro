@@ -1,15 +1,15 @@
 ---
-import BentoLayout from "../layouts/BentoLayout.astro";
+import Layout from "../layouts/Layout.astro";
 import HomePage from "../components/pages/HomePage.astro";
 import { useTranslations } from "../i18n/utils";
 
 const t = useTranslations("en");
 ---
 
-<BentoLayout
+<Layout
   title="David Herrera | Portfolio"
   description={t("hero.description")}
   lang="en"
 >
   <HomePage lang="en" />
-</BentoLayout>
+</Layout>
