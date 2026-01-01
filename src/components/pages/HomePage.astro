@@ -2,12 +2,9 @@
 import { useTranslations } from "../../i18n/utils";
 import {
   PiArrowRight,
-  PiGithubLogo,
-  PiLinkedinLogo,
-  PiDownloadSimple,
   PiCode,
   PiBriefcase,
-  PiArrowUpRight,
+  PiArrowRightBold,
 } from "react-icons/pi";
 
 export interface Props {
@@ -16,19 +13,6 @@ export interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-
-const socialLinks = [
-  {
-    href: "https://github.com/david-heca",
-    icon: PiGithubLogo,
-    label: "GitHub",
-  },
-  {
-    href: "https://linkedin.com/in/david-heca",
-    icon: PiLinkedinLogo,
-    label: "LinkedIn",
-  },
-];
 
 const currentJob = {
   company: "Baacc Systems",
@@ -58,14 +42,10 @@ const selectedProjects = [
 ];
 ---
 
-<div class="min-h-[calc(100vh-12rem)] flex flex-col justify-center py-8">
-  <div
-    class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[minmax(180px,auto)]"
-  >
+<section class="min-h-screen px-4 pt-20 pb-20">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[minmax(180px,auto)]">
     <!-- Hero Section -->
-    <div
-      class="md:col-span-2 md:row-span-2 rounded-3xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group"
-    >
+    <div class="md:col-span-2 md:row-span-2 rounded-3xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group">
       <div
         class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"
       >
@@ -110,25 +90,17 @@ const selectedProjects = [
           class="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 rounded-xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium hover:scale-105 transition-transform text-sm md:text-base"
         >
           {t("common.contactMe")}
-          <PiArrowRight className="w-4 h-4" />
-        </a>
-        <a
-          href="/assets/documents/cv.pdf"
-          target="_blank"
-          class="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 rounded-xl bg-white dark:bg-zinc-800 text-zinc-900 dark:text-white border border-zinc-200 dark:border-zinc-700 font-medium hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors text-sm md:text-base"
-        >
-          CV
-          <PiDownloadSimple className="w-4 h-4" />
+          <PiArrowRightBold className="w-4 h-4" />
         </a>
       </div>
     </div>
 
     <!-- Photo -->
     <div
-      class="md:col-span-1 md:row-span-1 rounded-3xl bg-blue-100 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 p-4 flex items-center justify-center relative overflow-hidden min-h-[200px] md:min-h-0"
+      class="md:col-span-1 md:row-span-2 rounded-3xl bg-blue-100 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 p-4 flex items-center justify-center relative overflow-hidden min-h-[200px] md:min-h-0"
     >
       <div
-        class="w-28 h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 flex items-center justify-center"
+        class="w-32 h-32 md:w-44 md:h-44 lg:w-56 lg:h-56 flex items-center justify-center"
       >
         <img
           src="/assets/dh.webp"
@@ -138,28 +110,49 @@ const selectedProjects = [
       </div>
     </div>
 
-    <!-- Socials -->
+        <!-- Current Experience -->
     <div
-      class="md:col-span-1 md:row-span-1 rounded-3xl bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-5 md:p-6 flex flex-col justify-center"
+      class="md:col-span-1 rounded-3xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group min-h-[240px] md:min-h-0"
     >
-      <h3
-        class="text-base md:text-lg font-semibold text-zinc-900 dark:text-white mb-3 md:mb-4"
+      <div
+        class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-15 transition-opacity"
       >
-        {t("home.connect")}
-      </h3>
-      <div class="flex gap-3 md:gap-4">
-        {
-          socialLinks.map((link) => (
-            <a
-              href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="p-2.5 md:p-3 rounded-xl bg-white dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:text-blue-500 dark:hover:text-blue-400 hover:shadow-md transition-all border border-zinc-100 dark:border-zinc-700"
-            >
-              <link.icon className="w-5 h-5 md:w-6 md:h-6" />
-            </a>
-          ))
-        }
+        <PiBriefcase className="w-20 md:w-24 h-20 md:h-24" />
+      </div>
+
+      <div class="relative z-10">
+        <div class="flex items-center gap-2 mb-3 md:mb-4">
+          <span class="relative flex h-2 w-2">
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+            ></span>
+            <span
+              class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"
+            ></span>
+          </span>
+          <h3 class="text-xs font-medium uppercase tracking-wider opacity-70">
+            {t("home.currentRole")}
+          </h3>
+        </div>
+
+        <div class="mb-4 md:mb-6">
+          <h4 class="text-xl md:text-2xl font-bold mb-1">
+            {currentJob.company}
+          </h4>
+          <p class="text-base md:text-lg opacity-90">{currentJob.role}</p>
+        </div>
+
+        <p class="text-xs opacity-60 font-mono">{currentJob.period}</p>
+      </div>
+
+      <div class="relative z-10 mt-6 md:mt-8">
+        <a
+          href={lang === "es" ? "/work" : "/en/work"}
+          class="inline-flex items-center gap-2 text-xs md:text-sm font-medium hover:opacity-80 transition-opacity"
+        >
+          {t("home.viewResume")}
+          <PiArrowRight className="w-3 h-3 md:w-4 md:h-4" />
+        </a>
       </div>
     </div>
 
@@ -210,51 +203,5 @@ const selectedProjects = [
         }
       </div>
     </div>
-
-    <!-- Current Experience -->
-    <div
-      class="md:col-span-1 rounded-3xl bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group min-h-[240px] md:min-h-0"
-    >
-      <div
-        class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-15 transition-opacity"
-      >
-        <PiBriefcase className="w-20 md:w-24 h-20 md:h-24" />
-      </div>
-
-      <div class="relative z-10">
-        <div class="flex items-center gap-2 mb-3 md:mb-4">
-          <span class="relative flex h-2 w-2">
-            <span
-              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
-            ></span>
-            <span
-              class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"
-            ></span>
-          </span>
-          <h3 class="text-xs font-medium uppercase tracking-wider opacity-70">
-            {t("home.currentRole")}
-          </h3>
-        </div>
-
-        <div class="mb-4 md:mb-6">
-          <h4 class="text-xl md:text-2xl font-bold mb-1">
-            {currentJob.company}
-          </h4>
-          <p class="text-base md:text-lg opacity-90">{currentJob.role}</p>
-        </div>
-
-        <p class="text-xs opacity-60 font-mono">{currentJob.period}</p>
-      </div>
-
-      <div class="relative z-10 mt-6 md:mt-8">
-        <a
-          href={lang === "es" ? "/work" : "/en/work"}
-          class="inline-flex items-center gap-2 text-xs md:text-sm font-medium hover:opacity-80 transition-opacity"
-        >
-          {t("home.viewResume")}
-          <PiArrowRight className="w-3 h-3 md:w-4 md:h-4" />
-        </a>
-      </div>
-    </div>
   </div>
-</div>
+</section>
