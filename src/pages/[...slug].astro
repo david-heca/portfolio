@@ -1,6 +1,6 @@
 ---
-import BentoLayout from "../layouts/BentoLayout.astro";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import Layout from "../layouts/Layout.astro";
+import { useTranslations } from "../i18n/utils";
 
 // Importar componentes de páginas
 import AboutPage from "../components/pages/AboutPage.astro";
@@ -109,11 +109,7 @@ const getPageMeta = (page: string, lang: "es" | "en") => {
 const pageMeta = getPageMeta(page, lang);
 ---
 
-<BentoLayout
-  title={pageMeta.title}
-  description={pageMeta.description}
-  lang={lang}
->
+<Layout title={pageMeta.title} description={pageMeta.description} lang={lang}>
   <!-- Renderizar componente según la página -->
   {page === "home" && <HomePage lang={lang} />}
   {page === "about" && <AboutPage lang={lang} />}
@@ -122,4 +118,4 @@ const pageMeta = getPageMeta(page, lang);
   {page === "work" && <WorkPage lang={lang} />}
   {page === "education" && <EducationPage lang={lang} />}
   {page === "contact" && <ContactPage lang={lang} />}
-</BentoLayout>
+</Layout>
