@@ -1,5 +1,17 @@
 ---
 import { useTranslations } from "../../i18n/utils";
+import {
+  PiGraduationCap,
+  PiCertificate,
+  PiCalendar,
+  PiMapPin,
+  PiChartBar,
+  PiArrowUpRight,
+  PiBooks,
+  PiLightning,
+  PiStar,
+  PiTrophy,
+} from "react-icons/pi";
 
 export interface Props {
   lang: "es" | "en";
@@ -25,6 +37,8 @@ const education = [
         : "Specialized courses in web development, artificial intelligence and emerging technologies.",
     grade: "N/A",
     location: "Online",
+    icon: PiLightning,
+    accent: "emerald",
   },
   {
     id: 2,
@@ -46,6 +60,8 @@ const education = [
     grade: "96/100",
     location:
       lang === "es" ? "Estado de México, México" : "Mexico State, Mexico",
+    icon: PiGraduationCap,
+    accent: "blue",
   },
   {
     id: 3,
@@ -65,6 +81,8 @@ const education = [
     grade: "8.8/10",
     location:
       lang === "es" ? "Estado de México, México" : "Mexico State, Mexico",
+    icon: PiBooks,
+    accent: "violet",
   },
 ];
 
@@ -79,6 +97,7 @@ const certifications = [
       "https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=414&cvid=r+dkpNaAIMQHhll3/TFLLw==",
     skills: ["Azure", "Cloud Computing", "Networking", "Security"],
     level: lang === "es" ? "Fundamentals" : "Fundamentals",
+    featured: true,
   },
   {
     id: 2,
@@ -90,6 +109,7 @@ const certifications = [
       "https://www.coursera.org/account/accomplishments/verify/J7EMYHGRRUH8",
     skills: ["Python", "Data Structures", "SQL"],
     level: lang === "es" ? "Fundamentals" : "Fundamentals",
+    featured: true,
   },
   {
     id: 3,
@@ -104,6 +124,7 @@ const certifications = [
       "https://platzi.com/p/david-heca/curso/11157-introduccion-ai/diploma/detalle/",
     skills: ["AI", "Machine Learning", "Data Science"],
     level: lang === "es" ? "Fundamentals" : "Fundamentals",
+    featured: false,
   },
   {
     id: 4,
@@ -118,6 +139,7 @@ const certifications = [
       "https://platzi.com/p/david-heca/curso/8946-azureopenia/diploma/detalle/",
     skills: ["Chatbots", "Azure", "OpenAI"],
     level: lang === "es" ? "Intermedio" : "Intermediate",
+    featured: false,
   },
   {
     id: 5,
@@ -132,185 +154,302 @@ const certifications = [
       "https://platzi.com/p/david-heca/curso/2292-terminal/diploma/detalle/",
     skills: ["Terminal", "Command Line", "Linux"],
     level: lang === "es" ? "Fundamentals" : "Fundamentals",
+    featured: false,
   },
 ];
+
+const featuredCerts = certifications.filter((c) => c.featured);
+const otherCerts = certifications.filter((c) => !c.featured);
 ---
 
 <main class="min-h-screen px-4 pt-32 pb-20">
   <div class="max-w-6xl mx-auto">
+    <!-- Header -->
     <div class="text-center mb-16">
       <h1
-        class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+        class="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white mb-4"
       >
         {t("education.title")}
       </h1>
-      <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+      <p class="text-lg text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto">
         {t("education.subtitle")}
       </p>
     </div>
 
-    <!-- Formación académica -->
-    <div class="mb-20">
-      <h2
-        class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center"
-      >
-        {lang === "es" ? "Formación Académica" : "Academic Background"}
-      </h2>
+    <!-- Bento Grid Layout -->
+    <div class="grid grid-cols-12 gap-4 md:gap-6">
+      <!-- Section Header: Academic Background -->
+      <div class="col-span-12 mb-2">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-2xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center"
+          >
+            <PiGraduationCap
+              className="w-5 h-5 text-zinc-600 dark:text-zinc-400"
+            />
+          </div>
+          <h2 class="text-xl font-semibold text-zinc-900 dark:text-white">
+            {lang === "es" ? "Formación Académica" : "Academic Background"}
+          </h2>
+        </div>
+      </div>
 
-      <div class="max-w-4xl mx-auto space-y-8">
-        {
-          education.map((edu, index) => (
-            <div class="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 md:p-8 rounded-2xl transition-all duration-300 hover:shadow-xl hover:border-blue-400 dark:hover:border-blue-400">
-              {/* Header */}
-              <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-6">
+      <!-- Education Cards -->
+      {
+        education.map((edu, index) => (
+          <div
+            class={`col-span-12 ${index === 0 ? "lg:col-span-12" : "lg:col-span-6"} group`}
+          >
+            <div class="h-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 md:p-8 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-lg">
+              <div class="flex flex-col h-full">
+                {/* Header with Icon and Status */}
+                <div class="flex items-start justify-between mb-6">
+                  <div
+                    class={`w-14 h-14 rounded-2xl flex items-center justify-center ${
+                      edu.accent === "emerald"
+                        ? "bg-emerald-500/10 dark:bg-emerald-500/20"
+                        : edu.accent === "blue"
+                          ? "bg-blue-500/10 dark:bg-blue-500/20"
+                          : "bg-violet-500/10 dark:bg-violet-500/20"
+                    }`}
+                  >
+                    <edu.icon
+                      className={`w-7 h-7 ${
+                        edu.accent === "emerald"
+                          ? "text-emerald-600 dark:text-emerald-400"
+                          : edu.accent === "blue"
+                            ? "text-blue-600 dark:text-blue-400"
+                            : "text-violet-600 dark:text-violet-400"
+                      }`}
+                    />
+                  </div>
+                  <span
+                    class={`px-3 py-1.5 rounded-full text-xs font-medium ${
+                      edu.status.includes("Autodidacta") ||
+                      edu.status.includes("Self")
+                        ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20"
+                        : "bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20"
+                    }`}
+                  >
+                    {edu.status}
+                  </span>
+                </div>
+
+                {/* Content */}
                 <div class="flex-1">
-                  <h3 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  <h3 class="text-xl md:text-2xl font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors">
                     {edu.degree}
                   </h3>
-                  <p class="text-blue-500 font-semibold mb-3">
+                  <p class="text-zinc-600 dark:text-zinc-400 font-medium mb-4">
                     {edu.institution}
                   </p>
-                  <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  <p class="text-zinc-500 dark:text-zinc-500 text-sm leading-relaxed mb-6">
                     {edu.description}
                   </p>
                 </div>
 
-                {/* Status badge */}
-                <div class="flex-shrink-0">
-                  <span class="px-4 py-2 bg-green-100 dark:bg-green-900/20 border border-green-200 dark:border-green-400/30 text-green-700 dark:text-green-300 rounded-full text-sm font-medium">
-                    {edu.status}
-                  </span>
-                </div>
-              </div>
-
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span class="text-blue-600 dark:text-blue-400 text-lg">
-                      📅
-                    </span>
-                  </div>
-                  <div>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-                      {lang === "es" ? "Período" : "Period"}
-                    </p>
-                    <p class="text-gray-900 dark:text-white font-medium">
+                {/* Meta Info */}
+                <div class="grid grid-cols-3 gap-4 pt-6 border-t border-zinc-200 dark:border-zinc-800">
+                  <div class="flex items-center gap-2">
+                    <PiCalendar className="w-4 h-4 text-zinc-400" />
+                    <span class="text-sm text-zinc-600 dark:text-zinc-400">
                       {edu.period}
-                    </p>
-                  </div>
-                </div>
-
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span class="text-purple-600 dark:text-purple-400 text-lg">
-                      📍
                     </span>
                   </div>
-                  <div>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-                      {lang === "es" ? "Ubicación" : "Location"}
-                    </p>
-                    <p class="text-gray-900 dark:text-white font-medium text-sm">
+                  <div class="flex items-center gap-2">
+                    <PiMapPin className="w-4 h-4 text-zinc-400" />
+                    <span class="text-sm text-zinc-600 dark:text-zinc-400 truncate">
                       {edu.location}
-                    </p>
-                  </div>
-                </div>
-
-                <div class="flex items-center gap-3">
-                  <div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900/20 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span class="text-yellow-600 dark:text-yellow-400 text-lg">
-                      📊
                     </span>
                   </div>
-                  <div>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide">
-                      {lang === "es" ? "Calificación" : "Grade"}
-                    </p>
-                    <p class="text-gray-900 dark:text-white font-medium">
+                  <div class="flex items-center gap-2">
+                    <PiChartBar className="w-4 h-4 text-zinc-400" />
+                    <span class="text-sm text-zinc-600 dark:text-zinc-400">
                       {edu.grade}
-                    </p>
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
-          ))
-        }
+          </div>
+        ))
+      }
+
+      <!-- Section Header: Certifications -->
+      <div class="col-span-12 mt-8 mb-2">
+        <div class="flex items-center gap-3">
+          <div
+            class="w-10 h-10 rounded-2xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center"
+          >
+            <PiCertificate
+              className="w-5 h-5 text-zinc-600 dark:text-zinc-400"
+            />
+          </div>
+          <h2 class="text-xl font-semibold text-zinc-900 dark:text-white">
+            {lang === "es" ? "Certificaciones" : "Certifications"}
+          </h2>
+        </div>
       </div>
-    </div>
 
-    <!-- Certificaciones -->
-    <div>
-      <h2
-        class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center"
-      >
-        {
-          lang === "es"
-            ? "Certificaciones & Cursos"
-            : "Certifications & Courses"
-        }
-      </h2>
+      <!-- Featured Certifications -->
+      {
+        featuredCerts.map((cert) => (
+          <div class="col-span-12 md:col-span-6 group">
+            <a
+              href={cert.verifyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block h-full"
+            >
+              <div class="h-full bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-3xl p-6 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-600 hover:shadow-xl hover:-translate-y-1">
+                <div class="flex flex-col h-full">
+                  {/* Header */}
+                  <div class="flex items-start justify-between mb-4">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/10 dark:bg-amber-500/20 flex items-center justify-center">
+                      <PiTrophy className="w-6 h-6 text-amber-600 dark:text-amber-400" />
+                    </div>
+                    <div class="flex items-center gap-2">
+                      <PiStar className="w-4 h-4 text-amber-500" />
+                      <span class="text-xs text-zinc-500 dark:text-zinc-400">
+                        Featured
+                      </span>
+                    </div>
+                  </div>
 
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {
-          certifications.map((cert, index) => (
-            <div class="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 p-6 rounded-2xl transition-all duration-300 hover:shadow-lg hover:border-blue-400 dark:hover:border-blue-400 hover:scale-105">
-              {/* Header */}
-              <div class="flex items-start justify-between mb-4">
-                <div class="w-12 h-12 bg-gradient-to-br from-blue-100 to-purple-100 dark:from-blue-900/20 dark:to-purple-900/20 rounded-xl flex items-center justify-center border border-gray-200 dark:border-gray-600 group-hover:border-blue-400 dark:group-hover:border-blue-400 transition-colors flex-shrink-0">
-                  <span class="text-2xl">🏆</span>
+                  {/* Content */}
+                  <div class="flex-1">
+                    <h3 class="text-lg font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors leading-tight">
+                      {cert.name}
+                    </h3>
+                    <p class="text-zinc-600 dark:text-zinc-400 text-sm mb-4">
+                      {cert.issuer} • {cert.date}
+                    </p>
+
+                    {/* Skills */}
+                    <div class="flex flex-wrap gap-2 mb-4">
+                      {cert.skills.map((skill) => (
+                        <span class="px-2.5 py-1 bg-zinc-200/50 dark:bg-zinc-700/50 text-zinc-700 dark:text-zinc-300 rounded-lg text-xs">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Footer */}
+                  <div class="flex items-center justify-between pt-4 border-t border-zinc-200 dark:border-zinc-700">
+                    <span class="text-xs text-zinc-400 font-mono">
+                      {cert.credentialId.slice(0, 12)}...
+                    </span>
+                    <span class="flex items-center gap-1 text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
+                      {lang === "es" ? "Ver credencial" : "View credential"}
+                      <PiArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </span>
+                  </div>
                 </div>
-                <span
-                  class={`px-3 py-1 rounded-full text-xs font-medium ${
-                    cert.level === "Fundamentals"
-                      ? "bg-blue-100 dark:bg-blue-900/20 text-blue-700 dark:text-blue-300"
-                      : "bg-purple-100 dark:bg-purple-900/20 text-purple-700 dark:text-purple-300"
-                  }`}
-                >
-                  {cert.level}
-                </span>
               </div>
+            </a>
+          </div>
+        ))
+      }
 
-              {/* Content */}
-              <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-tight">
-                {cert.name}
-              </h3>
-              <p class="text-blue-500 font-medium text-sm mb-3">
-                {cert.issuer}
-              </p>
+      <!-- Other Certifications -->
+      {
+        otherCerts.map((cert) => (
+          <div class="col-span-12 sm:col-span-6 lg:col-span-4 group">
+            <a
+              href={cert.verifyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="block h-full"
+            >
+              <div class="h-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-5 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-lg hover:-translate-y-1">
+                {/* Header */}
+                <div class="flex items-start justify-between mb-4">
+                  <div class="w-10 h-10 rounded-xl bg-zinc-200/50 dark:bg-zinc-800 flex items-center justify-center">
+                    <PiCertificate className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
+                  </div>
+                  <span
+                    class={`px-2 py-1 rounded-full text-xs font-medium ${
+                      cert.level.includes("Intermedio") ||
+                      cert.level.includes("Intermediate")
+                        ? "bg-violet-500/10 text-violet-600 dark:text-violet-400"
+                        : "bg-zinc-200/50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
+                    }`}
+                  >
+                    {cert.level}
+                  </span>
+                </div>
 
-              {/* Skills tags */}
-              <div class="mb-4">
-                <div class="flex flex-wrap gap-2">
-                  {cert.skills.map((skill) => (
-                    <span class="px-2.5 py-1 bg-gray-100 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg text-xs hover:bg-gray-200 dark:hover:bg-gray-600 hover:border-blue-400 dark:hover:border-blue-400 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200 cursor-default">
+                {/* Content */}
+                <h3 class="text-base font-semibold text-zinc-900 dark:text-white mb-2 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors leading-tight line-clamp-2">
+                  {cert.name}
+                </h3>
+                <p class="text-zinc-500 dark:text-zinc-500 text-sm mb-4">
+                  {cert.issuer} • {cert.date}
+                </p>
+
+                {/* Skills */}
+                <div class="flex flex-wrap gap-1.5 mb-4">
+                  {cert.skills.slice(0, 3).map((skill) => (
+                    <span class="px-2 py-0.5 bg-zinc-200/50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded text-xs">
                       {skill}
                     </span>
                   ))}
                 </div>
-              </div>
 
-              {/* Footer */}
-              <div class="pt-4 border-t border-gray-200 dark:border-gray-700 space-y-2">
-                <div class="flex items-center justify-between text-sm">
-                  <span class="text-gray-600 dark:text-gray-400 font-medium">
-                    {cert.date}
-                  </span>
-                  <a
-                    href={cert.verifyUrl}
-                    target="_blank"
-                    class="inline-flex items-center gap-1 text-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors hover:underline font-medium"
-                  >
-                    {lang === "es" ? "Verificar" : "Verify"}
-                    <span class="text-sm">↗</span>
-                  </a>
+                {/* Link indicator */}
+                <div class="flex items-center gap-1 text-xs text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
+                  <span>{lang === "es" ? "Verificar" : "Verify"}</span>
+                  <PiArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                 </div>
-                <p class="text-xs text-gray-500 dark:text-gray-400 font-mono bg-gray-50 dark:bg-gray-700 px-2 py-1 rounded">
-                  ID: {cert.credentialId}
-                </p>
               </div>
+            </a>
+          </div>
+        ))
+      }
+
+      <!-- Stats Card -->
+      <div class="col-span-12 mt-4">
+        <div
+          class="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6"
+        >
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="text-center">
+              <p class="text-3xl font-bold text-zinc-900 dark:text-white mb-1">
+                3
+              </p>
+              <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                {lang === "es" ? "Títulos" : "Degrees"}
+              </p>
             </div>
-          ))
-        }
+            <div class="text-center">
+              <p class="text-3xl font-bold text-zinc-900 dark:text-white mb-1">
+                5+
+              </p>
+              <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                {lang === "es" ? "Certificaciones" : "Certifications"}
+              </p>
+            </div>
+            <div class="text-center">
+              <p class="text-3xl font-bold text-zinc-900 dark:text-white mb-1">
+                8+
+              </p>
+              <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                {lang === "es" ? "Años aprendiendo" : "Years learning"}
+              </p>
+            </div>
+            <div class="text-center">
+              <p
+                class="text-3xl font-bold text-emerald-600 dark:text-emerald-400 mb-1"
+              >
+                ∞
+              </p>
+              <p class="text-sm text-zinc-500 dark:text-zinc-400">
+                {lang === "es" ? "Curiosidad" : "Curiosity"}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

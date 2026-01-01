@@ -9,7 +9,7 @@ import ProjectsPage from "../components/pages/ProjectsPage.astro";
 import WorkPage from "../components/pages/WorkPage.astro";
 import EducationPage from "../components/pages/EducationPage.astro";
 import ContactPage from "../components/pages/ContactPage.astro";
-import BentoHome from "../components/pages/BentoHome.astro";
+import HomePage from "../components/pages/HomePage.astro";
 
 export async function getStaticPaths() {
   const pages = ["about", "skills", "projects", "work", "education", "contact"];
@@ -115,7 +115,7 @@ const pageMeta = getPageMeta(page, lang);
   lang={lang}
 >
   <!-- Renderizar componente según la página -->
-  {page === "home" && <BentoHome lang={lang} />}
+  {page === "home" && <HomePage lang={lang} />}
   {page === "about" && <AboutPage lang={lang} />}
   {page === "skills" && <SkillsPage lang={lang} />}
   {page === "projects" && <ProjectsPage lang={lang} />}
