@@ -1,25 +1,28 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --animate-slide-up: slide-up 0.8s ease-out;
+
+  @keyframes slide-up {
+    fr5m {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  
+}
 
 @layer base {
   html {
     font-family: "Inter", system-ui, sans-serif;
     scroll-behavior: smooth;
-  }
-
-  body {
-    @apply bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-50 antialiased selection:bg-blue-500/30;
-  }
-}
-
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
-  .glass {
-    @apply bg-white/70 dark:bg-gray-900/70 backdrop-blur-lg border border-gray-200 dark:border-gray-800;
   }
 }

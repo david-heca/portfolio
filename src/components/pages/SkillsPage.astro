@@ -128,7 +128,7 @@ const softSkills =
 ---
 
 <section class="min-h-screen px-4 pt-20 pb-20">
-  <div class="max-w-7xl mx-auto">
+  <div class="max-w-6xl mx-auto">
     <!-- Header -->
     <div class="animate-slide-up text-center mb-12">
       <h1
@@ -181,7 +181,7 @@ const softSkills =
                     <img
                       src={`https://svgl.app/library/${skill.icon}.svg`}
                       alt={`${skill.name} icon`}
-                      class="w-5 h-5 md:w-7 md:h-7 object-contain filter dark:brightness-110 flex-shrink-0"
+                      class="w-5 h-5 md:w-7 md:h-7 object-contain filter dark:brightness-110 shrink-0"
                       loading="lazy"
                       onerror="this.style.display='none'"
                     />
@@ -190,21 +190,21 @@ const softSkills =
                       <img
                         src={skill.iconLight}
                         alt={`${skill.name} icon`}
-                        class="w-5 h-5 md:w-7 md:h-7 object-contain dark:hidden flex-shrink-0"
+                        class="w-5 h-5 md:w-7 md:h-7 object-contain dark:hidden hrink-0"
                         loading="lazy"
                         onerror="this.style.display='none'"
                       />
                       <img
                         src={skill.iconDark}
                         alt={`${skill.name} icon`}
-                        class="w-5 h-5 md:w-7 md:h-7 object-contain hidden dark:block flex-shrink-0"
+                        class="w-5 h-5 md:w-7 md:h-7 object-contain hidden dark:block hrink-0"
                         loading="lazy"
                         onerror="this.style.display='none'"
                       />
                     </>
                   ) : (
                     <div
-                      class={`w-7 h-7 bg-gradient-to-r ${skill.color} rounded-lg flex items-center justify-center flex-shrink-0`}
+                      class={`w-7 h-7 bg-linear-to-r ${skill.color} rounded-lg flex items-center justify-center hrink-0`}
                     >
                       <span class="text-white font-bold text-xs">
                         {skill.name.charAt(0)}
@@ -233,7 +233,7 @@ const softSkills =
 
       <!-- Languages Card -->
       <div
-        class="md:col-span-4 md:row-span-2 rounded-3xl bg-gradient-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800/50 p-8 relative overflow-hidden"
+        class="md:col-span-4 md:row-span-2 rounded-3xl bg-linear-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800/50 p-8 relative overflow-hidden"
       >
         <div class="absolute top-4 right-4 opacity-10">
           <PiTranslate className="w-24 h-24" />
@@ -289,8 +289,8 @@ const softSkills =
                       class={`h-3 rounded-full transition-all duration-1000 ease-out ${
                         language.level === "Nativo" ||
                         language.level === "Native"
-                          ? "bg-gradient-to-r from-green-500 to-green-600 w-full"
-                          : "bg-gradient-to-r from-blue-500 to-blue-600 w-[70%]"
+                          ? "bg-linear-to-r from-green-500 to-green-600 w-full"
+                          : "bg-linear-to-r from-blue-500 to-blue-600 w-[70%]"
                       }`}
                     />
                   </div>

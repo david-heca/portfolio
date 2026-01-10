@@ -1,23 +1,38 @@
 ---
-import { PiSun, PiMoon } from "react-icons/pi";
+import { PiSunDuotone, PiMoonDuotone } from "react-icons/pi";
 ---
 
 <button
   id="theme-toggle"
   type="button"
-  class="p-2 rounded-lg text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 transition-colors"
+  class="p-2 rounded-lg text-cyan-500 hover:bg-gray-100 dark:text-amber-300 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 transition-colors overflow-hidden"
   aria-label="Toggle Dark Mode"
 >
-  <span class="hidden dark:inline"><PiSun className="w-5 h-5" /></span>
-  <span class="inline dark:hidden"><PiMoon className="w-5 h-5" /></span>
+  <div class="relative w-5 h-5 flex items-center justify-center">
+    <!-- Moon: Visible in light, rotates out in dark -->
+    <span
+      class="absolute transition-all duration-500 transform rotate-0 scale-100 opacity-100 dark:-rotate-90 dark:scale-0 dark:opacity-0"
+    >
+      <PiMoonDuotone className="w-5 h-5" />
+    </span>
+    <!-- Sun: Hidden in light, rotates in for dark -->
+    <span
+      class="absolute transition-all duration-500 transform rotate-90 scale-0 opacity-0 dark:rotate-0 dark:scale-100 dark:opacity-100"
+    >
+      <PiSunDuotone className="w-5 h-5" />
+    </span>
+  </div>
 </button>
 
 <script>
   function setupThemeToggle() {
     const themeToggleBtn = document.getElementById("theme-toggle");
 
+    // Prevent multiple event listeners on persisted elements
+    if (!themeToggleBtn || themeToggleBtn.dataset.initialized) return;
+
     // Handle click
-    themeToggleBtn?.addEventListener("click", function () {
+    themeToggleBtn.addEventListener("click", function () {
       // Toggle theme
       if (document.documentElement.classList.contains("dark")) {
         document.documentElement.classList.remove("dark");
@@ -27,11 +42,14 @@ import { PiSun, PiMoon } from "react-icons/pi";
         localStorage.setItem("color-theme", "dark");
       }
     });
+
+    // Mark as initialized
+    themeToggleBtn.dataset.initialized = "true";
   }
 
   // Run on initial load
   setupThemeToggle();
 
   // Run on view transitions navigation
-  document.addEventListener("astro:after-swap", setupThemeToggle);
+  document.addEventListener("astro:page-load", setupThemeToggle);
 </script>

@@ -1,20 +1,27 @@
-import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import react from '@astrojs/react';
+import { defineConfig } from "astro/config";
+import react from "@astrojs/react";
+
+import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  integrations: [tailwind(), react()],
-  site: 'https://davidheca.dev',
+  integrations: [react()],
+  site: "https://davidheca.dev",
+
   server: {
     host: true,
-    open: true
+    open: true,
   },
+
   i18n: {
-    defaultLocale: 'es',
-    locales: ['es', 'en'],
+    defaultLocale: "es",
+    locales: ["es", "en"],
     routing: {
       prefixDefaultLocale: false,
-      redirectToDefaultLocale: false
-    }
-  }
+      redirectToDefaultLocale: false,
+    },
+  },
+
+  vite: {
+    plugins: [tailwindcss()],
+  },
 });

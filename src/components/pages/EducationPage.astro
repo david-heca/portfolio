@@ -179,10 +179,11 @@ const otherCerts = certifications.filter((c) => !c.featured);
 
     <!-- Bento Grid Layout -->
     <div class="grid grid-cols-12 gap-4 md:gap-6">
-
-            <!-- Stats Card -->
+      <!-- Stats Card -->
       <div class="col-span-12 mt-4">
-        <div class="bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6">
+        <div
+          class="bg-gray-50 dark:bg-gray-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6"
+        >
           <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
             <div class="text-center">
               <p class="text-3xl font-bold text-zinc-900 dark:text-white mb-1">
@@ -226,7 +227,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
       <div class="col-span-12 mt-8 mb-2">
         <div class="flex items-center gap-3">
           <div
-            class="w-10 h-10 rounded-2xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center"
+            class="w-10 h-10 rounded-2xl bg-gray-100 dark:bg-gray-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center"
           >
             <PiGraduationCap
               className="w-5 h-5 text-zinc-600 dark:text-zinc-400"
@@ -241,8 +242,10 @@ const otherCerts = certifications.filter((c) => !c.featured);
       <!-- Education Cards -->
       {
         education.map((edu, index) => (
-          <div class={`col-span-12 ${index === 0 ? "lg:col-span-12" : "lg:col-span-6"} group`}>
-            <div class="h-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 md:p-8 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-lg">
+          <div
+            class={`col-span-12 ${index === 0 ? "lg:col-span-12" : "lg:col-span-6"} group`}
+          >
+            <div class="h-full bg-gray-50 dark:bg-gray-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 md:p-8 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-lg">
               <div class="flex flex-col h-full">
                 {/* Header with Icon and Status */}
                 <div class="flex items-start justify-between mb-6">
@@ -321,7 +324,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
       <div class="col-span-12 mt-8 mb-2">
         <div class="flex items-center gap-3">
           <div
-            class="w-10 h-10 rounded-2xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center"
+            class="w-10 h-10 rounded-2xl bg-gray-100 dark:bg-gray-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center"
           >
             <PiCertificate
               className="w-5 h-5 text-zinc-600 dark:text-zinc-400"
@@ -343,7 +346,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
               rel="noopener noreferrer"
               class="block h-full"
             >
-              <div class="h-full bg-gradient-to-br from-zinc-50 to-zinc-100 dark:from-zinc-900 dark:to-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-3xl p-6 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-600 hover:shadow-xl hover:-translate-y-1">
+              <div class="h-full bg-linear-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 border border-zinc-200 dark:border-zinc-700 rounded-3xl p-6 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-600 hover:shadow-xl hover:-translate-y-1">
                 <div class="flex flex-col h-full">
                   {/* Header */}
                   <div class="flex items-start justify-between mb-4">
@@ -370,7 +373,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
                     {/* Skills */}
                     <div class="flex flex-wrap gap-2 mb-4">
                       {cert.skills.map((skill) => (
-                        <span class="px-2.5 py-1 bg-zinc-200/50 dark:bg-zinc-700/50 text-zinc-700 dark:text-zinc-300 rounded-lg text-xs">
+                        <span class="px-2.5 py-1 bg-gray-200/50 dark:bg-gray-700/50 text-zinc-700 dark:text-zinc-300 rounded-lg text-xs">
                           {skill}
                         </span>
                       ))}
@@ -404,10 +407,10 @@ const otherCerts = certifications.filter((c) => !c.featured);
               rel="noopener noreferrer"
               class="block h-full"
             >
-              <div class="h-full bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-5 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-lg hover:-translate-y-1">
+              <div class="h-full bg-gray-50 dark:bg-gray-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-5 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-lg hover:-translate-y-1">
                 {/* Header */}
                 <div class="flex items-start justify-between mb-4">
-                  <div class="w-10 h-10 rounded-xl bg-zinc-200/50 dark:bg-zinc-800 flex items-center justify-center">
+                  <div class="w-10 h-10 rounded-xl bg-gray-200/50 dark:bg-gray-800 flex items-center justify-center">
                     <PiCertificate className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
                   </div>
                   <span
@@ -415,7 +418,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
                       cert.level.includes("Intermedio") ||
                       cert.level.includes("Intermediate")
                         ? "bg-violet-500/10 text-violet-600 dark:text-violet-400"
-                        : "bg-zinc-200/50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400"
+                        : "bg-gray-200/50 dark:bg-gray-800 text-zinc-600 dark:text-zinc-400"
                     }`}
                   >
                     {cert.level}
@@ -433,7 +436,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
                 {/* Skills */}
                 <div class="flex flex-wrap gap-1.5 mb-4">
                   {cert.skills.slice(0, 3).map((skill) => (
-                    <span class="px-2 py-0.5 bg-zinc-200/50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded text-xs">
+                    <span class="px-2 py-0.5 bg-gray-200/50 dark:bg-gray-800 text-zinc-600 dark:text-zinc-400 rounded text-xs">
                       {skill}
                     </span>
                   ))}

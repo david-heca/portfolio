@@ -108,132 +108,134 @@ const experiences = [
 ---
 
 <section class="min-h-screen px-4 pt-20 pb-20">
-  <!-- Header -->
-  <div class="animate-slide-up text-center mb-12">
-    <h1
-      class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
-    >
-      {t("work.title")}
-    </h1>
-    <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-      {t("work.subtitle")}
-    </p>
-  </div>
-
-  <!-- Experience Cards Grid -->
-  <div class="space-y-8">
-    {
-      experiences.map((exp, index) => (
-        <div class="group relative rounded-3xl bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-2xl transition-all duration-500">
-          {/* Background Pattern */}
-          <div class="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]">
-            <div
-              class="absolute inset-0"
-              style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 20px 20px;"
-            />
-          </div>
-
-          <div class="relative p-8 md:p-10">
-            {/* Header Section */}
-            <div class="flex flex-col md:flex-row gap-6 mb-8">
-              {/* Company Logo */}
-              <div class="flex-shrink-0">
-                {exp.logo ? (
-                  <div class="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white dark:bg-gray-800 p-3 border border-gray-200 dark:border-gray-700 shadow-lg">
-                    <img
-                      src={exp.logo}
-                      alt={`${exp.company} logo`}
-                      class="w-full h-full object-contain"
-                      loading="lazy"
-                    />
-                  </div>
-                ) : (
-                  <div class="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
-                    <span class="text-white font-bold text-3xl">
-                      {exp.company.charAt(0)}
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              {/* Title & Info */}
-              <div class="flex-1 min-w-0">
-                <h3 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                  {exp.position}
-                </h3>
-                <p class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-4">
-                  {exp.company}
-                </p>
-
-                {/* Meta Info Pills */}
-                <div class="flex flex-wrap gap-3">
-                  <div class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
-                    <PiCalendar className="w-4 h-4 text-blue-500" />
-                    {exp.period}
-                  </div>
-                  <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-xl text-sm font-medium text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
-                    <PiBriefcase className="w-4 h-4" />
-                    {exp.type}
-                  </div>
-                  <div class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
-                    <PiMapPin className="w-4 h-4 text-gray-500" />
-                    {exp.location}
-                  </div>
-                </div>
-              </div>
+  <div class="max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="animate-slide-up text-center mb-12">
+      <h1
+        class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+      >
+        {t("work.title")}
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+        {t("work.subtitle")}
+      </p>
+    </div>
+  
+    <!-- Experience Cards Grid -->
+    <div class="space-y-8">
+      {
+        experiences.map((exp, index) => (
+          <div class="group relative rounded-3xl bg-linear-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-2xl transition-all duration-500">
+            {/* Background Pattern */}
+            <div class="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]">
+              <div
+                class="absolute inset-0"
+                style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 20px 20px;"
+              />
             </div>
-
-            {/* Description */}
-            <p class="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-8 max-w-4xl">
-              {exp.description}
-            </p>
-
-            {/* Two Column Layout for Achievements and Tech */}
-            <div class="grid md:grid-cols-2 gap-8">
-              {/* Achievements */}
-              <div>
-                <div class="flex items-center gap-2 mb-4">
-                  <div class="p-2 rounded-lg bg-green-100 dark:bg-green-900/30">
-                    <PiLightning className="w-5 h-5 text-green-600 dark:text-green-400" />
-                  </div>
-                  <h4 class="text-lg font-bold text-gray-900 dark:text-white">
-                    {lang === "es" ? "Logros Principales" : "Key Achievements"}
-                  </h4>
-                </div>
-                <ul class="space-y-3">
-                  {exp.achievements.map((achievement) => (
-                    <li class="flex items-start gap-3 group/item">
-                      <div class="w-1.5 h-1.5 bg-green-500 rounded-full mt-2.5 flex-shrink-0 group-hover/item:scale-150 transition-transform" />
-                      <span class="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
-                        {achievement}
+  
+            <div class="relative p-8 md:p-10">
+              {/* Header Section */}
+              <div class="flex flex-col md:flex-row gap-6 mb-8">
+                {/* Company Logo */}
+                <div class="shrink-0">
+                  {exp.logo ? (
+                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white dark:bg-gray-800 p-3 border border-gray-200 dark:border-gray-700 shadow-lg">
+                      <img
+                        src={exp.logo}
+                        alt={`${exp.company} logo`}
+                        class="w-full h-full object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                  ) : (
+                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
+                      <span class="text-white font-bold text-3xl">
+                        {exp.company.charAt(0)}
                       </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Technologies */}
-              <div>
-                <div class="flex items-center gap-2 mb-4">
-                  <div class="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/30">
-                    <PiStack className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-                  </div>
-                  <h4 class="text-lg font-bold text-gray-900 dark:text-white">
-                    {lang === "es" ? "Stack Tecnológico" : "Tech Stack"}
-                  </h4>
+                    </div>
+                  )}
                 </div>
-                <div class="flex flex-wrap gap-2">
-                  {exp.technologies.map((tech) => (
-                    <span class="px-3 py-1.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-700 dark:hover:text-purple-300 transition-all duration-200">
-                      {tech}
-                    </span>
-                  ))}
+  
+                {/* Title & Info */}
+                <div class="flex-1 min-w-0">
+                  <h3 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                    {exp.position}
+                  </h3>
+                  <p class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-4">
+                    {exp.company}
+                  </p>
+  
+                  {/* Meta Info Pills */}
+                  <div class="flex flex-wrap gap-3">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                      <PiCalendar className="w-4 h-4 text-blue-500" />
+                      {exp.period}
+                    </div>
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-xl text-sm font-medium text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                      <PiBriefcase className="w-4 h-4" />
+                      {exp.type}
+                    </div>
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                      <PiMapPin className="w-4 h-4 text-gray-500" />
+                      {exp.location}
+                    </div>
+                  </div>
+                </div>
+              </div>
+  
+              {/* Description */}
+              <p class="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-8 max-w-4xl">
+                {exp.description}
+              </p>
+  
+              {/* Two Column Layout for Achievements and Tech */}
+              <div class="grid md:grid-cols-2 gap-8">
+                {/* Achievements */}
+                <div>
+                  <div class="flex items-center gap-2 mb-4">
+                    <div class="p-2 rounded-lg bg-green-100 dark:bg-green-900/30">
+                      <PiLightning className="w-5 h-5 text-green-600 dark:text-green-400" />
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">
+                      {lang === "es" ? "Logros Principales" : "Key Achievements"}
+                    </h4>
+                  </div>
+                  <ul class="space-y-3">
+                    {exp.achievements.map((achievement) => (
+                      <li class="flex items-start gap-3 group/item">
+                        <div class="w-1.5 h-1.5 bg-green-500 rounded-full mt-2.5 shrink-0 group-hover/item:scale-150 transition-transform" />
+                        <span class="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
+                          {achievement}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+  
+                {/* Technologies */}
+                <div>
+                  <div class="flex items-center gap-2 mb-4">
+                    <div class="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/30">
+                      <PiStack className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">
+                      {lang === "es" ? "Stack Tecnológico" : "Tech Stack"}
+                    </h4>
+                  </div>
+                  <div class="flex flex-wrap gap-2">
+                    {exp.technologies.map((tech) => (
+                      <span class="px-3 py-1.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-700 dark:hover:text-purple-300 transition-all duration-200">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      ))
-    }
+        ))
+      }
+    </div>
   </div>
 </section>

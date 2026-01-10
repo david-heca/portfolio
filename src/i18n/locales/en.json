@@ -47,5 +47,13 @@
     "connect": "Connect",
     "currentRole": "Current Role",
     "viewResume": "View Full Resume"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "heading": "404",
+    "subtitle": "Looks like you're lost",
+    "description": "The page you are looking for doesn't exist or has been moved to another location.",
+    "backButton": "Go back",
+    "homeButton": "Go to home"
   }
 }
