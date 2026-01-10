@@ -83,7 +83,7 @@ const projects = [
 ---
 
 <section class="min-h-screen px-4 pt-20 pb-20">
-  <div class="max-w-7xl mx-auto">
+  <div class="max-w-6xl mx-auto">
     <!-- Header -->
     <div class="animate-slide-up text-center mb-12">
       <h1
@@ -105,10 +105,10 @@ const projects = [
           .filter((p) => p.featured)
           .map((project, index) => (
             <div
-              class={`group relative rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-500 min-h-[350px] ${
+              class={`group relative rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-500 min-h-87.5 ${
                 index === 0
-                  ? "lg:col-span-2 lg:row-span-2 lg:min-h-[600px]"
-                  : "md:min-h-[200px]"
+                  ? "lg:col-span-2 lg:row-span-2 lg:min-h-150"
+                  : "md:min-h-50"
               }`}
             >
               {/* Background Image with Overlay */}
@@ -119,7 +119,7 @@ const projects = [
                   loading="lazy"
                   class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/20 transition-all duration-500" />
+                <div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-black/20 transition-all duration-500" />
               </div>
 
               {/* Content */}
@@ -179,7 +179,7 @@ const projects = [
                 </div>
 
                 {/* Project Info */}
-                <div class="transform transition-all duration-300 group-hover:translate-y-[-4px]">
+                <div class="transform transition-all duration-300 group-hover:translate-y-1">
                   <h3
                     class={`font-bold text-white mb-3 ${
                       index === 0
@@ -231,7 +231,7 @@ const projects = [
             <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
               {lang === "es" ? "Más Proyectos" : "More Projects"}
             </h2>
-            <div class="flex-1 h-px bg-gradient-to-r from-gray-300 dark:from-gray-700 to-transparent" />
+            <div class="flex-1 h-px bg-linear-to-r from-gray-300 dark:from-gray-700 to-transparent" />
           </div>
 
           <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
@@ -247,7 +247,7 @@ const projects = [
                       loading="lazy"
                       class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
 
                     {/* Type Badge */}
                     <div class="absolute top-3 left-3">
@@ -328,4 +328,4 @@ const projects = [
       )
     }
   </div>
-</main>
+</section>

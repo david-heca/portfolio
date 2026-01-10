@@ -81,7 +81,7 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
   >
     <!-- Background Pattern -->
     <div
-      class="fixed inset-0 z-[-1] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"
+      class="fixed inset-0 z-[-1] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[30px_30px]"
     >
     </div>
     <div
@@ -92,7 +92,7 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     <Navbar />
 
     <main
-      class="flex-grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full animate-fade-in"
+      class="grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full animate-fade-in"
     >
       <slot />
     </main>
