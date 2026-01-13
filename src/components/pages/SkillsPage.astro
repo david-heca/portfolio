@@ -127,7 +127,7 @@ const softSkills =
       ];
 ---
 
-<section class="min-h-screen px-4 pt-20 pb-20">
+<section class="min-h-screen">
   <div class="max-w-6xl mx-auto">
     <!-- Header -->
     <div class="animate-slide-up text-center mb-12">
@@ -147,7 +147,7 @@ const softSkills =
     >
       <!-- Technical Skills - Large Card -->
       <div
-        class="md:col-span-8 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-8 relative overflow-hidden group"
+        class="md:col-span-8 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 relative overflow-hidden group"
       >
         <div
           class="absolute top-4 right-4 opacity-5 group-hover:opacity-10 transition-opacity"
@@ -181,7 +181,7 @@ const softSkills =
                     <img
                       src={`https://svgl.app/library/${skill.icon}.svg`}
                       alt={`${skill.name} icon`}
-                      class="w-5 h-5 md:w-7 md:h-7 object-contain filter dark:brightness-110 shrink-0"
+                      class="w-6 h-6 md:w-8 md:h-8 object-contain filter dark:brightness-110 shrink-0"
                       loading="lazy"
                       onerror="this.style.display='none'"
                     />
@@ -190,14 +190,14 @@ const softSkills =
                       <img
                         src={skill.iconLight}
                         alt={`${skill.name} icon`}
-                        class="w-5 h-5 md:w-7 md:h-7 object-contain dark:hidden hrink-0"
+                        class="w-6 h-6 md:w-8 md:h-8 object-contain dark:hidden hrink-0"
                         loading="lazy"
                         onerror="this.style.display='none'"
                       />
                       <img
                         src={skill.iconDark}
                         alt={`${skill.name} icon`}
-                        class="w-5 h-5 md:w-7 md:h-7 object-contain hidden dark:block hrink-0"
+                        class="w-6 h-6 md:w-8 md:h-8 object-contain hidden dark:block hrink-0"
                         loading="lazy"
                         onerror="this.style.display='none'"
                       />
@@ -233,7 +233,7 @@ const softSkills =
 
       <!-- Languages Card -->
       <div
-        class="md:col-span-4 md:row-span-2 rounded-3xl bg-linear-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800/50 p-8 relative overflow-hidden"
+        class="md:col-span-4 md:row-span-2 rounded-3xl bg-linear-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800/50 p-6 relative overflow-hidden"
       >
         <div class="absolute top-4 right-4 opacity-10">
           <PiTranslate className="w-24 h-24" />
@@ -267,7 +267,7 @@ const softSkills =
                       ? lang === "es"
                         ? "Nativo"
                         : "Native"
-                      : "B2"}
+                      : "B1"}
                   </span>
                 </div>
 
@@ -313,7 +313,7 @@ const softSkills =
 
       <!-- Soft Skills Card -->
       <div
-        class="md:col-span-8 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-8 relative overflow-hidden group"
+        class="md:col-span-8 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 relative overflow-hidden group"
       >
         <div
           class="absolute top-4 right-4 opacity-5 group-hover:opacity-10 transition-opacity"
