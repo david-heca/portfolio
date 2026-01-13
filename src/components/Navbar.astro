@@ -195,10 +195,23 @@ function isActive(href: string): boolean {
     btn?.addEventListener("click", toggleMenu);
     closeBtn?.addEventListener("click", toggleMenu);
 
-    // Close menu when clicking a link
+    // Close menu when clicking a link with smooth animation
     links?.forEach((link) => {
-      link.addEventListener("click", () => {
-        if (isOpen) toggleMenu();
+      link.addEventListener("click", (e) => {
+        if (isOpen) {
+          e.preventDefault();
+          const href = link.getAttribute("href");
+
+          // Start close animation
+          toggleMenu();
+
+          // Wait for animation to complete before navigating
+          setTimeout(() => {
+            if (href) {
+              window.location.href = href;
+            }
+          }, 200); // Match the duration-300 class (300ms)
+        }
       });
     });
   }

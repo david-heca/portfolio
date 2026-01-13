@@ -28,7 +28,6 @@ const selectedProjects = [
         ? "Plataforma empresarial de Inteligencia Artificial"
         : "Enterprise Artificial Intelligence Platform",
     tech: "React • Python • Azure AI",
-    href: "#",
   },
   {
     title: "Zebra RFID Application",
@@ -36,13 +35,12 @@ const selectedProjects = [
       lang === "es"
         ? "Aplicación para control de inventarios con RFID"
         : "Inventory management application with RFID",
-    tech: "Java • Android • SQL Server",
-    href: "#",
+    tech: "Java • Android • SQL Server"
   },
 ];
 ---
 
-<section class="min-h-screen px-4 pt-20 pb-20">
+<section class="min-h-screen">
   <div class="max-w-6xl mx-auto">
     <div
       class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[minmax(180px,auto)]"
@@ -185,8 +183,7 @@ const selectedProjects = [
         <div class="space-y-2 md:space-y-3">
           {
             selectedProjects.map((project) => (
-              <a
-                href={project.href}
+              <div
                 class="group block p-3 md:p-4 rounded-2xl bg-white dark:bg-gray-800/50 hover:bg-blue-50 dark:hover:bg-blue-900/10 transition-colors border border-transparent hover:border-blue-200 dark:hover:border-blue-800"
               >
                 <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2">
@@ -204,7 +201,7 @@ const selectedProjects = [
                     </span>
                   </div>
                 </div>
-              </a>
+              </div>
             ))
           }
         </div>

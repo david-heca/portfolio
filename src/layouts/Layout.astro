@@ -2,6 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import Navbar from "../components/Navbar.astro";
 import "../styles/global.css";
+import { PiHeartDuotone } from "react-icons/pi";
 
 export interface Props {
   title: string;
@@ -77,7 +78,7 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     </script>
   </head>
   <body
-    class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-50 min-h-screen flex flex-col"
+    class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-50 flex flex-col"
   >
     <!-- Background Pattern -->
     <div
@@ -92,17 +93,30 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     <Navbar />
 
     <main
-      class="grow pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full animate-fade-in"
+      class="grow pt-26 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full animate-fade-in"
     >
       <slot />
     </main>
 
-    <footer class="border-t border-gray-200 dark:border-gray-800 py-8 mt-auto">
+    <footer
+      class="bg-white/70 dark:bg-gray-950/70 border-t border-gray-200 dark:border-gray-800 py-8 px-6 mt-auto"
+    >
       <div
         class="max-w-7xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm"
       >
-        <p>
+        <p class="flex flex-col sm:flex-row sm:justify-center sm:items-center gap-2 justify-center items-center">
           &copy; {new Date().getFullYear()} David Herrera.
+          {
+            lang === "es" ? (
+              <>
+                Hecho con <PiHeartDuotone size={20} className="text-red-500" /> desde México.
+              </>
+            ) : (
+              <>
+                Made with <PiHeartDuotone size={20} className="text-red-500" /> from Mexico.
+              </>
+            )
+          }
         </p>
       </div>
     </footer>
