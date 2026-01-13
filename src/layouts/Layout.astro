@@ -78,7 +78,7 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     </script>
   </head>
   <body
-    class="bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-50 flex flex-col"
+    class="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-50 flex flex-col"
   >
     <!-- Background Pattern -->
     <div
@@ -104,16 +104,20 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
       <div
         class="max-w-7xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm"
       >
-        <p class="flex flex-col sm:flex-row sm:justify-center sm:items-center gap-2 justify-center items-center">
+        <p
+          class="flex flex-col sm:flex-row sm:justify-center sm:items-center gap-2 justify-center items-center"
+        >
           &copy; {new Date().getFullYear()} David Herrera.
           {
             lang === "es" ? (
               <>
-                Hecho con <PiHeartDuotone size={20} className="text-red-500" /> desde México.
+                Hecho con <PiHeartDuotone size={20} className="text-red-500" />{" "}
+                desde México.
               </>
             ) : (
               <>
-                Made with <PiHeartDuotone size={20} className="text-red-500" /> from Mexico.
+                Made with <PiHeartDuotone size={20} className="text-red-500" />{" "}
+                from Mexico.
               </>
             )
           }
