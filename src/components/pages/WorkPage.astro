@@ -20,7 +20,9 @@ const experiences = [
     id: 1,
     company: "Baacc Systems",
     position:
-      lang === "es" ? "Fullstack & Arquitecto de Soluciones de IA" : "Fullstack & AI Solutions Architect",
+      lang === "es"
+        ? "Fullstack & Arquitecto de Soluciones de IA"
+        : "Fullstack & AI Solutions Architect",
     period: lang === "es" ? "2023 Sep - Actualidad" : "2023 Sep - Present",
     location:
       lang === "es" ? "Estado de México, México" : "Mexico State, Mexico",
@@ -107,7 +109,7 @@ const experiences = [
 ];
 ---
 
-<section class="min-h-screen">
+<section>
   <div class="max-w-6xl mx-auto">
     <!-- Header -->
     <div class="animate-slide-up text-center mb-12">
@@ -120,7 +122,7 @@ const experiences = [
         {t("work.subtitle")}
       </p>
     </div>
-  
+
     <!-- Experience Cards Grid -->
     <div class="space-y-8">
       {
@@ -133,7 +135,7 @@ const experiences = [
                 style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 20px 20px;"
               />
             </div>
-  
+
             <div class="relative p-8 md:p-10">
               {/* Header Section */}
               <div class="flex flex-col md:flex-row gap-6 mb-8">
@@ -156,7 +158,7 @@ const experiences = [
                     </div>
                   )}
                 </div>
-  
+
                 {/* Title & Info */}
                 <div class="flex-1 min-w-0">
                   <h3 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
@@ -165,7 +167,7 @@ const experiences = [
                   <p class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-4">
                     {exp.company}
                   </p>
-  
+
                   {/* Meta Info Pills */}
                   <div class="flex flex-wrap gap-3">
                     <div class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
@@ -183,12 +185,12 @@ const experiences = [
                   </div>
                 </div>
               </div>
-  
+
               {/* Description */}
               <p class="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-8 max-w-4xl">
                 {exp.description}
               </p>
-  
+
               {/* Two Column Layout for Achievements and Tech */}
               <div class="grid md:grid-cols-2 gap-8">
                 {/* Achievements */}
@@ -198,7 +200,9 @@ const experiences = [
                       <PiLightning className="w-5 h-5 text-green-600 dark:text-green-400" />
                     </div>
                     <h4 class="text-lg font-bold text-gray-900 dark:text-white">
-                      {lang === "es" ? "Logros Principales" : "Key Achievements"}
+                      {lang === "es"
+                        ? "Logros Principales"
+                        : "Key Achievements"}
                     </h4>
                   </div>
                   <ul class="space-y-3">
@@ -212,7 +216,7 @@ const experiences = [
                     ))}
                   </ul>
                 </div>
-  
+
                 {/* Technologies */}
                 <div>
                   <div class="flex items-center gap-2 mb-4">
