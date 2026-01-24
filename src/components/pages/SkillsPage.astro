@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { useTranslations } from "../../i18n/utils";
 import { PiCode, PiTranslate, PiLightbulb } from "react-icons/pi";
 
@@ -178,28 +179,31 @@ const softSkills =
                     </p>
                   </div>
                   {skill.icon ? (
-                    <img
+                    <Image
                       src={`https://svgl.app/library/${skill.icon}.svg`}
                       alt={`${skill.name} icon`}
+                      width={32}
+                      height={32}
                       class="w-6 h-6 md:w-8 md:h-8 object-contain filter dark:brightness-110 shrink-0"
                       loading="lazy"
-                      onerror="this.style.display='none'"
                     />
                   ) : skill.iconLight && skill.iconDark ? (
                     <>
-                      <img
+                      <Image
                         src={skill.iconLight}
                         alt={`${skill.name} icon`}
-                        class="w-6 h-6 md:w-8 md:h-8 object-contain dark:hidden hrink-0"
+                        width={32}
+                        height={32}
+                        class="w-6 h-6 md:w-8 md:h-8 object-contain dark:hidden shrink-0"
                         loading="lazy"
-                        onerror="this.style.display='none'"
                       />
-                      <img
+                      <Image
                         src={skill.iconDark}
                         alt={`${skill.name} icon`}
-                        class="w-6 h-6 md:w-8 md:h-8 object-contain hidden dark:block hrink-0"
+                        width={32}
+                        height={32}
+                        class="w-6 h-6 md:w-8 md:h-8 object-contain hidden dark:block shrink-0"
                         loading="lazy"
-                        onerror="this.style.display='none'"
                       />
                     </>
                   ) : (

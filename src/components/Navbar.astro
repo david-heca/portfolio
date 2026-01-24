@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import ThemeToggle from "./ThemeToggle.astro";
 import LanguagePicker from "./LanguagePicker.astro";
@@ -74,10 +75,13 @@ function isActive(href: string): boolean {
       href={lang === "es" ? "/" : "/en"}
       class="flex items-center gap-2 font-bold text-xl tracking-tight text-gray-900 dark:text-white hover:opacity-80 transition-opacity"
     >
-      <img
+      <Image
         src="/assets/dh.webp"
         alt="David Herrera"
+        width={32}
+        height={32}
         class="w-8 h-8 rounded-lg object-contain border border-gray-200 dark:border-gray-800"
+        loading="eager"
       />
       <span>David Herrera</span>
     </a>
@@ -139,10 +143,13 @@ function isActive(href: string): boolean {
       href={lang === "es" ? "/" : "/en"}
       class="absolute top-6 left-5 flex items-center gap-2 font-bold text-xl tracking-tight text-gray-900 dark:text-white hover:opacity-80 transition-opacity"
     >
-      <img
+      <Image
         src="/assets/dh.webp"
         alt="David Herrera"
+        width={32}
+        height={32}
         class="w-8 h-8 rounded-lg object-contain border border-gray-200 dark:border-gray-800"
+        loading="eager"
       />
       <span>David Herrera</span>
     </a>

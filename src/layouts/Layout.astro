@@ -85,6 +85,28 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
       class="fixed inset-0 z-[-1] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[30px_30px]"
     >
     </div>
+
+    <!-- Cursor Glow Effect on Grid -->
+    <div
+      id="grid-glow"
+      class="fixed inset-0 z-[-1] pointer-events-none opacity-0 transition-opacity duration-500"
+      style="
+        background: 
+          radial-gradient(circle 400px at var(--x, 10%) var(--y, 10%), 
+            rgba(59, 130, 246, 0.15) 0%, 
+            transparent 60%),
+          radial-gradient(circle 400px at var(--x, 10%) var(--y, 10%), 
+            transparent 0%, 
+            transparent 5%),
+          linear-gradient(to right, rgba(59, 130, 246, 0.5) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(59, 130, 246, 0.5) 1px, transparent 1px);
+        background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
+        mask-image: radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), black 0%, transparent 60%);
+        -webkit-mask-image: radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), black 0%, transparent 70%);
+      "
+    >
+    </div>
+
     <div
       class="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(120,119,198,0.15),rgba(255,255,255,0))] dark:bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
     >
@@ -124,5 +146,27 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
         </p>
       </div>
     </footer>
+
+    <script>
+      function initGlow() {
+        const glow = document.getElementById("grid-glow");
+        if (!glow) return;
+
+        document.body.addEventListener("mousemove", (e) => {
+          const x = (e.clientX / window.innerWidth) * 100;
+          const y = (e.clientY / window.innerHeight) * 100;
+          glow.style.setProperty("--x", x + "%");
+          glow.style.setProperty("--y", y + "%");
+          glow.style.opacity = "1";
+        });
+
+        document.body.addEventListener("mouseleave", () => {
+          glow.style.opacity = "0";
+        });
+      }
+
+      initGlow();
+      document.addEventListener("astro:after-swap", initGlow);
+    </script>
   </body>
 </html>
