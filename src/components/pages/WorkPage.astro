@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { useTranslations } from "../../i18n/utils";
 import {
   PiBriefcase,
@@ -143,11 +144,13 @@ const experiences = [
                 <div class="shrink-0">
                   {exp.logo ? (
                     <div class="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white dark:bg-gray-800 p-3 border border-gray-200 dark:border-gray-700 shadow-lg">
-                      <img
+                      <Image
                         src={exp.logo}
                         alt={`${exp.company} logo`}
+                        width={96}
+                        height={96}
                         class="w-full h-full object-contain"
-                        loading="lazy"
+                        loading="eager"
                       />
                     </div>
                   ) : (

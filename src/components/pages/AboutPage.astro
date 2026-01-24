@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { useTranslations } from "../../i18n/utils";
 import {
   PiMapPin,
@@ -109,10 +110,15 @@ const interests = [
           class="h-full bg-gray-50 dark:bg-gray-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-4 overflow-hidden"
         >
           <div class="relative w-full h-full">
-            <img
+            <Image
               src="/assets/profile-photo.webp"
               alt="David Herrera"
-              class="w-full h-full object-cover rounded-2xl"
+              width={400}
+              height={500}
+              class="w-full h-full object-cover rounded-2xl transition-opacity duration-500"
+              loading="eager"
+              format="webp"
+              quality={85}
             />
             <!-- Gradient overlay -->
             <div

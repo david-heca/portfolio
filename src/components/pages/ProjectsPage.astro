@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import { useTranslations } from "../../i18n/utils";
 import {
   PiGithubLogo,
@@ -113,11 +114,14 @@ const projects = [
             >
               {/* Background Image with Overlay */}
               <div class="absolute inset-0">
-                <img
+                <Image
                   src={project.image}
                   alt={project.title}
-                  loading="lazy"
+                  width={800}
+                  height={600}
                   class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  loading="eager"
+                  quality={80}
                 />
                 <div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-black/20 transition-all duration-500" />
               </div>
@@ -241,11 +245,14 @@ const projects = [
                 <div class="group relative rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-300">
                   {/* Image */}
                   <div class="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-800">
-                    <img
+                    <Image
                       src={project.image}
                       alt={project.title}
-                      loading="lazy"
+                      width={600}
+                      height={400}
                       class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      loading="lazy"
+                      quality={75}
                     />
                     <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
 
