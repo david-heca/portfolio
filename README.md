@@ -2,7 +2,7 @@
 
 > Minimal & modern portfolio built with Astro. Clean design, fast performance, and bilingual content (ES/EN).
 
-**[Visit the site →](https://davidheca.dev)**
+**[Visit the site →](https://davidherrera.dev)**
 
 ## Tech Stack
 

@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   integrations: [react()],
-  site: "https://davidheca.dev",
+  site: "https://davidherrera.dev",
 
   server: {
     host: true,
