@@ -1,46 +1,198 @@
 ---
-import { PiSunDuotone, PiMoonDuotone } from "react-icons/pi";
+import { PiSunDuotone, PiMoonDuotone, PiDesktopDuotone } from "react-icons/pi";
 ---
 
-<button
-  id="theme-toggle"
-  type="button"
-  class="p-2 rounded-lg text-cyan-500 hover:bg-gray-100 dark:text-amber-300 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 transition-colors overflow-hidden"
-  aria-label="Toggle Dark Mode"
->
-  <div class="relative w-5 h-5 flex items-center justify-center">
-    <!-- Moon: Visible in light, rotates out in dark -->
-    <span
-      class="absolute transition-all duration-500 transform rotate-0 scale-100 opacity-100 dark:-rotate-90 dark:scale-0 dark:opacity-0"
+<div class="relative" id="theme-menu">
+  <button
+    id="theme-toggle"
+    type="button"
+    class="p-2 rounded-lg text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 transition-colors"
+    aria-label="Theme options"
+    aria-haspopup="true"
+    aria-expanded="false"
+  >
+    <div class="relative w-5 h-5 flex items-center justify-center">
+      <span
+        class="theme-toggle-icon absolute opacity-0 transition-opacity"
+        data-theme-icon="light"
+        aria-hidden="true"
+      >
+        <PiSunDuotone className="w-5 h-5" />
+      </span>
+      <span
+        class="theme-toggle-icon absolute opacity-0 transition-opacity"
+        data-theme-icon="dark"
+        aria-hidden="true"
+      >
+        <PiMoonDuotone className="w-5 h-5" />
+      </span>
+      <span
+        class="theme-toggle-icon absolute opacity-100 transition-opacity"
+        data-theme-icon="system"
+        aria-hidden="true"
+      >
+        <PiDesktopDuotone className="w-5 h-5" />
+      </span>
+    </div>
+  </button>
+
+  <div
+    id="theme-menu-panel"
+    class="absolute right-0 mt-2 w-36 rounded-xl border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-lg p-1 hidden"
+    role="menu"
+    aria-label="Theme"
+  >
+    <button
+      type="button"
+      data-theme="light"
+      class="theme-option w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+      role="menuitemradio"
+      aria-checked="false"
     >
-      <PiMoonDuotone className="w-5 h-5" />
-    </span>
-    <!-- Sun: Hidden in light, rotates in for dark -->
-    <span
-      class="absolute transition-all duration-500 transform rotate-90 scale-0 opacity-0 dark:rotate-0 dark:scale-100 dark:opacity-100"
+      <PiSunDuotone className="w-4 h-4" />
+      Light
+    </button>
+    <button
+      type="button"
+      data-theme="dark"
+      class="theme-option w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+      role="menuitemradio"
+      aria-checked="false"
     >
-      <PiSunDuotone className="w-5 h-5" />
-    </span>
+      <PiMoonDuotone className="w-4 h-4" />
+      Dark
+    </button>
+    <button
+      type="button"
+      data-theme="system"
+      class="theme-option w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+      role="menuitemradio"
+      aria-checked="false"
+    >
+      <PiDesktopDuotone className="w-4 h-4" />
+      System
+    </button>
   </div>
-</button>
+</div>
 
 <script>
   function setupThemeToggle() {
+    const root = document.documentElement;
     const themeToggleBtn = document.getElementById("theme-toggle");
+    const menu = document.getElementById("theme-menu");
+    const panel = document.getElementById("theme-menu-panel");
+    const options = panel?.querySelectorAll(".theme-option");
+    const icons = document.querySelectorAll<HTMLElement>(".theme-toggle-icon");
 
     // Prevent multiple event listeners on persisted elements
-    if (!themeToggleBtn || themeToggleBtn.dataset.initialized) return;
+    if (
+      !themeToggleBtn ||
+      !panel ||
+      !options ||
+      themeToggleBtn.dataset.initialized
+    )
+      return;
 
-    // Handle click
-    themeToggleBtn.addEventListener("click", function () {
-      // Toggle theme
-      if (document.documentElement.classList.contains("dark")) {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("color-theme", "light");
+    const THEME_KEY = "color-theme";
+
+    function getStoredTheme() {
+      if (typeof localStorage === "undefined") return null;
+      return localStorage.getItem(THEME_KEY);
+    }
+
+    function setStoredTheme(theme: "light" | "dark" | "system") {
+      if (typeof localStorage === "undefined") return;
+      localStorage.setItem(THEME_KEY, theme);
+    }
+
+    function getSystemTheme() {
+      return window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+    }
+
+    function applyTheme(preference: "light" | "dark" | "system") {
+      const resolved = preference === "system" ? getSystemTheme() : preference;
+      if (resolved === "dark") {
+        root.classList.add("dark");
       } else {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("color-theme", "dark");
+        root.classList.remove("dark");
       }
+      root.dataset.theme = preference;
+    }
+
+    function setActiveOption(preference: "light" | "dark" | "system") {
+      options?.forEach((option) => {
+        const isActive = option.getAttribute("data-theme") === preference;
+        option.setAttribute("aria-checked", isActive ? "true" : "false");
+        option.classList.toggle("bg-gray-100", isActive);
+        option.classList.toggle("dark:bg-gray-800", isActive);
+        option.classList.toggle("text-gray-900", isActive);
+        option.classList.toggle("dark:text-white", isActive);
+      });
+
+      icons.forEach((iconEl) => {
+        const isActive = iconEl.dataset.themeIcon === preference;
+        iconEl.classList.toggle("opacity-100", isActive);
+        iconEl.classList.toggle("opacity-0", !isActive);
+      });
+    }
+
+    function openMenu() {
+      panel?.classList.remove("hidden");
+      themeToggleBtn?.setAttribute("aria-expanded", "true");
+    }
+
+    function closeMenu() {
+      panel?.classList.add("hidden");
+      themeToggleBtn?.setAttribute("aria-expanded", "false");
+    }
+
+    function toggleMenu() {
+      if (panel?.classList.contains("hidden")) {
+        openMenu();
+      } else {
+        closeMenu();
+      }
+    }
+
+    function handleSelection(preference: "light" | "dark" | "system") {
+      setStoredTheme(preference);
+      applyTheme(preference);
+      setActiveOption(preference);
+      closeMenu();
+    }
+
+    const stored = (getStoredTheme() || "system") as
+      | "light"
+      | "dark"
+      | "system";
+    applyTheme(stored);
+    setActiveOption(stored);
+
+    themeToggleBtn.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleMenu();
+    });
+
+    options?.forEach((option) => {
+      option.addEventListener("click", () => {
+        const preference = (option.getAttribute("data-theme") || "system") as
+          | "light"
+          | "dark"
+          | "system";
+        handleSelection(preference);
+      });
+    });
+
+    document.addEventListener("click", (event) => {
+      if (!menu?.contains(event.target as Node)) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMenu();
     });
 
     // Mark as initialized
