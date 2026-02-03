@@ -50,24 +50,30 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     <script is:inline>
       // Function to set theme
       function setTheme() {
-        const theme = (() => {
+        const themePreference = (() => {
           if (
             typeof localStorage !== "undefined" &&
             localStorage.getItem("color-theme")
           ) {
             return localStorage.getItem("color-theme");
           }
-          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-            return "dark";
-          }
-          return "light";
+          return "system";
         })();
 
-        if (theme === "dark") {
+        const resolvedTheme =
+          themePreference === "system"
+            ? window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "dark"
+              : "light"
+            : themePreference;
+
+        if (resolvedTheme === "dark") {
           document.documentElement.classList.add("dark");
         } else {
           document.documentElement.classList.remove("dark");
         }
+
+        document.documentElement.dataset.theme = themePreference;
       }
 
       // Run on initial load
@@ -75,6 +81,28 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
 
       // Run on view transitions navigation
       document.addEventListener("astro:after-swap", setTheme);
+
+      // React to OS theme changes when in system mode
+      if (!window.__themeMediaListener) {
+        const media = window.matchMedia("(prefers-color-scheme: dark)");
+        const handler = () => {
+          const preference =
+            typeof localStorage !== "undefined"
+              ? localStorage.getItem("color-theme")
+              : "system";
+          if (preference === "system" || !preference) {
+            setTheme();
+          }
+        };
+
+        if (media.addEventListener) {
+          media.addEventListener("change", handler);
+        } else if (media.addListener) {
+          media.addListener(handler);
+        }
+
+        window.__themeMediaListener = true;
+      }
     </script>
   </head>
   <body
