@@ -10,10 +10,6 @@ import {
   PiCode,
   PiLightbulb,
   PiHeartDuotone,
-  PiCoffeeDuotone,
-  PiGameControllerDuotone,
-  PiMusicNoteDuotone,
-  PiRocketDuotone,
 } from "react-icons/pi";
 
 export interface Props {
@@ -79,13 +75,6 @@ const expertise = [
     color: "violet",
   },
 ];
-
-const interests = [
-  { icon: PiCoffeeDuotone, label: lang === "es" ? "Café" : "Coffee" },
-  { icon: PiGameControllerDuotone, label: "Gaming" },
-  { icon: PiMusicNoteDuotone, label: lang === "es" ? "Música" : "Music" },
-  { icon: PiRocketDuotone, label: "Tech" },
-];
 ---
 
 <section>
@@ -97,7 +86,7 @@ const interests = [
       >
         {t("about.title")}
       </h1>
-      <p class="text-lg text-zinc-500 dark:text-zinc-400">
+      <p class="text-xl text-zinc-500 dark:text-zinc-400">
         {t("about.subtitle")}
       </p>
     </div>
@@ -290,31 +279,6 @@ const interests = [
           </div>
         ))
       }
-
-      <!-- Interests Card -->
-      <div class="col-span-12 md:col-span-6">
-        <div
-          class="h-full bg-gray-50 dark:bg-gray-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6"
-        >
-          <h4
-            class="text-sm font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-4"
-          >
-            {lang === "es" ? "Intereses" : "Interests"}
-          </h4>
-          <div class="flex flex-wrap gap-3">
-            {
-              interests.map((interest) => (
-                <div class="flex items-center gap-2 px-4 py-2 bg-gray-200/50 dark:bg-gray-800 rounded-full">
-                  <interest.icon className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
-                  <span class="text-sm text-zinc-700 dark:text-zinc-300">
-                    {interest.label}
-                  </span>
-                </div>
-              ))
-            }
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
