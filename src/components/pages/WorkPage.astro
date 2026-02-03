@@ -19,93 +19,115 @@ const t = useTranslations(lang);
 const experiences = [
   {
     id: 1,
-    company: "Baacc Systems",
-    position:
-      lang === "es"
-        ? "Fullstack & Arquitecto de Soluciones de IA"
-        : "Fullstack & AI Solutions Architect",
-    period: lang === "es" ? "2023 Sep - Actualidad" : "2023 Sep - Present",
+    company: "BAACC Systems S.A. de C.V.",
+    totalPeriod: lang === "es" ? "2023 Sep - Actualidad" : "Sep 2023 - Present",
+    totalDuration: lang === "es" ? "2 años 6 meses" : "2 yrs 6 mos",
     location:
       lang === "es" ? "Estado de México, México" : "Mexico State, Mexico",
-    type: lang === "es" ? "Tiempo Completo" : "Full Time",
-    description:
-      lang === "es"
-        ? "Desarrollo de aplicaciones web, móviles y sistemas de backend (microservicios) para clientes en sectores como automotriz, e-commerce y salud."
-        : "Development of web applications, mobile apps and backend systems (microservices) for clients in automotive, e-commerce and healthcare sectors.",
-    achievements:
-      lang === "es"
-        ? [
-            "Implementé un sistema de control de inventarios en tiempo real con tecnología RFID (Android y Java)",
-            "Desarrollé una plataforma de IA para empresas que permite interactuar con datos mediante procesamiento de lenguaje natural",
-            "Optimicé el rendimiento de aplicaciones web, desarrolladas en WebAssembly y React, mejorando la experiencia del usuario",
-            "Lideré equipos pequeños en proyectos de desarrollo ágil, mejorando la entrega de productos",
-            "Integré herramientas de DevOps como Docker y Azure para mejorar la eficiencia del desarrollo y despliegue",
-            "Administré bases de datos SQL y NoSQL, implementando prácticas de seguridad y optimización",
-          ]
-        : [
-            "Implemented a real-time inventory control system with RFID technology (Android and Java)",
-            "Developed an AI platform for companies that allows interaction with data through natural language processing",
-            "Optimized web application performance, developed in WebAssembly and React, improving user experience",
-            "Led small teams in agile development projects, improving product delivery",
-            "Integrated DevOps tools like Docker and Azure to improve development and deployment efficiency",
-            "Managed SQL and NoSQL databases, implementing security and optimization practices",
-          ],
-    technologies: [
-      "React",
-      "Python",
-      "JavaScript",
-      "Tailwind CSS",
-      "SQL Server",
-      "Android",
-      ".NET",
-      "Docker",
-      "Azure OpenAI",
-      "MCP",
-      "RAG",
-      "FastAPI",
-      "Git",
-      "APIs",
-    ],
+    workMode: lang === "es" ? "Presencial" : "On-site",
     logo: "/assets/company/baacc.webp",
+    roles: [
+      {
+        title:
+          lang === "es"
+            ? "Arquitecto de Soluciones de IA"
+            : "AI Solutions Architect",
+        period: lang === "es" ? "Mar 2025 - Actualidad" : "Mar 2025 - Present",
+        duration: lang === "es" ? "1 año" : "1 yr",
+        type: lang === "es" ? "Tiempo Completo" : "Full-time",
+        location: lang === "es" ? "México" : "Mexico",
+        achievements:
+          lang === "es"
+            ? [
+                "Diseño e implementación de aplicaciones inteligentes utilizando LLMs",
+                "Integración de servidores y clientes MCP para habilitar flujos de trabajo autónomos",
+                "Diseño y desarrollo de arquitecturas RAG (Retrieval-Augmented Generation)",
+                "Evaluación continua e investigación de nuevas tecnologías en IA generativa y MLOps",
+              ]
+            : [
+                "Design and implementation of intelligent applications using LLMs",
+                "Integration of MCP servers and clients to enable autonomous workflows",
+                "Design and development of RAG (Retrieval-Augmented Generation) architectures",
+                "Continuous evaluation and research of new technologies in generative AI and MLOps",
+              ],
+        technologies: ["LLM", "MCP", "RAG", "MLOps", "APIs"],
+      },
+      {
+        title: lang === "es" ? "Fullstack Developer" : "Fullstack Developer",
+        period: lang === "es" ? "Ene 2024 - Mar 2025" : "Jan 2024 - Mar 2025",
+        duration: lang === "es" ? "1 año 3 meses" : "1 yr 3 mos",
+        type: lang === "es" ? "Tiempo Completo" : "Full-time",
+        location: lang === "es" ? "Estado de México" : "Mexico State",
+        achievements:
+          lang === "es"
+            ? [
+                "Desarrollo de aplicaciones de escritorio con .NET y Python para entornos industriales",
+                "Creación de aplicaciones web con JavaScript, .NET y DevExpress",
+                "Diseño y administración de bases de datos en SQL Server y PostgreSQL",
+                "Desarrollo de aplicaciones móviles Android con RFID para seguimiento y trazabilidad",
+              ]
+            : [
+                "Desktop apps with .NET and Python for industrial environments",
+                "Web apps with JavaScript, .NET and DevExpress",
+                "Database design and administration in SQL Server and PostgreSQL",
+                "Android mobile apps with RFID for tracking and traceability",
+              ],
+        technologies: [".NET", "Python", "SQL Server", "PostgreSQL", "Android"],
+      },
+      {
+        title:
+          lang === "es"
+            ? "Fullstack Developer Jr."
+            : "Junior Fullstack Developer",
+        period: lang === "es" ? "Sep 2023 - Ene 2024" : "Sep 2023 - Jan 2024",
+        duration: lang === "es" ? "5 meses" : "5 mos",
+        type: lang === "es" ? "Prácticas" : "Internship",
+        location: lang === "es" ? "Estado de México" : "Mexico State",
+        achievements:
+          lang === "es"
+            ? [
+                "Apoyo en desarrollo de módulos web y APIs internas",
+                "Mantenimiento de bases de datos y documentación técnica",
+              ]
+            : [
+                "Support in web module development and internal APIs",
+                "Database maintenance and technical documentation",
+              ],
+        technologies: ["MVC", "SQL Server", "APIs"],
+      },
+    ],
   },
   {
     id: 2,
     company: "DEC Marketing",
-    position: lang === "es" ? "Web Developer Junior" : "Junior Web Developer",
-    period: "2022 Mar - 2023 Sep",
+    totalPeriod: "Mar 2022 - Sep 2023",
+    totalDuration: lang === "es" ? "1 año 7 meses" : "1 yr 7 mos",
     location:
       lang === "es" ? "Ciudad de México, México" : "Mexico City, Mexico",
-    type: lang === "es" ? "Contrato de Prácticas" : "Internship Contract",
-    description:
-      lang === "es"
-        ? "Desarrollo y administración de sitios web y aplicaciones para clientes diversos, incluyendo temas de SEO y marketing digital."
-        : "Development and administration of websites and applications for diverse clients, including SEO and digital marketing topics.",
-    achievements:
-      lang === "es"
-        ? [
-            "Desarrollé más de 15 proyectos web exitosos con tecnologías como WordPress, OpenCart y Joomla",
-            "Administré correos electrónicos y dominios para clientes",
-            "Implementé estrategias de SEO que mejoraron la visibilidad en línea de los clientes con Google Ads y Google Analytics",
-            "Mitigué ataques de denegación de servicio (DDoS) en sitios web de clientes a través de Cloudflare",
-          ]
-        : [
-            "Developed over 15 successful web projects with technologies like WordPress, OpenCart and Joomla",
-            "Managed emails and domains for clients",
-            "Implemented SEO strategies that improved clients' online visibility with Google Ads and Google Analytics",
-            "Mitigated denial of service (DDoS) attacks on client websites through Cloudflare",
-          ],
-    technologies: [
-      "HTML",
-      "CSS",
-      "JavaScript",
-      "WordPress",
-      "Figma",
-      "OpenCart",
-      "Joomla",
-      "Google Ads",
-      "Google Analytics",
-    ],
+    workMode: lang === "es" ? "Remoto" : "Remote",
     logo: "/assets/company/dec.webp",
+    roles: [
+      {
+        title: lang === "es" ? "Web Developer Jr." : "Junior Web Developer",
+        period: "Mar 2022 - Sep 2023",
+        duration: lang === "es" ? "1 año 7 meses" : "1 yr 7 mos",
+        type: lang === "es" ? "Prácticas" : "Internship",
+        location: lang === "es" ? "Ciudad de México" : "Mexico City",
+        achievements:
+          lang === "es"
+            ? [
+                "Desarrollo y soporte de sitios web con HTML, CSS, JavaScript y CMS (WordPress, Joomla, OpenCart)",
+                "Administración de hosting, certificados de seguridad y dominios",
+                "Gestión de cuentas de correo electrónico corporativas",
+              ]
+            : [
+                "Website development and support with HTML, CSS, JavaScript and CMS (WordPress, Joomla, OpenCart)",
+                "Hosting, security certificates and domain administration",
+                "Corporate email account management",
+              ],
+        technologies: ["HTML", "CSS", "JavaScript", "WordPress", "Joomla"],
+      },
+    ],
   },
 ];
 ---
@@ -127,118 +149,133 @@ const experiences = [
     <!-- Experience Cards Grid -->
     <div class="space-y-8">
       {
-        experiences.map((exp, index) => (
-          <div class="group relative rounded-3xl bg-linear-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-2xl transition-all duration-500">
-            {/* Background Pattern */}
-            <div class="absolute inset-0 opacity-[0.02] dark:opacity-[0.05]">
-              <div
-                class="absolute inset-0"
-                style="background-image: radial-gradient(circle, currentColor 1px, transparent 1px); background-size: 20px 20px;"
-              />
+        experiences.map((exp) => (
+          <div class="group rounded-3xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 md:p-8">
+            {/* Company Header */}
+            <div class="flex flex-col md:flex-row gap-5 md:gap-6">
+              <div class="shrink-0">
+                {exp.logo ? (
+                  <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white dark:bg-gray-800 p-3 border border-gray-200 dark:border-gray-700">
+                    <Image
+                      src={exp.logo}
+                      alt={`${exp.company} logo`}
+                      width={80}
+                      height={80}
+                      class="w-full h-full object-contain"
+                      loading="eager"
+                    />
+                  </div>
+                ) : (
+                  <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                    <span class="text-white font-bold text-2xl">
+                      {exp.company.charAt(0)}
+                    </span>
+                  </div>
+                )}
+              </div>
+
+              <div class="flex-1 min-w-0">
+                <h3 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
+                  {exp.company}
+                </h3>
+                <div class="flex flex-wrap gap-2 mt-2">
+                  <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                    <PiCalendar className="w-4 h-4 text-blue-500" />
+                    {exp.totalPeriod}
+                  </span>
+                  <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                    {exp.totalDuration}
+                  </span>
+                  <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                    <PiMapPin className="w-4 h-4 text-gray-500" />
+                    {exp.location}
+                  </span>
+                  <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-xs md:text-sm font-medium text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                    {exp.workMode}
+                  </span>
+                </div>
+              </div>
             </div>
 
-            <div class="relative p-8 md:p-10">
-              {/* Header Section */}
-              <div class="flex flex-col md:flex-row gap-6 mb-8">
-                {/* Company Logo */}
-                <div class="shrink-0">
-                  {exp.logo ? (
-                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-white dark:bg-gray-800 p-3 border border-gray-200 dark:border-gray-700 shadow-lg">
-                      <Image
-                        src={exp.logo}
-                        alt={`${exp.company} logo`}
-                        width={96}
-                        height={96}
-                        class="w-full h-full object-contain"
-                        loading="eager"
-                      />
-                    </div>
-                  ) : (
-                    <div class="w-20 h-20 md:w-24 md:h-24 rounded-2xl bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center shadow-lg">
-                      <span class="text-white font-bold text-3xl">
-                        {exp.company.charAt(0)}
-                      </span>
-                    </div>
+            {/* Roles Timeline */}
+            <div class="mt-6 space-y-5">
+              {exp.roles.map((role, roleIndex) => (
+                <div class="relative pl-6">
+                  <div class="absolute left-0 top-2 w-2 h-2 rounded-full bg-blue-500" />
+                  {roleIndex !== exp.roles.length - 1 && (
+                    <div class="absolute left-0.75 top-4 bottom-0 w-px bg-gray-200 dark:bg-gray-700" />
                   )}
-                </div>
 
-                {/* Title & Info */}
-                <div class="flex-1 min-w-0">
-                  <h3 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                    {exp.position}
-                  </h3>
-                  <p class="text-xl font-semibold text-blue-600 dark:text-blue-400 mb-4">
-                    {exp.company}
-                  </p>
-
-                  {/* Meta Info Pills */}
-                  <div class="flex flex-wrap gap-3">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
-                      <PiCalendar className="w-4 h-4 text-blue-500" />
-                      {exp.period}
-                    </div>
-                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-50 dark:bg-blue-900/20 rounded-xl text-sm font-medium text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
-                      <PiBriefcase className="w-4 h-4" />
-                      {exp.type}
-                    </div>
-                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-white dark:bg-gray-800 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
-                      <PiMapPin className="w-4 h-4 text-gray-500" />
-                      {exp.location}
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Description */}
-              <p class="text-gray-700 dark:text-gray-300 text-lg leading-relaxed mb-8 max-w-4xl">
-                {exp.description}
-              </p>
-
-              {/* Two Column Layout for Achievements and Tech */}
-              <div class="grid md:grid-cols-2 gap-8">
-                {/* Achievements */}
-                <div>
-                  <div class="flex items-center gap-2 mb-4">
-                    <div class="p-2 rounded-lg bg-green-100 dark:bg-green-900/30">
-                      <PiLightning className="w-5 h-5 text-green-600 dark:text-green-400" />
-                    </div>
-                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">
-                      {lang === "es"
-                        ? "Logros Principales"
-                        : "Key Achievements"}
-                    </h4>
-                  </div>
-                  <ul class="space-y-3">
-                    {exp.achievements.map((achievement) => (
-                      <li class="flex items-start gap-3 group/item">
-                        <div class="w-1.5 h-1.5 bg-green-500 rounded-full mt-2.5 shrink-0 group-hover/item:scale-150 transition-transform" />
-                        <span class="text-gray-700 dark:text-gray-300 leading-relaxed text-sm">
-                          {achievement}
+                  <div class="bg-white dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 md:p-5">
+                    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
+                      <h4 class="text-base md:text-lg font-semibold text-gray-900 dark:text-white">
+                        {role.title}
+                      </h4>
+                      <div class="flex flex-wrap gap-2">
+                        <span class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 dark:bg-gray-900 rounded-lg text-xs font-medium text-gray-700 dark:text-gray-300">
+                          <PiCalendar className="w-3.5 h-3.5" />
+                          {role.period}
                         </span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Technologies */}
-                <div>
-                  <div class="flex items-center gap-2 mb-4">
-                    <div class="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/30">
-                      <PiStack className="w-5 h-5 text-purple-600 dark:text-purple-400" />
+                        <span class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 dark:bg-gray-900 rounded-lg text-xs font-medium text-gray-700 dark:text-gray-300">
+                          {role.duration}
+                        </span>
+                      </div>
                     </div>
-                    <h4 class="text-lg font-bold text-gray-900 dark:text-white">
-                      {lang === "es" ? "Stack Tecnológico" : "Tech Stack"}
-                    </h4>
-                  </div>
-                  <div class="flex flex-wrap gap-2">
-                    {exp.technologies.map((tech) => (
-                      <span class="px-3 py-1.5 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-700 dark:hover:text-purple-300 transition-all duration-200">
-                        {tech}
+
+                    <div class="flex flex-wrap gap-2 mt-2">
+                      <span class="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-xs font-medium text-blue-700 dark:text-blue-300">
+                        <PiBriefcase className="w-3.5 h-3.5" />
+                        {role.type}
                       </span>
-                    ))}
+                      <span class="inline-flex items-center gap-2 px-3 py-1 bg-white dark:bg-gray-900 rounded-lg text-xs font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                        <PiMapPin className="w-3.5 h-3.5" />
+                        {role.location}
+                      </span>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4 mt-4">
+                      <div>
+                        <div class="flex items-center gap-2 mb-2">
+                          <div class="p-1.5 rounded-lg bg-green-100 dark:bg-green-900/30">
+                            <PiLightning className="w-4 h-4 text-green-600 dark:text-green-400" />
+                          </div>
+                          <h5 class="text-sm font-semibold text-gray-900 dark:text-white">
+                            {lang === "es" ? "Logros" : "Highlights"}
+                          </h5>
+                        </div>
+                        <ul class="space-y-2">
+                          {role.achievements.map((achievement) => (
+                            <li class="flex items-start gap-3">
+                              <div class="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
+                              <span class="text-xs md:text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+                                {achievement}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div>
+                        <div class="flex items-center gap-2 mb-2">
+                          <div class="p-1.5 rounded-lg bg-purple-100 dark:bg-purple-900/30">
+                            <PiStack className="w-4 h-4 text-purple-600 dark:text-purple-400" />
+                          </div>
+                          <h5 class="text-sm font-semibold text-gray-900 dark:text-white">
+                            {lang === "es" ? "Stack" : "Stack"}
+                          </h5>
+                        </div>
+                        <div class="flex flex-wrap gap-2">
+                          {role.technologies.map((tech) => (
+                            <span class="px-2.5 py-1 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 rounded-lg text-xs font-medium border border-gray-200 dark:border-gray-700">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         ))
