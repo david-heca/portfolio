@@ -47,6 +47,14 @@ const primarySkills = [
     icon: "azure",
   },
   {
+    name: "Az Foundry",
+    category: lang === "es" ? "IA" : "AI",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
+    color: "from-blue-500 to-purple-600",
+    iconDark: "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/azureai-color.png",
+    iconLight: "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/azureai-color.png",
+  },
+  {
     name: "JavaScript",
     category: "Frontend",
     level: lang === "es" ? "Intermedio" : "Intermediate",
@@ -83,6 +91,86 @@ const primarySkills = [
     iconLight: "https://svgl.app/library/astro-icon-light.svg",
     iconDark: "https://svgl.app/library/astro-icon-dark.svg",
   },
+  {
+    name: "MCP",
+    category: lang === "es" ? "IA" : "AI",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
+    color: "from-indigo-500 to-purple-600",
+    iconDark: "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/mcp.png",
+    iconLight: "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/mcp.png",
+  },
+  {
+    name: "HTML5",
+    category: "Frontend",
+    level: lang === "es" ? "Avanzado" : "Advanced",
+    color: "from-orange-400 to-red-500",
+    icon: "html5",
+  },
+  {
+    name: "CSS3",
+    category: "Frontend",
+    level: lang === "es" ? "Avanzado" : "Advanced",
+    color: "from-blue-400 to-blue-600",
+    icon: "css_old",
+  },
+  {
+    name: "Linux",
+    category: lang === "es" ? "Sistemas Operativos" : "Operating Systems",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
+    color: "from-yellow-400 to-yellow-600",
+    icon: "linux",
+  },
+  {
+    name: "GitHub",
+    category: lang === "es" ? "Herramientas" : "Tools",
+    level: lang === "es" ? "Avanzado" : "Advanced",
+    color: "from-purple-500 to-purple-700",
+    iconDark: "https://svgl.app/library/github_dark.svg",
+    iconLight: "https://svgl.app/library/github_light.svg",
+  },
+  {
+    name: "PostgreSQL",
+    category: "Database",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
+    color: "from-blue-500 to-blue-700",
+    icon: "postgresql",
+  },
+  {
+    name: "Railway",
+    category: "Cloud",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
+    color: "from-purple-500 to-pink-600",
+    iconDark: "https://svgl.app/library/railway_dark.svg",
+    iconLight: "https://svgl.app/library/railway.svg",
+  },
+  {
+    name: "Cloudflare",
+    category: "Cloud",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
+    color: "from-blue-400 to-blue-600",
+    icon: "cloudflare",
+  },
+  {
+    name: "Bun",
+    category: "Runtime",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
+    color: "from-yellow-400 to-yellow-600",
+    icon: "bun",
+  },
+  {
+    name: "Linear",
+    category: lang === "es" ? "Herramientas" : "Tools",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
+    color: "from-purple-500 to-pink-600",
+    icon: "linear",
+  },
+  {
+    name: "JWT",
+    category: "Security",
+    level: lang === "es" ? "Intermedio" : "Intermediate",
+    color: "from-yellow-400 to-yellow-600",
+    icon: "jwt",
+  }
 ];
 
 const languages = [
@@ -137,7 +225,7 @@ const softSkills =
       >
         {t("skills.title")}
       </h1>
-      <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+      <p class="text-xl text-zinc-500 dark:text-zinc-400">
         {t("skills.subtitle")}
       </p>
     </div>
@@ -210,7 +298,7 @@ const softSkills =
                     <div
                       class={`w-7 h-7 bg-linear-to-r ${skill.color} rounded-lg flex items-center justify-center hrink-0`}
                     >
-                      <span class="text-white font-bold text-xs">
+                      <span class="text-white font-bold text-sm">
                         {skill.name.charAt(0)}
                       </span>
                     </div>

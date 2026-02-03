@@ -1,5 +1,8 @@
 ---
 import { PiSunDuotone, PiMoonDuotone, PiDesktopDuotone } from "react-icons/pi";
+import { getLangFromUrl } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
 ---
 
 <div class="relative" id="theme-menu">
@@ -45,22 +48,22 @@ import { PiSunDuotone, PiMoonDuotone, PiDesktopDuotone } from "react-icons/pi";
     <button
       type="button"
       data-theme="light"
-      class="theme-option w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+      class="theme-option w-full flex mb-1 items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
       role="menuitemradio"
       aria-checked="false"
     >
       <PiSunDuotone className="w-4 h-4" />
-      Light
+      { lang === "es" ? "Claro" : "Light" }
     </button>
     <button
       type="button"
       data-theme="dark"
-      class="theme-option w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+      class="theme-option w-full flex mb-1 items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
       role="menuitemradio"
       aria-checked="false"
     >
       <PiMoonDuotone className="w-4 h-4" />
-      Dark
+      { lang === "es" ? "Oscuro" : "Dark" }
     </button>
     <button
       type="button"
@@ -70,7 +73,7 @@ import { PiSunDuotone, PiMoonDuotone, PiDesktopDuotone } from "react-icons/pi";
       aria-checked="false"
     >
       <PiDesktopDuotone className="w-4 h-4" />
-      System
+      { lang === "es" ? "Sistema" : "System" }
     </button>
   </div>
 </div>
