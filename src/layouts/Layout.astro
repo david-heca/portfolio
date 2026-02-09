@@ -3,6 +3,7 @@ import { ClientRouter } from "astro:transitions";
 import Navbar from "../components/Navbar.astro";
 import "../styles/global.css";
 import { PiHeartDuotone } from "react-icons/pi";
+import DarkVeil from "../components/backgrounds/DarkVeil";
 
 export interface Props {
   title: string;
@@ -98,35 +99,27 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
   <body
     class="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-50 flex flex-col"
   >
+    <!-- DarkVeil Background Effect -->
+    <div
+      class="fixed inset-0 w-screen h-screen"
+      style="z-index: -2;"
+      transition:persist="background-darkveil"
+    >
+      <DarkVeil
+        client:load
+        hueShift={0}
+        noiseIntensity={0.15}
+        scanlineIntensity={0}
+        speed={0.5}
+        scanlineFrequency={0}
+        warpAmount={0.3}
+        resolutionScale={0.6}
+      />
+    </div>
+
     <!-- Background Pattern -->
     <div
       class="fixed inset-0 z-[-1] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[30px_30px]"
-    >
-    </div>
-
-    <!-- Cursor Glow Effect on Grid -->
-    <div
-      id="grid-glow"
-      class="fixed inset-0 z-[-1] pointer-events-none opacity-0 transition-opacity duration-500"
-      style="
-        background: 
-          radial-gradient(circle 400px at var(--x, 10%) var(--y, 10%), 
-            rgba(59, 131, 246, 0.036) 0%, 
-            transparent 60%),
-          radial-gradient(circle 400px at var(--x, 10%) var(--y, 10%), 
-            transparent 0%, 
-            transparent 5%),
-          linear-gradient(to right, rgba(59, 130, 246, 0.5) 1px, transparent 1px),
-          linear-gradient(to bottom, rgba(59, 130, 246, 0.5) 1px, transparent 1px);
-        background-size: 100% 100%, 100% 100%, 30px 30px, 30px 30px;
-        mask-image: radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), black 0%, transparent 60%);
-        -webkit-mask-image: radial-gradient(circle 400px at var(--x, 50%) var(--y, 50%), black 0%, transparent 70%);
-      "
-    >
-    </div>
-
-    <div
-      class="fixed inset-0 z-[-1] bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(120,119,198,0.15),rgba(255,255,255,0))] dark:bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
     >
     </div>
 
@@ -165,27 +158,5 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
         </p>
       </div>
     </footer>
-
-    <script>
-      function initGlow() {
-        const glow = document.getElementById("grid-glow");
-        if (!glow) return;
-
-        document.body.addEventListener("mousemove", (e) => {
-          const x = (e.clientX / window.innerWidth) * 100;
-          const y = (e.clientY / window.innerHeight) * 100;
-          glow.style.setProperty("--x", x + "%");
-          glow.style.setProperty("--y", y + "%");
-          glow.style.opacity = "1";
-        });
-
-        document.body.addEventListener("mouseleave", () => {
-          glow.style.opacity = "0";
-        });
-      }
-
-      initGlow();
-      document.addEventListener("astro:after-swap", initGlow);
-    </script>
   </body>
 </html>
