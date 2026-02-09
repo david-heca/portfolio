@@ -92,6 +92,7 @@ function isActive(href: string): boolean {
         navItems.map((item) => (
           <a
             href={item.href}
+            data-astro-prefetch="hover"
             class={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center gap-2 capitalize ${
               isActive(item.href)
                 ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
@@ -165,6 +166,7 @@ function isActive(href: string): boolean {
         navItems.map((item) => (
           <a
             href={item.href}
+            data-astro-prefetch
             class={`px-4 py-3 rounded-xl text-lg font-medium transition-all duration-200 flex items-center gap-3 ${
               isActive(item.href)
                 ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
@@ -192,35 +194,29 @@ function isActive(href: string): boolean {
       isOpen = !isOpen;
       if (isOpen) {
         menu?.classList.remove("translate-x-full");
-        document.body.style.overflow = "hidden"; // Prevent scrolling
+        document.body.style.overflow = "hidden";
       } else {
         menu?.classList.add("translate-x-full");
         document.body.style.overflow = "";
       }
     }
 
+    function closeMenu() {
+      if (isOpen) {
+        toggleMenu();
+      }
+    }
+
     btn?.addEventListener("click", toggleMenu);
     closeBtn?.addEventListener("click", toggleMenu);
 
-    // Close menu when clicking a link with smooth animation
+    // Close menu when navigating
     links?.forEach((link) => {
-      link.addEventListener("click", (e) => {
-        if (isOpen) {
-          e.preventDefault();
-          const href = link.getAttribute("href");
-
-          // Start close animation
-          toggleMenu();
-
-          // Wait for animation to complete before navigating
-          setTimeout(() => {
-            if (href) {
-              window.location.href = href;
-            }
-          }, 200); // Match the duration-300 class (300ms)
-        }
-      });
+      link.addEventListener("click", closeMenu);
     });
+
+    // Close menu on navigation (view transitions)
+    document.addEventListener("astro:before-preparation", closeMenu);
   }
 
   setupMobileMenu();

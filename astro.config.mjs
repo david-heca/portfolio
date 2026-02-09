@@ -7,6 +7,11 @@ export default defineConfig({
   integrations: [react()],
   site: "https://davidherrera.dev",
 
+  prefetch: {
+    prefetchAll: true,
+    defaultStrategy: "load", // Prefetch inmediato, no esperar hover
+  },
+
   server: {
     host: true,
     open: true,
