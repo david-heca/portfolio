@@ -1,4 +1,5 @@
 ---
+import { PiGlobeDuotone } from "react-icons/pi";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
@@ -25,7 +26,10 @@ const targetHref = getPathForLang(targetLang);
 
 <a
   href={targetHref}
-  class="px-3 py-1 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
+  class="flex gap-1 px-3 py-2 text-sm font-medium text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors rounded-md hover:bg-gray-100 dark:hover:bg-gray-800"
 >
-  {label}
+  <PiGlobeDuotone className="w-5 h-5 hidden md:block" />
+  <span class="text-sm font-medium uppercase" id="current-lang-label">
+    {label}
+  </span>
 </a>

@@ -48,18 +48,9 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     <ClientRouter />
 
     <script is:inline>
-      // Function to set theme
-      function setTheme() {
-        const themePreference = (() => {
-          if (
-            typeof localStorage !== "undefined" &&
-            localStorage.getItem("color-theme")
-          ) {
-            return localStorage.getItem("color-theme");
-          }
-          return "system";
-        })();
-
+      // Aplicar tema en navegaciones de view transition
+      function setThemeOnNavigation() {
+        const themePreference = localStorage.getItem("color-theme") || "system";
         const resolvedTheme =
           themePreference === "system"
             ? window.matchMedia("(prefers-color-scheme: dark)").matches
@@ -72,33 +63,32 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
         } else {
           document.documentElement.classList.remove("dark");
         }
-
-        document.documentElement.dataset.theme = themePreference;
       }
 
-      // Run on initial load
-      setTheme();
+      // Ejecutar ANTES de que se haga el swap de contenido
+      document.addEventListener("astro:before-swap", (e) => {
+        // Preservar el tema en el nuevo documento
+        const currentTheme =
+          document.documentElement.classList.contains("dark");
+        if (currentTheme) {
+          e.newDocument.documentElement.classList.add("dark");
+        }
+      });
 
-      // Run on view transitions navigation
-      document.addEventListener("astro:after-swap", setTheme);
+      document.addEventListener("astro:after-swap", setThemeOnNavigation);
 
       // React to OS theme changes when in system mode
       if (!window.__themeMediaListener) {
         const media = window.matchMedia("(prefers-color-scheme: dark)");
         const handler = () => {
-          const preference =
-            typeof localStorage !== "undefined"
-              ? localStorage.getItem("color-theme")
-              : "system";
+          const preference = localStorage.getItem("color-theme");
           if (preference === "system" || !preference) {
-            setTheme();
+            setThemeOnNavigation();
           }
         };
 
         if (media.addEventListener) {
           media.addEventListener("change", handler);
-        } else if (media.addListener) {
-          media.addListener(handler);
         }
 
         window.__themeMediaListener = true;
@@ -140,16 +130,17 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     >
     </div>
 
-    <Navbar />
+    <Navbar transition:persist="navbar" />
 
     <main
-      class="grow pt-26 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full animate-fade-in"
+      class="grow pt-26 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full"
     >
       <slot />
     </main>
 
     <footer
-      class="bg-white/70 dark:bg-gray-950/70 border-t border-gray-200 dark:border-gray-800 py-8 px-6 mt-auto"
+      class="bg-white/70 dark:bg-gray-950/70 backdrop-blur-xl border-t border-gray-200 dark:border-gray-800 py-8 px-6 mt-auto"
+      transition:persist="footer"
     >
       <div
         class="max-w-7xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm"
