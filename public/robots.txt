@@ -1,0 +1,7 @@
+# robots.txt for davidherrera.dev
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://davidherrera.dev/sitemap-index.xml

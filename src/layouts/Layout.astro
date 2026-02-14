@@ -25,6 +25,17 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- SEO Meta Tags -->
+    <meta name="author" content="David Herrera" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Performance Hints -->
+    <link rel="preconnect" href="https://davidherrera.dev" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
@@ -110,7 +121,7 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
       class="fixed inset-0 z-[-1] pointer-events-none opacity-30 dark:opacity-40"
     >
       <Antigravity
-        client:load
+        client:idle
         count={100}
         magnetRadius={12}
         ringRadius={6}
