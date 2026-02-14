@@ -9,7 +9,7 @@ export default defineConfig({
 
   prefetch: {
     prefetchAll: true,
-    defaultStrategy: "load", // Prefetch inmediato, no esperar hover
+    defaultStrategy: "load",
   },
 
   server: {

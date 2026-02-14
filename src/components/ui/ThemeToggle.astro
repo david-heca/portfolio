@@ -1,6 +1,6 @@
 ---
 import { PiSunDuotone, PiMoonDuotone, PiDesktopDuotone } from "react-icons/pi";
-import { getLangFromUrl } from "../i18n/utils";
+import { getLangFromUrl } from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 ---
@@ -53,7 +53,7 @@ const lang = getLangFromUrl(Astro.url);
       aria-checked="false"
     >
       <PiSunDuotone className="w-4 h-4" />
-      { lang === "es" ? "Claro" : "Light" }
+      {lang === "es" ? "Claro" : "Light"}
     </button>
     <button
       type="button"
@@ -63,7 +63,7 @@ const lang = getLangFromUrl(Astro.url);
       aria-checked="false"
     >
       <PiMoonDuotone className="w-4 h-4" />
-      { lang === "es" ? "Oscuro" : "Dark" }
+      {lang === "es" ? "Oscuro" : "Dark"}
     </button>
     <button
       type="button"
@@ -73,7 +73,7 @@ const lang = getLangFromUrl(Astro.url);
       aria-checked="false"
     >
       <PiDesktopDuotone className="w-4 h-4" />
-      { lang === "es" ? "Sistema" : "System" }
+      {lang === "es" ? "Sistema" : "System"}
     </button>
   </div>
 </div>

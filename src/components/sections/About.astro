@@ -1,6 +1,6 @@
 ---
 import { Image } from "astro:assets";
-import { useTranslations } from "../../i18n/utils";
+import { useTranslations } from "@i18n/utils";
 import {
   PiMapPin,
   PiBriefcase,
@@ -116,13 +116,6 @@ const expertise = [
           <!-- Name overlay -->
           <div class="absolute bottom-4 left-4 right-4">
             <h2 class="text-2xl font-bold text-white mb-1">David Herrera</h2>
-            <p class="text-zinc-300 text-sm">
-              {
-                lang === "es"
-                  ? "Desarrollador de Software"
-                  : "Software Developer"
-              }
-            </p>
           </div>
         </div>
       </div>

@@ -1,27 +1,27 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { useTranslations } from "../i18n/utils";
+import Layout from "@layouts/Layout.astro";
+import { useTranslations } from "@i18n/utils";
 
-// Importar componentes de páginas
-import AboutPage from "../components/pages/AboutPage.astro";
-import SkillsPage from "../components/pages/SkillsPage.astro";
-import ProjectsPage from "../components/pages/ProjectsPage.astro";
-import WorkPage from "../components/pages/WorkPage.astro";
-import EducationPage from "../components/pages/EducationPage.astro";
-import ContactPage from "../components/pages/ContactPage.astro";
-import HomePage from "../components/pages/HomePage.astro";
+// Importar componentes de secciones
+import About from "@sections/About.astro";
+import Skills from "@sections/Skills.astro";
+import Projects from "@sections/Projects.astro";
+import Work from "@sections/Work.astro";
+import Education from "@sections/Education.astro";
+import Contact from "@sections/Contact.astro";
+import Home from "@sections/Home.astro";
 
 export async function getStaticPaths() {
   const pages = ["about", "skills", "projects", "work", "education", "contact"];
   const paths: any[] = [];
 
-  // Página principal en inglés: /en
+  // Página principal en inglés
   paths.push({
     params: { slug: "en" },
     props: { page: "home", lang: "en" },
   });
 
-  // Rutas en español: /about, /skills, etc.
+  // Rutas en español
   pages.forEach((page) => {
     paths.push({
       params: { slug: page },
@@ -29,7 +29,7 @@ export async function getStaticPaths() {
     });
   });
 
-  // Rutas en inglés: /en/about, /en/skills, etc.
+  // Rutas en inglés
   pages.forEach((page) => {
     paths.push({
       params: { slug: `en/${page}` },
@@ -110,12 +110,12 @@ const pageMeta = getPageMeta(page, lang);
 ---
 
 <Layout title={pageMeta.title} description={pageMeta.description} lang={lang}>
-  <!-- Renderizar componente según la página -->
-  {page === "home" && <HomePage lang={lang} />}
-  {page === "about" && <AboutPage lang={lang} />}
-  {page === "skills" && <SkillsPage lang={lang} />}
-  {page === "projects" && <ProjectsPage lang={lang} />}
-  {page === "work" && <WorkPage lang={lang} />}
-  {page === "education" && <EducationPage lang={lang} />}
-  {page === "contact" && <ContactPage lang={lang} />}
+  <!-- Renderizar componente -->
+  {page === "home" && <Home lang={lang} />}
+  {page === "about" && <About lang={lang} />}
+  {page === "skills" && <Skills lang={lang} />}
+  {page === "projects" && <Projects lang={lang} />}
+  {page === "work" && <Work lang={lang} />}
+  {page === "education" && <Education lang={lang} />}
+  {page === "contact" && <Contact lang={lang} />}
 </Layout>

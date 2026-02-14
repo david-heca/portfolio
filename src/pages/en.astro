@@ -1,7 +1,7 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import HomePage from "../components/pages/HomePage.astro";
-import { useTranslations } from "../i18n/utils";
+import Layout from "@layouts/Layout.astro";
+import Home from "@sections/Home.astro";
+import { useTranslations } from "@i18n/utils";
 
 const t = useTranslations("en");
 ---
@@ -11,5 +11,5 @@ const t = useTranslations("en");
   description={t("hero.description")}
   lang="en"
 >
-  <HomePage lang="en" />
+  <Home lang="en" />
 </Layout>

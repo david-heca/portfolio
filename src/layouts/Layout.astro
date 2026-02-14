@@ -1,8 +1,8 @@
 ---
 import { ClientRouter } from "astro:transitions";
-import Navbar from "../components/Navbar.astro";
-import Antigravity from "../components/reactbits/animations/antigravity";
-import "../styles/global.css";
+import Navbar from "@ui/Navbar.astro";
+import Antigravity from "@animations/Antigravity";
+import "@styles/global.css";
 import { PiHeartDuotone } from "react-icons/pi";
 
 export interface Props {
@@ -145,7 +145,7 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
         class="max-w-7xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm"
       >
         <p
-          class="flex sm:justify-center sm:items-center justify-center items-center"
+          class="flex sm:justify-center sm:items-center justify-center items-center gap-2"
         >
           &copy; {new Date().getFullYear()} David Herrera.
           {
