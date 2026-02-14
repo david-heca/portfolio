@@ -51,8 +51,10 @@ const primarySkills = [
     category: lang === "es" ? "IA" : "AI",
     level: lang === "es" ? "Intermedio" : "Intermediate",
     color: "from-blue-500 to-purple-600",
-    iconDark: "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/azureai-color.png",
-    iconLight: "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/azureai-color.png",
+    iconDark:
+      "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/azureai-color.png",
+    iconLight:
+      "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/azureai-color.png",
   },
   {
     name: "JavaScript",
@@ -96,8 +98,10 @@ const primarySkills = [
     category: lang === "es" ? "IA" : "AI",
     level: lang === "es" ? "Intermedio" : "Intermediate",
     color: "from-indigo-500 to-purple-600",
-    iconDark: "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/mcp.png",
-    iconLight: "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/mcp.png",
+    iconDark:
+      "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/mcp.png",
+    iconLight:
+      "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/mcp.png",
   },
   {
     name: "HTML5",
@@ -170,7 +174,7 @@ const primarySkills = [
     level: lang === "es" ? "Intermedio" : "Intermediate",
     color: "from-yellow-400 to-yellow-600",
     icon: "jwt",
-  }
+  },
 ];
 
 const languages = [
@@ -217,222 +221,218 @@ const softSkills =
 ---
 
 <section>
-  <div class="max-w-6xl mx-auto">
-    <!-- Header -->
-    <div class="animate-slide-up text-center mb-12">
-      <h1
-        class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
-      >
-        {t("skills.title")}
-      </h1>
-      <p class="text-xl text-zinc-500 dark:text-zinc-400">
-        {t("skills.subtitle")}
-      </p>
-    </div>
-
-    <!-- Bento Grid Layout -->
-    <div
-      class="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[minmax(180px,auto)]"
+  <!-- Header -->
+  <div class="animate-slide-up text-center mb-12">
+    <h1
+      class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
     >
-      <!-- Technical Skills - Large Card -->
+      {t("skills.title")}
+    </h1>
+    <p class="text-xl text-zinc-500 dark:text-zinc-400">
+      {t("skills.subtitle")}
+    </p>
+  </div>
+
+  <!-- Bento Grid Layout -->
+  <div
+    class="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[minmax(180px,auto)]"
+  >
+    <!-- Technical Skills - Large Card -->
+    <div
+      class="md:col-span-8 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 relative overflow-hidden group"
+    >
       <div
-        class="md:col-span-8 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 relative overflow-hidden group"
+        class="absolute top-4 right-4 opacity-5 group-hover:opacity-10 transition-opacity"
       >
-        <div
-          class="absolute top-4 right-4 opacity-5 group-hover:opacity-10 transition-opacity"
-        >
-          <PiCode className="w-32 h-32" />
-        </div>
+        <PiCode className="w-32 h-32" />
+      </div>
 
-        <div class="flex items-center gap-3 mb-6">
-          <div class="p-2 rounded-xl bg-blue-100 dark:bg-blue-900/30">
-            <PiCode className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-          </div>
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-            {lang === "es" ? "Tecnologías" : "Technologies"}
-          </h2>
+      <div class="flex items-center gap-3 mb-6">
+        <div class="p-2 rounded-xl bg-blue-100 dark:bg-blue-900/30">
+          <PiCode className="w-5 h-5 text-blue-600 dark:text-blue-400" />
         </div>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+          {lang === "es" ? "Tecnologías" : "Technologies"}
+        </h2>
+      </div>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
-          {
-            primarySkills.map((skill) => (
-              <div class="group/skill p-3 md:p-4 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg transition-all duration-300">
-                <div class="flex items-start gap-3 mb-3">
-                  <div class="flex-1 min-w-0">
-                    <h3 class="text-sm font-semibold text-gray-900 dark:text-white truncate group-hover/skill:text-blue-600 dark:group-hover/skill:text-blue-400 transition-colors">
-                      {skill.name}
-                    </h3>
-                    <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
-                      {skill.category}
-                    </p>
-                  </div>
-                  {skill.icon ? (
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+        {
+          primarySkills.map((skill) => (
+            <div class="group/skill p-3 md:p-4 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg transition-all duration-300">
+              <div class="flex items-start gap-3 mb-3">
+                <div class="flex-1 min-w-0">
+                  <h3 class="text-sm font-semibold text-gray-900 dark:text-white truncate group-hover/skill:text-blue-600 dark:group-hover/skill:text-blue-400 transition-colors">
+                    {skill.name}
+                  </h3>
+                  <p class="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                    {skill.category}
+                  </p>
+                </div>
+                {skill.icon ? (
+                  <Image
+                    src={`https://svgl.app/library/${skill.icon}.svg`}
+                    alt={`${skill.name} icon`}
+                    width={32}
+                    height={32}
+                    class="w-6 h-6 md:w-8 md:h-8 object-contain filter dark:brightness-110 shrink-0"
+                    loading="lazy"
+                  />
+                ) : skill.iconLight && skill.iconDark ? (
+                  <>
                     <Image
-                      src={`https://svgl.app/library/${skill.icon}.svg`}
+                      src={skill.iconLight}
                       alt={`${skill.name} icon`}
                       width={32}
                       height={32}
-                      class="w-6 h-6 md:w-8 md:h-8 object-contain filter dark:brightness-110 shrink-0"
+                      class="w-6 h-6 md:w-8 md:h-8 object-contain dark:hidden shrink-0"
                       loading="lazy"
                     />
-                  ) : skill.iconLight && skill.iconDark ? (
-                    <>
-                      <Image
-                        src={skill.iconLight}
-                        alt={`${skill.name} icon`}
-                        width={32}
-                        height={32}
-                        class="w-6 h-6 md:w-8 md:h-8 object-contain dark:hidden shrink-0"
-                        loading="lazy"
-                      />
-                      <Image
-                        src={skill.iconDark}
-                        alt={`${skill.name} icon`}
-                        width={32}
-                        height={32}
-                        class="w-6 h-6 md:w-8 md:h-8 object-contain hidden dark:block shrink-0"
-                        loading="lazy"
-                      />
-                    </>
-                  ) : (
-                    <div
-                      class={`w-7 h-7 bg-linear-to-r ${skill.color} rounded-lg flex items-center justify-center hrink-0`}
-                    >
-                      <span class="text-white font-bold text-sm">
-                        {skill.name.charAt(0)}
-                      </span>
-                    </div>
-                  )}
-                </div>
-
-                <span
-                  class={`inline-block text-xs px-2 py-1 rounded-md font-medium ${
-                    skill.level === "Avanzado" || skill.level === "Advanced"
-                      ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300"
-                      : skill.level === "Intermedio" ||
-                          skill.level === "Intermediate"
-                        ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
-                        : "bg-gray-100 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300"
-                  }`}
-                >
-                  {skill.level}
-                </span>
+                    <Image
+                      src={skill.iconDark}
+                      alt={`${skill.name} icon`}
+                      width={32}
+                      height={32}
+                      class="w-6 h-6 md:w-8 md:h-8 object-contain hidden dark:block shrink-0"
+                      loading="lazy"
+                    />
+                  </>
+                ) : (
+                  <div
+                    class={`w-7 h-7 bg-linear-to-r ${skill.color} rounded-lg flex items-center justify-center hrink-0`}
+                  >
+                    <span class="text-white font-bold text-sm">
+                      {skill.name.charAt(0)}
+                    </span>
+                  </div>
+                )}
               </div>
-            ))
-          }
-        </div>
+
+              <span
+                class={`inline-block text-xs px-2 py-1 rounded-md font-medium ${
+                  skill.level === "Avanzado" || skill.level === "Advanced"
+                    ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300"
+                    : skill.level === "Intermedio" ||
+                        skill.level === "Intermediate"
+                      ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                      : "bg-gray-100 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300"
+                }`}
+              >
+                {skill.level}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Languages Card -->
+    <div
+      class="md:col-span-4 md:row-span-2 rounded-3xl bg-linear-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800/50 p-6 relative overflow-hidden"
+    >
+      <div class="absolute top-4 right-4 opacity-10">
+        <PiTranslate className="w-24 h-24" />
       </div>
 
-      <!-- Languages Card -->
-      <div
-        class="md:col-span-4 md:row-span-2 rounded-3xl bg-linear-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-blue-800/50 p-6 relative overflow-hidden"
-      >
-        <div class="absolute top-4 right-4 opacity-10">
-          <PiTranslate className="w-24 h-24" />
+      <div class="flex items-center gap-3 mb-8">
+        <div class="p-2 rounded-xl bg-blue-100 dark:bg-blue-900/30">
+          <PiTranslate className="w-5 h-5 text-blue-600 dark:text-blue-400" />
         </div>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+          {lang === "es" ? "Idiomas" : "Languages"}
+        </h2>
+      </div>
 
-        <div class="flex items-center gap-3 mb-8">
-          <div class="p-2 rounded-xl bg-blue-100 dark:bg-blue-900/30">
-            <PiTranslate className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-          </div>
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-            {lang === "es" ? "Idiomas" : "Languages"}
-          </h2>
-        </div>
+      <div class="space-y-6 relative z-10">
+        {
+          languages.map((language) => (
+            <div class="p-6 rounded-2xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/50 dark:border-gray-700/50 hover:shadow-lg transition-all duration-300">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-bold text-gray-900 dark:text-white">
+                  {language.name}
+                </h3>
+                <span
+                  class={`text-xs px-3 py-1 rounded-full font-semibold ${
+                    language.level === "Nativo" || language.level === "Native"
+                      ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300"
+                      : "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
+                  }`}
+                >
+                  {language.level === "Nativo" || language.level === "Native"
+                    ? lang === "es"
+                      ? "Nativo"
+                      : "Native"
+                    : "B1"}
+                </span>
+              </div>
 
-        <div class="space-y-6 relative z-10">
-          {
-            languages.map((language) => (
-              <div class="p-6 rounded-2xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/50 dark:border-gray-700/50 hover:shadow-lg transition-all duration-300">
-                <div class="flex items-center justify-between mb-4">
-                  <h3 class="text-lg font-bold text-gray-900 dark:text-white">
-                    {language.name}
-                  </h3>
-                  <span
-                    class={`text-xs px-3 py-1 rounded-full font-semibold ${
-                      language.level === "Nativo" || language.level === "Native"
-                        ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300"
-                        : "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
-                    }`}
-                  >
+              <div class="space-y-3">
+                <div class="flex justify-between text-sm">
+                  <span class="text-gray-600 dark:text-gray-400">
+                    {lang === "es" ? "Proficiencia" : "Proficiency"}
+                  </span>
+                  <span class="font-bold text-gray-900 dark:text-white">
                     {language.level === "Nativo" || language.level === "Native"
-                      ? lang === "es"
-                        ? "Nativo"
-                        : "Native"
-                      : "B1"}
+                      ? "100%"
+                      : "70%"}
                   </span>
                 </div>
 
-                <div class="space-y-3">
-                  <div class="flex justify-between text-sm">
-                    <span class="text-gray-600 dark:text-gray-400">
-                      {lang === "es" ? "Proficiencia" : "Proficiency"}
-                    </span>
-                    <span class="font-bold text-gray-900 dark:text-white">
-                      {language.level === "Nativo" ||
-                      language.level === "Native"
-                        ? "100%"
-                        : "70%"}
-                    </span>
-                  </div>
-
-                  <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
-                    <div
-                      class={`h-3 rounded-full transition-all duration-1000 ease-out ${
-                        language.level === "Nativo" ||
-                        language.level === "Native"
-                          ? "bg-linear-to-r from-green-500 to-green-600 w-full"
-                          : "bg-linear-to-r from-blue-500 to-blue-600 w-[70%]"
-                      }`}
-                    />
-                  </div>
-
-                  <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">
-                    {language.level === "Nativo" || language.level === "Native"
-                      ? lang === "es"
-                        ? "Lengua materna • Dominio completo"
-                        : "Native language • Complete mastery"
-                      : lang === "es"
-                        ? "Competencia profesional • Comunicación fluida"
-                        : "Professional competency • Fluent communication"}
-                  </p>
+                <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
+                  <div
+                    class={`h-3 rounded-full transition-all duration-1000 ease-out ${
+                      language.level === "Nativo" || language.level === "Native"
+                        ? "bg-linear-to-r from-green-500 to-green-600 w-full"
+                        : "bg-linear-to-r from-blue-500 to-blue-600 w-[70%]"
+                    }`}
+                  />
                 </div>
+
+                <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">
+                  {language.level === "Nativo" || language.level === "Native"
+                    ? lang === "es"
+                      ? "Lengua materna • Dominio completo"
+                      : "Native language • Complete mastery"
+                    : lang === "es"
+                      ? "Competencia profesional • Comunicación fluida"
+                      : "Professional competency • Fluent communication"}
+                </p>
               </div>
-            ))
-          }
-        </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Soft Skills Card -->
+    <div
+      class="md:col-span-8 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 relative overflow-hidden group"
+    >
+      <div
+        class="absolute top-4 right-4 opacity-5 group-hover:opacity-10 transition-opacity"
+      >
+        <PiLightbulb className="w-32 h-32" />
       </div>
 
-      <!-- Soft Skills Card -->
-      <div
-        class="md:col-span-8 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 relative overflow-hidden group"
-      >
-        <div
-          class="absolute top-4 right-4 opacity-5 group-hover:opacity-10 transition-opacity"
-        >
-          <PiLightbulb className="w-32 h-32" />
+      <div class="flex items-center gap-3 mb-6">
+        <div class="p-2 rounded-xl bg-purple-100 dark:bg-purple-900/30">
+          <PiLightbulb
+            className="w-5 h-5 text-purple-600 dark:text-purple-400"
+          />
         </div>
+        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+          {lang === "es" ? "Habilidades Blandas" : "Soft Skills"}
+        </h2>
+      </div>
 
-        <div class="flex items-center gap-3 mb-6">
-          <div class="p-2 rounded-xl bg-purple-100 dark:bg-purple-900/30">
-            <PiLightbulb
-              className="w-5 h-5 text-purple-600 dark:text-purple-400"
-            />
-          </div>
-          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-            {lang === "es" ? "Habilidades Blandas" : "Soft Skills"}
-          </h2>
-        </div>
-
-        <div class="flex flex-wrap gap-2">
-          {
-            softSkills.map((skill) => (
-              <span class="px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-700 dark:hover:text-purple-300 transition-all duration-200">
-                {skill}
-              </span>
-            ))
-          }
-        </div>
+      <div class="flex flex-wrap gap-2">
+        {
+          softSkills.map((skill) => (
+            <span class="px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-700 dark:hover:text-purple-300 transition-all duration-200">
+              {skill}
+            </span>
+          ))
+        }
       </div>
     </div>
   </div>

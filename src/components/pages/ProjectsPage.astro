@@ -84,255 +84,251 @@ const projects = [
 ---
 
 <section>
-  <div class="max-w-6xl mx-auto">
-    <!-- Header -->
-    <div class="animate-slide-up text-center mb-12">
-      <h1
-        class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
-      >
-        {t("projects.title")}
-      </h1>
-      <p class="text-xl text-zinc-500 dark:text-zinc-400">
-        {t("projects.subtitle")}
-      </p>
-    </div>
-
-    <!-- Featured Projects - Bento Grid Layout -->
-    <div
-      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16 auto-rows-fr"
+  <!-- Header -->
+  <div class="animate-slide-up text-center mb-12">
+    <h1
+      class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
     >
-      {
-        projects
-          .filter((p) => p.featured)
-          .map((project, index) => (
+      {t("projects.title")}
+    </h1>
+    <p class="text-xl text-zinc-500 dark:text-zinc-400">
+      {t("projects.subtitle")}
+    </p>
+  </div>
+
+  <!-- Featured Projects - Bento Grid Layout -->
+  <div
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16 auto-rows-fr"
+  >
+    {
+      projects
+        .filter((p) => p.featured)
+        .map((project, index) => (
+          <div
+            class={`group relative rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-500 min-h-87.5 ${
+              index === 0
+                ? "lg:col-span-2 lg:row-span-2 lg:min-h-150"
+                : "md:min-h-50"
+            }`}
+          >
+            {/* Background Image with Overlay */}
+            <div class="absolute inset-0">
+              <Image
+                src={project.image}
+                alt={project.title}
+                width={800}
+                height={600}
+                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                loading="eager"
+                quality={80}
+              />
+              <div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-black/20 transition-all duration-500" />
+            </div>
+
+            {/* Content */}
             <div
-              class={`group relative rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-500 min-h-87.5 ${
-                index === 0
-                  ? "lg:col-span-2 lg:row-span-2 lg:min-h-150"
-                  : "md:min-h-50"
+              class={`relative h-full flex flex-col justify-end p-6 ${
+                index === 0 ? "md:p-8 lg:p-10" : "md:p-6"
               }`}
             >
-              {/* Background Image with Overlay */}
-              <div class="absolute inset-0">
-                <Image
-                  src={project.image}
-                  alt={project.title}
-                  width={800}
-                  height={600}
-                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="eager"
-                  quality={80}
-                />
-                <div class="absolute inset-0 bg-linear-to-t from-black via-black/40 to-black/20 transition-all duration-500" />
+              {/* Type Badge */}
+              <div class="absolute top-4 left-4">
+                <div
+                  class={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl backdrop-blur-md font-medium text-xs ${
+                    project.type === "work"
+                      ? "bg-blue-500/20 border border-blue-400/30 text-blue-200"
+                      : "bg-purple-500/20 border border-purple-400/30 text-purple-200"
+                  }`}
+                >
+                  {project.type === "work" ? (
+                    <>
+                      <PiBriefcase className="w-3.5 h-3.5" />
+                      {lang === "es" ? "Trabajo" : "Work"}
+                    </>
+                  ) : (
+                    <>
+                      <PiSparkle className="w-3.5 h-3.5" />
+                      {lang === "es" ? "Personal" : "Personal"}
+                    </>
+                  )}
+                </div>
               </div>
 
-              {/* Content */}
-              <div
-                class={`relative h-full flex flex-col justify-end p-6 ${
-                  index === 0 ? "md:p-8 lg:p-10" : "md:p-6"
-                }`}
-              >
-                {/* Type Badge */}
-                <div class="absolute top-4 left-4">
-                  <div
-                    class={`inline-flex items-center gap-2 px-3 py-1.5 rounded-xl backdrop-blur-md font-medium text-xs ${
-                      project.type === "work"
-                        ? "bg-blue-500/20 border border-blue-400/30 text-blue-200"
-                        : "bg-purple-500/20 border border-purple-400/30 text-purple-200"
-                    }`}
+              {/* Links - Top Right */}
+              <div class="absolute top-4 right-4 flex gap-2">
+                {project.demo && (
+                  <a
+                    href={project.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="p-2.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl hover:bg-white/20 hover:scale-110 transition-all duration-200 group/link"
+                    title={lang === "es" ? "Ver demo" : "View demo"}
                   >
-                    {project.type === "work" ? (
-                      <>
-                        <PiBriefcase className="w-3.5 h-3.5" />
-                        {lang === "es" ? "Trabajo" : "Work"}
-                      </>
-                    ) : (
-                      <>
-                        <PiSparkle className="w-3.5 h-3.5" />
-                        {lang === "es" ? "Personal" : "Personal"}
-                      </>
+                    <PiRocketLaunch className="w-4 h-4 text-white" />
+                  </a>
+                )}
+
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="p-2.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl hover:bg-white/20 hover:scale-110 transition-all duration-200 group/link"
+                    title={lang === "es" ? "Ver código" : "View code"}
+                  >
+                    <PiGithubLogo className="w-4 h-4 text-white" />
+                  </a>
+                )}
+              </div>
+
+              {/* Project Info */}
+              <div class="transform transition-all duration-300 group-hover:translate-y-1">
+                <h3
+                  class={`font-bold text-white mb-3 ${
+                    index === 0 ? "text-3xl md:text-4xl" : "text-xl md:text-2xl"
+                  }`}
+                >
+                  {project.title}
+                </h3>
+
+                <p
+                  class={`text-gray-300 leading-relaxed mb-4 ${
+                    index === 0
+                      ? "text-base md:text-lg max-w-2xl"
+                      : "text-sm line-clamp-2"
+                  }`}
+                >
+                  {project.description}
+                </p>
+
+                {/* Tech Stack */}
+                <div class="flex flex-wrap gap-2">
+                  {project.tech.slice(0, index === 0 ? 6 : 4).map((tech) => (
+                    <span class="px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-lg text-xs font-medium hover:bg-white/20 transition-colors">
+                      {tech}
+                    </span>
+                  ))}
+                  {project.tech.length > (index === 0 ? 6 : 4) && (
+                    <span class="px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/20 text-gray-300 rounded-lg text-xs">
+                      +{project.tech.length - (index === 0 ? 6 : 4)}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Hover Border Effect */}
+            <div class="absolute inset-0 border-2 border-transparent group-hover:border-blue-500/50 rounded-3xl transition-all duration-500 pointer-events-none" />
+          </div>
+        ))
+    }
+  </div>
+
+  <!-- Other Projects -->
+  {
+    projects.filter((p) => !p.featured).length > 0 && (
+      <div>
+        <div class="flex items-center gap-3 mb-8">
+          <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
+            {lang === "es" ? "Más Proyectos" : "More Projects"}
+          </h2>
+          <div class="flex-1 h-px bg-linear-to-r from-gray-300 dark:from-gray-700 to-transparent" />
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {projects
+            .filter((p) => !p.featured)
+            .map((project) => (
+              <div class="group relative rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-300">
+                {/* Image */}
+                <div class="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-800">
+                  <Image
+                    src={project.image}
+                    alt={project.title}
+                    width={600}
+                    height={400}
+                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    loading="lazy"
+                    quality={75}
+                  />
+                  <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
+
+                  {/* Type Badge */}
+                  <div class="absolute top-3 left-3">
+                    <div
+                      class={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg backdrop-blur-sm font-medium text-xs ${
+                        project.type === "work"
+                          ? "bg-blue-500/30 border border-blue-400/40 text-white"
+                          : "bg-purple-500/30 border border-purple-400/40 text-white"
+                      }`}
+                    >
+                      {project.type === "work" ? (
+                        <PiBriefcase className="w-3 h-3" />
+                      ) : (
+                        <PiSparkle className="w-3 h-3" />
+                      )}
+                      {project.type === "work"
+                        ? lang === "es"
+                          ? "Trabajo"
+                          : "Work"
+                        : lang === "es"
+                          ? "Personal"
+                          : "Personal"}
+                    </div>
+                  </div>
+
+                  {/* Quick Links */}
+                  <div class="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-all"
+                      >
+                        <PiRocketLaunch className="w-4 h-4 text-white" />
+                      </a>
+                    )}
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-all"
+                      >
+                        <PiGithubLogo className="w-4 h-4 text-white" />
+                      </a>
                     )}
                   </div>
                 </div>
 
-                {/* Links - Top Right */}
-                <div class="absolute top-4 right-4 flex gap-2">
-                  {project.demo && (
-                    <a
-                      href={project.demo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="p-2.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl hover:bg-white/20 hover:scale-110 transition-all duration-200 group/link"
-                      title={lang === "es" ? "Ver demo" : "View demo"}
-                    >
-                      <PiRocketLaunch className="w-4 h-4 text-white" />
-                    </a>
-                  )}
-
-                  {project.github && (
-                    <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="p-2.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl hover:bg-white/20 hover:scale-110 transition-all duration-200 group/link"
-                      title={lang === "es" ? "Ver código" : "View code"}
-                    >
-                      <PiGithubLogo className="w-4 h-4 text-white" />
-                    </a>
-                  )}
-                </div>
-
-                {/* Project Info */}
-                <div class="transform transition-all duration-300 group-hover:translate-y-1">
-                  <h3
-                    class={`font-bold text-white mb-3 ${
-                      index === 0
-                        ? "text-3xl md:text-4xl"
-                        : "text-xl md:text-2xl"
-                    }`}
-                  >
+                {/* Content */}
+                <div class="p-5">
+                  <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                     {project.title}
                   </h3>
-
-                  <p
-                    class={`text-gray-300 leading-relaxed mb-4 ${
-                      index === 0
-                        ? "text-base md:text-lg max-w-2xl"
-                        : "text-sm line-clamp-2"
-                    }`}
-                  >
+                  <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
                     {project.description}
                   </p>
 
                   {/* Tech Stack */}
-                  <div class="flex flex-wrap gap-2">
-                    {project.tech.slice(0, index === 0 ? 6 : 4).map((tech) => (
-                      <span class="px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-lg text-xs font-medium hover:bg-white/20 transition-colors">
+                  <div class="flex flex-wrap gap-1.5">
+                    {project.tech.slice(0, 3).map((tech) => (
+                      <span class="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md text-xs font-medium">
                         {tech}
                       </span>
                     ))}
-                    {project.tech.length > (index === 0 ? 6 : 4) && (
-                      <span class="px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/20 text-gray-300 rounded-lg text-xs">
-                        +{project.tech.length - (index === 0 ? 6 : 4)}
+                    {project.tech.length > 3 && (
+                      <span class="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-md text-xs">
+                        +{project.tech.length - 3}
                       </span>
                     )}
                   </div>
                 </div>
               </div>
-
-              {/* Hover Border Effect */}
-              <div class="absolute inset-0 border-2 border-transparent group-hover:border-blue-500/50 rounded-3xl transition-all duration-500 pointer-events-none" />
-            </div>
-          ))
-      }
-    </div>
-
-    <!-- Other Projects -->
-    {
-      projects.filter((p) => !p.featured).length > 0 && (
-        <div>
-          <div class="flex items-center gap-3 mb-8">
-            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-              {lang === "es" ? "Más Proyectos" : "More Projects"}
-            </h2>
-            <div class="flex-1 h-px bg-linear-to-r from-gray-300 dark:from-gray-700 to-transparent" />
-          </div>
-
-          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-            {projects
-              .filter((p) => !p.featured)
-              .map((project) => (
-                <div class="group relative rounded-2xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 overflow-hidden hover:shadow-xl hover:border-blue-300 dark:hover:border-blue-700 transition-all duration-300">
-                  {/* Image */}
-                  <div class="relative h-48 overflow-hidden bg-gray-100 dark:bg-gray-800">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      width={600}
-                      height={400}
-                      class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                      loading="lazy"
-                      quality={75}
-                    />
-                    <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
-
-                    {/* Type Badge */}
-                    <div class="absolute top-3 left-3">
-                      <div
-                        class={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg backdrop-blur-sm font-medium text-xs ${
-                          project.type === "work"
-                            ? "bg-blue-500/30 border border-blue-400/40 text-white"
-                            : "bg-purple-500/30 border border-purple-400/40 text-white"
-                        }`}
-                      >
-                        {project.type === "work" ? (
-                          <PiBriefcase className="w-3 h-3" />
-                        ) : (
-                          <PiSparkle className="w-3 h-3" />
-                        )}
-                        {project.type === "work"
-                          ? lang === "es"
-                            ? "Trabajo"
-                            : "Work"
-                          : lang === "es"
-                            ? "Personal"
-                            : "Personal"}
-                      </div>
-                    </div>
-
-                    {/* Quick Links */}
-                    <div class="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      {project.demo && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-all"
-                        >
-                          <PiRocketLaunch className="w-4 h-4 text-white" />
-                        </a>
-                      )}
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          class="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-all"
-                        >
-                          <PiGithubLogo className="w-4 h-4 text-white" />
-                        </a>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div class="p-5">
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                      {project.title}
-                    </h3>
-                    <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
-                      {project.description}
-                    </p>
-
-                    {/* Tech Stack */}
-                    <div class="flex flex-wrap gap-1.5">
-                      {project.tech.slice(0, 3).map((tech) => (
-                        <span class="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md text-xs font-medium">
-                          {tech}
-                        </span>
-                      ))}
-                      {project.tech.length > 3 && (
-                        <span class="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400 rounded-md text-xs">
-                          +{project.tech.length - 3}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </div>
+            ))}
         </div>
-      )
-    }
-  </div>
+      </div>
+    )
+  }
 </section>
