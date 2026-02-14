@@ -1,9 +1,9 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import Navbar from "../components/Navbar.astro";
+import Antigravity from "../components/reactbits/animations/antigravity";
 import "../styles/global.css";
 import { PiHeartDuotone } from "react-icons/pi";
-import DarkVeil from "../components/backgrounds/DarkVeil";
 
 export interface Props {
   title: string;
@@ -99,28 +99,32 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
   <body
     class="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-50 flex flex-col"
   >
-    <!-- DarkVeil Background Effect -->
-    <div
-      class="fixed inset-0 w-screen h-screen"
-      style="z-index: -2;"
-      transition:persist="background-darkveil"
-    >
-      <DarkVeil
-        client:load
-        hueShift={0}
-        noiseIntensity={0.15}
-        scanlineIntensity={0}
-        speed={0.5}
-        scanlineFrequency={0}
-        warpAmount={0.3}
-        resolutionScale={0.6}
-      />
-    </div>
-
     <!-- Background Pattern -->
     <div
       class="fixed inset-0 z-[-1] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[30px_30px]"
     >
+    </div>
+
+    <!-- Antigravity Background -->
+    <div class="fixed inset-0 z-[-1] pointer-events-none opacity-30 dark:opacity-40">
+      <Antigravity
+        client:load
+        count={200}
+        magnetRadius={12}
+        ringRadius={8}
+        waveSpeed={0.3}
+        waveAmplitude={0.8}
+        particleSize={1.5}
+        lerpSpeed={0.08}
+        color="#3b82f6"
+        autoAnimate
+        particleVariance={0.8}
+        rotationSpeed={0.1}
+        depthFactor={0.5}
+        pulseSpeed={2}
+        particleShape="capsule"
+        fieldStrength={8}
+      />
     </div>
 
     <Navbar transition:persist="navbar" />
