@@ -60,211 +60,208 @@ const interests = [
 ---
 
 <section>
-  <div class="max-w-6xl mx-auto">
+  <div
+    class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[minmax(180px,auto)]"
+  >
+    <!-- Hero Section -->
     <div
-      class="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 auto-rows-[minmax(180px,auto)]"
+      class="md:col-span-2 md:row-span-2 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-200 dark:border-zinc-800 p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group"
     >
-      <!-- Hero Section -->
       <div
-        class="md:col-span-2 md:row-span-2 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-200 dark:border-zinc-800 p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group"
+        class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"
       >
-        <div
-          class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"
-        >
-          <PiCode className="w-24 md:w-32 h-24 md:h-32" />
-        </div>
-
-        <div class="z-10">
-          <div
-            class="inline-flex items-center align-middle gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium mb-4 md:mb-6"
-          >
-            <span class="relative flex h-2 w-2">
-              <span
-                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"
-              ></span>
-              <span
-                class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"
-              ></span>
-            </span>
-            {t("home.available")}
-          </div>
-
-          <h1
-            class="text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-900 dark:text-white mb-3 md:mb-4 tracking-tight"
-          >
-            {t("hero.greeting")}
-            <span class="text-blue-600 dark:text-blue-400">David Herrera</span>
-          </h1>
-          <p
-            class="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-lg leading-relaxed"
-          >
-            {t("hero.title")}
-          </p>
-          <p
-            class="mt-3 md:mt-4 text-sm md:text-base text-zinc-500 dark:text-zinc-500 max-w-lg"
-          >
-            {t("hero.description")}
-          </p>
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-3 md:gap-4 mt-6 md:mt-8 z-10">
-          <a
-            href={lang === "es" ? "/contact" : "/en/contact"}
-            class="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-zinc-900 font-medium hover:scale-105 transition-transform text-sm md:text-base"
-          >
-            {t("common.contactMe")}
-            <PiArrowRightBold className="w-4 h-4" />
-          </a>
-        </div>
+        <PiCode className="w-24 md:w-32 h-24 md:h-32" />
       </div>
 
-      <!-- Photo -->
-      <div
-        class="md:col-span-1 md:row-span-2 rounded-3xl bg-blue-100 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 p-4 flex items-center justify-center relative overflow-hidden min-h-50 md:min-h-0"
-      >
+      <div class="z-10">
         <div
-          class="w-32 h-32 md:w-44 md:h-44 lg:w-56 lg:h-56 flex items-center justify-center"
+          class="inline-flex items-center align-middle gap-2 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium mb-4 md:mb-6"
         >
-          <Image
-            src="/assets/dh.webp"
-            alt="David Herrera Logo"
-            width={224}
-            height={224}
-            class="w-full h-full rounded-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
-            loading="eager"
+          <span class="relative flex h-2 w-2">
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"
+            ></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"
+            ></span>
+          </span>
+          {t("home.available")}
+        </div>
+
+        <h1
+          class="text-3xl md:text-4xl lg:text-5xl font-bold text-zinc-900 dark:text-white mb-3 md:mb-4 tracking-tight"
+        >
+          {t("hero.greeting")}
+          <span class="text-blue-600 dark:text-blue-400">David Herrera</span>
+        </h1>
+        <p
+          class="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-lg leading-relaxed"
+        >
+          {t("hero.title")}
+        </p>
+        <p
+          class="mt-3 md:mt-4 text-sm md:text-base text-zinc-500 dark:text-zinc-500 max-w-lg"
+        >
+          {t("hero.description")}
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-3 md:gap-4 mt-6 md:mt-8 z-10">
+        <a
+          href={lang === "es" ? "/contact" : "/en/contact"}
+          class="inline-flex items-center justify-center gap-2 px-5 md:px-6 py-2.5 md:py-3 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-zinc-900 font-medium hover:scale-105 transition-transform text-sm md:text-base"
+        >
+          {t("common.contactMe")}
+          <PiArrowRightBold className="w-4 h-4" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Photo -->
+    <div
+      class="md:col-span-1 md:row-span-2 rounded-3xl bg-blue-100 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/50 p-4 flex items-center justify-center relative overflow-hidden min-h-50 md:min-h-0"
+    >
+      <div
+        class="w-32 h-32 md:w-44 md:h-44 lg:w-56 lg:h-56 flex items-center justify-center"
+      >
+        <Image
+          src="/assets/dh.webp"
+          alt="David Herrera Logo"
+          width={224}
+          height={224}
+          class="w-full h-full rounded-full object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+          loading="eager"
+        />
+      </div>
+    </div>
+
+    <!-- Current Experience -->
+    <div
+      class="md:col-span-1 rounded-3xl bg-gray-900 dark:bg-white text-white dark:text-zinc-900 p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group min-h-60 md:min-h-0"
+    >
+      <div
+        class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-15 transition-opacity"
+      >
+        <PiBriefcase className="w-20 md:w-24 h-20 md:h-24" />
+      </div>
+
+      <div class="relative z-10">
+        <div class="flex items-center gap-2 mb-3 md:mb-4">
+          <span class="relative flex h-2 w-2">
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+            ></span>
+            <span
+              class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"
+            ></span>
+          </span>
+          <h3 class="text-xs font-medium uppercase tracking-wider opacity-70">
+            {t("home.currentRole")}
+          </h3>
+        </div>
+
+        <div class="mb-4 md:mb-6">
+          <h4 class="text-xl md:text-2xl font-bold mb-1">
+            {currentJob.company}
+          </h4>
+          <p class="text-base md:text-lg opacity-90">{currentJob.role}</p>
+        </div>
+
+        <p class="text-xs opacity-60 font-mono">{currentJob.period}</p>
+      </div>
+
+      <div class="relative z-10 mt-6 md:mt-8">
+        <a
+          href={lang === "es" ? "/work" : "/en/work"}
+          class="inline-flex items-center gap-2 text-xs md:text-sm font-medium hover:opacity-80 transition-opacity"
+        >
+          {t("home.viewResume")}
+          <PiArrowRightBold className="w-3 h-3 md:w-4 md:h-4" />
+        </a>
+      </div>
+    </div>
+
+    <!-- About Snapshot -->
+    <div
+      class="md:col-span-2 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-200 dark:border-zinc-800 p-5 md:p-8"
+    >
+      <div class="flex items-center gap-3 mb-4">
+        <div
+          class="w-10 h-10 rounded-2xl bg-gray-200/50 dark:bg-gray-800 flex items-center justify-center"
+        >
+          <PiHeartDuotone
+            className="w-5 h-5 text-zinc-600 dark:text-zinc-400"
           />
         </div>
+        <h3
+          class="text-base md:text-xl font-bold text-zinc-900 dark:text-white"
+        >
+          {lang === "es" ? "Sobre mí" : "About me"}
+        </h3>
+        <!-- boton de mas información -->
+        <a
+          class="ml-auto inline-flex items-center gap-1 text-sm md:text-base font-medium text-blue-600 dark:text-blue-400 hover:underline"
+          href={lang === "es" ? "/about" : "/en/about"}
+        >
+          {lang === "es" ? "Más información" : "Learn more"}
+          <PiArrowRightBold className="w-4 h-4" />
+        </a>
       </div>
 
-      <!-- Current Experience -->
-      <div
-        class="md:col-span-1 rounded-3xl bg-gray-900 dark:bg-white text-white dark:text-zinc-900 p-6 md:p-8 flex flex-col justify-between relative overflow-hidden group min-h-60 md:min-h-0"
+      <p
+        class="text-sm md:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl"
       >
-        <div
-          class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-15 transition-opacity"
-        >
-          <PiBriefcase className="w-20 md:w-24 h-20 md:h-24" />
-        </div>
+        {
+          lang === "es"
+            ? "Ingeniero de Software y Datos enfocado en crear productos con IA, sistemas escalables y experiencias claras para el negocio."
+            : "Software & Data Engineer focused on AI products, scalable systems, and clear business outcomes."
+        }
+      </p>
 
-        <div class="relative z-10">
-          <div class="flex items-center gap-2 mb-3 md:mb-4">
-            <span class="relative flex h-2 w-2">
-              <span
-                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
-              ></span>
-              <span
-                class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"
-              ></span>
-            </span>
-            <h3 class="text-xs font-medium uppercase tracking-wider opacity-70">
-              {t("home.currentRole")}
-            </h3>
-          </div>
-
-          <div class="mb-4 md:mb-6">
-            <h4 class="text-xl md:text-2xl font-bold mb-1">
-              {currentJob.company}
-            </h4>
-            <p class="text-base md:text-lg opacity-90">{currentJob.role}</p>
-          </div>
-
-          <p class="text-xs opacity-60 font-mono">{currentJob.period}</p>
-        </div>
-
-        <div class="relative z-10 mt-6 md:mt-8">
-          <a
-            href={lang === "es" ? "/work" : "/en/work"}
-            class="inline-flex items-center gap-2 text-xs md:text-sm font-medium hover:opacity-80 transition-opacity"
-          >
-            {t("home.viewResume")}
-            <PiArrowRightBold className="w-3 h-3 md:w-4 md:h-4" />
-          </a>
-        </div>
-      </div>
-
-      <!-- About Snapshot -->
-      <div
-        class="md:col-span-2 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-200 dark:border-zinc-800 p-5 md:p-8"
-      >
-        <div class="flex items-center gap-3 mb-4">
-          <div
-            class="w-10 h-10 rounded-2xl bg-gray-200/50 dark:bg-gray-800 flex items-center justify-center"
-          >
-            <PiHeartDuotone
-              className="w-5 h-5 text-zinc-600 dark:text-zinc-400"
-            />
-          </div>
-          <h3
-            class="text-base md:text-xl font-bold text-zinc-900 dark:text-white"
-          >
-            {lang === "es" ? "Sobre mí" : "About me"}
-          </h3>
-          <!-- boton de mas información -->
-           <a
-            class="ml-auto inline-flex items-center gap-1 text-sm md:text-base font-medium text-blue-600 dark:text-blue-400 hover:underline"
-            href={lang === "es" ? "/about" : "/en/about"}
-          >
-            {lang === "es" ? "Más información" : "Learn more"}
-            <PiArrowRightBold className="w-4 h-4" />
-          </a>
-        </div>
-
-        <p
-          class="text-sm md:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed max-w-3xl"
-        >
-          {
-            lang === "es"
-              ? "Ingeniero de Software y Datos enfocado en crear productos con IA, sistemas escalables y experiencias claras para el negocio."
-              : "Software & Data Engineer focused on AI products, scalable systems, and clear business outcomes."
-          }
-        </p>
-
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
-          {
-            quickFacts.map((fact) => (
-              <div class="bg-white dark:bg-gray-800/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-3">
-                <div
-                  class={`w-9 h-9 rounded-xl mb-2 flex items-center justify-center ${
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
+        {
+          quickFacts.map((fact) => (
+            <div class="bg-white dark:bg-gray-800/50 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-3">
+              <div
+                class={`w-9 h-9 rounded-xl mb-2 flex items-center justify-center ${
+                  fact.color === "blue"
+                    ? "bg-blue-500/10 dark:bg-blue-500/20"
+                    : fact.color === "emerald"
+                      ? "bg-emerald-500/10 dark:bg-emerald-500/20"
+                      : fact.color === "violet"
+                        ? "bg-violet-500/10 dark:bg-violet-500/20"
+                        : "bg-amber-500/10 dark:bg-amber-500/20"
+                }`}
+              >
+                <fact.icon
+                  className={`w-4 h-4 ${
                     fact.color === "blue"
-                      ? "bg-blue-500/10 dark:bg-blue-500/20"
+                      ? "text-blue-600 dark:text-blue-400"
                       : fact.color === "emerald"
-                        ? "bg-emerald-500/10 dark:bg-emerald-500/20"
+                        ? "text-emerald-600 dark:text-emerald-400"
                         : fact.color === "violet"
-                          ? "bg-violet-500/10 dark:bg-violet-500/20"
-                          : "bg-amber-500/10 dark:bg-amber-500/20"
+                          ? "text-violet-600 dark:text-violet-400"
+                          : "text-amber-600 dark:text-amber-400"
                   }`}
-                >
-                  <fact.icon
-                    className={`w-4 h-4 ${
-                      fact.color === "blue"
-                        ? "text-blue-600 dark:text-blue-400"
-                        : fact.color === "emerald"
-                          ? "text-emerald-600 dark:text-emerald-400"
-                          : fact.color === "violet"
-                            ? "text-violet-600 dark:text-violet-400"
-                            : "text-amber-600 dark:text-amber-400"
-                    }`}
-                  />
-                </div>
-                <p class="text-xs md:text-sm font-medium text-zinc-900 dark:text-white">
-                  {fact.label}
-                </p>
+                />
               </div>
-            ))
-          }
-        </div>
-        <div class="flex flex-wrap gap-2 mt-5">
-          {
-            interests.map((interest) => (
-              <div class="flex items-center gap-2 px-3 py-2 bg-gray-200/50 dark:bg-gray-800 rounded-full">
-                <interest.icon className="w-4 h-4 text-zinc-600 dark:text-zinc-400" />
-                <span class="text-xs md:text-sm text-zinc-700 dark:text-zinc-300">
-                  {interest.label}
-                </span>
-              </div>
-            ))
-          }
-        </div>
+              <p class="text-xs md:text-sm font-medium text-zinc-900 dark:text-white">
+                {fact.label}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+      <div class="flex flex-wrap gap-2 mt-5">
+        {
+          interests.map((interest) => (
+            <div class="flex items-center gap-2 px-3 py-2 bg-gray-200/50 dark:bg-gray-800 rounded-full">
+              <interest.icon className="w-4 h-4 text-zinc-600 dark:text-zinc-400" />
+              <span class="text-xs md:text-sm text-zinc-700 dark:text-zinc-300">
+                {interest.label}
+              </span>
+            </div>
+          ))
+        }
       </div>
     </div>
   </div>

@@ -106,7 +106,9 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     </div>
 
     <!-- Antigravity Background -->
-    <div class="fixed inset-0 z-[-1] pointer-events-none opacity-30 dark:opacity-40">
+    <div
+      class="fixed inset-0 z-[-1] pointer-events-none opacity-30 dark:opacity-40"
+    >
       <Antigravity
         client:load
         count={200}
@@ -130,33 +132,33 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     <Navbar transition:persist="navbar" />
 
     <main
-      class="grow pt-26 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full"
+      class="grow pt-26 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full"
     >
       <slot />
     </main>
 
     <footer
-      class="bg-white/70 dark:bg-gray-950/70 backdrop-blur-xl border-t border-gray-200 dark:border-gray-800 py-8 px-6 mt-auto"
+      class="bg-white/70 dark:bg-gray-950/70 backdrop-blur-xl border-t border-gray-200 dark:border-gray-800 py-6 px-6 mt-auto"
       transition:persist="footer"
     >
       <div
         class="max-w-7xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm"
       >
         <p
-          class="flex flex-col sm:flex-row sm:justify-center sm:items-center gap-2 justify-center items-center"
+          class="flex sm:justify-center sm:items-center justify-center items-center"
         >
           &copy; {new Date().getFullYear()} David Herrera.
           {
             lang === "es" ? (
-              <>
+              <span class="hidden md:flex items-center gap-1">
                 Hecho con <PiHeartDuotone size={20} className="text-red-500" />{" "}
                 desde México.
-              </>
+              </span>
             ) : (
-              <>
+              <span class="hidden md:flex items-center gap-1">
                 Made with <PiHeartDuotone size={20} className="text-red-500" />{" "}
                 from Mexico.
-              </>
+              </span>
             )
           }
         </p>

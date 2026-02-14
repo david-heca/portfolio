@@ -4,7 +4,7 @@ import { getLangFromUrl, useTranslations } from "../i18n/utils";
 import ThemeToggle from "./ThemeToggle.astro";
 import LanguagePicker from "./LanguagePicker.astro";
 import {
-  PiHouse,
+  PiHouseLine,
   PiUser,
   PiCode,
   PiBriefcase,
@@ -18,7 +18,11 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const navItems = [
-  { href: lang === "es" ? "/" : "/en", label: t("nav.home"), icon: PiHouse },
+  {
+    href: lang === "es" ? "/" : "/en",
+    label: t("nav.home"),
+    icon: PiHouseLine,
+  },
   {
     href: lang === "es" ? "/about" : "/en/about",
     label: t("nav.about"),
@@ -68,12 +72,12 @@ function isActive(href: string): boolean {
   </div>
 
   <div
-    class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
+    class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
   >
     <!-- Logo -->
     <a
       href={lang === "es" ? "/" : "/en"}
-      class="flex items-center gap-2 font-bold text-xl tracking-tight text-gray-900 dark:text-white hover:opacity-80 transition-opacity"
+      class="flex items-center gap-2 font-bold text-lg tracking-tight text-gray-900 dark:text-white hover:opacity-80 transition-opacity"
     >
       <Image
         src="/assets/dh.webp"
@@ -87,7 +91,7 @@ function isActive(href: string): boolean {
     </a>
 
     <!-- Desktop Nav -->
-    <nav class="hidden md:flex items-center gap-1">
+    <nav class="hidden xl:flex items-center gap-1">
       {
         navItems.map((item) => (
           <a
@@ -115,7 +119,7 @@ function isActive(href: string): boolean {
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-btn"
-        class="md:hidden p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+        class="xl:hidden p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
         aria-label="Toggle menu"
       >
         <svg
@@ -138,11 +142,11 @@ function isActive(href: string): boolean {
   <!-- Mobile Menu Overlay -->
   <div
     id="mobile-menu"
-    class="fixed inset-0 z-40 bg-white dark:bg-gray-950 transform translate-x-full transition-transform duration-300 ease-in-out md:hidden pt-20 px-6"
+    class="fixed inset-0 z-40 bg-white dark:bg-gray-950 transform translate-x-full transition-transform duration-300 ease-in-out xl:hidden pt-20 px-6"
   >
     <a
       href={lang === "es" ? "/" : "/en"}
-      class="absolute top-6 left-5 flex items-center gap-2 font-bold text-xl tracking-tight text-gray-900 dark:text-white hover:opacity-80 transition-opacity"
+      class="absolute top-6 left-5 flex items-center gap-2 font-bold text-lg tracking-tight text-gray-900 dark:text-white hover:opacity-80 transition-opacity"
     >
       <Image
         src="/assets/dh.webp"
@@ -167,7 +171,7 @@ function isActive(href: string): boolean {
           <a
             href={item.href}
             data-astro-prefetch
-            class={`px-4 py-3 rounded-xl text-lg font-medium transition-all duration-200 flex items-center gap-3 ${
+            class={`px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 flex items-center gap-3 ${
               isActive(item.href)
                 ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
                 : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50"
