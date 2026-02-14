@@ -1,7 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import Navbar from "@ui/Navbar.astro";
-import Antigravity from "@animations/Antigravity";
 import "@styles/global.css";
 import { PiHeartDuotone } from "react-icons/pi";
 
@@ -114,30 +113,6 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     <div
       class="fixed inset-0 z-[-1] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[30px_30px]"
     >
-    </div>
-
-    <!-- Antigravity Background -->
-    <div
-      class="fixed inset-0 z-[-1] pointer-events-none opacity-30 dark:opacity-40"
-    >
-      <Antigravity
-        client:idle
-        count={100}
-        magnetRadius={12}
-        ringRadius={6}
-        waveSpeed={0.3}
-        waveAmplitude={0.8}
-        particleSize={1}
-        lerpSpeed={0.08}
-        color="#3b82f6"
-        autoAnimate
-        particleVariance={0.8}
-        rotationSpeed={0.1}
-        depthFactor={0.5}
-        pulseSpeed={2}
-        particleShape="capsule"
-        fieldStrength={8}
-      />
     </div>
 
     <Navbar transition:persist="navbar" />
