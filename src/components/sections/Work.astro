@@ -19,112 +19,75 @@ const t = useTranslations(lang);
 const experiences = [
   {
     id: 1,
-    company: "BAACC Systems S.A. de C.V.",
-    totalPeriod: lang === "es" ? "2023 Sep - Actualidad" : "Sep 2023 - Present",
-    totalDuration: lang === "es" ? "2 años 6 meses" : "2 yrs 6 mos",
-    location:
-      lang === "es" ? "Estado de México, México" : "Mexico State, Mexico",
-    workMode: lang === "es" ? "Presencial" : "On-site",
+    company: t("work.companies.baacc.name"),
+    totalPeriod: t("work.companies.baacc.totalPeriod"),
+    totalDuration: t("work.companies.baacc.totalDuration"),
+    location: t("work.companies.baacc.location"),
+    workMode: t("work.companies.baacc.workMode"),
     logo: "/assets/company/baacc.webp",
     roles: [
       {
-        title:
-          lang === "es"
-            ? "Arquitecto de Soluciones de IA"
-            : "AI Solutions Architect",
-        period: lang === "es" ? "Mar 2025 - Actualidad" : "Mar 2025 - Present",
-        duration: lang === "es" ? "1 año" : "1 yr",
-        type: lang === "es" ? "Tiempo Completo" : "Full-time",
-        location: lang === "es" ? "México" : "Mexico",
-        achievements:
-          lang === "es"
-            ? [
-                "Diseño e implementación de aplicaciones inteligentes utilizando LLMs",
-                "Integración de servidores y clientes MCP para habilitar flujos de trabajo autónomos",
-                "Diseño y desarrollo de arquitecturas RAG (Retrieval-Augmented Generation)",
-                "Evaluación continua e investigación de nuevas tecnologías en IA generativa y MLOps",
-              ]
-            : [
-                "Design and implementation of intelligent applications using LLMs",
-                "Integration of MCP servers and clients to enable autonomous workflows",
-                "Design and development of RAG (Retrieval-Augmented Generation) architectures",
-                "Continuous evaluation and research of new technologies in generative AI and MLOps",
-              ],
+        title: t("work.companies.baacc.roles.architect.title"),
+        period: t("work.companies.baacc.roles.architect.period"),
+        duration: t("work.companies.baacc.roles.architect.duration"),
+        type: t("work.companies.baacc.roles.architect.type"),
+        location: t("work.companies.baacc.roles.architect.location"),
+        achievements: [
+          t("work.companies.baacc.roles.architect.achievements.0"),
+          t("work.companies.baacc.roles.architect.achievements.1"),
+          t("work.companies.baacc.roles.architect.achievements.2"),
+          t("work.companies.baacc.roles.architect.achievements.3"),
+        ],
         technologies: ["LLM", "MCP", "RAG", "MLOps", "APIs"],
       },
       {
-        title: lang === "es" ? "Fullstack Developer" : "Fullstack Developer",
-        period: lang === "es" ? "Ene 2024 - Mar 2025" : "Jan 2024 - Mar 2025",
-        duration: lang === "es" ? "1 año 3 meses" : "1 yr 3 mos",
-        type: lang === "es" ? "Tiempo Completo" : "Full-time",
-        location: lang === "es" ? "Estado de México" : "Mexico State",
-        achievements:
-          lang === "es"
-            ? [
-                "Desarrollo de aplicaciones de escritorio con .NET y Python para entornos industriales",
-                "Creación de aplicaciones web con JavaScript, .NET y DevExpress",
-                "Diseño y administración de bases de datos en SQL Server y PostgreSQL",
-                "Desarrollo de aplicaciones móviles Android con RFID para seguimiento y trazabilidad",
-              ]
-            : [
-                "Desktop apps with .NET and Python for industrial environments",
-                "Web apps with JavaScript, .NET and DevExpress",
-                "Database design and administration in SQL Server and PostgreSQL",
-                "Android mobile apps with RFID for tracking and traceability",
-              ],
+        title: t("work.companies.baacc.roles.fullstack.title"),
+        period: t("work.companies.baacc.roles.fullstack.period"),
+        duration: t("work.companies.baacc.roles.fullstack.duration"),
+        type: t("work.companies.baacc.roles.fullstack.type"),
+        location: t("work.companies.baacc.roles.fullstack.location"),
+        achievements: [
+          t("work.companies.baacc.roles.fullstack.achievements.0"),
+          t("work.companies.baacc.roles.fullstack.achievements.1"),
+          t("work.companies.baacc.roles.fullstack.achievements.2"),
+          t("work.companies.baacc.roles.fullstack.achievements.3"),
+        ],
         technologies: [".NET", "Python", "SQL Server", "PostgreSQL", "Android"],
       },
       {
-        title:
-          lang === "es"
-            ? "Fullstack Developer Jr."
-            : "Junior Fullstack Developer",
-        period: lang === "es" ? "Sep 2023 - Ene 2024" : "Sep 2023 - Jan 2024",
-        duration: lang === "es" ? "5 meses" : "5 mos",
-        type: lang === "es" ? "Prácticas" : "Internship",
-        location: lang === "es" ? "Estado de México" : "Mexico State",
-        achievements:
-          lang === "es"
-            ? [
-                "Apoyo en desarrollo de módulos web y APIs internas",
-                "Mantenimiento de bases de datos y documentación técnica",
-              ]
-            : [
-                "Support in web module development and internal APIs",
-                "Database maintenance and technical documentation",
-              ],
+        title: t("work.companies.baacc.roles.junior.title"),
+        period: t("work.companies.baacc.roles.junior.period"),
+        duration: t("work.companies.baacc.roles.junior.duration"),
+        type: t("work.companies.baacc.roles.junior.type"),
+        location: t("work.companies.baacc.roles.junior.location"),
+        achievements: [
+          t("work.companies.baacc.roles.junior.achievements.0"),
+          t("work.companies.baacc.roles.junior.achievements.1"),
+        ],
         technologies: ["MVC", "SQL Server", "APIs"],
       },
     ],
   },
   {
     id: 2,
-    company: "DEC Marketing",
-    totalPeriod: "Mar 2022 - Sep 2023",
-    totalDuration: lang === "es" ? "1 año 7 meses" : "1 yr 7 mos",
-    location:
-      lang === "es" ? "Ciudad de México, México" : "Mexico City, Mexico",
-    workMode: lang === "es" ? "Remoto" : "Remote",
+    company: t("work.companies.dec.name"),
+    totalPeriod: t("work.companies.dec.totalPeriod"),
+    totalDuration: t("work.companies.dec.totalDuration"),
+    location: t("work.companies.dec.location"),
+    workMode: t("work.companies.dec.workMode"),
     logo: "/assets/company/dec.webp",
     roles: [
       {
-        title: lang === "es" ? "Web Developer Jr." : "Junior Web Developer",
-        period: "Mar 2022 - Sep 2023",
-        duration: lang === "es" ? "1 año 7 meses" : "1 yr 7 mos",
-        type: lang === "es" ? "Prácticas" : "Internship",
-        location: lang === "es" ? "Ciudad de México" : "Mexico City",
-        achievements:
-          lang === "es"
-            ? [
-                "Desarrollo y soporte de sitios web con HTML, CSS, JavaScript y CMS (WordPress, Joomla, OpenCart)",
-                "Administración de hosting, certificados de seguridad y dominios",
-                "Gestión de cuentas de correo electrónico corporativas",
-              ]
-            : [
-                "Website development and support with HTML, CSS, JavaScript and CMS (WordPress, Joomla, OpenCart)",
-                "Hosting, security certificates and domain administration",
-                "Corporate email account management",
-              ],
+        title: t("work.companies.dec.roles.webdev.title"),
+        period: t("work.companies.dec.roles.webdev.period"),
+        duration: t("work.companies.dec.roles.webdev.duration"),
+        type: t("work.companies.dec.roles.webdev.type"),
+        location: t("work.companies.dec.roles.webdev.location"),
+        achievements: [
+          t("work.companies.dec.roles.webdev.achievements.0"),
+          t("work.companies.dec.roles.webdev.achievements.1"),
+          t("work.companies.dec.roles.webdev.achievements.2"),
+        ],
         technologies: ["HTML", "CSS", "JavaScript", "WordPress", "Joomla"],
       },
     ],
@@ -239,7 +202,7 @@ const experiences = [
                           <PiLightning className="w-4 h-4 text-green-600 dark:text-green-400" />
                         </div>
                         <h5 class="text-sm font-semibold text-gray-900 dark:text-white">
-                          {lang === "es" ? "Logros" : "Highlights"}
+                          {t("work.labels.highlights")}
                         </h5>
                       </div>
                       <ul class="space-y-2">
@@ -260,7 +223,7 @@ const experiences = [
                           <PiStack className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                         </div>
                         <h5 class="text-sm font-semibold text-gray-900 dark:text-white">
-                          {lang === "es" ? "Stack" : "Stack"}
+                          {t("work.labels.stack")}
                         </h5>
                       </div>
                       <div class="flex flex-wrap gap-2">

@@ -10,46 +10,74 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
+// Helper para obtener categoría traducida
+const getCategory = (category: string) => {
+  const categoryMap: Record<string, string> = {
+    Backend: t("skills.categories.backend"),
+    Frontend: t("skills.categories.frontend"),
+    DevOps: t("skills.categories.devops"),
+    Cloud: t("skills.categories.cloud"),
+    AI: t("skills.categories.ai"),
+    Database: t("skills.categories.database"),
+    Tools: t("skills.categories.tools"),
+    OS: t("skills.categories.os"),
+    Security: t("skills.categories.security"),
+    Runtime: t("skills.categories.runtime"),
+  };
+  return categoryMap[category] || category;
+};
+
+// Helper para obtener nivel traducido
+const getLevel = (level: string) => {
+  const levelMap: Record<string, string> = {
+    Basic: t("skills.levels.basic"),
+    Intermediate: t("skills.levels.intermediate"),
+    Advanced: t("skills.levels.advanced"),
+    Native: t("skills.levels.native"),
+  };
+  return levelMap[level] || level;
+};
+
 const primarySkills = [
   {
     name: "C#",
-    category: lang === "es" ? "Backend" : "Backend",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("Backend"),
+    level: getLevel("Intermediate"),
     color: "from-purple-500 to-purple-700",
     icon: "csharp",
   },
   {
     name: "Tailwind CSS",
-    category: "Frontend",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("Frontend"),
+    level: getLevel("Intermediate"),
     color: "from-cyan-400 to-cyan-600",
     icon: "tailwindcss",
   },
   {
     name: "Python",
-    category: "Backend",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("Backend"),
+    level: getLevel("Intermediate"),
     color: "from-yellow-400 to-green-600",
     icon: "python",
   },
   {
     name: "Docker",
-    category: "DevOps",
-    level: lang === "es" ? "Básico" : "Basic",
+    category: getCategory("DevOps"),
+    level: getLevel("Basic"),
     color: "from-blue-400 to-blue-700",
     icon: "docker",
   },
   {
     name: "Azure",
-    category: "Cloud",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("Cloud"),
+    level: getLevel("Intermediate"),
     color: "from-green-400 to-green-600",
     icon: "azure",
   },
   {
     name: "Az Foundry",
-    category: lang === "es" ? "IA" : "AI",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("AI"),
+    level: getLevel("Intermediate"),
     color: "from-blue-500 to-purple-600",
     iconDark:
       "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/azureai-color.png",
@@ -58,45 +86,45 @@ const primarySkills = [
   },
   {
     name: "JavaScript",
-    category: "Frontend",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("Frontend"),
+    level: getLevel("Intermediate"),
     color: "from-yellow-400 to-yellow-600",
     icon: "javascript",
   },
   {
     name: "SQL",
-    category: "Database",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("Database"),
+    level: getLevel("Intermediate"),
     color: "from-red-500 to-red-700",
     icon: "sql-server",
   },
   {
     name: "Git",
-    category: lang === "es" ? "Herramientas" : "Tools",
-    level: lang === "es" ? "Avanzado" : "Advanced",
+    category: getCategory("Tools"),
+    level: getLevel("Advanced"),
     color: "from-orange-500 to-red-600",
     icon: "git",
   },
   {
     name: "React",
-    category: "Frontend",
-    level: lang === "es" ? "Básico" : "Basic",
+    category: getCategory("Frontend"),
+    level: getLevel("Basic"),
     color: "from-blue-500 to-blue-700",
     iconLight: "https://svgl.app/library/react_light.svg",
     iconDark: "https://svgl.app/library/react_dark.svg",
   },
   {
     name: "Astro",
-    category: "Frontend",
-    level: lang === "es" ? "Básico" : "Basic",
+    category: getCategory("Frontend"),
+    level: getLevel("Basic"),
     color: "from-blue-500 to-blue-700",
     iconLight: "https://svgl.app/library/astro-icon-light.svg",
     iconDark: "https://svgl.app/library/astro-icon-dark.svg",
   },
   {
     name: "MCP",
-    category: lang === "es" ? "IA" : "AI",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("AI"),
+    level: getLevel("Intermediate"),
     color: "from-indigo-500 to-purple-600",
     iconDark:
       "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/mcp.png",
@@ -105,73 +133,73 @@ const primarySkills = [
   },
   {
     name: "HTML5",
-    category: "Frontend",
-    level: lang === "es" ? "Avanzado" : "Advanced",
+    category: getCategory("Frontend"),
+    level: getLevel("Advanced"),
     color: "from-orange-400 to-red-500",
     icon: "html5",
   },
   {
     name: "CSS3",
-    category: "Frontend",
-    level: lang === "es" ? "Avanzado" : "Advanced",
+    category: getCategory("Frontend"),
+    level: getLevel("Advanced"),
     color: "from-blue-400 to-blue-600",
     icon: "css_old",
   },
   {
     name: "Linux",
-    category: lang === "es" ? "Sistemas Operativos" : "Operating Systems",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("OS"),
+    level: getLevel("Intermediate"),
     color: "from-yellow-400 to-yellow-600",
     icon: "linux",
   },
   {
     name: "GitHub",
-    category: lang === "es" ? "Herramientas" : "Tools",
-    level: lang === "es" ? "Avanzado" : "Advanced",
+    category: getCategory("Tools"),
+    level: getLevel("Advanced"),
     color: "from-purple-500 to-purple-700",
     iconDark: "https://svgl.app/library/github_dark.svg",
     iconLight: "https://svgl.app/library/github_light.svg",
   },
   {
     name: "PostgreSQL",
-    category: "Database",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("Database"),
+    level: getLevel("Intermediate"),
     color: "from-blue-500 to-blue-700",
     icon: "postgresql",
   },
   {
     name: "Railway",
-    category: "Cloud",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("Cloud"),
+    level: getLevel("Intermediate"),
     color: "from-purple-500 to-pink-600",
     iconDark: "https://svgl.app/library/railway_dark.svg",
     iconLight: "https://svgl.app/library/railway.svg",
   },
   {
     name: "Cloudflare",
-    category: "Cloud",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("Cloud"),
+    level: getLevel("Intermediate"),
     color: "from-blue-400 to-blue-600",
     icon: "cloudflare",
   },
   {
     name: "Bun",
-    category: "Runtime",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("Runtime"),
+    level: getLevel("Intermediate"),
     color: "from-yellow-400 to-yellow-600",
     icon: "bun",
   },
   {
     name: "Linear",
-    category: lang === "es" ? "Herramientas" : "Tools",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("Tools"),
+    level: getLevel("Intermediate"),
     color: "from-purple-500 to-pink-600",
     icon: "linear",
   },
   {
     name: "JWT",
-    category: "Security",
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    category: getCategory("Security"),
+    level: getLevel("Intermediate"),
     color: "from-yellow-400 to-yellow-600",
     icon: "jwt",
   },
@@ -179,45 +207,29 @@ const primarySkills = [
 
 const languages = [
   {
-    name: lang === "es" ? "Español" : "Spanish",
-    level: lang === "es" ? "Nativo" : "Native",
+    name: t("skills.languageSkills.spanish"),
+    level: t("skills.levels.native"),
   },
   {
-    name: lang === "es" ? "Inglés" : "English",
+    name: t("skills.languageSkills.english"),
     level: "B2 - Upper Intermediate",
   },
 ];
 
-const softSkills =
-  lang === "es"
-    ? [
-        "Resolución de Problemas",
-        "Trabajo en Equipo",
-        "Comunicación",
-        "Aprendizaje Rápido",
-        "Adaptabilidad",
-        "Pensamiento Crítico",
-        "Responsabilidad",
-        "Creatividad",
-        "Liderazgo",
-        "Empatía",
-        "Organización",
-        "Gestión del Tiempo",
-      ]
-    : [
-        "Problem Solving",
-        "Teamwork",
-        "Communication",
-        "Fast Learning",
-        "Adaptability",
-        "Critical Thinking",
-        "Responsibility",
-        "Creativity",
-        "Leadership",
-        "Empathy",
-        "Organization",
-        "Time Management",
-      ];
+const softSkills = [
+  t("skills.softSkillsList.0"),
+  t("skills.softSkillsList.1"),
+  t("skills.softSkillsList.2"),
+  t("skills.softSkillsList.3"),
+  t("skills.softSkillsList.4"),
+  t("skills.softSkillsList.5"),
+  t("skills.softSkillsList.6"),
+  t("skills.softSkillsList.7"),
+  t("skills.softSkillsList.8"),
+  t("skills.softSkillsList.9"),
+  t("skills.softSkillsList.10"),
+  t("skills.softSkillsList.11"),
+];
 ---
 
 <section>
@@ -252,7 +264,7 @@ const softSkills =
           <PiCode className="w-5 h-5 text-blue-600 dark:text-blue-400" />
         </div>
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-          {lang === "es" ? "Tecnologías" : "Technologies"}
+          {t("skills.sections.technologies")}
         </h2>
       </div>
 
@@ -310,10 +322,9 @@ const softSkills =
 
               <span
                 class={`inline-block text-xs px-2 py-1 rounded-md font-medium ${
-                  skill.level === "Avanzado" || skill.level === "Advanced"
+                  skill.level === t("skills.levels.advanced")
                     ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300"
-                    : skill.level === "Intermedio" ||
-                        skill.level === "Intermediate"
+                    : skill.level === t("skills.levels.intermediate")
                       ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
                       : "bg-gray-100 dark:bg-gray-700/50 text-gray-700 dark:text-gray-300"
                 }`}
@@ -339,7 +350,7 @@ const softSkills =
           <PiTranslate className="w-5 h-5 text-blue-600 dark:text-blue-400" />
         </div>
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-          {lang === "es" ? "Idiomas" : "Languages"}
+          {t("skills.sections.languages")}
         </h2>
       </div>
 
@@ -353,15 +364,13 @@ const softSkills =
                 </h3>
                 <span
                   class={`text-xs px-3 py-1 rounded-full font-semibold ${
-                    language.level === "Nativo" || language.level === "Native"
+                    language.level === t("skills.levels.native")
                       ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300"
                       : "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300"
                   }`}
                 >
-                  {language.level === "Nativo" || language.level === "Native"
-                    ? lang === "es"
-                      ? "Nativo"
-                      : "Native"
+                  {language.level === t("skills.levels.native")
+                    ? t("skills.levels.native")
                     : "B1"}
                 </span>
               </div>
@@ -369,10 +378,10 @@ const softSkills =
               <div class="space-y-3">
                 <div class="flex justify-between text-sm">
                   <span class="text-gray-600 dark:text-gray-400">
-                    {lang === "es" ? "Proficiencia" : "Proficiency"}
+                    {t("skills.languageSkills.proficiency")}
                   </span>
                   <span class="font-bold text-gray-900 dark:text-white">
-                    {language.level === "Nativo" || language.level === "Native"
+                    {language.level === t("skills.levels.native")
                       ? "100%"
                       : "70%"}
                   </span>
@@ -381,7 +390,7 @@ const softSkills =
                 <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
                   <div
                     class={`h-3 rounded-full transition-all duration-1000 ease-out ${
-                      language.level === "Nativo" || language.level === "Native"
+                      language.level === t("skills.levels.native")
                         ? "bg-linear-to-r from-green-500 to-green-600 w-full"
                         : "bg-linear-to-r from-blue-500 to-blue-600 w-[70%]"
                     }`}
@@ -389,13 +398,9 @@ const softSkills =
                 </div>
 
                 <p class="text-gray-600 dark:text-gray-400 text-xs leading-relaxed">
-                  {language.level === "Nativo" || language.level === "Native"
-                    ? lang === "es"
-                      ? "Lengua materna • Dominio completo"
-                      : "Native language • Complete mastery"
-                    : lang === "es"
-                      ? "Competencia profesional • Comunicación fluida"
-                      : "Professional competency • Fluent communication"}
+                  {language.level === t("skills.levels.native")
+                    ? t("skills.languageSkills.nativeDescription")
+                    : t("skills.languageSkills.professionalDescription")}
                 </p>
               </div>
             </div>
@@ -421,7 +426,7 @@ const softSkills =
           />
         </div>
         <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-          {lang === "es" ? "Habilidades Blandas" : "Soft Skills"}
+          {t("skills.sections.softSkills")}
         </h2>
       </div>
 

@@ -15,14 +15,20 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
+// Helper function for project types
+const getProjectType = (type: string) => {
+  const typeMap: Record<string, string> = {
+    work: t("projects.types.work"),
+    personal: t("projects.types.personal"),
+  };
+  return typeMap[type] || type;
+};
+
 const projects = [
   {
     id: 1,
-    title: lang === "es" ? "Portafolio" : "Portfolio",
-    description:
-      lang === "es"
-        ? "Portafolio personal para mostrar mis proyectos y habilidades como desarrollador."
-        : "Personal portfolio to showcase my projects and skills as a developer.",
+    title: t("projects.list.portfolio.title"),
+    description: t("projects.list.portfolio.description"),
     image: "/assets/projects/portfolio.webp",
     tech: ["Astro", "Tailwind", "JavaScript", "React", "Markdown"],
     github: "https://github.com/david-heca/portfolio",
@@ -31,11 +37,8 @@ const projects = [
   },
   {
     id: 2,
-    title: "Connie",
-    description:
-      lang === "es"
-        ? "Plataforma de IA para empresas, habla con tus datos por medio del procesamiento de lenguaje natural."
-        : "AI platform for businesses, talk to your data through natural language processing.",
+    title: t("projects.list.connie.title"),
+    description: t("projects.list.connie.description"),
     image: "/assets/projects/connie.webp",
     tech: ["React", "RAG", "SQL", "JWT", "FastAPI", "MCP", "Azure OpenAI"],
     demo: "https://connie.app",
@@ -44,14 +47,8 @@ const projects = [
   },
   {
     id: 3,
-    title:
-      lang === "es"
-        ? "HandHeld - Aplicación de RFID"
-        : "HandHeld - RFID Application",
-    description:
-      lang === "es"
-        ? "Aplicación para controlar el inventario de una empresa, utilizando tecnología RFID."
-        : "Application to control company inventory using RFID technology.",
+    title: t("projects.list.handheld.title"),
+    description: t("projects.list.handheld.description"),
     image: "/assets/projects/handheld.webp",
     tech: [
       "Java",
@@ -67,14 +64,8 @@ const projects = [
   },
   {
     id: 4,
-    title:
-      lang === "es"
-        ? "Trazabilidad de Piezas Automotrices"
-        : "Automotive Parts Traceability",
-    description:
-      lang === "es"
-        ? "Aplicación de escritorio para la trazabilidad de piezas automotrices utilizando C# y DevExpress."
-        : "Desktop application for automotive parts traceability using C# and DevExpress.",
+    title: t("projects.list.trace.title"),
+    description: t("projects.list.trace.description"),
     image: "/assets/projects/trace.webp",
     tech: ["C#", "DevExpress", "SQL", "WinForms", ".NET Framework"],
     type: "work",
@@ -143,12 +134,12 @@ const projects = [
                   {project.type === "work" ? (
                     <>
                       <PiBriefcase className="w-3.5 h-3.5" />
-                      {lang === "es" ? "Trabajo" : "Work"}
+                      {getProjectType("work")}
                     </>
                   ) : (
                     <>
                       <PiSparkle className="w-3.5 h-3.5" />
-                      {lang === "es" ? "Personal" : "Personal"}
+                      {getProjectType("personal")}
                     </>
                   )}
                 </div>
@@ -162,7 +153,7 @@ const projects = [
                     target="_blank"
                     rel="noopener noreferrer"
                     class="p-2.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl hover:bg-white/20 hover:scale-110 transition-all duration-200 group/link"
-                    title={lang === "es" ? "Ver demo" : "View demo"}
+                    title={t("projects.links.demo")}
                   >
                     <PiRocketLaunch className="w-4 h-4 text-white" />
                   </a>
@@ -174,7 +165,7 @@ const projects = [
                     target="_blank"
                     rel="noopener noreferrer"
                     class="p-2.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl hover:bg-white/20 hover:scale-110 transition-all duration-200 group/link"
-                    title={lang === "es" ? "Ver código" : "View code"}
+                    title={t("projects.links.code")}
                   >
                     <PiGithubLogo className="w-4 h-4 text-white" />
                   </a>
@@ -230,7 +221,7 @@ const projects = [
       <div>
         <div class="flex items-center gap-3 mb-8">
           <h2 class="text-2xl font-bold text-gray-900 dark:text-white">
-            {lang === "es" ? "Más Proyectos" : "More Projects"}
+            {t("projects.moreProjects")}
           </h2>
           <div class="flex-1 h-px bg-linear-to-r from-gray-300 dark:from-gray-700 to-transparent" />
         </div>
@@ -267,13 +258,7 @@ const projects = [
                       ) : (
                         <PiSparkle className="w-3 h-3" />
                       )}
-                      {project.type === "work"
-                        ? lang === "es"
-                          ? "Trabajo"
-                          : "Work"
-                        : lang === "es"
-                          ? "Personal"
-                          : "Personal"}
+                      {getProjectType(project.type)}
                     </div>
                   </div>
 
