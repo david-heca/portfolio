@@ -111,12 +111,12 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     >
       <Antigravity
         client:load
-        count={200}
+        count={100}
         magnetRadius={12}
-        ringRadius={8}
+        ringRadius={6}
         waveSpeed={0.3}
         waveAmplitude={0.8}
-        particleSize={1.5}
+        particleSize={1}
         lerpSpeed={0.08}
         color="#3b82f6"
         autoAnimate
@@ -138,7 +138,7 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     </main>
 
     <footer
-      class="bg-white/70 dark:bg-gray-950/70 backdrop-blur-xl border-t border-gray-200 dark:border-gray-800 py-6 px-6 mt-auto"
+      class="bg-white/70 dark:bg-gray-950/70 backdrop-blur-xl border-t border-zinc-300 dark:border-zinc-700 py-6 px-6 mt-auto"
       transition:persist="footer"
     >
       <div

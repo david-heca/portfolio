@@ -51,7 +51,6 @@ src/
 ## Pages
 
 - **Home** - Hero section with projects & current role
-- **About** - Bio, skills & interests
 - **Skills** - Technical expertise & languages
 - **Work** - Professional experience
 - **Projects** - Selected projects showcase

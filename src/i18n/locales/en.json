@@ -36,7 +36,31 @@
   },
   "contact": {
     "title": "Contact",
-    "subtitle": "Let's talk about your next project?"
+    "subtitle": "Let's talk about your next project?",
+    "info": {
+      "location": "Mexico, Mexico",
+      "availability": "Interested in collaborative projects",
+      "timezone": "GMT-6 (CST) - Mexico City"
+    },
+    "cta": {
+      "heading": "Let's talk about your project",
+      "description": "Have an amazing idea? I'd love to hear it and see how I can help you make it a reality.",
+      "sendEmail": "Send Email"
+    },
+    "location": {
+      "title": "Location"
+    },
+    "cv": {
+      "spanish": {
+        "title": "CV Español",
+        "description": "Complete resume with experience, skills and projects."
+      },
+      "english": {
+        "title": "CV English",
+        "description": "English version for international opportunities."
+      },
+      "download": "Download"
+    }
   },
   "common": {
     "contactMe": "Contact Me",
@@ -44,9 +68,30 @@
   },
   "home": {
     "available": "Available",
-    "connect": "Connect",
     "currentRole": "Current Role",
-    "viewResume": "View Full Resume"
+    "viewResume": "View Full Resume",
+    "quickFacts": {
+      "location": "Mexico City",
+      "experience": "3+ years exp.",
+      "degree": "Information Tech Eng.",
+      "languages": "ES / EN"
+    },
+    "interests": {
+      "coffee": "Coffee",
+      "gaming": "Gaming",
+      "music": "Music",
+      "tech": "Tech"
+    },
+    "aboutSection": {
+      "title": "About me",
+      "learnMore": "Learn more",
+      "shortBio": "Software & Data Engineer focused on AI products, scalable systems, and clear business outcomes.",
+      "bio": {
+        "paragraph1": "I am a Software and Data Engineering professional with a strong track record in designing, building, and scaling data-driven and AI-powered solutions that generate real business value.",
+        "paragraph2": "Throughout my career, I have worked at the intersection of software engineering, data science, and automation—leading initiatives that transform complex challenges into robust, scalable systems. My expertise spans backend and frontend development, data engineering, and applied artificial intelligence, with a consistent focus on clean architecture, efficiency, and long-term maintainability.",
+        "paragraph3": "Beyond execution, I actively contribute to knowledge sharing and talent development. I have delivered conferences and academic talks at universities on Artificial Intelligence and Data Science, helping bridge the gap between theory and real-world application."
+      }
+    }
   },
   "notFound": {
     "title": "Page not found",

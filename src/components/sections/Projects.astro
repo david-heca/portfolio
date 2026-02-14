@@ -98,7 +98,7 @@ const projects = [
 
   <!-- Featured Projects - Bento Grid Layout -->
   <div
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-16 auto-rows-fr"
+    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-16 auto-rows-fr"
   >
     {
       projects
@@ -235,7 +235,7 @@ const projects = [
           <div class="flex-1 h-px bg-linear-to-r from-gray-300 dark:from-gray-700 to-transparent" />
         </div>
 
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-16">
           {projects
             .filter((p) => !p.featured)
             .map((project) => (

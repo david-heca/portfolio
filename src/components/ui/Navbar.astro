@@ -24,9 +24,14 @@ const navItems = [
     icon: PiHouseLine,
   },
   {
-    href: lang === "es" ? "/about" : "/en/about",
-    label: t("nav.about"),
-    icon: PiUser,
+    href: lang === "es" ? "/work" : "/en/work",
+    label: t("nav.work"),
+    icon: PiBriefcase,
+  },
+  {
+    href: lang === "es" ? "/projects" : "/en/projects",
+    label: t("nav.projects"),
+    icon: PiFolder,
   },
   {
     href: lang === "es" ? "/skills" : "/en/skills",
@@ -34,19 +39,9 @@ const navItems = [
     icon: PiCode,
   },
   {
-    href: lang === "es" ? "/work" : "/en/work",
-    label: t("nav.work"),
-    icon: PiBriefcase,
-  },
-  {
     href: lang === "es" ? "/education" : "/en/education",
     label: t("nav.education"),
     icon: PiGraduationCap,
-  },
-  {
-    href: lang === "es" ? "/projects" : "/en/projects",
-    label: t("nav.projects"),
-    icon: PiFolder,
   },
   {
     href: lang === "es" ? "/contact" : "/en/contact",
@@ -67,7 +62,7 @@ function isActive(href: string): boolean {
 
 <header class="fixed top-0 left-0 right-0 z-50">
   <div
-    class="absolute inset-0 bg-white/70 dark:bg-gray-950/70 backdrop-blur-xl border-b border-gray-200 dark:border-gray-800"
+    class="absolute inset-0 bg-white/70 dark:bg-gray-950/70 backdrop-blur-xl border-b border-zinc-300 dark:border-zinc-700"
   >
   </div>
 
@@ -84,14 +79,14 @@ function isActive(href: string): boolean {
         alt="David Herrera"
         width={32}
         height={32}
-        class="w-8 h-8 rounded-lg object-contain border border-gray-200 dark:border-gray-800"
+        class="w-8 h-8 rounded-lg object-contain border border-zinc-300 dark:border-zinc-700"
         loading="eager"
       />
       <span>David Herrera</span>
     </a>
 
     <!-- Desktop Nav -->
-    <nav class="hidden xl:flex items-center gap-1">
+    <nav class="hidden lg:flex items-center gap-1">
       {
         navItems.map((item) => (
           <a
@@ -119,7 +114,7 @@ function isActive(href: string): boolean {
       <!-- Mobile Menu Button -->
       <button
         id="mobile-menu-btn"
-        class="xl:hidden p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+        class="lg:hidden p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
         aria-label="Toggle menu"
       >
         <svg
@@ -142,7 +137,7 @@ function isActive(href: string): boolean {
   <!-- Mobile Menu Overlay -->
   <div
     id="mobile-menu"
-    class="fixed inset-0 z-40 bg-white dark:bg-gray-950 transform translate-x-full transition-transform duration-300 ease-in-out xl:hidden pt-20 px-6"
+    class="fixed inset-0 z-40 bg-white dark:bg-gray-950 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden pt-20 px-6"
   >
     <a
       href={lang === "es" ? "/" : "/en"}
@@ -153,7 +148,7 @@ function isActive(href: string): boolean {
         alt="David Herrera"
         width={32}
         height={32}
-        class="w-8 h-8 rounded-lg object-contain border border-gray-200 dark:border-gray-800"
+        class="w-8 h-8 rounded-lg object-contain border border-zinc-300 dark:border-zinc-700"
         loading="eager"
       />
       <span>David Herrera</span>
