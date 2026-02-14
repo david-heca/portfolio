@@ -43,64 +43,37 @@ const { page, lang } = Astro.props;
 const t = useTranslations(lang);
 
 // Configurar metadatos de página
-const getPageMeta = (page: string, lang: "es" | "en") => {
-  const baseName = "David Herrera";
-
+const getPageMeta = (page: string) => {
   if (page === "home") {
     return {
-      title:
-        lang === "es"
-          ? `${baseName} - Ingeniero en Tecnologías de la Información & Arquitecto de Soluciones IA`
-          : `${baseName} - IT Engineer & AI Solutions Architect`,
-      description:
-        lang === "es"
-          ? "Portfolio de David Herrera. Ingeniero especializado en desarrollo de soluciones tecnológicas innovadoras y arquitecturas de inteligencia artificial."
-          : "David Herrera's portfolio. Engineer specialized in developing innovative technological solutions and artificial intelligence architectures.",
+      title: t("meta.home.title"),
+      description: t("meta.home.description"),
     };
   }
 
-  const titles = {
-    skills:
-      lang === "es" ? `Habilidades - ${baseName}` : `Skills - ${baseName}`,
-    projects:
-      lang === "es" ? `Proyectos - ${baseName}` : `Projects - ${baseName}`,
-    work:
-      lang === "es" ? `Experiencia - ${baseName}` : `Experience - ${baseName}`,
-    education:
-      lang === "es" ? `Formación - ${baseName}` : `Education - ${baseName}`,
-    contact: lang === "es" ? `Contacto - ${baseName}` : `Contact - ${baseName}`,
+  const metaKeys: Record<string, string> = {
+    skills: "skills",
+    projects: "projects",
+    work: "work",
+    education: "education",
+    contact: "contact",
   };
 
-  const descriptions = {
-    skills:
-      lang === "es"
-        ? "Tecnologías y habilidades que domino como desarrollador."
-        : "Technologies and skills I master as a developer.",
-    projects:
-      lang === "es"
-        ? "Proyectos innovadores desarrollados con las últimas tecnologías."
-        : "Innovative projects developed with the latest technologies.",
-    work:
-      lang === "es"
-        ? "Mi experiencia profesional en empresas tecnológicas."
-        : "My professional experience in technology companies.",
-    education:
-      lang === "es"
-        ? "Formación académica y certificaciones en tecnología."
-        : "Academic background and certifications in technology.",
-    contact:
-      lang === "es"
-        ? "Conectemos y exploremos oportunidades de colaboración."
-        : "Let's connect and explore collaboration opportunities.",
-  };
+  const key = metaKeys[page];
+  if (key) {
+    return {
+      title: t(`meta.${key}.title`),
+      description: t(`meta.${key}.description`),
+    };
+  }
 
   return {
-    title: titles[page as keyof typeof titles],
-    description: descriptions[page as keyof typeof descriptions],
+    title: t("meta.home.title"),
+    description: t("meta.home.description"),
   };
 };
 
-const pageMeta = getPageMeta(page, lang);
+const pageMeta = getPageMeta(page);
 ---
 
 <Layout title={pageMeta.title} description={pageMeta.description} lang={lang}>

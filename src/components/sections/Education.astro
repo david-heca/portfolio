@@ -21,67 +21,60 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
+// Helper functions
+const getStatus = (status: string) => {
+  const statusMap: Record<string, string> = {
+    graduate: t("education.status.graduate"),
+    selfTaught: t("education.status.selfTaught"),
+  };
+  return statusMap[status] || status;
+};
+
+const getLevel = (level: string) => {
+  const levelMap: Record<string, string> = {
+    fundamentals: t("education.levels.fundamentals"),
+    intermediate: t("education.levels.intermediate"),
+  };
+  return levelMap[level] || level;
+};
+
 const education = [
   {
     id: 1,
     type: "education",
-    institution:
-      "Platzi - " +
-      (lang === "es" ? "Escuela de Tecnología" : "Technology School"),
-    degree:
-      lang === "es" ? "Industria de la Tecnología" : "Technology Industry",
-    period: lang === "es" ? "2022 - Actualidad" : "2022 - Present",
-    status: lang === "es" ? "Autodidacta" : "Self-taught",
-    description:
-      lang === "es"
-        ? "Cursos especializados en desarrollo web, inteligencia artificial y tecnologías emergentes."
-        : "Specialized courses in web development, artificial intelligence and emerging technologies.",
+    institution: t("education.list.platzi.institution"),
+    degree: t("education.list.platzi.degree"),
+    period: t("education.list.platzi.period"),
+    status: getStatus("selfTaught"),
+    description: t("education.list.platzi.description"),
     grade: "N/A",
-    location: "Online",
+    location: t("education.list.platzi.location"),
     icon: PiLightning,
     accent: "emerald",
   },
   {
     id: 2,
     type: "education",
-    institution:
-      lang === "es"
-        ? "Tecnológico de Estudios Superiores de Coacalco (TESCo) - TecNM"
-        : "Technological Institute of Higher Studies of Coacalco (TESCo) - TecNM",
-    degree:
-      lang === "es"
-        ? "Ingeniería en Tecnologías de la Información & Comunicaciones"
-        : "Information and Communication Technologies Engineering",
-    period: "2018 - 2022",
-    status: lang === "es" ? "Graduado" : "Graduate",
-    description:
-      lang === "es"
-        ? "Especialización en desarrollo de aplicaciones móviles."
-        : "Specialization in mobile application development.",
+    institution: t("education.list.tesco.institution"),
+    degree: t("education.list.tesco.degree"),
+    period: t("education.list.tesco.period"),
+    status: getStatus("graduate"),
+    description: t("education.list.tesco.description"),
     grade: "96/100",
-    location:
-      lang === "es" ? "Estado de México, México" : "Mexico State, Mexico",
+    location: t("education.list.tesco.location"),
     icon: PiGraduationCap,
     accent: "blue",
   },
   {
     id: 3,
     type: "education",
-    institution:
-      lang === "es"
-        ? "Colegio de Estudios Científicos y Tecnológicos del Estado de México (CECyTEM) - Tultepec"
-        : "College of Scientific and Technological Studies of the State of Mexico (CECyTEM) - Tultepec",
-    degree:
-      lang === "es" ? "Técnico en Programación" : "Programming Technician",
-    period: "2016 - 2018",
-    status: lang === "es" ? "Graduado" : "Graduate",
-    description:
-      lang === "es"
-        ? "Formación especializada en desarrollo de software y metodologías de desarrollo."
-        : "Specialized training in software development and development methodologies.",
+    institution: t("education.list.cecytem.institution"),
+    degree: t("education.list.cecytem.degree"),
+    period: t("education.list.cecytem.period"),
+    status: getStatus("graduate"),
+    description: t("education.list.cecytem.description"),
     grade: "8.8/10",
-    location:
-      lang === "es" ? "Estado de México, México" : "Mexico State, Mexico",
+    location: t("education.list.cecytem.location"),
     icon: PiBooks,
     accent: "violet",
   },
@@ -90,71 +83,62 @@ const education = [
 const certifications = [
   {
     id: 1,
-    name: "Azure AZ-900: Microsoft Azure Fundamentals",
+    name: t("education.certifications.azure.name"),
     issuer: "Microsoft",
     date: "2024",
     credentialId: "AZ-900-123456",
     verifyUrl:
       "https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=414&cvid=r+dkpNaAIMQHhll3/TFLLw==",
     skills: ["Azure", "Cloud Computing", "Networking", "Security"],
-    level: lang === "es" ? "Fundamentals" : "Fundamentals",
+    level: getLevel("fundamentals"),
     featured: true,
   },
   {
     id: 2,
-    name: "Python for Everybody Specialization",
+    name: t("education.certifications.python.name"),
     issuer: "Michigan University",
     date: "2022",
     credentialId: "J7EMYHGRRUH8",
     verifyUrl:
       "https://www.coursera.org/account/accomplishments/verify/J7EMYHGRRUH8",
     skills: ["Python", "Data Structures", "SQL"],
-    level: lang === "es" ? "Fundamentals" : "Fundamentals",
+    level: getLevel("fundamentals"),
     featured: true,
   },
   {
     id: 3,
-    name:
-      lang === "es"
-        ? "Introducción a la Inteligencia Artificial"
-        : "Introduction to Artificial Intelligence",
+    name: t("education.certifications.aiIntro.name"),
     issuer: "Platzi",
     date: "2023",
     credentialId: "bb841264-3516-4421-a1e2-5f5902c117ee",
     verifyUrl:
       "https://platzi.com/p/david-heca/curso/11157-introduccion-ai/diploma/detalle/",
     skills: ["AI", "Machine Learning", "Data Science"],
-    level: lang === "es" ? "Fundamentals" : "Fundamentals",
+    level: getLevel("fundamentals"),
     featured: false,
   },
   {
     id: 4,
-    name:
-      lang === "es"
-        ? "Desarrollo de Chatbots con Azure OpenAI"
-        : "Chatbot Development with Azure OpenAI",
+    name: t("education.certifications.chatbot.name"),
     issuer: "Platzi",
     date: "2023",
     credentialId: "60c81aa1-626e-4a7c-9842-8b4a2fabc165",
     verifyUrl:
       "https://platzi.com/p/david-heca/curso/8946-azureopenia/diploma/detalle/",
     skills: ["Chatbots", "Azure", "OpenAI"],
-    level: lang === "es" ? "Intermedio" : "Intermediate",
+    level: getLevel("intermediate"),
     featured: false,
   },
   {
     id: 5,
-    name:
-      lang === "es"
-        ? "Introducción a la Terminal y Línea de Comandos"
-        : "Introduction to Terminal and Command Line",
+    name: t("education.certifications.terminal.name"),
     issuer: "Platzi",
     date: "2023",
     credentialId: "5584d92c-c845-442e-819b-2b31a747f230",
     verifyUrl:
       "https://platzi.com/p/david-heca/curso/2292-terminal/diploma/detalle/",
     skills: ["Terminal", "Command Line", "Linux"],
-    level: lang === "es" ? "Fundamentals" : "Fundamentals",
+    level: getLevel("fundamentals"),
     featured: false,
   },
 ];
@@ -189,7 +173,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
               3
             </p>
             <p class="text-sm text-zinc-500 dark:text-zinc-400">
-              {lang === "es" ? "Títulos" : "Degrees"}
+              {t("education.stats.degrees")}
             </p>
           </div>
           <div class="text-center">
@@ -197,7 +181,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
               5+
             </p>
             <p class="text-sm text-zinc-500 dark:text-zinc-400">
-              {lang === "es" ? "Certificaciones" : "Certifications"}
+              {t("education.stats.certifications")}
             </p>
           </div>
           <div class="text-center">
@@ -205,7 +189,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
               8+
             </p>
             <p class="text-sm text-zinc-500 dark:text-zinc-400">
-              {lang === "es" ? "Años aprendiendo" : "Years learning"}
+              {t("education.stats.yearsLearning")}
             </p>
           </div>
           <div class="text-center">
@@ -215,7 +199,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
               <PiInfinityBold className="inline w-9 h-9" />
             </p>
             <p class="text-sm text-zinc-500 dark:text-zinc-400">
-              {lang === "es" ? "Curiosidad" : "Curiosity"}
+              {t("education.stats.curiosity")}
             </p>
           </div>
         </div>
@@ -233,7 +217,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
           />
         </div>
         <h2 class="text-xl font-semibold text-zinc-900 dark:text-white">
-          {lang === "es" ? "Formación Académica" : "Academic Background"}
+          {t("education.sections.academic")}
         </h2>
       </div>
     </div>
@@ -328,7 +312,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
           <PiCertificate className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
         </div>
         <h2 class="text-xl font-semibold text-zinc-900 dark:text-white">
-          {lang === "es" ? "Certificaciones" : "Certifications"}
+          {t("education.sections.certifications")}
         </h2>
       </div>
     </div>
@@ -353,7 +337,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
                   <div class="flex items-center gap-2">
                     <PiStar className="w-4 h-4 text-amber-500" />
                     <span class="text-xs text-zinc-500 dark:text-zinc-400">
-                      Featured
+                      {t("education.labels.featured")}
                     </span>
                   </div>
                 </div>
@@ -383,7 +367,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
                     {cert.credentialId.slice(0, 12)}...
                   </span>
                   <span class="flex items-center gap-1 text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors">
-                    {lang === "es" ? "Ver credencial" : "View credential"}
+                    {t("education.labels.viewCredential")}
                     <PiArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                   </span>
                 </div>
@@ -412,8 +396,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
                 </div>
                 <span
                   class={`px-2 py-1 rounded-full text-xs font-medium ${
-                    cert.level.includes("Intermedio") ||
-                    cert.level.includes("Intermediate")
+                    cert.level.includes(t("education.levels.intermediate"))
                       ? "bg-violet-500/10 text-violet-600 dark:text-violet-400"
                       : "bg-gray-200/50 dark:bg-gray-800 text-zinc-600 dark:text-zinc-400"
                   }`}
@@ -441,7 +424,7 @@ const otherCerts = certifications.filter((c) => !c.featured);
 
               {/* Link indicator */}
               <div class="flex items-center gap-1 text-xs text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors">
-                <span>{lang === "es" ? "Verificar" : "Verify"}</span>
+                <span>{t("education.labels.verify")}</span>
                 <PiArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </div>
             </div>

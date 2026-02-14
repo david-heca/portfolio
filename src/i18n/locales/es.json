@@ -1,4 +1,35 @@
 {
+  "theme": {
+    "light": "Claro",
+    "dark": "Oscuro",
+    "system": "Sistema"
+  },
+  "meta": {
+    "home": {
+      "title": "David Herrera - Ingeniero en Tecnologías de la Información & Arquitecto de Soluciones IA",
+      "description": "Portfolio de David Herrera. Ingeniero especializado en desarrollo de soluciones tecnológicas innovadoras y arquitecturas de inteligencia artificial."
+    },
+    "skills": {
+      "title": "Habilidades - David Herrera",
+      "description": "Tecnologías y habilidades que domino como desarrollador."
+    },
+    "projects": {
+      "title": "Proyectos - David Herrera",
+      "description": "Proyectos innovadores desarrollados con las últimas tecnologías."
+    },
+    "work": {
+      "title": "Experiencia - David Herrera",
+      "description": "Mi experiencia profesional en empresas tecnológicas."
+    },
+    "education": {
+      "title": "Formación - David Herrera",
+      "description": "Formación académica y certificaciones en tecnología."
+    },
+    "contact": {
+      "title": "Contacto - David Herrera",
+      "description": "Conectemos y exploremos oportunidades de colaboración."
+    }
+  },
   "nav": {
     "home": "Inicio",
     "about": "Sobre mí",
@@ -20,19 +51,227 @@
   },
   "skills": {
     "title": "Habilidades",
-    "subtitle": "Tecnologías y herramientas que domino"
+    "subtitle": "Tecnologías y herramientas que domino",
+    "sections": {
+      "technologies": "Tecnologías",
+      "languages": "Idiomas",
+      "softSkills": "Habilidades Blandas"
+    },
+    "levels": {
+      "basic": "Básico",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado",
+      "native": "Nativo"
+    },
+    "categories": {
+      "backend": "Backend",
+      "frontend": "Frontend",
+      "devops": "DevOps",
+      "cloud": "Cloud",
+      "ai": "IA",
+      "database": "Database",
+      "tools": "Herramientas",
+      "os": "Sistemas Operativos",
+      "security": "Security",
+      "runtime": "Runtime"
+    },
+    "languageSkills": {
+      "proficiency": "Proficiencia",
+      "spanish": "Español",
+      "english": "Inglés",
+      "nativeDescription": "Lengua materna • Dominio completo",
+      "professionalDescription": "Competencia profesional • Comunicación fluida"
+    },
+    "softSkillsList": [
+      "Resolución de Problemas",
+      "Trabajo en Equipo",
+      "Comunicación",
+      "Aprendizaje Rápido",
+      "Adaptabilidad",
+      "Pensamiento Crítico",
+      "Responsabilidad",
+      "Creatividad",
+      "Liderazgo",
+      "Empatía",
+      "Organización",
+      "Gestión del Tiempo"
+    ]
   },
   "work": {
     "title": "Experiencia",
-    "subtitle": "Mi trayectoria profesional"
+    "subtitle": "Mi trayectoria profesional",
+    "labels": {
+      "highlights": "Logros",
+      "stack": "Stack"
+    },
+    "companies": {
+      "baacc": {
+        "name": "BAACC Systems S.A. de C.V.",
+        "totalPeriod": "2023 Sep - Actualidad",
+        "totalDuration": "2 años 6 meses",
+        "location": "Estado de México, México",
+        "workMode": "Presencial",
+        "roles": {
+          "architect": {
+            "title": "Arquitecto de Soluciones de IA",
+            "period": "Mar 2025 - Actualidad",
+            "duration": "1 año",
+            "type": "Tiempo Completo",
+            "location": "México",
+            "achievements": [
+              "Diseño e implementación de aplicaciones inteligentes utilizando LLMs",
+              "Integración de servidores y clientes MCP para habilitar flujos de trabajo autónomos",
+              "Diseño y desarrollo de arquitecturas RAG (Retrieval-Augmented Generation)",
+              "Evaluación continua e investigación de nuevas tecnologías en IA generativa y MLOps"
+            ]
+          },
+          "fullstack": {
+            "title": "Fullstack Developer",
+            "period": "Ene 2024 - Mar 2025",
+            "duration": "1 año 3 meses",
+            "type": "Tiempo Completo",
+            "location": "Estado de México",
+            "achievements": [
+              "Desarrollo de aplicaciones de escritorio con .NET y Python para entornos industriales",
+              "Creación de aplicaciones web con JavaScript, .NET y DevExpress",
+              "Diseño y administración de bases de datos en SQL Server y PostgreSQL",
+              "Desarrollo de aplicaciones móviles Android con RFID para seguimiento y trazabilidad"
+            ]
+          },
+          "junior": {
+            "title": "Fullstack Developer Jr.",
+            "period": "Sep 2023 - Ene 2024",
+            "duration": "5 meses",
+            "type": "Prácticas",
+            "location": "Estado de México",
+            "achievements": [
+              "Apoyo en desarrollo de módulos web y APIs internas",
+              "Mantenimiento de bases de datos y documentación técnica"
+            ]
+          }
+        }
+      },
+      "dec": {
+        "name": "DEC Marketing",
+        "totalPeriod": "Mar 2022 - Sep 2023",
+        "totalDuration": "1 año 7 meses",
+        "location": "Ciudad de México, México",
+        "workMode": "Remoto",
+        "roles": {
+          "webdev": {
+            "title": "Web Developer Jr.",
+            "period": "Mar 2022 - Sep 2023",
+            "duration": "1 año 7 meses",
+            "type": "Prácticas",
+            "location": "Ciudad de México",
+            "achievements": [
+              "Desarrollo y soporte de sitios web con HTML, CSS, JavaScript y CMS (WordPress, Joomla, OpenCart)",
+              "Administración de hosting, certificados de seguridad y dominios",
+              "Gestión de cuentas de correo electrónico corporativas"
+            ]
+          }
+        }
+      }
+    }
   },
   "education": {
     "title": "Formación",
-    "subtitle": "Educación y certificaciones"
+    "subtitle": "Educación y certificaciones",
+    "stats": {
+      "degrees": "Títulos",
+      "certifications": "Certificaciones",
+      "yearsLearning": "Años aprendiendo",
+      "curiosity": "Curiosidad"
+    },
+    "sections": {
+      "academic": "Formación Académica",
+      "certifications": "Certificaciones"
+    },
+    "status": {
+      "graduate": "Graduado",
+      "selfTaught": "Autodidacta",
+      "present": "Actualidad"
+    },
+    "labels": {
+      "featured": "Destacado",
+      "viewCredential": "Ver credencial",
+      "verify": "Verificar"
+    },
+    "levels": {
+      "fundamentals": "Fundamentals",
+      "intermediate": "Intermedio"
+    },
+    "list": {
+      "platzi": {
+        "institution": "Platzi - Escuela de Tecnología",
+        "degree": "Industria de la Tecnología",
+        "period": "2022 - Actualidad",
+        "description": "Cursos especializados en desarrollo web, inteligencia artificial y tecnologías emergentes.",
+        "location": "Online"
+      },
+      "tesco": {
+        "institution": "Tecnológico de Estudios Superiores de Coacalco (TESCo) - TecNM",
+        "degree": "Ingeniería en Tecnologías de la Información & Comunicaciones",
+        "period": "2018 - 2022",
+        "description": "Especialización en desarrollo de aplicaciones móviles.",
+        "location": "Estado de México, México"
+      },
+      "cecytem": {
+        "institution": "Colegio de Estudios Científicos y Tecnológicos del Estado de México (CECyTEM) - Tultepec",
+        "degree": "Técnico en Programación",
+        "period": "2016 - 2018",
+        "description": "Formación especializada en desarrollo de software y metodologías de desarrollo.",
+        "location": "Estado de México, México"
+      }
+    },
+    "certifications": {
+      "azure": {
+        "name": "Azure AZ-900: Microsoft Azure Fundamentals"
+      },
+      "python": {
+        "name": "Python for Everybody Specialization"
+      },
+      "aiIntro": {
+        "name": "Introducción a la Inteligencia Artificial"
+      },
+      "chatbot": {
+        "name": "Desarrollo de Chatbots con Azure OpenAI"
+      },
+      "terminal": {
+        "name": "Introducción a la Terminal y Línea de Comandos"
+      }
+    }
   },
   "projects": {
     "title": "Proyectos",
-    "subtitle": "Algunos de mis trabajos destacados"
+    "subtitle": "Algunos de mis trabajos más destacados",
+    "types": {
+      "work": "Trabajo",
+      "personal": "Personal"
+    },
+    "links": {
+      "demo": "Ver demo",
+      "code": "Ver código"
+    },
+    "moreProjects": "Más Proyectos",
+    "list": {
+      "portfolio": {
+        "title": "Portafolio",
+        "description": "Portafolio personal para mostrar mis proyectos y habilidades como desarrollador."
+      },
+      "connie": {
+        "title": "Connie",
+        "description": "Plataforma de IA para empresas, habla con tus datos por medio del procesamiento de lenguaje natural."
+      },
+      "handheld": {
+        "title": "HandHeld - Aplicación de RFID",
+        "description": "Aplicación para controlar el inventario de una empresa, utilizando tecnología RFID."
+      },
+      "trace": {
+        "title": "Trazabilidad de Piezas Automotrices",
+        "description": "Aplicación de escritorio para la trazabilidad de piezas automotrices utilizando C# y DevExpress."
+      }
+    }
   },
   "contact": {
     "title": "Contacto",
@@ -70,12 +309,7 @@
     "available": "Disponible",
     "currentRole": "Rol Actual",
     "viewResume": "Ver Experiencia Completa",
-    "quickFacts": {
-      "location": "Ciudad de México",
-      "experience": "3+ años exp.",
-      "degree": "Ing. en TI",
-      "languages": "ES / EN"
-    },
+    "interestsTitle": "Intereses",
     "interests": {
       "coffee": "Café",
       "gaming": "Gaming",

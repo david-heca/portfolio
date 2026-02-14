@@ -240,42 +240,6 @@ const interests = [
       </a>
     </div>
 
-    <!-- Quick Facts -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-      {
-        quickFacts.map((fact) => (
-          <div class="rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-300 dark:border-zinc-700 p-5 md:p-6 transition-all duration-300 hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-lg">
-            <div
-              class={`w-12 h-12 rounded-xl mb-3 flex items-center justify-center ${
-                fact.color === "blue"
-                  ? "bg-blue-500/10 dark:bg-blue-500/20"
-                  : fact.color === "emerald"
-                    ? "bg-emerald-500/10 dark:bg-emerald-500/20"
-                    : fact.color === "violet"
-                      ? "bg-violet-500/10 dark:bg-violet-500/20"
-                      : "bg-amber-500/10 dark:bg-amber-500/20"
-              }`}
-            >
-              <fact.icon
-                className={`w-6 h-6 ${
-                  fact.color === "blue"
-                    ? "text-blue-600 dark:text-blue-400"
-                    : fact.color === "emerald"
-                      ? "text-emerald-600 dark:text-emerald-400"
-                      : fact.color === "violet"
-                        ? "text-violet-600 dark:text-violet-400"
-                        : "text-amber-600 dark:text-amber-400"
-                }`}
-              />
-            </div>
-            <p class="text-sm md:text-base font-semibold text-zinc-900 dark:text-white">
-              {fact.label}
-            </p>
-          </div>
-        ))
-      }
-    </div>
-
     <!-- Interests -->
     <div
       class="rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-300 dark:border-zinc-700 p-6 md:p-8"
@@ -283,7 +247,7 @@ const interests = [
       <h3
         class="text-lg md:text-xl font-semibold text-zinc-900 dark:text-white mb-4"
       >
-        {lang === "es" ? "Intereses" : "Interests"}
+        {t("home.interestsTitle")}
       </h3>
       <div class="flex flex-wrap gap-3">
         {
