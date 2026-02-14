@@ -235,11 +235,11 @@ const softSkills =
 
   <!-- Bento Grid Layout -->
   <div
-    class="grid grid-cols-1 md:grid-cols-12 gap-4 auto-rows-[minmax(180px,auto)]"
+    class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 auto-rows-[minmax(180px,auto)]"
   >
     <!-- Technical Skills - Large Card -->
     <div
-      class="md:col-span-8 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 relative overflow-hidden group"
+      class="md:col-span-8 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-300 dark:border-zinc-700 p-6 relative overflow-hidden group"
     >
       <div
         class="absolute top-4 right-4 opacity-5 group-hover:opacity-10 transition-opacity"
@@ -256,7 +256,7 @@ const softSkills =
         </h2>
       </div>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
         {
           primarySkills.map((skill) => (
             <div class="group/skill p-3 md:p-4 rounded-2xl bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-700 hover:shadow-lg transition-all duration-300">
@@ -343,7 +343,7 @@ const softSkills =
         </h2>
       </div>
 
-      <div class="space-y-6 relative z-10">
+      <div class="space-y-4 relative z-10">
         {
           languages.map((language) => (
             <div class="p-6 rounded-2xl bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm border border-white/50 dark:border-gray-700/50 hover:shadow-lg transition-all duration-300">
@@ -406,7 +406,7 @@ const softSkills =
 
     <!-- Soft Skills Card -->
     <div
-      class="md:col-span-8 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 relative overflow-hidden group"
+      class="md:col-span-8 rounded-3xl bg-white dark:bg-gray-900 border border-zinc-300 dark:border-zinc-700 p-6 relative overflow-hidden group"
     >
       <div
         class="absolute top-4 right-4 opacity-5 group-hover:opacity-10 transition-opacity"
@@ -425,7 +425,7 @@ const softSkills =
         </h2>
       </div>
 
-      <div class="flex flex-wrap gap-2">
+      <div class="flex flex-wrap gap-3">
         {
           softSkills.map((skill) => (
             <span class="px-4 py-2 rounded-xl bg-gray-50 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-sm font-medium border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-700 hover:bg-purple-50 dark:hover:bg-purple-900/20 hover:text-purple-700 dark:hover:text-purple-300 transition-all duration-200">

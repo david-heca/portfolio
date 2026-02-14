@@ -25,13 +25,9 @@ const t = useTranslations(lang);
 const contactInfo = {
   email: "hello@davidherrera.dev",
   phone: "+52 442 837 2849",
-  location: lang === "es" ? "México, México" : "Mexico, Mexico",
-  availability:
-    lang === "es"
-      ? "Interesado en proyectos colaborativos"
-      : "Interested in collaborative projects",
-  timezone:
-    "GMT-6 (CST) - " + (lang === "es" ? "Ciudad de México" : "Mexico City"),
+  location: t("contact.info.location"),
+  availability: t("contact.info.availability"),
+  timezone: t("contact.info.timezone"),
 };
 
 const socialLinks = [
@@ -83,7 +79,7 @@ const socialLinks = [
   </div>
 
   <!-- Bento Grid Layout -->
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-4 mb-12">
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 mb-12">
     <!-- Main Contact Card - Email -->
     <div
       class="md:col-span-8 rounded-3xl bg-linear-to-br from-blue-500 to-blue-600 p-8 md:p-10 relative overflow-hidden group"
@@ -113,19 +109,11 @@ const socialLinks = [
         </div>
 
         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-          {
-            lang === "es"
-              ? "Hablemos de tu proyecto"
-              : "Let's talk about your project"
-          }
+          {t("contact.cta.heading")}
         </h2>
 
         <p class="text-blue-100 text-lg mb-8 max-w-xl">
-          {
-            lang === "es"
-              ? "¿Tienes una idea increíble? Me encantaría escucharla y ver cómo puedo ayudarte a hacerla realidad."
-              : "Have an amazing idea? I'd love to hear it and see how I can help you make it a reality."
-          }
+          {t("contact.cta.description")}
         </p>
 
         <div class="flex flex-col sm:flex-row gap-4">
@@ -134,7 +122,7 @@ const socialLinks = [
             class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-blue-600 rounded-2xl font-bold hover:scale-105 transition-all duration-200 shadow-xl shadow-blue-900/20"
           >
             <PiEnvelope className="w-5 h-5" />
-            {lang === "es" ? "Enviar Correo" : "Send Email"}
+            {t("contact.cta.sendEmail")}
           </a>
           <a
             href={`tel:${contactInfo.phone}`}
@@ -149,7 +137,7 @@ const socialLinks = [
 
     <!-- Location Card -->
     <div
-      class="md:col-span-4 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-8 relative overflow-hidden group"
+      class="md:col-span-4 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-300 dark:border-zinc-700 p-8 relative overflow-hidden group"
     >
       <div
         class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity"
@@ -165,7 +153,7 @@ const socialLinks = [
         </div>
 
         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
-          {lang === "es" ? "Ubicación" : "Location"}
+          {t("contact.location.title")}
         </h3>
 
         <p class="text-gray-600 dark:text-gray-400 mb-4">
@@ -198,7 +186,9 @@ const socialLinks = [
             <PiReadCvLogoDuotone className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h3 class="font-bold text-gray-900 dark:text-white">CV Español</h3>
+            <h3 class="font-bold text-gray-900 dark:text-white">
+              {t("contact.cv.spanish.title")}
+            </h3>
             <p class="text-xs text-gray-500 dark:text-gray-400">
               PDF • Nov 2025
             </p>
@@ -206,11 +196,7 @@ const socialLinks = [
         </div>
 
         <p class="text-gray-600 dark:text-gray-400 text-sm mb-6">
-          {
-            lang === "es"
-              ? "Currículum completo con experiencia, habilidades y proyectos."
-              : "Complete resume with experience, skills and projects."
-          }
+          {t("contact.cv.spanish.description")}
         </p>
 
         <a
@@ -219,7 +205,7 @@ const socialLinks = [
           class="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-red-500 to-orange-500 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
         >
           <PiDownloadSimple className="w-5 h-5" />
-          {lang === "es" ? "Descargar" : "Download"}
+          {t("contact.cv.download")}
         </a>
       </div>
     </div>
@@ -240,7 +226,9 @@ const socialLinks = [
             <PiReadCvLogoDuotone className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h3 class="font-bold text-gray-900 dark:text-white">CV English</h3>
+            <h3 class="font-bold text-gray-900 dark:text-white">
+              {t("contact.cv.english.title")}
+            </h3>
             <p class="text-xs text-gray-500 dark:text-gray-400">
               PDF • Nov 2025
             </p>
@@ -248,11 +236,7 @@ const socialLinks = [
         </div>
 
         <p class="text-gray-600 dark:text-gray-400 text-sm mb-6">
-          {
-            lang === "es"
-              ? "Versión en inglés para oportunidades internacionales."
-              : "English version for international opportunities."
-          }
+          {t("contact.cv.english.description")}
         </p>
 
         <a
@@ -261,7 +245,7 @@ const socialLinks = [
           class="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
         >
           <PiDownloadSimple className="w-5 h-5" />
-          {lang === "es" ? "Descargar" : "Download"}
+          {t("contact.cv.download")}
         </a>
       </div>
     </div>
@@ -273,7 +257,7 @@ const socialLinks = [
           href={social.url}
           target="_blank"
           rel="noopener noreferrer"
-          class={`md:col-span-3 rounded-3xl bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-6 flex items-center gap-4 group hover:shadow-xl transition-all duration-300 ${social.color}`}
+          class={`md:col-span-3 rounded-3xl bg-white dark:bg-gray-900 border border-zinc-300 dark:border-zinc-700 p-6 flex items-center gap-4 group hover:shadow-xl transition-all duration-300 ${social.color}`}
         >
           <div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center group-hover:bg-transparent transition-all duration-300">
             {social.icon === "github" && (

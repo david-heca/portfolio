@@ -36,7 +36,31 @@
   },
   "contact": {
     "title": "Contacto",
-    "subtitle": "¿Hablamos de tu próximo proyecto?"
+    "subtitle": "¿Hablamos de tu próximo proyecto?",
+    "info": {
+      "location": "México, México",
+      "availability": "Interesado en proyectos colaborativos",
+      "timezone": "GMT-6 (CST) - Ciudad de México"
+    },
+    "cta": {
+      "heading": "Hablemos de tu proyecto",
+      "description": "¿Tienes una idea increíble? Me encantaría escucharla y ver cómo puedo ayudarte a hacerla realidad.",
+      "sendEmail": "Enviar Correo"
+    },
+    "location": {
+      "title": "Ubicación"
+    },
+    "cv": {
+      "spanish": {
+        "title": "CV Español",
+        "description": "Currículum completo con experiencia, habilidades y proyectos."
+      },
+      "english": {
+        "title": "CV English",
+        "description": "Versión en inglés para oportunidades internacionales."
+      },
+      "download": "Descargar"
+    }
   },
   "common": {
     "contactMe": "Contáctame",
@@ -44,9 +68,30 @@
   },
   "home": {
     "available": "Disponible",
-    "connect": "Conectar",
     "currentRole": "Rol Actual",
-    "viewResume": "Ver Experiencia Completa"
+    "viewResume": "Ver Experiencia Completa",
+    "quickFacts": {
+      "location": "Ciudad de México",
+      "experience": "3+ años exp.",
+      "degree": "Ing. en TI",
+      "languages": "ES / EN"
+    },
+    "interests": {
+      "coffee": "Café",
+      "gaming": "Gaming",
+      "music": "Música",
+      "tech": "Tech"
+    },
+    "aboutSection": {
+      "title": "Sobre mí",
+      "learnMore": "Más información",
+      "shortBio": "Ingeniero de Software y Datos enfocado en crear productos con IA, sistemas escalables y experiencias claras para el negocio.",
+      "bio": {
+        "paragraph1": "Soy un profesional en Ingeniería de Software y Datos con un sólido historial en el diseño, construcción y escalado de soluciones impulsadas por datos e IA que generan valor empresarial real.",
+        "paragraph2": "A lo largo de mi carrera, he trabajado en la intersección de la ingeniería de software, la ciencia de datos y la automatización—liderando iniciativas que transforman desafíos complejos en sistemas robustos y escalables. Mi experiencia abarca desarrollo backend y frontend, ingeniería de datos e inteligencia artificial aplicada, con un enfoque consistente en arquitectura limpia, eficiencia y mantenibilidad a largo plazo.",
+        "paragraph3": "Más allá de la ejecución, contribuyo activamente al intercambio de conocimientos y al desarrollo de talento. He impartido conferencias y charlas académicas en universidades sobre Inteligencia Artificial y Ciencia de Datos, ayudando a cerrar la brecha entre la teoría y la aplicación en el mundo real."
+      }
+    }
   },
   "notFound": {
     "title": "Página no encontrada",

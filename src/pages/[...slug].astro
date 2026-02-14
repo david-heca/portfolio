@@ -3,7 +3,6 @@ import Layout from "@layouts/Layout.astro";
 import { useTranslations } from "@i18n/utils";
 
 // Importar componentes de secciones
-import About from "@sections/About.astro";
 import Skills from "@sections/Skills.astro";
 import Projects from "@sections/Projects.astro";
 import Work from "@sections/Work.astro";
@@ -12,7 +11,7 @@ import Contact from "@sections/Contact.astro";
 import Home from "@sections/Home.astro";
 
 export async function getStaticPaths() {
-  const pages = ["about", "skills", "projects", "work", "education", "contact"];
+  const pages = ["skills", "projects", "work", "education", "contact"];
   const paths: any[] = [];
 
   // Página principal en inglés
@@ -61,7 +60,6 @@ const getPageMeta = (page: string, lang: "es" | "en") => {
   }
 
   const titles = {
-    about: lang === "es" ? `Sobre mí - ${baseName}` : `About me - ${baseName}`,
     skills:
       lang === "es" ? `Habilidades - ${baseName}` : `Skills - ${baseName}`,
     projects:
@@ -74,10 +72,6 @@ const getPageMeta = (page: string, lang: "es" | "en") => {
   };
 
   const descriptions = {
-    about:
-      lang === "es"
-        ? "Conoce más sobre David Herrera, su experiencia y pasión por la tecnología."
-        : "Learn more about David Herrera, his experience and passion for technology.",
     skills:
       lang === "es"
         ? "Tecnologías y habilidades que domino como desarrollador."
@@ -112,7 +106,6 @@ const pageMeta = getPageMeta(page, lang);
 <Layout title={pageMeta.title} description={pageMeta.description} lang={lang}>
   <!-- Renderizar componente -->
   {page === "home" && <Home lang={lang} />}
-  {page === "about" && <About lang={lang} />}
   {page === "skills" && <Skills lang={lang} />}
   {page === "projects" && <Projects lang={lang} />}
   {page === "work" && <Work lang={lang} />}
