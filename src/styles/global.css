@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
 @import "tailwindcss";
 
 @variant dark (&:where(.dark, .dark *));
@@ -31,5 +31,47 @@
   html {
     font-family: "Outfit", sans-serif;
     scroll-behavior: smooth;
+  }
+
+  /* Modern minimalist scrollbar */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgb(203 213 225 / 0.5) transparent;
+  }
+
+  *::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background: rgb(203 213 225 / 0.5);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  *::-webkit-scrollbar-thumb:hover {
+    background: rgb(148 163 184 / 0.7);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+  }
+
+  /* Dark mode scrollbar */
+  .dark * {
+    scrollbar-color: rgb(51 65 85 / 0.5) transparent;
+  }
+
+  .dark *::-webkit-scrollbar-thumb {
+    background: rgb(51 65 85 / 0.5);
+  }
+
+  .dark *::-webkit-scrollbar-thumb:hover {
+    background: rgb(71 85 105 / 0.7);
   }
 }
