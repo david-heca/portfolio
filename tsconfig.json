@@ -24,9 +24,6 @@
       "@ui/*": [
         "src/components/ui/*"
       ],
-      "@animations/*": [
-        "src/components/animations/*"
-      ],
       "@layouts/*": [
         "src/layouts/*"
       ],

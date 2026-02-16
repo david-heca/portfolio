@@ -17,21 +17,3 @@ export function useTranslations(lang: keyof typeof ui) {
     return value || key;
   }
 }
-
-export function getRouteFromUrl(url: URL): string | undefined {
-  const pathname = new URL(url).pathname;
-  const parts = pathname?.split('/');
-  const path = parts.pop() || parts.pop();
-
-  if (path === undefined) {
-    return '/';
-  }
-
-  const currentLang = getLangFromUrl(url);
-
-  if (currentLang === defaultLang) {
-    return path ? `/${path}` : '/';
-  }
-
-  return path ? `/${currentLang}/${path}` : `/${currentLang}`;
-}
