@@ -4,9 +4,6 @@ import { useTranslations } from "@i18n/utils";
 import {
   PiCode,
   PiArrowRightBold,
-  PiMapPin,
-  PiGraduationCap,
-  PiTranslate,
   PiBriefcase,
   PiHeartDuotone,
   PiCoffeeDuotone,
@@ -23,29 +20,6 @@ export interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-
-const quickFacts = [
-  {
-    icon: PiMapPin,
-    label: t("home.quickFacts.location"),
-    color: "blue",
-  },
-  {
-    icon: PiBriefcase,
-    label: t("home.quickFacts.experience"),
-    color: "emerald",
-  },
-  {
-    icon: PiGraduationCap,
-    label: t("home.quickFacts.degree"),
-    color: "violet",
-  },
-  {
-    icon: PiTranslate,
-    label: t("home.quickFacts.languages"),
-    color: "amber",
-  },
-];
 
 const interests = [
   { icon: PiCoffeeDuotone, label: t("home.interests.coffee") },
