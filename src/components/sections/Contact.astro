@@ -8,12 +8,12 @@ import {
   PiLinkedinLogo,
   PiXLogo,
   PiInstagramLogo,
-  PiDownloadSimple,
   PiClock,
   PiPaperPlaneTilt,
   PiArrowUpRight,
   PiReadCvLogoDuotone,
 } from "react-icons/pi";
+import CvDownloadButton from "@ui/CvDownloadButton";
 
 export interface Props {
   lang: "es" | "en";
@@ -199,14 +199,15 @@ const socialLinks = [
           {t("contact.cv.spanish.description")}
         </p>
 
-        <a
+        <CvDownloadButton
+          client:load
           href="/assets/documents/davidherrera-spanish.pdf"
           download="davidherrera-spanish.pdf"
-          class="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-red-500 to-orange-500 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
-        >
-          <PiDownloadSimple className="w-5 h-5" />
-          {t("contact.cv.download")}
-        </a>
+          locale={lang}
+          cvName="es"
+          label={t("contact.cv.download")}
+          className="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-red-500 to-orange-500 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
+        />
       </div>
     </div>
 
@@ -239,14 +240,15 @@ const socialLinks = [
           {t("contact.cv.english.description")}
         </p>
 
-        <a
+        <CvDownloadButton
+          client:load
           href="/assets/documents/davidherrera-english.pdf"
           download="davidherrera-english.pdf"
-          class="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
-        >
-          <PiDownloadSimple className="w-5 h-5" />
-          {t("contact.cv.download")}
-        </a>
+          locale={lang}
+          cvName="en"
+          label={t("contact.cv.download")}
+          className="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
+        />
       </div>
     </div>
 
