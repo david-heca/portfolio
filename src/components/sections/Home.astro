@@ -2,10 +2,8 @@
 import { Image } from "astro:assets";
 import { useTranslations } from "@i18n/utils";
 import {
-  PiCode,
   PiArrowRightBold,
   PiBriefcase,
-  PiHeartDuotone,
   PiCoffeeDuotone,
   PiGameControllerDuotone,
   PiMusicNoteDuotone,
@@ -30,207 +28,172 @@ const interests = [
 ---
 
 <section>
-  <div class="space-y-4 md:space-y-6">
-    <!-- Hero Section with Photo -->
-    <div
-      class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 auto-rows-[minmax(200px,auto)]"
-    >
-      <!-- Hero Text -->
-      <div
-        class="md:col-span-8 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-300 dark:border-zinc-700 p-6 md:p-10 flex flex-col justify-center relative overflow-hidden group"
-      >
-        <div
-          class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity"
-        >
-          <PiCode className="w-32 md:w-48 h-32 md:h-48" />
-        </div>
-
-        <div class="relative z-10">
+  <div class="space-y-8 md:space-y-12">
+    <!-- Hero Section - Cinematic Full Width -->
+    <div class="relative overflow-hidden">
+      <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-12 py-8 md:py-16">
+        <!-- Text Content -->
+        <div class="flex-1 min-w-0">
+          <!-- Availability Badge -->
           <div
-            class="inline-flex items-center align-middle gap-2 px-3 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 text-xs font-medium mb-6"
+            class="reveal inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-mono text-xs uppercase tracking-wider mb-6 border"
+            style={`color: var(--color-accent); border-color: color-mix(in srgb, var(--color-accent) 30%, transparent); background-color: var(--color-accent-muted);`}
           >
             <span class="relative flex h-2 w-2">
               <span
-                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"
-              ></span>
+                class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                style={`background-color: var(--color-accent);`}></span>
               <span
-                class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"
-              ></span>
+                class="relative inline-flex rounded-full h-2 w-2"
+                style={`background-color: var(--color-accent);`}></span>
             </span>
             {t("home.available")}
           </div>
 
-          <h1
-            class="text-3xl md:text-4xl lg:text-6xl font-bold text-zinc-900 dark:text-white mb-4 tracking-tight"
-          >
+          <!-- Greeting Label -->
+          <p class="reveal reveal-delay-1 font-mono text-sm uppercase tracking-widest mb-4" style={`color: var(--color-text-tertiary);`}>
             {t("hero.greeting")}
-            <span class="text-blue-600 dark:text-blue-400">David Herrera</span>
+          </p>
+
+          <!-- Name -->
+          <h1 class="reveal reveal-delay-2 text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05] mb-6">
+            <span class="text-gradient">David Herrera</span>
           </h1>
-          <p
-            class="text-lg md:text-2xl text-zinc-600 dark:text-zinc-400 leading-relaxed mb-2"
-          >
+
+          <!-- Role -->
+          <p class="reveal reveal-delay-3 text-xl md:text-2xl leading-relaxed mb-3" style={`color: var(--color-text-secondary);`}>
             {t("hero.title")}
           </p>
-          <p class="text-base md:text-lg text-zinc-500 dark:text-zinc-500">
+          <p class="reveal reveal-delay-4 text-base md:text-lg" style={`color: var(--color-text-tertiary);`}>
             {t("hero.description")}
           </p>
         </div>
-      </div>
 
-      <!-- Photo -->
-      <div
-        class="md:col-span-4 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-300 dark:border-zinc-700 p-4 relative overflow-hidden"
-      >
-        <div class="relative w-full h-full min-h-70 md:min-h-0">
-          <Image
-            src="/assets/profile-photo.webp"
-            alt="David Herrera"
-            width={400}
-            height={500}
-            class="w-full h-full object-cover rounded-2xl transition-opacity duration-500"
-            loading="eager"
-            format="webp"
-            quality={85}
-          />
-          <!-- Gradient overlay -->
-          <div
-            class="absolute inset-0 rounded-2xl bg-linear-to-t from-black/60 via-black/10 to-transparent"
-          >
+        <!-- Photo -->
+        <div class="reveal reveal-delay-3 shrink-0">
+          <div class="relative w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64">
+            <div class="absolute inset-0 rounded-2xl ring-2 opacity-40" style={`--tw-ring-color: var(--color-accent);`}></div>
+            <Image
+              src="/assets/profile-photo.webp"
+              alt="David Herrera"
+              width={256}
+              height={256}
+              class="w-full h-full object-cover rounded-2xl"
+              loading="eager"
+              format="webp"
+              quality={85}
+            />
+            <div
+              class="absolute inset-0 rounded-2xl bg-linear-to-t from-black/30 via-transparent to-transparent"
+            >
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- About Me - Extended Bio -->
-    <div
-      class="rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-300 dark:border-zinc-700 p-6 md:p-10"
-    >
-      <div class="flex items-center gap-3 mb-6">
-        <div
-          class="w-12 h-12 rounded-2xl bg-gray-200/50 dark:bg-gray-800 flex items-center justify-center"
-        >
-          <PiHeartDuotone
-            className="w-6 h-6 text-zinc-600 dark:text-zinc-400"
-          />
-        </div>
-        <h2
-          class="text-2xl md:text-3xl font-bold text-zinc-900 dark:text-white"
-        >
-          {t("home.aboutSection.title")}
-        </h2>
-      </div>
+    <!-- Divider -->
+    <div class="divider"></div>
 
-      <div class="space-y-4 max-w-4xl">
-        <p
-          class="text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed"
-        >
+    <!-- About Me -->
+    <div class="reveal">
+      <span class="font-mono text-xs uppercase tracking-widest block mb-6" style={`color: var(--color-accent);`}>
+        // {t("home.aboutSection.title")}
+      </span>
+
+      <div class="space-y-4 max-w-3xl">
+        <p class="text-base md:text-lg leading-relaxed" style={`color: var(--color-text-secondary);`}>
           {t("home.aboutSection.bio.paragraph1")}
         </p>
-        <p
-          class="text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed"
-        >
+        <p class="text-base md:text-lg leading-relaxed" style={`color: var(--color-text-secondary);`}>
           {t("home.aboutSection.bio.paragraph2")}
         </p>
-        <p
-          class="text-base md:text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed"
-        >
+        <p class="text-base md:text-lg leading-relaxed" style={`color: var(--color-text-secondary);`}>
           {t("home.aboutSection.bio.paragraph3")}
         </p>
       </div>
     </div>
 
-    <!-- CTA Buttons - Navigation to other sections -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+    <!-- CTA Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
       <a
         href={lang === "es" ? "/work" : "/en/work"}
-        class="group rounded-3xl bg-gray-900 dark:bg-white border border-gray-900 dark:border-white p-6 md:p-8 hover:scale-[1.02] transition-all duration-300 hover:shadow-xl"
+        class="reveal reveal-delay-1 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover:-translate-y-0.5"
+        style={`background-color: var(--color-bg-secondary); border-color: var(--color-border-default); border-left-color: var(--color-text-tertiary);`}
+        onmouseenter="this.style.borderLeftColor='var(--color-accent)'; this.style.boxShadow='0 0 30px -5px var(--color-accent-glow)'"
+        onmouseleave="this.style.borderLeftColor='var(--color-text-tertiary)'; this.style.boxShadow='none'"
       >
-        <div class="flex items-start justify-between mb-4">
-          <div
-            class="w-12 h-12 rounded-xl bg-white/10 dark:bg-gray-900/10 flex items-center justify-center group-hover:scale-110 transition-transform"
-          >
-            <PiBriefcase className="w-6 h-6 text-white dark:text-gray-900" />
-          </div>
+        <div class="flex items-start justify-between mb-3">
+          <PiBriefcase className="w-5 h-5 text-zinc-400 dark:text-zinc-500" />
           <PiArrowRightBold
-            className="w-5 h-5 text-white dark:text-gray-900 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
+            className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-indigo-500 dark:text-indigo-400"
           />
         </div>
-        <h3
-          class="text-xl md:text-2xl font-bold text-white dark:text-gray-900 mb-2"
-        >
+        <h3 class="text-lg font-semibold mb-1" style={`color: var(--color-text-primary);`}>
           {t("work.title")}
         </h3>
-        <p class="text-sm text-gray-300 dark:text-gray-600">
+        <p class="text-sm" style={`color: var(--color-text-tertiary);`}>
           {t("work.subtitle")}
         </p>
       </a>
 
       <a
         href={lang === "es" ? "/projects" : "/en/projects"}
-        class="group rounded-3xl bg-blue-600 dark:bg-blue-500 border border-blue-600 dark:border-blue-500 p-6 md:p-8 hover:scale-[1.02] transition-all duration-300 hover:shadow-xl"
+        class="reveal reveal-delay-2 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover:-translate-y-0.5"
+        style={`background-color: var(--color-bg-secondary); border-color: var(--color-border-default); border-left-color: var(--color-accent);`}
+        onmouseenter="this.style.boxShadow='0 0 30px -5px var(--color-accent-glow)'"
+        onmouseleave="this.style.boxShadow='none'"
       >
-        <div class="flex items-start justify-between mb-4">
-          <div
-            class="w-12 h-12 rounded-xl bg-white/10 dark:bg-white/20 flex items-center justify-center group-hover:scale-110 transition-transform"
-          >
-            <PiFolderOpen className="w-6 h-6 text-white" />
-          </div>
+        <div class="flex items-start justify-between mb-3">
+          <PiFolderOpen className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
           <PiArrowRightBold
-            className="w-5 h-5 text-white opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
+            className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-indigo-500 dark:text-indigo-400"
           />
         </div>
-        <h3 class="text-xl md:text-2xl font-bold text-white mb-2">
+        <h3 class="text-lg font-semibold mb-1" style={`color: var(--color-text-primary);`}>
           {t("projects.title")}
         </h3>
-        <p class="text-sm text-blue-100">
+        <p class="text-sm" style={`color: var(--color-text-tertiary);`}>
           {t("projects.subtitle")}
         </p>
       </a>
 
       <a
         href={lang === "es" ? "/contact" : "/en/contact"}
-        class="group rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-300 dark:border-zinc-700 p-6 md:p-8 hover:scale-[1.02] hover:border-zinc-400 dark:hover:border-zinc-600 transition-all duration-300"
+        class="reveal reveal-delay-3 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover:-translate-y-0.5"
+        style={`background-color: var(--color-bg-secondary); border-color: var(--color-border-default); border-left-color: var(--color-text-tertiary);`}
+        onmouseenter="this.style.borderLeftColor='var(--color-accent)'; this.style.boxShadow='0 0 30px -5px var(--color-accent-glow)'"
+        onmouseleave="this.style.borderLeftColor='var(--color-text-tertiary)'; this.style.boxShadow='none'"
       >
-        <div class="flex items-start justify-between mb-4">
-          <div
-            class="w-12 h-12 rounded-xl bg-blue-500/20 dark:bg-blue-500/20 flex items-center justify-center group-hover:scale-110 transition-transform"
-          >
-            <PiUserCircle
-              className="w-6 h-6 text-blue-600 dark:text-blue-400"
-            />
-          </div>
+        <div class="flex items-start justify-between mb-3">
+          <PiUserCircle className="w-5 h-5 text-zinc-400 dark:text-zinc-500" />
           <PiArrowRightBold
-            className="w-5 h-5 text-zinc-400 dark:text-zinc-600 group-hover:text-blue-600 dark:group-hover:text-blue-400 group-hover:translate-x-1 transition-all"
+            className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-indigo-500 dark:text-indigo-400"
           />
         </div>
-        <h3
-          class="text-xl md:text-2xl font-bold text-zinc-900 dark:text-white mb-2"
-        >
+        <h3 class="text-lg font-semibold mb-1" style={`color: var(--color-text-primary);`}>
           {t("contact.title")}
         </h3>
-        <p class="text-sm text-zinc-600 dark:text-zinc-400">
+        <p class="text-sm" style={`color: var(--color-text-tertiary);`}>
           {t("contact.subtitle")}
         </p>
       </a>
     </div>
 
     <!-- Interests -->
-    <div
-      class="rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-300 dark:border-zinc-700 p-6 md:p-8"
-    >
-      <h3
-        class="text-lg md:text-xl font-semibold text-zinc-900 dark:text-white mb-4"
-      >
+    <div class="reveal">
+      <h3 class="font-mono text-xs uppercase tracking-widest mb-4" style={`color: var(--color-text-tertiary);`}>
         {t("home.interestsTitle")}
       </h3>
       <div class="flex flex-wrap gap-3">
         {
           interests.map((interest) => (
-            <div class="flex items-center gap-2 px-4 py-2.5 bg-white dark:bg-gray-800 border border-zinc-200 dark:border-zinc-700 rounded-full hover:border-zinc-300 dark:hover:border-zinc-600 transition-colors">
-              <interest.icon className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
-              <span class="text-sm md:text-base font-medium text-zinc-700 dark:text-zinc-300">
-                {interest.label}
-              </span>
+            <div
+              class="flex items-center gap-2 px-3 py-1.5 rounded-md font-mono text-xs transition-colors"
+              style={`background-color: var(--color-bg-tertiary); color: var(--color-text-secondary);`}
+            >
+              <interest.icon className="w-4 h-4" />
+              <span>{interest.label}</span>
             </div>
           ))
         }

@@ -9,9 +9,8 @@ import {
   PiXLogo,
   PiInstagramLogo,
   PiClock,
-  PiPaperPlaneTilt,
   PiArrowUpRight,
-  PiReadCvLogoDuotone,
+  PiDownloadSimple,
 } from "react-icons/pi";
 import CvDownloadButton from "@ui/CvDownloadButton";
 
@@ -31,102 +30,70 @@ const contactInfo = {
 };
 
 const socialLinks = [
-  {
-    name: "GitHub",
-    url: "https://github.com/david-heca",
-    icon: "github",
-    username: "@david-heca",
-    color:
-      "group-hover:bg-gray-900 group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-gray-900",
-  },
-  {
-    name: "LinkedIn",
-    url: "https://www.linkedin.com/in/david-heca/",
-    icon: "linkedin",
-    username: "/in/david-heca",
-    color: "group-hover:bg-blue-600 group-hover:text-white",
-  },
-  {
-    name: "Twitter",
-    url: "https://x.com/david_heca_",
-    icon: "twitter",
-    username: "@david_heca_",
-    color:
-      "group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black",
-  },
-  {
-    name: "Instagram",
-    url: "https://www.instagram.com/david_heca/",
-    icon: "instagram",
-    username: "@david_heca",
-    color:
-      "group-hover:bg-linear-to-br group-hover:from-purple-600 group-hover:to-pink-500 group-hover:text-white",
-  },
+  { name: "GitHub", url: "https://github.com/david-heca", icon: PiGithubLogo, username: "@david-heca" },
+  { name: "LinkedIn", url: "https://www.linkedin.com/in/david-heca/", icon: PiLinkedinLogo, username: "/in/david-heca" },
+  { name: "Twitter", url: "https://x.com/david_heca_", icon: PiXLogo, username: "@david_heca_" },
+  { name: "Instagram", url: "https://www.instagram.com/david_heca/", icon: PiInstagramLogo, username: "@david_heca" },
 ];
 ---
 
 <section>
   <!-- Header -->
-  <div class="animate-slide-up text-center mb-12">
-    <h1
-      class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
-    >
+  <div class="reveal mb-16">
+    <span class="font-mono text-xs uppercase tracking-widest block mb-3" style={`color: var(--color-accent);`}>
+      // 05. {t("nav.contact")}
+    </span>
+    <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-3" style={`color: var(--color-text-primary);`}>
       {t("contact.title")}
     </h1>
-    <p class="text-xl text-zinc-500 dark:text-zinc-400">
+    <p class="text-lg" style={`color: var(--color-text-secondary);`}>
       {t("contact.subtitle")}
     </p>
   </div>
 
-  <!-- Bento Grid Layout -->
-  <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-6 mb-12">
-    <!-- Main Contact Card - Email -->
+  <div class="grid grid-cols-1 md:grid-cols-12 gap-5 mb-12">
+    <!-- Main Email CTA -->
     <div
-      class="md:col-span-8 rounded-3xl bg-linear-to-br from-blue-500 to-blue-600 p-8 md:p-10 relative overflow-hidden group"
+      class="reveal md:col-span-8 rounded-2xl p-8 md:p-10 relative overflow-hidden"
+      style="background: linear-gradient(135deg, var(--color-accent), #7C3AED);"
     >
+      <!-- Subtle pattern -->
       <div
-        class="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI2MCIgaGVpZ2h0PSI2MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAxMCAwIEwgMCAwIDAgMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0id2hpdGUiIHN0cm9rZS13aWR0aD0iMSIgb3BhY2l0eT0iMC4xIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc=')] opacity-30"
+        class="absolute inset-0 opacity-10 pointer-events-none"
+        style="background-image: url('/assets/noise.svg'); background-repeat: repeat;"
       >
-      </div>
-      <div
-        class="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity"
-      >
-        <PiPaperPlaneTilt className="w-40 h-40 text-white" />
       </div>
 
       <div class="relative z-10">
         <div
-          class="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-white text-sm font-medium mb-6"
+          class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/15 backdrop-blur-sm rounded-full text-white text-xs font-mono uppercase tracking-wider mb-6"
         >
           <span class="relative flex h-2 w-2">
-            <span
-              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
-            ></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-400"
-            ></span>
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
           </span>
           {contactInfo.availability}
         </div>
 
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
           {t("contact.cta.heading")}
         </h2>
 
-        <p class="text-blue-100 text-lg mb-8 max-w-xl">
+        <p class="text-white/70 text-lg mb-8 max-w-xl">
           {t("contact.cta.description")}
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-4">
+        <div class="flex flex-col sm:flex-row gap-3">
           <a
             href={`mailto:${contactInfo.email}`}
-            class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white text-blue-600 rounded-2xl font-bold hover:scale-105 transition-all duration-200 shadow-xl shadow-blue-900/20"
+            class="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white text-indigo-600 rounded-xl font-semibold hover:scale-105 transition-all duration-200 shadow-xl"
           >
             <PiEnvelope className="w-5 h-5" />
             {t("contact.cta.sendEmail")}
           </a>
           <a
             href={`tel:${contactInfo.phone}`}
-            class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-white/10 backdrop-blur-sm text-white border border-white/30 rounded-2xl font-bold hover:bg-white/20 transition-all duration-200"
+            class="inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white/10 backdrop-blur-sm text-white border border-white/20 rounded-xl font-semibold hover:bg-white/20 transition-all duration-200"
           >
             <PiPhone className="w-5 h-5" />
             {contactInfo.phone}
@@ -137,151 +104,90 @@ const socialLinks = [
 
     <!-- Location Card -->
     <div
-      class="md:col-span-4 rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-300 dark:border-zinc-700 p-8 relative overflow-hidden group"
+      class="reveal md:col-span-4 rounded-2xl p-6 md:p-8"
+      style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
     >
-      <div
-        class="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity"
-      >
-        <PiMapPin className="w-32 h-32" />
+      <PiMapPin className="w-6 h-6 mb-4 text-indigo-500 dark:text-indigo-400" />
+      <h3 class="text-lg font-bold mb-2" style={`color: var(--color-text-primary);`}>
+        {t("contact.location.title")}
+      </h3>
+      <p class="mb-4" style={`color: var(--color-text-secondary);`}>
+        {contactInfo.location}
+      </p>
+      <div class="flex items-center gap-2 font-mono text-xs" style={`color: var(--color-text-tertiary);`}>
+        <PiClock className="w-3.5 h-3.5" />
+        {contactInfo.timezone}
       </div>
+    </div>
 
-      <div class="relative z-10">
-        <div
-          class="w-14 h-14 bg-purple-100 dark:bg-purple-900/30 rounded-2xl flex items-center justify-center mb-6"
-        >
-          <PiMapPin className="w-7 h-7 text-purple-600 dark:text-purple-400" />
-        </div>
-
-        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
-          {t("contact.location.title")}
+    <!-- CV Downloads - Minimal -->
+    <div
+      class="reveal md:col-span-6 rounded-2xl p-6 flex items-center gap-4"
+      style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
+    >
+      <PiDownloadSimple className="w-5 h-5 shrink-0 text-indigo-500 dark:text-indigo-400" />
+      <div class="flex-1">
+        <h3 class="text-sm font-semibold" style={`color: var(--color-text-primary);`}>
+          {t("contact.cv.spanish.title")}
         </h3>
-
-        <p class="text-gray-600 dark:text-gray-400 mb-4">
-          {contactInfo.location}
-        </p>
-
-        <div
-          class="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500 mb-4"
-        >
-          <PiClock className="w-4 h-4" />
-          {contactInfo.timezone}
-        </div>
+        <p class="font-mono text-xs" style={`color: var(--color-text-tertiary);`}>PDF · Nov 2025</p>
       </div>
-    </div>
-
-    <!-- CV Downloads -->
-    <div
-      class="md:col-span-6 rounded-3xl bg-linear-to-br from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20 border border-gray-200 dark:border-gray-700 p-8 relative overflow-hidden group"
-    >
-      <div
-        class="absolute top-0 right-0 w-40 h-40 bg-linear-to-br from-red-500/30 to-orange-500/30 rounded-full blur-3xl -mr-20 -mt-20 group-hover:scale-200 transition-transform duration-500"
-      >
-      </div>
-
-      <div class="relative z-10">
-        <div class="flex items-center gap-3 mb-4">
-          <div
-            class="w-12 h-12 bg-linear-to-br from-red-500 to-orange-500 rounded-xl flex items-center justify-center"
-          >
-            <PiReadCvLogoDuotone className="w-6 h-6 text-white" />
-          </div>
-          <div>
-            <h3 class="font-bold text-gray-900 dark:text-white">
-              {t("contact.cv.spanish.title")}
-            </h3>
-            <p class="text-xs text-gray-500 dark:text-gray-400">
-              PDF • Nov 2025
-            </p>
-          </div>
-        </div>
-
-        <p class="text-gray-600 dark:text-gray-400 text-sm mb-6">
-          {t("contact.cv.spanish.description")}
-        </p>
-
-        <CvDownloadButton
-          client:load
-          href="/assets/documents/davidherrera-spanish.pdf"
-          download="davidherrera-spanish.pdf"
-          label={t("contact.cv.download")}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-red-500 to-orange-500 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
-        />
-      </div>
+      <CvDownloadButton
+        client:load
+        href="/assets/documents/davidherrera-spanish.pdf"
+        download="davidherrera-spanish.pdf"
+        label={t("contact.cv.download")}
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-indigo-500/10 text-indigo-500 dark:bg-indigo-400/15 dark:text-indigo-400"
+      />
     </div>
 
     <div
-      class="md:col-span-6 rounded-3xl bg-linear-to-br from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 border border-gray-200 dark:border-gray-700 p-8 relative overflow-hidden group"
+      class="reveal md:col-span-6 rounded-2xl p-6 flex items-center gap-4"
+      style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
     >
-      <div
-        class="absolute top-0 right-0 w-40 h-40 bg-linear-to-br from-blue-500/30 to-purple-500/30 rounded-full blur-3xl -mr-20 -mt-20 group-hover:scale-200 transition-transform duration-500"
-      >
+      <PiDownloadSimple className="w-5 h-5 shrink-0 text-indigo-500 dark:text-indigo-400" />
+      <div class="flex-1">
+        <h3 class="text-sm font-semibold" style={`color: var(--color-text-primary);`}>
+          {t("contact.cv.english.title")}
+        </h3>
+        <p class="font-mono text-xs" style={`color: var(--color-text-tertiary);`}>PDF · Nov 2025</p>
       </div>
-
-      <div class="relative z-10">
-        <div class="flex items-center gap-3 mb-4">
-          <div
-            class="w-12 h-12 bg-linear-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center"
-          >
-            <PiReadCvLogoDuotone className="w-6 h-6 text-white" />
-          </div>
-          <div>
-            <h3 class="font-bold text-gray-900 dark:text-white">
-              {t("contact.cv.english.title")}
-            </h3>
-            <p class="text-xs text-gray-500 dark:text-gray-400">
-              PDF • Nov 2025
-            </p>
-          </div>
-        </div>
-
-        <p class="text-gray-600 dark:text-gray-400 text-sm mb-6">
-          {t("contact.cv.english.description")}
-        </p>
-
-        <CvDownloadButton
-          client:load
-          href="/assets/documents/davidherrera-english.pdf"
-          download="davidherrera-english.pdf"
-          label={t("contact.cv.download")}
-          className="inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-blue-500 to-purple-500 text-white rounded-xl font-semibold hover:shadow-lg hover:scale-105 transition-all duration-200"
-        />
-      </div>
+      <CvDownloadButton
+        client:load
+        href="/assets/documents/davidherrera-english.pdf"
+        download="davidherrera-english.pdf"
+        label={t("contact.cv.download")}
+        className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-indigo-500/10 text-indigo-500 dark:bg-indigo-400/15 dark:text-indigo-400"
+      />
     </div>
 
-    <!-- Social Links -->
-    {
-      socialLinks.map((social) => (
-        <a
-          href={social.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          class={`md:col-span-3 rounded-3xl bg-white dark:bg-gray-900 border border-zinc-300 dark:border-zinc-700 p-6 flex items-center gap-4 group hover:shadow-xl transition-all duration-300 ${social.color}`}
-        >
-          <div class="w-12 h-12 rounded-2xl bg-gray-100 dark:bg-gray-800 flex items-center justify-center group-hover:bg-transparent transition-all duration-300">
-            {social.icon === "github" && (
-              <PiGithubLogo className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-current transition-colors" />
-            )}
-            {social.icon === "linkedin" && (
-              <PiLinkedinLogo className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-current transition-colors" />
-            )}
-            {social.icon === "twitter" && (
-              <PiXLogo className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-current transition-colors" />
-            )}
-            {social.icon === "instagram" && (
-              <PiInstagramLogo className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-current transition-colors" />
-            )}
-          </div>
-          <div class="flex-1 min-w-0">
-            <p class="font-bold text-gray-900 dark:text-white group-hover:text-current transition-colors">
-              {social.name}
-            </p>
-            <p class="text-sm text-gray-500 dark:text-gray-400 group-hover:text-current/70 transition-colors truncate">
-              {social.username}
-            </p>
-          </div>
-          <PiArrowUpRight className="w-5 h-5 text-gray-400 group-hover:text-current opacity-0 group-hover:opacity-100 transition-all" />
-        </a>
-      ))
-    }
+    <!-- Social Links - Icon Row -->
+    <div class="md:col-span-12">
+      <div class="reveal flex flex-wrap gap-3">
+        {
+          socialLinks.map((social) => (
+            <a
+              href={social.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-3 px-5 py-3 rounded-xl transition-all duration-300"
+              style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
+              onmouseenter="this.style.borderColor='var(--color-border-hover)'; this.style.boxShadow='0 0 20px -8px var(--color-accent-glow)'"
+              onmouseleave="this.style.borderColor='var(--color-border-default)'; this.style.boxShadow='none'"
+            >
+              <social.icon className="w-5 h-5 text-zinc-500 dark:text-zinc-400" />
+              <div class="min-w-0">
+                <p class="text-sm font-semibold" style={`color: var(--color-text-primary);`}>{social.name}</p>
+                <p class="font-mono text-xs truncate" style={`color: var(--color-text-tertiary);`}>{social.username}</p>
+              </div>
+              <PiArrowUpRight
+                className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
+                className="text-indigo-500 dark:text-indigo-400"
+              />
+            </a>
+          ))
+        }
+      </div>
+    </div>
   </div>
 </section>

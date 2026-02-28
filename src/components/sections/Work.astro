@@ -97,62 +97,88 @@ const experiences = [
 
 <section>
   <!-- Header -->
-  <div class="animate-slide-up text-center mb-12">
+  <div class="reveal mb-16">
+    <span
+      class="font-mono text-xs uppercase tracking-widest block mb-3"
+      style={`color: var(--color-accent);`}
+    >
+      // 01. {t("nav.work")}
+    </span>
     <h1
-      class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+      class="text-3xl md:text-5xl font-bold tracking-tight mb-3"
+      style={`color: var(--color-text-primary);`}
     >
       {t("work.title")}
     </h1>
-    <p class="text-xl text-zinc-500 dark:text-zinc-400">
+    <p class="text-lg" style={`color: var(--color-text-secondary);`}>
       {t("work.subtitle")}
     </p>
   </div>
 
-  <!-- Experience Cards Grid -->
-  <div class="space-y-4 md:space-y-6">
+  <!-- Experience -->
+  <div class="space-y-12">
     {
-      experiences.map((exp) => (
-        <div class="group rounded-3xl bg-gray-50 dark:bg-gray-900 border border-zinc-300 dark:border-zinc-700 p-6 md:p-8">
+      experiences.map((exp, expIndex) => (
+        <div class="reveal" style={`transition-delay: ${expIndex * 0.15}s;`}>
           {/* Company Header */}
-          <div class="flex flex-col md:flex-row gap-5 md:gap-6">
+          <div class="flex flex-col md:flex-row gap-4 md:gap-5 mb-6">
             <div class="shrink-0">
               {exp.logo ? (
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white dark:bg-gray-800 p-3 border border-gray-200 dark:border-gray-700">
+                <div
+                  class="w-14 h-14 md:w-16 md:h-16 rounded-xl p-2.5 ring-1"
+                  style={`background-color: var(--color-bg-secondary); --tw-ring-color: var(--color-border-default);`}
+                >
                   <Image
                     src={exp.logo}
                     alt={`${exp.company} logo`}
-                    width={80}
-                    height={80}
+                    width={64}
+                    height={64}
                     class="w-full h-full object-contain"
                     loading="lazy"
                   />
                 </div>
               ) : (
-                <div class="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-linear-to-br from-blue-500 to-purple-600 flex items-center justify-center">
-                  <span class="text-white font-bold text-2xl">
-                    {exp.company.charAt(0)}
-                  </span>
+                <div
+                  class="w-14 h-14 md:w-16 md:h-16 rounded-xl flex items-center justify-center"
+                  style={`background-color: var(--color-accent); color: white;`}
+                >
+                  <span class="font-bold text-xl">{exp.company.charAt(0)}</span>
                 </div>
               )}
             </div>
 
             <div class="flex-1 min-w-0">
-              <h3 class="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
+              <h3
+                class="text-xl md:text-2xl font-bold"
+                style={`color: var(--color-text-primary);`}
+              >
                 {exp.company}
               </h3>
               <div class="flex flex-wrap gap-2 mt-2">
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
-                  <PiCalendar className="w-4 h-4 text-blue-500" />
+                <span
+                  class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider px-2.5 py-1 rounded-md border"
+                  style={`background-color: var(--color-bg-tertiary); border-color: var(--color-border-default); color: var(--color-text-tertiary);`}
+                >
+                  <PiCalendar className="w-3.5 h-3.5" />
                   {exp.totalPeriod}
                 </span>
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
+                <span
+                  class="inline-flex items-center font-mono text-xs uppercase tracking-wider px-2.5 py-1 rounded-md border"
+                  style={`background-color: var(--color-bg-tertiary); border-color: var(--color-border-default); color: var(--color-text-tertiary);`}
+                >
                   {exp.totalDuration}
                 </span>
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-white dark:bg-gray-800 rounded-lg text-xs md:text-sm font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
-                  <PiMapPin className="w-4 h-4 text-gray-500" />
+                <span
+                  class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider px-2.5 py-1 rounded-md border"
+                  style={`background-color: var(--color-bg-tertiary); border-color: var(--color-border-default); color: var(--color-text-tertiary);`}
+                >
+                  <PiMapPin className="w-3.5 h-3.5" />
                   {exp.location}
                 </span>
-                <span class="inline-flex items-center gap-2 px-3 py-1.5 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-xs md:text-sm font-medium text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800">
+                <span
+                  class="inline-flex items-center font-mono text-xs uppercase tracking-wider px-2.5 py-1 rounded-md border"
+                  style={`background-color: var(--color-accent-muted); border-color: color-mix(in srgb, var(--color-accent) 20%, transparent); color: var(--color-accent);`}
+                >
                   {exp.workMode}
                 </span>
               </div>
@@ -160,79 +186,103 @@ const experiences = [
           </div>
 
           {/* Roles Timeline */}
-          <div class="mt-6 space-y-5">
+          <div class="space-y-4 ml-1">
             {exp.roles.map((role, roleIndex) => (
-              <div class="relative pl-4 md:pl-6">
-                <div class="absolute left-0 top-2 w-2 h-2 rounded-full bg-blue-500" />
-                {roleIndex !== exp.roles.length - 1 && (
-                  <div class="absolute left-0.75 top-4 bottom-0 w-px bg-gray-200 dark:bg-gray-700" />
-                )}
-
-                <div class="bg-white dark:bg-gray-800/60 border border-gray-200 dark:border-gray-700 rounded-2xl p-4 md:p-5">
-                  <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                    <h4 class="text-base md:text-lg font-semibold text-gray-900 dark:text-white">
-                      {role.title}
-                    </h4>
-                    <div class="flex flex-wrap gap-2">
-                      <span class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 dark:bg-gray-900 rounded-lg text-xs font-medium text-gray-700 dark:text-gray-300">
-                        <PiCalendar className="w-3.5 h-3.5" />
-                        {role.period}
-                      </span>
-                      <span class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 dark:bg-gray-900 rounded-lg text-xs font-medium text-gray-700 dark:text-gray-300">
-                        {role.duration}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div class="flex flex-wrap gap-2 mt-2">
-                    <span class="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-xs font-medium text-blue-700 dark:text-blue-300">
-                      <PiBriefcase className="w-3.5 h-3.5" />
-                      {role.type}
+              <div
+                class="rounded-xl p-5 md:p-6 transition-all duration-300"
+                style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
+                onmouseenter="this.style.borderColor='var(--color-border-hover)'; this.style.boxShadow='0 0 30px -10px var(--color-accent-glow)'"
+                onmouseleave="this.style.borderColor='var(--color-border-default)'; this.style.boxShadow='none'"
+              >
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
+                  <h4
+                    class="text-base md:text-lg font-semibold"
+                    style={`color: var(--color-text-primary);`}
+                  >
+                    {role.title}
+                  </h4>
+                  <div class="flex flex-wrap gap-2">
+                    <span
+                      class="inline-flex items-center gap-1.5 font-mono text-xs px-2.5 py-1 rounded-md"
+                      style={`background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary);`}
+                    >
+                      <PiCalendar className="w-3 h-3" />
+                      {role.period}
                     </span>
-                    <span class="inline-flex items-center gap-2 px-3 py-1 bg-white dark:bg-gray-900 rounded-lg text-xs font-medium text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
-                      <PiMapPin className="w-3.5 h-3.5" />
-                      {role.location}
+                    <span
+                      class="font-mono text-xs px-2.5 py-1 rounded-md"
+                      style={`background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary);`}
+                    >
+                      {role.duration}
                     </span>
                   </div>
+                </div>
 
-                  <div class="grid md:grid-cols-2 gap-4 mt-4">
-                    <div>
-                      <div class="flex items-center gap-2 mb-2">
-                        <div class="p-1.5 rounded-lg bg-green-100 dark:bg-green-900/30">
-                          <PiLightning className="w-4 h-4 text-green-600 dark:text-green-400" />
-                        </div>
-                        <h5 class="text-sm font-semibold text-gray-900 dark:text-white">
-                          {t("work.labels.highlights")}
-                        </h5>
-                      </div>
-                      <ul class="space-y-2">
-                        {role.achievements.map((achievement) => (
-                          <li class="flex items-start gap-3">
-                            <div class="w-1.5 h-1.5 bg-green-500 rounded-full mt-2 shrink-0" />
-                            <span class="text-xs md:text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-                              {achievement}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <span
+                    class="inline-flex items-center gap-1.5 font-mono text-xs px-2.5 py-1 rounded-md"
+                    style={`background-color: var(--color-accent-muted); color: var(--color-accent);`}
+                  >
+                    <PiBriefcase className="w-3 h-3" />
+                    {role.type}
+                  </span>
+                  <span
+                    class="inline-flex items-center gap-1.5 font-mono text-xs px-2.5 py-1 rounded-md border"
+                    style={`border-color: var(--color-border-default); color: var(--color-text-tertiary);`}
+                  >
+                    <PiMapPin className="w-3 h-3" />
+                    {role.location}
+                  </span>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-5">
+                  <div>
+                    <div class="flex items-center gap-2 mb-3">
+                      <PiLightning className="w-4 h-4 text-emerald-500" />
+                      <h5
+                        class="text-sm font-semibold"
+                        style={`color: var(--color-text-primary);`}
+                      >
+                        {t("work.labels.highlights")}
+                      </h5>
                     </div>
-
-                    <div>
-                      <div class="flex items-center gap-2 mb-2">
-                        <div class="p-1.5 rounded-lg bg-purple-100 dark:bg-purple-900/30">
-                          <PiStack className="w-4 h-4 text-purple-600 dark:text-purple-400" />
-                        </div>
-                        <h5 class="text-sm font-semibold text-gray-900 dark:text-white">
-                          {t("work.labels.stack")}
-                        </h5>
-                      </div>
-                      <div class="flex flex-wrap gap-2">
-                        {role.technologies.map((tech) => (
-                          <span class="px-2.5 py-1 bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 rounded-lg text-xs font-medium border border-gray-200 dark:border-gray-700">
-                            {tech}
+                    <ul class="space-y-2">
+                      {role.achievements.map((achievement) => (
+                        <li class="flex items-start gap-3">
+                          <div class="w-1.5 h-1.5 bg-emerald-500 rounded-full mt-2 shrink-0" />
+                          <span
+                            class="text-xs md:text-sm leading-relaxed"
+                            style={`color: var(--color-text-secondary);`}
+                          >
+                            {achievement}
                           </span>
-                        ))}
-                      </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <div class="flex items-center gap-2 mb-3">
+                      <PiStack
+                        className="w-4 h-4"
+                        style={{ color: "var(--color-accent)" }}
+                      />
+                      <h5
+                        class="text-sm font-semibold"
+                        style={`color: var(--color-text-primary);`}
+                      >
+                        {t("work.labels.stack")}
+                      </h5>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                      {role.technologies.map((tech) => (
+                        <span
+                          class="font-mono text-xs px-2.5 py-1 rounded-md border"
+                          style={`background-color: var(--color-bg-tertiary); border-color: var(--color-border-default); color: var(--color-text-secondary);`}
+                        >
+                          {tech}
+                        </span>
+                      ))}
                     </div>
                   </div>
                 </div>
