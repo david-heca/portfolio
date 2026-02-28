@@ -2,8 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import Navbar from "@ui/Navbar.astro";
 import "@styles/global.css";
-import { PiHeartDuotone } from "react-icons/pi";
-import  SpeedInsights  from "@vercel/speed-insights/astro"
+import SpeedInsights from "@vercel/speed-insights/astro";
 
 export interface Props {
   title: string;
@@ -108,49 +107,61 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
     </script>
   </head>
   <body
-    class="min-h-screen bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-50 flex flex-col"
+    class="min-h-screen flex flex-col"
+    style={`background-color: var(--color-bg-primary); color: var(--color-text-primary);`}
   >
     <SpeedInsights />
-    <!-- Background Pattern -->
+
+    <!-- Noise Texture Background -->
     <div
-      class="fixed inset-0 z-[-1] bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[30px_30px]"
+      class="fixed inset-0 z-[-1] opacity-[0.03] dark:opacity-[0.04] pointer-events-none"
+      style="background-image: url('/assets/noise.svg'); background-repeat: repeat;"
     >
     </div>
 
     <Navbar transition:persist="navbar" />
 
     <main
-      class="grow pt-26 pb-12 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full"
+      class="grow pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full"
     >
       <slot />
     </main>
 
     <footer
-      class="bg-white/70 dark:bg-gray-950/70 backdrop-blur-xl border-t border-zinc-300 dark:border-zinc-700 py-6 px-6 mt-auto"
+      class="py-8 px-6 mt-auto"
+      style={`border-top: 1px solid var(--color-border-default);`}
       transition:persist="footer"
     >
-      <div
-        class="max-w-7xl mx-auto px-4 text-center text-gray-500 dark:text-gray-400 text-sm"
-      >
-        <p
-          class="flex sm:justify-center sm:items-center justify-center items-center gap-2"
-        >
-          &copy; {new Date().getFullYear()} David Herrera.
-          {
-            lang === "es" ? (
-              <span class="hidden md:flex items-center gap-1">
-                Hecho con <PiHeartDuotone size={20} className="text-red-500" />{" "}
-                desde México.
-              </span>
-            ) : (
-              <span class="hidden md:flex items-center gap-1">
-                Made with <PiHeartDuotone size={20} className="text-red-500" />{" "}
-                from Mexico.
-              </span>
-            )
-          }
+      <div class="max-w-7xl mx-auto px-4 text-center font-mono text-xs" style={`color: var(--color-text-tertiary);`}>
+        <p>
+          &copy; {new Date().getFullYear()} David Herrera
+          {lang === "es" ? " · Hecho desde México" : " · Made from Mexico"}
         </p>
       </div>
     </footer>
+
+    <!-- IntersectionObserver for reveal animations -->
+    <script>
+      function setupRevealAnimations() {
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+        );
+
+        document.querySelectorAll(".reveal").forEach((el) => {
+          observer.observe(el);
+        });
+      }
+
+      setupRevealAnimations();
+      document.addEventListener("astro:page-load", setupRevealAnimations);
+    </script>
   </body>
 </html>
