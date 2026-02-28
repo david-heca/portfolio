@@ -31,7 +31,9 @@ const interests = [
   <div class="space-y-8 md:space-y-12">
     <!-- Hero Section - Cinematic Full Width -->
     <div class="relative overflow-hidden">
-      <div class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-12 py-8 md:py-16">
+      <div
+        class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-12 py-8 md:py-16"
+      >
         <!-- Text Content -->
         <div class="flex-1 min-w-0">
           <!-- Availability Badge -->
@@ -51,20 +53,31 @@ const interests = [
           </div>
 
           <!-- Greeting Label -->
-          <p class="reveal reveal-delay-1 font-mono text-sm uppercase tracking-widest mb-4" style={`color: var(--color-text-tertiary);`}>
+          <p
+            class="reveal reveal-delay-1 font-mono text-sm uppercase tracking-widest mb-4"
+            style={`color: var(--color-text-tertiary);`}
+          >
             {t("hero.greeting")}
           </p>
 
           <!-- Name -->
-          <h1 class="reveal reveal-delay-2 text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05] mb-6">
+          <h1
+            class="reveal reveal-delay-2 text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05] mb-6"
+          >
             <span class="text-gradient">David Herrera</span>
           </h1>
 
           <!-- Role -->
-          <p class="reveal reveal-delay-3 text-xl md:text-2xl leading-relaxed mb-3" style={`color: var(--color-text-secondary);`}>
+          <p
+            class="reveal reveal-delay-3 text-xl md:text-2xl leading-relaxed mb-3"
+            style={`color: var(--color-text-secondary);`}
+          >
             {t("hero.title")}
           </p>
-          <p class="reveal reveal-delay-4 text-base md:text-lg" style={`color: var(--color-text-tertiary);`}>
+          <p
+            class="reveal reveal-delay-4 text-base md:text-lg"
+            style={`color: var(--color-text-tertiary);`}
+          >
             {t("hero.description")}
           </p>
         </div>
@@ -72,7 +85,11 @@ const interests = [
         <!-- Photo -->
         <div class="reveal reveal-delay-3 shrink-0">
           <div class="relative w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64">
-            <div class="absolute inset-0 rounded-2xl ring-2 opacity-40" style={`--tw-ring-color: var(--color-accent);`}></div>
+            <div
+              class="absolute inset-0 rounded-2xl ring-2 opacity-40"
+              style={`--tw-ring-color: var(--color-accent);`}
+            >
+            </div>
             <Image
               src="/assets/profile-photo.webp"
               alt="David Herrera"
@@ -97,18 +114,30 @@ const interests = [
 
     <!-- About Me -->
     <div class="reveal">
-      <span class="font-mono text-xs uppercase tracking-widest block mb-6" style={`color: var(--color-accent);`}>
+      <span
+        class="font-mono text-xs uppercase tracking-widest block mb-6"
+        style={`color: var(--color-accent);`}
+      >
         // {t("home.aboutSection.title")}
       </span>
 
       <div class="space-y-4 max-w-3xl">
-        <p class="text-base md:text-lg leading-relaxed" style={`color: var(--color-text-secondary);`}>
+        <p
+          class="text-base md:text-lg leading-relaxed"
+          style={`color: var(--color-text-secondary);`}
+        >
           {t("home.aboutSection.bio.paragraph1")}
         </p>
-        <p class="text-base md:text-lg leading-relaxed" style={`color: var(--color-text-secondary);`}>
+        <p
+          class="text-base md:text-lg leading-relaxed"
+          style={`color: var(--color-text-secondary);`}
+        >
           {t("home.aboutSection.bio.paragraph2")}
         </p>
-        <p class="text-base md:text-lg leading-relaxed" style={`color: var(--color-text-secondary);`}>
+        <p
+          class="text-base md:text-lg leading-relaxed"
+          style={`color: var(--color-text-secondary);`}
+        >
           {t("home.aboutSection.bio.paragraph3")}
         </p>
       </div>
@@ -129,7 +158,10 @@ const interests = [
             className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-indigo-500 dark:text-indigo-400"
           />
         </div>
-        <h3 class="text-lg font-semibold mb-1" style={`color: var(--color-text-primary);`}>
+        <h3
+          class="text-lg font-semibold mb-1"
+          style={`color: var(--color-text-primary);`}
+        >
           {t("work.title")}
         </h3>
         <p class="text-sm" style={`color: var(--color-text-tertiary);`}>
@@ -145,12 +177,17 @@ const interests = [
         onmouseleave="this.style.boxShadow='none'"
       >
         <div class="flex items-start justify-between mb-3">
-          <PiFolderOpen className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
+          <PiFolderOpen
+            className="w-5 h-5 text-indigo-500 dark:text-indigo-400"
+          />
           <PiArrowRightBold
             className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-indigo-500 dark:text-indigo-400"
           />
         </div>
-        <h3 class="text-lg font-semibold mb-1" style={`color: var(--color-text-primary);`}>
+        <h3
+          class="text-lg font-semibold mb-1"
+          style={`color: var(--color-text-primary);`}
+        >
           {t("projects.title")}
         </h3>
         <p class="text-sm" style={`color: var(--color-text-tertiary);`}>
@@ -171,7 +208,10 @@ const interests = [
             className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-indigo-500 dark:text-indigo-400"
           />
         </div>
-        <h3 class="text-lg font-semibold mb-1" style={`color: var(--color-text-primary);`}>
+        <h3
+          class="text-lg font-semibold mb-1"
+          style={`color: var(--color-text-primary);`}
+        >
           {t("contact.title")}
         </h3>
         <p class="text-sm" style={`color: var(--color-text-tertiary);`}>
@@ -182,7 +222,10 @@ const interests = [
 
     <!-- Interests -->
     <div class="reveal">
-      <h3 class="font-mono text-xs uppercase tracking-widest mb-4" style={`color: var(--color-text-tertiary);`}>
+      <h3
+        class="font-mono text-xs uppercase tracking-widest mb-4"
+        style={`color: var(--color-text-tertiary);`}
+      >
         {t("home.interestsTitle")}
       </h3>
       <div class="flex flex-wrap gap-3">

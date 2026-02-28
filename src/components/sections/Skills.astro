@@ -43,58 +43,190 @@ const getLevelColor = (level: string) => {
 };
 
 const primarySkills = [
-  { name: "C#", category: getCategory("Backend"), level: getLevel("Intermediate"), icon: "csharp" },
-  { name: "Tailwind CSS", category: getCategory("Frontend"), level: getLevel("Intermediate"), icon: "tailwindcss" },
-  { name: "Python", category: getCategory("Backend"), level: getLevel("Intermediate"), icon: "python" },
-  { name: "Docker", category: getCategory("DevOps"), level: getLevel("Basic"), icon: "docker" },
-  { name: "Azure", category: getCategory("Cloud"), level: getLevel("Intermediate"), icon: "azure" },
-  { name: "Az Foundry", category: getCategory("AI"), level: getLevel("Intermediate"),
-    iconDark: "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/azureai-color.png",
-    iconLight: "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/azureai-color.png" },
-  { name: "JavaScript", category: getCategory("Frontend"), level: getLevel("Intermediate"), icon: "javascript" },
-  { name: "SQL", category: getCategory("Database"), level: getLevel("Intermediate"), icon: "sql-server" },
-  { name: "Git", category: getCategory("Tools"), level: getLevel("Advanced"), icon: "git" },
-  { name: "React", category: getCategory("Frontend"), level: getLevel("Basic"),
-    iconLight: "https://svgl.app/library/react_light.svg", iconDark: "https://svgl.app/library/react_dark.svg" },
-  { name: "Astro", category: getCategory("Frontend"), level: getLevel("Basic"),
-    iconLight: "https://svgl.app/library/astro-icon-light.svg", iconDark: "https://svgl.app/library/astro-icon-dark.svg" },
-  { name: "MCP", category: getCategory("AI"), level: getLevel("Intermediate"),
-    iconDark: "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/mcp.png",
-    iconLight: "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/mcp.png" },
-  { name: "HTML5", category: getCategory("Frontend"), level: getLevel("Advanced"), icon: "html5" },
-  { name: "CSS3", category: getCategory("Frontend"), level: getLevel("Advanced"), icon: "css_old" },
-  { name: "Linux", category: getCategory("OS"), level: getLevel("Intermediate"), icon: "linux" },
-  { name: "GitHub", category: getCategory("Tools"), level: getLevel("Advanced"),
-    iconDark: "https://svgl.app/library/github_dark.svg", iconLight: "https://svgl.app/library/github_light.svg" },
-  { name: "PostgreSQL", category: getCategory("Database"), level: getLevel("Intermediate"), icon: "postgresql" },
-  { name: "Railway", category: getCategory("Cloud"), level: getLevel("Intermediate"),
-    iconDark: "https://svgl.app/library/railway_dark.svg", iconLight: "https://svgl.app/library/railway.svg" },
-  { name: "Cloudflare", category: getCategory("Cloud"), level: getLevel("Intermediate"), icon: "cloudflare" },
-  { name: "Bun", category: getCategory("Runtime"), level: getLevel("Intermediate"), icon: "bun" },
-  { name: "Linear", category: getCategory("Tools"), level: getLevel("Intermediate"), icon: "linear" },
-  { name: "JWT", category: getCategory("Security"), level: getLevel("Intermediate"), icon: "jwt" },
+  {
+    name: "C#",
+    category: getCategory("Backend"),
+    level: getLevel("Intermediate"),
+    icon: "csharp",
+  },
+  {
+    name: "Tailwind CSS",
+    category: getCategory("Frontend"),
+    level: getLevel("Intermediate"),
+    icon: "tailwindcss",
+  },
+  {
+    name: "Python",
+    category: getCategory("Backend"),
+    level: getLevel("Intermediate"),
+    icon: "python",
+  },
+  {
+    name: "Docker",
+    category: getCategory("DevOps"),
+    level: getLevel("Basic"),
+    icon: "docker",
+  },
+  {
+    name: "Azure",
+    category: getCategory("Cloud"),
+    level: getLevel("Intermediate"),
+    icon: "azure",
+  },
+  {
+    name: "Az Foundry",
+    category: getCategory("AI"),
+    level: getLevel("Intermediate"),
+    iconDark:
+      "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/azureai-color.png",
+    iconLight:
+      "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/azureai-color.png",
+  },
+  {
+    name: "JavaScript",
+    category: getCategory("Frontend"),
+    level: getLevel("Intermediate"),
+    icon: "javascript",
+  },
+  {
+    name: "SQL",
+    category: getCategory("Database"),
+    level: getLevel("Intermediate"),
+    icon: "sql-server",
+  },
+  {
+    name: "Git",
+    category: getCategory("Tools"),
+    level: getLevel("Advanced"),
+    icon: "git",
+  },
+  {
+    name: "React",
+    category: getCategory("Frontend"),
+    level: getLevel("Basic"),
+    iconLight: "https://svgl.app/library/react_light.svg",
+    iconDark: "https://svgl.app/library/react_dark.svg",
+  },
+  {
+    name: "Astro",
+    category: getCategory("Frontend"),
+    level: getLevel("Basic"),
+    iconLight: "https://svgl.app/library/astro-icon-light.svg",
+    iconDark: "https://svgl.app/library/astro-icon-dark.svg",
+  },
+  {
+    name: "MCP",
+    category: getCategory("AI"),
+    level: getLevel("Intermediate"),
+    iconDark:
+      "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/dark/mcp.png",
+    iconLight:
+      "https://raw.githubusercontent.com/lobehub/lobe-icons/refs/heads/master/packages/static-png/light/mcp.png",
+  },
+  {
+    name: "HTML5",
+    category: getCategory("Frontend"),
+    level: getLevel("Advanced"),
+    icon: "html5",
+  },
+  {
+    name: "CSS3",
+    category: getCategory("Frontend"),
+    level: getLevel("Advanced"),
+    icon: "css_old",
+  },
+  {
+    name: "Linux",
+    category: getCategory("OS"),
+    level: getLevel("Intermediate"),
+    icon: "linux",
+  },
+  {
+    name: "GitHub",
+    category: getCategory("Tools"),
+    level: getLevel("Advanced"),
+    iconDark: "https://svgl.app/library/github_dark.svg",
+    iconLight: "https://svgl.app/library/github_light.svg",
+  },
+  {
+    name: "PostgreSQL",
+    category: getCategory("Database"),
+    level: getLevel("Intermediate"),
+    icon: "postgresql",
+  },
+  {
+    name: "Railway",
+    category: getCategory("Cloud"),
+    level: getLevel("Intermediate"),
+    iconDark: "https://svgl.app/library/railway_dark.svg",
+    iconLight: "https://svgl.app/library/railway.svg",
+  },
+  {
+    name: "Cloudflare",
+    category: getCategory("Cloud"),
+    level: getLevel("Intermediate"),
+    icon: "cloudflare",
+  },
+  {
+    name: "Bun",
+    category: getCategory("Runtime"),
+    level: getLevel("Intermediate"),
+    icon: "bun",
+  },
+  {
+    name: "Linear",
+    category: getCategory("Tools"),
+    level: getLevel("Intermediate"),
+    icon: "linear",
+  },
+  {
+    name: "JWT",
+    category: getCategory("Security"),
+    level: getLevel("Intermediate"),
+    icon: "jwt",
+  },
 ];
 
 const languages = [
-  { name: t("skills.languageSkills.spanish"), level: t("skills.levels.native") },
-  { name: t("skills.languageSkills.english"), level: "B2 - Upper Intermediate" },
+  {
+    name: t("skills.languageSkills.spanish"),
+    level: t("skills.levels.native"),
+  },
+  {
+    name: t("skills.languageSkills.english"),
+    level: "B2 - Upper Intermediate",
+  },
 ];
 
 const softSkills = [
-  t("skills.softSkillsList.0"), t("skills.softSkillsList.1"), t("skills.softSkillsList.2"),
-  t("skills.softSkillsList.3"), t("skills.softSkillsList.4"), t("skills.softSkillsList.5"),
-  t("skills.softSkillsList.6"), t("skills.softSkillsList.7"), t("skills.softSkillsList.8"),
-  t("skills.softSkillsList.9"), t("skills.softSkillsList.10"), t("skills.softSkillsList.11"),
+  t("skills.softSkillsList.0"),
+  t("skills.softSkillsList.1"),
+  t("skills.softSkillsList.2"),
+  t("skills.softSkillsList.3"),
+  t("skills.softSkillsList.4"),
+  t("skills.softSkillsList.5"),
+  t("skills.softSkillsList.6"),
+  t("skills.softSkillsList.7"),
+  t("skills.softSkillsList.8"),
+  t("skills.softSkillsList.9"),
+  t("skills.softSkillsList.10"),
+  t("skills.softSkillsList.11"),
 ];
 ---
 
 <section>
   <!-- Header -->
   <div class="reveal mb-16">
-    <span class="font-mono text-xs uppercase tracking-widest block mb-3" style={`color: var(--color-accent);`}>
+    <span
+      class="font-mono text-xs uppercase tracking-widest block mb-3"
+      style={`color: var(--color-accent);`}
+    >
       // 03. {t("nav.skills")}
     </span>
-    <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-3" style={`color: var(--color-text-primary);`}>
+    <h1
+      class="text-3xl md:text-5xl font-bold tracking-tight mb-3"
+      style={`color: var(--color-text-primary);`}
+    >
       {t("skills.title")}
     </h1>
     <p class="text-lg" style={`color: var(--color-text-secondary);`}>
@@ -106,7 +238,10 @@ const softSkills = [
   <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
     <!-- Technical Skills -->
     <div class="md:col-span-8">
-      <h2 class="font-mono text-xs uppercase tracking-widest mb-6" style={`color: var(--color-text-tertiary);`}>
+      <h2
+        class="font-mono text-xs uppercase tracking-widest mb-6"
+        style={`color: var(--color-text-tertiary);`}
+      >
         {t("skills.sections.technologies")}
       </h2>
 
@@ -149,12 +284,18 @@ const softSkills = [
                     />
                   </>
                 ) : null}
-                <h3 class="text-sm font-medium truncate" style={`color: var(--color-text-primary);`}>
+                <h3
+                  class="text-sm font-medium truncate"
+                  style={`color: var(--color-text-primary);`}
+                >
                   {skill.name}
                 </h3>
               </div>
               <div class="flex items-center justify-between">
-                <span class="font-mono text-xs" style={`color: var(--color-text-tertiary);`}>
+                <span
+                  class="font-mono text-xs"
+                  style={`color: var(--color-text-tertiary);`}
+                >
                   {skill.category}
                 </span>
                 <span
@@ -171,7 +312,10 @@ const softSkills = [
 
     <!-- Languages -->
     <div class="md:col-span-4 md:row-span-2">
-      <h2 class="font-mono text-xs uppercase tracking-widest mb-6" style={`color: var(--color-text-tertiary);`}>
+      <h2
+        class="font-mono text-xs uppercase tracking-widest mb-6"
+        style={`color: var(--color-text-tertiary);`}
+      >
         {t("skills.sections.languages")}
       </h2>
 
@@ -180,8 +324,13 @@ const softSkills = [
         style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
       >
         <div class="flex items-center gap-2 mb-2">
-          <PiTranslate className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
-          <span class="font-mono text-xs uppercase tracking-widest" style={`color: var(--color-accent);`}>
+          <PiTranslate
+            className="w-5 h-5 text-indigo-500 dark:text-indigo-400"
+          />
+          <span
+            class="font-mono text-xs uppercase tracking-widest"
+            style={`color: var(--color-accent);`}
+          >
             // {t("skills.sections.languages")}
           </span>
         </div>
@@ -190,33 +339,48 @@ const softSkills = [
           languages.map((language) => (
             <div class="space-y-2">
               <div class="flex items-center justify-between">
-                <h3 class="font-semibold" style={`color: var(--color-text-primary);`}>
+                <h3
+                  class="font-semibold"
+                  style={`color: var(--color-text-primary);`}
+                >
                   {language.name}
                 </h3>
                 <span
                   class="font-mono text-xs px-2.5 py-1 rounded-md"
-                  style={language.level === t("skills.levels.native")
-                    ? `background-color: #10B98120; color: #10B981;`
-                    : `background-color: var(--color-accent-muted); color: var(--color-accent);`
+                  style={
+                    language.level === t("skills.levels.native")
+                      ? `background-color: #10B98120; color: #10B981;`
+                      : `background-color: var(--color-accent-muted); color: var(--color-accent);`
                   }
                 >
-                  {language.level === t("skills.levels.native") ? t("skills.levels.native") : "B2"}
+                  {language.level === t("skills.levels.native")
+                    ? t("skills.levels.native")
+                    : "B2"}
                 </span>
               </div>
 
-              <div class="w-full rounded-full h-0.5 overflow-hidden" style={`background-color: var(--color-bg-tertiary);`}>
+              <div
+                class="w-full rounded-full h-0.5 overflow-hidden"
+                style={`background-color: var(--color-bg-tertiary);`}
+              >
                 <div
                   class={`h-0.5 rounded-full transition-all duration-1000 ease-out ${
-                    language.level === t("skills.levels.native") ? "w-full" : "w-[70%]"
+                    language.level === t("skills.levels.native")
+                      ? "w-full"
+                      : "w-[70%]"
                   }`}
-                  style={language.level === t("skills.levels.native")
-                    ? "background-color: #10B981;"
-                    : `background-color: var(--color-accent);`
+                  style={
+                    language.level === t("skills.levels.native")
+                      ? "background-color: #10B981;"
+                      : `background-color: var(--color-accent);`
                   }
                 />
               </div>
 
-              <p class="text-xs leading-relaxed" style={`color: var(--color-text-tertiary);`}>
+              <p
+                class="text-xs leading-relaxed"
+                style={`color: var(--color-text-tertiary);`}
+              >
                 {language.level === t("skills.levels.native")
                   ? t("skills.languageSkills.nativeDescription")
                   : t("skills.languageSkills.professionalDescription")}
@@ -229,7 +393,10 @@ const softSkills = [
 
     <!-- Soft Skills -->
     <div class="md:col-span-8">
-      <h2 class="font-mono text-xs uppercase tracking-widest mb-6" style={`color: var(--color-text-tertiary);`}>
+      <h2
+        class="font-mono text-xs uppercase tracking-widest mb-6"
+        style={`color: var(--color-text-tertiary);`}
+      >
         {t("skills.sections.softSkills")}
       </h2>
 

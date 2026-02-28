@@ -81,39 +81,64 @@ const education = [
 
 const certifications = [
   {
-    id: 1, name: t("education.certifications.azure.name"), issuer: "Microsoft", date: "2024",
+    id: 1,
+    name: t("education.certifications.azure.name"),
+    issuer: "Microsoft",
+    date: "2024",
     credentialId: "AZ-900-123456",
-    verifyUrl: "https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=414&cvid=r+dkpNaAIMQHhll3/TFLLw==",
+    verifyUrl:
+      "https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=414&cvid=r+dkpNaAIMQHhll3/TFLLw==",
     skills: ["Azure", "Cloud Computing", "Networking", "Security"],
-    level: getLevel("fundamentals"), featured: true,
+    level: getLevel("fundamentals"),
+    featured: true,
   },
   {
-    id: 2, name: t("education.certifications.python.name"), issuer: "Michigan University", date: "2022",
+    id: 2,
+    name: t("education.certifications.python.name"),
+    issuer: "Michigan University",
+    date: "2022",
     credentialId: "J7EMYHGRRUH8",
-    verifyUrl: "https://www.coursera.org/account/accomplishments/verify/J7EMYHGRRUH8",
+    verifyUrl:
+      "https://www.coursera.org/account/accomplishments/verify/J7EMYHGRRUH8",
     skills: ["Python", "Data Structures", "SQL"],
-    level: getLevel("fundamentals"), featured: true,
+    level: getLevel("fundamentals"),
+    featured: true,
   },
   {
-    id: 3, name: t("education.certifications.aiIntro.name"), issuer: "Platzi", date: "2023",
+    id: 3,
+    name: t("education.certifications.aiIntro.name"),
+    issuer: "Platzi",
+    date: "2023",
     credentialId: "bb841264-3516-4421-a1e2-5f5902c117ee",
-    verifyUrl: "https://platzi.com/p/david-heca/curso/11157-introduccion-ai/diploma/detalle/",
+    verifyUrl:
+      "https://platzi.com/p/david-heca/curso/11157-introduccion-ai/diploma/detalle/",
     skills: ["AI", "Machine Learning", "Data Science"],
-    level: getLevel("fundamentals"), featured: false,
+    level: getLevel("fundamentals"),
+    featured: false,
   },
   {
-    id: 4, name: t("education.certifications.chatbot.name"), issuer: "Platzi", date: "2023",
+    id: 4,
+    name: t("education.certifications.chatbot.name"),
+    issuer: "Platzi",
+    date: "2023",
     credentialId: "60c81aa1-626e-4a7c-9842-8b4a2fabc165",
-    verifyUrl: "https://platzi.com/p/david-heca/curso/8946-azureopenia/diploma/detalle/",
+    verifyUrl:
+      "https://platzi.com/p/david-heca/curso/8946-azureopenia/diploma/detalle/",
     skills: ["Chatbots", "Azure", "OpenAI"],
-    level: getLevel("intermediate"), featured: false,
+    level: getLevel("intermediate"),
+    featured: false,
   },
   {
-    id: 5, name: t("education.certifications.terminal.name"), issuer: "Platzi", date: "2023",
+    id: 5,
+    name: t("education.certifications.terminal.name"),
+    issuer: "Platzi",
+    date: "2023",
     credentialId: "5584d92c-c845-442e-819b-2b31a747f230",
-    verifyUrl: "https://platzi.com/p/david-heca/curso/2292-terminal/diploma/detalle/",
+    verifyUrl:
+      "https://platzi.com/p/david-heca/curso/2292-terminal/diploma/detalle/",
     skills: ["Terminal", "Command Line", "Linux"],
-    level: getLevel("fundamentals"), featured: false,
+    level: getLevel("fundamentals"),
+    featured: false,
   },
 ];
 
@@ -124,10 +149,16 @@ const otherCerts = certifications.filter((c) => !c.featured);
 <section>
   <!-- Header -->
   <div class="reveal mb-16">
-    <span class="font-mono text-xs uppercase tracking-widest block mb-3" style={`color: var(--color-accent);`}>
+    <span
+      class="font-mono text-xs uppercase tracking-widest block mb-3"
+      style={`color: var(--color-accent);`}
+    >
       // 04. {t("nav.education")}
     </span>
-    <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-3" style={`color: var(--color-text-primary);`}>
+    <h1
+      class="text-3xl md:text-5xl font-bold tracking-tight mb-3"
+      style={`color: var(--color-text-primary);`}
+    >
       {t("education.title")}
     </h1>
     <p class="text-lg" style={`color: var(--color-text-secondary);`}>
@@ -142,28 +173,58 @@ const otherCerts = certifications.filter((c) => !c.featured);
   >
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
       <div class="text-center">
-        <p class="text-4xl md:text-5xl font-bold mb-1" style={`color: var(--color-text-primary);`}>3</p>
-        <p class="font-mono text-xs uppercase tracking-wider" style={`color: var(--color-text-tertiary);`}>
+        <p
+          class="text-4xl md:text-5xl font-bold mb-1"
+          style={`color: var(--color-text-primary);`}
+        >
+          3
+        </p>
+        <p
+          class="font-mono text-xs uppercase tracking-wider"
+          style={`color: var(--color-text-tertiary);`}
+        >
           {t("education.stats.degrees")}
         </p>
       </div>
       <div class="text-center">
-        <p class="text-4xl md:text-5xl font-bold mb-1" style={`color: var(--color-text-primary);`}>5+</p>
-        <p class="font-mono text-xs uppercase tracking-wider" style={`color: var(--color-text-tertiary);`}>
+        <p
+          class="text-4xl md:text-5xl font-bold mb-1"
+          style={`color: var(--color-text-primary);`}
+        >
+          5+
+        </p>
+        <p
+          class="font-mono text-xs uppercase tracking-wider"
+          style={`color: var(--color-text-tertiary);`}
+        >
           {t("education.stats.certifications")}
         </p>
       </div>
       <div class="text-center">
-        <p class="text-4xl md:text-5xl font-bold mb-1" style={`color: var(--color-text-primary);`}>8+</p>
-        <p class="font-mono text-xs uppercase tracking-wider" style={`color: var(--color-text-tertiary);`}>
+        <p
+          class="text-4xl md:text-5xl font-bold mb-1"
+          style={`color: var(--color-text-primary);`}
+        >
+          8+
+        </p>
+        <p
+          class="font-mono text-xs uppercase tracking-wider"
+          style={`color: var(--color-text-tertiary);`}
+        >
           {t("education.stats.yearsLearning")}
         </p>
       </div>
       <div class="text-center">
-        <p class="text-4xl md:text-5xl font-bold mb-1" style={`color: var(--color-accent);`}>
+        <p
+          class="text-4xl md:text-5xl font-bold mb-1"
+          style={`color: var(--color-accent);`}
+        >
           <PiInfinityBold className="inline w-10 h-10" />
         </p>
-        <p class="font-mono text-xs uppercase tracking-wider" style={`color: var(--color-text-tertiary);`}>
+        <p
+          class="font-mono text-xs uppercase tracking-wider"
+          style={`color: var(--color-text-tertiary);`}
+        >
           {t("education.stats.curiosity")}
         </p>
       </div>
@@ -172,7 +233,10 @@ const otherCerts = certifications.filter((c) => !c.featured);
 
   <!-- Academic Background -->
   <div class="mb-12">
-    <h2 class="font-mono text-xs uppercase tracking-widest mb-6" style={`color: var(--color-text-tertiary);`}>
+    <h2
+      class="font-mono text-xs uppercase tracking-widest mb-6"
+      style={`color: var(--color-text-tertiary);`}
+    >
       {t("education.sections.academic")}
     </h2>
 
@@ -189,26 +253,37 @@ const otherCerts = certifications.filter((c) => !c.featured);
               <div class="flex items-center gap-3">
                 <edu.icon className={`w-6 h-6 ${edu.accentClass}`} />
                 <div>
-                  <h3 class="text-lg md:text-xl font-bold" style={`color: var(--color-text-primary);`}>
+                  <h3
+                    class="text-lg md:text-xl font-bold"
+                    style={`color: var(--color-text-primary);`}
+                  >
                     {edu.degree}
                   </h3>
-                  <p class="text-sm font-medium" style={`color: var(--color-text-secondary);`}>
+                  <p
+                    class="text-sm font-medium"
+                    style={`color: var(--color-text-secondary);`}
+                  >
                     {edu.institution}
                   </p>
                 </div>
               </div>
               <span
                 class="font-mono text-xs px-2.5 py-1 rounded-md shrink-0"
-                style={edu.status.includes("Autodidacta") || edu.status.includes("Self")
-                  ? `background-color: #10B98120; color: #10B981;`
-                  : `background-color: var(--color-accent-muted); color: var(--color-accent);`
+                style={
+                  edu.status.includes("Autodidacta") ||
+                  edu.status.includes("Self")
+                    ? `background-color: #10B98120; color: #10B981;`
+                    : `background-color: var(--color-accent-muted); color: var(--color-accent);`
                 }
               >
                 {edu.status}
               </span>
             </div>
 
-            <p class="text-sm leading-relaxed mb-4" style={`color: var(--color-text-tertiary);`}>
+            <p
+              class="text-sm leading-relaxed mb-4"
+              style={`color: var(--color-text-tertiary);`}
+            >
               {edu.description}
             </p>
 
@@ -217,15 +292,30 @@ const otherCerts = certifications.filter((c) => !c.featured);
             <div class="flex flex-wrap gap-4">
               <div class="flex items-center gap-1.5">
                 <PiCalendar className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500" />
-                <span class="font-mono text-xs" style={`color: var(--color-text-tertiary);`}>{edu.period}</span>
+                <span
+                  class="font-mono text-xs"
+                  style={`color: var(--color-text-tertiary);`}
+                >
+                  {edu.period}
+                </span>
               </div>
               <div class="flex items-center gap-1.5">
                 <PiMapPin className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500" />
-                <span class="font-mono text-xs" style={`color: var(--color-text-tertiary);`}>{edu.location}</span>
+                <span
+                  class="font-mono text-xs"
+                  style={`color: var(--color-text-tertiary);`}
+                >
+                  {edu.location}
+                </span>
               </div>
               <div class="flex items-center gap-1.5">
                 <PiChartBar className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500" />
-                <span class="font-mono text-xs" style={`color: var(--color-text-tertiary);`}>{edu.grade}</span>
+                <span
+                  class="font-mono text-xs"
+                  style={`color: var(--color-text-tertiary);`}
+                >
+                  {edu.grade}
+                </span>
               </div>
             </div>
           </div>
@@ -236,7 +326,10 @@ const otherCerts = certifications.filter((c) => !c.featured);
 
   <!-- Certifications -->
   <div>
-    <h2 class="font-mono text-xs uppercase tracking-widest mb-6" style={`color: var(--color-text-tertiary);`}>
+    <h2
+      class="font-mono text-xs uppercase tracking-widest mb-6"
+      style={`color: var(--color-text-tertiary);`}
+    >
       {t("education.sections.certifications")}
     </h2>
 
@@ -257,22 +350,34 @@ const otherCerts = certifications.filter((c) => !c.featured);
               <PiTrophy className="w-6 h-6 text-amber-500" />
               <div class="flex items-center gap-1.5">
                 <PiStar className="w-3.5 h-3.5 text-amber-500" />
-                <span class="font-mono text-xs" style={`color: var(--color-text-tertiary);`}>
+                <span
+                  class="font-mono text-xs"
+                  style={`color: var(--color-text-tertiary);`}
+                >
                   {t("education.labels.featured")}
                 </span>
               </div>
             </div>
 
-            <h3 class="text-lg font-bold mb-2 leading-tight" style={`color: var(--color-text-primary);`}>
+            <h3
+              class="text-lg font-bold mb-2 leading-tight"
+              style={`color: var(--color-text-primary);`}
+            >
               {cert.name}
             </h3>
-            <p class="text-sm mb-4" style={`color: var(--color-text-tertiary);`}>
+            <p
+              class="text-sm mb-4"
+              style={`color: var(--color-text-tertiary);`}
+            >
               {cert.issuer} · {cert.date}
             </p>
 
             <div class="flex flex-wrap gap-1.5 mb-4">
               {cert.skills.map((skill) => (
-                <span class="font-mono text-xs px-2 py-0.5 rounded" style={`background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary);`}>
+                <span
+                  class="font-mono text-xs px-2 py-0.5 rounded"
+                  style={`background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary);`}
+                >
                   {skill}
                 </span>
               ))}
@@ -281,10 +386,16 @@ const otherCerts = certifications.filter((c) => !c.featured);
             <div class="divider mb-4" />
 
             <div class="flex items-center justify-between">
-              <span class="font-mono text-xs" style={`color: var(--color-text-tertiary);`}>
+              <span
+                class="font-mono text-xs"
+                style={`color: var(--color-text-tertiary);`}
+              >
                 {cert.credentialId.slice(0, 12)}...
               </span>
-              <span class="flex items-center gap-1 text-sm group-hover:gap-2 transition-all" style={`color: var(--color-text-secondary);`}>
+              <span
+                class="flex items-center gap-1 text-sm group-hover:gap-2 transition-all"
+                style={`color: var(--color-text-secondary);`}
+              >
                 {t("education.labels.viewCredential")}
                 <PiArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </span>
@@ -309,27 +420,42 @@ const otherCerts = certifications.filter((c) => !c.featured);
           >
             <div class="flex items-start justify-between mb-3">
               <PiCertificate className="w-5 h-5 text-zinc-400 dark:text-zinc-500" />
-              <span class="font-mono text-xs px-2 py-0.5 rounded" style={`background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary);`}>
+              <span
+                class="font-mono text-xs px-2 py-0.5 rounded"
+                style={`background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary);`}
+              >
                 {cert.level}
               </span>
             </div>
 
-            <h3 class="text-base font-semibold mb-1 leading-tight line-clamp-2" style={`color: var(--color-text-primary);`}>
+            <h3
+              class="text-base font-semibold mb-1 leading-tight line-clamp-2"
+              style={`color: var(--color-text-primary);`}
+            >
               {cert.name}
             </h3>
-            <p class="text-sm mb-3" style={`color: var(--color-text-tertiary);`}>
+            <p
+              class="text-sm mb-3"
+              style={`color: var(--color-text-tertiary);`}
+            >
               {cert.issuer} · {cert.date}
             </p>
 
             <div class="flex flex-wrap gap-1 mb-3">
               {cert.skills.slice(0, 3).map((skill) => (
-                <span class="font-mono text-xs px-1.5 py-0.5 rounded" style={`background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary);`}>
+                <span
+                  class="font-mono text-xs px-1.5 py-0.5 rounded"
+                  style={`background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary);`}
+                >
                   {skill}
                 </span>
               ))}
             </div>
 
-            <div class="flex items-center gap-1 text-xs" style={`color: var(--color-text-tertiary);`}>
+            <div
+              class="flex items-center gap-1 text-xs"
+              style={`color: var(--color-text-tertiary);`}
+            >
               <span>{t("education.labels.verify")}</span>
               <PiArrowUpRight className="w-3 h-3 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </div>

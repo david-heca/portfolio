@@ -30,20 +30,46 @@ const contactInfo = {
 };
 
 const socialLinks = [
-  { name: "GitHub", url: "https://github.com/david-heca", icon: PiGithubLogo, username: "@david-heca" },
-  { name: "LinkedIn", url: "https://www.linkedin.com/in/david-heca/", icon: PiLinkedinLogo, username: "/in/david-heca" },
-  { name: "Twitter", url: "https://x.com/david_heca_", icon: PiXLogo, username: "@david_heca_" },
-  { name: "Instagram", url: "https://www.instagram.com/david_heca/", icon: PiInstagramLogo, username: "@david_heca" },
+  {
+    name: "GitHub",
+    url: "https://github.com/david-heca",
+    icon: PiGithubLogo,
+    username: "@david-heca",
+  },
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/in/david-heca/",
+    icon: PiLinkedinLogo,
+    username: "/in/david-heca",
+  },
+  {
+    name: "Twitter",
+    url: "https://x.com/david_heca_",
+    icon: PiXLogo,
+    username: "@david_heca_",
+  },
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/david_heca/",
+    icon: PiInstagramLogo,
+    username: "@david_heca",
+  },
 ];
 ---
 
 <section>
   <!-- Header -->
   <div class="reveal mb-16">
-    <span class="font-mono text-xs uppercase tracking-widest block mb-3" style={`color: var(--color-accent);`}>
+    <span
+      class="font-mono text-xs uppercase tracking-widest block mb-3"
+      style={`color: var(--color-accent);`}
+    >
       // 05. {t("nav.contact")}
     </span>
-    <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-3" style={`color: var(--color-text-primary);`}>
+    <h1
+      class="text-3xl md:text-5xl font-bold tracking-tight mb-3"
+      style={`color: var(--color-text-primary);`}
+    >
       {t("contact.title")}
     </h1>
     <p class="text-lg" style={`color: var(--color-text-secondary);`}>
@@ -69,13 +95,19 @@ const socialLinks = [
           class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/15 backdrop-blur-sm rounded-full text-white text-xs font-mono uppercase tracking-wider mb-6"
         >
           <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"
+            ></span>
+            <span
+              class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"
+            ></span>
           </span>
           {contactInfo.availability}
         </div>
 
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
+        <h2
+          class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight"
+        >
           {t("contact.cta.heading")}
         </h2>
 
@@ -108,13 +140,19 @@ const socialLinks = [
       style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
     >
       <PiMapPin className="w-6 h-6 mb-4 text-indigo-500 dark:text-indigo-400" />
-      <h3 class="text-lg font-bold mb-2" style={`color: var(--color-text-primary);`}>
+      <h3
+        class="text-lg font-bold mb-2"
+        style={`color: var(--color-text-primary);`}
+      >
         {t("contact.location.title")}
       </h3>
       <p class="mb-4" style={`color: var(--color-text-secondary);`}>
         {contactInfo.location}
       </p>
-      <div class="flex items-center gap-2 font-mono text-xs" style={`color: var(--color-text-tertiary);`}>
+      <div
+        class="flex items-center gap-2 font-mono text-xs"
+        style={`color: var(--color-text-tertiary);`}
+      >
         <PiClock className="w-3.5 h-3.5" />
         {contactInfo.timezone}
       </div>
@@ -125,12 +163,22 @@ const socialLinks = [
       class="reveal md:col-span-6 rounded-2xl p-6 flex items-center gap-4"
       style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
     >
-      <PiDownloadSimple className="w-5 h-5 shrink-0 text-indigo-500 dark:text-indigo-400" />
+      <PiDownloadSimple
+        className="w-5 h-5 shrink-0 text-indigo-500 dark:text-indigo-400"
+      />
       <div class="flex-1">
-        <h3 class="text-sm font-semibold" style={`color: var(--color-text-primary);`}>
+        <h3
+          class="text-sm font-semibold"
+          style={`color: var(--color-text-primary);`}
+        >
           {t("contact.cv.spanish.title")}
         </h3>
-        <p class="font-mono text-xs" style={`color: var(--color-text-tertiary);`}>PDF · Nov 2025</p>
+        <p
+          class="font-mono text-xs"
+          style={`color: var(--color-text-tertiary);`}
+        >
+          PDF · Nov 2025
+        </p>
       </div>
       <CvDownloadButton
         client:load
@@ -145,12 +193,22 @@ const socialLinks = [
       class="reveal md:col-span-6 rounded-2xl p-6 flex items-center gap-4"
       style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
     >
-      <PiDownloadSimple className="w-5 h-5 shrink-0 text-indigo-500 dark:text-indigo-400" />
+      <PiDownloadSimple
+        className="w-5 h-5 shrink-0 text-indigo-500 dark:text-indigo-400"
+      />
       <div class="flex-1">
-        <h3 class="text-sm font-semibold" style={`color: var(--color-text-primary);`}>
+        <h3
+          class="text-sm font-semibold"
+          style={`color: var(--color-text-primary);`}
+        >
           {t("contact.cv.english.title")}
         </h3>
-        <p class="font-mono text-xs" style={`color: var(--color-text-tertiary);`}>PDF · Nov 2025</p>
+        <p
+          class="font-mono text-xs"
+          style={`color: var(--color-text-tertiary);`}
+        >
+          PDF · Nov 2025
+        </p>
       </div>
       <CvDownloadButton
         client:load
@@ -177,12 +235,21 @@ const socialLinks = [
             >
               <social.icon className="w-5 h-5 text-zinc-500 dark:text-zinc-400" />
               <div class="min-w-0">
-                <p class="text-sm font-semibold" style={`color: var(--color-text-primary);`}>{social.name}</p>
-                <p class="font-mono text-xs truncate" style={`color: var(--color-text-tertiary);`}>{social.username}</p>
+                <p
+                  class="text-sm font-semibold"
+                  style={`color: var(--color-text-primary);`}
+                >
+                  {social.name}
+                </p>
+                <p
+                  class="font-mono text-xs truncate"
+                  style={`color: var(--color-text-tertiary);`}
+                >
+                  {social.username}
+                </p>
               </div>
               <PiArrowUpRight
-                className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all"
-                className="text-indigo-500 dark:text-indigo-400"
+                className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-indigo-500 dark:text-indigo-400"
               />
             </a>
           ))

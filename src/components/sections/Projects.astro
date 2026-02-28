@@ -76,10 +76,16 @@ const projects = [
 <section>
   <!-- Header -->
   <div class="reveal mb-16">
-    <span class="font-mono text-xs uppercase tracking-widest block mb-3" style={`color: var(--color-accent);`}>
+    <span
+      class="font-mono text-xs uppercase tracking-widest block mb-3"
+      style={`color: var(--color-accent);`}
+    >
       // 02. {t("nav.projects")}
     </span>
-    <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-3" style={`color: var(--color-text-primary);`}>
+    <h1
+      class="text-3xl md:text-5xl font-bold tracking-tight mb-3"
+      style={`color: var(--color-text-primary);`}
+    >
       {t("projects.title")}
     </h1>
     <p class="text-lg" style={`color: var(--color-text-secondary);`}>
@@ -218,7 +224,10 @@ const projects = [
     projects.filter((p) => !p.featured).length > 0 && (
       <div>
         <div class="flex items-center gap-3 mb-8">
-          <h2 class="text-2xl font-bold" style={`color: var(--color-text-primary);`}>
+          <h2
+            class="text-2xl font-bold"
+            style={`color: var(--color-text-primary);`}
+          >
             {t("projects.moreProjects")}
           </h2>
           <div class="flex-1 divider" />
@@ -235,7 +244,10 @@ const projects = [
                 onmouseleave="this.style.borderColor='var(--color-border-default)'; this.style.boxShadow='none'"
               >
                 {/* Image */}
-                <div class="relative h-48 overflow-hidden" style={`background-color: var(--color-bg-tertiary);`}>
+                <div
+                  class="relative h-48 overflow-hidden"
+                  style={`background-color: var(--color-bg-tertiary);`}
+                >
                   <Image
                     src={project.image}
                     alt={project.title}
@@ -292,22 +304,34 @@ const projects = [
 
                 {/* Content */}
                 <div class="p-5">
-                  <h3 class="text-lg font-bold mb-2 transition-colors" style={`color: var(--color-text-primary);`}>
+                  <h3
+                    class="text-lg font-bold mb-2 transition-colors"
+                    style={`color: var(--color-text-primary);`}
+                  >
                     {project.title}
                   </h3>
-                  <p class="text-sm mb-4 line-clamp-2" style={`color: var(--color-text-secondary);`}>
+                  <p
+                    class="text-sm mb-4 line-clamp-2"
+                    style={`color: var(--color-text-secondary);`}
+                  >
                     {project.description}
                   </p>
 
                   {/* Tech Stack */}
                   <div class="flex flex-wrap gap-1.5">
                     {project.tech.slice(0, 3).map((tech) => (
-                      <span class="px-2.5 py-1 rounded-md font-mono text-xs" style={`background-color: var(--color-bg-tertiary); color: var(--color-text-secondary);`}>
+                      <span
+                        class="px-2.5 py-1 rounded-md font-mono text-xs"
+                        style={`background-color: var(--color-bg-tertiary); color: var(--color-text-secondary);`}
+                      >
                         {tech}
                       </span>
                     ))}
                     {project.tech.length > 3 && (
-                      <span class="px-2.5 py-1 rounded-md font-mono text-xs" style={`background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary);`}>
+                      <span
+                        class="px-2.5 py-1 rounded-md font-mono text-xs"
+                        style={`background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary);`}
+                      >
                         +{project.tech.length - 3}
                       </span>
                     )}
