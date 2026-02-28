@@ -10,7 +10,8 @@ const t = useTranslations(lang);
   <button
     id="theme-toggle"
     type="button"
-    class="p-2 rounded-lg text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 transition-colors"
+    class="p-2 rounded-lg transition-colors"
+    style="color: var(--color-text-tertiary);"
     aria-label="Theme options"
     aria-haspopup="true"
     aria-expanded="false"
@@ -42,14 +43,16 @@ const t = useTranslations(lang);
 
   <div
     id="theme-menu-panel"
-    class="absolute right-0 mt-2 w-36 rounded-xl border border-gray-200 dark:border-gray-700 bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-lg p-1 hidden"
+    class="absolute right-0 mt-2 w-36 rounded-xl backdrop-blur-xl shadow-lg p-1 hidden"
+    style="border: 1px solid var(--color-border-default); background-color: color-mix(in srgb, var(--color-bg-secondary) 90%, transparent);"
     role="menu"
     aria-label="Theme"
   >
     <button
       type="button"
       data-theme="light"
-      class="theme-option w-full flex mb-1 items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+      class="theme-option w-full flex mb-1 items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+      style="color: var(--color-text-secondary);"
       role="menuitemradio"
       aria-checked="false"
     >
@@ -59,7 +62,8 @@ const t = useTranslations(lang);
     <button
       type="button"
       data-theme="dark"
-      class="theme-option w-full flex mb-1 items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+      class="theme-option w-full flex mb-1 items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+      style="color: var(--color-text-secondary);"
       role="menuitemradio"
       aria-checked="false"
     >
@@ -69,7 +73,8 @@ const t = useTranslations(lang);
     <button
       type="button"
       data-theme="system"
-      class="theme-option w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition-colors text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+      class="theme-option w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
+      style="color: var(--color-text-secondary);"
       role="menuitemradio"
       aria-checked="false"
     >

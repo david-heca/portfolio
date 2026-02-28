@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import ThemeToggle from "@ui/ThemeToggle.astro";
 import LanguagePicker from "@ui/LanguagePicker.astro";
@@ -12,6 +11,7 @@ import {
   PiEnvelopeSimple,
   PiX,
 } from "react-icons/pi";
+import Image from "astro/components/Image.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -59,102 +59,108 @@ function isActive(href: string): boolean {
 }
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50">
+<header class="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
+  <!-- Floating Pill Navbar -->
   <div
-    class="absolute inset-0 bg-white/70 dark:bg-gray-950/70 backdrop-blur-xl border-b border-zinc-300 dark:border-zinc-700"
+    id="navbar-pill"
+    class="relative max-w-4xl w-full rounded-full border transition-all duration-500"
+    style={`border-color: var(--color-border-default); background-color: color-mix(in srgb, var(--color-bg-secondary) 80%, transparent);`}
   >
-  </div>
-
-  <div
-    class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between"
-  >
-    <!-- Logo -->
-    <a
+    <div class="backdrop-blur-xl rounded-full">
+      <div class="flex items-center justify-between h-12 px-5">
+        <!-- Logo -->
+        <a
       href={lang === "es" ? "/" : "/en"}
       class="flex items-center gap-2 font-bold text-lg tracking-tight text-gray-900 dark:text-white hover:opacity-80 transition-opacity"
-    >
-      <Image
-        src="/assets/dh.webp"
-        alt="David Herrera"
-        width={32}
-        height={32}
-        class="w-8 h-8 rounded-lg object-contain border border-zinc-300 dark:border-zinc-700"
-        loading="eager"
-      />
-      <span>David Herrera</span>
-    </a>
-
-    <!-- Desktop Nav -->
-    <nav class="hidden lg:flex items-center gap-1">
-      {
-        navItems.map((item) => (
-          <a
-            href={item.href}
-            data-astro-prefetch="hover"
-            class={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 flex items-center gap-2 capitalize ${
-              isActive(item.href)
-                ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
-                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50"
-            }`}
-          >
-            <item.icon className="w-4 h-4" />
-            {item.label}
-          </a>
-        ))
-      }
-    </nav>
-
-    <!-- Actions -->
-    <div class="flex items-center gap-2">
-      <LanguagePicker />
-      <div class="w-px h-4 bg-gray-200 dark:bg-gray-800 mx-1"></div>
-      <ThemeToggle />
-
-      <!-- Mobile Menu Button -->
-      <button
-        id="mobile-menu-btn"
-        class="lg:hidden p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
-        aria-label="Toggle menu"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          class="w-6 h-6"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
-        </svg>
-      </button>
+        <Image
+          src="/assets/dh.webp"
+          alt="David Herrera"
+          width={32}
+          height={32}
+          class="w-8 h-8 rounded-full object-contain border border-zinc-300 dark:border-zinc-700"
+          loading="eager"
+        />
+      </a>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden lg:flex items-center gap-1">
+          {
+            navItems.map((item) => (
+              <a
+                href={item.href}
+                data-astro-prefetch="hover"
+                class={`relative px-3 py-1.5 text-sm font-medium transition-colors duration-200 capitalize ${
+                  isActive(item.href)
+                    ? ""
+                    : "hover:opacity-80"
+                }`}
+                style={isActive(item.href)
+                  ? `color: var(--color-text-primary);`
+                  : `color: var(--color-text-tertiary);`
+                }
+              >
+                {item.label}
+                {isActive(item.href) && (
+                  <span
+                    class="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full"
+                    style={`background-color: var(--color-accent);`}
+                  />
+                )}
+              </a>
+            ))
+          }
+        </nav>
+
+        <!-- Actions -->
+        <div class="flex items-center gap-1">
+          <LanguagePicker />
+          <div class="w-px h-4 mx-1" style={`background-color: var(--color-border-default);`}></div>
+          <ThemeToggle />
+
+          <!-- Mobile Menu Button -->
+          <button
+            id="mobile-menu-btn"
+            class="lg:hidden p-2 rounded-lg transition-colors"
+            style={`color: var(--color-text-tertiary);`}
+            aria-label="Toggle menu"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
   <!-- Mobile Menu Overlay -->
   <div
     id="mobile-menu"
-    class="fixed inset-0 z-40 bg-white dark:bg-gray-950 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden pt-20 px-6"
+    class="fixed inset-0 z-40 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden pt-20 px-6"
+    style={`background-color: var(--color-bg-primary);`}
   >
     <a
       href={lang === "es" ? "/" : "/en"}
-      class="absolute top-6 left-5 flex items-center gap-2 font-bold text-lg tracking-tight text-gray-900 dark:text-white hover:opacity-80 transition-opacity"
+      class="absolute top-6 left-5 font-mono text-lg font-medium tracking-tight"
+      style={`color: var(--color-accent);`}
     >
-      <Image
-        src="/assets/dh.webp"
-        alt="David Herrera"
-        width={32}
-        height={32}
-        class="w-8 h-8 rounded-lg object-contain border border-zinc-300 dark:border-zinc-700"
-        loading="eager"
-      />
-      <span>David Herrera</span>
+      DH
     </a>
     <button
       id="close-menu-btn"
-      class="absolute top-5 right-4 p-2 text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+      class="absolute top-5 right-4 p-2 rounded-lg transition-colors"
+      style={`color: var(--color-text-tertiary);`}
       aria-label="Close menu"
     >
       <PiX className="w-6 h-6" />
@@ -166,12 +172,14 @@ function isActive(href: string): boolean {
             href={item.href}
             data-astro-prefetch
             class={`px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 flex items-center gap-3 ${
-              isActive(item.href)
-                ? "bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white"
-                : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800/50"
+              isActive(item.href) ? "" : ""
             }`}
+            style={isActive(item.href)
+              ? `background-color: var(--color-bg-tertiary); color: var(--color-text-primary);`
+              : `color: var(--color-text-secondary);`
+            }
           >
-            <item.icon className="w-6 h-6" />
+            <item.icon className="w-5 h-5" />
             {item.label}
           </a>
         ))
@@ -208,12 +216,10 @@ function isActive(href: string): boolean {
     btn?.addEventListener("click", toggleMenu);
     closeBtn?.addEventListener("click", toggleMenu);
 
-    // Close menu when navigating
     links?.forEach((link) => {
       link.addEventListener("click", closeMenu);
     });
 
-    // Close menu on navigation (view transitions)
     document.addEventListener("astro:before-preparation", closeMenu);
   }
 
