@@ -104,6 +104,9 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
 
         window.__themeMediaListener = true;
       }
+
+      // Aplicar tema inmediatamente en el primer load (antes de pintar)
+      setThemeOnNavigation();
     </script>
   </head>
   <body
@@ -132,7 +135,10 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
       style={`border-top: 1px solid var(--color-border-default);`}
       transition:persist="footer"
     >
-      <div class="max-w-7xl mx-auto px-4 text-center font-mono text-xs" style={`color: var(--color-text-tertiary);`}>
+      <div
+        class="max-w-7xl mx-auto px-4 text-center font-mono text-xs"
+        style={`color: var(--color-text-tertiary);`}
+      >
         <p>
           &copy; {new Date().getFullYear()} David Herrera
           {lang === "es" ? " · Hecho desde México" : " · Made from Mexico"}
@@ -152,7 +158,7 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
               }
             });
           },
-          { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+          { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
         );
 
         document.querySelectorAll(".reveal").forEach((el) => {
