@@ -36,22 +36,6 @@ const interests = [
       >
         <!-- Text Content -->
         <div class="flex-1 min-w-0">
-          <!-- Availability Badge -->
-          <div
-            class="reveal inline-flex items-center gap-2 px-3 py-1.5 rounded-full font-mono text-xs uppercase tracking-wider mb-6 border"
-            style={`color: var(--color-accent); border-color: color-mix(in srgb, var(--color-accent) 30%, transparent); background-color: var(--color-accent-muted);`}
-          >
-            <span class="relative flex h-2 w-2">
-              <span
-                class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
-                style={`background-color: var(--color-accent);`}></span>
-              <span
-                class="relative inline-flex rounded-full h-2 w-2"
-                style={`background-color: var(--color-accent);`}></span>
-            </span>
-            {t("home.available")}
-          </div>
-
           <!-- Greeting Label -->
           <p
             class="reveal reveal-delay-1 font-mono text-sm uppercase tracking-widest mb-4"
@@ -83,27 +67,18 @@ const interests = [
         </div>
 
         <!-- Photo -->
-        <div class="reveal reveal-delay-3 shrink-0">
+        <div class="reveal reveal-delay-3">
           <div class="relative w-48 h-48 md:w-56 md:h-56 lg:w-64 lg:h-64">
-            <div
-              class="absolute inset-0 rounded-2xl ring-2 opacity-40"
-              style={`--tw-ring-color: var(--color-accent);`}
-            >
-            </div>
             <Image
               src="/assets/profile-photo.webp"
               alt="David Herrera"
               width={256}
               height={256}
-              class="w-full h-full object-cover rounded-2xl"
+              class="w-full h-full object-cover rounded-3xl"
               loading="eager"
               format="webp"
               quality={85}
             />
-            <div
-              class="absolute inset-0 rounded-2xl bg-linear-to-t from-black/30 via-transparent to-transparent"
-            >
-            </div>
           </div>
         </div>
       </div>
@@ -121,7 +96,7 @@ const interests = [
         // {t("home.aboutSection.title")}
       </span>
 
-      <div class="space-y-4 max-w-3xl">
+      <div class="space-y-4 max-w-4xl">
         <p
           class="text-base md:text-lg leading-relaxed"
           style={`color: var(--color-text-secondary);`}
