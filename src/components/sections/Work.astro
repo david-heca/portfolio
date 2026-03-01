@@ -21,7 +21,6 @@ const experiences = [
     id: 1,
     company: t("work.companies.baacc.name"),
     totalPeriod: t("work.companies.baacc.totalPeriod"),
-    totalDuration: t("work.companies.baacc.totalDuration"),
     location: t("work.companies.baacc.location"),
     workMode: t("work.companies.baacc.workMode"),
     logo: "/assets/company/baacc.webp",
@@ -29,7 +28,6 @@ const experiences = [
       {
         title: t("work.companies.baacc.roles.architect.title"),
         period: t("work.companies.baacc.roles.architect.period"),
-        duration: t("work.companies.baacc.roles.architect.duration"),
         type: t("work.companies.baacc.roles.architect.type"),
         location: t("work.companies.baacc.roles.architect.location"),
         achievements: [
@@ -43,7 +41,6 @@ const experiences = [
       {
         title: t("work.companies.baacc.roles.fullstack.title"),
         period: t("work.companies.baacc.roles.fullstack.period"),
-        duration: t("work.companies.baacc.roles.fullstack.duration"),
         type: t("work.companies.baacc.roles.fullstack.type"),
         location: t("work.companies.baacc.roles.fullstack.location"),
         achievements: [
@@ -57,7 +54,6 @@ const experiences = [
       {
         title: t("work.companies.baacc.roles.junior.title"),
         period: t("work.companies.baacc.roles.junior.period"),
-        duration: t("work.companies.baacc.roles.junior.duration"),
         type: t("work.companies.baacc.roles.junior.type"),
         location: t("work.companies.baacc.roles.junior.location"),
         achievements: [
@@ -72,7 +68,6 @@ const experiences = [
     id: 2,
     company: t("work.companies.dec.name"),
     totalPeriod: t("work.companies.dec.totalPeriod"),
-    totalDuration: t("work.companies.dec.totalDuration"),
     location: t("work.companies.dec.location"),
     workMode: t("work.companies.dec.workMode"),
     logo: "/assets/company/dec.webp",
@@ -80,7 +75,6 @@ const experiences = [
       {
         title: t("work.companies.dec.roles.webdev.title"),
         period: t("work.companies.dec.roles.webdev.period"),
-        duration: t("work.companies.dec.roles.webdev.duration"),
         type: t("work.companies.dec.roles.webdev.type"),
         location: t("work.companies.dec.roles.webdev.location"),
         achievements: [
@@ -163,12 +157,6 @@ const experiences = [
                   {exp.totalPeriod}
                 </span>
                 <span
-                  class="inline-flex items-center font-mono text-xs uppercase tracking-wider px-2.5 py-1 rounded-md border"
-                  style={`background-color: var(--color-bg-tertiary); border-color: var(--color-border-default); color: var(--color-text-tertiary);`}
-                >
-                  {exp.totalDuration}
-                </span>
-                <span
                   class="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider px-2.5 py-1 rounded-md border"
                   style={`background-color: var(--color-bg-tertiary); border-color: var(--color-border-default); color: var(--color-text-tertiary);`}
                 >
@@ -208,12 +196,6 @@ const experiences = [
                     >
                       <PiCalendar className="w-3 h-3" />
                       {role.period}
-                    </span>
-                    <span
-                      class="font-mono text-xs px-2.5 py-1 rounded-md"
-                      style={`background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary);`}
-                    >
-                      {role.duration}
                     </span>
                   </div>
                 </div>

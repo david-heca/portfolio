@@ -108,14 +108,12 @@
       "baacc": {
         "name": "BAACC Systems S.A. de C.V.",
         "totalPeriod": "Sep 2023 - Present",
-        "totalDuration": "2 yrs 6 mos",
         "location": "Mexico State, Mexico",
         "workMode": "On-site",
         "roles": {
           "architect": {
             "title": "AI Solutions Architect",
             "period": "Mar 2025 - Present",
-            "duration": "1 yr",
             "type": "Full-time",
             "location": "Mexico",
             "achievements": [
@@ -128,7 +126,6 @@
           "fullstack": {
             "title": "Fullstack Developer",
             "period": "Jan 2024 - Mar 2025",
-            "duration": "1 yr 3 mos",
             "type": "Full-time",
             "location": "Mexico State",
             "achievements": [
@@ -141,7 +138,6 @@
           "junior": {
             "title": "Junior Fullstack Developer",
             "period": "Sep 2023 - Jan 2024",
-            "duration": "5 mos",
             "type": "Internship",
             "location": "Mexico State",
             "achievements": [
@@ -154,14 +150,12 @@
       "dec": {
         "name": "DEC Marketing",
         "totalPeriod": "Mar 2022 - Sep 2023",
-        "totalDuration": "1 yr 7 mos",
         "location": "Mexico City, Mexico",
         "workMode": "Remote",
         "roles": {
           "webdev": {
             "title": "Junior Web Developer",
             "period": "Mar 2022 - Sep 2023",
-            "duration": "1 yr 7 mos",
             "type": "Internship",
             "location": "Mexico City",
             "achievements": [
@@ -306,7 +300,6 @@
     "viewProject": "View Projects"
   },
   "home": {
-    "available": "Available",
     "currentRole": "Current Role",
     "viewResume": "View Full Resume",
     "interestsTitle": "Interests",

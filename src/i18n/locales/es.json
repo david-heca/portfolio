@@ -108,14 +108,12 @@
       "baacc": {
         "name": "BAACC Systems S.A. de C.V.",
         "totalPeriod": "2023 Sep - Actualidad",
-        "totalDuration": "2 años 6 meses",
         "location": "Estado de México, México",
         "workMode": "Presencial",
         "roles": {
           "architect": {
             "title": "Arquitecto de Soluciones de IA",
             "period": "Mar 2025 - Actualidad",
-            "duration": "1 año",
             "type": "Tiempo Completo",
             "location": "México",
             "achievements": [
@@ -128,7 +126,6 @@
           "fullstack": {
             "title": "Fullstack Developer",
             "period": "Ene 2024 - Mar 2025",
-            "duration": "1 año 3 meses",
             "type": "Tiempo Completo",
             "location": "Estado de México",
             "achievements": [
@@ -141,7 +138,6 @@
           "junior": {
             "title": "Fullstack Developer Jr.",
             "period": "Sep 2023 - Ene 2024",
-            "duration": "5 meses",
             "type": "Prácticas",
             "location": "Estado de México",
             "achievements": [
@@ -154,14 +150,12 @@
       "dec": {
         "name": "DEC Marketing",
         "totalPeriod": "Mar 2022 - Sep 2023",
-        "totalDuration": "1 año 7 meses",
         "location": "Ciudad de México, México",
         "workMode": "Remoto",
         "roles": {
           "webdev": {
             "title": "Web Developer Jr.",
             "period": "Mar 2022 - Sep 2023",
-            "duration": "1 año 7 meses",
             "type": "Prácticas",
             "location": "Ciudad de México",
             "achievements": [
@@ -306,7 +300,6 @@
     "viewProject": "Ver Proyectos"
   },
   "home": {
-    "available": "Disponible",
     "currentRole": "Rol Actual",
     "viewResume": "Ver Experiencia Completa",
     "interestsTitle": "Intereses",

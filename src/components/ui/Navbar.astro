@@ -9,7 +9,6 @@ import {
   PiGraduationCap,
   PiFolder,
   PiEnvelopeSimple,
-  PiX,
 } from "react-icons/pi";
 import Image from "astro/components/Image.astro";
 
@@ -63,7 +62,7 @@ function isActive(href: string): boolean {
   <!-- Floating Pill Navbar -->
   <div
     id="navbar-pill"
-    class="relative max-w-4xl w-full rounded-full border transition-all duration-500"
+    class="relative max-w-4xl rounded-full border transition-all duration-500"
     style={`border-color: var(--color-border-default); background-color: color-mix(in srgb, var(--color-bg-secondary) 80%, transparent);`}
   >
     <div class="backdrop-blur-xl rounded-full">
@@ -147,44 +146,35 @@ function isActive(href: string): boolean {
     </div>
   </div>
 
-  <!-- Mobile Menu Overlay -->
+  <!-- Mobile Dropdown Menu -->
   <div
     id="mobile-menu"
-    class="fixed inset-0 z-40 transform translate-x-full transition-transform duration-300 ease-in-out lg:hidden pt-20 px-6"
-    style={`background-color: var(--color-bg-primary);`}
+    class="absolute top-[calc(100%+8px)] left-0 right-0 z-40 lg:hidden
+           origin-top scale-y-95 opacity-0 pointer-events-none
+           transition-all duration-200 ease-out rounded-2xl overflow-hidden mx-4"
+    style={`background-color: color-mix(in srgb, var(--color-bg-secondary) 95%, transparent); border: 1px solid var(--color-border-default); backdrop-filter: blur(20px);`}
   >
-    <a
-      href={lang === "es" ? "/" : "/en"}
-      class="absolute top-6 left-5 font-mono text-lg font-medium tracking-tight"
-      style={`color: var(--color-accent);`}
-    >
-      DH
-    </a>
-    <button
-      id="close-menu-btn"
-      class="absolute top-5 right-4 p-2 rounded-lg transition-colors"
-      style={`color: var(--color-text-tertiary);`}
-      aria-label="Close menu"
-    >
-      <PiX className="w-6 h-6" />
-    </button>
-    <nav class="flex flex-col gap-2">
+    <nav class="flex flex-col p-2">
       {
         navItems.map((item) => (
           <a
             href={item.href}
             data-astro-prefetch
-            class={`px-4 py-3 rounded-xl text-base font-medium transition-all duration-200 flex items-center gap-3 ${
-              isActive(item.href) ? "" : ""
-            }`}
+            class="px-4 py-3 rounded-xl text-sm font-medium transition-all duration-150 flex items-center gap-3"
             style={
               isActive(item.href)
                 ? `background-color: var(--color-bg-tertiary); color: var(--color-text-primary);`
                 : `color: var(--color-text-secondary);`
             }
           >
-            <item.icon className="w-5 h-5" />
+            <item.icon className="w-4 h-4 shrink-0" />
             {item.label}
+            {isActive(item.href) && (
+              <span
+                class="ml-auto w-1.5 h-1.5 rounded-full shrink-0"
+                style={`background-color: var(--color-accent);`}
+              />
+            )}
           </a>
         ))
       }
@@ -195,33 +185,39 @@ function isActive(href: string): boolean {
 <script>
   function setupMobileMenu() {
     const btn = document.getElementById("mobile-menu-btn");
-    const closeBtn = document.getElementById("close-menu-btn");
     const menu = document.getElementById("mobile-menu");
     const links = menu?.querySelectorAll("a");
     let isOpen = false;
 
-    function toggleMenu() {
-      isOpen = !isOpen;
-      if (isOpen) {
-        menu?.classList.remove("translate-x-full");
-        document.body.style.overflow = "hidden";
-      } else {
-        menu?.classList.add("translate-x-full");
-        document.body.style.overflow = "";
-      }
+    function openMenu() {
+      isOpen = true;
+      menu?.classList.remove("scale-y-95", "opacity-0", "pointer-events-none");
+      menu?.classList.add("scale-y-100", "opacity-100");
     }
 
     function closeMenu() {
-      if (isOpen) {
-        toggleMenu();
-      }
+      isOpen = false;
+      menu?.classList.add("scale-y-95", "opacity-0", "pointer-events-none");
+      menu?.classList.remove("scale-y-100", "opacity-100");
     }
 
-    btn?.addEventListener("click", toggleMenu);
-    closeBtn?.addEventListener("click", toggleMenu);
+    function toggleMenu() {
+      isOpen ? closeMenu() : openMenu();
+    }
+
+    btn?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
 
     links?.forEach((link) => {
       link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener("click", (e) => {
+      if (isOpen && !menu?.contains(e.target as Node) && e.target !== btn) {
+        closeMenu();
+      }
     });
 
     document.addEventListener("astro:before-preparation", closeMenu);

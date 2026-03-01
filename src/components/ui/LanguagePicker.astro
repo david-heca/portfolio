@@ -26,11 +26,11 @@ const targetHref = getPathForLang(targetLang);
 
 <a
   href={targetHref}
-  class="flex gap-1 px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition-colors rounded-md"
+  class="flex gap-1 px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition-colors rounded-md items-center"
   style="color: var(--color-text-tertiary);"
 >
-  <PiGlobeDuotone className="w-4 h-4 hidden md:block" />
-  <span class="font-mono text-xs font-medium uppercase" id="current-lang-label">
+  <PiGlobeDuotone className="w-5 h-5" />
+  <span class="font-mono text-xs font-medium" id="current-lang-label">
     {label}
   </span>
 </a>
