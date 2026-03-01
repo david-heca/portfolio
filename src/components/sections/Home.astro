@@ -123,12 +123,12 @@ const interests = [
       <a
         href={lang === "es" ? "/work" : "/en/work"}
         class="reveal reveal-delay-1 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover:-translate-y-0.5"
-        style={`background-color: var(--color-bg-secondary); border-color: var(--color-border-default); border-left-color: var(--color-text-tertiary);`}
-        onmouseenter="this.style.borderLeftColor='var(--color-accent)'; this.style.boxShadow='0 0 30px -5px var(--color-accent-glow)'"
-        onmouseleave="this.style.borderLeftColor='var(--color-text-tertiary)'; this.style.boxShadow='none'"
+        style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
+        onmouseenter="this.style.borderColor='var(--color-border-hover)'; this.style.boxShadow='0 0 30px -10px var(--color-accent-glow)'"
+        onmouseleave="this.style.borderColor='var(--color-border-default)'; this.style.boxShadow='none'"
       >
         <div class="flex items-start justify-between mb-3">
-          <PiBriefcase className="w-5 h-5 text-zinc-400 dark:text-zinc-500" />
+          <PiBriefcase className="w-5 h-5 text-zinc-500 dark:text-zinc-400" />
           <PiArrowRightBold
             className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-indigo-500 dark:text-indigo-400"
           />
@@ -147,9 +147,9 @@ const interests = [
       <a
         href={lang === "es" ? "/projects" : "/en/projects"}
         class="reveal reveal-delay-2 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover:-translate-y-0.5"
-        style={`background-color: var(--color-bg-secondary); border-color: var(--color-border-default); border-left-color: var(--color-accent);`}
-        onmouseenter="this.style.boxShadow='0 0 30px -5px var(--color-accent-glow)'"
-        onmouseleave="this.style.boxShadow='none'"
+        style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
+        onmouseenter="this.style.borderColor='var(--color-border-hover)'; this.style.boxShadow='0 0 30px -10px var(--color-accent-glow)'"
+        onmouseleave="this.style.borderColor='var(--color-border-default)'; this.style.boxShadow='none'"
       >
         <div class="flex items-start justify-between mb-3">
           <PiFolderOpen
@@ -173,12 +173,12 @@ const interests = [
       <a
         href={lang === "es" ? "/contact" : "/en/contact"}
         class="reveal reveal-delay-3 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover:-translate-y-0.5"
-        style={`background-color: var(--color-bg-secondary); border-color: var(--color-border-default); border-left-color: var(--color-text-tertiary);`}
-        onmouseenter="this.style.borderLeftColor='var(--color-accent)'; this.style.boxShadow='0 0 30px -5px var(--color-accent-glow)'"
-        onmouseleave="this.style.borderLeftColor='var(--color-text-tertiary)'; this.style.boxShadow='none'"
+        style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
+        onmouseenter="this.style.borderColor='var(--color-border-hover)'; this.style.boxShadow='0 0 30px -10px var(--color-accent-glow)'"
+        onmouseleave="this.style.borderColor='var(--color-border-default)'; this.style.boxShadow='none'"
       >
         <div class="flex items-start justify-between mb-3">
-          <PiUserCircle className="w-5 h-5 text-zinc-400 dark:text-zinc-500" />
+          <PiUserCircle className="w-5 h-5 text-cyan-500 dark:text-cyan-400" />
           <PiArrowRightBold
             className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-indigo-500 dark:text-indigo-400"
           />
