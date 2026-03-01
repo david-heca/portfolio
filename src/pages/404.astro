@@ -14,7 +14,7 @@ const description = t("notFound.description");
   <section class="flex items-center justify-center min-h-[70vh] relative overflow-hidden">
     <!-- Ambient glow -->
     <div
-      class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-150 sm:h-100 rounded-full opacity-20 pointer-events-none blur-3xl"
+      class="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-150 sm:h-100 rounded-full opacity-20 pointer-events-none blur-3xl"
       style="background: radial-gradient(ellipse, var(--color-accent), transparent 70%);"
     >
     </div>
@@ -22,13 +22,6 @@ const description = t("notFound.description");
     <div class="relative z-10 text-center max-w-2xl mx-auto px-4">
       <!-- Glitch-style 404 -->
       <div class="relative mb-8">
-        <span
-          class="font-mono text-xs uppercase tracking-widest block mb-6"
-          style={`color: var(--color-accent);`}
-        >
-          // error.404
-        </span>
-
         <h1
           class="text-[8rem] md:text-[13rem] font-bold tracking-tighter select-none text-gradient relative z-10"
           style="line-height: 0.85;"
@@ -65,14 +58,14 @@ const description = t("notFound.description");
             style={`color: var(--color-text-tertiary);`}>terminal</span
           >
         </div>
-        <div class="space-y-1 truncate" style={`color: var(--color-text-tertiary);`}>
+        <div class="space-y-1" style={`color: var(--color-text-tertiary);`}>
           <p class="truncate">
             <span style={`color: var(--color-accent);`}>$</span>{" "}curl -I {Astro.url.pathname}
           </p>
           <p>
             <span class="text-red-400">HTTP/1.1 404 Not Found</span>
           </p>
-          <p class="truncate">
+          <p>
             <span style={`color: var(--color-accent);`}>$</span>
             {
               lang === "es"

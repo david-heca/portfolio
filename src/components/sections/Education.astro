@@ -245,9 +245,9 @@ const otherCerts = certifications.filter((c) => !c.featured);
         education.map((edu, index) => (
           <div
             class="reveal rounded-2xl p-6 md:p-8 border-l-2 transition-all duration-300"
-            style={`background-color: var(--color-bg-secondary); border-color: var(--color-border-default); border-left-color: ${edu.borderColor}; transition-delay: ${index * 0.1}s;`}
-            onmouseenter="this.style.boxShadow='0 0 30px -10px var(--color-accent-glow)'"
-            onmouseleave="this.style.boxShadow='none'"
+            style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
+            onmouseenter="this.style.borderColor='var(--color-border-hover)'; this.style.boxShadow='0 0 30px -10px var(--color-accent-glow)'"
+            onmouseleave="this.style.borderColor='var(--color-border-default)'; this.style.boxShadow='none'"
           >
             <div class="flex items-start justify-between mb-4">
               <div class="flex items-center gap-3">
