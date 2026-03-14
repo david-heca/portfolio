@@ -35,7 +35,7 @@
     --color-text-primary: #FAFAF9;
     --color-text-secondary: #A1A1AA;
     --color-text-tertiary: #71717A;
-    --color-accent: #81a7f8;
+    --color-accent: #557ce9;
     --color-accent-muted: #818CF820;
     --color-accent-glow: #818CF840;
   }
@@ -111,7 +111,7 @@
 
 /* Gradient text utility */
 .text-gradient {
-  background: linear-gradient(135deg, var(--color-accent), #A78BFA);
+  background: linear-gradient(135deg, var(--color-accent), #8bc1fa);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
