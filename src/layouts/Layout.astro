@@ -108,6 +108,36 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
       // Aplicar tema inmediatamente en el primer load (antes de pintar)
       setThemeOnNavigation();
     </script>
+
+    <script is:inline>
+      (function() {
+        var KEY = "preferred-lang";
+        var stored = localStorage.getItem(KEY);
+        var path = window.location.pathname;
+        var currentLang = (path === "/en" || path.startsWith("/en/")) ? "en" : "es";
+
+        function buildPath(targetLang) {
+          if (targetLang === "en") return path === "/" ? "/en" : "/en" + path;
+          return path === "/en" ? "/" : path.replace(/^\/en\//, "/") || "/";
+        }
+
+        // Preferencia explícita del usuario
+        if (stored) {
+          if (stored !== currentLang) window.location.replace(buildPath(stored));
+          return;
+        }
+
+        // Primera visita: detectar idioma del navegador
+        var langs = navigator.languages || [navigator.language];
+        var detected = "es";
+        for (var i = 0; i < langs.length; i++) {
+          if (langs[i].startsWith("en")) { detected = "en"; break; }
+          if (langs[i].startsWith("es")) { detected = "es"; break; }
+        }
+
+        if (detected !== currentLang) window.location.replace(buildPath(detected));
+      })();
+    </script>
   </head>
   <body
     class="min-h-screen flex flex-col"

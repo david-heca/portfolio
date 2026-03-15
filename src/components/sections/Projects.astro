@@ -102,14 +102,12 @@ const projects = [
         .filter((p) => p.featured)
         .map((project, index) => (
           <div
-            class={`reveal group relative rounded-2xl overflow-hidden border transition-all duration-500 min-h-87.5 ${
+            class={`reveal group relative rounded-2xl overflow-hidden border transition-all duration-500 min-h-87.5 hover-card-accent ${
               index === 0
                 ? "lg:col-span-2 lg:row-span-2 lg:min-h-150"
                 : "md:min-h-50"
             }`}
             style={`border-color: var(--color-border-default); transition-delay: ${index * 0.1}s;`}
-            onmouseenter="this.style.borderColor='color-mix(in srgb, var(--color-accent) 40%, transparent)'; this.style.boxShadow='0 0 40px -12px var(--color-accent-glow)'"
-            onmouseleave="this.style.borderColor='var(--color-border-default)'; this.style.boxShadow='none'"
           >
             {/* Background Image */}
             <div class="absolute inset-0">
@@ -238,10 +236,8 @@ const projects = [
             .filter((p) => !p.featured)
             .map((project) => (
               <div
-                class="reveal group relative rounded-2xl overflow-hidden transition-all duration-300"
+                class="reveal group relative rounded-2xl overflow-hidden transition-all duration-300 hover-card-accent"
                 style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
-                onmouseenter="this.style.borderColor='color-mix(in srgb, var(--color-accent) 40%, transparent)'; this.style.boxShadow='0 0 30px -10px var(--color-accent-glow)'"
-                onmouseleave="this.style.borderColor='var(--color-border-default)'; this.style.boxShadow='none'"
               >
                 {/* Image */}
                 <div

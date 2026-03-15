@@ -26,6 +26,7 @@ const targetHref = getPathForLang(targetLang);
 
 <a
   href={targetHref}
+  data-target-lang={targetLang}
   class="flex gap-1 px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition-colors rounded-md items-center"
   style="color: var(--color-text-tertiary);"
 >
@@ -34,3 +35,16 @@ const targetHref = getPathForLang(targetLang);
     {label}
   </span>
 </a>
+
+<script>
+  function setupLangPicker() {
+    const el = document.querySelector("[data-target-lang]") as HTMLAnchorElement | null;
+    if (!el || el.dataset.langReady) return;
+    el.addEventListener("click", () => {
+      if (el.dataset.targetLang) localStorage.setItem("preferred-lang", el.dataset.targetLang);
+    });
+    el.dataset.langReady = "true";
+  }
+  setupLangPicker();
+  document.addEventListener("astro:page-load", setupLangPicker);
+</script>
