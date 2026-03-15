@@ -177,10 +177,8 @@ const experiences = [
           <div class="space-y-4 ml-1">
             {exp.roles.map((role, roleIndex) => (
               <div
-                class="rounded-xl p-5 md:p-6 transition-all duration-300"
+                class="rounded-xl p-5 md:p-6 transition-all duration-300 hover-card"
                 style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
-                onmouseenter="this.style.borderColor='var(--color-border-hover)'; this.style.boxShadow='0 0 30px -10px var(--color-accent-glow)'"
-                onmouseleave="this.style.borderColor='var(--color-border-default)'; this.style.boxShadow='none'"
               >
                 <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-3">
                   <h4

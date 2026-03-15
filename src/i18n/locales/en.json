@@ -325,6 +325,7 @@
     "heading": "404",
     "subtitle": "Looks like you're lost",
     "description": "The page you are looking for doesn't exist or has been moved to another location.",
+    "terminalComment": "# This page went out for coffee ☕",
     "backButton": "Go back",
     "homeButton": "Go to home"
   }

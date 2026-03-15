@@ -244,10 +244,8 @@ const otherCerts = certifications.filter((c) => !c.featured);
       {
         education.map((edu, index) => (
           <div
-            class="reveal rounded-2xl p-6 md:p-8 border-l-2 transition-all duration-300"
+            class="reveal rounded-2xl p-6 md:p-8 border-l-2 transition-all duration-300 hover-card"
             style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
-            onmouseenter="this.style.borderColor='var(--color-border-hover)'; this.style.boxShadow='0 0 30px -10px var(--color-accent-glow)'"
-            onmouseleave="this.style.borderColor='var(--color-border-default)'; this.style.boxShadow='none'"
           >
             <div class="flex items-start justify-between mb-4">
               <div class="flex items-center gap-3">
@@ -341,10 +339,8 @@ const otherCerts = certifications.filter((c) => !c.featured);
             href={cert.verifyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="reveal group block rounded-2xl p-6 transition-all duration-300 hover:-translate-y-0.5"
+            class="reveal group block rounded-2xl p-6 transition-all duration-300 hover:-translate-y-0.5 hover-card"
             style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: ${index * 0.1}s;`}
-            onmouseenter="this.style.borderColor='var(--color-border-hover)'; this.style.boxShadow='0 0 30px -10px var(--color-accent-glow)'"
-            onmouseleave="this.style.borderColor='var(--color-border-default)'; this.style.boxShadow='none'"
           >
             <div class="flex items-start justify-between mb-4">
               <PiTrophy className="w-6 h-6 text-amber-500" />
@@ -413,10 +409,8 @@ const otherCerts = certifications.filter((c) => !c.featured);
             href={cert.verifyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="reveal group block rounded-xl p-5 transition-all duration-300 hover:-translate-y-0.5"
+            class="reveal group block rounded-xl p-5 transition-all duration-300 hover:-translate-y-0.5 hover-border"
             style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: ${index * 0.1}s;`}
-            onmouseenter="this.style.borderColor='var(--color-border-hover)'"
-            onmouseleave="this.style.borderColor='var(--color-border-default)'"
           >
             <div class="flex items-start justify-between mb-3">
               <PiCertificate className="w-5 h-5 text-zinc-400 dark:text-zinc-500" />

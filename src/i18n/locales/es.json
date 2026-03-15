@@ -325,6 +325,7 @@
     "heading": "404",
     "subtitle": "Parece que te has perdido",
     "description": "La página que buscas no existe o ha sido movida a otra ubicación.",
+    "terminalComment": "# Esta página se fue a tomar un café ☕",
     "backButton": "Volver atrás",
     "homeButton": "Ir al inicio"
   }

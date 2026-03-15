@@ -122,3 +122,40 @@
   height: 1px;
   background: linear-gradient(to right, transparent, var(--color-border-default) 20%, var(--color-border-default) 80%, transparent);
 }
+
+/* Hover utility classes (no transition — elements already use transition-all via Tailwind) */
+.hover-card:hover {
+  border-color: var(--color-border-hover) !important;
+  box-shadow: 0 0 30px -10px var(--color-accent-glow);
+}
+
+.hover-card-accent:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 40%, transparent) !important;
+  box-shadow: 0 0 40px -12px var(--color-accent-glow);
+}
+
+.hover-border:hover {
+  border-color: var(--color-border-hover) !important;
+}
+
+.hover-accent-text:hover {
+  border-color: color-mix(in srgb, var(--color-accent) 30%, transparent) !important;
+  color: var(--color-accent) !important;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
+  .reveal { transition-duration: 0.01s !important; }
+  .reveal-delay-1, .reveal-delay-2, .reveal-delay-3,
+  .reveal-delay-4, .reveal-delay-5 { transition-delay: 0s !important; }
+}
+
+/* Keyboard focus styles */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
