@@ -54,8 +54,7 @@
     "subtitle": "Tecnologías y herramientas que domino",
     "sections": {
       "technologies": "Tecnologías",
-      "languages": "Idiomas",
-      "softSkills": "Habilidades Blandas"
+      "languages": "Idiomas"
     },
     "levels": {
       "basic": "Básico",
@@ -82,20 +81,7 @@
       "nativeDescription": "Lengua materna • Dominio completo",
       "professionalDescription": "Competencia profesional • Comunicación fluida"
     },
-    "softSkillsList": [
-      "Resolución de Problemas",
-      "Trabajo en Equipo",
-      "Comunicación",
-      "Aprendizaje Rápido",
-      "Adaptabilidad",
-      "Pensamiento Crítico",
-      "Responsabilidad",
-      "Creatividad",
-      "Liderazgo",
-      "Empatía",
-      "Organización",
-      "Gestión del Tiempo"
-    ]
+    "softSkillsList": []
   },
   "work": {
     "title": "Experiencia",
@@ -224,15 +210,6 @@
       },
       "python": {
         "name": "Python for Everybody Specialization"
-      },
-      "aiIntro": {
-        "name": "Introducción a la Inteligencia Artificial"
-      },
-      "chatbot": {
-        "name": "Desarrollo de Chatbots con Azure OpenAI"
-      },
-      "terminal": {
-        "name": "Introducción a la Terminal y Línea de Comandos"
       }
     }
   },
@@ -272,7 +249,6 @@
     "subtitle": "¿Hablamos de tu próximo proyecto?",
     "info": {
       "location": "México, México",
-      "availability": "Interesado en proyectos colaborativos",
       "timezone": "GMT-6 (CST) - Ciudad de México"
     },
     "cta": {
@@ -302,13 +278,6 @@
   "home": {
     "currentRole": "Rol Actual",
     "viewResume": "Ver Experiencia Completa",
-    "interestsTitle": "Intereses",
-    "interests": {
-      "coffee": "Café",
-      "gaming": "Gaming",
-      "music": "Música",
-      "tech": "Tech"
-    },
     "aboutSection": {
       "title": "Sobre mí",
       "learnMore": "Más información",

@@ -45,6 +45,6 @@ Portafolio personal construido con **Astro 5 + React 19 + Tailwind CSS 4**, desp
 
 - Animaciones de revelación con `.reveal` + IntersectionObserver (root margin `-50px`)
 - Iconos de React Icons usando el set Phosphor (`PiXxxxx`)
-- Color de acento indigo (`--color-accent: #6366F1` light / `#557ce9` dark)
-- Fuentes: Inter (sans) y JetBrains Mono (mono)
+- Color de acento cyan (`--color-accent: #06B6D4` light / `#22D3EE` dark)
+- Fuentes: Space Grotesk (sans) y JetBrains Mono (mono)
 - Imágenes en formato WebP; imágenes críticas con `loading="eager"`
