@@ -4,10 +4,6 @@ import { useTranslations } from "@i18n/utils";
 import {
   PiArrowRightBold,
   PiBriefcase,
-  PiCoffeeDuotone,
-  PiGameControllerDuotone,
-  PiMusicNoteDuotone,
-  PiRocketDuotone,
   PiFolderOpen,
   PiUserCircle,
 } from "react-icons/pi";
@@ -19,11 +15,44 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const interests = [
-  { icon: PiCoffeeDuotone, label: t("home.interests.coffee") },
-  { icon: PiGameControllerDuotone, label: t("home.interests.gaming") },
-  { icon: PiMusicNoteDuotone, label: t("home.interests.music") },
-  { icon: PiRocketDuotone, label: t("home.interests.tech") },
+const getCategory = (category: string) => {
+  const categoryMap: Record<string, string> = {
+    Backend: t("skills.categories.backend"),
+    Frontend: t("skills.categories.frontend"),
+    DevOps: t("skills.categories.devops"),
+    Cloud: t("skills.categories.cloud"),
+    Database: t("skills.categories.database"),
+    Tools: t("skills.categories.tools"),
+  };
+  return categoryMap[category] || category;
+};
+
+const getLevel = (level: string) => {
+  const levelMap: Record<string, string> = {
+    Basic: t("skills.levels.basic"),
+    Intermediate: t("skills.levels.intermediate"),
+    Advanced: t("skills.levels.advanced"),
+  };
+  return levelMap[level] || level;
+};
+
+const getLevelColor = (level: string) => {
+  if (level === t("skills.levels.advanced")) return "#10B981";
+  if (level === t("skills.levels.intermediate")) return "var(--color-accent)";
+  return "var(--color-text-tertiary)";
+};
+
+const primarySkills = [
+  { name: "C#", category: getCategory("Backend"), level: getLevel("Intermediate"), icon: "csharp" },
+  { name: "Python", category: getCategory("Backend"), level: getLevel("Intermediate"), icon: "python" },
+  { name: "JavaScript", category: getCategory("Frontend"), level: getLevel("Intermediate"), icon: "javascript" },
+  { name: "React", category: getCategory("Frontend"), level: getLevel("Basic"), iconLight: "https://svgl.app/library/react_light.svg", iconDark: "https://svgl.app/library/react_dark.svg" },
+  { name: "Tailwind CSS", category: getCategory("Frontend"), level: getLevel("Intermediate"), icon: "tailwindcss" },
+  { name: "Azure", category: getCategory("Cloud"), level: getLevel("Intermediate"), icon: "azure" },
+  { name: "Docker", category: getCategory("DevOps"), level: getLevel("Basic"), icon: "docker" },
+  { name: "SQL", category: getCategory("Database"), level: getLevel("Intermediate"), icon: "sql-server" },
+  { name: "PostgreSQL", category: getCategory("Database"), level: getLevel("Intermediate"), icon: "postgresql" },
+  { name: "Git", category: getCategory("Tools"), level: getLevel("Advanced"), icon: "git" },
 ];
 ---
 
@@ -118,6 +147,78 @@ const interests = [
       </div>
     </div>
 
+    <!-- Skills -->
+    <div class="reveal">
+      <span
+        class="font-mono text-xs uppercase tracking-widest block mb-6"
+        style={`color: var(--color-accent);`}
+      >
+        // {t("skills.sections.technologies")}
+      </span>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+        {
+          primarySkills.map((skill, index) => (
+            <div
+              class="group/skill p-3 rounded-xl transition-all duration-300 hover-card"
+              style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
+            >
+              <div class="flex items-center gap-3 mb-2">
+                {skill.icon ? (
+                  <Image
+                    src={`https://svgl.app/library/${skill.icon}.svg`}
+                    alt={`${skill.name} icon`}
+                    width={24}
+                    height={24}
+                    class="w-5 h-5 object-contain shrink-0"
+                    loading="lazy"
+                  />
+                ) : skill.iconLight && skill.iconDark ? (
+                  <>
+                    <Image
+                      src={skill.iconLight}
+                      alt={`${skill.name} icon`}
+                      width={24}
+                      height={24}
+                      class="w-5 h-5 object-contain dark:hidden shrink-0"
+                      loading="lazy"
+                    />
+                    <Image
+                      src={skill.iconDark}
+                      alt={`${skill.name} icon`}
+                      width={24}
+                      height={24}
+                      class="w-5 h-5 object-contain hidden dark:block shrink-0"
+                      loading="lazy"
+                    />
+                  </>
+                ) : null}
+                <h3
+                  class="text-sm font-medium truncate"
+                  style={`color: var(--color-text-primary);`}
+                >
+                  {skill.name}
+                </h3>
+              </div>
+              <div class="flex items-center justify-between">
+                <span
+                  class="font-mono text-xs"
+                  style={`color: var(--color-text-tertiary);`}
+                >
+                  {skill.category}
+                </span>
+                <span
+                  class="w-2 h-2 rounded-full shrink-0"
+                  style={`background-color: ${getLevelColor(skill.level)};`}
+                  title={skill.level}
+                />
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
     <!-- CTA Cards -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
       <a
@@ -128,7 +229,7 @@ const interests = [
         <div class="flex items-start justify-between mb-3">
           <PiBriefcase className="w-5 h-5 text-zinc-500 dark:text-zinc-400" />
           <PiArrowRightBold
-            className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-indigo-500 dark:text-indigo-400"
+            className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-cyan-500 dark:text-cyan-400"
           />
         </div>
         <h3
@@ -149,10 +250,10 @@ const interests = [
       >
         <div class="flex items-start justify-between mb-3">
           <PiFolderOpen
-            className="w-5 h-5 text-indigo-500 dark:text-indigo-400"
+            className="w-5 h-5 text-cyan-500 dark:text-cyan-400"
           />
           <PiArrowRightBold
-            className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-indigo-500 dark:text-indigo-400"
+            className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-cyan-500 dark:text-cyan-400"
           />
         </div>
         <h3
@@ -174,7 +275,7 @@ const interests = [
         <div class="flex items-start justify-between mb-3">
           <PiUserCircle className="w-5 h-5 text-cyan-500 dark:text-cyan-400" />
           <PiArrowRightBold
-            className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-indigo-500 dark:text-indigo-400"
+            className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-cyan-500 dark:text-cyan-400"
           />
         </div>
         <h3
@@ -189,27 +290,5 @@ const interests = [
       </a>
     </div>
 
-    <!-- Interests -->
-    <div class="reveal">
-      <h3
-        class="font-mono text-xs uppercase tracking-widest mb-4"
-        style={`color: var(--color-text-tertiary);`}
-      >
-        {t("home.interestsTitle")}
-      </h3>
-      <div class="flex flex-wrap gap-3">
-        {
-          interests.map((interest) => (
-            <div
-              class="flex items-center gap-2 px-3 py-1.5 rounded-md font-mono text-xs transition-colors"
-              style={`background-color: var(--color-bg-tertiary); color: var(--color-text-secondary);`}
-            >
-              <interest.icon className="w-4 h-4" />
-              <span>{interest.label}</span>
-            </div>
-          ))
-        }
-      </div>
-    </div>
   </div>
 </section>

@@ -54,8 +54,7 @@
     "subtitle": "Technologies and tools I master",
     "sections": {
       "technologies": "Technologies",
-      "languages": "Languages",
-      "softSkills": "Soft Skills"
+      "languages": "Languages"
     },
     "levels": {
       "basic": "Basic",
@@ -82,20 +81,7 @@
       "nativeDescription": "Native language • Complete mastery",
       "professionalDescription": "Professional competency • Fluent communication"
     },
-    "softSkillsList": [
-      "Problem Solving",
-      "Teamwork",
-      "Communication",
-      "Fast Learning",
-      "Adaptability",
-      "Critical Thinking",
-      "Responsibility",
-      "Creativity",
-      "Leadership",
-      "Empathy",
-      "Organization",
-      "Time Management"
-    ]
+    "softSkillsList": []
   },
   "work": {
     "title": "Experience",
@@ -224,15 +210,6 @@
       },
       "python": {
         "name": "Python for Everybody Specialization"
-      },
-      "aiIntro": {
-        "name": "Introduction to Artificial Intelligence"
-      },
-      "chatbot": {
-        "name": "Chatbot Development with Azure OpenAI"
-      },
-      "terminal": {
-        "name": "Introduction to Terminal and Command Line"
       }
     }
   },
@@ -272,7 +249,6 @@
     "subtitle": "Let's talk about your next project?",
     "info": {
       "location": "Mexico, Mexico",
-      "availability": "Interested in collaborative projects",
       "timezone": "GMT-6 (CST) - Mexico City"
     },
     "cta": {
@@ -302,13 +278,6 @@
   "home": {
     "currentRole": "Current Role",
     "viewResume": "View Full Resume",
-    "interestsTitle": "Interests",
-    "interests": {
-      "coffee": "Coffee",
-      "gaming": "Gaming",
-      "music": "Music",
-      "tech": "Tech"
-    },
     "aboutSection": {
       "title": "About me",
       "learnMore": "Learn more",

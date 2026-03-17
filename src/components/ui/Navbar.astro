@@ -4,7 +4,6 @@ import ThemeToggle from "@ui/ThemeToggle.astro";
 import LanguagePicker from "@ui/LanguagePicker.astro";
 import {
   PiHouseLine,
-  PiCode,
   PiBriefcase,
   PiGraduationCap,
   PiFolder,
@@ -30,11 +29,6 @@ const navItems = [
     href: lang === "es" ? "/projects" : "/en/projects",
     label: t("nav.projects"),
     icon: PiFolder,
-  },
-  {
-    href: lang === "es" ? "/skills" : "/en/skills",
-    label: t("nav.skills"),
-    icon: PiCode,
   },
   {
     href: lang === "es" ? "/education" : "/en/education",
