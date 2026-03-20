@@ -14,6 +14,17 @@ const { title, description, lang = "es" } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL("/assets/dh.webp", Astro.site);
+
+// hreflang alternates
+const pathname = Astro.url.pathname;
+const esPath = lang === "en"
+  ? (pathname === "/en" || pathname === "/en/" ? "/" : pathname.replace(/^\/en\//, "/"))
+  : pathname;
+const enPath = lang === "es"
+  ? (pathname === "/" ? "/en" : `/en${pathname}`)
+  : pathname;
+const esURL = new URL(esPath, Astro.site);
+const enURL = new URL(enPath, Astro.site);
 ---
 
 <!doctype html>
@@ -40,6 +51,11 @@ const socialImageURL = new URL("/assets/dh.webp", Astro.site);
 
     <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
+
+    <!-- hreflang alternates -->
+    <link rel="alternate" hreflang="es" href={esURL} />
+    <link rel="alternate" hreflang="en" href={enURL} />
+    <link rel="alternate" hreflang="x-default" href={esURL} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
