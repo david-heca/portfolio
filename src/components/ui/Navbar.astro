@@ -42,7 +42,7 @@ const navItems = [
   },
 ];
 
-const currentPath = Astro.url.pathname;
+const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 
 function isActive(href: string): boolean {
   if (href === "/" || href === "/en") {
