@@ -160,9 +160,9 @@ const primarySkills = [
     </div>
 
     <!-- Skills -->
-    <div class="reveal">
+    <div>
       <span
-        class="font-mono text-xs uppercase tracking-widest block mb-6"
+        class="reveal font-mono text-xs uppercase tracking-widest block mb-6"
         style={`color: var(--color-accent);`}
       >
         // {t("skills.sections.technologies")}
@@ -172,8 +172,8 @@ const primarySkills = [
         {
           primarySkills.map((skill, index) => (
             <div
-              class="group/skill p-3 rounded-xl transition-all duration-300 hover-card"
-              style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
+              class="reveal group/skill p-3 rounded-xl transition-all duration-300 hover-card"
+              style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: ${index * 0.07}s;`}
             >
               <div class="flex items-center gap-3 mb-2">
                 <skill.icon className="w-5 h-5 shrink-0" style={{ color: skill.color }} />
