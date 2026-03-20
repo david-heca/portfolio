@@ -24,6 +24,13 @@ Portafolio personal construido con **Astro 5 + React 19 + Tailwind CSS 4**, desp
 - `src/pages/[...slug].astro` genera todas las subrutas para ambos idiomas vía `getStaticPaths()`
 - Las traducciones viven en `src/i18n/locales/es.json` y `en.json` (~330 líneas cada una)
 - `useTranslations(lang)` retorna una función `t(key)` que soporta claves anidadas con notación de punto
+- Detección automática de idioma del navegador en primera visita; persistido en `localStorage['preferred-lang']`
+
+### SEO
+
+- hreflang alternates (ES/EN + x-default) generados en `Layout.astro`
+- Sitemap automático vía `@astrojs/sitemap` + `robots.txt` en `public/`
+- Canonical URLs, Open Graph y Twitter Cards en cada página
 
 ### Sistema de temas
 
@@ -33,7 +40,7 @@ Portafolio personal construido con **Astro 5 + React 19 + Tailwind CSS 4**, desp
 
 ### Componentes
 
-- **Secciones** (`src/components/sections/`): Home, Skills, Work, Projects, Education, Contact — componentes Astro que reciben `lang: "es" | "en"` como prop
+- **Secciones** (`src/components/sections/`): Home, Work, Projects, Education, Contact — componentes Astro que reciben `lang: "es" | "en"` como prop
 - **UI** (`src/components/ui/`): Navbar, ThemeToggle, LanguagePicker, CvDownloadButton — Navbar y Footer usan `transition:persist` para preservarse entre View Transitions
 - React se usa solo para componentes interactivos (CvDownloadButton); el resto es Astro puro
 
@@ -43,8 +50,10 @@ Portafolio personal construido con **Astro 5 + React 19 + Tailwind CSS 4**, desp
 
 ### Patrones clave
 
-- Animaciones de revelación con `.reveal` + IntersectionObserver (root margin `-50px`)
-- Iconos de React Icons usando el set Phosphor (`PiXxxxx`)
+- Animaciones de revelación con `.reveal` + IntersectionObserver (root margin `-50px`), escalonadas con `transition-delay`
+- Iconos de React Icons: Phosphor (`PiXxxxx`) para UI, Simple Icons (`SiXxxxx`) para tech logos
 - Color de acento cyan (`--color-accent: #06B6D4` light / `#22D3EE` dark)
-- Fuentes: Space Grotesk (sans) y JetBrains Mono (mono)
+- Fuentes: Satoshi (sans, vía Fontshare) y JetBrains Mono (mono, vía Google Fonts)
 - Imágenes en formato WebP; imágenes críticas con `loading="eager"`
+- Copy-to-clipboard en Contact (email/teléfono) con feedback visual
+- Social links con brand colors en hover
