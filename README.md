@@ -1,61 +1,49 @@
 # David Herrera - Portfolio
 
-> Minimal & modern portfolio built with Astro. Clean design, fast performance, and bilingual content (ES/EN).
+Minimal, modern, and bilingual portfolio built with Astro.
 
-**[Visit the site →](https://davidherrera.dev)**
+**[davidherrera.dev](https://davidherrera.dev)**
 
 ## Tech Stack
 
-- **Framework**: Astro v5 with View Transitions
-- **Styling**: Tailwind CSS + Dark Mode
-- **UI Components**: React Icons (Phosphor)
-- **i18n**: Custom JSON-based translation system
-- **Deployment**: Vercel
-
-## Features
-
-- ✨ Modern Bento Grid design
-- 🌍 Bilingual (Spanish/English)
-- 🌙 Dark mode support
-- ⚡ Fast & lightweight
-- 📱 Mobile optimized
-- 🎨 Beautiful typography & spacing
+- **Astro 5** — Static site generation with View Transitions
+- **React 19** — Interactive components
+- **Tailwind CSS 4** — Styling with dark mode
+- **Satoshi + JetBrains Mono** — Typography
+- **Vercel** — Deployment with gzip/brotli compression
 
 ## Quick Start
 
-```sh
-# Install dependencies
+```bash
 bun install
-
-# Start dev server
-bun run dev
-
-# Build for production
-bun run build
+bun run dev        # localhost:4321
+bun run build      # production build → /dist
+bun run preview    # preview production build
 ```
-
-The site will be available at `http://localhost:4321`
 
 ## Project Structure
 
 ```
 src/
 ├── components/
-│   └── pages/          # Page components (Home, About, etc.)
-├── i18n/              # Translation files (ES/EN)
-├── layouts/           # Layout wrapper
-├── pages/             # Routing
-└── styles/            # Global CSS
+│   ├── sections/      # Home, Work, Projects, Education, Contact
+│   └── ui/            # Navbar, ThemeToggle, LanguagePicker, CvDownloadButton
+├── i18n/
+│   ├── locales/       # es.json, en.json
+│   └── utils.ts       # useTranslations(lang)
+├── layouts/           # Layout.astro (SEO, theme, fonts)
+├── pages/             # Routing (index, en, [...slug])
+└── styles/            # global.css (theme variables, Tailwind)
 ```
 
-## Pages
+## Features
 
-- **Home** - Hero section with projects & current role
-- **Skills** - Technical expertise & languages
-- **Work** - Professional experience
-- **Projects** - Selected projects showcase
-- **Education** - Academic background & certifications
-- **Contact** - Get in touch
+- Bilingual (ES/EN) with auto-detection and hreflang SEO
+- Light/dark theme with system preference support
+- Scroll reveal animations with staggered delays
+- Copy-to-clipboard contact actions
+- Social links with brand color hover effects
+- Responsive across all breakpoints
 
 ## License
 
