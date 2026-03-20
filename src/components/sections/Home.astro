@@ -7,6 +7,18 @@ import {
   PiFolderOpen,
   PiUserCircle,
 } from "react-icons/pi";
+import {
+  SiDotnet,
+  SiPython,
+  SiJavascript,
+  SiReact,
+  SiTailwindcss,
+  SiDocker,
+  SiPostgresql,
+  SiGit,
+  SiRailway,
+} from "react-icons/si";
+import { VscAzure } from "react-icons/vsc";
 
 export interface Props {
   lang: "es" | "en";
@@ -43,16 +55,16 @@ const getLevelColor = (level: string) => {
 };
 
 const primarySkills = [
-  { name: "C#", category: getCategory("Backend"), level: getLevel("Intermediate"), icon: "csharp" },
-  { name: "Python", category: getCategory("Backend"), level: getLevel("Intermediate"), icon: "python" },
-  { name: "JavaScript", category: getCategory("Frontend"), level: getLevel("Intermediate"), icon: "javascript" },
-  { name: "React", category: getCategory("Frontend"), level: getLevel("Basic"), iconLight: "https://svgl.app/library/react_light.svg", iconDark: "https://svgl.app/library/react_dark.svg" },
-  { name: "Tailwind CSS", category: getCategory("Frontend"), level: getLevel("Intermediate"), icon: "tailwindcss" },
-  { name: "Azure", category: getCategory("Cloud"), level: getLevel("Intermediate"), icon: "azure" },
-  { name: "Docker", category: getCategory("DevOps"), level: getLevel("Basic"), icon: "docker" },
-  { name: "SQL", category: getCategory("Database"), level: getLevel("Intermediate"), icon: "sql-server" },
-  { name: "PostgreSQL", category: getCategory("Database"), level: getLevel("Intermediate"), icon: "postgresql" },
-  { name: "Git", category: getCategory("Tools"), level: getLevel("Advanced"), icon: "git" },
+  { name: "C#", category: getCategory("Backend"), level: getLevel("Intermediate"), icon: SiDotnet, color: "#7b6fb3" },
+  { name: "Python", category: getCategory("Backend"), level: getLevel("Intermediate"), icon: SiPython, color: "#7ba1b3" },
+  { name: "JavaScript", category: getCategory("Frontend"), level: getLevel("Intermediate"), icon: SiJavascript, color: "#b3a76e" },
+  { name: "React", category: getCategory("Frontend"), level: getLevel("Basic"), icon: SiReact, color: "#6ea8b3" },
+  { name: "Tailwind CSS", category: getCategory("Frontend"), level: getLevel("Intermediate"), icon: SiTailwindcss, color: "#6a9fb3" },
+  { name: "Azure", category: getCategory("Cloud"), level: getLevel("Intermediate"), icon: VscAzure, color: "#6e88b3" },
+  { name: "Docker", category: getCategory("DevOps"), level: getLevel("Basic"), icon: SiDocker, color: "#6e9ab3" },
+  { name: "Railway", category: getCategory("DevOps"), level: getLevel("Intermediate"), icon: SiRailway, color: "#9b8eb3" },
+  { name: "PostgreSQL", category: getCategory("Database"), level: getLevel("Intermediate"), icon: SiPostgresql, color: "#6e7fb3" },
+  { name: "Git", category: getCategory("Tools"), level: getLevel("Advanced"), icon: SiGit, color: "#b38370" },
 ];
 ---
 
@@ -164,35 +176,7 @@ const primarySkills = [
               style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
             >
               <div class="flex items-center gap-3 mb-2">
-                {skill.icon ? (
-                  <Image
-                    src={`https://svgl.app/library/${skill.icon}.svg`}
-                    alt={`${skill.name} icon`}
-                    width={24}
-                    height={24}
-                    class="w-5 h-5 object-contain shrink-0"
-                    loading="lazy"
-                  />
-                ) : skill.iconLight && skill.iconDark ? (
-                  <>
-                    <Image
-                      src={skill.iconLight}
-                      alt={`${skill.name} icon`}
-                      width={24}
-                      height={24}
-                      class="w-5 h-5 object-contain dark:hidden shrink-0"
-                      loading="lazy"
-                    />
-                    <Image
-                      src={skill.iconDark}
-                      alt={`${skill.name} icon`}
-                      width={24}
-                      height={24}
-                      class="w-5 h-5 object-contain hidden dark:block shrink-0"
-                      loading="lazy"
-                    />
-                  </>
-                ) : null}
+                <skill.icon className="w-5 h-5 shrink-0" style={{ color: skill.color }} />
                 <h3
                   class="text-sm font-medium truncate"
                   style={`color: var(--color-text-primary);`}
