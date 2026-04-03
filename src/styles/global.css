@@ -144,12 +144,179 @@
   color: var(--color-accent) !important;
 }
 
+/* Spotlight mouse-follow glow */
+.spotlight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.spotlight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  z-index: 1;
+  transition: opacity 0.3s ease;
+  background: radial-gradient(
+    400px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    var(--spotlight-color, var(--color-accent-glow)),
+    transparent 40%
+  );
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.spotlight-card:hover::before {
+  opacity: 0.5;
+}
+
+/* 3D tilt on hover */
+.tilt-card {
+  transform-style: preserve-3d;
+  transform: perspective(800px) rotateX(0deg) rotateY(0deg);
+  transition: transform 0.15s ease-out;
+}
+
+/* Infinite marquee scroll */
+.marquee {
+  --marquee-speed: 35s;
+  overflow: hidden;
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  gap: 0.75rem;
+  animation: marquee var(--marquee-speed) linear infinite;
+}
+
+.marquee-track-reverse {
+  display: flex;
+  width: max-content;
+  gap: 0.75rem;
+  animation: marquee-reverse var(--marquee-speed) linear infinite;
+}
+
+.marquee:hover .marquee-track,
+.marquee:hover .marquee-track-reverse {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+/* Scroll-driven animations (progressive enhancement) */
+@supports (animation-timeline: view()) {
+  .scroll-fill-bar {
+    animation: scroll-fill linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 100%;
+  }
+
+  @keyframes scroll-fill {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  .scroll-slide-in {
+    animation: scroll-slide-in linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 80%;
+  }
+
+  @keyframes scroll-slide-in {
+    from { opacity: 0; transform: translateX(-30px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  .scroll-expand-divider {
+    animation: scroll-expand linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+
+  @keyframes scroll-expand {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+}
+
+/* Link underline expanding from center */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-accent);
+  border-radius: 1px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.25s ease;
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+}
+
+/* Button press micro-interaction */
+.press-effect:active {
+  transform: scale(0.97) !important;
+  box-shadow: none !important;
+}
+
+/* Arrow icon bounce on hover */
+.arrow-bounce-x {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.group:hover .arrow-bounce-x {
+  transform: translateX(4px);
+}
+
+.arrow-bounce-diagonal {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.group:hover .arrow-bounce-diagonal,
+.social-card:hover .arrow-bounce-diagonal {
+  transform: translate(3px, -3px);
+}
+
+/* Navbar active indicator transition */
+.nav-indicator {
+  animation: nav-indicator-in 0.3s ease 0.15s both;
+}
+
+@keyframes nav-indicator-in {
+  from { width: 0; opacity: 0; }
+  to { width: 1.25rem; opacity: 1; }
+}
+
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto !important; }
   .reveal { transition-duration: 0.01s !important; }
   .reveal-delay-1, .reveal-delay-2, .reveal-delay-3,
   .reveal-delay-4, .reveal-delay-5 { transition-delay: 0s !important; }
+  .marquee-track, .marquee-track-reverse { animation: none !important; }
+  .spotlight-card::before { display: none !important; }
+  .tilt-card { transform: none !important; }
+  .link-underline::after { transform: scaleX(1) !important; transition: none !important; }
 }
 
 /* Keyboard focus styles */
