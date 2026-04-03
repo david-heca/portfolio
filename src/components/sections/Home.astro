@@ -89,7 +89,7 @@ const primarySkills = [
           <h1
             class="reveal reveal-delay-2 text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05] mb-6"
           >
-            <span class="text-gradient">David Herrera</span>
+            <span class="text-gradient" data-scramble="David Herrera">David Herrera</span>
           </h1>
 
           <!-- Role -->
@@ -126,7 +126,7 @@ const primarySkills = [
     </div>
 
     <!-- Divider -->
-    <div class="divider"></div>
+    <div class="divider scroll-expand-divider" style="transform-origin: center;"></div>
 
     <!-- About Me -->
     <div class="reveal">
@@ -168,38 +168,62 @@ const primarySkills = [
         // {t("skills.sections.technologies")}
       </span>
 
-      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
-        {
-          primarySkills.map((skill, index) => (
-            <div
-              class="reveal group/skill p-3 rounded-xl transition-all duration-300 hover-card"
-              style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: ${index * 0.07}s;`}
-            >
-              <div class="flex items-center gap-3 mb-2">
-                <skill.icon className="w-5 h-5 shrink-0" style={{ color: skill.color }} />
-                <h3
-                  class="text-sm font-medium truncate"
-                  style={`color: var(--color-text-primary);`}
+      <div class="reveal space-y-3">
+        <!-- Row 1: scrolls left -->
+        <div class="marquee">
+          <div class="marquee-track">
+            {
+              [...primarySkills, ...primarySkills].map((skill, index) => (
+                <div
+                  class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl whitespace-nowrap shrink-0"
+                  style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
+                  aria-hidden={index >= primarySkills.length ? "true" : undefined}
                 >
-                  {skill.name}
-                </h3>
-              </div>
-              <div class="flex items-center justify-between">
-                <span
-                  class="font-mono text-xs"
-                  style={`color: var(--color-text-tertiary);`}
+                  <skill.icon className="w-4 h-4 shrink-0" style={{ color: skill.color }} />
+                  <span
+                    class="text-sm font-medium"
+                    style={`color: var(--color-text-primary);`}
+                  >
+                    {skill.name}
+                  </span>
+                  <span
+                    class="w-1.5 h-1.5 rounded-full shrink-0"
+                    style={`background-color: ${getLevelColor(skill.level)};`}
+                    title={skill.level}
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Row 2: scrolls right (offset order) -->
+        <div class="marquee">
+          <div class="marquee-track-reverse">
+            {
+              [...primarySkills.slice(5), ...primarySkills.slice(0, 5), ...primarySkills.slice(5), ...primarySkills.slice(0, 5)].map((skill, index) => (
+                <div
+                  class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl whitespace-nowrap shrink-0"
+                  style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
+                  aria-hidden={index >= primarySkills.length ? "true" : undefined}
                 >
-                  {skill.category}
-                </span>
-                <span
-                  class="w-2 h-2 rounded-full shrink-0"
-                  style={`background-color: ${getLevelColor(skill.level)};`}
-                  title={skill.level}
-                />
-              </div>
-            </div>
-          ))
-        }
+                  <skill.icon className="w-4 h-4 shrink-0" style={{ color: skill.color }} />
+                  <span
+                    class="text-sm font-medium"
+                    style={`color: var(--color-text-primary);`}
+                  >
+                    {skill.name}
+                  </span>
+                  <span
+                    class="w-1.5 h-1.5 rounded-full shrink-0"
+                    style={`background-color: ${getLevelColor(skill.level)};`}
+                    title={skill.level}
+                  />
+                </div>
+              ))
+            }
+          </div>
+        </div>
       </div>
     </div>
 
@@ -207,13 +231,13 @@ const primarySkills = [
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
       <a
         href={lang === "es" ? "/work" : "/en/work"}
-        class="reveal reveal-delay-1 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover:-translate-y-0.5 hover-card"
+        class="reveal reveal-delay-1 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover-card spotlight-card tilt-card"
         style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
       >
         <div class="flex items-start justify-between mb-3">
           <PiBriefcase className="w-5 h-5 text-zinc-500 dark:text-zinc-400" />
           <PiArrowRightBold
-            className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-cyan-500 dark:text-cyan-400"
+            className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity arrow-bounce-x text-cyan-500 dark:text-cyan-400"
           />
         </div>
         <h3
@@ -229,7 +253,7 @@ const primarySkills = [
 
       <a
         href={lang === "es" ? "/projects" : "/en/projects"}
-        class="reveal reveal-delay-2 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover:-translate-y-0.5 hover-card"
+        class="reveal reveal-delay-2 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover-card spotlight-card tilt-card"
         style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
       >
         <div class="flex items-start justify-between mb-3">
@@ -237,7 +261,7 @@ const primarySkills = [
             className="w-5 h-5 text-cyan-500 dark:text-cyan-400"
           />
           <PiArrowRightBold
-            className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-cyan-500 dark:text-cyan-400"
+            className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity arrow-bounce-x text-cyan-500 dark:text-cyan-400"
           />
         </div>
         <h3
@@ -253,13 +277,13 @@ const primarySkills = [
 
       <a
         href={lang === "es" ? "/contact" : "/en/contact"}
-        class="reveal reveal-delay-3 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover:-translate-y-0.5 hover-card"
+        class="reveal reveal-delay-3 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover-card spotlight-card tilt-card"
         style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
       >
         <div class="flex items-start justify-between mb-3">
           <PiUserCircle className="w-5 h-5 text-cyan-500 dark:text-cyan-400" />
           <PiArrowRightBold
-            className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all text-cyan-500 dark:text-cyan-400"
+            className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity arrow-bounce-x text-cyan-500 dark:text-cyan-400"
           />
         </div>
         <h3
