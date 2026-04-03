@@ -213,5 +213,139 @@ const enURL = new URL(enPath, Astro.site);
       setupRevealAnimations();
       document.addEventListener("astro:page-load", setupRevealAnimations);
     </script>
+
+    <!-- Spotlight + Tilt + Text Scramble -->
+    <script>
+      function setupSpotlightAndTilt() {
+        const cards = document.querySelectorAll(".spotlight-card, .tilt-card");
+
+        cards.forEach((card) => {
+          const el = card as HTMLElement;
+          if (el.dataset.interactiveReady) return;
+          el.dataset.interactiveReady = "true";
+
+          const isSpotlight = el.classList.contains("spotlight-card");
+          const isTilt = el.classList.contains("tilt-card");
+          el.addEventListener("mousemove", (e) => {
+            const rect = el.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            if (isSpotlight) {
+              el.style.setProperty("--mouse-x", x + "px");
+              el.style.setProperty("--mouse-y", y + "px");
+            }
+
+            if (isTilt) {
+              const centerX = rect.width / 2;
+              const centerY = rect.height / 2;
+              const rotateX = ((y - centerY) / centerY) * -6;
+              const rotateY = ((x - centerX) / centerX) * 6;
+              el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(8px)`;
+            }
+          });
+
+          el.addEventListener("mouseleave", () => {
+            if (isTilt) {
+              el.style.transform = "";
+            }
+          });
+        });
+      }
+
+      function setupTextScramble() {
+        const el = document.querySelector(
+          "[data-scramble]",
+        ) as HTMLElement | null;
+        if (!el || el.dataset.scrambleReady) return;
+        el.dataset.scrambleReady = "true";
+
+        const targetText = el.dataset.scramble || "";
+        const charset =
+          "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%&*";
+        const duration = 1500;
+        const resolveInterval = duration / targetText.length;
+
+        el.textContent = targetText.replace(
+          /[^ ]/g,
+          () => charset[Math.floor(Math.random() * charset.length)],
+        );
+
+        const parentReveal = el.closest(".reveal");
+        if (!parentReveal) return;
+
+        if (parentReveal.classList.contains("visible")) {
+          startScramble();
+        } else {
+          const observer = new MutationObserver((mutations) => {
+            for (const mutation of mutations) {
+              if (
+                mutation.type === "attributes" &&
+                mutation.attributeName === "class" &&
+                (mutation.target as HTMLElement).classList.contains("visible")
+              ) {
+                observer.disconnect();
+                startScramble();
+              }
+            }
+          });
+          observer.observe(parentReveal, {
+            attributes: true,
+            attributeFilter: ["class"],
+          });
+        }
+
+        function startScramble() {
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            el!.textContent = targetText;
+            return;
+          }
+
+          let resolvedCount = 0;
+          let lastResolve = performance.now();
+
+          function tick(now: number) {
+            if (resolvedCount >= targetText.length) {
+              el!.textContent = targetText;
+              return;
+            }
+
+            if (now - lastResolve >= resolveInterval) {
+              while (
+                resolvedCount < targetText.length &&
+                targetText[resolvedCount] === " "
+              ) {
+                resolvedCount++;
+              }
+              resolvedCount++;
+              lastResolve = now;
+            }
+
+            let display = "";
+            for (let i = 0; i < targetText.length; i++) {
+              if (targetText[i] === " ") {
+                display += " ";
+              } else if (i < resolvedCount) {
+                display += targetText[i];
+              } else {
+                display +=
+                  charset[Math.floor(Math.random() * charset.length)];
+              }
+            }
+            el!.textContent = display;
+            requestAnimationFrame(tick);
+          }
+
+          requestAnimationFrame(tick);
+        }
+      }
+
+      setupSpotlightAndTilt();
+      setupTextScramble();
+      document.addEventListener("astro:page-load", () => {
+        setupSpotlightAndTilt();
+        setupTextScramble();
+      });
+    </script>
   </body>
 </html>
