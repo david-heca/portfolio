@@ -109,7 +109,7 @@ const copiedText = lang === "es" ? "¡Copiado!" : "Copied!";
         <div class="flex flex-col sm:flex-row gap-3">
           <button
             data-copy={contactInfo.email}
-            class="copy-btn inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white text-cyan-600 rounded-xl font-semibold hover:scale-105 transition-all duration-200 shadow-xl cursor-pointer"
+            class="copy-btn press-effect inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white text-cyan-600 rounded-xl font-semibold hover:scale-105 transition-all duration-200 shadow-xl cursor-pointer"
           >
             <span class="copy-icon"><PiEnvelope className="w-5 h-5" /></span>
             <span class="copied-icon"><PiCheck className="w-5 h-5" /></span>
@@ -118,7 +118,7 @@ const copiedText = lang === "es" ? "¡Copiado!" : "Copied!";
           </button>
           <button
             data-copy={contactInfo.phone}
-            class="copy-btn inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white/10 backdrop-blur-sm text-white border border-white/20 rounded-xl font-semibold hover:bg-white/20 transition-all duration-200 cursor-pointer"
+            class="copy-btn press-effect inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white/10 backdrop-blur-sm text-white border border-white/20 rounded-xl font-semibold hover:bg-white/20 transition-all duration-200 cursor-pointer"
           >
             <span class="copy-icon"><PiPhone className="w-5 h-5" /></span>
             <span class="copied-icon"><PiCheck className="w-5 h-5" /></span>
@@ -133,7 +133,7 @@ const copiedText = lang === "es" ? "¡Copiado!" : "Copied!";
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
       <!-- Location -->
       <div
-        class="reveal rounded-2xl p-6 md:p-8"
+        class="reveal rounded-2xl p-6 md:p-8 transition-all duration-300 hover-card spotlight-card"
         style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: 0.1s;`}
       >
         <PiMapPin className="w-6 h-6 mb-4 text-cyan-500 dark:text-cyan-400" />
@@ -157,7 +157,7 @@ const copiedText = lang === "es" ? "¡Copiado!" : "Copied!";
 
       <!-- CV Spanish -->
       <div
-        class="reveal rounded-2xl p-6 md:p-8"
+        class="reveal rounded-2xl p-6 md:p-8 transition-all duration-300 hover-card spotlight-card"
         style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: 0.2s;`}
       >
         <PiDownloadSimple
@@ -180,13 +180,13 @@ const copiedText = lang === "es" ? "¡Copiado!" : "Copied!";
           href="/assets/documents/davidherrera-spanish.pdf"
           download="davidherrera-spanish.pdf"
           label={t("contact.cv.download")}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-cyan-500/10 text-cyan-500 dark:bg-cyan-400/15 dark:text-cyan-400"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-cyan-500/10 text-cyan-500 dark:bg-cyan-400/15 dark:text-cyan-400 press-effect"
         />
       </div>
 
       <!-- CV English -->
       <div
-        class="reveal rounded-2xl p-6 md:p-8"
+        class="reveal rounded-2xl p-6 md:p-8 transition-all duration-300 hover-card spotlight-card"
         style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: 0.3s;`}
       >
         <PiDownloadSimple
@@ -209,7 +209,7 @@ const copiedText = lang === "es" ? "¡Copiado!" : "Copied!";
           href="/assets/documents/davidherrera-english.pdf"
           download="davidherrera-english.pdf"
           label={t("contact.cv.download")}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-cyan-500/10 text-cyan-500 dark:bg-cyan-400/15 dark:text-cyan-400"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-cyan-500/10 text-cyan-500 dark:bg-cyan-400/15 dark:text-cyan-400 press-effect"
         />
       </div>
     </div>
@@ -222,8 +222,8 @@ const copiedText = lang === "es" ? "¡Copiado!" : "Copied!";
             href={social.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="reveal group social-card relative rounded-xl p-5 transition-all duration-300"
-            style={`--brand-color: ${social.brandColor}; background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: ${0.1 + i * 0.1}s;`}
+            class="reveal group social-card spotlight-card relative rounded-xl p-5 transition-all duration-300"
+            style={`--brand-color: ${social.brandColor}; --spotlight-color: color-mix(in srgb, ${social.brandColor} 25%, transparent); background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: ${0.1 + i * 0.1}s;`}
           >
             <span class="social-icon transition-colors duration-300">
               <social.icon className="w-6 h-6" />
@@ -240,7 +240,7 @@ const copiedText = lang === "es" ? "¡Copiado!" : "Copied!";
             >
               {social.username}
             </p>
-            <span class="social-arrow absolute top-4 right-4 opacity-0 transition-all duration-300">
+            <span class="social-arrow arrow-bounce-diagonal absolute top-4 right-4 opacity-0 transition-all duration-300">
               <PiArrowUpRight className="w-4 h-4" />
             </span>
           </a>
