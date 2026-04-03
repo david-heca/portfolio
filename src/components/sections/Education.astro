@@ -208,7 +208,7 @@ const languages = [
   <!-- Languages -->
   <div class="mb-12">
     <h2
-      class="font-mono text-xs uppercase tracking-widest mb-6"
+      class="font-mono text-xs uppercase tracking-widest mb-6 scroll-slide-in"
       style={`color: var(--color-text-tertiary);`}
     >
       {t("skills.sections.languages")}
@@ -218,7 +218,7 @@ const languages = [
       {
         languages.map((language, i) => (
           <div
-            class="reveal rounded-2xl p-6 transition-all duration-300 hover-card"
+            class="reveal rounded-2xl p-6 transition-all duration-300 hover-card spotlight-card"
             style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: ${0.1 + i * 0.15}s;`}
           >
             <div class="flex items-start justify-between mb-4">
@@ -263,15 +263,15 @@ const languages = [
               style={`background-color: var(--color-bg-tertiary);`}
             >
               <div
-                class={`h-1 rounded-full transition-all duration-1000 ease-out ${
+                class={`h-1 rounded-full scroll-fill-bar ${
                   language.level === t("skills.levels.native")
                     ? "w-full"
                     : "w-[70%]"
                 }`}
                 style={
                   language.level === t("skills.levels.native")
-                    ? "background-color: #10B981;"
-                    : `background-color: var(--color-accent);`
+                    ? "background-color: #10B981; transform-origin: left;"
+                    : `background-color: var(--color-accent); transform-origin: left;`
                 }
               />
             </div>
@@ -284,7 +284,7 @@ const languages = [
   <!-- Academic Background -->
   <div class="mb-12">
     <h2
-      class="font-mono text-xs uppercase tracking-widest mb-6"
+      class="font-mono text-xs uppercase tracking-widest mb-6 scroll-slide-in"
       style={`color: var(--color-text-tertiary);`}
     >
       {t("education.sections.academic")}
@@ -294,7 +294,7 @@ const languages = [
       {
         education.map((edu, index) => (
           <div
-            class="reveal rounded-2xl p-6 md:p-8 border-l-2 transition-all duration-300 hover-card"
+            class="reveal rounded-2xl p-6 md:p-8 border-l-2 transition-all duration-300 hover-card spotlight-card"
             style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: ${index * 0.15}s;`}
           >
             <div class="flex items-start justify-between mb-4">
@@ -375,7 +375,7 @@ const languages = [
   <!-- Certifications -->
   <div>
     <h2
-      class="font-mono text-xs uppercase tracking-widest mb-6"
+      class="font-mono text-xs uppercase tracking-widest mb-6 scroll-slide-in"
       style={`color: var(--color-text-tertiary);`}
     >
       {t("education.sections.certifications")}
@@ -389,7 +389,7 @@ const languages = [
             href={cert.verifyUrl}
             target="_blank"
             rel="noopener noreferrer"
-            class="reveal group block rounded-2xl p-6 transition-all duration-300 hover:-translate-y-0.5 hover-card"
+            class="reveal group block rounded-2xl p-6 transition-all duration-300 hover-card spotlight-card tilt-card"
             style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: ${index * 0.1}s;`}
           >
             <div class="flex items-start justify-between mb-4">
