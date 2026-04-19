@@ -45,8 +45,8 @@ Editorial-brutalist soft, v.2026:
 - Warm neutral palette (`#f5f3ee` / `#111110`) with a single electric-blue accent (`#1e4fff` light, `#4d7cff` dark)
 - Visible 12-column construction grid (responsive 12 → 6 → 4 cols)
 - Large expressive typography (hero name up to 220px, section headers up to 140px) with fluid `clamp()` scaling
-- Circular SVG tech ring, ticker marquee with `✦` separators, numbered per-page footers
-- Unicode typographic glyphs (`↗`, `→`, `↓`, `★`, `✦`) instead of UI icons
+- Circular SVG tech ring, technical-credits spec sheet, numbered per-page footers
+- Unicode typographic glyphs (`↗`, `→`, `↓`, `★`) instead of UI icons
 
 ## Features
 

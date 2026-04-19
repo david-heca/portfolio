@@ -60,15 +60,15 @@ Portafolio personal construido con **Astro 5 + React 19 + Tailwind CSS 4**, desp
 - **Una sola variable de acento**: `--color-accent` (light `#1e4fff`, dark `#4d7cff`). El resto de variantes translúcidas se derivan con `color-mix(in srgb, var(--color-accent) N%, transparent)` — para cambiar toda la paleta basta con editar dos líneas.
 - Paleta warm neutral: `--color-bg`, `--color-bg-2`, `--color-ink`, `--color-ink-2`, `--color-ink-3`, `--color-line`, `--color-line-strong`.
 - Fuentes: Satoshi (300–900, vía Fontshare) y JetBrains Mono (400, 500, vía Google Fonts).
-- **Container pattern**: `.container-editorial` (y `.nav__inner`, `.footer__inner`) aplican `max-width: 1280px` + padding-inline responsive (24/32/48/64px). Elementos con line/border full-width (`.nav`, `.footer`, `.marquee`) viven fuera del container para que su línea atraviese todo el viewport.
+- **Container pattern**: `.container-editorial` (y `.nav__inner`, `.footer__inner`) aplican `max-width: 1280px` + padding-inline responsive (24/32/48/64px). Elementos con line/border full-width (`.nav`, `.footer`) viven fuera del container para que su línea atraviese todo el viewport.
 - **Grid de construcción**: `.page::before` dibuja líneas verticales (12 cols `lg+`, 6 `sm–md`, 4 `<sm`) con `box-shadow: inset -1px 0` para cerrar el grid en el borde derecho.
 - **Tipografía fluida**: `clamp()` en todos los headings gigantes (hero 56→220px, headers 44→140px, contact 52→180px).
-- **Glifos tipográficos**: el diseño usa unicode (`✦` marquee, `↗` contact, `→` CTA, `↓` footer, `★` featured) en vez de iconos — es parte de la estética editorial.
+- **Glifos tipográficos**: el diseño usa unicode (`↗` contact, `→` CTA, `↓` footer, `★` featured) en vez de iconos — es parte de la estética editorial.
 
 ### Patrones clave
 
 - Animaciones de revelación con `.reveal` + IntersectionObserver (root margin `-50px`), escalonadas con `reveal-delay-1..4`
-- Marquee con `@keyframes slide` y separador `✦` entre items (`marquee__item::after`)
+- Strip de credits (`.credits`) debajo del hero: spec sheet tipográfico con categorías (Backend/Frontend/Cloud/AI) en filas `dt`/`dd`
 - Pulse del live dot del hero vía `@keyframes pulse`
 - Rotación lenta del `tech-ring` SVG (`60s linear infinite`)
 - Todas las animaciones respetan `prefers-reduced-motion: reduce`
