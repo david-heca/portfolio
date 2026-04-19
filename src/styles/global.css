@@ -82,6 +82,19 @@
 }
 
 /* ================================
+   Prevent double 1px borders when two bordered strips are adjacent.
+   Remove the bottom border of the first element so the "bar" visually
+   belongs to the following section (footer keeps its top border).
+   ================================ */
+.marquee:has(+ .stats),
+.marquee:has(+ .now-strip),
+.stats:has(+ .now-strip),
+.stats:has(+ .footer),
+.now-strip:has(+ .footer) {
+  border-bottom: 0;
+}
+
+/* ================================
    Page frame + construction grid
    ================================ */
 .page {
