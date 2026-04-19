@@ -1,216 +1,116 @@
 ---
-import { PiSunDuotone, PiMoonDuotone, PiDesktopDuotone } from "react-icons/pi";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<div class="relative" id="theme-menu">
+<div class="theme-toggle" role="radiogroup" aria-label="Theme">
   <button
-    id="theme-toggle"
     type="button"
-    class="p-2 rounded-lg transition-colors"
-    style="color: var(--color-text-tertiary);"
-    aria-label="Theme options"
-    aria-haspopup="true"
-    aria-expanded="false"
+    data-theme="light"
+    class="theme-toggle__btn"
+    role="radio"
+    aria-checked="false"
+    aria-label={t("theme.light")}
   >
-    <div class="relative w-5 h-5 flex items-center justify-center">
-      <span
-        class="theme-toggle-icon absolute opacity-0 transition-opacity"
-        data-theme-icon="light"
-        aria-hidden="true"
-      >
-        <PiSunDuotone className="w-5 h-5" />
-      </span>
-      <span
-        class="theme-toggle-icon absolute opacity-0 transition-opacity"
-        data-theme-icon="dark"
-        aria-hidden="true"
-      >
-        <PiMoonDuotone className="w-5 h-5" />
-      </span>
-      <span
-        class="theme-toggle-icon absolute opacity-100 transition-opacity"
-        data-theme-icon="system"
-        aria-hidden="true"
-      >
-        <PiDesktopDuotone className="w-5 h-5" />
-      </span>
-    </div>
+    LIGHT
   </button>
-
-  <div
-    id="theme-menu-panel"
-    class="absolute right-0 mt-2 w-36 rounded-xl backdrop-blur-xl shadow-lg p-1 hidden"
-    style="border: 1px solid var(--color-border-default); background-color: color-mix(in srgb, var(--color-bg-secondary) 90%, transparent);"
-    role="menu"
-    aria-label="Theme"
+  <button
+    type="button"
+    data-theme="dark"
+    class="theme-toggle__btn"
+    role="radio"
+    aria-checked="false"
+    aria-label={t("theme.dark")}
   >
-    <button
-      type="button"
-      data-theme="light"
-      class="theme-option w-full flex mb-1 items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
-      style="color: var(--color-text-secondary);"
-      role="menuitemradio"
-      aria-checked="false"
-    >
-      <PiSunDuotone className="w-4 h-4" />
-      {t("theme.light")}
-    </button>
-    <button
-      type="button"
-      data-theme="dark"
-      class="theme-option w-full flex mb-1 items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
-      style="color: var(--color-text-secondary);"
-      role="menuitemradio"
-      aria-checked="false"
-    >
-      <PiMoonDuotone className="w-4 h-4" />
-      {t("theme.dark")}
-    </button>
-    <button
-      type="button"
-      data-theme="system"
-      class="theme-option w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-colors"
-      style="color: var(--color-text-secondary);"
-      role="menuitemradio"
-      aria-checked="false"
-    >
-      <PiDesktopDuotone className="w-4 h-4" />
-      {t("theme.system")}
-    </button>
-  </div>
+    DARK
+  </button>
 </div>
+
+<style>
+  .theme-toggle {
+    display: inline-flex;
+    gap: 2px;
+    padding: 3px;
+    border: 1px solid var(--color-line);
+    border-radius: 2px;
+  }
+
+  .theme-toggle__btn {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    padding: 4px 8px;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    color: var(--color-ink-3);
+    letter-spacing: 0.04em;
+    line-height: 1.2;
+    transition:
+      background-color 0.15s ease,
+      color 0.15s ease;
+  }
+
+  .theme-toggle__btn:hover {
+    color: var(--color-ink-2);
+  }
+
+  .theme-toggle__btn[aria-checked="true"] {
+    background: var(--color-ink);
+    color: var(--color-bg);
+  }
+</style>
 
 <script>
   function setupThemeToggle() {
     const root = document.documentElement;
-    const themeToggleBtn = document.getElementById("theme-toggle");
-    const menu = document.getElementById("theme-menu");
-    const panel = document.getElementById("theme-menu-panel");
-    const options = panel?.querySelectorAll(".theme-option");
-    const icons = document.querySelectorAll<HTMLElement>(".theme-toggle-icon");
+    const wrapper = document.querySelector<HTMLElement>(".theme-toggle");
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".theme-toggle__btn");
 
-    // Prevent multiple event listeners on persisted elements
-    if (
-      !themeToggleBtn ||
-      !panel ||
-      !options ||
-      themeToggleBtn.dataset.initialized
-    )
-      return;
+    if (!wrapper || wrapper.dataset.ready) return;
 
     const THEME_KEY = "color-theme";
 
-    function getStoredTheme() {
-      if (typeof localStorage === "undefined") return null;
-      return localStorage.getItem(THEME_KEY);
+    function getStoredTheme(): "light" | "dark" | null {
+      const v = localStorage.getItem(THEME_KEY);
+      return v === "light" || v === "dark" ? v : null;
     }
 
-    function setStoredTheme(theme: "light" | "dark" | "system") {
-      if (typeof localStorage === "undefined") return;
-      localStorage.setItem(THEME_KEY, theme);
+    function getResolvedTheme(): "light" | "dark" {
+      const stored = getStoredTheme();
+      if (stored) return stored;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
     }
 
-    function getSystemTheme() {
-      return window.matchMedia("(prefers-color-scheme: dark)").matches
-        ? "dark"
-        : "light";
+    function applyTheme(theme: "light" | "dark") {
+      if (theme === "dark") root.classList.add("dark");
+      else root.classList.remove("dark");
     }
 
-    function applyTheme(preference: "light" | "dark" | "system") {
-      const resolved = preference === "system" ? getSystemTheme() : preference;
-      if (resolved === "dark") {
-        root.classList.add("dark");
-      } else {
-        root.classList.remove("dark");
-      }
-      root.dataset.theme = preference;
-    }
-
-    function setActiveOption(preference: "light" | "dark" | "system") {
-      options?.forEach((option) => {
-        const isActive = option.getAttribute("data-theme") === preference;
-        option.setAttribute("aria-checked", isActive ? "true" : "false");
-        option.classList.toggle("bg-gray-100", isActive);
-        option.classList.toggle("dark:bg-gray-800", isActive);
-        option.classList.toggle("text-gray-900", isActive);
-        option.classList.toggle("dark:text-white", isActive);
-      });
-
-      icons.forEach((iconEl) => {
-        const isActive = iconEl.dataset.themeIcon === preference;
-        iconEl.classList.toggle("opacity-100", isActive);
-        iconEl.classList.toggle("opacity-0", !isActive);
+    function setActive(theme: "light" | "dark") {
+      buttons.forEach((b) => {
+        const active = b.dataset.theme === theme;
+        b.setAttribute("aria-checked", active ? "true" : "false");
       });
     }
 
-    function openMenu() {
-      panel?.classList.remove("hidden");
-      themeToggleBtn?.setAttribute("aria-expanded", "true");
-    }
+    const current = getResolvedTheme();
+    applyTheme(current);
+    setActive(current);
 
-    function closeMenu() {
-      panel?.classList.add("hidden");
-      themeToggleBtn?.setAttribute("aria-expanded", "false");
-    }
-
-    function toggleMenu() {
-      if (panel?.classList.contains("hidden")) {
-        openMenu();
-      } else {
-        closeMenu();
-      }
-    }
-
-    function handleSelection(preference: "light" | "dark" | "system") {
-      setStoredTheme(preference);
-      applyTheme(preference);
-      setActiveOption(preference);
-      closeMenu();
-    }
-
-    const stored = (getStoredTheme() || "system") as
-      | "light"
-      | "dark"
-      | "system";
-    applyTheme(stored);
-    setActiveOption(stored);
-
-    themeToggleBtn.addEventListener("click", (event) => {
-      event.stopPropagation();
-      toggleMenu();
-    });
-
-    options?.forEach((option) => {
-      option.addEventListener("click", () => {
-        const preference = (option.getAttribute("data-theme") || "system") as
-          | "light"
-          | "dark"
-          | "system";
-        handleSelection(preference);
+    buttons.forEach((b) => {
+      b.addEventListener("click", () => {
+        const theme = b.dataset.theme as "light" | "dark";
+        localStorage.setItem(THEME_KEY, theme);
+        applyTheme(theme);
+        setActive(theme);
       });
     });
 
-    document.addEventListener("click", (event) => {
-      if (!menu?.contains(event.target as Node)) {
-        closeMenu();
-      }
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeMenu();
-    });
-
-    // Mark as initialized
-    themeToggleBtn.dataset.initialized = "true";
+    wrapper.dataset.ready = "true";
   }
 
-  // Run on initial load
   setupThemeToggle();
-
-  // Run on view transitions navigation
   document.addEventListener("astro:page-load", setupThemeToggle);
 </script>

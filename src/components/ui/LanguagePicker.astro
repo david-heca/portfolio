@@ -1,23 +1,18 @@
 ---
-import { PiGlobeDuotone } from "react-icons/pi";
-import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { getLangFromUrl } from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
 const currentPath = Astro.url.pathname;
 const targetLang = lang === "es" ? "en" : "es";
-const label = targetLang.toUpperCase();
 
 function getPathForLang(l: string) {
-  // Remove current lang prefix if present
   let path = currentPath;
   const parts = path.split("/");
   if (parts[1] === "en" || parts[1] === "es") {
     parts.splice(1, 1);
     path = parts.join("/") || "/";
   }
-
-  if (l === "es") return path; // es is default, so root
+  if (l === "es") return path;
   return `/${l}${path === "/" ? "" : path}`;
 }
 
@@ -27,18 +22,47 @@ const targetHref = getPathForLang(targetLang);
 <a
   href={targetHref}
   data-target-lang={targetLang}
-  class="flex gap-1 px-3 py-1.5 font-mono text-xs uppercase tracking-wider transition-colors rounded-md items-center"
-  style="color: var(--color-text-tertiary);"
+  class="lang-picker"
+  aria-label={`Switch to ${targetLang.toUpperCase()}`}
 >
-  <PiGlobeDuotone className="w-5 h-5" />
-  <span class="font-mono text-xs font-medium" id="current-lang-label">
-    {label}
-  </span>
+  <span class={`lang-picker__opt ${lang === "es" ? "active" : ""}`}>ES</span>
+  <span class="lang-picker__sep">/</span>
+  <span class={`lang-picker__opt ${lang === "en" ? "active" : ""}`}>EN</span>
 </a>
+
+<style>
+  .lang-picker {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-ink-3);
+    text-decoration: none;
+    padding: 4px 8px;
+    min-height: 28px;
+    transition: color 0.15s ease;
+  }
+
+  .lang-picker:hover .lang-picker__opt:not(.active) {
+    color: var(--color-ink-2);
+  }
+
+  .lang-picker__opt.active {
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  .lang-picker__sep {
+    color: var(--color-ink-3);
+    opacity: 0.6;
+  }
+</style>
 
 <script>
   function setupLangPicker() {
-    const el = document.querySelector("[data-target-lang]") as HTMLAnchorElement | null;
+    const el = document.querySelector<HTMLAnchorElement>("[data-target-lang]");
     if (!el || el.dataset.langReady) return;
     el.addEventListener("click", () => {
       if (el.dataset.targetLang) localStorage.setItem("preferred-lang", el.dataset.targetLang);

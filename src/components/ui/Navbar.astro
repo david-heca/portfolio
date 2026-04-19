@@ -2,219 +2,203 @@
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import ThemeToggle from "@ui/ThemeToggle.astro";
 import LanguagePicker from "@ui/LanguagePicker.astro";
-import {
-  PiHouseLine,
-  PiBriefcase,
-  PiGraduationCap,
-  PiFolder,
-  PiEnvelopeSimple,
-} from "react-icons/pi";
-import Image from "astro/components/Image.astro";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const navItems = [
-  {
-    href: lang === "es" ? "/" : "/en",
-    label: t("nav.home"),
-    icon: PiHouseLine,
-  },
-  {
-    href: lang === "es" ? "/work" : "/en/work",
-    label: t("nav.work"),
-    icon: PiBriefcase,
-  },
-  {
-    href: lang === "es" ? "/projects" : "/en/projects",
-    label: t("nav.projects"),
-    icon: PiFolder,
-  },
-  {
-    href: lang === "es" ? "/education" : "/en/education",
-    label: t("nav.education"),
-    icon: PiGraduationCap,
-  },
-  {
-    href: lang === "es" ? "/contact" : "/en/contact",
-    label: t("nav.contact"),
-    icon: PiEnvelopeSimple,
-  },
+  { id: "home",      href: lang === "es" ? "/" : "/en",            idx: "00", label: t("nav.home") },
+  { id: "work",      href: lang === "es" ? "/work" : "/en/work",   idx: "01", label: t("nav.work") },
+  { id: "projects",  href: lang === "es" ? "/projects" : "/en/projects", idx: "02", label: t("nav.projects") },
+  { id: "education", href: lang === "es" ? "/education" : "/en/education", idx: "03", label: t("nav.education") },
+  { id: "contact",   href: lang === "es" ? "/contact" : "/en/contact", idx: "04", label: t("nav.contact") },
 ];
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 
 function isActive(href: string): boolean {
-  if (href === "/" || href === "/en") {
-    return currentPath === href;
-  }
+  if (href === "/" || href === "/en") return currentPath === href;
   return currentPath.startsWith(href);
 }
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4">
-  <!-- Floating Pill Navbar -->
-  <div
-    id="navbar-pill"
-    class="relative max-w-4xl lg:w-full rounded-full border transition-all duration-500"
-    style={`border-color: var(--color-border-default); background-color: color-mix(in srgb, var(--color-bg-secondary) 80%, transparent);`}
-  >
-    <div class="backdrop-blur-xl rounded-full">
-      <div class="flex items-center justify-between h-12 px-5">
-        <!-- Logo -->
+<header class="nav">
+  <div class="nav__inner">
+    <a href={lang === "es" ? "/" : "/en"} class="nav__brand" aria-label="David Herrera - Home">
+      <span class="nav__brand-dot" aria-hidden="true"></span>
+      <span>davidherrera.dev</span>
+    </a>
+
+    <nav class="nav__links" aria-label="Primary">
+      {navItems.map((item) => (
         <a
-          href={lang === "es" ? "/" : "/en"}
-          class="flex items-center gap-2 font-bold text-lg tracking-tight text-gray-900 dark:text-white hover:opacity-80 transition-opacity"
+          href={item.href}
+          data-astro-prefetch="hover"
+          class={`nav__link ${isActive(item.href) ? "active" : ""}`}
         >
-          <Image
-            src="/assets/dh.webp"
-            alt="David Herrera"
-            width={32}
-            height={32}
-            class="w-8 h-8 rounded-full object-contain border border-zinc-300 dark:border-zinc-700"
-            loading="eager"
-          />
+          <span class="idx">{item.idx}</span>{item.label}
+          <span class="underline" aria-hidden="true"></span>
         </a>
+      ))}
+    </nav>
 
-        <!-- Desktop Nav -->
-        <nav class="hidden lg:flex items-center gap-1">
-          {
-            navItems.map((item) => (
-              <a
-                href={item.href}
-                data-astro-prefetch="hover"
-                class={`relative px-3 py-1.5 text-sm font-medium transition-colors duration-200 capitalize ${
-                  isActive(item.href) ? "" : "link-underline"
-                }`}
-                style={
-                  isActive(item.href)
-                    ? `color: var(--color-text-primary);`
-                    : `color: var(--color-text-tertiary);`
-                }
-              >
-                {item.label}
-                {isActive(item.href) && (
-                  <span
-                    class="absolute bottom-0 left-1/2 -translate-x-1/2 w-5 h-1 rounded-full nav-indicator"
-                    style={`background-color: var(--color-accent);`}
-                  />
-                )}
-              </a>
-            ))
-          }
-        </nav>
-
-        <!-- Actions -->
-        <div class="flex items-center gap-1">
-          <LanguagePicker />
-          <div
-            class="w-px h-4 mx-1"
-            style={`background-color: var(--color-border-default);`}
-          >
-          </div>
-          <ThemeToggle />
-
-          <!-- Mobile Menu Button -->
-          <button
-            id="mobile-menu-btn"
-            class="lg:hidden p-2 rounded-lg transition-colors"
-            style={`color: var(--color-text-tertiary);`}
-            aria-label="Toggle menu"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="w-5 h-5"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
-            </svg>
-          </button>
-        </div>
-      </div>
+    <div class="nav__utils">
+      <LanguagePicker />
+      <span aria-hidden="true" style="width:1px;height:14px;background:var(--color-line);"></span>
+      <ThemeToggle />
+      <button
+        id="mobile-menu-btn"
+        class="mobile-menu-btn"
+        aria-label="Toggle menu"
+        aria-expanded="false"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
+        </svg>
+      </button>
     </div>
   </div>
 
-  <!-- Mobile Dropdown Menu -->
-  <div
-    id="mobile-menu"
-    class="absolute top-[calc(100%+8px)] left-0 right-0 z-40 lg:hidden
-           origin-top scale-y-95 opacity-0 pointer-events-none
-           transition-all duration-200 ease-out rounded-2xl overflow-hidden mx-4"
-    style={`background-color: color-mix(in srgb, var(--color-bg-secondary) 95%, transparent); border: 1px solid var(--color-border-default); backdrop-filter: blur(20px);`}
-  >
-    <nav class="flex flex-col p-2">
-      {
-        navItems.map((item) => (
-          <a
-            href={item.href}
-            data-astro-prefetch
-            class="px-4 py-3 rounded-xl text-sm font-medium transition-all duration-150 flex items-center gap-3"
-            style={
-              isActive(item.href)
-                ? `background-color: var(--color-bg-tertiary); color: var(--color-text-primary);`
-                : `color: var(--color-text-secondary);`
-            }
-          >
-            <item.icon className="w-4 h-4 shrink-0" />
-            {item.label}
-            {isActive(item.href) && (
-              <span
-                class="ml-auto w-1.5 h-1.5 rounded-full shrink-0"
-                style={`background-color: var(--color-accent);`}
-              />
-            )}
-          </a>
-        ))
-      }
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <nav aria-label="Mobile">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          data-astro-prefetch
+          class={`mobile-menu__link ${isActive(item.href) ? "active" : ""}`}
+        >
+          <span class="idx">{item.idx}</span>{item.label}
+          {isActive(item.href) && <span class="dot" aria-hidden="true"></span>}
+        </a>
+      ))}
     </nav>
   </div>
 </header>
+
+<style>
+  .mobile-menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    background: transparent;
+    border: 0;
+    color: var(--color-ink-2);
+    cursor: pointer;
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-menu-btn {
+      display: none;
+    }
+  }
+
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 40;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-line);
+    transform: translateY(-8px) scaleY(0.98);
+    opacity: 0;
+    pointer-events: none;
+    transform-origin: top;
+    transition:
+      transform 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .mobile-menu.open {
+    transform: translateY(0) scaleY(1);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-menu nav {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 0;
+  }
+
+  .mobile-menu__link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-ink-2);
+    text-decoration: none;
+    border-top: 1px solid var(--color-line);
+    transition: background-color 0.15s ease;
+  }
+
+  .mobile-menu__link:first-child { border-top: 0; }
+
+  .mobile-menu__link:hover,
+  .mobile-menu__link:active {
+    background: var(--color-bg-2);
+  }
+
+  .mobile-menu__link.active {
+    color: var(--color-ink);
+  }
+
+  .mobile-menu__link .idx {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--color-ink-3);
+  }
+
+  .mobile-menu__link .dot {
+    margin-left: auto;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+  }
+</style>
 
 <script>
   function setupMobileMenu() {
     const btn = document.getElementById("mobile-menu-btn");
     const menu = document.getElementById("mobile-menu");
-    const links = menu?.querySelectorAll("a");
+    if (!btn || !menu || (btn as HTMLElement).dataset.ready) return;
+
+    const links = menu.querySelectorAll("a");
     let isOpen = false;
 
-    function openMenu() {
-      isOpen = true;
-      menu?.classList.remove("scale-y-95", "opacity-0", "pointer-events-none");
-      menu?.classList.add("scale-y-100", "opacity-100");
+    function setOpen(open: boolean) {
+      isOpen = open;
+      menu!.classList.toggle("open", open);
+      btn!.setAttribute("aria-expanded", open ? "true" : "false");
+      menu!.setAttribute("aria-hidden", open ? "false" : "true");
     }
 
-    function closeMenu() {
-      isOpen = false;
-      menu?.classList.add("scale-y-95", "opacity-0", "pointer-events-none");
-      menu?.classList.remove("scale-y-100", "opacity-100");
-    }
-
-    function toggleMenu() {
-      isOpen ? closeMenu() : openMenu();
-    }
-
-    btn?.addEventListener("click", (e) => {
+    btn.addEventListener("click", (e) => {
       e.stopPropagation();
-      toggleMenu();
+      setOpen(!isOpen);
     });
 
-    links?.forEach((link) => {
-      link.addEventListener("click", closeMenu);
-    });
+    links.forEach((l) => l.addEventListener("click", () => setOpen(false)));
 
     document.addEventListener("click", (e) => {
-      if (isOpen && !menu?.contains(e.target as Node) && e.target !== btn) {
-        closeMenu();
+      if (isOpen && !menu!.contains(e.target as Node) && e.target !== btn) {
+        setOpen(false);
       }
     });
 
-    document.addEventListener("astro:before-preparation", closeMenu);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && isOpen) setOpen(false);
+    });
+
+    document.addEventListener("astro:before-preparation", () => setOpen(false));
+
+    (btn as HTMLElement).dataset.ready = "true";
   }
 
   setupMobileMenu();
