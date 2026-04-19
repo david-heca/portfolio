@@ -9,86 +9,84 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-interface Job {
-  idx: string;
-  company: string;
-  companyMeta: string[];
-  role: string;
+interface Role {
+  title: string;
   period: string;
   stack: string[];
   bullets: string[];
   accent?: boolean;
 }
 
-const jobs: Job[] = [
+interface Company {
+  idx: string;
+  name: string;
+  meta: string[];
+  roles: Role[];
+}
+
+const companies: Company[] = [
   {
     idx: "01",
-    company: t("work.companies.baacc.name"),
-    companyMeta: [
+    name: t("work.companies.baacc.name"),
+    meta: [
       t("work.companies.baacc.totalPeriod"),
       t("work.companies.baacc.location"),
       t("work.companies.baacc.workMode"),
     ],
-    role: t("work.companies.baacc.roles.architect.title"),
-    period: `${t("work.companies.baacc.roles.architect.period")} · ${t("work.companies.baacc.roles.architect.type")}`,
-    stack: ["LLM", "MCP", "RAG", "MLOps", "APIs"],
-    bullets: [
-      t("work.companies.baacc.roles.architect.achievements.0"),
-      t("work.companies.baacc.roles.architect.achievements.1"),
-      t("work.companies.baacc.roles.architect.achievements.2"),
-      t("work.companies.baacc.roles.architect.achievements.3"),
+    roles: [
+      {
+        title: t("work.companies.baacc.roles.architect.title"),
+        period: `${t("work.companies.baacc.roles.architect.period")} · ${t("work.companies.baacc.roles.architect.type")}`,
+        stack: ["LLM", "MCP", "RAG", "MLOps", "APIs"],
+        bullets: [
+          t("work.companies.baacc.roles.architect.achievements.0"),
+          t("work.companies.baacc.roles.architect.achievements.1"),
+          t("work.companies.baacc.roles.architect.achievements.2"),
+          t("work.companies.baacc.roles.architect.achievements.3"),
+        ],
+        accent: true,
+      },
+      {
+        title: t("work.companies.baacc.roles.fullstack.title"),
+        period: `${t("work.companies.baacc.roles.fullstack.period")} · ${t("work.companies.baacc.roles.fullstack.type")}`,
+        stack: [".NET", "Python", "SQL", "Android"],
+        bullets: [
+          t("work.companies.baacc.roles.fullstack.achievements.0"),
+          t("work.companies.baacc.roles.fullstack.achievements.1"),
+          t("work.companies.baacc.roles.fullstack.achievements.2"),
+          t("work.companies.baacc.roles.fullstack.achievements.3"),
+        ],
+      },
+      {
+        title: t("work.companies.baacc.roles.junior.title"),
+        period: `${t("work.companies.baacc.roles.junior.period")} · ${t("work.companies.baacc.roles.junior.type")}`,
+        stack: ["MVC", "SQL", "APIs"],
+        bullets: [
+          t("work.companies.baacc.roles.junior.achievements.0"),
+          t("work.companies.baacc.roles.junior.achievements.1"),
+        ],
+      },
     ],
-    accent: true,
   },
   {
     idx: "02",
-    company: t("work.companies.baacc.name"),
-    companyMeta: [
-      t("work.companies.baacc.roles.fullstack.period"),
-      t("work.companies.baacc.roles.fullstack.location"),
-      t("work.companies.baacc.roles.fullstack.type"),
-    ],
-    role: t("work.companies.baacc.roles.fullstack.title"),
-    period: `${t("work.companies.baacc.roles.fullstack.period")} · ${t("work.companies.baacc.roles.fullstack.type")}`,
-    stack: [".NET", "Python", "SQL", "Android"],
-    bullets: [
-      t("work.companies.baacc.roles.fullstack.achievements.0"),
-      t("work.companies.baacc.roles.fullstack.achievements.1"),
-      t("work.companies.baacc.roles.fullstack.achievements.2"),
-      t("work.companies.baacc.roles.fullstack.achievements.3"),
-    ],
-  },
-  {
-    idx: "03",
-    company: t("work.companies.baacc.name"),
-    companyMeta: [
-      t("work.companies.baacc.roles.junior.period"),
-      t("work.companies.baacc.roles.junior.location"),
-      t("work.companies.baacc.roles.junior.type"),
-    ],
-    role: t("work.companies.baacc.roles.junior.title"),
-    period: `${t("work.companies.baacc.roles.junior.period")} · ${t("work.companies.baacc.roles.junior.type")}`,
-    stack: ["MVC", "SQL", "APIs"],
-    bullets: [
-      t("work.companies.baacc.roles.junior.achievements.0"),
-      t("work.companies.baacc.roles.junior.achievements.1"),
-    ],
-  },
-  {
-    idx: "04",
-    company: t("work.companies.dec.name"),
-    companyMeta: [
+    name: t("work.companies.dec.name"),
+    meta: [
       t("work.companies.dec.totalPeriod"),
       t("work.companies.dec.location"),
       t("work.companies.dec.workMode"),
     ],
-    role: t("work.companies.dec.roles.webdev.title"),
-    period: `${t("work.companies.dec.roles.webdev.period")} · ${t("work.companies.dec.roles.webdev.type")}`,
-    stack: ["HTML", "CSS", "JS", "WordPress"],
-    bullets: [
-      t("work.companies.dec.roles.webdev.achievements.0"),
-      t("work.companies.dec.roles.webdev.achievements.1"),
-      t("work.companies.dec.roles.webdev.achievements.2"),
+    roles: [
+      {
+        title: t("work.companies.dec.roles.webdev.title"),
+        period: `${t("work.companies.dec.roles.webdev.period")} · ${t("work.companies.dec.roles.webdev.type")}`,
+        stack: ["HTML", "CSS", "JS", "WordPress"],
+        bullets: [
+          t("work.companies.dec.roles.webdev.achievements.0"),
+          t("work.companies.dec.roles.webdev.achievements.1"),
+          t("work.companies.dec.roles.webdev.achievements.2"),
+        ],
+      },
     ],
   },
 ];
@@ -101,27 +99,33 @@ const headingHtml = t("work.heading");
   <h1 class="reveal reveal-delay-1 work__h" set:html={headingHtml}></h1>
   <p class="reveal reveal-delay-2 work__sub">{t("work.description")}</p>
 
-  {jobs.map((job, i) => (
+  {companies.map((co, i) => (
     <div class={`job reveal ${i > 0 ? `reveal-delay-${Math.min(i, 4)}` : ""}`}>
-      <div class="job__idx">/ {job.idx}</div>
-      <div>
-        <div class="job__co">{job.company}</div>
+      <div class="job__idx">/ {co.idx}</div>
+      <div class="job__co-wrap">
+        <div class="job__co">{co.name}</div>
         <div class="job__co-meta">
-          {job.companyMeta.map((m) => <div>{m}</div>)}
+          {co.meta.map((m) => <div>{m}</div>)}
         </div>
       </div>
-      <div>
-        <div class="job__role">{job.role}</div>
-        <div class="job__period">{job.period}</div>
-      </div>
-      <div class="job__stack">
-        {job.stack.map((s) => (
-          <span class={`tag ${job.accent ? "accent" : ""}`}>{s}</span>
+      <div class="job__roles">
+        {co.roles.map((role) => (
+          <div class="role">
+            <div class="role__head">
+              <div class="role__title">{role.title}</div>
+              <div class="role__period">{role.period}</div>
+            </div>
+            <div class="role__stack">
+              {role.stack.map((s) => (
+                <span class={`tag ${role.accent ? "accent" : ""}`}>{s}</span>
+              ))}
+            </div>
+            <ul class="role__body">
+              {role.bullets.map((b) => <li>{b}</li>)}
+            </ul>
+          </div>
         ))}
       </div>
-      <ul class="job__body">
-        {job.bullets.map((b) => <li>{b}</li>)}
-      </ul>
     </div>
   ))}
 </section>

@@ -1018,7 +1018,7 @@
 
 @media (min-width: 1024px) {
   .job {
-    grid-template-columns: 90px 280px 1fr 220px;
+    grid-template-columns: 90px 280px 1fr;
     gap: 40px;
     padding: 40px 0;
     align-items: baseline;
@@ -1052,7 +1052,43 @@
   line-height: 1.6;
 }
 
-.job__role {
+.job__roles {
+  display: grid;
+  gap: 32px;
+}
+
+@media (min-width: 1024px) {
+  .job__roles {
+    gap: 48px;
+  }
+}
+
+.role {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+@media (min-width: 1024px) {
+  .role {
+    grid-template-columns: 1fr 220px;
+    gap: 16px 40px;
+    align-items: baseline;
+  }
+}
+
+.role + .role {
+  border-top: 1px dashed var(--color-line);
+  padding-top: 32px;
+}
+
+@media (min-width: 1024px) {
+  .role + .role {
+    padding-top: 48px;
+  }
+}
+
+.role__title {
   font-size: clamp(22px, 3.5vw, 32px);
   font-weight: 500;
   letter-spacing: -0.02em;
@@ -1060,14 +1096,14 @@
   color: var(--color-ink);
 }
 
-.job__period {
+.role__period {
   font-family: var(--font-mono);
   font-size: 11px;
   color: var(--color-ink-3);
   margin-top: 8px;
 }
 
-.job__stack {
+.role__stack {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
@@ -1075,7 +1111,7 @@
 }
 
 @media (min-width: 1024px) {
-  .job__stack {
+  .role__stack {
     justify-self: end;
     max-width: 220px;
     justify-content: flex-end;
@@ -1100,7 +1136,7 @@
   border-color: var(--color-accent);
 }
 
-.job__body {
+.role__body {
   margin-top: 8px;
   display: grid;
   grid-template-columns: 1fr;
@@ -1110,21 +1146,21 @@
 }
 
 @media (min-width: 768px) {
-  .job__body {
+  .role__body {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px 32px;
   }
 }
 
 @media (min-width: 1024px) {
-  .job__body {
-    grid-column: 2 / 5;
-    margin-top: 20px;
+  .role__body {
+    grid-column: 1 / 3;
+    margin-top: 16px;
     gap: 12px 40px;
   }
 }
 
-.job__body li {
+.role__body li {
   list-style: none;
   font-size: 14px;
   line-height: 1.55;
@@ -1134,12 +1170,12 @@
 }
 
 @media (min-width: 768px) {
-  .job__body li {
+  .role__body li {
     font-size: 15px;
   }
 }
 
-.job__body li::before {
+.role__body li::before {
   content: "";
   position: absolute;
   left: 0;

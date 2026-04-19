@@ -73,7 +73,6 @@
             "title": "Fullstack Developer",
             "period": "Jan 2024 - Mar 2025",
             "type": "Full-time",
-            "location": "Mexico State",
             "achievements": [
               "Desktop apps with .NET and Python for industrial environments",
               "Web apps with JavaScript, .NET and DevExpress",
@@ -85,7 +84,6 @@
             "title": "Junior Fullstack Developer",
             "period": "Sep 2023 - Jan 2024",
             "type": "Internship",
-            "location": "Mexico State",
             "achievements": [
               "Support in web module development and internal APIs",
               "Database maintenance and technical documentation"

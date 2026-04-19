@@ -73,7 +73,6 @@
             "title": "Fullstack Developer",
             "period": "Ene 2024 - Mar 2025",
             "type": "Tiempo Completo",
-            "location": "Estado de México",
             "achievements": [
               "Desarrollo de aplicaciones de escritorio con .NET y Python para entornos industriales",
               "Creación de aplicaciones web con JavaScript, .NET y DevExpress",
@@ -85,7 +84,6 @@
             "title": "Fullstack Developer Jr.",
             "period": "Sep 2023 - Ene 2024",
             "type": "Prácticas",
-            "location": "Estado de México",
             "achievements": [
               "Apoyo en desarrollo de módulos web y APIs internas",
               "Mantenimiento de bases de datos y documentación técnica"
@@ -216,7 +214,7 @@
   "home": {
     "stats": {
       "experience": "Años de experiencia",
-      "projects": "Proyectos enviados",
+      "projects": "Proyectos en producción",
       "techs": "Tecnologías en stack",
       "drive": "Ganas de construir"
     },
