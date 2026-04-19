@@ -65,10 +65,8 @@ const t = useTranslations(lang);
 <script>
   function setupThemeToggle() {
     const root = document.documentElement;
-    const wrapper = document.querySelector<HTMLElement>(".theme-toggle");
-    const buttons = document.querySelectorAll<HTMLButtonElement>(".theme-toggle__btn");
-
-    if (!wrapper || wrapper.dataset.ready) return;
+    const wrappers = document.querySelectorAll<HTMLElement>(".theme-toggle");
+    if (!wrappers.length) return;
 
     const THEME_KEY = "color-theme";
 
@@ -89,7 +87,7 @@ const t = useTranslations(lang);
     }
 
     function setActive(theme: "light" | "dark") {
-      buttons.forEach((b) => {
+      document.querySelectorAll<HTMLButtonElement>(".theme-toggle__btn").forEach((b) => {
         const active = b.dataset.theme === theme;
         b.setAttribute("aria-checked", active ? "true" : "false");
       });
@@ -99,16 +97,18 @@ const t = useTranslations(lang);
     applyTheme(current);
     setActive(current);
 
-    buttons.forEach((b) => {
-      b.addEventListener("click", () => {
-        const theme = b.dataset.theme as "light" | "dark";
-        localStorage.setItem(THEME_KEY, theme);
-        applyTheme(theme);
-        setActive(theme);
+    wrappers.forEach((wrapper) => {
+      if (wrapper.dataset.ready) return;
+      wrapper.querySelectorAll<HTMLButtonElement>(".theme-toggle__btn").forEach((b) => {
+        b.addEventListener("click", () => {
+          const theme = b.dataset.theme as "light" | "dark";
+          localStorage.setItem(THEME_KEY, theme);
+          applyTheme(theme);
+          setActive(theme);
+        });
       });
+      wrapper.dataset.ready = "true";
     });
-
-    wrapper.dataset.ready = "true";
   }
 
   setupThemeToggle();
