@@ -4,6 +4,9 @@
 
 @variant dark (&:where(.dark, .dark *));
 
+/* ============================================================
+   01. Theme tokens
+   ============================================================ */
 @theme {
   --font-sans: "Satoshi", -apple-system, BlinkMacSystemFont, "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, Consolas, monospace;
@@ -32,6 +35,9 @@
   --s-10: 128px;
 }
 
+/* ============================================================
+   02. Base layer
+   ============================================================ */
 @layer base {
   html {
     font-family: var(--font-sans);
@@ -79,24 +85,21 @@
   *::-webkit-scrollbar-thumb:hover {
     background: var(--color-ink-3);
   }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
 }
 
-/* ================================
-   Prevent double 1px borders when two bordered strips are adjacent.
-   Remove the bottom border of the first element so the "bar" visually
-   belongs to the following section (footer keeps its top border).
-   ================================ */
-.marquee:has(+ .stats),
-.marquee:has(+ .now-strip),
-.stats:has(+ .now-strip),
-.stats:has(+ .footer),
-.now-strip:has(+ .footer) {
-  border-bottom: 0;
-}
-
-/* ================================
-   Page frame + construction grid
-   ================================ */
+/* ============================================================
+   03. Layout primitives
+   Page frame + construction grid, editorial container, section label
+   ============================================================ */
 .page {
   background: var(--color-bg);
   color: var(--color-ink);
@@ -163,9 +166,7 @@
   }
 }
 
-/* ================================
-   Section label — "// 01. Title"
-   ================================ */
+/* Section label — "// 01. Title" */
 .section-label {
   font-family: var(--font-mono);
   font-size: 11px;
@@ -184,9 +185,9 @@
   background: var(--color-accent);
 }
 
-/* ================================
-   Nav — editorial full-width
-   ================================ */
+/* ============================================================
+   04. Nav — editorial full-width
+   ============================================================ */
 .nav {
   position: relative;
   z-index: 20;
@@ -317,9 +318,10 @@
   color: var(--color-ink-3);
 }
 
-/* ================================
-   Hero
-   ================================ */
+/* ============================================================
+   05. Hero
+   Includes .meta-bar (top-right coord panel) and .tech-ring (decoration)
+   ============================================================ */
 .hero {
   padding-block: 40px 56px;
   position: relative;
@@ -441,9 +443,7 @@
   max-width: 44ch;
 }
 
-/* ================================
-   Meta-bar (top-right coord panel)
-   ================================ */
+/* Meta-bar — top-right coord panel (md+) */
 .meta-bar {
   display: none;
   font-family: var(--font-mono);
@@ -475,9 +475,7 @@
   font-weight: 500;
 }
 
-/* ================================
-   Tech ring (hero decoration)
-   ================================ */
+/* Tech ring — circular SVG rotating text (lg+) */
 .tech-ring {
   display: none;
 }
@@ -526,9 +524,13 @@
   }
 }
 
-/* ================================
-   Marquee tickers
-   ================================ */
+/* ============================================================
+   06. Strips — marquee, stats, now-strip
+   Full-width bordered bands. The dedup rule below collapses
+   the double 1px line when two strips sit adjacent.
+   ============================================================ */
+
+/* Marquee tickers */
 .marquee {
   overflow: hidden;
   border-top: 1px solid var(--color-line);
@@ -595,9 +597,7 @@
   }
 }
 
-/* ================================
-   Stats
-   ================================ */
+/* Stats */
 .stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -667,9 +667,62 @@
   }
 }
 
-/* ================================
-   About
-   ================================ */
+/* Now strip */
+.now-strip {
+  padding-block: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+  border-top: 1px solid var(--color-line);
+  border-bottom: 1px solid var(--color-line);
+  position: relative;
+  z-index: 5;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-ink-3);
+}
+
+@media (min-width: 768px) {
+  .now-strip {
+    flex-direction: row;
+    align-items: center;
+    padding-block: 24px;
+    font-size: 12px;
+  }
+}
+
+.now-strip__label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--color-ink);
+}
+
+.now-strip__label::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+
+/* Strip border dedup — when two bordered strips sit adjacent,
+   drop the bottom border of the first so the shared line is 1px,
+   not 2px. Footer keeps its own top border. */
+.marquee:has(+ .stats),
+.marquee:has(+ .now-strip),
+.stats:has(+ .now-strip),
+.stats:has(+ .footer),
+.now-strip:has(+ .footer) {
+  border-bottom: 0;
+}
+
+/* ============================================================
+   07. About
+   ============================================================ */
 .about {
   padding-block: 64px;
   position: relative;
@@ -785,53 +838,9 @@
   border-bottom: 1px solid var(--color-accent);
 }
 
-/* ================================
-   Now strip
-   ================================ */
-.now-strip {
-  padding-block: 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 8px;
-  border-top: 1px solid var(--color-line);
-  border-bottom: 1px solid var(--color-line);
-  position: relative;
-  z-index: 5;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  color: var(--color-ink-3);
-}
-
-@media (min-width: 768px) {
-  .now-strip {
-    flex-direction: row;
-    align-items: center;
-    padding-block: 24px;
-    font-size: 12px;
-  }
-}
-
-.now-strip__label {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: var(--color-ink);
-}
-
-.now-strip__label::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  flex-shrink: 0;
-}
-
-/* ================================
-   Page footer (per section)
-   ================================ */
+/* ============================================================
+   08. Page footer (per section)
+   ============================================================ */
 .footer {
   position: relative;
   z-index: 5;
@@ -909,9 +918,9 @@
   gap: 8px;
 }
 
-/* ================================
-   Work / Experience
-   ================================ */
+/* ============================================================
+   09. Work / Experience
+   ============================================================ */
 .work,
 .edu,
 .projects,
@@ -1126,9 +1135,9 @@
   background: var(--color-accent);
 }
 
-/* ================================
-   Projects
-   ================================ */
+/* ============================================================
+   10. Projects
+   ============================================================ */
 .projects__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1334,9 +1343,9 @@
   display: block;
 }
 
-/* ================================
-   Education
-   ================================ */
+/* ============================================================
+   11. Education
+   ============================================================ */
 .edu__grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1485,9 +1494,9 @@
   font-weight: 300;
 }
 
-/* ================================
-   Contact
-   ================================ */
+/* ============================================================
+   12. Contact
+   ============================================================ */
 .contact__h {
   font-size: clamp(52px, 12vw, 180px);
   font-weight: 700;
@@ -1708,9 +1717,10 @@
   }
 }
 
-/* ================================
-   Reveal animations
-   ================================ */
+/* ============================================================
+   13. Interaction utilities
+   Reveal-on-scroll + press feedback for buttons
+   ============================================================ */
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -1729,16 +1739,13 @@
 .reveal-delay-3 { transition-delay: 0.3s; }
 .reveal-delay-4 { transition-delay: 0.4s; }
 
-/* ================================
-   Press effect (buttons)
-   ================================ */
 .press-effect:active {
   transform: scale(0.97) !important;
 }
 
-/* ================================
-   Reduced motion
-   ================================ */
+/* ============================================================
+   14. Reduced motion
+   ============================================================ */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto !important;
@@ -1759,16 +1766,4 @@
   .hero__intro .live {
     animation: none !important;
   }
-}
-
-/* ================================
-   Focus styles
-   ================================ */
-:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
-:focus:not(:focus-visible) {
-  outline: none;
 }
