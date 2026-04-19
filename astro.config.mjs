@@ -5,6 +5,8 @@ import viteCompression from "vite-plugin-compression";
 
 import tailwindcss from "@tailwindcss/vite";
 
+import cloudflare from "@astrojs/cloudflare";
+
 export default defineConfig({
   integrations: [react(), sitemap()],
   site: "https://davidherrera.dev",
@@ -54,4 +56,6 @@ export default defineConfig({
       cssCodeSplit: true,
     },
   },
+
+  adapter: cloudflare(),
 });
