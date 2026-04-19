@@ -12,11 +12,7 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const skills = [
-  "C#", "Python", "React", "Azure", "PostgreSQL", "Docker",
-  "LLMs", "RAG", "MCP", ".NET", "Tailwind",
-];
-const marqueeLoop = [...skills, ...skills];
+const creditsRows = ["backend", "frontend", "cloud", "ai"] as const;
 
 const roleHtml = t("hero.role");
 const aboutHeadingHtml = t("home.aboutSection.heading");
@@ -43,14 +39,6 @@ const bio3Html = t("home.aboutSection.bio.paragraph3");
     <p class="reveal reveal-delay-3 hero__desc">{t("hero.shortDesc")}</p>
   </div>
 </section>
-
-<div class="marquee">
-  <div class="marquee__track">
-    {marqueeLoop.map((s, i) => (
-      <span class="marquee__item" aria-hidden={i >= skills.length ? "true" : undefined}>{s}</span>
-    ))}
-  </div>
-</div>
 
 <div class="stats container-editorial">
   <div class="stat">
@@ -92,6 +80,18 @@ const bio3Html = t("home.aboutSection.bio.paragraph3");
       <p class="reveal reveal-delay-4" set:html={bio3Html}></p>
     </div>
   </div>
+</section>
+
+<section class="credits container-editorial">
+  <div class="reveal section-label">// {t("home.credits.label")}</div>
+  <dl class="credits__list">
+    {creditsRows.map((key, i) => (
+      <div class={`credits__row reveal reveal-delay-${i + 1}`}>
+        <dt class="credits__term">{t(`home.credits.rows.${key}.label`)}</dt>
+        <dd class="credits__items">{t(`home.credits.rows.${key}.items`)}</dd>
+      </div>
+    ))}
+  </dl>
 </section>
 
 <div class="now-strip footer__inner">

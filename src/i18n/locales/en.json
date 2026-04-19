@@ -224,6 +224,27 @@
       "label": "NOW — AI Solutions Architect @ BAACC Systems",
       "stack": "LLMs · RAG · MCP · MLOps"
     },
+    "credits": {
+      "label": "Technical stack",
+      "rows": {
+        "backend": {
+          "label": "Backend",
+          "items": "C# · .NET · Python · PostgreSQL"
+        },
+        "frontend": {
+          "label": "Frontend",
+          "items": "React · Tailwind · TypeScript"
+        },
+        "cloud": {
+          "label": "Cloud & Infra",
+          "items": "Azure · Docker · CI/CD"
+        },
+        "ai": {
+          "label": "AI & Data",
+          "items": "LLMs · RAG · MCP · MLOps"
+        }
+      }
+    },
     "aboutSection": {
       "title": "About me",
       "heading": "Software, data <em>&</em> AI applied to the real world.",

@@ -525,76 +525,93 @@
 }
 
 /* ============================================================
-   06. Strips — marquee, stats, now-strip
-   Full-width bordered bands. The dedup rule below collapses
-   the double 1px line when two strips sit adjacent.
+   06. Strips — credits, stats, now-strip
+   Bordered bands that share the editorial horizontal rhythm.
+   The dedup rule below collapses the double 1px line when two
+   strips sit adjacent.
    ============================================================ */
 
-/* Marquee tickers */
-.marquee {
-  overflow: hidden;
+/* Credits — technical stack as editorial spec sheet */
+.credits {
+  padding-block: 40px;
   border-top: 1px solid var(--color-line);
   border-bottom: 1px solid var(--color-line);
   background: var(--color-bg);
-  position: relative;
-  z-index: 5;
 }
 
-.marquee__track {
+@media (min-width: 768px) {
+  .credits {
+    padding-block: 56px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .credits {
+    padding-block: 72px;
+  }
+}
+
+.credits__list {
+  margin: 24px 0 0;
   display: flex;
-  gap: 32px;
-  padding: 18px 0;
-  white-space: nowrap;
-  animation: slide 40s linear infinite;
-  font-size: clamp(20px, 3vw, 32px);
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .credits__list {
+    margin-top: 32px;
+  }
+}
+
+.credits__row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 6px;
+  padding-block: 16px;
+}
+
+.credits__row + .credits__row {
+  border-top: 1px solid var(--color-line);
+}
+
+@media (min-width: 640px) {
+  .credits__row {
+    grid-template-columns: 160px 1fr;
+    gap: 32px;
+    align-items: baseline;
+    padding-block: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .credits__row {
+    grid-template-columns: 220px 1fr;
+    padding-block: 24px;
+  }
+}
+
+.credits__term {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-ink-3);
+}
+
+@media (min-width: 768px) {
+  .credits__term {
+    font-size: 12px;
+  }
+}
+
+.credits__items {
+  margin: 0;
+  font-size: clamp(20px, 2.6vw, 32px);
   font-weight: 500;
   letter-spacing: -0.02em;
   color: var(--color-ink);
-  width: max-content;
-}
-
-.marquee__track.rev {
-  animation-direction: reverse;
-}
-
-@media (min-width: 768px) {
-  .marquee__track {
-    gap: 48px;
-    padding: 22px 0;
-  }
-}
-
-.marquee__item {
-  display: inline-flex;
-  align-items: center;
-  gap: 32px;
-}
-
-@media (min-width: 768px) {
-  .marquee__item {
-    gap: 48px;
-  }
-}
-
-.marquee__item::after {
-  content: "✦";
-  color: var(--color-accent);
-  font-size: 18px;
-}
-
-@media (min-width: 768px) {
-  .marquee__item::after {
-    font-size: 20px;
-  }
-}
-
-@keyframes slide {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+  line-height: 1.2;
 }
 
 /* Stats */
@@ -712,10 +729,7 @@
 /* Strip border dedup — when two bordered strips sit adjacent,
    drop the bottom border of the first so the shared line is 1px,
    not 2px. Footer keeps its own top border. */
-.marquee:has(+ .stats),
-.marquee:has(+ .now-strip),
-.stats:has(+ .now-strip),
-.stats:has(+ .footer),
+.credits:has(+ .now-strip),
 .now-strip:has(+ .footer) {
   border-bottom: 0;
 }
@@ -1759,7 +1773,6 @@
   .reveal-delay-4 {
     transition-delay: 0s !important;
   }
-  .marquee__track,
   .tech-ring svg {
     animation: none !important;
   }
