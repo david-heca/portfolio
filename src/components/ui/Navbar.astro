@@ -44,8 +44,10 @@ function isActive(href: string): boolean {
 
     <div class="nav__utils">
       <LanguagePicker />
-      <span aria-hidden="true" style="width:1px;height:14px;background:var(--color-line);"></span>
-      <ThemeToggle />
+      <div class="nav__utils-desktop">
+        <span aria-hidden="true" style="width:1px;height:14px;background:var(--color-line);"></span>
+        <ThemeToggle />
+      </div>
       <button
         id="mobile-menu-btn"
         class="mobile-menu-btn"
@@ -72,10 +74,25 @@ function isActive(href: string): boolean {
         </a>
       ))}
     </nav>
+    <div class="mobile-menu__footer">
+      <ThemeToggle />
+    </div>
   </div>
 </header>
 
 <style>
+  .nav__utils-desktop {
+    display: none;
+    align-items: center;
+    gap: 12px;
+  }
+
+  @media (min-width: 1024px) {
+    .nav__utils-desktop {
+      display: inline-flex;
+    }
+  }
+
   .mobile-menu-btn {
     display: inline-flex;
     align-items: center;
@@ -91,6 +108,20 @@ function isActive(href: string): boolean {
 
   @media (min-width: 1024px) {
     .mobile-menu-btn {
+      display: none;
+    }
+  }
+
+  .mobile-menu__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 16px 20px;
+    border-top: 1px solid var(--color-line);
+  }
+
+  @media (min-width: 1024px) {
+    .mobile-menu__footer {
       display: none;
     }
   }
