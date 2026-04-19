@@ -1,0 +1,38 @@
+---
+import { useTranslations } from "@i18n/utils";
+
+export interface Props {
+  lang: "es" | "en";
+  num: "00" | "01" | "02" | "03" | "04";
+}
+
+const { lang, num } = Astro.props;
+const t = useTranslations(lang);
+
+const order: Array<{ num: string; href: string }> = [
+  { num: "00", href: lang === "es" ? "/" : "/en" },
+  { num: "01", href: lang === "es" ? "/work" : "/en/work" },
+  { num: "02", href: lang === "es" ? "/projects" : "/en/projects" },
+  { num: "03", href: lang === "es" ? "/education" : "/en/education" },
+  { num: "04", href: lang === "es" ? "/contact" : "/en/contact" },
+];
+
+const currentIdx = order.findIndex((o) => o.num === num);
+const next = order[(currentIdx + 1) % order.length];
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="footer__inner">
+    <div>
+      © {year} — David Herrera<br />
+      {t("common.footer.copy")}
+    </div>
+    <div style="text-align: right;">
+      {num} / 04<br />
+      <a href={next.href} class="footer__next" data-astro-prefetch="hover">
+        ↓ {t("common.footer.next")}
+      </a>
+    </div>
+  </div>
+</footer>

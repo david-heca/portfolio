@@ -1,0 +1,29 @@
+---
+import { useTranslations } from "@i18n/utils";
+
+export interface Props {
+  lang: "es" | "en";
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const label = t("hero.techRing");
+const loop = `${label} ${label} ${label}`;
+---
+
+<div class="tech-ring" aria-hidden="true">
+  <svg viewBox="0 0 280 280" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <path id="circ" d="M 140,140 m -110,0 a 110,110 0 1,1 220,0 a 110,110 0 1,1 -220,0" />
+    </defs>
+    <text>
+      <textPath href="#circ" startOffset="0">{loop}</textPath>
+    </text>
+    <circle cx="140" cy="140" r="70" fill="none" stroke="var(--color-line)" />
+    <circle cx="140" cy="140" r="45" fill="none" stroke="var(--color-line)" stroke-dasharray="2 4" />
+    <circle cx="140" cy="140" r="6" fill="var(--color-accent)" />
+    <circle cx="210" cy="140" r="3" fill="var(--color-ink)" />
+    <circle cx="140" cy="70" r="3" fill="var(--color-ink)" />
+    <circle cx="70" cy="140" r="3" fill="var(--color-ink)" />
+  </svg>
+</div>
