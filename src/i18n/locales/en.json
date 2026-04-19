@@ -1,8 +1,7 @@
 {
   "theme": {
     "light": "Light",
-    "dark": "Dark",
-    "system": "System"
+    "dark": "Dark"
   },
   "meta": {
     "home": {
@@ -32,8 +31,6 @@
   },
   "nav": {
     "home": "Home",
-    "about": "About",
-    "skills": "Skills",
     "work": "Experience",
     "education": "Education",
     "projects": "Projects",
@@ -41,55 +38,19 @@
   },
   "hero": {
     "greeting": "Hi, I'm",
-    "title": "Information Technologies Engineer",
-    "description": "Professional with a strong track record in designing, building, and scaling data-driven and AI-powered solutions that generate real business value.",
-    "cta": "See my work"
-  },
-  "about": {
-    "title": "About Me",
-    "subtitle": "Passion for technology and innovation"
-  },
-  "skills": {
-    "title": "Skills",
-    "subtitle": "Technologies and tools I master",
-    "sections": {
-      "technologies": "Technologies",
-      "languages": "Languages"
-    },
-    "levels": {
-      "basic": "Basic",
-      "intermediate": "Intermediate",
-      "advanced": "Advanced",
-      "native": "Native"
-    },
-    "categories": {
-      "backend": "Backend",
-      "frontend": "Frontend",
-      "devops": "DevOps",
-      "cloud": "Cloud",
-      "ai": "AI",
-      "database": "Database",
-      "tools": "Tools",
-      "os": "Operating Systems",
-      "security": "Security",
-      "runtime": "Runtime"
-    },
-    "languageSkills": {
-      "proficiency": "Proficiency",
-      "spanish": "Spanish",
-      "english": "English",
-      "nativeDescription": "Native language • Complete mastery",
-      "professionalDescription": "Professional competency • Fluent communication"
-    },
-    "softSkillsList": []
+    "role": "Information Technologies Engineer <em>&</em> AI Solutions Architect",
+    "shortDesc": "I design, build, and scale data-driven and AI-powered systems that generate real business value. From idea to production — with clean architecture, efficiency, and maintainability as the north star.",
+    "techRing": "BUILDING · SHIPPING · LEARNING ·",
+    "metaBar": {
+      "city": "MEXICO CITY",
+      "status": "AVAILABLE",
+      "statusFor": "FOR WORK",
+      "version": "v.2026"
+    }
   },
   "work": {
-    "title": "Experience",
-    "subtitle": "My professional journey",
-    "labels": {
-      "highlights": "Highlights",
-      "stack": "Stack"
-    },
+    "heading": "Professional<br/><em>journey.</em>",
+    "description": "From intern to AI solutions architect — four years building systems that solve real problems in industry, marketing, and data.",
     "companies": {
       "baacc": {
         "name": "BAACC Systems S.A. de C.V.",
@@ -101,7 +62,6 @@
             "title": "AI Solutions Architect",
             "period": "Mar 2025 - Present",
             "type": "Full-time",
-            "location": "Mexico",
             "achievements": [
               "Design and implementation of intelligent applications using LLMs",
               "Integration of MCP servers and clients to enable autonomous workflows",
@@ -143,7 +103,6 @@
             "title": "Junior Web Developer",
             "period": "Mar 2022 - Sep 2023",
             "type": "Internship",
-            "location": "Mexico City",
             "achievements": [
               "Website development and support with HTML, CSS, JavaScript and CMS (WordPress, Joomla, OpenCart)",
               "Hosting, security certificates and domain administration",
@@ -155,53 +114,37 @@
     }
   },
   "education": {
-    "title": "Education",
-    "subtitle": "Education and certifications",
-    "stats": {
-      "degrees": "Degrees",
-      "certifications": "Certifications",
-      "yearsLearning": "Years learning",
-      "curiosity": "Curiosity"
-    },
-    "sections": {
-      "academic": "Academic Background",
-      "certifications": "Certifications"
-    },
-    "status": {
-      "graduate": "Graduate",
-      "selfTaught": "Self-taught",
-      "present": "Present"
+    "heading": "Learn <em>&</em><br/>teach.",
+    "description": "Academic background, certifications, and speaking engagements — because knowledge grows when shared.",
+    "sideCards": {
+      "languagesTitle": "// Languages",
+      "languagesBody": "Spanish <em>—</em> Native<br/>English <em>—</em> Professional",
+      "interestsTitle": "// Interests",
+      "interestsBody": "Generative AI, MLOps, distributed systems, specialty coffee, and — inevitably — typography.",
+      "philosophyTitle": "// Philosophy",
+      "philosophyBody": "<em>«</em>The best architecture is the one you don't need to defend<em>.»</em>"
     },
     "labels": {
-      "featured": "Featured",
-      "viewCredential": "View credential",
-      "verify": "Verify"
-    },
-    "levels": {
-      "fundamentals": "Fundamentals",
-      "intermediate": "Intermediate"
+      "featured": "Featured"
     },
     "list": {
       "platzi": {
         "institution": "Platzi - Technology School",
         "degree": "Technology Industry",
         "period": "2022 - Present",
-        "description": "Specialized courses in web development, artificial intelligence and emerging technologies.",
-        "location": "Online"
+        "description": "Specialized courses in web development, artificial intelligence and emerging technologies."
       },
       "tesco": {
         "institution": "Technological Institute of Higher Studies of Coacalco (TESCo) - TecNM",
         "degree": "Information and Communication Technologies Engineering",
         "period": "2019 - 2024",
-        "description": "Specialization in mobile application development.",
-        "location": "Mexico State, Mexico"
+        "description": "Specialization in mobile application development."
       },
       "cecytem": {
         "institution": "College of Scientific and Technological Studies of the State of Mexico (CECyTEM) - Tultepec",
         "degree": "Programming Technician",
         "period": "2016 - 2018",
-        "description": "Specialized training in software development and development methodologies.",
-        "location": "Mexico State, Mexico"
+        "description": "Specialized training in software development and development methodologies."
       }
     },
     "certifications": {
@@ -214,77 +157,79 @@
     }
   },
   "projects": {
-    "title": "Projects",
-    "subtitle": "Some of my featured work",
-    "types": {
-      "work": "Work",
-      "personal": "Personal"
-    },
-    "links": {
-      "demo": "View demo",
-      "code": "View code"
-    },
-    "moreProjects": "More Projects",
+    "heading": "Selected <em>work.</em>",
+    "description": "Some of the systems I've designed and shipped — from conversational AI over enterprise data to industrial software on the shop floor.",
+    "featuredLabel": "★ Featured",
+    "moreProjects": "— More projects —",
     "list": {
       "portfolio": {
         "title": "Portfolio",
-        "description": "Personal portfolio to showcase my projects and skills as a developer."
+        "description": "Personal portfolio to showcase my projects and skills as a developer.",
+        "kind": "Personal / Web",
+        "year": "2026",
+        "status": "Live"
       },
       "connie": {
         "title": "Connie",
-        "description": "AI platform for businesses, talk to your data through natural language processing."
+        "description": "AI platform for businesses. Talk to your data through natural language — RAG over heterogeneous sources with enterprise authentication.",
+        "kind": "Work / AI",
+        "year": "2025",
+        "status": "In production"
       },
       "handheld": {
-        "title": "HandHeld - RFID Application",
-        "description": "Application to control company inventory using RFID technology."
+        "title": "HandHeld RFID",
+        "description": "Android application for inventory control using RFID technology.",
+        "kind": "Work / Mobile",
+        "year": "2024",
+        "status": "In production"
       },
       "trace": {
-        "title": "Automotive Parts Traceability",
-        "description": "Desktop application for automotive parts traceability using C# and DevExpress."
+        "title": "Automotive Traceability",
+        "description": "Desktop app for automotive parts traceability with C# and DevExpress.",
+        "kind": "Work / Desktop",
+        "year": "2024",
+        "status": "Delivered"
       }
     }
   },
   "contact": {
-    "title": "Contact",
-    "subtitle": "Let's talk about your next project?",
-    "info": {
-      "location": "Mexico, Mexico",
-      "timezone": "GMT-6 (CST) - Mexico City"
+    "heading": "Let's talk<br/>about your next<br/><em>project?</em>",
+    "description": "I'm available for freelance projects, collaborations, and full-time opportunities. Tell me what you're building.",
+    "channels": {
+      "email": "// Email",
+      "linkedin": "// LinkedIn",
+      "github": "// GitHub",
+      "twitter": "// X / Twitter"
     },
     "cta": {
-      "heading": "Let's talk about your project",
-      "description": "Have an amazing idea? I'd love to hear it and see how I can help you make it a reality.",
-      "sendEmail": "Send Email"
+      "button": "Send me a message",
+      "note": "Reply within < 24h · Mexico City, GMT-6"
     },
-    "location": {
-      "title": "Location"
-    },
-    "cv": {
-      "spanish": {
-        "title": "CV Español",
-        "description": "Complete resume with experience, skills and projects."
-      },
-      "english": {
-        "title": "CV English",
-        "description": "English version for international opportunities."
-      },
-      "download": "Download"
-    }
+    "footerGiant": "Let's build<br/><em>something</em>."
   },
   "common": {
-    "contactMe": "Contact Me",
-    "viewProject": "View Projects"
+    "footer": {
+      "copy": "Made with care · Astro + Tailwind",
+      "next": "Next"
+    }
   },
   "home": {
-    "currentRole": "Current Role",
-    "viewResume": "View Full Resume",
+    "stats": {
+      "experience": "Years of experience",
+      "projects": "Projects shipped",
+      "techs": "Technologies in stack",
+      "drive": "Drive to build"
+    },
+    "nowStrip": {
+      "label": "NOW — AI Solutions Architect @ BAACC Systems",
+      "stack": "LLMs · RAG · MCP · MLOps"
+    },
     "aboutSection": {
       "title": "About me",
-      "learnMore": "Learn more",
-      "shortBio": "Software & Data Engineer focused on AI products, scalable systems, and clear business outcomes.",
+      "heading": "Software, data <em>&</em> AI applied to the real world.",
       "bio": {
-        "paragraph1": "I am a Software and Data Engineering professional with a strong track record in designing, building, and scaling data-driven and AI-powered solutions that generate real business value.",
-        "paragraph2": "Throughout my career, I have worked at the intersection of software engineering, data science, and automation—leading initiatives that transform complex challenges into robust, scalable systems. My expertise spans backend and frontend development, data engineering, and applied artificial intelligence, with a consistent focus on clean architecture, efficiency, and long-term maintainability.",
+        "paragraph1": "I am a <strong>Software and Data Engineering</strong> professional with a strong track record in designing, building, and scaling data-driven and AI-powered solutions that generate real business value.",
+        "paragraph2": "Throughout my career, I have worked at the intersection of software engineering, data science, and automation — leading initiatives that transform complex challenges into <strong>robust, scalable systems</strong>. My expertise spans backend and frontend development, data engineering, and applied artificial intelligence, with a consistent focus on clean architecture, efficiency, and long-term maintainability.",
         "paragraph3": "Beyond execution, I actively contribute to knowledge sharing and talent development. I have delivered conferences and academic talks at universities on Artificial Intelligence and Data Science, helping bridge the gap between theory and real-world application."
       }
     }
