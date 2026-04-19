@@ -1,12 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { useTranslations } from "@i18n/utils";
-import {
-  PiGithubLogo,
-  PiRocketLaunch,
-  PiBriefcase,
-  PiSparkle,
-} from "react-icons/pi";
+import PageFooter from "@ui/PageFooter.astro";
 
 export interface Props {
   lang: "es" | "en";
@@ -15,328 +10,143 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const getProjectType = (type: string) => {
-  const typeMap: Record<string, string> = {
-    work: t("projects.types.work"),
-    personal: t("projects.types.personal"),
-  };
-  return typeMap[type] || type;
+interface Project {
+  num: string;
+  slug: string;
+  title: string;
+  desc: string;
+  kind: string;
+  year: string;
+  status: string;
+  tags: string[];
+  image?: string;
+  featured?: boolean;
+  accent?: boolean;
+  href?: string;
+}
+
+const featured: Project = {
+  num: "01",
+  slug: "connie",
+  title: t("projects.list.connie.title"),
+  desc: t("projects.list.connie.description"),
+  kind: t("projects.list.connie.kind"),
+  year: t("projects.list.connie.year"),
+  status: t("projects.list.connie.status"),
+  tags: ["React", "RAG", "SQL", "JWT", "Python", "Azure"],
+  image: "/assets/projects/connie.webp",
+  featured: true,
+  accent: true,
 };
 
-const projects = [
+const rest: Project[] = [
   {
-    id: 1,
-    title: t("projects.list.portfolio.title"),
-    description: t("projects.list.portfolio.description"),
-    image: "/assets/projects/portfolio.webp",
-    tech: ["Astro", "Tailwind", "JavaScript", "React", "Markdown"],
-    github: "https://github.com/david-heca/portfolio",
-    type: "personal",
-    featured: true,
-  },
-  {
-    id: 2,
-    title: t("projects.list.connie.title"),
-    description: t("projects.list.connie.description"),
-    image: "/assets/projects/connie.webp",
-    tech: ["React", "RAG", "SQL", "JWT", "FastAPI", "MCP", "Azure OpenAI"],
-    demo: "https://connie.app",
-    type: "work",
-    featured: true,
-  },
-  {
-    id: 3,
+    num: "02",
+    slug: "handheld",
     title: t("projects.list.handheld.title"),
-    description: t("projects.list.handheld.description"),
+    desc: t("projects.list.handheld.description"),
+    kind: t("projects.list.handheld.kind"),
+    year: t("projects.list.handheld.year"),
+    status: t("projects.list.handheld.status"),
+    tags: ["Java", "Android", "Material", "SQL"],
     image: "/assets/projects/handheld.webp",
-    tech: [
-      "Java",
-      "Android Studio",
-      "Material",
-      "SQL",
-      "Firebase",
-      "Sentry",
-      "ODBC",
-    ],
-    type: "work",
-    featured: true,
   },
   {
-    id: 4,
+    num: "03",
+    slug: "trace",
     title: t("projects.list.trace.title"),
-    description: t("projects.list.trace.description"),
+    desc: t("projects.list.trace.description"),
+    kind: t("projects.list.trace.kind"),
+    year: t("projects.list.trace.year"),
+    status: t("projects.list.trace.status"),
+    tags: ["C#", "DevExpress", "SQL"],
     image: "/assets/projects/trace.webp",
-    tech: ["C#", "DevExpress", "SQL", "WinForms", ".NET Framework"],
-    type: "work",
-    featured: false,
+  },
+  {
+    num: "04",
+    slug: "portfolio",
+    title: t("projects.list.portfolio.title"),
+    desc: t("projects.list.portfolio.description"),
+    kind: t("projects.list.portfolio.kind"),
+    year: t("projects.list.portfolio.year"),
+    status: t("projects.list.portfolio.status"),
+    tags: ["Astro", "Tailwind", "React", "Markdown"],
+    image: "/assets/projects/portfolio.webp",
+    href: "https://github.com/david-heca/portfolio",
+    accent: true,
   },
 ];
+
+const headingHtml = t("projects.heading");
 ---
 
-<section>
-  <!-- Header -->
-  <div class="reveal mb-16">
-    <span
-      class="font-mono text-xs uppercase tracking-widest block mb-3"
-      style={`color: var(--color-accent);`}
-    >
-      // 02. {t("nav.projects")}
-    </span>
-    <h1
-      class="text-3xl md:text-5xl font-bold tracking-tight mb-3"
-      style={`color: var(--color-text-primary);`}
-    >
-      {t("projects.title")}
-    </h1>
-    <p class="text-lg" style={`color: var(--color-text-secondary);`}>
-      {t("projects.subtitle")}
-    </p>
+<section class="projects container-editorial">
+  <div class="reveal section-label">// 02. {t("nav.projects")}</div>
+  <h1 class="reveal reveal-delay-1 projects__h" set:html={headingHtml}></h1>
+  <p class="reveal reveal-delay-2 work__sub" style="margin-bottom: 0;">{t("projects.description")}</p>
+
+  <div class="project project--feat reveal">
+    <div class={`project__cover ${featured.accent ? "project__cover--accent" : ""}`}>
+      <div class="project__num">{featured.num}</div>
+      <div class="project__kind">{t("projects.featuredLabel")}</div>
+      {featured.image ? (
+        <Image
+          src={featured.image}
+          alt={featured.title}
+          width={1280}
+          height={800}
+          loading="lazy"
+          quality={85}
+        />
+      ) : (
+        <div class="project__cover-placeholder">[ cover · {featured.title} ]</div>
+      )}
+    </div>
+    <div>
+      <div class="project__meta">
+        <span>{featured.kind}</span>
+        <span>{featured.year} · {featured.status}</span>
+      </div>
+      <div class="project__title">{featured.title}</div>
+      <div class="project__desc">{featured.desc}</div>
+      <div class="project__tags">
+        {featured.tags.map((tag) => <span class="tag">{tag}</span>)}
+      </div>
+    </div>
   </div>
 
-  <!-- Featured Projects -->
-  <div
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-16 auto-rows-fr"
-  >
-    {
-      projects
-        .filter((p) => p.featured)
-        .map((project, index) => (
-          <div
-            class={`reveal group relative rounded-2xl overflow-hidden border transition-all duration-500 min-h-87.5 hover-card-accent ${
-              index === 0
-                ? "lg:col-span-2 lg:row-span-2 lg:min-h-150"
-                : "md:min-h-50"
-            }`}
-            style={`border-color: var(--color-border-default); transition-delay: ${index * 0.1}s;`}
-          >
-            {/* Background Image */}
-            <div class="absolute inset-0">
-              <Image
-                src={project.image}
-                alt={project.title}
-                width={800}
-                height={600}
-                class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                loading={index === 0 ? "eager" : "lazy"}
-                quality={80}
-              />
-              <div class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-black/10 transition-all duration-500" />
-            </div>
+  <div class="projects__more-label reveal">{t("projects.moreProjects")}</div>
 
-            {/* Content */}
-            <div
-              class={`relative h-full flex flex-col justify-end p-6 ${
-                index === 0 ? "md:p-8 lg:p-10" : "md:p-6"
-              }`}
-            >
-              {/* Type Badge */}
-              <div class="absolute top-4 left-4">
-                <div
-                  class={`inline-flex items-center gap-2 px-2.5 py-1 rounded-md backdrop-blur-md font-mono text-xs uppercase tracking-wider ${
-                    project.type === "work"
-                      ? "bg-cyan-500/20 border border-cyan-400/30 text-cyan-200"
-                      : "bg-violet-500/20 border border-violet-400/30 text-violet-200"
-                  }`}
-                >
-                  {project.type === "work" ? (
-                    <>
-                      <PiBriefcase className="w-3 h-3" />
-                      {getProjectType("work")}
-                    </>
-                  ) : (
-                    <>
-                      <PiSparkle className="w-3 h-3" />
-                      {getProjectType("personal")}
-                    </>
-                  )}
-                </div>
-              </div>
-
-              {/* Links */}
-              <div class="absolute top-4 right-4 flex gap-2">
-                {project.demo && (
-                  <a
-                    href={project.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="p-2.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl hover:bg-white/20 hover:scale-110 transition-all duration-200"
-                    title={t("projects.links.demo")}
-                  >
-                    <PiRocketLaunch className="w-4 h-4 text-white" />
-                  </a>
-                )}
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="p-2.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl hover:bg-white/20 hover:scale-110 transition-all duration-200"
-                    title={t("projects.links.code")}
-                  >
-                    <PiGithubLogo className="w-4 h-4 text-white" />
-                  </a>
-                )}
-              </div>
-
-              {/* Project Info */}
-              <div class="transform transition-all duration-300 group-hover:translate-y-1">
-                <h3
-                  class={`font-bold text-white mb-3 ${
-                    index === 0 ? "text-3xl md:text-4xl" : "text-xl md:text-2xl"
-                  }`}
-                >
-                  {project.title}
-                </h3>
-                <p
-                  class={`text-gray-300 leading-relaxed mb-4 ${
-                    index === 0
-                      ? "text-base md:text-lg max-w-2xl"
-                      : "text-sm line-clamp-2"
-                  }`}
-                >
-                  {project.description}
-                </p>
-
-                {/* Tech Stack */}
-                <div class="flex flex-wrap gap-2">
-                  {project.tech.slice(0, index === 0 ? 6 : 4).map((tech) => (
-                    <span class="px-2.5 py-1 bg-white/10 backdrop-blur-sm border border-white/20 text-white rounded-md font-mono text-xs">
-                      {tech}
-                    </span>
-                  ))}
-                  {project.tech.length > (index === 0 ? 6 : 4) && (
-                    <span class="px-2.5 py-1 bg-white/10 backdrop-blur-sm border border-white/20 text-gray-300 rounded-md font-mono text-xs">
-                      +{project.tech.length - (index === 0 ? 6 : 4)}
-                    </span>
-                  )}
-                </div>
-              </div>
-            </div>
-          </div>
-        ))
-    }
-  </div>
-
-  <!-- Other Projects -->
-  {
-    projects.filter((p) => !p.featured).length > 0 && (
-      <div>
-        <div class="flex items-center gap-3 mb-8">
-          <h2
-            class="text-2xl font-bold"
-            style={`color: var(--color-text-primary);`}
-          >
-            {t("projects.moreProjects")}
-          </h2>
-          <div class="flex-1 divider" />
+  <div class="projects__grid">
+    {rest.map((p, i) => (
+      <div class={`project reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+        <div class={`project__cover ${p.accent ? "project__cover--accent" : ""}`}>
+          <div class="project__num">{p.num}</div>
+          {p.image ? (
+            <Image
+              src={p.image}
+              alt={p.title}
+              width={800}
+              height={600}
+              loading="lazy"
+              quality={80}
+            />
+          ) : (
+            <div class="project__cover-placeholder">[ cover · {p.title} ]</div>
+          )}
         </div>
-
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 mb-16">
-          {projects
-            .filter((p) => !p.featured)
-            .map((project) => (
-              <div
-                class="reveal group relative rounded-2xl overflow-hidden transition-all duration-300 hover-card-accent spotlight-card tilt-card"
-                style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
-              >
-                {/* Image */}
-                <div
-                  class="relative h-48 overflow-hidden rounded-2xl"
-                  style={`background-color: var(--color-bg-tertiary);`}
-                >
-                  <Image
-                    src={project.image}
-                    alt={project.title}
-                    width={600}
-                    height={400}
-                    class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    loading="lazy"
-                    quality={75}
-                  />
-                  <div class="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
-
-                  {/* Type Badge */}
-                  <div class="absolute top-3 left-3">
-                    <div
-                      class={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md backdrop-blur-sm font-mono text-xs uppercase tracking-wider ${
-                        project.type === "work"
-                          ? "bg-cyan-500/30 border border-cyan-400/40 text-white"
-                          : "bg-violet-500/30 border border-violet-400/40 text-white"
-                      }`}
-                    >
-                      {project.type === "work" ? (
-                        <PiBriefcase className="w-3 h-3" />
-                      ) : (
-                        <PiSparkle className="w-3 h-3" />
-                      )}
-                      {getProjectType(project.type)}
-                    </div>
-                  </div>
-
-                  {/* Quick Links */}
-                  <div class="absolute top-3 right-3 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {project.demo && (
-                      <a
-                        href={project.demo}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-all"
-                      >
-                        <PiRocketLaunch className="w-4 h-4 text-white" />
-                      </a>
-                    )}
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="p-2 bg-white/20 backdrop-blur-sm rounded-lg hover:bg-white/30 transition-all"
-                      >
-                        <PiGithubLogo className="w-4 h-4 text-white" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                {/* Content */}
-                <div class="p-5">
-                  <h3
-                    class="text-lg font-bold mb-2 transition-colors"
-                    style={`color: var(--color-text-primary);`}
-                  >
-                    {project.title}
-                  </h3>
-                  <p
-                    class="text-sm mb-4 line-clamp-2"
-                    style={`color: var(--color-text-secondary);`}
-                  >
-                    {project.description}
-                  </p>
-
-                  {/* Tech Stack */}
-                  <div class="flex flex-wrap gap-1.5">
-                    {project.tech.slice(0, 3).map((tech) => (
-                      <span
-                        class="px-2.5 py-1 rounded-md font-mono text-xs"
-                        style={`background-color: var(--color-bg-tertiary); color: var(--color-text-secondary);`}
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                    {project.tech.length > 3 && (
-                      <span
-                        class="px-2.5 py-1 rounded-md font-mono text-xs"
-                        style={`background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary);`}
-                      >
-                        +{project.tech.length - 3}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              </div>
-            ))}
+        <div class="project__meta">
+          <span>{p.kind}</span>
+          <span>{p.year} · {p.status}</span>
+        </div>
+        <div class="project__title" style="font-size: clamp(22px, 3.5vw, 32px);">{p.title}</div>
+        <div class="project__desc">{p.desc}</div>
+        <div class="project__tags">
+          {p.tags.map((tag) => <span class="tag">{tag}</span>)}
         </div>
       </div>
-    )
-  }
+    ))}
+  </div>
 </section>
+
+<PageFooter lang={lang} num="02" />

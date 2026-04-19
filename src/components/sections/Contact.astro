@@ -1,19 +1,5 @@
 ---
 import { useTranslations } from "@i18n/utils";
-import {
-  PiEnvelope,
-  PiPhone,
-  PiMapPin,
-  PiGithubLogo,
-  PiLinkedinLogo,
-  PiXLogo,
-  PiInstagramLogo,
-  PiClock,
-  PiArrowUpRight,
-  PiDownloadSimple,
-  PiCheck,
-} from "react-icons/pi";
-import CvDownloadButton from "@ui/CvDownloadButton";
 
 export interface Props {
   lang: "es" | "en";
@@ -22,294 +8,64 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const contactInfo = {
-  email: "hello@davidherrera.dev",
-  phone: "+52 442 837 2849",
-  location: t("contact.info.location"),
-  timezone: t("contact.info.timezone"),
-};
+interface Channel {
+  k: string;
+  v: string;
+  href: string;
+  external?: boolean;
+}
 
-const socialLinks = [
-  {
-    name: "GitHub",
-    url: "https://github.com/david-heca",
-    icon: PiGithubLogo,
-    username: "@david-heca",
-    brandColor: "#8b949e",
-  },
-  {
-    name: "LinkedIn",
-    url: "https://www.linkedin.com/in/david-heca/",
-    icon: PiLinkedinLogo,
-    username: "/in/david-heca",
-    brandColor: "#0A66C2",
-  },
-  {
-    name: "Twitter",
-    url: "https://x.com/david_heca_",
-    icon: PiXLogo,
-    username: "@david_heca_",
-    brandColor: "#1DA1F2",
-  },
-  {
-    name: "Instagram",
-    url: "https://www.instagram.com/david_heca/",
-    icon: PiInstagramLogo,
-    username: "@david_heca",
-    brandColor: "#E4405F",
-  },
+const email = "hello@davidherrera.dev";
+
+const channels: Channel[] = [
+  { k: t("contact.channels.email"),    v: email,                 href: `mailto:${email}` },
+  { k: t("contact.channels.linkedin"), v: "/in/david-heca",      href: "https://www.linkedin.com/in/david-heca/", external: true },
+  { k: t("contact.channels.github"),   v: "@david-heca",         href: "https://github.com/david-heca", external: true },
+  { k: t("contact.channels.twitter"),  v: "@david_heca_",        href: "https://x.com/david_heca_", external: true },
 ];
 
-const copiedText = lang === "es" ? "¡Copiado!" : "Copied!";
+const headingHtml = t("contact.heading");
+const footerGiantHtml = t("contact.footerGiant");
+const year = new Date().getFullYear();
 ---
 
-<section>
-  <!-- Header -->
-  <div class="reveal mb-16">
-    <span
-      class="font-mono text-xs uppercase tracking-widest block mb-3"
-      style={`color: var(--color-accent);`}
-    >
-      // 04. {t("nav.contact")}
-    </span>
-    <h1
-      class="text-3xl md:text-5xl font-bold tracking-tight mb-3"
-      style={`color: var(--color-text-primary);`}
-    >
-      {t("contact.title")}
-    </h1>
-    <p class="text-lg" style={`color: var(--color-text-secondary);`}>
-      {t("contact.subtitle")}
-    </p>
+<section class="contact container-editorial">
+  <div class="reveal section-label">// 04. {t("nav.contact")}</div>
+  <h1 class="reveal reveal-delay-1 contact__h" set:html={headingHtml}></h1>
+  <p class="reveal reveal-delay-2 contact__sub">{t("contact.description")}</p>
+
+  <div class="contact__grid">
+    {channels.map((c, i) => (
+      <a
+        href={c.href}
+        target={c.external ? "_blank" : undefined}
+        rel={c.external ? "noopener noreferrer" : undefined}
+        class={`contact__cell reveal reveal-delay-${Math.min(i + 1, 4)}`}
+      >
+        <div class="contact__cell-k">{c.k}</div>
+        <div class="contact__cell-v">{c.v}</div>
+        <div class="contact__cell-arrow" aria-hidden="true">↗</div>
+      </a>
+    ))}
   </div>
 
-  <div class="space-y-5">
-    <!-- Main CTA - Full Width -->
-    <div
-      class="reveal rounded-2xl p-8 md:p-10 relative overflow-hidden"
-      style="background: linear-gradient(135deg, var(--color-accent), #0E7490);"
-    >
-      <div
-        class="absolute inset-0 opacity-10 pointer-events-none"
-        style="background-image: url('/assets/noise.svg'); background-repeat: repeat;"
-      >
-      </div>
-
-      <div class="relative z-10">
-        <h2
-          class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight"
-        >
-          {t("contact.cta.heading")}
-        </h2>
-
-        <p class="text-white/70 text-lg mb-8 max-w-xl">
-          {t("contact.cta.description")}
-        </p>
-
-        <div class="flex flex-col sm:flex-row gap-3">
-          <button
-            data-copy={contactInfo.email}
-            class="copy-btn press-effect inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white text-cyan-600 rounded-xl font-semibold hover:scale-105 transition-all duration-200 shadow-xl cursor-pointer"
-          >
-            <span class="copy-icon"><PiEnvelope className="w-5 h-5" /></span>
-            <span class="copied-icon"><PiCheck className="w-5 h-5" /></span>
-            <span class="copy-text">{contactInfo.email}</span>
-            <span class="copied-text">{copiedText}</span>
-          </button>
-          <button
-            data-copy={contactInfo.phone}
-            class="copy-btn press-effect inline-flex items-center justify-center gap-3 px-8 py-3.5 bg-white/10 backdrop-blur-sm text-white border border-white/20 rounded-xl font-semibold hover:bg-white/20 transition-all duration-200 cursor-pointer"
-          >
-            <span class="copy-icon"><PiPhone className="w-5 h-5" /></span>
-            <span class="copied-icon"><PiCheck className="w-5 h-5" /></span>
-            <span class="copy-text">{contactInfo.phone}</span>
-            <span class="copied-text">{copiedText}</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Info Cards Row -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-      <!-- Location -->
-      <div
-        class="reveal rounded-2xl p-6 md:p-8 transition-all duration-300 hover-card spotlight-card"
-        style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: 0.1s;`}
-      >
-        <PiMapPin className="w-6 h-6 mb-4 text-cyan-500 dark:text-cyan-400" />
-        <h3
-          class="text-lg font-bold mb-2"
-          style={`color: var(--color-text-primary);`}
-        >
-          {t("contact.location.title")}
-        </h3>
-        <p class="mb-3" style={`color: var(--color-text-secondary);`}>
-          {contactInfo.location}
-        </p>
-        <div
-          class="flex items-center gap-2 font-mono text-xs"
-          style={`color: var(--color-text-tertiary);`}
-        >
-          <PiClock className="w-3.5 h-3.5" />
-          {contactInfo.timezone}
-        </div>
-      </div>
-
-      <!-- CV Spanish -->
-      <div
-        class="reveal rounded-2xl p-6 md:p-8 transition-all duration-300 hover-card spotlight-card"
-        style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: 0.2s;`}
-      >
-        <PiDownloadSimple
-          className="w-6 h-6 mb-4 text-cyan-500 dark:text-cyan-400"
-        />
-        <h3
-          class="text-sm font-semibold mb-1"
-          style={`color: var(--color-text-primary);`}
-        >
-          {t("contact.cv.spanish.title")}
-        </h3>
-        <p
-          class="font-mono text-xs mb-4"
-          style={`color: var(--color-text-tertiary);`}
-        >
-          PDF · Mar 2026
-        </p>
-        <CvDownloadButton
-          client:load
-          href="/assets/documents/davidherrera-spanish.pdf"
-          download="davidherrera-spanish.pdf"
-          label={t("contact.cv.download")}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-cyan-500/10 text-cyan-500 dark:bg-cyan-400/15 dark:text-cyan-400 press-effect"
-        />
-      </div>
-
-      <!-- CV English -->
-      <div
-        class="reveal rounded-2xl p-6 md:p-8 transition-all duration-300 hover-card spotlight-card"
-        style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: 0.3s;`}
-      >
-        <PiDownloadSimple
-          className="w-6 h-6 mb-4 text-cyan-500 dark:text-cyan-400"
-        />
-        <h3
-          class="text-sm font-semibold mb-1"
-          style={`color: var(--color-text-primary);`}
-        >
-          {t("contact.cv.english.title")}
-        </h3>
-        <p
-          class="font-mono text-xs mb-4"
-          style={`color: var(--color-text-tertiary);`}
-        >
-          PDF · Mar 2026
-        </p>
-        <CvDownloadButton
-          client:load
-          href="/assets/documents/davidherrera-english.pdf"
-          download="davidherrera-english.pdf"
-          label={t("contact.cv.download")}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 bg-cyan-500/10 text-cyan-500 dark:bg-cyan-400/15 dark:text-cyan-400 press-effect"
-        />
-      </div>
-    </div>
-
-    <!-- Social Links - Brand Color Cards -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      {
-        socialLinks.map((social, i) => (
-          <a
-            href={social.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="reveal group social-card spotlight-card relative rounded-xl p-5 transition-all duration-300"
-            style={`--brand-color: ${social.brandColor}; --spotlight-color: color-mix(in srgb, ${social.brandColor} 25%, transparent); background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: ${0.1 + i * 0.1}s;`}
-          >
-            <span class="social-icon transition-colors duration-300">
-              <social.icon className="w-6 h-6" />
-            </span>
-            <p
-              class="text-sm font-semibold mt-3 mb-0.5"
-              style={`color: var(--color-text-primary);`}
-            >
-              {social.name}
-            </p>
-            <p
-              class="font-mono text-xs"
-              style={`color: var(--color-text-tertiary);`}
-            >
-              {social.username}
-            </p>
-            <span class="social-arrow arrow-bounce-diagonal absolute top-4 right-4 opacity-0 transition-all duration-300">
-              <PiArrowUpRight className="w-4 h-4" />
-            </span>
-          </a>
-        ))
-      }
-    </div>
+  <div class="contact__cta reveal">
+    <a href={`mailto:${email}`} class="contact__cta-btn press-effect">
+      <span class="dot" aria-hidden="true"></span>
+      {t("contact.cta.button")}
+      <span aria-hidden="true">→</span>
+    </a>
+    <div class="contact__cta-note">{t("contact.cta.note")}</div>
   </div>
 </section>
 
-<style>
-  /* Social card brand color hover */
-  .social-card .social-icon {
-    color: var(--color-text-tertiary);
-  }
-
-  .social-card:hover {
-    border-color: var(--brand-color) !important;
-    box-shadow: 0 0 24px color-mix(in srgb, var(--brand-color) 15%, transparent);
-  }
-
-  .social-card:hover .social-icon {
-    color: var(--brand-color);
-  }
-
-  .social-card:hover .social-arrow {
-    opacity: 1;
-    color: var(--brand-color);
-  }
-
-  /* Copy button states */
-  .copy-btn .copied-icon,
-  .copy-btn .copied-text {
-    display: none;
-  }
-
-  .copy-btn.copied .copy-icon,
-  .copy-btn.copied .copy-text {
-    display: none;
-  }
-
-  .copy-btn.copied .copied-icon,
-  .copy-btn.copied .copied-text {
-    display: inline-flex;
-  }
-</style>
-
-<script>
-  function setupCopyButtons() {
-    document.querySelectorAll(".copy-btn").forEach((btn) => {
-      btn.addEventListener("click", async () => {
-        const value = (btn as HTMLElement).dataset.copy;
-        if (!value) return;
-
-        try {
-          await navigator.clipboard.writeText(value);
-          btn.classList.add("copied");
-          setTimeout(() => btn.classList.remove("copied"), 2000);
-        } catch {
-          // Fallback: open mailto or tel
-          if (value.includes("@")) {
-            window.location.href = `mailto:${value}`;
-          } else {
-            window.location.href = `tel:${value}`;
-          }
-        }
-      });
-    });
-  }
-
-  setupCopyButtons();
-  document.addEventListener("astro:page-load", setupCopyButtons);
-</script>
+<footer class="footer">
+  <div class="footer__inner" style="padding-top: 72px; align-items: flex-end;">
+    <div class="footer__giant" set:html={footerGiantHtml}></div>
+    <div style="text-align: right;">
+      © {year} David Herrera<br />
+      v.2026 · Astro + Tailwind + React<br />
+      04 / 04
+    </div>
+  </div>
+</footer>

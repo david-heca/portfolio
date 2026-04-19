@@ -1,24 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import { useTranslations } from "@i18n/utils";
-import {
-  PiArrowRightBold,
-  PiBriefcase,
-  PiFolderOpen,
-  PiUserCircle,
-} from "react-icons/pi";
-import {
-  SiDotnet,
-  SiPython,
-  SiJavascript,
-  SiReact,
-  SiTailwindcss,
-  SiDocker,
-  SiPostgresql,
-  SiGit,
-  SiRailway,
-} from "react-icons/si";
-import { VscAzure } from "react-icons/vsc";
+import TechRing from "@ui/TechRing.astro";
+import MetaBar from "@ui/MetaBar.astro";
+import PageFooter from "@ui/PageFooter.astro";
 
 export interface Props {
   lang: "es" | "en";
@@ -27,276 +12,91 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const getCategory = (category: string) => {
-  const categoryMap: Record<string, string> = {
-    Backend: t("skills.categories.backend"),
-    Frontend: t("skills.categories.frontend"),
-    DevOps: t("skills.categories.devops"),
-    Cloud: t("skills.categories.cloud"),
-    Database: t("skills.categories.database"),
-    Tools: t("skills.categories.tools"),
-  };
-  return categoryMap[category] || category;
-};
-
-const getLevel = (level: string) => {
-  const levelMap: Record<string, string> = {
-    Basic: t("skills.levels.basic"),
-    Intermediate: t("skills.levels.intermediate"),
-    Advanced: t("skills.levels.advanced"),
-  };
-  return levelMap[level] || level;
-};
-
-const getLevelColor = (level: string) => {
-  if (level === t("skills.levels.advanced")) return "#10B981";
-  if (level === t("skills.levels.intermediate")) return "var(--color-accent)";
-  return "var(--color-text-tertiary)";
-};
-
-const primarySkills = [
-  { name: "C#", category: getCategory("Backend"), level: getLevel("Intermediate"), icon: SiDotnet, color: "#7b6fb3" },
-  { name: "Python", category: getCategory("Backend"), level: getLevel("Intermediate"), icon: SiPython, color: "#7ba1b3" },
-  { name: "JavaScript", category: getCategory("Frontend"), level: getLevel("Intermediate"), icon: SiJavascript, color: "#b3a76e" },
-  { name: "React", category: getCategory("Frontend"), level: getLevel("Basic"), icon: SiReact, color: "#6ea8b3" },
-  { name: "Tailwind CSS", category: getCategory("Frontend"), level: getLevel("Intermediate"), icon: SiTailwindcss, color: "#6a9fb3" },
-  { name: "Azure", category: getCategory("Cloud"), level: getLevel("Intermediate"), icon: VscAzure, color: "#6e88b3" },
-  { name: "Docker", category: getCategory("DevOps"), level: getLevel("Basic"), icon: SiDocker, color: "#6e9ab3" },
-  { name: "Railway", category: getCategory("DevOps"), level: getLevel("Intermediate"), icon: SiRailway, color: "#9b8eb3" },
-  { name: "PostgreSQL", category: getCategory("Database"), level: getLevel("Intermediate"), icon: SiPostgresql, color: "#6e7fb3" },
-  { name: "Git", category: getCategory("Tools"), level: getLevel("Advanced"), icon: SiGit, color: "#b38370" },
+const skills = [
+  "C#", "Python", "React", "Azure", "PostgreSQL", "Docker",
+  "LLMs", "RAG", "MCP", ".NET", "Tailwind",
 ];
+const marqueeLoop = [...skills, ...skills];
+
+const roleHtml = t("hero.role");
+const aboutHeadingHtml = t("home.aboutSection.heading");
+const bio1Html = t("home.aboutSection.bio.paragraph1");
+const bio2Html = t("home.aboutSection.bio.paragraph2");
+const bio3Html = t("home.aboutSection.bio.paragraph3");
 ---
 
-<section>
-  <div class="space-y-8 md:space-y-12">
-    <!-- Hero Section - Cinematic Full Width -->
-    <div class="relative overflow-hidden">
-      <div
-        class="relative z-10 flex flex-col md:flex-row items-start md:items-center gap-8 md:gap-12 py-8 md:py-16"
-      >
-        <!-- Text Content -->
-        <div class="flex-1 min-w-0">
-          <!-- Greeting Label -->
-          <p
-            class="reveal reveal-delay-1 font-mono text-sm uppercase tracking-widest mb-4"
-            style={`color: var(--color-text-tertiary);`}
-          >
-            {t("hero.greeting")}
-          </p>
+<section class="hero container-editorial">
+  <MetaBar lang={lang} />
+  <TechRing lang={lang} />
 
-          <!-- Name -->
-          <h1
-            class="reveal reveal-delay-2 text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.05] mb-6"
-          >
-            <span class="text-gradient">David Herrera</span>
-          </h1>
+  <div class="reveal hero__intro">
+    <span class="live" aria-hidden="true"></span>
+    {t("hero.greeting")}<span style="color: var(--color-ink);">&nbsp;—</span>
+  </div>
 
-          <!-- Role -->
-          <p
-            class="reveal reveal-delay-3 text-xl md:text-2xl leading-relaxed mb-3"
-            style={`color: var(--color-text-secondary);`}
-          >
-            {t("hero.title")}
-          </p>
-          <p
-            class="reveal reveal-delay-4 text-base md:text-lg"
-            style={`color: var(--color-text-tertiary);`}
-          >
-            {t("hero.description")}
-          </p>
-        </div>
+  <h1 class="reveal reveal-delay-1 hero__name">
+    David<br />Herrer<span class="amp">a</span>
+  </h1>
 
-        <!-- Photo -->
-        <div class="reveal reveal-delay-3">
-          <div class="relative w-72 h-72">
-            <Image
-              src="/assets/profile-photo.webp"
-              alt="David Herrera"
-              width={256}
-              height={256}
-              class="w-full h-full object-cover rounded-3xl"
-              loading="eager"
-              format="webp"
-              quality={85}
-            />
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Divider -->
-    <div class="divider scroll-expand-divider" style="transform-origin: center;"></div>
-
-    <!-- About Me -->
-    <div class="reveal">
-      <span
-        class="font-mono text-xs uppercase tracking-widest block mb-6"
-        style={`color: var(--color-accent);`}
-      >
-        // {t("home.aboutSection.title")}
-      </span>
-
-      <div class="space-y-4 max-w-4xl">
-        <p
-          class="text-base md:text-lg leading-relaxed"
-          style={`color: var(--color-text-secondary);`}
-        >
-          {t("home.aboutSection.bio.paragraph1")}
-        </p>
-        <p
-          class="text-base md:text-lg leading-relaxed"
-          style={`color: var(--color-text-secondary);`}
-        >
-          {t("home.aboutSection.bio.paragraph2")}
-        </p>
-        <p
-          class="text-base md:text-lg leading-relaxed"
-          style={`color: var(--color-text-secondary);`}
-        >
-          {t("home.aboutSection.bio.paragraph3")}
-        </p>
-      </div>
-    </div>
-
-    <!-- Skills -->
-    <div>
-      <span
-        class="reveal font-mono text-xs uppercase tracking-widest block mb-6"
-        style={`color: var(--color-accent);`}
-      >
-        // {t("skills.sections.technologies")}
-      </span>
-
-      <div class="reveal space-y-3">
-        <!-- Row 1: scrolls left -->
-        <div class="marquee">
-          <div class="marquee-track">
-            {
-              [...primarySkills, ...primarySkills].map((skill, index) => (
-                <div
-                  class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl whitespace-nowrap shrink-0"
-                  style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
-                  aria-hidden={index >= primarySkills.length ? "true" : undefined}
-                >
-                  <skill.icon className="w-4 h-4 shrink-0" style={{ color: skill.color }} />
-                  <span
-                    class="text-sm font-medium"
-                    style={`color: var(--color-text-primary);`}
-                  >
-                    {skill.name}
-                  </span>
-                  <span
-                    class="w-1.5 h-1.5 rounded-full shrink-0"
-                    style={`background-color: ${getLevelColor(skill.level)};`}
-                    title={skill.level}
-                  />
-                </div>
-              ))
-            }
-          </div>
-        </div>
-
-        <!-- Row 2: scrolls right (offset order) -->
-        <div class="marquee">
-          <div class="marquee-track-reverse">
-            {
-              [...primarySkills.slice(5), ...primarySkills.slice(0, 5), ...primarySkills.slice(5), ...primarySkills.slice(0, 5)].map((skill, index) => (
-                <div
-                  class="flex items-center gap-2.5 px-4 py-2.5 rounded-xl whitespace-nowrap shrink-0"
-                  style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
-                  aria-hidden={index >= primarySkills.length ? "true" : undefined}
-                >
-                  <skill.icon className="w-4 h-4 shrink-0" style={{ color: skill.color }} />
-                  <span
-                    class="text-sm font-medium"
-                    style={`color: var(--color-text-primary);`}
-                  >
-                    {skill.name}
-                  </span>
-                  <span
-                    class="w-1.5 h-1.5 rounded-full shrink-0"
-                    style={`background-color: ${getLevelColor(skill.level)};`}
-                    title={skill.level}
-                  />
-                </div>
-              ))
-            }
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- CTA Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5">
-      <a
-        href={lang === "es" ? "/work" : "/en/work"}
-        class="reveal reveal-delay-1 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover-card spotlight-card tilt-card"
-        style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
-      >
-        <div class="flex items-start justify-between mb-3">
-          <PiBriefcase className="w-5 h-5 text-zinc-500 dark:text-zinc-400" />
-          <PiArrowRightBold
-            className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity arrow-bounce-x text-cyan-500 dark:text-cyan-400"
-          />
-        </div>
-        <h3
-          class="text-lg font-semibold mb-1"
-          style={`color: var(--color-text-primary);`}
-        >
-          {t("work.title")}
-        </h3>
-        <p class="text-sm" style={`color: var(--color-text-tertiary);`}>
-          {t("work.subtitle")}
-        </p>
-      </a>
-
-      <a
-        href={lang === "es" ? "/projects" : "/en/projects"}
-        class="reveal reveal-delay-2 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover-card spotlight-card tilt-card"
-        style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
-      >
-        <div class="flex items-start justify-between mb-3">
-          <PiFolderOpen
-            className="w-5 h-5 text-cyan-500 dark:text-cyan-400"
-          />
-          <PiArrowRightBold
-            className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity arrow-bounce-x text-cyan-500 dark:text-cyan-400"
-          />
-        </div>
-        <h3
-          class="text-lg font-semibold mb-1"
-          style={`color: var(--color-text-primary);`}
-        >
-          {t("projects.title")}
-        </h3>
-        <p class="text-sm" style={`color: var(--color-text-tertiary);`}>
-          {t("projects.subtitle")}
-        </p>
-      </a>
-
-      <a
-        href={lang === "es" ? "/contact" : "/en/contact"}
-        class="reveal reveal-delay-3 group rounded-2xl p-6 border-l-2 transition-all duration-300 hover-card spotlight-card tilt-card"
-        style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
-      >
-        <div class="flex items-start justify-between mb-3">
-          <PiUserCircle className="w-5 h-5 text-cyan-500 dark:text-cyan-400" />
-          <PiArrowRightBold
-            className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity arrow-bounce-x text-cyan-500 dark:text-cyan-400"
-          />
-        </div>
-        <h3
-          class="text-lg font-semibold mb-1"
-          style={`color: var(--color-text-primary);`}
-        >
-          {t("contact.title")}
-        </h3>
-        <p class="text-sm" style={`color: var(--color-text-tertiary);`}>
-          {t("contact.subtitle")}
-        </p>
-      </a>
-    </div>
-
+  <div class="hero__tagrow">
+    <div class="reveal reveal-delay-2 hero__role" set:html={roleHtml}></div>
+    <p class="reveal reveal-delay-3 hero__desc">{t("hero.shortDesc")}</p>
   </div>
 </section>
+
+<div class="marquee">
+  <div class="marquee__track">
+    {marqueeLoop.map((s, i) => (
+      <span class="marquee__item" aria-hidden={i >= skills.length ? "true" : undefined}>{s}</span>
+    ))}
+  </div>
+</div>
+
+<div class="stats container-editorial">
+  <div class="stat">
+    <div class="stat__num">4<span class="plus">+</span></div>
+    <div class="stat__label">{t("home.stats.experience")}</div>
+  </div>
+  <div class="stat">
+    <div class="stat__num">20<span class="plus">+</span></div>
+    <div class="stat__label">{t("home.stats.projects")}</div>
+  </div>
+  <div class="stat">
+    <div class="stat__num">10</div>
+    <div class="stat__label">{t("home.stats.techs")}</div>
+  </div>
+  <div class="stat">
+    <div class="stat__num">∞</div>
+    <div class="stat__label">{t("home.stats.drive")}</div>
+  </div>
+</div>
+
+<section class="about container-editorial">
+  <div class="reveal about__photo about__photo-corners">
+    <Image
+      src="/assets/profile-photo.webp"
+      alt="David Herrera"
+      width={400}
+      height={533}
+      loading="eager"
+      format="webp"
+      quality={85}
+    />
+  </div>
+  <div>
+    <div class="reveal section-label">// {t("home.aboutSection.title")}</div>
+    <h2 class="reveal reveal-delay-1 about__title" set:html={aboutHeadingHtml}></h2>
+    <div class="about__body">
+      <p class="reveal reveal-delay-2" set:html={bio1Html}></p>
+      <p class="reveal reveal-delay-3" set:html={bio2Html}></p>
+      <p class="reveal reveal-delay-4" set:html={bio3Html}></p>
+    </div>
+  </div>
+</section>
+
+<div class="now-strip footer__inner">
+  <div class="now-strip__label">{t("home.nowStrip.label")}</div>
+  <div>{t("home.nowStrip.stack")}</div>
+</div>
+
+<PageFooter lang={lang} num="00" />
