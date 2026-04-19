@@ -15,7 +15,6 @@ const { title, description, lang = "es" } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL("/assets/dh.webp", Astro.site);
 
-// hreflang alternates
 const pathname = Astro.url.pathname;
 const esPath = lang === "en"
   ? (pathname === "/en" || pathname === "/en/" ? "/" : pathname.replace(/^\/en\//, "/"))
@@ -32,40 +31,32 @@ const enURL = new URL(enPath, Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- SEO Meta Tags -->
     <meta name="author" content="David Herrera" />
     <meta name="robots" content="index, follow" />
     <meta name="googlebot" content="index, follow" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <!-- Performance Hints -->
     <link rel="preconnect" href="https://davidherrera.dev" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
 
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-
-    <!-- Canonical URL -->
     <link rel="canonical" href={canonicalURL} />
 
-    <!-- hreflang alternates -->
     <link rel="alternate" hreflang="es" href={esURL} />
     <link rel="alternate" hreflang="en" href={enURL} />
     <link rel="alternate" hreflang="x-default" href={esURL} />
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.url} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={socialImageURL} />
 
-    <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={Astro.url} />
     <meta property="twitter:title" content={title} />
@@ -76,7 +67,6 @@ const enURL = new URL(enPath, Astro.site);
     <ClientRouter />
 
     <script is:inline>
-      // Aplicar tema en navegaciones de view transition
       function setThemeOnNavigation() {
         const themePreference = localStorage.getItem("color-theme") || "system";
         const resolvedTheme =
@@ -93,9 +83,7 @@ const enURL = new URL(enPath, Astro.site);
         }
       }
 
-      // Ejecutar ANTES de que se haga el swap de contenido
       document.addEventListener("astro:before-swap", (e) => {
-        // Preservar el tema en el nuevo documento
         const currentTheme =
           document.documentElement.classList.contains("dark");
         if (currentTheme) {
@@ -105,7 +93,6 @@ const enURL = new URL(enPath, Astro.site);
 
       document.addEventListener("astro:after-swap", setThemeOnNavigation);
 
-      // React to OS theme changes when in system mode
       if (!window.__themeMediaListener) {
         const media = window.matchMedia("(prefers-color-scheme: dark)");
         const handler = () => {
@@ -122,7 +109,6 @@ const enURL = new URL(enPath, Astro.site);
         window.__themeMediaListener = true;
       }
 
-      // Aplicar tema inmediatamente en el primer load (antes de pintar)
       setThemeOnNavigation();
     </script>
 
@@ -138,13 +124,11 @@ const enURL = new URL(enPath, Astro.site);
           return path === "/en" ? "/" : path.replace(/^\/en\//, "/") || "/";
         }
 
-        // Preferencia explícita del usuario
         if (stored) {
           if (stored !== currentLang) window.location.replace(buildPath(stored));
           return;
         }
 
-        // Primera visita: detectar idioma del navegador
         var langs = navigator.languages || [navigator.language];
         var detected = "es";
         for (var i = 0; i < langs.length; i++) {
@@ -156,41 +140,15 @@ const enURL = new URL(enPath, Astro.site);
       })();
     </script>
   </head>
-  <body
-    class="min-h-screen flex flex-col"
-    style={`background-color: var(--color-bg-primary); color: var(--color-text-primary);`}
-  >
+  <body class="min-h-screen flex flex-col">
     <SpeedInsights />
-
-    <!-- Noise Texture Background -->
-    <div
-      class="fixed inset-0 z-[-1] opacity-[0.03] dark:opacity-[0.04] pointer-events-none"
-      style="background-image: url('/assets/noise.svg'); background-repeat: repeat;"
-    >
-    </div>
 
     <Navbar transition:persist="navbar" />
 
-    <main
-      class="grow pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto w-full"
-    >
+    <main class="page grow flex flex-col">
       <slot />
     </main>
 
-    <footer
-      class="py-8 px-6 mt-auto"
-      style={`border-top: 1px solid var(--color-border-default);`}
-      transition:persist="footer"
-    >
-      <div
-        class="max-w-6xl mx-auto px-4 text-center font-mono text-xs"
-        style={`color: var(--color-text-tertiary);`}
-      >
-        &copy; {new Date().getFullYear()} David Herrera
-      </div>
-    </footer>
-
-    <!-- IntersectionObserver for reveal animations -->
     <script>
       function setupRevealAnimations() {
         const observer = new IntersectionObserver(
@@ -212,49 +170,6 @@ const enURL = new URL(enPath, Astro.site);
 
       setupRevealAnimations();
       document.addEventListener("astro:page-load", setupRevealAnimations);
-    </script>
-
-    <!-- Spotlight + Tilt + Text Scramble -->
-    <script>
-      function setupSpotlightAndTilt() {
-        const cards = document.querySelectorAll(".spotlight-card, .tilt-card");
-
-        cards.forEach((card) => {
-          const el = card as HTMLElement;
-          if (el.dataset.interactiveReady) return;
-          el.dataset.interactiveReady = "true";
-
-          const isSpotlight = el.classList.contains("spotlight-card");
-          const isTilt = el.classList.contains("tilt-card");
-          el.addEventListener("mousemove", (e) => {
-            const rect = el.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            if (isSpotlight) {
-              el.style.setProperty("--mouse-x", x + "px");
-              el.style.setProperty("--mouse-y", y + "px");
-            }
-
-            if (isTilt) {
-              const centerX = rect.width / 2;
-              const centerY = rect.height / 2;
-              const rotateX = ((y - centerY) / centerY) * -6;
-              const rotateY = ((x - centerX) / centerX) * 6;
-              el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(8px)`;
-            }
-          });
-
-          el.addEventListener("mouseleave", () => {
-            if (isTilt) {
-              el.style.transform = "";
-            }
-          });
-        });
-      }
-
-      setupSpotlightAndTilt();
-      document.addEventListener("astro:page-load", setupSpotlightAndTilt);
     </script>
   </body>
 </html>
