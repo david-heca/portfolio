@@ -1,8 +1,7 @@
 {
   "theme": {
     "light": "Claro",
-    "dark": "Oscuro",
-    "system": "Sistema"
+    "dark": "Oscuro"
   },
   "meta": {
     "home": {
@@ -32,8 +31,6 @@
   },
   "nav": {
     "home": "Inicio",
-    "about": "Sobre mí",
-    "skills": "Habilidades",
     "work": "Experiencia",
     "education": "Formación",
     "projects": "Proyectos",
@@ -41,55 +38,19 @@
   },
   "hero": {
     "greeting": "Hola, soy",
-    "title": "Ingeniero en Tecnologías de la Información",
-    "description": "Profesional con un sólido historial en el diseño, construcción y escalado de soluciones impulsadas por datos e IA que generan valor empresarial real.",
-    "cta": "Ver mi trabajo"
-  },
-  "about": {
-    "title": "Sobre Mí",
-    "subtitle": "Pasión por la tecnología e innovación"
-  },
-  "skills": {
-    "title": "Habilidades",
-    "subtitle": "Tecnologías y herramientas que domino",
-    "sections": {
-      "technologies": "Tecnologías",
-      "languages": "Idiomas"
-    },
-    "levels": {
-      "basic": "Básico",
-      "intermediate": "Intermedio",
-      "advanced": "Avanzado",
-      "native": "Nativo"
-    },
-    "categories": {
-      "backend": "Backend",
-      "frontend": "Frontend",
-      "devops": "DevOps",
-      "cloud": "Cloud",
-      "ai": "IA",
-      "database": "Database",
-      "tools": "Herramientas",
-      "os": "Sistemas Operativos",
-      "security": "Security",
-      "runtime": "Runtime"
-    },
-    "languageSkills": {
-      "proficiency": "Proficiencia",
-      "spanish": "Español",
-      "english": "Inglés",
-      "nativeDescription": "Lengua materna • Dominio completo",
-      "professionalDescription": "Competencia profesional • Comunicación fluida"
-    },
-    "softSkillsList": []
+    "role": "Ingeniero en Tecnologías de la Información <em>&</em> Arquitecto de Soluciones IA",
+    "shortDesc": "Diseño, construyo y escalo sistemas impulsados por datos e IA que generan valor empresarial real. De la idea a producción — con arquitectura limpia, eficiencia y mantenibilidad como norte.",
+    "techRing": "BUILDING · SHIPPING · LEARNING ·",
+    "metaBar": {
+      "city": "CIUDAD DE MÉXICO",
+      "status": "DISPONIBLE",
+      "statusFor": "PARA TRABAJAR",
+      "version": "v.2026"
+    }
   },
   "work": {
-    "title": "Experiencia",
-    "subtitle": "Mi trayectoria profesional",
-    "labels": {
-      "highlights": "Logros",
-      "stack": "Stack"
-    },
+    "heading": "Trayectoria<br/><em>profesional.</em>",
+    "description": "De becario a arquitecto de soluciones IA — cuatro años construyendo sistemas que resuelven problemas reales en industria, marketing y datos.",
     "companies": {
       "baacc": {
         "name": "BAACC Systems S.A. de C.V.",
@@ -101,7 +62,6 @@
             "title": "Arquitecto de Soluciones de IA",
             "period": "Mar 2025 - Actualidad",
             "type": "Tiempo Completo",
-            "location": "México",
             "achievements": [
               "Diseño e implementación de aplicaciones inteligentes utilizando LLMs",
               "Integración de servidores y clientes MCP para habilitar flujos de trabajo autónomos",
@@ -143,7 +103,6 @@
             "title": "Web Developer Jr.",
             "period": "Mar 2022 - Sep 2023",
             "type": "Prácticas",
-            "location": "Ciudad de México",
             "achievements": [
               "Desarrollo y soporte de sitios web con HTML, CSS, JavaScript y CMS (WordPress, Joomla, OpenCart)",
               "Administración de hosting, certificados de seguridad y dominios",
@@ -155,53 +114,37 @@
     }
   },
   "education": {
-    "title": "Formación",
-    "subtitle": "Educación y certificaciones",
-    "stats": {
-      "degrees": "Títulos",
-      "certifications": "Certificaciones",
-      "yearsLearning": "Años aprendiendo",
-      "curiosity": "Curiosidad"
-    },
-    "sections": {
-      "academic": "Formación Académica",
-      "certifications": "Certificaciones"
-    },
-    "status": {
-      "graduate": "Graduado",
-      "selfTaught": "Autodidacta",
-      "present": "Actualidad"
+    "heading": "Aprender <em>&</em><br/>enseñar.",
+    "description": "Formación académica, certificaciones y participación como ponente — porque el conocimiento crece cuando se comparte.",
+    "sideCards": {
+      "languagesTitle": "// Idiomas",
+      "languagesBody": "Español <em>—</em> Nativo<br/>Inglés <em>—</em> Profesional",
+      "interestsTitle": "// Intereses",
+      "interestsBody": "IA generativa, MLOps, sistemas distribuidos, café de especialidad y — inevitablemente — tipografía.",
+      "philosophyTitle": "// Filosofía",
+      "philosophyBody": "<em>«</em>La mejor arquitectura es la que no necesitas defender<em>.»</em>"
     },
     "labels": {
-      "featured": "Destacado",
-      "viewCredential": "Ver credencial",
-      "verify": "Verificar"
-    },
-    "levels": {
-      "fundamentals": "Fundamentals",
-      "intermediate": "Intermedio"
+      "featured": "Destacado"
     },
     "list": {
       "platzi": {
         "institution": "Platzi - Escuela de Tecnología",
         "degree": "Industria de la Tecnología",
         "period": "2022 - Actualidad",
-        "description": "Cursos especializados en desarrollo web, inteligencia artificial y tecnologías emergentes.",
-        "location": "Online"
+        "description": "Cursos especializados en desarrollo web, inteligencia artificial y tecnologías emergentes."
       },
       "tesco": {
         "institution": "Tecnológico de Estudios Superiores de Coacalco (TESCo) - TecNM",
         "degree": "Ingeniería en Tecnologías de la Información & Comunicaciones",
         "period": "2019 - 2024",
-        "description": "Especialización en desarrollo de aplicaciones móviles.",
-        "location": "Estado de México, México"
+        "description": "Especialización en desarrollo de aplicaciones móviles."
       },
       "cecytem": {
         "institution": "Colegio de Estudios Científicos y Tecnológicos del Estado de México (CECyTEM) - Tultepec",
         "degree": "Técnico en Programación",
         "period": "2016 - 2018",
-        "description": "Formación especializada en desarrollo de software y metodologías de desarrollo.",
-        "location": "Estado de México, México"
+        "description": "Formación especializada en desarrollo de software y metodologías de desarrollo."
       }
     },
     "certifications": {
@@ -214,77 +157,79 @@
     }
   },
   "projects": {
-    "title": "Proyectos",
-    "subtitle": "Algunos de mis trabajos más destacados",
-    "types": {
-      "work": "Trabajo",
-      "personal": "Personal"
-    },
-    "links": {
-      "demo": "Ver demo",
-      "code": "Ver código"
-    },
-    "moreProjects": "Más Proyectos",
+    "heading": "Trabajo <em>seleccionado.</em>",
+    "description": "Algunos de los sistemas que he diseñado y enviado — desde IA conversacional sobre datos empresariales hasta software industrial en planta.",
+    "featuredLabel": "★ Destacado",
+    "moreProjects": "— Más proyectos —",
     "list": {
       "portfolio": {
         "title": "Portafolio",
-        "description": "Portafolio personal para mostrar mis proyectos y habilidades como desarrollador."
+        "description": "Portafolio personal para mostrar mis proyectos y habilidades como desarrollador.",
+        "kind": "Personal / Web",
+        "year": "2026",
+        "status": "Live"
       },
       "connie": {
         "title": "Connie",
-        "description": "Plataforma de IA para empresas, habla con tus datos por medio del procesamiento de lenguaje natural."
+        "description": "Plataforma de IA para empresas. Habla con tus datos por medio de procesamiento de lenguaje natural — RAG sobre fuentes heterogéneas con autenticación empresarial.",
+        "kind": "Trabajo / IA",
+        "year": "2025",
+        "status": "En producción"
       },
       "handheld": {
-        "title": "HandHeld - Aplicación de RFID",
-        "description": "Aplicación para controlar el inventario de una empresa, utilizando tecnología RFID."
+        "title": "HandHeld RFID",
+        "description": "Aplicación Android para control de inventario usando tecnología RFID.",
+        "kind": "Trabajo / Móvil",
+        "year": "2024",
+        "status": "En producción"
       },
       "trace": {
-        "title": "Trazabilidad de Piezas Automotrices",
-        "description": "Aplicación de escritorio para la trazabilidad de piezas automotrices utilizando C# y DevExpress."
+        "title": "Trazabilidad Automotriz",
+        "description": "App de escritorio para trazabilidad de piezas automotrices con C# y DevExpress.",
+        "kind": "Trabajo / Desktop",
+        "year": "2024",
+        "status": "Entregado"
       }
     }
   },
   "contact": {
-    "title": "Contacto",
-    "subtitle": "¿Hablamos de tu próximo proyecto?",
-    "info": {
-      "location": "México, México",
-      "timezone": "GMT-6 (CST) - Ciudad de México"
+    "heading": "¿Hablamos<br/>de tu próximo<br/><em>proyecto?</em>",
+    "description": "Estoy disponible para proyectos freelance, colaboraciones y oportunidades de tiempo completo. Cuéntame qué estás construyendo.",
+    "channels": {
+      "email": "// Email",
+      "linkedin": "// LinkedIn",
+      "github": "// GitHub",
+      "twitter": "// X / Twitter"
     },
     "cta": {
-      "heading": "Hablemos de tu proyecto",
-      "description": "¿Tienes una idea increíble? Me encantaría escucharla y ver cómo puedo ayudarte a hacerla realidad.",
-      "sendEmail": "Enviar Correo"
+      "button": "Envíame un mensaje",
+      "note": "Respuesta en < 24h · CDMX, GMT-6"
     },
-    "location": {
-      "title": "Ubicación"
-    },
-    "cv": {
-      "spanish": {
-        "title": "CV Español",
-        "description": "Currículum completo con experiencia, habilidades y proyectos."
-      },
-      "english": {
-        "title": "CV English",
-        "description": "Versión en inglés para oportunidades internacionales."
-      },
-      "download": "Descargar"
-    }
+    "footerGiant": "Hagamos<br/>algo <em>juntos</em>."
   },
   "common": {
-    "contactMe": "Contáctame",
-    "viewProject": "Ver Proyectos"
+    "footer": {
+      "copy": "Made with care · Astro + Tailwind",
+      "next": "Siguiente"
+    }
   },
   "home": {
-    "currentRole": "Rol Actual",
-    "viewResume": "Ver Experiencia Completa",
+    "stats": {
+      "experience": "Años de experiencia",
+      "projects": "Proyectos enviados",
+      "techs": "Tecnologías en stack",
+      "drive": "Ganas de construir"
+    },
+    "nowStrip": {
+      "label": "AHORA — Arquitecto de Soluciones IA @ BAACC Systems",
+      "stack": "LLMs · RAG · MCP · MLOps"
+    },
     "aboutSection": {
       "title": "Sobre mí",
-      "learnMore": "Más información",
-      "shortBio": "Ingeniero de Software y Datos enfocado en crear productos con IA, sistemas escalables y experiencias claras para el negocio.",
+      "heading": "Software, datos <em>&</em> IA aplicada al mundo real.",
       "bio": {
-        "paragraph1": "Soy un profesional en Ingeniería de Software y Datos con un sólido historial en el diseño, construcción y escalado de soluciones impulsadas por datos e IA que generan valor empresarial real.",
-        "paragraph2": "A lo largo de mi carrera, he trabajado en la intersección de la ingeniería de software, la ciencia de datos y la automatización—liderando iniciativas que transforman desafíos complejos en sistemas robustos y escalables. Mi experiencia abarca desarrollo backend y frontend, ingeniería de datos e inteligencia artificial aplicada, con un enfoque consistente en arquitectura limpia, eficiencia y mantenibilidad a largo plazo.",
+        "paragraph1": "Soy un profesional en <strong>Ingeniería de Software y Datos</strong> con un sólido historial en el diseño, construcción y escalado de soluciones impulsadas por datos e IA que generan valor empresarial real.",
+        "paragraph2": "A lo largo de mi carrera, he trabajado en la intersección de la ingeniería de software, la ciencia de datos y la automatización — liderando iniciativas que transforman desafíos complejos en <strong>sistemas robustos y escalables</strong>. Mi experiencia abarca desarrollo backend y frontend, ingeniería de datos e inteligencia artificial aplicada, con un enfoque consistente en arquitectura limpia, eficiencia y mantenibilidad a largo plazo.",
         "paragraph3": "Más allá de la ejecución, contribuyo activamente al intercambio de conocimientos y al desarrollo de talento. He impartido conferencias y charlas académicas en universidades sobre Inteligencia Artificial y Ciencia de Datos, ayudando a cerrar la brecha entre la teoría y la aplicación en el mundo real."
       }
     }
