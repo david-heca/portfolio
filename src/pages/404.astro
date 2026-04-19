@@ -1,7 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
-import { PiHouseLine, PiArrowLeft } from "react-icons/pi";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -11,102 +10,42 @@ const description = t("notFound.description");
 ---
 
 <Layout title={title} description={description} lang={lang}>
-  <section class="flex items-center justify-center min-h-[70vh] relative overflow-hidden">
-    <!-- Ambient glow -->
-    <div
-      class="hidden md:block absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 sm:w-150 sm:h-100 rounded-full opacity-20 pointer-events-none blur-3xl"
-      style="background: radial-gradient(ellipse, var(--color-accent), transparent 70%);"
+  <section class="container-editorial" style="padding: 96px 0 120px; position: relative; z-index: 5;">
+    <div class="section-label" style="margin-bottom: 24px;">// 404</div>
+
+    <h1
+      style="font-size: clamp(96px, 22vw, 320px); font-weight: 900; line-height: 0.88; letter-spacing: -0.05em; margin: 0 0 32px; color: var(--color-ink);"
     >
-    </div>
+      4<span style="color: var(--color-accent); font-style: italic; font-weight: 300;">0</span>4
+    </h1>
 
-    <div class="relative z-10 text-center max-w-2xl mx-auto px-4">
-      <!-- Glitch-style 404 -->
-      <div class="relative mb-8">
-        <h1
-          class="text-[8rem] md:text-[13rem] font-bold tracking-tighter select-none text-gradient relative z-10"
-          style="line-height: 0.85;"
-        >
-          404
-        </h1>
+    <p style="font-size: clamp(22px, 4vw, 40px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; color: var(--color-ink); max-width: 24ch; margin: 0 0 16px;">
+      {t("notFound.subtitle")}
+    </p>
 
-        <!-- Decorative code lines behind the number -->
-        <div
-          class="absolute inset-0 flex flex-col justify-center opacity-[0.06] pointer-events-none font-mono text-[0.5rem] sm:text-xs overflow-hidden"
-          aria-hidden="true"
-        >
-          {
-            Array.from({ length: 10 }).map((_, i) => (
-              <span class="block whitespace-nowrap px-2">
-                {`${String(i + 1).padStart(2, "0")} | const route = await resolve(request.url);`}
-              </span>
-            ))
-          }
-        </div>
-      </div>
+    <p style="font-size: 16px; color: var(--color-ink-2); max-width: 50ch; margin: 0 0 48px; line-height: 1.55;">
+      {t("notFound.description")}
+    </p>
 
-      <!-- Terminal-style message -->
-      <div
-        class="rounded-2xl p-4 sm:p-6 mb-8 text-left font-mono text-xs sm:text-sm overflow-hidden"
-        style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
+    <pre style="font-family: var(--font-mono); font-size: 12px; color: var(--color-ink-3); padding: 20px 24px; border: 1px solid var(--color-line); background: var(--color-bg); max-width: 52ch; margin: 0 0 40px; overflow-x: auto;">
+<span style="color: var(--color-accent);">$</span> curl -I {Astro.url.pathname}
+<span>HTTP/1.1 404 Not Found</span>
+
+<span style="color: var(--color-accent);">$</span> {t("notFound.terminalComment")}
+▋</pre>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+      <button
+        onclick="history.back()"
+        class="contact__cta-btn press-effect"
+        style="background: transparent; color: var(--color-ink); border: 1px solid var(--color-line-strong);"
       >
-        <div class="flex items-center gap-2 mb-4">
-          <span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span>
-          <span class="w-2.5 h-2.5 rounded-full bg-yellow-500/80"></span>
-          <span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span>
-          <span
-            class="ml-2 text-xs"
-            style={`color: var(--color-text-tertiary);`}>terminal</span
-          >
-        </div>
-        <div class="space-y-1" style={`color: var(--color-text-tertiary);`}>
-          <p class="truncate">
-            <span style={`color: var(--color-accent);`}>$</span>{" "}curl -I {Astro.url.pathname}
-          </p>
-          <p>
-            <span class="text-red-400">HTTP/1.1 404 Not Found</span>
-          </p>
-          <p>
-            <span style={`color: var(--color-accent);`}>$</span>
-            {" "}{t("notFound.terminalComment")}
-          </p>
-          <p class="animate-pulse">▋</p>
-        </div>
-      </div>
-
-      <!-- Subtitle -->
-      <h2
-        class="text-xl md:text-2xl font-bold mb-3 tracking-tight"
-        style={`color: var(--color-text-primary);`}
-      >
-        {t("notFound.subtitle")}
-      </h2>
-
-      <p class="mb-10" style={`color: var(--color-text-secondary);`}>
-        {t("notFound.description")}
-      </p>
-
-      <!-- Action Buttons -->
-      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
-        <button
-          onclick="history.back()"
-          class="w-full sm:w-auto px-6 py-3 rounded-xl font-medium transition-all duration-200 flex items-center justify-center gap-2 group/btn hover-border"
-          style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); color: var(--color-text-secondary);`}
-        >
-          <PiArrowLeft
-            className="w-5 h-5 group-hover/btn:-translate-x-1 transition-transform"
-          />
-          {t("notFound.backButton")}
-        </button>
-
-        <a
-          href={lang === "es" ? "/" : "/en"}
-          class="w-full sm:w-auto px-6 py-3 rounded-xl text-white font-medium transition-all duration-200 flex items-center justify-center gap-2 hover:scale-105"
-          style="background: linear-gradient(135deg, var(--color-accent), #0E7490);"
-        >
-          <PiHouseLine className="w-5 h-5" />
-          {t("notFound.homeButton")}
-        </a>
-      </div>
+        ← {t("notFound.backButton")}
+      </button>
+      <a href={lang === "es" ? "/" : "/en"} class="contact__cta-btn press-effect">
+        <span class="dot" aria-hidden="true"></span>
+        {t("notFound.homeButton")}
+      </a>
     </div>
   </section>
 </Layout>

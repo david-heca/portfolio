@@ -1,18 +1,6 @@
 ---
 import { useTranslations } from "@i18n/utils";
-import {
-  PiGraduationCap,
-  PiCalendar,
-  PiMapPin,
-  PiChartBar,
-  PiArrowUpRight,
-  PiBooks,
-  PiLightning,
-  PiStar,
-  PiTrophy,
-  PiInfinityBold,
-  PiTranslate,
-} from "react-icons/pi";
+import PageFooter from "@ui/PageFooter.astro";
 
 export interface Props {
   lang: "es" | "en";
@@ -21,434 +9,82 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const getStatus = (status: string) => {
-  const statusMap: Record<string, string> = {
-    graduate: t("education.status.graduate"),
-    selfTaught: t("education.status.selfTaught"),
-  };
-  return statusMap[status] || status;
-};
+interface Item {
+  year: string;
+  title: string;
+  place: string;
+  desc: string;
+}
 
-const getLevel = (level: string) => {
-  const levelMap: Record<string, string> = {
-    fundamentals: t("education.levels.fundamentals"),
-    intermediate: t("education.levels.intermediate"),
-  };
-  return levelMap[level] || level;
-};
-
-const education = [
+const items: Item[] = [
   {
-    id: 1,
-    institution: t("education.list.platzi.institution"),
-    degree: t("education.list.platzi.degree"),
-    period: t("education.list.platzi.period"),
-    status: getStatus("selfTaught"),
-    description: t("education.list.platzi.description"),
-    grade: "N/A",
-    location: t("education.list.platzi.location"),
-    icon: PiLightning,
-    accentClass: "text-emerald-500",
-    borderColor: "#10B981",
+    year: t("education.list.tesco.period"),
+    title: t("education.list.tesco.degree"),
+    place: t("education.list.tesco.institution"),
+    desc: t("education.list.tesco.description"),
   },
   {
-    id: 2,
-    institution: t("education.list.tesco.institution"),
-    degree: t("education.list.tesco.degree"),
-    period: t("education.list.tesco.period"),
-    status: getStatus("graduate"),
-    description: t("education.list.tesco.description"),
-    grade: "96/100",
-    location: t("education.list.tesco.location"),
-    icon: PiGraduationCap,
-    accentClass: "text-cyan-500 dark:text-cyan-400",
-    borderColor: "#06B6D4",
+    year: t("education.list.platzi.period"),
+    title: t("education.list.platzi.degree"),
+    place: t("education.list.platzi.institution"),
+    desc: t("education.list.platzi.description"),
   },
   {
-    id: 3,
-    institution: t("education.list.cecytem.institution"),
-    degree: t("education.list.cecytem.degree"),
-    period: t("education.list.cecytem.period"),
-    status: getStatus("graduate"),
-    description: t("education.list.cecytem.description"),
-    grade: "8.8/10",
-    location: t("education.list.cecytem.location"),
-    icon: PiBooks,
-    accentClass: "text-violet-500",
-    borderColor: "#8B5CF6",
+    year: t("education.list.cecytem.period"),
+    title: t("education.list.cecytem.degree"),
+    place: t("education.list.cecytem.institution"),
+    desc: t("education.list.cecytem.description"),
+  },
+  {
+    year: "2024",
+    title: t("education.certifications.azure.name"),
+    place: "Microsoft · " + t("education.labels.featured"),
+    desc: "Azure · Cloud Computing · Networking · Security",
+  },
+  {
+    year: "2022",
+    title: t("education.certifications.python.name"),
+    place: "Michigan University · Coursera",
+    desc: "Python · Data Structures · SQL",
   },
 ];
 
-const certifications = [
-  {
-    id: 1,
-    name: t("education.certifications.azure.name"),
-    issuer: "Microsoft",
-    date: "2024",
-    credentialId: "AZ-900-123456",
-    verifyUrl:
-      "https://www.certiport.com/portal/Pages/PrintTranscriptInfo.aspx?action=Cert&id=414&cvid=r+dkpNaAIMQHhll3/TFLLw==",
-    skills: ["Azure", "Cloud Computing", "Networking", "Security"],
-    level: getLevel("fundamentals"),
-    featured: true,
-  },
-  {
-    id: 2,
-    name: t("education.certifications.python.name"),
-    issuer: "Michigan University",
-    date: "2022",
-    credentialId: "J7EMYHGRRUH8",
-    verifyUrl:
-      "https://www.coursera.org/account/accomplishments/verify/J7EMYHGRRUH8",
-    skills: ["Python", "Data Structures", "SQL"],
-    level: getLevel("fundamentals"),
-    featured: true,
-  },
-];
-
-const featuredCerts = certifications;
-
-const languages = [
-  {
-    name: t("skills.languageSkills.spanish"),
-    level: t("skills.levels.native"),
-  },
-  {
-    name: t("skills.languageSkills.english"),
-    level: "B2 - Upper Intermediate",
-  },
-];
+const headingHtml = t("education.heading");
 ---
 
-<section>
-  <!-- Header -->
-  <div class="reveal mb-16">
-    <span
-      class="font-mono text-xs uppercase tracking-widest block mb-3"
-      style={`color: var(--color-accent);`}
-    >
-      // 03. {t("nav.education")}
-    </span>
-    <h1
-      class="text-3xl md:text-5xl font-bold tracking-tight mb-3"
-      style={`color: var(--color-text-primary);`}
-    >
-      {t("education.title")}
-    </h1>
-    <p class="text-lg" style={`color: var(--color-text-secondary);`}>
-      {t("education.subtitle")}
-    </p>
-  </div>
+<section class="edu container-editorial">
+  <div class="reveal section-label">// 03. {t("nav.education")}</div>
+  <h1 class="reveal reveal-delay-1 edu__h" set:html={headingHtml}></h1>
+  <p class="reveal reveal-delay-2 work__sub">{t("education.description")}</p>
 
-  <!-- Stats Card -->
-  <div
-    class="rounded-2xl p-6 md:p-8 mb-12"
-    style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default);`}
-  >
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
-      <div class="reveal text-center" style="transition-delay: 0.1s;">
-        <p
-          class="text-4xl md:text-5xl font-bold mb-1"
-          style={`color: var(--color-text-primary);`}
-        >
-          3
-        </p>
-        <p
-          class="font-mono text-xs uppercase tracking-wider"
-          style={`color: var(--color-text-tertiary);`}
-        >
-          {t("education.stats.degrees")}
-        </p>
-      </div>
-      <div class="reveal text-center" style="transition-delay: 0.2s;">
-        <p
-          class="text-4xl md:text-5xl font-bold mb-1"
-          style={`color: var(--color-text-primary);`}
-        >
-          5+
-        </p>
-        <p
-          class="font-mono text-xs uppercase tracking-wider"
-          style={`color: var(--color-text-tertiary);`}
-        >
-          {t("education.stats.certifications")}
-        </p>
-      </div>
-      <div class="reveal text-center" style="transition-delay: 0.3s;">
-        <p
-          class="text-4xl md:text-5xl font-bold mb-1"
-          style={`color: var(--color-text-primary);`}
-        >
-          8+
-        </p>
-        <p
-          class="font-mono text-xs uppercase tracking-wider"
-          style={`color: var(--color-text-tertiary);`}
-        >
-          {t("education.stats.yearsLearning")}
-        </p>
-      </div>
-      <div class="reveal text-center" style="transition-delay: 0.4s;">
-        <p
-          class="text-4xl md:text-5xl font-bold mb-1"
-          style={`color: var(--color-accent);`}
-        >
-          <PiInfinityBold className="inline w-10 h-10" />
-        </p>
-        <p
-          class="font-mono text-xs uppercase tracking-wider"
-          style={`color: var(--color-text-tertiary);`}
-        >
-          {t("education.stats.curiosity")}
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <!-- Languages -->
-  <div class="mb-12">
-    <h2
-      class="font-mono text-xs uppercase tracking-widest mb-6 scroll-slide-in"
-      style={`color: var(--color-text-tertiary);`}
-    >
-      {t("skills.sections.languages")}
-    </h2>
-
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {
-        languages.map((language, i) => (
-          <div
-            class="reveal rounded-2xl p-6 transition-all duration-300 hover-card spotlight-card"
-            style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: ${0.1 + i * 0.15}s;`}
-          >
-            <div class="flex items-start justify-between mb-4">
-              <PiTranslate
-                className={`w-6 h-6 ${
-                  language.level === t("skills.levels.native")
-                    ? "text-emerald-500"
-                    : "text-cyan-500 dark:text-cyan-400"
-                }`}
-              />
-              <span
-                class="font-mono text-xs px-2.5 py-1 rounded-md"
-                style={
-                  language.level === t("skills.levels.native")
-                    ? `background-color: #10B98120; color: #10B981;`
-                    : `background-color: var(--color-accent-muted); color: var(--color-accent);`
-                }
-              >
-                {language.level === t("skills.levels.native")
-                  ? t("skills.levels.native")
-                  : "B2"}
-              </span>
-            </div>
-
-            <h3
-              class="text-lg font-bold mb-1"
-              style={`color: var(--color-text-primary);`}
-            >
-              {language.name}
-            </h3>
-            <p
-              class="text-sm mb-4"
-              style={`color: var(--color-text-tertiary);`}
-            >
-              {language.level === t("skills.levels.native")
-                ? t("skills.languageSkills.nativeDescription")
-                : t("skills.languageSkills.professionalDescription")}
-            </p>
-
-            <div
-              class="w-full rounded-full h-1 overflow-hidden"
-              style={`background-color: var(--color-bg-tertiary);`}
-            >
-              <div
-                class={`h-1 rounded-full scroll-fill-bar ${
-                  language.level === t("skills.levels.native")
-                    ? "w-full"
-                    : "w-[70%]"
-                }`}
-                style={
-                  language.level === t("skills.levels.native")
-                    ? "background-color: #10B981; transform-origin: left;"
-                    : `background-color: var(--color-accent); transform-origin: left;`
-                }
-              />
-            </div>
+  <div class="edu__grid">
+    <div>
+      {items.map((it, i) => (
+        <div class={`timeline__item reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+          <div class="timeline__year">{it.year}</div>
+          <div>
+            <div class="timeline__title">{it.title}</div>
+            <div class="timeline__place">{it.place}</div>
+            <div class="timeline__desc">{it.desc}</div>
           </div>
-        ))
-      }
+        </div>
+      ))}
     </div>
-  </div>
-
-  <!-- Academic Background -->
-  <div class="mb-12">
-    <h2
-      class="font-mono text-xs uppercase tracking-widest mb-6 scroll-slide-in"
-      style={`color: var(--color-text-tertiary);`}
-    >
-      {t("education.sections.academic")}
-    </h2>
-
-    <div class="space-y-4">
-      {
-        education.map((edu, index) => (
-          <div
-            class="reveal rounded-2xl p-6 md:p-8 border-l-2 transition-all duration-300 hover-card spotlight-card"
-            style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: ${index * 0.15}s;`}
-          >
-            <div class="flex items-start justify-between mb-4">
-              <div class="flex items-center gap-3">
-                <edu.icon className={`w-6 h-6 shrink-0 mt-1 ${edu.accentClass}`} />
-                <div>
-                  <h3
-                    class="text-lg md:text-xl font-bold"
-                    style={`color: var(--color-text-primary);`}
-                  >
-                    {edu.degree}
-                  </h3>
-                  <p
-                    class="text-sm font-medium"
-                    style={`color: var(--color-text-secondary);`}
-                  >
-                    {edu.institution}
-                  </p>
-                </div>
-              </div>
-              <span
-                class="font-mono text-xs px-2.5 py-1 rounded-md shrink-0"
-                style={
-                  edu.status.includes("Autodidacta") ||
-                  edu.status.includes("Self")
-                    ? `background-color: #10B98120; color: #10B981;`
-                    : `background-color: var(--color-accent-muted); color: var(--color-accent);`
-                }
-              >
-                {edu.status}
-              </span>
-            </div>
-
-            <p
-              class="text-sm leading-relaxed mb-4"
-              style={`color: var(--color-text-tertiary);`}
-            >
-              {edu.description}
-            </p>
-
-            <div class="divider mb-4" />
-
-            <div class="flex flex-wrap gap-4">
-              <div class="flex items-center gap-1.5">
-                <PiCalendar className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500" />
-                <span
-                  class="font-mono text-xs"
-                  style={`color: var(--color-text-tertiary);`}
-                >
-                  {edu.period}
-                </span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <PiMapPin className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500" />
-                <span
-                  class="font-mono text-xs"
-                  style={`color: var(--color-text-tertiary);`}
-                >
-                  {edu.location}
-                </span>
-              </div>
-              <div class="flex items-center gap-1.5">
-                <PiChartBar className="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500" />
-                <span
-                  class="font-mono text-xs"
-                  style={`color: var(--color-text-tertiary);`}
-                >
-                  {edu.grade}
-                </span>
-              </div>
-            </div>
-          </div>
-        ))
-      }
-    </div>
-  </div>
-
-  <!-- Certifications -->
-  <div>
-    <h2
-      class="font-mono text-xs uppercase tracking-widest mb-6 scroll-slide-in"
-      style={`color: var(--color-text-tertiary);`}
-    >
-      {t("education.sections.certifications")}
-    </h2>
-
-    <!-- Featured -->
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-      {
-        featuredCerts.map((cert, index) => (
-          <a
-            href={cert.verifyUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="reveal group block rounded-2xl p-6 transition-all duration-300 hover-card spotlight-card tilt-card"
-            style={`background-color: var(--color-bg-secondary); border: 1px solid var(--color-border-default); transition-delay: ${index * 0.1}s;`}
-          >
-            <div class="flex items-start justify-between mb-4">
-              <PiTrophy className="w-6 h-6 text-amber-500" />
-              <div class="flex items-center gap-1.5">
-                <PiStar className="w-3.5 h-3.5 text-amber-500" />
-                <span
-                  class="font-mono text-xs"
-                  style={`color: var(--color-text-tertiary);`}
-                >
-                  {t("education.labels.featured")}
-                </span>
-              </div>
-            </div>
-
-            <h3
-              class="text-lg font-bold mb-2 leading-tight"
-              style={`color: var(--color-text-primary);`}
-            >
-              {cert.name}
-            </h3>
-            <p
-              class="text-sm mb-4"
-              style={`color: var(--color-text-tertiary);`}
-            >
-              {cert.issuer} · {cert.date}
-            </p>
-
-            <div class="flex flex-wrap gap-1.5 mb-4">
-              {cert.skills.map((skill) => (
-                <span
-                  class="font-mono text-xs px-2 py-0.5 rounded"
-                  style={`background-color: var(--color-bg-tertiary); color: var(--color-text-tertiary);`}
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
-
-            <div class="divider mb-4" />
-
-            <div class="flex items-center justify-between">
-              <span
-                class="font-mono text-xs"
-                style={`color: var(--color-text-tertiary);`}
-              >
-                {cert.credentialId.slice(0, 12)}...
-              </span>
-              <span
-                class="flex items-center gap-1 text-sm group-hover:gap-2 transition-all"
-                style={`color: var(--color-text-secondary);`}
-              >
-                {t("education.labels.viewCredential")}
-                <PiArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-              </span>
-            </div>
-          </a>
-        ))
-      }
-    </div>
+    <aside>
+      <div class="side-card reveal">
+        <div class="side-card__k">{t("education.sideCards.languagesTitle")}</div>
+        <div class="side-card__v" set:html={t("education.sideCards.languagesBody")}></div>
+      </div>
+      <div class="side-card reveal reveal-delay-1">
+        <div class="side-card__k">{t("education.sideCards.interestsTitle")}</div>
+        <div class="side-card__v">{t("education.sideCards.interestsBody")}</div>
+      </div>
+      <div class="side-card reveal reveal-delay-2">
+        <div class="side-card__k">{t("education.sideCards.philosophyTitle")}</div>
+        <div class="side-card__v" set:html={t("education.sideCards.philosophyBody")}></div>
+      </div>
+    </aside>
   </div>
 </section>
+
+<PageFooter lang={lang} num="03" />
