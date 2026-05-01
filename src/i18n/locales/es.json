@@ -6,27 +6,27 @@
   "meta": {
     "home": {
       "title": "David Herrera - Ingeniero en Tecnologías de la Información & Arquitecto de Soluciones IA",
-      "description": "Portfolio de David Herrera. Ingeniero especializado en desarrollo de soluciones tecnológicas innovadoras y arquitecturas de inteligencia artificial."
+      "description": "Arquitecto de Soluciones IA y Ingeniero de Software con base en CDMX. Diseño y construyo sistemas con LLMs, RAG, MCP, .NET, Python y Azure que entregan valor en producción."
     },
     "skills": {
       "title": "Habilidades - David Herrera",
-      "description": "Tecnologías y habilidades que domino como desarrollador."
+      "description": "Stack técnico: .NET, Python, TypeScript, React, Azure, PostgreSQL, LLMs, RAG, MCP y MLOps."
     },
     "projects": {
       "title": "Proyectos - David Herrera",
-      "description": "Proyectos innovadores desarrollados con las últimas tecnologías."
+      "description": "Sistemas que he diseñado y enviado: plataformas RAG empresariales, software industrial, apps Android con RFID y trazabilidad automotriz."
     },
     "work": {
       "title": "Experiencia - David Herrera",
-      "description": "Mi experiencia profesional en empresas tecnológicas."
+      "description": "Trayectoria profesional: de becario a Arquitecto de Soluciones IA en BAACC Systems. LLMs, MCP, RAG, MLOps, .NET, Python, Azure."
     },
     "education": {
       "title": "Formación - David Herrera",
-      "description": "Formación académica y certificaciones en tecnología."
+      "description": "Ingeniería en TIC (TESCo - TecNM), Técnico en Programación (CECyTEM) y formación continua en IA, MLOps y desarrollo en Platzi. Certificaciones Azure AZ-900 y Python."
     },
     "contact": {
       "title": "Contacto - David Herrera",
-      "description": "Conectemos y exploremos oportunidades de colaboración."
+      "description": "Disponible para proyectos freelance, colaboraciones y oportunidades full-time. Email, LinkedIn, GitHub y CV (ES/EN) en PDF."
     }
   },
   "nav": {
@@ -197,7 +197,11 @@
       "email": "// Email",
       "linkedin": "// LinkedIn",
       "github": "// GitHub",
-      "twitter": "// X / Twitter"
+      "twitter": "// X / Twitter",
+      "cvEs": "// Currículum (ES)",
+      "cvEsValue": "Descargar PDF",
+      "cvEn": "// Resume (EN)",
+      "cvEnValue": "Download PDF"
     },
     "cta": {
       "button": "Envíame un mensaje",
