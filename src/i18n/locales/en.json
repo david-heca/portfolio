@@ -6,27 +6,27 @@
   "meta": {
     "home": {
       "title": "David Herrera - IT Engineer & AI Solutions Architect",
-      "description": "David Herrera's portfolio. Engineer specialized in developing innovative technological solutions and artificial intelligence architectures."
+      "description": "AI Solutions Architect and Software Engineer based in Mexico City. I design and ship systems built on LLMs, RAG, MCP, .NET, Python and Azure that deliver value in production."
     },
     "skills": {
       "title": "Skills - David Herrera",
-      "description": "Technologies and skills I master as a developer."
+      "description": "Technical stack: .NET, Python, TypeScript, React, Azure, PostgreSQL, LLMs, RAG, MCP and MLOps."
     },
     "projects": {
       "title": "Projects - David Herrera",
-      "description": "Innovative projects developed with the latest technologies."
+      "description": "Systems I've designed and shipped: enterprise RAG platforms, industrial software, Android RFID apps and automotive traceability."
     },
     "work": {
       "title": "Experience - David Herrera",
-      "description": "My professional experience in technology companies."
+      "description": "Professional journey: from intern to AI Solutions Architect at BAACC Systems. LLMs, MCP, RAG, MLOps, .NET, Python, Azure."
     },
     "education": {
       "title": "Education - David Herrera",
-      "description": "Academic background and certifications in technology."
+      "description": "ICT Engineering (TESCo - TecNM), Programming Technician (CECyTEM) and continuous learning in AI, MLOps and development at Platzi. Azure AZ-900 and Python certifications."
     },
     "contact": {
       "title": "Contact - David Herrera",
-      "description": "Let's connect and explore collaboration opportunities."
+      "description": "Available for freelance projects, collaborations and full-time opportunities. Email, LinkedIn, GitHub and Resume (ES/EN) in PDF."
     }
   },
   "nav": {
@@ -197,7 +197,11 @@
       "email": "// Email",
       "linkedin": "// LinkedIn",
       "github": "// GitHub",
-      "twitter": "// X / Twitter"
+      "twitter": "// X / Twitter",
+      "cvEs": "// Resume (ES)",
+      "cvEsValue": "Descargar PDF",
+      "cvEn": "// Resume (EN)",
+      "cvEnValue": "Download PDF"
     },
     "cta": {
       "button": "Send me a message",
