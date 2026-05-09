@@ -85,13 +85,16 @@ const personSchema = {
     <meta name="author" content="David Herrera" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="googlebot" content="index, follow" />
-    <meta name="theme-color" content="#f5f3ee" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#f5f1ea" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#0e0d0b" media="(prefers-color-scheme: dark)" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://unpkg.com" crossorigin />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" />
+    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.2/src/duotone/style.css" />
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="canonical" href={canonicalURL} />
@@ -191,11 +194,13 @@ const personSchema = {
           return path === "/en" ? "/" : path.replace(/^\/en\//, "/") || "/";
         }
 
-        if (stored) {
+        // explicit ES or EN preference: honor it
+        if (stored === "es" || stored === "en") {
           if (stored !== currentLang) window.location.replace(buildPath(stored));
           return;
         }
 
+        // "auto" or unset: detect from navigator (browser/system config)
         var langs = navigator.languages || [navigator.language];
         var detected = "es";
         for (var i = 0; i < langs.length; i++) {

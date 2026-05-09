@@ -1,5 +1,7 @@
 ---
 import { useTranslations } from "@i18n/utils";
+import PageHeader from "@ui/PageHeader.astro";
+import PageFooter from "@ui/PageFooter.astro";
 
 export interface Props {
   lang: "es" | "en";
@@ -8,66 +10,121 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-interface Channel {
-  k: string;
-  v: string;
-  href: string;
-  external?: boolean;
-}
-
 const email = "hello@davidherrera.dev";
 
-const channels: Channel[] = [
-  { k: t("contact.channels.email"), v: email, href: `mailto:${email}` },
-  { k: t("contact.channels.linkedin"), v: "/in/david-heca", href: "https://www.linkedin.com/in/david-heca/", external: true },
-  { k: t("contact.channels.github"), v: "@david-heca", href: "https://github.com/david-heca", external: true },
-  { k: t("contact.channels.twitter"), v: "@david_heca_", href: "https://x.com/david_heca_", external: true },
-  { k: t("contact.channels.cvEs"), v: t("contact.channels.cvEsValue"), href: "/assets/documents/davidherrera-spanish.pdf", external: true },
-  { k: t("contact.channels.cvEn"), v: t("contact.channels.cvEnValue"), href: "/assets/documents/davidherrera-english.pdf", external: true },
+const elsewhere = [
+  { k: "github", v: "@david-heca", href: "https://github.com/david-heca" },
+  { k: "linkedin", v: "in/david-heca", href: "https://www.linkedin.com/in/david-heca/" },
+  { k: "x / twitter", v: "@david_heca_", href: "https://x.com/david_heca_" },
+  { k: "email", v: email, href: `mailto:${email}` },
 ];
 
-const headingHtml = t("contact.heading");
-const footerGiantHtml = t("contact.footerGiant");
-const year = new Date().getFullYear();
+const cvFiles = [
+  { lab: "PDF · ES", href: "/assets/documents/davidherrera-spanish.pdf" },
+  { lab: "PDF · EN", href: "/assets/documents/davidherrera-english.pdf" },
+];
 ---
 
+<PageHeader
+  idx="04"
+  kicker={t("nav.contact")}
+  title={t("contact.headerTitle")}
+  italic={t("contact.headerItalic")}
+  sub={t("contact.description")}
+/>
+
 <section class="contact container-editorial">
-  <div class="reveal section-label">// 04. {t("nav.contact")}</div>
-  <h1 class="reveal reveal-delay-1 contact__h" set:html={headingHtml}></h1>
-  <p class="reveal reveal-delay-2 contact__sub">{t("contact.description")}</p>
+  <div class="contact__split">
+    <!-- left: invitation + CTA + meta -->
+    <div class="contact__intro reveal">
+      <div class="contact__invite hand lg">
+        <i class="ph-duotone ph-paper-plane-tilt"></i>
+        <span set:html={t("contact.invite")}></span>
+      </div>
 
-  <div class="contact__grid">
-    {channels.map((c, i) => (
-      <a
-        href={c.href}
-        target={c.external ? "_blank" : undefined}
-        rel={c.external ? "noopener noreferrer" : undefined}
-        class={`contact__cell reveal reveal-delay-${Math.min(i + 1, 4)}`}
-      >
-        <div class="contact__cell-k">{c.k}</div>
-        <div class="contact__cell-v">{c.v}</div>
-        <div class="contact__cell-arrow" aria-hidden="true">↗</div>
-      </a>
-    ))}
-  </div>
+      <div class="contact__cta">
+        <a href={`mailto:${email}`} class="contact__cta-btn press-effect">
+          <span class="dot"></span>
+          {t("contact.cta.button")}
+          <span aria-hidden="true">→</span>
+        </a>
+        <div class="contact__cta-note">{t("contact.cta.note")}</div>
+      </div>
 
-  <div class="contact__cta reveal">
-    <a href={`mailto:${email}`} class="contact__cta-btn press-effect">
-      <span class="dot" aria-hidden="true"></span>
-      {t("contact.cta.button")}
-      <span aria-hidden="true">→</span>
-    </a>
-    <div class="contact__cta-note">{t("contact.cta.note")}</div>
+      <div class="contact__intro-meta meta-row">
+        <span class="icon-row"><i class="ph-duotone ph-map-pin"></i>{t("hero.metaBar.city")}</span>
+        <span class="sep">/</span>
+        <span class="icon-row"><i class="ph-duotone ph-clock"></i>GMT-6</span>
+        <span class="sep">/</span>
+        <span class="icon-row" style="color: var(--color-accent);">
+          <span class="pulse"></span>
+          {t("hero.metaBar.status")}
+        </span>
+      </div>
+    </div>
+
+    <!-- right: channels stack -->
+    <div class="contact__channels">
+      <div class="box accent contact__direct reveal">
+        <div class="label accent">{t("contact.directLabel")}</div>
+        <div class="contact__direct-email">
+          <a href={`mailto:${email}`}>hello@<br />davidherrera.dev</a>
+        </div>
+        <div class="meta-row" style="margin-top: 12px;">
+          <a href={`mailto:${email}`}>copy</a>
+          <span class="sep">/</span>
+          <a href={`mailto:${email}`}>compose</a>
+        </div>
+      </div>
+
+      <div class="box solid contact__elsewhere reveal reveal-delay-1">
+        <div class="label accent">{t("contact.elsewhereLabel")}</div>
+        <div class="contact__elsewhere-grid">
+          {elsewhere.map((e) => (
+            <a
+              href={e.href}
+              target={e.href.startsWith("mailto:") ? undefined : "_blank"}
+              rel={e.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+              class="contact__elsewhere-item"
+            >
+              <span class="label">/ {e.k}</span>
+              <span class="hand sm">{e.v} ↗</span>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="box solid contact__cv reveal reveal-delay-2">
+        <div class="contact__cv-head">
+          <div class="label accent">{t("contact.cvLabel")}</div>
+          <span class="hand dim sm">{t("contact.cvUpdated")}</span>
+        </div>
+        <div class="contact__cv-grid">
+          {cvFiles.map((f) => (
+            <a
+              href={f.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="box contact__cv-item"
+            >
+              <div class="contact__cv-label">↓ {f.lab}</div>
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="box contact__avail reveal reveal-delay-3">
+        <div>
+          <div class="label">{t("contact.availLabel")}</div>
+          <div class="hand sm" style="margin-top: 4px;">{t("contact.availText")}</div>
+        </div>
+        <span class="chip accent">
+          <span class="dot"></span>
+          {t("contact.open")}
+        </span>
+      </div>
+    </div>
   </div>
 </section>
 
-<footer class="footer">
-  <div class="footer__inner" style="padding-top: 72px; align-items: flex-end;">
-    <div class="footer__giant" set:html={footerGiantHtml}></div>
-    <div style="text-align: right;">
-      © {year} David Herrera<br />
-      v.2026 · Astro + Tailwind + React<br />
-      04 / 04
-    </div>
-  </div>
-</footer>
+<PageFooter lang={lang} num="04" />

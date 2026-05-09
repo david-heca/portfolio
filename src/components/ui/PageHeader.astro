@@ -1,0 +1,23 @@
+---
+interface Props {
+  idx: string;
+  kicker: string;
+  title: string;
+  italic: string;
+  sub: string;
+}
+
+const { idx, kicker, title, italic, sub } = Astro.props;
+---
+
+<div class="page-header container-editorial">
+  <div>
+    <div class="reveal page-header__kicker label accent">// {idx}. {kicker}</div>
+    <h1 class="reveal reveal-delay-1 page-header__title">
+      {title}{" "}<span class="accent">{italic}</span><span class="dot">.</span>
+    </h1>
+  </div>
+  <div class="reveal reveal-delay-2 page-header__sub">
+    {sub}
+  </div>
+</div>

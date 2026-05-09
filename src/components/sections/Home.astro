@@ -1,8 +1,7 @@
 ---
-import { Image } from "astro:assets";
 import { useTranslations } from "@i18n/utils";
-import TechRing from "@ui/TechRing.astro";
-import MetaBar from "@ui/MetaBar.astro";
+import { Image } from "astro:assets";
+import Stamp from "@ui/Stamp.astro";
 import PageFooter from "@ui/PageFooter.astro";
 
 export interface Props {
@@ -14,89 +13,187 @@ const t = useTranslations(lang);
 
 const creditsRows = ["backend", "frontend", "cloud", "ai"] as const;
 
-const roleHtml = t("hero.role");
 const aboutHeadingHtml = t("home.aboutSection.heading");
 const bio1Html = t("home.aboutSection.bio.paragraph1");
 const bio2Html = t("home.aboutSection.bio.paragraph2");
 const bio3Html = t("home.aboutSection.bio.paragraph3");
+
+const stack = [
+  { icon: "ph-code", label: ".NET" },
+  { icon: "ph-snake", label: "Python" },
+  { icon: "ph-cloud", label: "Azure" },
+  { icon: "ph-brain", label: "LLMs" },
+  { icon: "ph-database", label: "RAG" },
+  { icon: "ph-plugs-connected", label: "MCP" },
+];
+
+const taglineItalic = t("hero.tagline.italic");
+const ulinePart = t("hero.tagline.uline");
+const taglineHtml = taglineItalic.replace(
+  ulinePart,
+  `<span class="uline">${ulinePart}</span>`,
+);
 ---
 
 <section class="hero container-editorial">
-  <MetaBar lang={lang} />
-  <TechRing lang={lang} />
+  <div class="hero__split">
+    <!-- LEFT — typography column -->
+    <div class="hero__left">
+      <div class="hero__topline reveal">
+        <div class="meta-row">
+          <span class="label accent">— 00 / {t("nav.home")}</span>
+          <span class="sep">·</span>
+          <span>edition 04 · 2026</span>
+        </div>
+      </div>
 
-  <div class="reveal hero__intro">
-    <span class="live" aria-hidden="true"></span>
-    {t("hero.greeting")}<span style="color: var(--color-ink);">&nbsp;—</span>
-  </div>
+      <div style="position: relative;">
+        <div class="hero__greeting reveal reveal-delay-1">
+          <i class="ph-duotone ph-hand-waving"></i>
+          <span class="hand lg">
+            {t("hero.greeting")}<span style="color: var(--color-accent);">—</span>
+          </span>
+          <span class="label" style="margin-left: 6px;">{t("hero.greetingTail")}</span>
+        </div>
 
-  <h1 class="reveal reveal-delay-1 hero__name">
-    David<br />Herrer<span class="amp">a</span>
-  </h1>
+        <h1 class="hero__name reveal reveal-delay-1">
+          <span class="hero__name-line1">David</span>
+          <span class="hero__name-line2">
+            Herrera<span class="accent-dot">.</span>
+          </span>
+        </h1>
 
-  <div class="hero__tagrow">
-    <div class="reveal reveal-delay-2 hero__role" set:html={roleHtml}></div>
-    <p class="reveal reveal-delay-3 hero__desc">{t("hero.shortDesc")}</p>
-  </div>
-</section>
+        <div class="hero__tagline reveal reveal-delay-2">
+          <div class="hero__tagline-line">
+            <i class="ph-duotone ph-circuitry"></i>
+            <b>{t("hero.tagline.role1")}</b>
+            <span style="color: var(--color-ink-2);">×</span>
+            <b class="accent">{t("hero.tagline.role2")}</b>
+          </div>
+          <span class="hero__tagline-italic" set:html={taglineHtml}></span>
+        </div>
 
-<div class="stats container-editorial">
-  <div class="stat">
-    <div class="stat__num">4<span class="plus">+</span></div>
-    <div class="stat__label">{t("home.stats.experience")}</div>
-  </div>
-  <div class="stat">
-    <div class="stat__num">20<span class="plus">+</span></div>
-    <div class="stat__label">{t("home.stats.projects")}</div>
-  </div>
-  <div class="stat">
-    <div class="stat__num">10</div>
-    <div class="stat__label">{t("home.stats.techs")}</div>
-  </div>
-  <div class="stat">
-    <div class="stat__num">∞</div>
-    <div class="stat__label">{t("home.stats.drive")}</div>
-  </div>
-</div>
+        <div class="hero__stack reveal reveal-delay-3">
+          {stack.map((s) => (
+            <span class="chip">
+              <i class={`ph-duotone ${s.icon}`}></i>
+              {s.label}
+            </span>
+          ))}
+        </div>
+      </div>
 
-<section class="about container-editorial">
-  <div class="reveal about__photo about__photo-corners">
-    <Image
-      src="/assets/profile-photo.webp"
-      alt="David Herrera"
-      width={400}
-      height={533}
-      loading="eager"
-      format="webp"
-      quality={85}
-    />
-  </div>
-  <div>
-    <div class="reveal section-label">// {t("home.aboutSection.title")}</div>
-    <h2 class="reveal reveal-delay-1 about__title" set:html={aboutHeadingHtml}></h2>
-    <div class="about__body">
-      <p class="reveal reveal-delay-2" set:html={bio1Html}></p>
-      <p class="reveal reveal-delay-3" set:html={bio2Html}></p>
-      <p class="reveal reveal-delay-4" set:html={bio3Html}></p>
+      <div class="reveal reveal-delay-4" style="padding-bottom: 8px;">
+        <div class="hero__ctas">
+          <a
+            href={lang === "es" ? "/projects" : "/en/projects"}
+            class="chip accent"
+            data-astro-prefetch="hover"
+          >
+            <i class="ph-duotone ph-arrow-up-right"></i>
+            {t("hero.ctas.work")}
+          </a>
+          <a href={`mailto:hello@davidherrera.dev`} class="chip">
+            <i class="ph-duotone ph-envelope-simple"></i>
+            {t("hero.ctas.email")}
+          </a>
+        </div>
+        <div class="hero__metarow meta-row">
+          <span class="icon-row"><i class="ph-duotone ph-map-pin"></i>{t("hero.metaBar.city")}</span>
+          <span class="sep">/</span>
+          <span class="icon-row"><i class="ph-duotone ph-clock"></i>GMT-6</span>
+          <span class="sep">/</span>
+          <span class="icon-row" style="color: var(--color-accent);">
+            <span class="pulse"></span>
+            {t("hero.metaBar.status")} · {t("hero.metaBar.statusFor")}
+          </span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT — bento stack -->
+    <div class="hero__right">
+      <div class="hero__portrait reveal">
+        <div class="placeholder">
+          <Image
+            src="/assets/profile-photo.webp"
+            alt="David Herrera"
+            width={400}
+            height={533}
+            loading="eager"
+            format="webp"
+            quality={85}
+          />
+        </div>
+        <Stamp lang={lang} className="hero__portrait-stamp" />
+        <div class="sticker hero__portrait-sticker">
+          <i class="ph-duotone ph-flag"></i>
+          {t("hero.sticker")}
+        </div>
+      </div>
+
+      <div class="box accent hero__currently reveal reveal-delay-1">
+        <div class="hero__currently-head">
+          <div class="icon-row">
+            <span class="pulse"></span>
+            <span class="label accent">// {t("hero.currently.label")}</span>
+          </div>
+          <i class="ph-duotone ph-plugs-connected"></i>
+        </div>
+        <div class="hero__currently-text">
+          {t("hero.currently.text")}
+        </div>
+      </div>
+
+      <div class="box hero__socials reveal reveal-delay-2">
+        <div class="icon-row">
+          <a href="https://github.com/david-heca" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            <i class="ph-duotone ph-github-logo"></i>
+          </a>
+          <a href="https://www.linkedin.com/in/david-heca/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <i class="ph-duotone ph-linkedin-logo"></i>
+          </a>
+          <a href="https://x.com/david_heca_" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
+            <i class="ph-duotone ph-x-logo"></i>
+          </a>
+          <a href={`mailto:hello@davidherrera.dev`} aria-label="Email">
+            <i class="ph-duotone ph-envelope-simple"></i>
+          </a>
+        </div>
+        <span class="hand sm accent">
+          <span style="display: inline-flex; align-items: center; gap: 6px;">
+            scroll
+            <i class="ph-duotone ph-arrow-down" style="font-size: 14px;"></i>
+          </span>
+        </span>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="credits container-editorial">
-  <div class="reveal section-label">// {t("home.credits.label")}</div>
-  <dl class="credits__list">
+<section class="home-about container-editorial">
+  <div class="home-about__intro">
+    <div class="reveal label accent">// {t("home.aboutSection.title")}</div>
+    <h2 class="reveal reveal-delay-1 home-about__title" set:html={aboutHeadingHtml}></h2>
+  </div>
+  <div class="home-about__body">
+    <p class="reveal reveal-delay-2" set:html={bio1Html}></p>
+    <p class="reveal reveal-delay-3" set:html={bio2Html}></p>
+    <p class="reveal reveal-delay-4" set:html={bio3Html}></p>
+  </div>
+</section>
+
+<section class="home-credits container-editorial">
+  <div class="reveal label accent">// {t("home.credits.label")}</div>
+  <dl class="home-credits__list">
     {creditsRows.map((key, i) => (
-      <div class={`credits__row reveal reveal-delay-${i + 1}`}>
-        <dt class="credits__term">{t(`home.credits.rows.${key}.label`)}</dt>
-        <dd class="credits__items">{t(`home.credits.rows.${key}.items`)}</dd>
+      <div class={`home-credits__row reveal reveal-delay-${i + 1}`}>
+        <dt class="home-credits__term">{t(`home.credits.rows.${key}.label`)}</dt>
+        <dd class="home-credits__items">{t(`home.credits.rows.${key}.items`)}</dd>
       </div>
     ))}
   </dl>
 </section>
-
-<div class="now-strip footer__inner">
-  <div class="now-strip__label">{t("home.nowStrip.label")}</div>
-  <div>{t("home.nowStrip.stack")}</div>
-</div>
 
 <PageFooter lang={lang} num="00" />

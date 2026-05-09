@@ -7,12 +7,16 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const navItems = [
-  { id: "home",      href: lang === "es" ? "/" : "/en",            idx: "00", label: t("nav.home") },
-  { id: "work",      href: lang === "es" ? "/work" : "/en/work",   idx: "01", label: t("nav.work") },
+  { id: "home",      href: lang === "es" ? "/" : "/en",                idx: "00", label: t("nav.home") },
+  { id: "work",      href: lang === "es" ? "/work" : "/en/work",       idx: "01", label: t("nav.work") },
   { id: "projects",  href: lang === "es" ? "/projects" : "/en/projects", idx: "02", label: t("nav.projects") },
   { id: "education", href: lang === "es" ? "/education" : "/en/education", idx: "03", label: t("nav.education") },
   { id: "contact",   href: lang === "es" ? "/contact" : "/en/contact", idx: "04", label: t("nav.contact") },
 ];
+
+const cvHref = lang === "es"
+  ? "/assets/documents/davidherrera-spanish.pdf"
+  : "/assets/documents/davidherrera-english.pdf";
 
 const currentPath = Astro.url.pathname.replace(/\/$/, "") || "/";
 
@@ -25,8 +29,7 @@ function isActive(href: string): boolean {
 <header class="nav">
   <div class="nav__inner">
     <a href={lang === "es" ? "/" : "/en"} class="nav__brand" aria-label="David Herrera - Home">
-      <span class="nav__brand-dot" aria-hidden="true"></span>
-      <span>davidherrera.dev</span>
+      <b>davidherrera</b><span class="nav__brand-tld">.dev</span>
     </a>
 
     <nav class="nav__links" aria-label="Primary">
@@ -37,7 +40,6 @@ function isActive(href: string): boolean {
           class={`nav__link ${isActive(item.href) ? "active" : ""}`}
         >
           <span class="idx">{item.idx}</span>{item.label}
-          <span class="underline" aria-hidden="true"></span>
         </a>
       ))}
     </nav>
@@ -45,8 +47,17 @@ function isActive(href: string): boolean {
     <div class="nav__utils">
       <LanguagePicker />
       <div class="nav__utils-desktop">
-        <span aria-hidden="true" style="width:1px;height:14px;background:var(--color-line);"></span>
         <ThemeToggle />
+        <a
+          href={cvHref}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="chip accent nav__cv"
+          aria-label={t("nav.cv")}
+        >
+          <i class="ph-duotone ph-file-arrow-down"></i>
+          {t("nav.cv")}
+        </a>
       </div>
       <button
         id="mobile-menu-btn"
@@ -54,9 +65,7 @@ function isActive(href: string): boolean {
         aria-label="Toggle menu"
         aria-expanded="false"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" width="22" height="22">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"></path>
-        </svg>
+        <i class="ph-duotone ph-list" style="font-size: 22px;"></i>
       </button>
     </div>
   </div>
@@ -76,6 +85,15 @@ function isActive(href: string): boolean {
     </nav>
     <div class="mobile-menu__footer">
       <ThemeToggle />
+      <a
+        href={cvHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="chip accent"
+      >
+        <i class="ph-duotone ph-file-arrow-down"></i>
+        {t("nav.cv")}
+      </a>
     </div>
   </div>
 </header>
@@ -88,9 +106,7 @@ function isActive(href: string): boolean {
   }
 
   @media (min-width: 1024px) {
-    .nav__utils-desktop {
-      display: inline-flex;
-    }
+    .nav__utils-desktop { display: inline-flex; }
   }
 
   .mobile-menu-btn {
@@ -105,25 +121,24 @@ function isActive(href: string): boolean {
     min-width: 44px;
     min-height: 44px;
   }
+  .mobile-menu-btn:hover { color: var(--color-ink); }
 
   @media (min-width: 1024px) {
-    .mobile-menu-btn {
-      display: none;
-    }
+    .mobile-menu-btn { display: none; }
   }
 
   .mobile-menu__footer {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+    gap: 12px;
     padding: 16px 20px;
-    border-top: 1px solid var(--color-line);
+    border-top: 1.5px dashed var(--color-ink-3);
+    flex-wrap: wrap;
   }
 
   @media (min-width: 1024px) {
-    .mobile-menu__footer {
-      display: none;
-    }
+    .mobile-menu__footer { display: none; }
   }
 
   .mobile-menu {
@@ -133,14 +148,12 @@ function isActive(href: string): boolean {
     right: 0;
     z-index: 40;
     background: var(--color-bg);
-    border-bottom: 1px solid var(--color-line);
+    border-bottom: 1.5px dashed var(--color-ink-3);
     transform: translateY(-8px) scaleY(0.98);
     opacity: 0;
     pointer-events: none;
     transform-origin: top;
-    transition:
-      transform 0.2s ease,
-      opacity 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
   }
 
   .mobile-menu.open {
@@ -160,28 +173,23 @@ function isActive(href: string): boolean {
     align-items: center;
     gap: 10px;
     padding: 14px 20px;
-    font-size: 15px;
-    font-weight: 500;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
     color: var(--color-ink-2);
     text-decoration: none;
-    border-top: 1px solid var(--color-line);
-    transition: background-color 0.15s ease;
+    border-top: 1.5px dashed var(--color-ink-3);
+    transition: background-color 0.15s ease, color 0.15s ease;
   }
 
   .mobile-menu__link:first-child { border-top: 0; }
-
   .mobile-menu__link:hover,
-  .mobile-menu__link:active {
-    background: var(--color-bg-2);
-  }
-
-  .mobile-menu__link.active {
-    color: var(--color-ink);
-  }
+  .mobile-menu__link:active { background: var(--color-bg-2); color: var(--color-ink); }
+  .mobile-menu__link.active { color: var(--color-ink); }
 
   .mobile-menu__link .idx {
-    font-family: var(--font-mono);
-    font-size: 10px;
+    font-size: 11px;
     color: var(--color-ink-3);
   }
 

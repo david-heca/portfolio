@@ -1,5 +1,6 @@
 ---
 import { useTranslations } from "@i18n/utils";
+import PageHeader from "@ui/PageHeader.astro";
 import PageFooter from "@ui/PageFooter.astro";
 
 export interface Props {
@@ -9,81 +10,112 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-interface Item {
-  year: string;
-  title: string;
-  place: string;
-  desc: string;
-}
-
-const items: Item[] = [
+const academic = [
   {
     year: t("education.list.tesco.period"),
     title: t("education.list.tesco.degree"),
-    place: t("education.list.tesco.institution"),
-    desc: t("education.list.tesco.description"),
+    school: t("education.list.tesco.institution"),
+    note: t("education.list.tesco.description"),
   },
   {
     year: t("education.list.platzi.period"),
     title: t("education.list.platzi.degree"),
-    place: t("education.list.platzi.institution"),
-    desc: t("education.list.platzi.description"),
+    school: t("education.list.platzi.institution"),
+    note: t("education.list.platzi.description"),
   },
   {
     year: t("education.list.cecytem.period"),
     title: t("education.list.cecytem.degree"),
-    place: t("education.list.cecytem.institution"),
-    desc: t("education.list.cecytem.description"),
+    school: t("education.list.cecytem.institution"),
+    note: t("education.list.cecytem.description"),
   },
+];
+
+const certs = [
   {
     year: "2024",
     title: t("education.certifications.azure.name"),
-    place: "Microsoft · " + t("education.labels.featured"),
-    desc: "Azure · Cloud Computing · Networking · Security",
+    issuer: "Microsoft",
+    tags: ["Azure", "Cloud", "Networking", "Security"],
+    featured: true,
   },
   {
     year: "2022",
     title: t("education.certifications.python.name"),
-    place: "Michigan University · Coursera",
-    desc: "Python · Data Structures · SQL",
+    issuer: "Michigan University · Coursera",
+    tags: ["Python", "Data Structures", "SQL"],
   },
 ];
 
-const headingHtml = t("education.heading");
+const langsHtml = t("education.sideCards.languagesBody");
+const interestsText = t("education.sideCards.interestsBody");
+const philosophyHtml = t("education.sideCards.philosophyBody");
 ---
 
-<section class="edu container-editorial">
-  <div class="reveal section-label">// 03. {t("nav.education")}</div>
-  <h1 class="reveal reveal-delay-1 edu__h" set:html={headingHtml}></h1>
-  <p class="reveal reveal-delay-2 work__sub">{t("education.description")}</p>
+<PageHeader
+  idx="03"
+  kicker={t("nav.education")}
+  title={t("education.headerTitle")}
+  italic={t("education.headerItalic")}
+  sub={t("education.description")}
+/>
 
-  <div class="edu__grid">
-    <div>
-      {items.map((it, i) => (
-        <div class={`timeline__item reveal reveal-delay-${Math.min(i + 1, 4)}`}>
-          <div class="timeline__year">{it.year}</div>
-          <div>
-            <div class="timeline__title">{it.title}</div>
-            <div class="timeline__place">{it.place}</div>
-            <div class="timeline__desc">{it.desc}</div>
+<section class="edu container-editorial">
+  <div class="edu__split">
+    <div class="reveal">
+      <div class="label accent edu__col-title">{t("education.academicLabel")}</div>
+      <div class="edu__list">
+        {academic.map((e, i) => (
+          <div class={`box edu-item reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <div class="edu-item__year">{e.year}</div>
+            <div>
+              <div class="edu-item__title">{e.title}</div>
+              <div class="label edu-item__school">{e.school}</div>
+              <div class="edu-item__note">{e.note}</div>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
-    <aside>
-      <div class="side-card reveal">
-        <div class="side-card__k">{t("education.sideCards.languagesTitle")}</div>
-        <div class="side-card__v" set:html={t("education.sideCards.languagesBody")}></div>
+
+    <div class="reveal reveal-delay-1">
+      <div class="label accent edu__col-title">{t("education.certsLabel")}</div>
+      <div class="edu__list">
+        {certs.map((c, i) => (
+          <div class={`cert-card ${c.featured ? "box accent" : "box"} reveal reveal-delay-${Math.min(i + 1, 4)}`}>
+            <div class="cert-card__head">
+              <span class="cert-card__year">{c.year}</span>
+              {c.featured && (
+                <span class="chip accent">
+                  <span class="dot"></span>
+                  {t("education.labels.featured")}
+                </span>
+              )}
+            </div>
+            <div class="cert-card__title">{c.title}</div>
+            <div class="label cert-card__issuer">{c.issuer}</div>
+            <div class="cert-card__tags">
+              {c.tags.map((t) => <span class="chip">{t}</span>)}
+            </div>
+          </div>
+        ))}
       </div>
-      <div class="side-card reveal reveal-delay-1">
-        <div class="side-card__k">{t("education.sideCards.interestsTitle")}</div>
-        <div class="side-card__v">{t("education.sideCards.interestsBody")}</div>
-      </div>
-      <div class="side-card reveal reveal-delay-2">
-        <div class="side-card__k">{t("education.sideCards.philosophyTitle")}</div>
-        <div class="side-card__v" set:html={t("education.sideCards.philosophyBody")}></div>
-      </div>
-    </aside>
+    </div>
+  </div>
+
+  <div class="edu__meta-strip">
+    <div class="box solid edu__meta-card reveal">
+      <div class="label accent">{t("education.sideCards.languagesTitle")}</div>
+      <div class="display" set:html={langsHtml}></div>
+    </div>
+    <div class="box solid edu__meta-card reveal reveal-delay-1">
+      <div class="label accent">{t("education.sideCards.interestsTitle")}</div>
+      <div class="edu__meta-card-text">{interestsText}</div>
+    </div>
+    <div class="box accent edu__meta-card edu__philosophy reveal reveal-delay-2">
+      <div class="label accent">{t("education.sideCards.philosophyTitle")}</div>
+      <div class="display" set:html={philosophyHtml}></div>
+    </div>
   </div>
 </section>
 

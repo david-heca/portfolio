@@ -5,7 +5,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<div class="theme-toggle" role="radiogroup" aria-label="Theme">
+<div class="seg theme-toggle" role="radiogroup" aria-label="Theme">
   <button
     type="button"
     data-theme="light"
@@ -13,8 +13,20 @@ const t = useTranslations(lang);
     role="radio"
     aria-checked="false"
     aria-label={t("theme.light")}
+    title={t("theme.light")}
   >
-    LIGHT
+    <i class="ph-duotone ph-sun"></i>
+  </button>
+  <button
+    type="button"
+    data-theme="system"
+    class="theme-toggle__btn"
+    role="radio"
+    aria-checked="false"
+    aria-label={t("theme.system")}
+    title={t("theme.system")}
+  >
+    <i class="ph-duotone ph-monitor"></i>
   </button>
   <button
     type="button"
@@ -23,46 +35,15 @@ const t = useTranslations(lang);
     role="radio"
     aria-checked="false"
     aria-label={t("theme.dark")}
+    title={t("theme.dark")}
   >
-    DARK
+    <i class="ph-duotone ph-moon"></i>
   </button>
 </div>
 
-<style>
-  .theme-toggle {
-    display: inline-flex;
-    gap: 2px;
-    padding: 3px;
-    border: 1px solid var(--color-line);
-    border-radius: 2px;
-  }
-
-  .theme-toggle__btn {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    padding: 4px 8px;
-    background: transparent;
-    border: 0;
-    cursor: pointer;
-    color: var(--color-ink-3);
-    letter-spacing: 0.04em;
-    line-height: 1.2;
-    transition:
-      background-color 0.15s ease,
-      color 0.15s ease;
-  }
-
-  .theme-toggle__btn:hover {
-    color: var(--color-ink-2);
-  }
-
-  .theme-toggle__btn[aria-checked="true"] {
-    background: var(--color-ink);
-    color: var(--color-bg);
-  }
-</style>
-
 <script>
+  type ThemePref = "light" | "dark" | "system";
+
   function setupThemeToggle() {
     const root = document.documentElement;
     const wrappers = document.querySelectorAll<HTMLElement>(".theme-toggle");
@@ -70,15 +51,17 @@ const t = useTranslations(lang);
 
     const THEME_KEY = "color-theme";
 
-    function getStoredTheme(): "light" | "dark" | null {
+    function getStoredTheme(): ThemePref {
       const v = localStorage.getItem(THEME_KEY);
-      return v === "light" || v === "dark" ? v : null;
+      if (v === "light" || v === "dark" || v === "system") return v;
+      return "system";
     }
 
-    function getResolvedTheme(): "light" | "dark" {
-      const stored = getStoredTheme();
-      if (stored) return stored;
-      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    function resolveTheme(pref: ThemePref): "light" | "dark" {
+      if (pref === "system") {
+        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      }
+      return pref;
     }
 
     function applyTheme(theme: "light" | "dark") {
@@ -86,25 +69,25 @@ const t = useTranslations(lang);
       else root.classList.remove("dark");
     }
 
-    function setActive(theme: "light" | "dark") {
+    function setActive(pref: ThemePref) {
       document.querySelectorAll<HTMLButtonElement>(".theme-toggle__btn").forEach((b) => {
-        const active = b.dataset.theme === theme;
+        const active = b.dataset.theme === pref;
         b.setAttribute("aria-checked", active ? "true" : "false");
       });
     }
 
-    const current = getResolvedTheme();
-    applyTheme(current);
-    setActive(current);
+    const currentPref = getStoredTheme();
+    applyTheme(resolveTheme(currentPref));
+    setActive(currentPref);
 
     wrappers.forEach((wrapper) => {
       if (wrapper.dataset.ready) return;
       wrapper.querySelectorAll<HTMLButtonElement>(".theme-toggle__btn").forEach((b) => {
         b.addEventListener("click", () => {
-          const theme = b.dataset.theme as "light" | "dark";
-          localStorage.setItem(THEME_KEY, theme);
-          applyTheme(theme);
-          setActive(theme);
+          const pref = b.dataset.theme as ThemePref;
+          localStorage.setItem(THEME_KEY, pref);
+          applyTheme(resolveTheme(pref));
+          setActive(pref);
         });
       });
       wrapper.dataset.ready = "true";
