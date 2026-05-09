@@ -1,16 +1,13 @@
 {
   "theme": {
     "light": "Claro",
-    "dark": "Oscuro"
+    "dark": "Oscuro",
+    "system": "Sistema"
   },
   "meta": {
     "home": {
       "title": "David Herrera - Ingeniero en Tecnologías de la Información & Arquitecto de Soluciones IA",
       "description": "Arquitecto de Soluciones IA y Ingeniero de Software con base en CDMX. Diseño y construyo sistemas con LLMs, RAG, MCP, .NET, Python y Azure que entregan valor en producción."
-    },
-    "skills": {
-      "title": "Habilidades - David Herrera",
-      "description": "Stack técnico: .NET, Python, TypeScript, React, Azure, PostgreSQL, LLMs, RAG, MCP y MLOps."
     },
     "projects": {
       "title": "Proyectos - David Herrera",
@@ -34,23 +31,41 @@
     "work": "Experiencia",
     "education": "Formación",
     "projects": "Proyectos",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "cv": "CV"
   },
   "hero": {
-    "greeting": "Hola, soy",
-    "role": "Ingeniero en Tecnologías de la Información <em>&</em> Arquitecto de Soluciones IA",
-    "shortDesc": "Diseño, construyo y escalo sistemas impulsados por datos e IA que generan valor empresarial real. De la idea a producción — con arquitectura limpia, eficiencia y mantenibilidad como norte.",
-    "techRing": "BUILDING · SHIPPING · LEARNING ·",
+    "greeting": "Hola, mucho gusto",
+    "greetingTail": "(soy)",
     "metaBar": {
       "city": "CIUDAD DE MÉXICO",
       "status": "DISPONIBLE",
-      "statusFor": "PARA TRABAJAR",
-      "version": "v.2026"
+      "statusFor": "PARA TRABAJAR"
+    },
+    "tagline": {
+      "role1": "Ingeniero en TIC",
+      "role2": "Arquitecto de Soluciones IA",
+      "italic": "— Diseño sistemas con LLMs que realmente funcionan en producción.",
+      "uline": "realmente funcionan en producción"
+    },
+    "ctas": {
+      "work": "ver trabajo",
+      "email": "hello@davidherrera.dev"
+    },
+    "stamp": {
+      "ringText": "★ DISPONIBLE · 2026 · NUEVOS PROYECTOS · ",
+      "core": "hablemos"
+    },
+    "sticker": "MADE IN CDMX",
+    "currently": {
+      "label": "construyendo ahora",
+      "text": "Connie v2 · RAG multi-tenant en Azure y un MCP server que expone el corpus interno a clientes LLM."
     }
   },
   "work": {
-    "heading": "Trayectoria<br/><em>profesional.</em>",
-    "description": "De becario a arquitecto de soluciones IA — cuatro años construyendo sistemas que resuelven problemas reales en industria, marketing y datos.",
+    "headerTitle": "Trayectoria",
+    "headerItalic": "profesional",
+    "description": "De becario a arquitecto de soluciones IA en cuatro años. De WordPress a sistemas RAG en producción — pasando por industria, marketing y plataformas de datos.",
     "companies": {
       "baacc": {
         "name": "BAACC Systems S.A. de C.V.",
@@ -63,10 +78,10 @@
             "period": "Mar 2025 - Actualidad",
             "type": "Tiempo Completo",
             "achievements": [
-              "Diseño e implementación de aplicaciones inteligentes utilizando LLMs",
-              "Integración de servidores y clientes MCP para habilitar flujos de trabajo autónomos",
-              "Diseño y desarrollo de arquitecturas RAG (Retrieval-Augmented Generation)",
-              "Evaluación continua e investigación de nuevas tecnologías en IA generativa y MLOps"
+              "Diseño y construcción de Connie: plataforma RAG sobre datos corporativos heterogéneos con autenticación enterprise, en producción",
+              "Pipelines RAG end-to-end sobre Azure: ingestión, chunking, retrieval y serving con observabilidad de prompts",
+              "Servidores MCP que conectan fuentes internas con clientes LLM — los modelos consumen tools sin glue code custom",
+              "Adopción de prácticas MLOps en el equipo: evaluación de retrieval, versionado de prompts y modelos"
             ]
           },
           "fullstack": {
@@ -74,10 +89,10 @@
             "period": "Ene 2024 - Mar 2025",
             "type": "Tiempo Completo",
             "achievements": [
-              "Desarrollo de aplicaciones de escritorio con .NET y Python para entornos industriales",
-              "Creación de aplicaciones web con JavaScript, .NET y DevExpress",
+              "Apps de escritorio en .NET y Python para piso de planta — operación industrial 24/7",
+              "Apps web internas con .NET y DevExpress para flujos de operaciones",
               "Diseño y administración de bases de datos en SQL Server y PostgreSQL",
-              "Desarrollo de aplicaciones móviles Android con RFID para seguimiento y trazabilidad"
+              "App Android con lector RFID para inventario y trazabilidad en campo"
             ]
           },
           "junior": {
@@ -85,8 +100,8 @@
             "period": "Sep 2023 - Ene 2024",
             "type": "Prácticas",
             "achievements": [
-              "Apoyo en desarrollo de módulos web y APIs internas",
-              "Mantenimiento de bases de datos y documentación técnica"
+              "Desarrollo de módulos web y APIs internas",
+              "Mantenimiento de bases de datos y documentación técnica del stack"
             ]
           }
         }
@@ -112,7 +127,11 @@
     }
   },
   "education": {
-    "heading": "Aprender <em>&</em><br/>enseñar.",
+    "headerTitle": "Aprender &",
+    "headerItalic": "enseñar",
+    "academicLabel": "// académico",
+    "certsLabel": "// certificaciones",
+    "currentLabel": "actual",
     "description": "Formación académica, certificaciones y participación como ponente — porque el conocimiento crece cuando se comparte.",
     "sideCards": {
       "languagesTitle": "// Idiomas",
@@ -155,35 +174,36 @@
     }
   },
   "projects": {
-    "heading": "Trabajo <em>seleccionado.</em>",
+    "headerTitle": "Trabajo",
+    "headerItalic": "seleccionado",
     "description": "Algunos de los sistemas que he diseñado y enviado — desde IA conversacional sobre datos empresariales hasta software industrial en planta.",
     "featuredLabel": "★ Destacado",
     "moreProjects": "— Más proyectos —",
     "list": {
       "portfolio": {
         "title": "Portafolio",
-        "description": "Portafolio personal para mostrar mis proyectos y habilidades como desarrollador.",
+        "description": "Este sitio. Astro + Tailwind, i18n bilingüe, theme switcher con persistencia y View Transitions. Open source bajo licencia MIT.",
         "kind": "Personal / Web",
         "year": "2026",
         "status": "Live"
       },
       "connie": {
         "title": "Connie",
-        "description": "Plataforma de IA para empresas. Habla con tus datos por medio de procesamiento de lenguaje natural — RAG sobre fuentes heterogéneas con autenticación empresarial.",
+        "description": "Plataforma RAG enterprise para conversar con datos corporativos heterogéneos en lenguaje natural. Auth empresarial, MCP server interno y pipelines de ingestión sobre Azure.",
         "kind": "Trabajo / IA",
         "year": "2025",
         "status": "En producción"
       },
       "handheld": {
         "title": "HandHeld RFID",
-        "description": "Aplicación Android para control de inventario usando tecnología RFID.",
+        "description": "App Android nativa con lector RFID para inventario y trazabilidad en campo. Reemplazó captura manual en operación industrial.",
         "kind": "Trabajo / Móvil",
         "year": "2024",
         "status": "En producción"
       },
       "trace": {
         "title": "Trazabilidad Automotriz",
-        "description": "App de escritorio para trazabilidad de piezas automotrices con C# y DevExpress.",
+        "description": "Sistema desktop que sigue piezas automotrices a lo largo de la línea de producción. C# .NET + DevExpress sobre SQL Server.",
         "kind": "Trabajo / Desktop",
         "year": "2024",
         "status": "Entregado"
@@ -191,41 +211,28 @@
     }
   },
   "contact": {
-    "heading": "¿Hablamos<br/>de tu próximo<br/><em>proyecto?</em>",
+    "headerTitle": "Hablemos",
+    "headerItalic": "ahora",
+    "invite": "Cuéntame qué estás <em>construyendo</em>.",
+    "directLabel": "// directo",
+    "elsewhereLabel": "// en otros lugares",
+    "cvLabel": "// currículum / cv",
+    "cvUpdated": "actualizado may 2026",
+    "availLabel": "/ disponibilidad",
+    "availText": "Acepto nuevos proyectos para 2026",
+    "open": "abierto",
     "description": "Estoy disponible para proyectos freelance, colaboraciones y oportunidades de tiempo completo. Cuéntame qué estás construyendo.",
-    "channels": {
-      "email": "// Email",
-      "linkedin": "// LinkedIn",
-      "github": "// GitHub",
-      "twitter": "// X / Twitter",
-      "cvEs": "// Currículum (ES)",
-      "cvEsValue": "Descargar PDF",
-      "cvEn": "// Resume (EN)",
-      "cvEnValue": "Download PDF"
-    },
     "cta": {
       "button": "Envíame un mensaje",
       "note": "Respuesta en < 24h · CDMX, GMT-6"
-    },
-    "footerGiant": "Hagamos<br/>algo <em>juntos</em>."
+    }
   },
   "common": {
     "footer": {
-      "copy": "Made with care · Astro + Tailwind",
-      "next": "Siguiente"
+      "license": "Código abierto · MIT"
     }
   },
   "home": {
-    "stats": {
-      "experience": "Años de experiencia",
-      "projects": "Proyectos en producción",
-      "techs": "Tecnologías en stack",
-      "drive": "Ganas de construir"
-    },
-    "nowStrip": {
-      "label": "AHORA — Arquitecto de Soluciones IA @ BAACC Systems",
-      "stack": "LLMs · RAG · MCP · MLOps"
-    },
     "credits": {
       "label": "Stack técnico",
       "rows": {
@@ -251,9 +258,9 @@
       "title": "Sobre mí",
       "heading": "Software, datos <em>&</em> IA aplicada al mundo real.",
       "bio": {
-        "paragraph1": "Soy un profesional en <strong>Ingeniería de Software y Datos</strong> con un sólido historial en el diseño, construcción y escalado de soluciones impulsadas por datos e IA que generan valor empresarial real.",
-        "paragraph2": "A lo largo de mi carrera, he trabajado en la intersección de la ingeniería de software, la ciencia de datos y la automatización — liderando iniciativas que transforman desafíos complejos en <strong>sistemas robustos y escalables</strong>. Mi experiencia abarca desarrollo backend y frontend, ingeniería de datos e inteligencia artificial aplicada, con un enfoque consistente en arquitectura limpia, eficiencia y mantenibilidad a largo plazo.",
-        "paragraph3": "Más allá de la ejecución, contribuyo activamente al intercambio de conocimientos y al desarrollo de talento. He impartido conferencias y charlas académicas en universidades sobre Inteligencia Artificial y Ciencia de Datos, ayudando a cerrar la brecha entre la teoría y la aplicación en el mundo real."
+        "paragraph1": "Ingeniero de software construyendo en la intersección de <strong>backend, datos e IA aplicada</strong>. Cuatro años traduciendo problemas de negocio en sistemas que se entregan, escalan y se mantienen sin convertirse en deuda técnica.",
+        "paragraph2": "Trabajo cómodo en todo el stack — del modelo de datos al frontend — pero mi foco actual son arquitecturas <strong>RAG, MCP y MLOps</strong> sobre datos corporativos. Me importa que los sistemas de IA que diseño se puedan operar, observar y debuggear en producción real.",
+        "paragraph3": "Doy charlas de IA y ciencia de datos en universidades — me gusta cerrar el loop entre la teoría académica y lo que de verdad pasa cuando un sistema toca producción."
       }
     }
   },
