@@ -22,3 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# wrangler / cloudflare workers local state
+.wrangler/
+.dev.vars
