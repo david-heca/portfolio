@@ -10,17 +10,23 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
+interface Tech { label: string; icon: string }
+interface Achievement { text: string; icon: string }
 interface Role {
   title: string;
   period: string;
-  stack: string[];
-  bullets: string[];
+  type: string;
+  icon: string;
+  hand?: string;
+  stack: Tech[];
+  bullets: Achievement[];
   current?: boolean;
 }
 
 interface Company {
   idx: string;
   name: string;
+  initials: string;
   span: string;
   loc: string;
   mode: string;
@@ -29,64 +35,123 @@ interface Company {
 
 const companies: Company[] = [
   {
-    idx: "/ 01",
+    idx: "01",
     name: t("work.companies.baacc.name"),
+    initials: "BS",
     span: t("work.companies.baacc.totalPeriod"),
     loc: t("work.companies.baacc.location"),
     mode: t("work.companies.baacc.workMode"),
     roles: [
       {
         title: t("work.companies.baacc.roles.architect.title"),
-        period: `${t("work.companies.baacc.roles.architect.period")} · ${t("work.companies.baacc.roles.architect.type")}`,
-        stack: ["LLM", "MCP", "RAG", "MLOps", "APIs"],
+        period: t("work.companies.baacc.roles.architect.period"),
+        type: t("work.companies.baacc.roles.architect.type"),
+        icon: "ph-blueprint",
+        hand: lang === "es" ? "rol actual ↘" : "current role ↘",
+        stack: [
+          { label: "LLM", icon: "ph-brain" },
+          { label: "MCP", icon: "ph-plugs-connected" },
+          { label: "RAG", icon: "ph-database" },
+          { label: "MLOps", icon: "ph-test-tube" },
+          { label: "APIs", icon: "ph-share-network" },
+        ],
         bullets: [
-          t("work.companies.baacc.roles.architect.achievements.0"),
-          t("work.companies.baacc.roles.architect.achievements.1"),
-          t("work.companies.baacc.roles.architect.achievements.2"),
-          t("work.companies.baacc.roles.architect.achievements.3"),
+          { text: t("work.companies.baacc.roles.architect.achievements.0"), icon: "ph-rocket" },
+          { text: t("work.companies.baacc.roles.architect.achievements.1"), icon: "ph-flow-arrow" },
+          { text: t("work.companies.baacc.roles.architect.achievements.2"), icon: "ph-plugs-connected" },
+          { text: t("work.companies.baacc.roles.architect.achievements.3"), icon: "ph-test-tube" },
         ],
         current: true,
       },
       {
         title: t("work.companies.baacc.roles.fullstack.title"),
-        period: `${t("work.companies.baacc.roles.fullstack.period")} · ${t("work.companies.baacc.roles.fullstack.type")}`,
-        stack: [".NET", "Python", "SQL", "Android"],
+        period: t("work.companies.baacc.roles.fullstack.period"),
+        type: t("work.companies.baacc.roles.fullstack.type"),
+        icon: "ph-stack",
+        stack: [
+          { label: ".NET", icon: "ph-code-block" },
+          { label: "Python", icon: "ph-code" },
+          { label: "SQL", icon: "ph-database" },
+          { label: "Android", icon: "ph-device-mobile" },
+        ],
         bullets: [
-          t("work.companies.baacc.roles.fullstack.achievements.0"),
-          t("work.companies.baacc.roles.fullstack.achievements.1"),
-          t("work.companies.baacc.roles.fullstack.achievements.2"),
-          t("work.companies.baacc.roles.fullstack.achievements.3"),
+          { text: t("work.companies.baacc.roles.fullstack.achievements.0"), icon: "ph-desktop" },
+          { text: t("work.companies.baacc.roles.fullstack.achievements.1"), icon: "ph-browser" },
+          { text: t("work.companies.baacc.roles.fullstack.achievements.2"), icon: "ph-database" },
+          { text: t("work.companies.baacc.roles.fullstack.achievements.3"), icon: "ph-device-mobile" },
         ],
       },
       {
         title: t("work.companies.baacc.roles.junior.title"),
-        period: `${t("work.companies.baacc.roles.junior.period")} · ${t("work.companies.baacc.roles.junior.type")}`,
-        stack: ["MVC", "SQL", "APIs"],
+        period: t("work.companies.baacc.roles.junior.period"),
+        type: t("work.companies.baacc.roles.junior.type"),
+        icon: "ph-plant",
+        stack: [
+          { label: "MVC", icon: "ph-stack" },
+          { label: "SQL", icon: "ph-database" },
+          { label: "APIs", icon: "ph-share-network" },
+        ],
         bullets: [
-          t("work.companies.baacc.roles.junior.achievements.0"),
-          t("work.companies.baacc.roles.junior.achievements.1"),
+          { text: t("work.companies.baacc.roles.junior.achievements.0"), icon: "ph-share-network" },
+          { text: t("work.companies.baacc.roles.junior.achievements.1"), icon: "ph-files" },
         ],
       },
     ],
   },
   {
-    idx: "/ 02",
+    idx: "02",
     name: t("work.companies.dec.name"),
+    initials: "DM",
     span: t("work.companies.dec.totalPeriod"),
     loc: t("work.companies.dec.location"),
     mode: t("work.companies.dec.workMode"),
     roles: [
       {
         title: t("work.companies.dec.roles.webdev.title"),
-        period: `${t("work.companies.dec.roles.webdev.period")} · ${t("work.companies.dec.roles.webdev.type")}`,
-        stack: ["HTML", "CSS", "JS", "WordPress"],
+        period: t("work.companies.dec.roles.webdev.period"),
+        type: t("work.companies.dec.roles.webdev.type"),
+        icon: "ph-browser",
+        hand: lang === "es" ? "← donde empezó todo" : "← where it all started",
+        stack: [
+          { label: "HTML", icon: "ph-code" },
+          { label: "CSS", icon: "ph-paint-brush" },
+          { label: "JS", icon: "ph-brackets-curly" },
+          { label: "WordPress", icon: "ph-globe" },
+        ],
         bullets: [
-          t("work.companies.dec.roles.webdev.achievements.0"),
-          t("work.companies.dec.roles.webdev.achievements.1"),
-          t("work.companies.dec.roles.webdev.achievements.2"),
+          { text: t("work.companies.dec.roles.webdev.achievements.0"), icon: "ph-browser" },
+          { text: t("work.companies.dec.roles.webdev.achievements.1"), icon: "ph-shield-check" },
+          { text: t("work.companies.dec.roles.webdev.achievements.2"), icon: "ph-envelope" },
         ],
       },
     ],
+  },
+];
+
+const totalRoles = companies.reduce((acc, c) => acc + c.roles.length, 0);
+
+const stats = [
+  {
+    num: "4",
+    suffix: lang === "es" ? "años" : "yrs",
+    label: lang === "es" ? "trayectoria" : "experience",
+    icon: "ph-clock",
+    accent: true,
+  },
+  {
+    num: String(companies.length),
+    label: lang === "es" ? "empresas" : "companies",
+    icon: "ph-buildings",
+  },
+  {
+    num: String(totalRoles),
+    label: lang === "es" ? "roles" : "roles",
+    icon: "ph-stack",
+  },
+  {
+    num: "∞",
+    label: lang === "es" ? "deploys" : "deploys",
+    icon: "ph-rocket",
   },
 ];
 ---
@@ -100,42 +165,112 @@ const companies: Company[] = [
 />
 
 <section class="work container-editorial">
-  {companies.map((co, i) => (
-    <div class="work__roles reveal">
-      <div class="job-rail">
-        <div class="label accent">{co.idx}</div>
-        <div class="job-rail__name">{co.name}</div>
-        <div class="job-rail__meta">
-          <span>{co.span}</span>
-          <span>{co.loc}</span>
-          <span>{co.mode}</span>
+  <div class="stats-strip reveal">
+    {stats.map((s) => (
+      <div class="stats-strip__item">
+        <i class={`ph-duotone ${s.icon} stats-strip__icon`}></i>
+        <div class="stats-strip__num">
+          {s.accent ? <span class="accent">{s.num}</span> : s.num}
+          {s.suffix && <span style="font-size: 0.55em; color: var(--color-ink-2); margin-left: 4px; font-style: normal; font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;">{s.suffix}</span>}
         </div>
+        <div class="stats-strip__label">{s.label}</div>
       </div>
-      <div class={`job-roles ${i < companies.length - 1 ? "job-roles--bordered" : ""}`}>
-        {co.roles.map((r) => (
-          <div class={`role-card ${r.current ? "box accent" : "box"}`}>
-            <div class="role-card__head">
-              <div>
-                <div class="role-card__title">{r.title}</div>
-                <div class="label role-card__period">{r.period}</div>
-              </div>
-              {r.current && (
-                <span class="chip accent">
-                  <span class="dot"></span>
-                  {t("education.currentLabel")}
-                </span>
-              )}
-            </div>
-            <div class="role-card__tags">
-              {r.stack.map((s) => <span class="chip">{s}</span>)}
-            </div>
-            <ul class="role-card__bullets">
-              {r.bullets.map((b) => <li>{b}</li>)}
-            </ul>
+    ))}
+  </div>
+
+  {companies.map((co, ci) => (
+    <>
+      <article class="work__company reveal">
+        <header class="work__company-header">
+          <div class="work__logo" data-idx={`/ ${co.idx}`} aria-hidden="true">
+            {co.initials}
           </div>
-        ))}
-      </div>
-    </div>
+          <div class="work__company-info">
+            <h3 class="work__company-name">
+              {co.name.replace(/ S\.A\. de C\.V\./, "")}<span class="accent-dot">.</span>
+            </h3>
+            <div class="work__company-meta">
+              <span class="chip soft">
+                <i class="ph-duotone ph-calendar-blank"></i>
+                {co.span}
+              </span>
+              <span class="chip">
+                <i class="ph-duotone ph-map-pin"></i>
+                {co.loc}
+              </span>
+              <span class="chip">
+                <i class="ph-duotone ph-buildings"></i>
+                {co.mode}
+              </span>
+            </div>
+          </div>
+          <div class="work__company-aside">
+            <span class="work__company-roles-count">
+              <em>{co.roles.length}</em>
+              {co.roles.length === 1 ? (lang === "es" ? "rol" : "role") : (lang === "es" ? "roles" : "roles")}
+            </span>
+          </div>
+        </header>
+
+        <div class="work__timeline">
+          {co.roles.map((r) => (
+            <div class={`role-card box ${r.current ? "accent" : ""}`}>
+              <span class="role-card__node" aria-hidden="true">
+                <i class={`ph-duotone ${r.icon}`}></i>
+                {r.current && <span class="role-card__node-pulse"></span>}
+              </span>
+
+              <div class="role-card__head">
+                <div class="role-card__head-left">
+                  <div class="role-card__period-row">
+                    <span class="label accent">{r.period}</span>
+                    <span class="chip ghost">{r.type}</span>
+                    {r.current && (
+                      <span class="chip solid">
+                        <span class="dot" style="background: currentColor;"></span>
+                        {t("education.currentLabel")}
+                      </span>
+                    )}
+                  </div>
+                  <div class="role-card__title">{r.title}</div>
+                  {r.hand && <div class="role-card__hand">{r.hand}</div>}
+                </div>
+              </div>
+
+              <ul class="role-card__achievements">
+                {r.bullets.map((b) => (
+                  <li class="achievement">
+                    <span class="achievement__icon" aria-hidden="true">
+                      <i class={`ph-duotone ${b.icon}`}></i>
+                    </span>
+                    <span>{b.text}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div class="role-card__tags">
+                {r.stack.map((s) => (
+                  <span class={`chip ${r.current ? "soft" : ""}`}>
+                    <i class={`ph-duotone ${s.icon}`}></i>
+                    {s.label}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </article>
+
+      {ci < companies.length - 1 && (
+        <div class="work__then reveal" aria-hidden="true">
+          <span class="work__then-arrow">
+            <i class="ph-duotone ph-arrow-bend-right-down"></i>
+            {lang === "es" ? "antes ·" : "before that ·"}
+          </span>
+          <span class="work__then-line"></span>
+        </div>
+      )}
+    </>
   ))}
 </section>
 
