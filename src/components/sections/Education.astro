@@ -10,46 +10,103 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
+interface Tag { label: string; icon: string }
+
 const academic = [
   {
     year: t("education.list.tesco.period"),
     title: t("education.list.tesco.degree"),
     school: t("education.list.tesco.institution"),
     note: t("education.list.tesco.description"),
+    initials: "TESCo",
+    icon: "ph-graduation-cap",
   },
   {
     year: t("education.list.platzi.period"),
     title: t("education.list.platzi.degree"),
     school: t("education.list.platzi.institution"),
     note: t("education.list.platzi.description"),
+    initials: "Platzi",
+    icon: "ph-monitor-play",
   },
   {
     year: t("education.list.cecytem.period"),
     title: t("education.list.cecytem.degree"),
     school: t("education.list.cecytem.institution"),
     note: t("education.list.cecytem.description"),
+    initials: "CECyTEM",
+    icon: "ph-code",
   },
 ];
 
-const certs = [
+interface Cert {
+  year: string;
+  title: string;
+  issuer: string;
+  icon: string;
+  tags: Tag[];
+  featured?: boolean;
+}
+
+const certs: Cert[] = [
   {
     year: "2024",
     title: t("education.certifications.azure.name"),
     issuer: "Microsoft",
-    tags: ["Azure", "Cloud", "Networking", "Security"],
+    icon: "ph-cloud",
+    tags: [
+      { label: "Azure", icon: "ph-cloud" },
+      { label: "Cloud", icon: "ph-cloud-arrow-up" },
+      { label: "Networking", icon: "ph-share-network" },
+      { label: "Security", icon: "ph-shield-check" },
+    ],
     featured: true,
   },
   {
     year: "2022",
     title: t("education.certifications.python.name"),
     issuer: "Michigan University · Coursera",
-    tags: ["Python", "Data Structures", "SQL"],
+    icon: "ph-code",
+    tags: [
+      { label: "Python", icon: "ph-code" },
+      { label: "Data Structures", icon: "ph-tree-structure" },
+      { label: "SQL", icon: "ph-database" },
+    ],
   },
 ];
 
-const langsHtml = t("education.sideCards.languagesBody");
-const interestsText = t("education.sideCards.interestsBody");
-const philosophyHtml = t("education.sideCards.philosophyBody");
+const interests = [
+  { label: lang === "es" ? "IA generativa" : "Generative AI", icon: "ph-sparkle" },
+  { label: "MLOps", icon: "ph-test-tube" },
+  { label: lang === "es" ? "Sistemas distribuidos" : "Distributed systems", icon: "ph-share-network" },
+  { label: lang === "es" ? "Café especialidad" : "Specialty coffee", icon: "ph-coffee" },
+  { label: lang === "es" ? "Tipografía" : "Typography", icon: "ph-text-aa" },
+];
+
+const stats = [
+  {
+    num: "10",
+    suffix: lang === "es" ? "años" : "yrs",
+    label: lang === "es" ? "estudiando" : "studying",
+    icon: "ph-graduation-cap",
+    accent: true,
+  },
+  {
+    num: String(academic.length),
+    label: lang === "es" ? "instituciones" : "institutions",
+    icon: "ph-buildings",
+  },
+  {
+    num: String(certs.length),
+    label: lang === "es" ? "certificaciones" : "certifications",
+    icon: "ph-certificate",
+  },
+  {
+    num: "∞",
+    label: lang === "es" ? "por aprender" : "to learn",
+    icon: "ph-book-open",
+  },
+];
 ---
 
 <PageHeader
@@ -61,16 +118,38 @@ const philosophyHtml = t("education.sideCards.philosophyBody");
 />
 
 <section class="edu container-editorial">
+  <div class="stats-strip reveal">
+    {stats.map((s) => (
+      <div class="stats-strip__item">
+        <i class={`ph-duotone ${s.icon} stats-strip__icon`}></i>
+        <div class="stats-strip__num">
+          {s.accent ? <span class="accent">{s.num}</span> : s.num}
+          {s.suffix && <span style="font-size: 0.55em; color: var(--color-ink-2); margin-left: 4px; font-style: normal; font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;">{s.suffix}</span>}
+        </div>
+        <div class="stats-strip__label">{s.label}</div>
+      </div>
+    ))}
+  </div>
+
   <div class="edu__split">
     <div class="reveal">
-      <div class="label accent edu__col-title">{t("education.academicLabel")}</div>
+      <div class="edu__col-head">
+        <div class="label accent edu__col-title">{t("education.academicLabel")}</div>
+        <span class="edu__col-count">— {String(academic.length).padStart(2, "0")}</span>
+      </div>
       <div class="edu__list">
         {academic.map((e, i) => (
           <div class={`box edu-item reveal reveal-delay-${Math.min(i + 1, 4)}`}>
-            <div class="edu-item__year">{e.year}</div>
-            <div>
+            <div class="edu-item__logo" aria-hidden="true">
+              <i class={`ph-duotone ${e.icon}`}></i>
+              <span class="edu-item__logo-initials">{e.initials}</span>
+            </div>
+            <div class="edu-item__body">
+              <div class="edu-item__year-row">
+                <span class="edu-item__year">{e.year}</span>
+              </div>
               <div class="edu-item__title">{e.title}</div>
-              <div class="label edu-item__school">{e.school}</div>
+              <span class="edu-item__school">{e.school}</span>
               <div class="edu-item__note">{e.note}</div>
             </div>
           </div>
@@ -79,23 +158,36 @@ const philosophyHtml = t("education.sideCards.philosophyBody");
     </div>
 
     <div class="reveal reveal-delay-1">
-      <div class="label accent edu__col-title">{t("education.certsLabel")}</div>
+      <div class="edu__col-head">
+        <div class="label accent edu__col-title">{t("education.certsLabel")}</div>
+        <span class="edu__col-count">— {String(certs.length).padStart(2, "0")}</span>
+      </div>
       <div class="edu__list">
         {certs.map((c, i) => (
           <div class={`cert-card ${c.featured ? "box accent" : "box"} reveal reveal-delay-${Math.min(i + 1, 4)}`}>
             <div class="cert-card__head">
-              <span class="cert-card__year">{c.year}</span>
+              <div class="cert-card__head-left">
+                <span class="cert-card__icon" aria-hidden="true">
+                  <i class={`ph-duotone ${c.icon}`}></i>
+                </span>
+                <span class="cert-card__year">{c.year}</span>
+              </div>
               {c.featured && (
-                <span class="chip accent">
-                  <span class="dot"></span>
+                <span class="chip solid">
+                  <i class="ph-duotone ph-medal"></i>
                   {t("education.labels.featured")}
                 </span>
               )}
             </div>
             <div class="cert-card__title">{c.title}</div>
-            <div class="label cert-card__issuer">{c.issuer}</div>
+            <div class="cert-card__issuer">{c.issuer}</div>
             <div class="cert-card__tags">
-              {c.tags.map((t) => <span class="chip">{t}</span>)}
+              {c.tags.map((tg) => (
+                <span class={`chip ${c.featured ? "soft" : ""}`}>
+                  <i class={`ph-duotone ${tg.icon}`}></i>
+                  {tg.label}
+                </span>
+              ))}
             </div>
           </div>
         ))}
@@ -105,16 +197,65 @@ const philosophyHtml = t("education.sideCards.philosophyBody");
 
   <div class="edu__meta-strip">
     <div class="box solid edu__meta-card reveal">
-      <div class="label accent">{t("education.sideCards.languagesTitle")}</div>
-      <div class="display" set:html={langsHtml}></div>
+      <div class="edu__meta-card-head">
+        <i class="ph-duotone ph-translate"></i>
+        <div class="label accent">{t("education.sideCards.languagesTitle")}</div>
+      </div>
+      <div class="edu__lang-list">
+        <div class="edu__lang-row">
+          <span class="edu__lang-name">{lang === "es" ? "Español" : "Spanish"}</span>
+          <span class="edu__lang-level">
+            <span class="edu__lang-bars">
+              <span class="edu__lang-bar on"></span>
+              <span class="edu__lang-bar on"></span>
+              <span class="edu__lang-bar on"></span>
+              <span class="edu__lang-bar on"></span>
+              <span class="edu__lang-bar on"></span>
+            </span>
+            {lang === "es" ? "Nativo" : "Native"}
+          </span>
+        </div>
+        <div class="edu__lang-row">
+          <span class="edu__lang-name">{lang === "es" ? "Inglés" : "English"}</span>
+          <span class="edu__lang-level">
+            <span class="edu__lang-bars">
+              <span class="edu__lang-bar on"></span>
+              <span class="edu__lang-bar on"></span>
+              <span class="edu__lang-bar on"></span>
+              <span class="edu__lang-bar on"></span>
+              <span class="edu__lang-bar"></span>
+            </span>
+            {lang === "es" ? "Profesional" : "Professional"}
+          </span>
+        </div>
+      </div>
     </div>
+
     <div class="box solid edu__meta-card reveal reveal-delay-1">
-      <div class="label accent">{t("education.sideCards.interestsTitle")}</div>
-      <div class="edu__meta-card-text">{interestsText}</div>
+      <div class="edu__meta-card-head">
+        <i class="ph-duotone ph-sparkle"></i>
+        <div class="label accent">{t("education.sideCards.interestsTitle")}</div>
+      </div>
+      <div class="edu__interests">
+        {interests.map((it) => (
+          <span class="chip">
+            <i class={`ph-duotone ${it.icon}`}></i>
+            {it.label}
+          </span>
+        ))}
+      </div>
     </div>
-    <div class="box accent edu__meta-card edu__philosophy reveal reveal-delay-2">
-      <div class="label accent">{t("education.sideCards.philosophyTitle")}</div>
-      <div class="display" set:html={philosophyHtml}></div>
+
+    <div class="box edu__meta-card edu__philosophy reveal reveal-delay-2">
+      <div class="edu__meta-card-head">
+        <i class="ph-duotone ph-quotes"></i>
+        <div class="label accent">{t("education.sideCards.philosophyTitle")}</div>
+      </div>
+      <div class="display" set:html={t("education.sideCards.philosophyBody")}></div>
+      <div class="edu__philosophy-attr">
+        <i class="ph-duotone ph-pen-nib"></i>
+        {lang === "es" ? "— guía personal" : "— personal guide"}
+      </div>
     </div>
   </div>
 </section>
