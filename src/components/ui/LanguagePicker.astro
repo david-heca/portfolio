@@ -19,104 +19,34 @@ const esHref = getPathForLang("es");
 const enHref = getPathForLang("en");
 ---
 
-<div class="seg lang-picker" role="radiogroup" aria-label="Language">
+<div class="seg lang-picker" role="group" aria-label="Language">
   <a
     href={esHref}
     data-target-lang="es"
     class={lang === "es" ? "active" : ""}
-    role="radio"
-    aria-checked={lang === "es" ? "true" : "false"}
+    aria-current={lang === "es" ? "true" : undefined}
     title="Español"
   >ES</a>
-  <button
-    type="button"
-    data-target-lang="auto"
-    class="lang-picker__auto"
-    role="radio"
-    aria-checked="false"
-    aria-label="Auto / system"
-    title="Auto / system"
-  >
-    <i class="ph-duotone ph-translate"></i>
-  </button>
   <a
     href={enHref}
     data-target-lang="en"
     class={lang === "en" ? "active" : ""}
-    role="radio"
-    aria-checked={lang === "en" ? "true" : "false"}
+    aria-current={lang === "en" ? "true" : undefined}
     title="English"
   >EN</a>
 </div>
 
 <script>
-  type LangPref = "es" | "en" | "auto";
-
   function setupLangPicker() {
-    const KEY = "preferred-lang";
-    const groups = document.querySelectorAll<HTMLElement>(".lang-picker");
-    if (!groups.length) return;
-
-    function getStored(): LangPref {
-      const v = localStorage.getItem(KEY);
-      if (v === "es" || v === "en") return v;
-      return "auto";
-    }
-
-    function setActive(pref: LangPref) {
-      groups.forEach((g) => {
-        g.querySelectorAll<HTMLElement>("[data-target-lang]").forEach((el) => {
-          const active = el.dataset.targetLang === pref;
-          el.classList.toggle("active", active);
-          el.setAttribute("aria-checked", active ? "true" : "false");
-        });
+    document.querySelectorAll<HTMLAnchorElement>(".lang-picker [data-target-lang]").forEach((el) => {
+      if (el.dataset.langReady) return;
+      el.addEventListener("click", () => {
+        const t = el.dataset.targetLang;
+        if (t) localStorage.setItem("preferred-lang", t);
       });
-    }
-
-    function detectFromBrowser(): "es" | "en" {
-      const langs = navigator.languages || [navigator.language];
-      for (const l of langs) {
-        if (l.startsWith("en")) return "en";
-        if (l.startsWith("es")) return "es";
-      }
-      return "es";
-    }
-
-    function getCurrentUrlLang(): "es" | "en" {
-      const path = window.location.pathname;
-      return (path === "/en" || path.startsWith("/en/")) ? "en" : "es";
-    }
-
-    function buildPath(target: "es" | "en"): string {
-      const path = window.location.pathname;
-      if (target === "en") return path === "/" ? "/en" : "/en" + path;
-      return path === "/en" ? "/" : path.replace(/^\/en\//, "/") || "/";
-    }
-
-    setActive(getStored());
-
-    groups.forEach((g) => {
-      if (g.dataset.langReady) return;
-      g.querySelectorAll<HTMLElement>("[data-target-lang]").forEach((el) => {
-        el.addEventListener("click", (e) => {
-          const target = el.dataset.targetLang as LangPref;
-          if (target === "auto") {
-            e.preventDefault();
-            localStorage.setItem(KEY, "auto");
-            setActive("auto");
-            const detected = detectFromBrowser();
-            if (detected !== getCurrentUrlLang()) {
-              window.location.assign(buildPath(detected));
-            }
-          } else {
-            localStorage.setItem(KEY, target);
-          }
-        });
-      });
-      g.dataset.langReady = "true";
+      el.dataset.langReady = "true";
     });
   }
-
   setupLangPicker();
   document.addEventListener("astro:page-load", setupLangPicker);
 </script>
