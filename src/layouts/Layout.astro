@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import Navbar from "@ui/Navbar.astro";
+import "@phosphor-icons/web/duotone";
 import "@styles/global.css";
 
 export interface Props {
@@ -91,10 +92,8 @@ const personSchema = {
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://unpkg.com" crossorigin />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" />
-    <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.1.2/src/duotone/style.css" />
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="canonical" href={canonicalURL} />
