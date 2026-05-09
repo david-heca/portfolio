@@ -657,7 +657,7 @@ i[class*="ph-"] {
 }
 @media (min-width: 1024px) {
   .hero__right {
-    grid-template-rows: 1.6fr 0.9fr 0.5fr;
+    grid-template-rows: 1fr auto auto;
   }
 }
 
@@ -697,8 +697,7 @@ i[class*="ph-"] {
 .hero__currently {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
   padding: 14px 18px;
 }
 .hero__currently-head {
