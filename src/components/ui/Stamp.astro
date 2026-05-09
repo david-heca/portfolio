@@ -1,0 +1,34 @@
+---
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+
+interface Props {
+  lang?: "es" | "en";
+  className?: string;
+  style?: string;
+}
+
+const lang = Astro.props.lang ?? getLangFromUrl(Astro.url);
+const className = Astro.props.className ?? "";
+const style = Astro.props.style ?? "";
+const t = useTranslations(lang);
+
+const ringText = t("hero.stamp.ringText");
+const coreText = t("hero.stamp.core");
+---
+
+<div class={`stamp ${className}`} style={style} aria-hidden="true">
+  <div class="ring-text">
+    <svg viewBox="0 0 132 132">
+      <defs>
+        <path id="stamp-ring" d="M 66,66 m -52,0 a 52,52 0 1,1 104,0 a 52,52 0 1,1 -104,0" fill="none" />
+      </defs>
+      <text fill="currentColor">
+        <textPath href="#stamp-ring" fill="currentColor">{ringText}</textPath>
+      </text>
+    </svg>
+  </div>
+  <div class="core">
+    <i class="ph-duotone ph-star"></i>
+    <span set:html={coreText.replace(/ /g, "<br/>")} />
+  </div>
+</div>

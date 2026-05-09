@@ -1,5 +1,6 @@
 ---
 import { useTranslations } from "@i18n/utils";
+import PageHeader from "@ui/PageHeader.astro";
 import PageFooter from "@ui/PageFooter.astro";
 
 export interface Props {
@@ -14,25 +15,25 @@ interface Role {
   period: string;
   stack: string[];
   bullets: string[];
-  accent?: boolean;
+  current?: boolean;
 }
 
 interface Company {
   idx: string;
   name: string;
-  meta: string[];
+  span: string;
+  loc: string;
+  mode: string;
   roles: Role[];
 }
 
 const companies: Company[] = [
   {
-    idx: "01",
+    idx: "/ 01",
     name: t("work.companies.baacc.name"),
-    meta: [
-      t("work.companies.baacc.totalPeriod"),
-      t("work.companies.baacc.location"),
-      t("work.companies.baacc.workMode"),
-    ],
+    span: t("work.companies.baacc.totalPeriod"),
+    loc: t("work.companies.baacc.location"),
+    mode: t("work.companies.baacc.workMode"),
     roles: [
       {
         title: t("work.companies.baacc.roles.architect.title"),
@@ -44,7 +45,7 @@ const companies: Company[] = [
           t("work.companies.baacc.roles.architect.achievements.2"),
           t("work.companies.baacc.roles.architect.achievements.3"),
         ],
-        accent: true,
+        current: true,
       },
       {
         title: t("work.companies.baacc.roles.fullstack.title"),
@@ -69,13 +70,11 @@ const companies: Company[] = [
     ],
   },
   {
-    idx: "02",
+    idx: "/ 02",
     name: t("work.companies.dec.name"),
-    meta: [
-      t("work.companies.dec.totalPeriod"),
-      t("work.companies.dec.location"),
-      t("work.companies.dec.workMode"),
-    ],
+    span: t("work.companies.dec.totalPeriod"),
+    loc: t("work.companies.dec.location"),
+    mode: t("work.companies.dec.workMode"),
     roles: [
       {
         title: t("work.companies.dec.roles.webdev.title"),
@@ -90,38 +89,48 @@ const companies: Company[] = [
     ],
   },
 ];
-
-const headingHtml = t("work.heading");
 ---
 
-<section class="work container-editorial">
-  <div class="reveal section-label">// 01. {t("nav.work")}</div>
-  <h1 class="reveal reveal-delay-1 work__h" set:html={headingHtml}></h1>
-  <p class="reveal reveal-delay-2 work__sub">{t("work.description")}</p>
+<PageHeader
+  idx="01"
+  kicker={t("nav.work")}
+  title={t("work.headerTitle")}
+  italic={t("work.headerItalic")}
+  sub={t("work.description")}
+/>
 
+<section class="work container-editorial">
   {companies.map((co, i) => (
-    <div class={`job reveal ${i > 0 ? `reveal-delay-${Math.min(i, 4)}` : ""}`}>
-      <div class="job__idx">/ {co.idx}</div>
-      <div class="job__co-wrap">
-        <div class="job__co">{co.name}</div>
-        <div class="job__co-meta">
-          {co.meta.map((m) => <div>{m}</div>)}
+    <div class="work__roles reveal">
+      <div class="job-rail">
+        <div class="label accent">{co.idx}</div>
+        <div class="job-rail__name">{co.name}</div>
+        <div class="job-rail__meta">
+          <span>{co.span}</span>
+          <span>{co.loc}</span>
+          <span>{co.mode}</span>
         </div>
       </div>
-      <div class="job__roles">
-        {co.roles.map((role) => (
-          <div class="role">
-            <div class="role__head">
-              <div class="role__title">{role.title}</div>
-              <div class="role__period">{role.period}</div>
+      <div class={`job-roles ${i < companies.length - 1 ? "job-roles--bordered" : ""}`}>
+        {co.roles.map((r) => (
+          <div class={`role-card ${r.current ? "box accent" : "box"}`}>
+            <div class="role-card__head">
+              <div>
+                <div class="role-card__title">{r.title}</div>
+                <div class="label role-card__period">{r.period}</div>
+              </div>
+              {r.current && (
+                <span class="chip accent">
+                  <span class="dot"></span>
+                  {t("education.currentLabel")}
+                </span>
+              )}
             </div>
-            <div class="role__stack">
-              {role.stack.map((s) => (
-                <span class={`tag ${role.accent ? "accent" : ""}`}>{s}</span>
-              ))}
+            <div class="role-card__tags">
+              {r.stack.map((s) => <span class="chip">{s}</span>)}
             </div>
-            <ul class="role__body">
-              {role.bullets.map((b) => <li>{b}</li>)}
+            <ul class="role-card__bullets">
+              {r.bullets.map((b) => <li>{b}</li>)}
             </ul>
           </div>
         ))}

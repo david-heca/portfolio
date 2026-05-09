@@ -3,7 +3,6 @@ import { getLangFromUrl } from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const currentPath = Astro.url.pathname;
-const targetLang = lang === "es" ? "en" : "es";
 
 function getPathForLang(l: string) {
   let path = currentPath;
@@ -16,59 +15,108 @@ function getPathForLang(l: string) {
   return `/${l}${path === "/" ? "" : path}`;
 }
 
-const targetHref = getPathForLang(targetLang);
+const esHref = getPathForLang("es");
+const enHref = getPathForLang("en");
 ---
 
-<a
-  href={targetHref}
-  data-target-lang={targetLang}
-  class="lang-picker"
-  aria-label={`Switch to ${targetLang.toUpperCase()}`}
->
-  <span class={`lang-picker__opt ${lang === "es" ? "active" : ""}`}>ES</span>
-  <span class="lang-picker__sep">/</span>
-  <span class={`lang-picker__opt ${lang === "en" ? "active" : ""}`}>EN</span>
-</a>
-
-<style>
-  .lang-picker {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--color-ink-3);
-    text-decoration: none;
-    padding: 4px 8px;
-    min-height: 28px;
-    transition: color 0.15s ease;
-  }
-
-  .lang-picker:hover .lang-picker__opt:not(.active) {
-    color: var(--color-ink-2);
-  }
-
-  .lang-picker__opt.active {
-    color: var(--color-ink);
-    font-weight: 500;
-  }
-
-  .lang-picker__sep {
-    color: var(--color-ink-3);
-    opacity: 0.6;
-  }
-</style>
+<div class="seg lang-picker" role="radiogroup" aria-label="Language">
+  <a
+    href={esHref}
+    data-target-lang="es"
+    class={lang === "es" ? "active" : ""}
+    role="radio"
+    aria-checked={lang === "es" ? "true" : "false"}
+    title="Español"
+  >ES</a>
+  <button
+    type="button"
+    data-target-lang="auto"
+    class="lang-picker__auto"
+    role="radio"
+    aria-checked="false"
+    aria-label="Auto / system"
+    title="Auto / system"
+  >
+    <i class="ph-duotone ph-translate"></i>
+  </button>
+  <a
+    href={enHref}
+    data-target-lang="en"
+    class={lang === "en" ? "active" : ""}
+    role="radio"
+    aria-checked={lang === "en" ? "true" : "false"}
+    title="English"
+  >EN</a>
+</div>
 
 <script>
+  type LangPref = "es" | "en" | "auto";
+
   function setupLangPicker() {
-    const el = document.querySelector<HTMLAnchorElement>("[data-target-lang]");
-    if (!el || el.dataset.langReady) return;
-    el.addEventListener("click", () => {
-      if (el.dataset.targetLang) localStorage.setItem("preferred-lang", el.dataset.targetLang);
+    const KEY = "preferred-lang";
+    const groups = document.querySelectorAll<HTMLElement>(".lang-picker");
+    if (!groups.length) return;
+
+    function getStored(): LangPref {
+      const v = localStorage.getItem(KEY);
+      if (v === "es" || v === "en") return v;
+      return "auto";
+    }
+
+    function setActive(pref: LangPref) {
+      groups.forEach((g) => {
+        g.querySelectorAll<HTMLElement>("[data-target-lang]").forEach((el) => {
+          const active = el.dataset.targetLang === pref;
+          el.classList.toggle("active", active);
+          el.setAttribute("aria-checked", active ? "true" : "false");
+        });
+      });
+    }
+
+    function detectFromBrowser(): "es" | "en" {
+      const langs = navigator.languages || [navigator.language];
+      for (const l of langs) {
+        if (l.startsWith("en")) return "en";
+        if (l.startsWith("es")) return "es";
+      }
+      return "es";
+    }
+
+    function getCurrentUrlLang(): "es" | "en" {
+      const path = window.location.pathname;
+      return (path === "/en" || path.startsWith("/en/")) ? "en" : "es";
+    }
+
+    function buildPath(target: "es" | "en"): string {
+      const path = window.location.pathname;
+      if (target === "en") return path === "/" ? "/en" : "/en" + path;
+      return path === "/en" ? "/" : path.replace(/^\/en\//, "/") || "/";
+    }
+
+    setActive(getStored());
+
+    groups.forEach((g) => {
+      if (g.dataset.langReady) return;
+      g.querySelectorAll<HTMLElement>("[data-target-lang]").forEach((el) => {
+        el.addEventListener("click", (e) => {
+          const target = el.dataset.targetLang as LangPref;
+          if (target === "auto") {
+            e.preventDefault();
+            localStorage.setItem(KEY, "auto");
+            setActive("auto");
+            const detected = detectFromBrowser();
+            if (detected !== getCurrentUrlLang()) {
+              window.location.assign(buildPath(detected));
+            }
+          } else {
+            localStorage.setItem(KEY, target);
+          }
+        });
+      });
+      g.dataset.langReady = "true";
     });
-    el.dataset.langReady = "true";
   }
+
   setupLangPicker();
   document.addEventListener("astro:page-load", setupLangPicker);
 </script>

@@ -9,30 +9,42 @@ export interface Props {
 const { lang, num } = Astro.props;
 const t = useTranslations(lang);
 
-const order: Array<{ num: string; href: string }> = [
-  { num: "00", href: lang === "es" ? "/" : "/en" },
-  { num: "01", href: lang === "es" ? "/work" : "/en/work" },
-  { num: "02", href: lang === "es" ? "/projects" : "/en/projects" },
-  { num: "03", href: lang === "es" ? "/education" : "/en/education" },
-  { num: "04", href: lang === "es" ? "/contact" : "/en/contact" },
+const order: Array<{ num: string; href: string; key: string }> = [
+  { num: "00", href: lang === "es" ? "/" : "/en",                    key: "home" },
+  { num: "01", href: lang === "es" ? "/work" : "/en/work",           key: "work" },
+  { num: "02", href: lang === "es" ? "/projects" : "/en/projects",   key: "projects" },
+  { num: "03", href: lang === "es" ? "/education" : "/en/education", key: "education" },
+  { num: "04", href: lang === "es" ? "/contact" : "/en/contact",     key: "contact" },
 ];
 
 const currentIdx = order.findIndex((o) => o.num === num);
 const next = order[(currentIdx + 1) % order.length];
+const prev = order[(currentIdx - 1 + order.length) % order.length];
 const year = new Date().getFullYear();
+
+const nextLabel = t(`nav.${next.key}`);
+const prevLabel = t(`nav.${prev.key}`);
 ---
 
 <footer class="footer">
   <div class="footer__inner">
-    <div>
-      © {year} — David Herrera<br />
-      {t("common.footer.copy")}
-    </div>
-    <div style="text-align: right;">
-      {num} / 04<br />
-      <a href={next.href} class="footer__next" data-astro-prefetch="hover">
-        ↓ {t("common.footer.next")}
+    <div class="meta-row">
+      <span>© {year} — David Herrera</span>
+      <span class="sep">/</span>
+      <a
+        href="https://github.com/david-heca/portfolio"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="footer__next"
+      >
+        <i class="ph-duotone ph-github-logo" style="font-size: 12px;"></i>
+        {t("common.footer.license")}
       </a>
+    </div>
+    <div class="meta-row">
+      <a href={prev.href} class="footer__next" data-astro-prefetch="hover">↑ {prevLabel}</a>
+      <span class="accent">{num} / 04</span>
+      <a href={next.href} class="footer__next" data-astro-prefetch="hover">{nextLabel} ↓</a>
     </div>
   </div>
 </footer>

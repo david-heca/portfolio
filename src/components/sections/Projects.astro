@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { useTranslations } from "@i18n/utils";
+import PageHeader from "@ui/PageHeader.astro";
 import PageFooter from "@ui/PageFooter.astro";
 
 export interface Props {
@@ -20,8 +21,6 @@ interface Project {
   status: string;
   tags: string[];
   image?: string;
-  featured?: boolean;
-  accent?: boolean;
   href?: string;
 }
 
@@ -35,8 +34,6 @@ const featured: Project = {
   status: t("projects.list.connie.status"),
   tags: ["React", "RAG", "SQL", "JWT", "Python", "Azure"],
   image: "/assets/projects/connie.webp",
-  featured: true,
-  accent: true,
 };
 
 const rest: Project[] = [
@@ -70,58 +67,87 @@ const rest: Project[] = [
     kind: t("projects.list.portfolio.kind"),
     year: t("projects.list.portfolio.year"),
     status: t("projects.list.portfolio.status"),
-    tags: ["Astro", "Tailwind", "React", "Markdown"],
+    tags: ["Astro", "Tailwind", "React"],
     image: "/assets/projects/portfolio.webp",
     href: "https://github.com/david-heca/portfolio",
-    accent: true,
   },
 ];
-
-const headingHtml = t("projects.heading");
 ---
 
-<section class="projects container-editorial">
-  <div class="reveal section-label">// 02. {t("nav.projects")}</div>
-  <h1 class="reveal reveal-delay-1 projects__h" set:html={headingHtml}></h1>
-  <p class="reveal reveal-delay-2 work__sub" style="margin-bottom: 0;">{t("projects.description")}</p>
+<PageHeader
+  idx="02"
+  kicker={t("nav.projects")}
+  title={t("projects.headerTitle")}
+  italic={t("projects.headerItalic")}
+  sub={t("projects.description")}
+/>
 
-  <div class="project project--feat reveal">
-    <div class={`project__cover ${featured.accent ? "project__cover--accent" : ""}`}>
-      <div class="project__num">{featured.num}</div>
-      <div class="project__kind">{t("projects.featuredLabel")}</div>
-      {featured.image ? (
-        <Image
-          src={featured.image}
-          alt={featured.title}
-          width={1280}
-          height={800}
-          loading="lazy"
-          quality={85}
-        />
-      ) : (
-        <div class="project__cover-placeholder">[ cover · {featured.title} ]</div>
-      )}
-    </div>
-    <div>
-      <div class="project__meta">
-        <span>{featured.kind}</span>
-        <span>{featured.year} · {featured.status}</span>
+<section class="projects container-editorial">
+  <div class="projects__featured reveal">
+    <div class="projects__cover">
+      <div class="placeholder">
+        {featured.image ? (
+          <Image
+            src={featured.image}
+            alt={featured.title}
+            width={1280}
+            height={800}
+            loading="lazy"
+            quality={85}
+          />
+        ) : (
+          <span>cover · {featured.title}</span>
+        )}
       </div>
-      <div class="project__title">{featured.title}</div>
-      <div class="project__desc">{featured.desc}</div>
-      <div class="project__tags">
-        {featured.tags.map((tag) => <span class="tag">{tag}</span>)}
+      <div class="projects__cover-badge-l">
+        <span class="chip accent">
+          <span class="dot"></span>
+          {t("projects.featuredLabel")}
+        </span>
+      </div>
+      <div class="projects__cover-badge-r">
+        <span class="label">/ {featured.num}</span>
+      </div>
+    </div>
+
+    <div class="projects__feat-content">
+      <div>
+        <div class="meta-row projects__feat-meta">
+          <span style="color: var(--color-accent);">{featured.kind}</span>
+          <span class="sep">·</span>
+          <span>{featured.year}</span>
+          <span class="sep">·</span>
+          <span>{featured.status}</span>
+        </div>
+        <div class="projects__feat-title">
+          {featured.title}<span class="accent-dot">.</span>
+        </div>
+        <div class="projects__feat-desc">{featured.desc}</div>
+      </div>
+      <div>
+        <div class="projects__feat-tags">
+          {featured.tags.map((t) => <span class="chip">{t}</span>)}
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="projects__more-label reveal">{t("projects.moreProjects")}</div>
+  <div class="projects__divider reveal">
+    <span class="hr"></span>
+    <span class="label-mid">{t("projects.moreProjects")}</span>
+    <span class="hr"></span>
+  </div>
 
   <div class="projects__grid">
     {rest.map((p, i) => (
-      <div class={`project reveal reveal-delay-${Math.min(i + 1, 4)}`}>
-        <div class={`project__cover ${p.accent ? "project__cover--accent" : ""}`}>
-          <div class="project__num">{p.num}</div>
+      <a
+        href={p.href ?? "#"}
+        target={p.href ? "_blank" : undefined}
+        rel={p.href ? "noopener noreferrer" : undefined}
+        class={`box solid project-card reveal reveal-delay-${Math.min(i + 1, 4)}`}
+        style={p.href ? "" : "pointer-events: none;"}
+      >
+        <div class="project-card__cover placeholder">
           {p.image ? (
             <Image
               src={p.image}
@@ -132,19 +158,21 @@ const headingHtml = t("projects.heading");
               quality={80}
             />
           ) : (
-            <div class="project__cover-placeholder">[ cover · {p.title} ]</div>
+            <span>cover · {p.title}</span>
           )}
         </div>
-        <div class="project__meta">
-          <span>{p.kind}</span>
-          <span>{p.year} · {p.status}</span>
+        <div class="project-card__body">
+          <div class="project-card__head">
+            <span class="label">{p.kind} · {p.year}</span>
+            <span class="project-card__num">{p.num}</span>
+          </div>
+          <div class="project-card__title">{p.title}</div>
+          <div class="project-card__desc">{p.desc}</div>
+          <div class="project-card__tags">
+            {p.tags.map((t) => <span class="chip">{t}</span>)}
+          </div>
         </div>
-        <div class="project__title" style="font-size: clamp(22px, 3.5vw, 32px);">{p.title}</div>
-        <div class="project__desc">{p.desc}</div>
-        <div class="project__tags">
-          {p.tags.map((tag) => <span class="tag">{tag}</span>)}
-        </div>
-      </div>
+      </a>
     ))}
   </div>
 </section>
