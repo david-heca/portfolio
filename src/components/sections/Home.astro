@@ -17,22 +17,6 @@ const aboutHeadingHtml = t("home.aboutSection.heading");
 const bio1Html = t("home.aboutSection.bio.paragraph1");
 const bio2Html = t("home.aboutSection.bio.paragraph2");
 const bio3Html = t("home.aboutSection.bio.paragraph3");
-
-const stack = [
-  { icon: "ph-code", label: ".NET" },
-  { icon: "ph-snake", label: "Python" },
-  { icon: "ph-cloud", label: "Azure" },
-  { icon: "ph-brain", label: "LLMs" },
-  { icon: "ph-database", label: "RAG" },
-  { icon: "ph-plugs-connected", label: "MCP" },
-];
-
-const taglineItalic = t("hero.tagline.italic");
-const ulinePart = t("hero.tagline.uline");
-const taglineHtml = taglineItalic.replace(
-  ulinePart,
-  `<span class="uline">${ulinePart}</span>`,
-);
 ---
 
 <section class="hero container-editorial">
@@ -70,16 +54,6 @@ const taglineHtml = taglineItalic.replace(
             <span style="color: var(--color-ink-2);">×</span>
             <b class="accent">{t("hero.tagline.role2")}</b>
           </div>
-          <span class="hero__tagline-italic" set:html={taglineHtml}></span>
-        </div>
-
-        <div class="hero__stack reveal reveal-delay-3">
-          {stack.map((s) => (
-            <span class="chip">
-              <i class={`ph-duotone ${s.icon}`}></i>
-              {s.label}
-            </span>
-          ))}
         </div>
       </div>
 

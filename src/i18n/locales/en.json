@@ -43,10 +43,8 @@
       "statusFor": "FOR WORK"
     },
     "tagline": {
-      "role1": "IT Engineer",
-      "role2": "AI Solutions Architect",
-      "italic": "— I design grounded LLM systems that actually work in production.",
-      "uline": "actually work in production"
+      "role1": "Information Technologies and Communications Engineer",
+      "role2": "AI Solutions Architect"
     },
     "ctas": {
       "work": "see selected work",
@@ -238,19 +236,19 @@
       "rows": {
         "backend": {
           "label": "Backend",
-          "items": "C# · .NET · Python · PostgreSQL"
+          "items": "C# · .NET · Python · PostgreSQL · SQL Server · JWT · OAuth · APIs"
         },
         "frontend": {
           "label": "Frontend",
-          "items": "React · Tailwind · TypeScript"
+          "items": "React · Tailwind · TypeScript · DevExpress"
         },
         "cloud": {
           "label": "Cloud & Infra",
-          "items": "Azure · Docker · CI/CD"
+          "items": "Azure · AWS · Docker · CI/CD · Pipelines"
         },
         "ai": {
           "label": "AI & Data",
-          "items": "LLMs · RAG · MCP · MLOps"
+          "items": "LLMs · RAG · MCP · MLOps · Prompts"
         }
       }
     },
