@@ -43,10 +43,8 @@
       "statusFor": "PARA TRABAJAR"
     },
     "tagline": {
-      "role1": "Ingeniero en TIC",
-      "role2": "Arquitecto de Soluciones IA",
-      "italic": "— Diseño sistemas con LLMs que realmente funcionan en producción.",
-      "uline": "realmente funcionan en producción"
+      "role1": "Ingeniero en Tecnologías de la Información y Comunicaciones",
+      "role2": "Arquitecto de Soluciones IA"
     },
     "ctas": {
       "work": "ver trabajo",
@@ -238,19 +236,19 @@
       "rows": {
         "backend": {
           "label": "Backend",
-          "items": "C# · .NET · Python · PostgreSQL"
+          "items": "C# · .NET · Python · PostgreSQL · SQL Server · JWT · OAuth · APIs"
         },
         "frontend": {
           "label": "Frontend",
-          "items": "React · Tailwind · TypeScript"
+          "items": "React · Tailwind · TypeScript · DevExpress"
         },
         "cloud": {
           "label": "Nube & Infra",
-          "items": "Azure · Docker · CI/CD"
+          "items": "Azure · AWS · Docker · CI/CD · Pipelines"
         },
         "ai": {
           "label": "IA & Datos",
-          "items": "LLMs · RAG · MCP · MLOps"
+          "items": "LLMs · RAG · MCP · MLOps · Prompts"
         }
       }
     },

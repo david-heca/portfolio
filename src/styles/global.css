@@ -154,36 +154,15 @@ img, svg { display: block; max-width: 100%; }
   object-fit: cover;
 }
 
-.uline {
-  position: relative;
-  display: inline-block;
-  padding-bottom: 4px;
-}
-.uline::after {
-  content: "";
-  position: absolute;
-  left: -2%;
-  right: -2%;
-  bottom: 0;
-  height: 6px;
-  background-color: var(--color-accent);
-  -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'><path d='M0 3 Q 10 0 20 3 T 40 3 T 60 3 T 80 3 T 100 3' fill='none' stroke='black' stroke-width='1.5'/></svg>");
-  mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 6' preserveAspectRatio='none'><path d='M0 3 Q 10 0 20 3 T 40 3 T 60 3 T 80 3 T 100 3' fill='none' stroke='black' stroke-width='1.5'/></svg>");
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-}
-
 .hand {
   font-family: var(--font-hand);
   font-weight: 500;
-  font-size: 18px;
-  line-height: 1.1;
+  font-size: 20px;
+  line-height: 1.15;
   color: var(--color-ink);
 }
-.hand.sm { font-size: 15px; }
-.hand.lg { font-size: 24px; }
+.hand.sm { font-size: 17px; }
+.hand.lg { font-size: 26px; }
 .hand.dim { color: var(--color-ink-2); }
 .hand.accent { color: var(--color-accent); }
 
@@ -414,10 +393,10 @@ i[class*="ph-"] {
 .sticker {
   position: absolute;
   font-family: var(--font-hand);
-  font-size: 14px;
+  font-size: 17px;
   color: var(--color-bg);
   background: var(--color-accent);
-  padding: 5px 12px;
+  padding: 5px 14px;
   border-radius: 999px;
   letter-spacing: 0.04em;
   display: inline-flex;
@@ -631,28 +610,6 @@ i[class*="ph-"] {
 }
 .hero__tagline-line b { font-weight: 500; }
 .hero__tagline-line .accent { font-weight: 500; color: var(--color-accent); }
-.hero__tagline-italic {
-  display: block;
-  margin-top: 8px;
-  color: var(--color-ink-2);
-  font-style: italic;
-  font-family: var(--font-display);
-  font-size: 18px;
-  line-height: 1.45;
-}
-
-.hero__stack {
-  display: none;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 22px;
-  max-width: 600px;
-}
-@media (min-width: 1024px) {
-  .hero__stack { display: flex; }
-}
-.hero__stack .chip { padding: 5px 11px; gap: 6px; }
-.hero__stack .chip i { font-size: 13px; color: var(--color-accent); }
 
 .hero__ctas {
   display: flex;
@@ -737,8 +694,8 @@ i[class*="ph-"] {
 }
 .hero__currently-text {
   font-family: var(--font-hand);
-  font-size: 19px;
-  line-height: 1.2;
+  font-size: 21px;
+  line-height: 1.25;
   color: var(--color-ink);
 }
 
@@ -950,7 +907,7 @@ i[class*="ph-"] {
 }
 .work__company-roles-count {
   font-family: var(--font-hand);
-  font-size: 17px;
+  font-size: 19px;
   color: var(--color-ink-2);
   white-space: nowrap;
 }
@@ -958,7 +915,7 @@ i[class*="ph-"] {
   color: var(--color-accent);
   font-style: italic;
   font-family: var(--font-display);
-  font-size: 22px;
+  font-size: 24px;
   margin-right: 4px;
 }
 
@@ -1069,7 +1026,7 @@ i[class*="ph-"] {
 
 .role-card__hand {
   font-family: var(--font-hand);
-  font-size: 16px;
+  font-size: 18px;
   color: var(--color-accent);
   margin-top: 4px;
 }
@@ -1135,7 +1092,7 @@ i[class*="ph-"] {
   align-items: center;
   gap: 6px;
   font-family: var(--font-hand);
-  font-size: 19px;
+  font-size: 21px;
   color: var(--color-accent);
 }
 .work__then-arrow i { font-size: 20px !important; color: var(--color-accent) !important; }
@@ -1232,7 +1189,7 @@ i[class*="ph-"] {
 .projects__divider .label-mid {
   font-family: var(--font-hand);
   color: var(--color-ink-2);
-  font-size: 16px;
+  font-size: 18px;
   white-space: nowrap;
 }
 
@@ -1281,7 +1238,7 @@ i[class*="ph-"] {
 }
 .project-card__num {
   font-family: var(--font-hand);
-  font-size: 15px;
+  font-size: 17px;
   color: var(--color-ink-2);
 }
 .project-card__title {
@@ -1599,7 +1556,7 @@ i[class*="ph-"] {
 .edu__philosophy .display em { color: var(--color-accent); font-style: italic; }
 .edu__philosophy-attr {
   font-family: var(--font-hand);
-  font-size: 16px;
+  font-size: 18px;
   color: var(--color-accent);
   margin-top: 8px;
   display: inline-flex;
@@ -1765,7 +1722,7 @@ i[class*="ph-"] {
 .contact__cv-label {
   font-family: var(--font-hand);
   color: var(--color-accent);
-  font-size: 17px;
+  font-size: 19px;
 }
 
 .contact__avail {
