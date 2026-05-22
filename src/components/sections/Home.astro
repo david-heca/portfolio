@@ -1,5 +1,6 @@
 ---
 import { useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 import Stamp from "@ui/Stamp.astro";
 import PageFooter from "@ui/PageFooter.astro";
@@ -24,16 +25,12 @@ const bio3Html = t("home.aboutSection.bio.paragraph3");
     <!-- LEFT — typography column -->
     <div class="hero__left">
       <div class="hero__topline reveal">
-        <div class="meta-row">
-          <span class="label accent">— 00 / {t("nav.home")}</span>
-          <span class="sep">·</span>
-          <span>edition 04 · 2026</span>
-        </div>
+        <span class="label accent">— 00 / {t("nav.home")}</span>
       </div>
 
       <div style="position: relative;">
-        <div class="hero__greeting reveal reveal-delay-1">
-          <i class="ph-duotone ph-hand-waving"></i>
+        <div class="hero__greeting reveal reveal-delay-1 mb-8!">
+          <Icon name="ph:hand-waving-duotone" />
           <span class="hand lg">
             {t("hero.greeting")}<span style="color: var(--color-accent);">—</span>
           </span>
@@ -49,9 +46,9 @@ const bio3Html = t("home.aboutSection.bio.paragraph3");
 
         <div class="hero__tagline reveal reveal-delay-2">
           <div class="hero__tagline-line">
-            <i class="ph-duotone ph-circuitry"></i>
+            <Icon name="ph:circuitry-duotone" />
             <b>{t("hero.tagline.role1")}</b>
-            <span style="color: var(--color-ink-2);">×</span>
+            <span style="color: var(--color-ink-2);">✼</span>
             <b class="accent">{t("hero.tagline.role2")}</b>
           </div>
         </div>
@@ -64,18 +61,18 @@ const bio3Html = t("home.aboutSection.bio.paragraph3");
             class="chip accent"
             data-astro-prefetch="hover"
           >
-            <i class="ph-duotone ph-arrow-up-right"></i>
+            <Icon name="ph:arrow-up-right-duotone" />
             {t("hero.ctas.work")}
           </a>
           <a href={`mailto:hello@davidherrera.dev`} class="chip">
-            <i class="ph-duotone ph-envelope-simple"></i>
+            <Icon name="ph:envelope-simple-duotone" />
             {t("hero.ctas.email")}
           </a>
         </div>
         <div class="hero__metarow meta-row">
-          <span class="icon-row"><i class="ph-duotone ph-map-pin"></i>{t("hero.metaBar.city")}</span>
+          <span class="icon-row"><Icon name="ph:map-pin-duotone" />{t("hero.metaBar.city")}</span>
           <span class="sep">/</span>
-          <span class="icon-row"><i class="ph-duotone ph-clock"></i>GMT-6</span>
+          <span class="icon-row"><Icon name="ph:clock-duotone" />GMT-6</span>
           <span class="sep">/</span>
           <span class="icon-row" style="color: var(--color-accent);">
             <span class="pulse"></span>
@@ -102,7 +99,7 @@ const bio3Html = t("home.aboutSection.bio.paragraph3");
         </div>
         <Stamp lang={lang} className="hero__portrait-stamp" />
         <div class="sticker hero__portrait-sticker">
-          <i class="ph-duotone ph-flag"></i>
+          <Icon name="ph:flag-duotone" />
           {t("hero.sticker")}
         </div>
       </div>
@@ -113,7 +110,7 @@ const bio3Html = t("home.aboutSection.bio.paragraph3");
             <span class="pulse"></span>
             <span class="label accent">// {t("hero.currently.label")}</span>
           </div>
-          <i class="ph-duotone ph-plugs-connected"></i>
+          <Icon name="ph:plugs-connected-duotone" />
         </div>
         <div class="hero__currently-text">
           {t("hero.currently.text")}
@@ -123,22 +120,22 @@ const bio3Html = t("home.aboutSection.bio.paragraph3");
       <div class="box hero__socials reveal reveal-delay-2">
         <div class="icon-row">
           <a href="https://github.com/david-heca" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            <i class="ph-duotone ph-github-logo"></i>
+            <Icon name="ph:github-logo-duotone" />
           </a>
           <a href="https://www.linkedin.com/in/david-heca/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <i class="ph-duotone ph-linkedin-logo"></i>
+            <Icon name="ph:linkedin-logo-duotone" />
           </a>
           <a href="https://x.com/david_heca_" target="_blank" rel="noopener noreferrer" aria-label="X / Twitter">
-            <i class="ph-duotone ph-x-logo"></i>
+            <Icon name="ph:x-logo-duotone" />
           </a>
           <a href={`mailto:hello@davidherrera.dev`} aria-label="Email">
-            <i class="ph-duotone ph-envelope-simple"></i>
+            <Icon name="ph:envelope-simple-duotone" />
           </a>
         </div>
         <span class="hand sm accent">
           <span style="display: inline-flex; align-items: center; gap: 6px;">
             scroll
-            <i class="ph-duotone ph-arrow-down" style="font-size: 14px;"></i>
+            <Icon name="ph:arrow-down-duotone" style="font-size: 14px;" />
           </span>
         </span>
       </div>

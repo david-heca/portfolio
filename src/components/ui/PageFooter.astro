@@ -1,5 +1,6 @@
 ---
 import { useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
 
 export interface Props {
   lang: "es" | "en";
@@ -37,7 +38,7 @@ const prevLabel = t(`nav.${prev.key}`);
         rel="noopener noreferrer"
         class="footer__next"
       >
-        <i class="ph-duotone ph-github-logo" style="font-size: 12px;"></i>
+        <Icon name="ph:github-logo-duotone" style="font-size: 12px;" />
         {t("common.footer.license")}
       </a>
     </div>

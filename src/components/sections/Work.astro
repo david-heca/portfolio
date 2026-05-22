@@ -1,5 +1,6 @@
 ---
 import { useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
 import PageHeader from "@ui/PageHeader.astro";
 import PageFooter from "@ui/PageFooter.astro";
 
@@ -46,20 +47,20 @@ const companies: Company[] = [
         title: t("work.companies.baacc.roles.architect.title"),
         period: t("work.companies.baacc.roles.architect.period"),
         type: t("work.companies.baacc.roles.architect.type"),
-        icon: "ph-blueprint",
+        icon: "ph:blueprint-duotone",
         hand: lang === "es" ? "rol actual ↘" : "current role ↘",
         stack: [
-          { label: "LLM", icon: "ph-brain" },
-          { label: "MCP", icon: "ph-plugs-connected" },
-          { label: "RAG", icon: "ph-database" },
-          { label: "MLOps", icon: "ph-test-tube" },
-          { label: "APIs", icon: "ph-share-network" },
+          { label: "LLM", icon: "ph:brain-duotone" },
+          { label: "MCP", icon: "ph:plugs-connected-duotone" },
+          { label: "RAG", icon: "ph:database-duotone" },
+          { label: "MLOps", icon: "ph:test-tube-duotone" },
+          { label: "APIs", icon: "ph:share-network-duotone" },
         ],
         bullets: [
-          { text: t("work.companies.baacc.roles.architect.achievements.0"), icon: "ph-rocket" },
-          { text: t("work.companies.baacc.roles.architect.achievements.1"), icon: "ph-flow-arrow" },
-          { text: t("work.companies.baacc.roles.architect.achievements.2"), icon: "ph-plugs-connected" },
-          { text: t("work.companies.baacc.roles.architect.achievements.3"), icon: "ph-test-tube" },
+          { text: t("work.companies.baacc.roles.architect.achievements.0"), icon: "ph:rocket-duotone" },
+          { text: t("work.companies.baacc.roles.architect.achievements.1"), icon: "ph:flow-arrow-duotone" },
+          { text: t("work.companies.baacc.roles.architect.achievements.2"), icon: "ph:plugs-connected-duotone" },
+          { text: t("work.companies.baacc.roles.architect.achievements.3"), icon: "ph:test-tube-duotone" },
         ],
         current: true,
       },
@@ -67,33 +68,33 @@ const companies: Company[] = [
         title: t("work.companies.baacc.roles.fullstack.title"),
         period: t("work.companies.baacc.roles.fullstack.period"),
         type: t("work.companies.baacc.roles.fullstack.type"),
-        icon: "ph-stack",
+        icon: "ph:stack-duotone",
         stack: [
-          { label: ".NET", icon: "ph-code-block" },
-          { label: "Python", icon: "ph-code" },
-          { label: "SQL", icon: "ph-database" },
-          { label: "Android", icon: "ph-device-mobile" },
+          { label: ".NET", icon: "ph:code-block-duotone" },
+          { label: "Python", icon: "ph:code-duotone" },
+          { label: "SQL", icon: "ph:database-duotone" },
+          { label: "Android", icon: "ph:device-mobile-duotone" },
         ],
         bullets: [
-          { text: t("work.companies.baacc.roles.fullstack.achievements.0"), icon: "ph-desktop" },
-          { text: t("work.companies.baacc.roles.fullstack.achievements.1"), icon: "ph-browser" },
-          { text: t("work.companies.baacc.roles.fullstack.achievements.2"), icon: "ph-database" },
-          { text: t("work.companies.baacc.roles.fullstack.achievements.3"), icon: "ph-device-mobile" },
+          { text: t("work.companies.baacc.roles.fullstack.achievements.0"), icon: "ph:desktop-duotone" },
+          { text: t("work.companies.baacc.roles.fullstack.achievements.1"), icon: "ph:browser-duotone" },
+          { text: t("work.companies.baacc.roles.fullstack.achievements.2"), icon: "ph:database-duotone" },
+          { text: t("work.companies.baacc.roles.fullstack.achievements.3"), icon: "ph:device-mobile-duotone" },
         ],
       },
       {
         title: t("work.companies.baacc.roles.junior.title"),
         period: t("work.companies.baacc.roles.junior.period"),
         type: t("work.companies.baacc.roles.junior.type"),
-        icon: "ph-plant",
+        icon: "ph:plant-duotone",
         stack: [
-          { label: "MVC", icon: "ph-stack" },
-          { label: "SQL", icon: "ph-database" },
-          { label: "APIs", icon: "ph-share-network" },
+          { label: "MVC", icon: "ph:stack-duotone" },
+          { label: "SQL", icon: "ph:database-duotone" },
+          { label: "APIs", icon: "ph:share-network-duotone" },
         ],
         bullets: [
-          { text: t("work.companies.baacc.roles.junior.achievements.0"), icon: "ph-share-network" },
-          { text: t("work.companies.baacc.roles.junior.achievements.1"), icon: "ph-files" },
+          { text: t("work.companies.baacc.roles.junior.achievements.0"), icon: "ph:share-network-duotone" },
+          { text: t("work.companies.baacc.roles.junior.achievements.1"), icon: "ph:files-duotone" },
         ],
       },
     ],
@@ -110,18 +111,18 @@ const companies: Company[] = [
         title: t("work.companies.dec.roles.webdev.title"),
         period: t("work.companies.dec.roles.webdev.period"),
         type: t("work.companies.dec.roles.webdev.type"),
-        icon: "ph-browser",
+        icon: "ph:browser-duotone",
         hand: lang === "es" ? "← donde empezó todo" : "← where it all started",
         stack: [
-          { label: "HTML", icon: "ph-code" },
-          { label: "CSS", icon: "ph-paint-brush" },
-          { label: "JS", icon: "ph-brackets-curly" },
-          { label: "WordPress", icon: "ph-globe" },
+          { label: "HTML", icon: "ph:code-duotone" },
+          { label: "CSS", icon: "ph:paint-brush-duotone" },
+          { label: "JS", icon: "ph:brackets-curly-duotone" },
+          { label: "WordPress", icon: "ph:globe-duotone" },
         ],
         bullets: [
-          { text: t("work.companies.dec.roles.webdev.achievements.0"), icon: "ph-browser" },
-          { text: t("work.companies.dec.roles.webdev.achievements.1"), icon: "ph-shield-check" },
-          { text: t("work.companies.dec.roles.webdev.achievements.2"), icon: "ph-envelope" },
+          { text: t("work.companies.dec.roles.webdev.achievements.0"), icon: "ph:browser-duotone" },
+          { text: t("work.companies.dec.roles.webdev.achievements.1"), icon: "ph:shield-check-duotone" },
+          { text: t("work.companies.dec.roles.webdev.achievements.2"), icon: "ph:envelope-duotone" },
         ],
       },
     ],
@@ -135,23 +136,23 @@ const stats = [
     num: "4",
     suffix: lang === "es" ? "años" : "yrs",
     label: lang === "es" ? "trayectoria" : "experience",
-    icon: "ph-clock",
+    icon: "ph:clock-duotone",
     accent: true,
   },
   {
     num: String(companies.length),
     label: lang === "es" ? "empresas" : "companies",
-    icon: "ph-buildings",
+    icon: "ph:buildings-duotone",
   },
   {
     num: String(totalRoles),
     label: lang === "es" ? "roles" : "roles",
-    icon: "ph-stack",
+    icon: "ph:stack-duotone",
   },
   {
     num: "∞",
     label: lang === "es" ? "deploys" : "deploys",
-    icon: "ph-rocket",
+    icon: "ph:rocket-duotone",
   },
 ];
 ---
@@ -168,7 +169,7 @@ const stats = [
   <div class="stats-strip reveal">
     {stats.map((s) => (
       <div class="stats-strip__item">
-        <i class={`ph-duotone ${s.icon} stats-strip__icon`}></i>
+        <Icon name={s.icon} class="stats-strip__icon" />
         <div class="stats-strip__num">
           {s.accent ? <span class="accent">{s.num}</span> : s.num}
           {s.suffix && <span style="font-size: 0.55em; color: var(--color-ink-2); margin-left: 4px; font-style: normal; font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;">{s.suffix}</span>}
@@ -191,15 +192,15 @@ const stats = [
             </h3>
             <div class="work__company-meta">
               <span class="chip soft">
-                <i class="ph-duotone ph-calendar-blank"></i>
+                <Icon name="ph:calendar-blank-duotone" />
                 {co.span}
               </span>
               <span class="chip">
-                <i class="ph-duotone ph-map-pin"></i>
+                <Icon name="ph:map-pin-duotone" />
                 {co.loc}
               </span>
               <span class="chip">
-                <i class="ph-duotone ph-buildings"></i>
+                <Icon name="ph:buildings-duotone" />
                 {co.mode}
               </span>
             </div>
@@ -216,7 +217,7 @@ const stats = [
           {co.roles.map((r) => (
             <div class={`role-card box ${r.current ? "accent" : ""}`}>
               <span class="role-card__node" aria-hidden="true">
-                <i class={`ph-duotone ${r.icon}`}></i>
+                <Icon name={r.icon} />
                 {r.current && <span class="role-card__node-pulse"></span>}
               </span>
 
@@ -241,7 +242,7 @@ const stats = [
                 {r.bullets.map((b) => (
                   <li class="achievement">
                     <span class="achievement__icon" aria-hidden="true">
-                      <i class={`ph-duotone ${b.icon}`}></i>
+                      <Icon name={b.icon} />
                     </span>
                     <span>{b.text}</span>
                   </li>
@@ -251,7 +252,7 @@ const stats = [
               <div class="role-card__tags">
                 {r.stack.map((s) => (
                   <span class={`chip ${r.current ? "soft" : ""}`}>
-                    <i class={`ph-duotone ${s.icon}`}></i>
+                    <Icon name={s.icon} />
                     {s.label}
                   </span>
                 ))}
@@ -264,7 +265,7 @@ const stats = [
       {ci < companies.length - 1 && (
         <div class="work__then reveal" aria-hidden="true">
           <span class="work__then-arrow">
-            <i class="ph-duotone ph-arrow-bend-right-down"></i>
+            <Icon name="ph:arrow-bend-right-down-duotone" />
             {lang === "es" ? "antes ·" : "before that ·"}
           </span>
           <span class="work__then-line"></span>

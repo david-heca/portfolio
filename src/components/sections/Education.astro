@@ -1,5 +1,6 @@
 ---
 import { useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
 import PageHeader from "@ui/PageHeader.astro";
 import PageFooter from "@ui/PageFooter.astro";
 
@@ -19,7 +20,7 @@ const academic = [
     school: t("education.list.tesco.institution"),
     note: t("education.list.tesco.description"),
     initials: "TESCo",
-    icon: "ph-graduation-cap",
+    icon: "ph:graduation-cap-duotone",
   },
   {
     year: t("education.list.platzi.period"),
@@ -27,7 +28,7 @@ const academic = [
     school: t("education.list.platzi.institution"),
     note: t("education.list.platzi.description"),
     initials: "Platzi",
-    icon: "ph-monitor-play",
+    icon: "ph:monitor-play-duotone",
   },
   {
     year: t("education.list.cecytem.period"),
@@ -35,7 +36,7 @@ const academic = [
     school: t("education.list.cecytem.institution"),
     note: t("education.list.cecytem.description"),
     initials: "CECyTEM",
-    icon: "ph-code",
+    icon: "ph:code-duotone",
   },
 ];
 
@@ -53,12 +54,12 @@ const certs: Cert[] = [
     year: "2024",
     title: t("education.certifications.azure.name"),
     issuer: "Microsoft",
-    icon: "ph-cloud",
+    icon: "ph:cloud-duotone",
     tags: [
-      { label: "Azure", icon: "ph-cloud" },
-      { label: "Cloud", icon: "ph-cloud-arrow-up" },
-      { label: "Networking", icon: "ph-share-network" },
-      { label: "Security", icon: "ph-shield-check" },
+      { label: "Azure", icon: "ph:cloud-duotone" },
+      { label: "Cloud", icon: "ph:cloud-arrow-up-duotone" },
+      { label: "Networking", icon: "ph:share-network-duotone" },
+      { label: "Security", icon: "ph:shield-check-duotone" },
     ],
     featured: true,
   },
@@ -66,21 +67,21 @@ const certs: Cert[] = [
     year: "2022",
     title: t("education.certifications.python.name"),
     issuer: "Michigan University · Coursera",
-    icon: "ph-code",
+    icon: "ph:code-duotone",
     tags: [
-      { label: "Python", icon: "ph-code" },
-      { label: "Data Structures", icon: "ph-tree-structure" },
-      { label: "SQL", icon: "ph-database" },
+      { label: "Python", icon: "ph:code-duotone" },
+      { label: "Data Structures", icon: "ph:tree-structure-duotone" },
+      { label: "SQL", icon: "ph:database-duotone" },
     ],
   },
 ];
 
 const interests = [
-  { label: lang === "es" ? "IA generativa" : "Generative AI", icon: "ph-sparkle" },
-  { label: "MLOps", icon: "ph-test-tube" },
-  { label: lang === "es" ? "Sistemas distribuidos" : "Distributed systems", icon: "ph-share-network" },
-  { label: lang === "es" ? "Café especialidad" : "Specialty coffee", icon: "ph-coffee" },
-  { label: lang === "es" ? "Tipografía" : "Typography", icon: "ph-text-aa" },
+  { label: lang === "es" ? "IA generativa" : "Generative AI", icon: "ph:sparkle-duotone" },
+  { label: "MLOps", icon: "ph:test-tube-duotone" },
+  { label: lang === "es" ? "Sistemas distribuidos" : "Distributed systems", icon: "ph:share-network-duotone" },
+  { label: lang === "es" ? "Café especialidad" : "Specialty coffee", icon: "ph:coffee-duotone" },
+  { label: lang === "es" ? "Tipografía" : "Typography", icon: "ph:text-aa-duotone" },
 ];
 
 const stats = [
@@ -88,23 +89,23 @@ const stats = [
     num: "10",
     suffix: lang === "es" ? "años" : "yrs",
     label: lang === "es" ? "estudiando" : "studying",
-    icon: "ph-graduation-cap",
+    icon: "ph:graduation-cap-duotone",
     accent: true,
   },
   {
     num: String(academic.length),
     label: lang === "es" ? "instituciones" : "institutions",
-    icon: "ph-buildings",
+    icon: "ph:buildings-duotone",
   },
   {
     num: String(certs.length),
     label: lang === "es" ? "certificaciones" : "certifications",
-    icon: "ph-certificate",
+    icon: "ph:certificate-duotone",
   },
   {
     num: "∞",
     label: lang === "es" ? "por aprender" : "to learn",
-    icon: "ph-book-open",
+    icon: "ph:book-open-duotone",
   },
 ];
 ---
@@ -121,7 +122,7 @@ const stats = [
   <div class="stats-strip reveal">
     {stats.map((s) => (
       <div class="stats-strip__item">
-        <i class={`ph-duotone ${s.icon} stats-strip__icon`}></i>
+        <Icon name={s.icon} class="stats-strip__icon" />
         <div class="stats-strip__num">
           {s.accent ? <span class="accent">{s.num}</span> : s.num}
           {s.suffix && <span style="font-size: 0.55em; color: var(--color-ink-2); margin-left: 4px; font-style: normal; font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;">{s.suffix}</span>}
@@ -141,7 +142,7 @@ const stats = [
         {academic.map((e, i) => (
           <div class={`box edu-item reveal reveal-delay-${Math.min(i + 1, 4)}`}>
             <div class="edu-item__logo" aria-hidden="true">
-              <i class={`ph-duotone ${e.icon}`}></i>
+              <Icon name={e.icon} />
               <span class="edu-item__logo-initials">{e.initials}</span>
             </div>
             <div class="edu-item__body">
@@ -168,13 +169,13 @@ const stats = [
             <div class="cert-card__head">
               <div class="cert-card__head-left">
                 <span class="cert-card__icon" aria-hidden="true">
-                  <i class={`ph-duotone ${c.icon}`}></i>
+                  <Icon name={c.icon} />
                 </span>
                 <span class="cert-card__year">{c.year}</span>
               </div>
               {c.featured && (
                 <span class="chip solid">
-                  <i class="ph-duotone ph-medal"></i>
+                  <Icon name="ph:medal-duotone" />
                   {t("education.labels.featured")}
                 </span>
               )}
@@ -184,7 +185,7 @@ const stats = [
             <div class="cert-card__tags">
               {c.tags.map((tg) => (
                 <span class={`chip ${c.featured ? "soft" : ""}`}>
-                  <i class={`ph-duotone ${tg.icon}`}></i>
+                  <Icon name={tg.icon} />
                   {tg.label}
                 </span>
               ))}
@@ -198,7 +199,7 @@ const stats = [
   <div class="edu__meta-strip">
     <div class="box solid edu__meta-card reveal">
       <div class="edu__meta-card-head">
-        <i class="ph-duotone ph-translate"></i>
+        <Icon name="ph:translate-duotone" />
         <div class="label accent">{t("education.sideCards.languagesTitle")}</div>
       </div>
       <div class="edu__lang-list">
@@ -233,13 +234,13 @@ const stats = [
 
     <div class="box solid edu__meta-card reveal reveal-delay-1">
       <div class="edu__meta-card-head">
-        <i class="ph-duotone ph-sparkle"></i>
+        <Icon name="ph:sparkle-duotone" />
         <div class="label accent">{t("education.sideCards.interestsTitle")}</div>
       </div>
       <div class="edu__interests">
         {interests.map((it) => (
           <span class="chip">
-            <i class={`ph-duotone ${it.icon}`}></i>
+            <Icon name={it.icon} />
             {it.label}
           </span>
         ))}
@@ -248,12 +249,12 @@ const stats = [
 
     <div class="box edu__meta-card edu__philosophy reveal reveal-delay-2">
       <div class="edu__meta-card-head">
-        <i class="ph-duotone ph-quotes"></i>
+        <Icon name="ph:quotes-duotone" />
         <div class="label accent">{t("education.sideCards.philosophyTitle")}</div>
       </div>
       <div class="display" set:html={t("education.sideCards.philosophyBody")}></div>
       <div class="edu__philosophy-attr">
-        <i class="ph-duotone ph-pen-nib"></i>
+        <Icon name="ph:pen-nib-duotone" />
         {lang === "es" ? "— guía personal" : "— personal guide"}
       </div>
     </div>

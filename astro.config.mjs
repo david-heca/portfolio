@@ -1,11 +1,12 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import icon from "astro-icon";
 import viteCompression from "vite-plugin-compression";
 
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
-  integrations: [sitemap()],
+  integrations: [icon(), sitemap()],
   site: "https://davidherrera.dev",
 
   prefetch: {
