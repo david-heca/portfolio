@@ -57,7 +57,7 @@ function isActive(href: string): boolean {
           aria-label={t("nav.cv")}
         >
           <Icon name="ph:file-arrow-down-duotone" />
-          {t("nav.cv dsdf")}
+          {t("nav.cv")}
         </a>
       </div>
       <button
@@ -100,6 +100,87 @@ function isActive(href: string): boolean {
 </header>
 
 <style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border-bottom: var(--line) dashed var(--color-ink-3);
+  }
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 18px;
+  }
+  @media (min-width: 1024px) {
+    .nav__inner { padding-block: 22px; }
+  }
+
+  .nav__brand {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+    color: var(--color-ink);
+    text-decoration: none;
+  }
+  .nav__brand b {
+    font-style: normal;
+    font-weight: 400;
+  }
+  .nav__brand-tld {
+    color: var(--color-accent);
+    font-style: italic;
+  }
+
+  .nav__links {
+    display: none;
+    gap: 22px;
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .nav__links { display: inline-flex; }
+  }
+  .nav__link {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-ink-2);
+    text-decoration: none;
+    transition: color 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+  }
+  .nav__link:hover { color: var(--color-ink); }
+  .nav__link .idx { color: var(--color-ink-3); }
+  .nav__link.active { color: var(--color-ink); }
+  .nav__link.active .idx { color: var(--color-accent); }
+
+  .nav__utils {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav__cv {
+    display: none;
+    padding: 5px 12px;
+    gap: 6px;
+  }
+  .nav__cv [data-icon] { font-size: 14px; color: var(--color-accent); }
+  @media (min-width: 1024px) {
+    .nav__cv { display: inline-flex; }
+  }
+
   .nav__utils-desktop {
     display: none;
     align-items: center;

@@ -21,3 +21,50 @@ const { idx, kicker, title, italic, sub } = Astro.props;
     {sub}
   </div>
 </div>
+
+<style>
+  .page-header {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    align-items: end;
+    padding-top: 32px;
+    padding-bottom: 24px;
+  }
+  @media (min-width: 1024px) {
+    .page-header {
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      padding-bottom: 28px;
+    }
+  }
+  .page-header__kicker { margin-bottom: 16px; }
+  .page-header__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.86;
+    color: var(--color-ink);
+    margin: 0;
+    font-size: clamp(56px, 11vw, 132px);
+  }
+  .page-header__title .accent { color: var(--color-accent); }
+  .page-header__title .dot {
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: clamp(28px, 5vw, 60px);
+    color: var(--color-ink-2);
+    margin-left: 6px;
+  }
+  .page-header__sub {
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 460px;
+    color: var(--color-ink);
+    padding-bottom: 8px;
+  }
+  @media (min-width: 1024px) {
+    .page-header__sub { padding-bottom: 18px; }
+  }
+</style>
