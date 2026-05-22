@@ -6,19 +6,18 @@ Bilingual portfolio with an editorial-brutalist design. Built with Astro.
 
 ## Tech Stack
 
-- **Astro 5** — Static site generation with View Transitions
-- **React 19** — (installed; no islands in use currently)
+- **Astro 6** — Static site generation with View Transitions
 - **Tailwind CSS 4** — Utility layer alongside a semantic custom-CSS design system
 - **Satoshi + JetBrains Mono** — Typography (Fontshare + Google Fonts)
-- **Vercel** — Deployment with gzip/brotli compression
+- **Cloudflare Workers** — Deployment with global CDN, DDoS protection, and edge caching
 
 ## Quick Start
 
 ```bash
-bun install
-bun run dev        # localhost:4321
-bun run build      # production build → /dist
-bun run preview    # preview production build
+pnpm install
+pnpm run dev # localhost:4321
+pnpm run build # production build → /dist
+pnpm run preview # preview production build
 ```
 
 ## Project Structure
@@ -59,4 +58,4 @@ Editorial-brutalist soft, v.2026:
 
 ## License
 
-MIT
+MIT 
