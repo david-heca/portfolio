@@ -1,5 +1,6 @@
 ---
 import { useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
 import PageHeader from "@ui/PageHeader.astro";
 import PageFooter from "@ui/PageFooter.astro";
 
@@ -38,7 +39,7 @@ const cvFiles = [
     <!-- left: invitation + CTA + meta -->
     <div class="contact__intro reveal">
       <div class="contact__invite hand lg">
-        <i class="ph-duotone ph-paper-plane-tilt"></i>
+        <Icon name="ph:paper-plane-tilt-duotone" />
         <span set:html={t("contact.invite")}></span>
       </div>
 
@@ -52,9 +53,9 @@ const cvFiles = [
       </div>
 
       <div class="contact__intro-meta meta-row">
-        <span class="icon-row"><i class="ph-duotone ph-map-pin"></i>{t("hero.metaBar.city")}</span>
+        <span class="icon-row"><Icon name="ph:map-pin-duotone" />{t("hero.metaBar.city")}</span>
         <span class="sep">/</span>
-        <span class="icon-row"><i class="ph-duotone ph-clock"></i>GMT-6</span>
+        <span class="icon-row"><Icon name="ph:clock-duotone" />GMT-6</span>
         <span class="sep">/</span>
         <span class="icon-row" style="color: var(--color-accent);">
           <span class="pulse"></span>

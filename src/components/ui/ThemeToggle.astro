@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -15,7 +16,7 @@ const t = useTranslations(lang);
     aria-label={t("theme.light")}
     title={t("theme.light")}
   >
-    <i class="ph-fill ph-sun"></i>
+    <Icon name="ph:sun-duotone" />
   </button>
   <button
     type="button"
@@ -26,7 +27,7 @@ const t = useTranslations(lang);
     aria-label={t("theme.system")}
     title={t("theme.system")}
   >
-    <i class="ph-fill ph-monitor"></i>
+    <Icon name="ph:monitor-duotone" />
   </button>
   <button
     type="button"
@@ -37,7 +38,7 @@ const t = useTranslations(lang);
     aria-label={t("theme.dark")}
     title={t("theme.dark")}
   >
-    <i class="ph-fill ph-moon"></i>
+    <Icon name="ph:moon-duotone" />
   </button>
 </div>
 

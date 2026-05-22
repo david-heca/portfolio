@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
 
 interface Props {
   lang?: "es" | "en";
@@ -28,7 +29,7 @@ const coreText = t("hero.stamp.core");
     </svg>
   </div>
   <div class="core">
-    <i class="ph-duotone ph-star"></i>
+    <Icon name="ph:star-duotone" />
     <span set:html={coreText.replace(/ /g, "<br/>")} />
   </div>
 </div>

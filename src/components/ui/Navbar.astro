@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
 import ThemeToggle from "@ui/ThemeToggle.astro";
 import LanguagePicker from "@ui/LanguagePicker.astro";
 
@@ -7,11 +8,11 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const navItems = [
-  { id: "home",      href: lang === "es" ? "/" : "/en",                idx: "00", label: t("nav.home") },
-  { id: "work",      href: lang === "es" ? "/work" : "/en/work",       idx: "01", label: t("nav.work") },
-  { id: "projects",  href: lang === "es" ? "/projects" : "/en/projects", idx: "02", label: t("nav.projects") },
+  { id: "home", href: lang === "es" ? "/" : "/en", idx: "00", label: t("nav.home") },
+  { id: "work", href: lang === "es" ? "/work" : "/en/work", idx: "01", label: t("nav.work") },
+  { id: "projects", href: lang === "es" ? "/projects" : "/en/projects", idx: "02", label: t("nav.projects") },
   { id: "education", href: lang === "es" ? "/education" : "/en/education", idx: "03", label: t("nav.education") },
-  { id: "contact",   href: lang === "es" ? "/contact" : "/en/contact", idx: "04", label: t("nav.contact") },
+  { id: "contact", href: lang === "es" ? "/contact" : "/en/contact", idx: "04", label: t("nav.contact") },
 ];
 
 const cvHref = lang === "es"
@@ -55,8 +56,8 @@ function isActive(href: string): boolean {
           class="chip accent nav__cv"
           aria-label={t("nav.cv")}
         >
-          <i class="ph-fill ph-file-arrow-down"></i>
-          {t("nav.cv")}
+          <Icon name="ph:file-arrow-down-duotone" />
+          {t("nav.cv dsdf")}
         </a>
       </div>
       <button
@@ -65,7 +66,7 @@ function isActive(href: string): boolean {
         aria-label="Toggle menu"
         aria-expanded="false"
       >
-        <i class="ph-fill ph-list" style="font-size: 22px;"></i>
+        <Icon name="ph:list-bold" style="font-size: 22px;" />
       </button>
     </div>
   </div>
@@ -91,7 +92,7 @@ function isActive(href: string): boolean {
         rel="noopener noreferrer"
         class="chip accent"
       >
-        <i class="ph-fill ph-file-arrow-down"></i>
+        <Icon name="ph:file-arrow-down-duotone" />
         {t("nav.cv")}
       </a>
     </div>

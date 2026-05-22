@@ -213,7 +213,7 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-bg);
 }
 .chip.solid:hover { color: var(--color-bg); }
-.chip.solid i { color: var(--color-bg) !important; }
+.chip.solid [data-icon] { color: var(--color-bg) !important; }
 .chip.soft {
   background: var(--color-accent-soft);
   border-color: color-mix(in srgb, var(--color-accent) 28%, transparent);
@@ -226,13 +226,12 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-ink-2);
 }
 .chip.dashed { border-style: dashed; }
-.chip i {
+.chip [data-icon] {
   font-size: 12px;
   color: var(--color-accent);
-  flex-shrink: 0;
 }
-.chip.solid i,
-.chip.soft i { color: currentColor; }
+.chip.solid [data-icon],
+.chip.soft [data-icon] { color: currentColor; }
 .chip .dot {
   width: 6px;
   height: 6px;
@@ -263,19 +262,21 @@ img, svg { display: block; max-width: 100%; }
 }
 .meta-row .sep { color: var(--color-ink-3); }
 
-i[class*="ph-"] {
-  font-style: normal;
-  line-height: 1;
+/* Phosphor icons rendered as inline SVG via astro-icon — every icon
+   carries a [data-icon] attribute. SVGs default to 1em, so font-size
+   still controls their scale. :where() keeps the duotone default at
+   zero specificity so any contextual rule can override it. */
+[data-icon] {
   display: inline-block;
+  flex-shrink: 0;
 }
-.ph-duotone { color: var(--color-ink); }
-.ph-duotone.accent { color: var(--color-accent); }
+:where([data-icon$="-duotone"]) { color: var(--color-ink); }
 .icon-row {
   display: inline-flex;
   align-items: center;
   gap: 8px;
 }
-.icon-row i[class*="ph-"] { font-size: 16px; color: var(--color-accent); }
+.icon-row [data-icon] { font-size: 16px; color: var(--color-accent); }
 
 .stamp {
   position: absolute;
@@ -313,7 +314,7 @@ i[class*="ph-"] {
   gap: 4px;
   text-align: center;
 }
-.stamp .core i { font-size: 22px; color: var(--color-accent); }
+.stamp .core [data-icon] { font-size: 22px; color: var(--color-accent); }
 
 @keyframes stamp-spin { to { transform: rotate(360deg); } }
 
@@ -380,13 +381,13 @@ i[class*="ph-"] {
   background: var(--color-ink);
   color: var(--color-bg);
 }
-.seg > span.on i,
-.seg > button.on i,
-.seg > button[aria-checked="true"] i,
-.seg > a.active i { color: var(--color-bg); }
-.seg > span i,
-.seg > button i,
-.seg > a i {
+.seg > span.on [data-icon],
+.seg > button.on [data-icon],
+.seg > button[aria-checked="true"] [data-icon],
+.seg > a.active [data-icon] { color: var(--color-bg); }
+.seg > span [data-icon],
+.seg > button [data-icon],
+.seg > a [data-icon] {
   font-size: 13px;
   color: var(--color-ink-2);
 }
@@ -403,7 +404,7 @@ i[class*="ph-"] {
   align-items: center;
   gap: 6px;
 }
-.sticker i { font-size: 14px; color: var(--color-bg); }
+.sticker [data-icon] { font-size: 14px; color: var(--color-bg); }
 
 .press-effect:active { transform: scale(0.97) !important; }
 
@@ -503,7 +504,7 @@ i[class*="ph-"] {
   padding: 5px 12px;
   gap: 6px;
 }
-.nav__cv i { font-size: 14px; color: var(--color-accent); }
+.nav__cv [data-icon] { font-size: 14px; color: var(--color-accent); }
 @media (min-width: 1024px) {
   .nav__cv { display: inline-flex; }
 }
@@ -556,7 +557,7 @@ i[class*="ph-"] {
   margin-bottom: 14px;
   flex-wrap: wrap;
 }
-.hero__greeting i {
+.hero__greeting [data-icon] {
   font-size: 28px;
   color: var(--color-accent);
 }
@@ -604,7 +605,7 @@ i[class*="ph-"] {
   gap: 8px;
   flex-wrap: wrap;
 }
-.hero__tagline-line i {
+.hero__tagline-line [data-icon] {
   font-size: 16px;
   color: var(--color-accent);
 }
@@ -618,7 +619,7 @@ i[class*="ph-"] {
   flex-wrap: wrap;
 }
 .hero__ctas .chip { padding: 7px 14px; gap: 6px; font-size: 11px; }
-.hero__ctas .chip i { font-size: 14px; color: var(--color-accent); }
+.hero__ctas .chip [data-icon] { font-size: 14px; color: var(--color-accent); }
 
 .hero__metarow {
   display: flex;
@@ -688,7 +689,7 @@ i[class*="ph-"] {
   justify-content: space-between;
   align-items: center;
 }
-.hero__currently-head i {
+.hero__currently-head [data-icon] {
   font-size: 22px;
   color: var(--color-accent);
 }
@@ -717,7 +718,7 @@ i[class*="ph-"] {
   color: var(--color-accent);
   transform: translateY(-1px);
 }
-.hero__socials a i { font-size: 17px; }
+.hero__socials a [data-icon] { font-size: 17px; }
 
 /* ================================================================
    PAGE HEADER
@@ -972,18 +973,18 @@ i[class*="ph-"] {
 @media (min-width: 768px) {
   .role-card__node { left: -56px; top: 16px; width: 32px; height: 32px; }
 }
-.role-card__node i {
+.role-card__node [data-icon] {
   font-size: 14px !important;
   color: var(--color-ink-2) !important;
 }
 @media (min-width: 768px) {
-  .role-card__node i { font-size: 16px !important; }
+  .role-card__node [data-icon] { font-size: 16px !important; }
 }
 .role-card.box.accent .role-card__node {
   border-color: var(--color-accent);
   background: var(--color-accent);
 }
-.role-card.box.accent .role-card__node i { color: var(--color-bg) !important; }
+.role-card.box.accent .role-card__node [data-icon] { color: var(--color-bg) !important; }
 .role-card__node-pulse {
   position: absolute;
   inset: -6px;
@@ -1037,7 +1038,7 @@ i[class*="ph-"] {
   flex-wrap: wrap;
 }
 .role-card__tags .chip { padding: 4px 10px; font-size: 9px; gap: 5px; }
-.role-card__tags .chip i { font-size: 11px; }
+.role-card__tags .chip [data-icon] { font-size: 11px; }
 
 /* achievements with icons */
 .role-card__achievements {
@@ -1069,7 +1070,7 @@ i[class*="ph-"] {
   flex-shrink: 0;
   margin-top: 1px;
 }
-.achievement__icon i {
+.achievement__icon [data-icon] {
   font-size: 14px !important;
   color: var(--color-accent) !important;
 }
@@ -1095,7 +1096,7 @@ i[class*="ph-"] {
   font-size: 21px;
   color: var(--color-accent);
 }
-.work__then-arrow i { font-size: 20px !important; color: var(--color-accent) !important; }
+.work__then-arrow [data-icon] { font-size: 20px !important; color: var(--color-accent) !important; }
 .work__then-line {
   flex: 1;
   height: 0;
@@ -1318,7 +1319,7 @@ i[class*="ph-"] {
   gap: 2px;
   flex-shrink: 0;
 }
-.edu-item__logo i {
+.edu-item__logo [data-icon] {
   font-size: 22px !important;
   color: var(--color-accent) !important;
 }
@@ -1405,7 +1406,7 @@ i[class*="ph-"] {
   background: var(--color-bg);
   border-color: var(--color-accent);
 }
-.cert-card__icon i {
+.cert-card__icon [data-icon] {
   font-size: 20px !important;
   color: var(--color-accent) !important;
 }
@@ -1441,7 +1442,7 @@ i[class*="ph-"] {
   border-top: var(--line) dashed var(--color-ink-3);
 }
 .cert-card__tags .chip { padding: 3px 8px; font-size: 9px; gap: 5px; }
-.cert-card__tags .chip i { font-size: 10px; }
+.cert-card__tags .chip [data-icon] { font-size: 10px; }
 
 /* side-cards (idiomas / intereses / filosofía) */
 .edu__meta-strip {
@@ -1468,7 +1469,7 @@ i[class*="ph-"] {
   align-items: center;
   gap: 10px;
 }
-.edu__meta-card-head i {
+.edu__meta-card-head [data-icon] {
   font-size: 20px !important;
   color: var(--color-accent) !important;
 }
@@ -1594,10 +1595,9 @@ i[class*="ph-"] {
   color: var(--color-ink);
   flex-wrap: wrap;
 }
-.contact__invite i {
+.contact__invite [data-icon] {
   font-size: clamp(28px, 4.5vw, 44px);
   color: var(--color-accent);
-  flex-shrink: 0;
 }
 .contact__invite em {
   color: var(--color-accent);
