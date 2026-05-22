@@ -33,3 +33,49 @@ const coreText = t("hero.stamp.core");
     <span set:html={coreText.replace(/ /g, "<br/>")} />
   </div>
 </div>
+
+<style>
+  .stamp {
+    position: absolute;
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: var(--color-bg);
+  }
+  .stamp .ring-text {
+    position: absolute;
+    inset: 0;
+    animation: stamp-spin 16s linear infinite;
+    color: var(--color-accent);
+  }
+  .stamp .ring-text svg { width: 100%; height: 100%; }
+  .stamp .ring-text text {
+    fill: var(--color-accent);
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.32em;
+  }
+  .stamp .core {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    text-align: center;
+  }
+  .stamp .core [data-icon] { font-size: 22px; color: var(--color-accent); }
+
+  @keyframes stamp-spin { to { transform: rotate(360deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stamp .ring-text { animation: none; }
+  }
+</style>

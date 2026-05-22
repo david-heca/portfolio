@@ -49,3 +49,35 @@ const prevLabel = t(`nav.${prev.key}`);
     </div>
   </div>
 </footer>
+
+<style>
+  .footer {
+    border-top: var(--line) dashed var(--color-ink-3);
+    margin-top: auto;
+    background: var(--color-bg);
+  }
+  .footer__inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-block: 18px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-ink-2);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .footer__inner .meta-row { font-size: 11px; gap: 16px; }
+  .footer__inner .accent { color: var(--color-accent); }
+  .footer__next {
+    color: var(--color-ink-2);
+    text-decoration: none;
+    transition: color 0.15s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .footer__next:hover { color: var(--color-accent); }
+</style>

@@ -262,3 +262,305 @@ const stats = [
 </section>
 
 <PageFooter lang={lang} num="03" />
+
+<style>
+  .edu { padding-bottom: 80px; }
+  .edu__split {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding-top: 10px;
+  }
+  @media (min-width: 1024px) {
+    .edu__split { grid-template-columns: 1.15fr 1fr; gap: 40px; }
+  }
+  .edu__col-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .edu__col-title { margin-bottom: 0; }
+  .edu__col-count {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    color: var(--color-ink-3);
+  }
+  .edu__list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  /* academic — vertical timeline w/ year markers */
+  .edu-item {
+    padding: 16px 20px;
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 18px;
+    align-items: start;
+    position: relative;
+  }
+  @media (max-width: 480px) {
+    .edu-item { grid-template-columns: 1fr; gap: 12px; }
+  }
+  .edu-item__logo {
+    width: 64px;
+    height: 64px;
+    border: var(--line) solid var(--color-line-strong);
+    border-radius: 8px;
+    background: var(--color-bg-2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    flex-shrink: 0;
+  }
+  .edu-item__logo [data-icon] {
+    font-size: 22px !important;
+    color: var(--color-accent) !important;
+  }
+  .edu-item__logo-initials {
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    color: var(--color-ink-2);
+    text-transform: uppercase;
+  }
+  .edu-item__body { min-width: 0; }
+  .edu-item__year-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .edu-item__year {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .edu-item__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 2.6vw, 24px);
+    line-height: 1.15;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+  }
+  .edu-item__school {
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink-2);
+    display: block;
+    line-height: 1.5;
+  }
+  .edu-item__note {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--color-ink-2);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: var(--line) dashed var(--color-ink-3);
+  }
+
+  /* certs */
+  .cert-card {
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+  }
+  .cert-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+  .cert-card__head-left {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .cert-card__icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--color-accent-soft);
+    border: var(--line) solid color-mix(in srgb, var(--color-accent) 28%, transparent);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .cert-card.box.accent .cert-card__icon {
+    background: var(--color-bg);
+    border-color: var(--color-accent);
+  }
+  .cert-card__icon [data-icon] {
+    font-size: 20px !important;
+    color: var(--color-accent) !important;
+  }
+  .cert-card__year {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-ink-2);
+  }
+  .cert-card__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(20px, 2.6vw, 24px);
+    line-height: 1.15;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+  }
+  .cert-card__issuer {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-ink-2);
+  }
+  .cert-card__tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+    padding-top: 8px;
+    border-top: var(--line) dashed var(--color-ink-3);
+  }
+  .cert-card__tags .chip { padding: 3px 8px; font-size: 9px; gap: 5px; }
+  .cert-card__tags .chip [data-icon] { font-size: 10px; }
+
+  /* side-cards (idiomas / intereses / filosofía) */
+  .edu__meta-strip {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 32px;
+  }
+  @media (min-width: 768px) {
+    .edu__meta-strip { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1024px) {
+    .edu__meta-strip { grid-template-columns: 1fr 1fr 1.3fr; gap: 18px; }
+  }
+  .edu__meta-card {
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+  }
+  .edu__meta-card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .edu__meta-card-head [data-icon] {
+    font-size: 20px !important;
+    color: var(--color-accent) !important;
+  }
+  .edu__meta-card .display {
+    font-size: 19px;
+    line-height: 1.35;
+    color: var(--color-ink);
+  }
+  .edu__meta-card .display em {
+    color: var(--color-ink-2);
+    font-style: normal;
+    font-family: var(--font-mono);
+    font-style: normal;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .edu__meta-card-text {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--color-ink);
+  }
+
+  .edu__lang-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .edu__lang-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: var(--line) dashed var(--color-ink-3);
+    gap: 10px;
+  }
+  .edu__lang-row:last-child { border-bottom: 0; }
+  .edu__lang-name {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--color-ink);
+  }
+  .edu__lang-level {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .edu__lang-bars {
+    display: inline-flex;
+    gap: 3px;
+  }
+  .edu__lang-bar {
+    width: 4px;
+    height: 12px;
+    border-radius: 1px;
+    background: var(--color-ink-3);
+  }
+  .edu__lang-bar.on { background: var(--color-accent); }
+
+  .edu__interests {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .edu__philosophy {
+    background: var(--color-accent-soft) !important;
+    border-color: var(--color-accent) !important;
+  }
+  .edu__philosophy .display {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(20px, 2.4vw, 26px);
+    line-height: 1.2;
+    color: var(--color-ink);
+  }
+  .edu__philosophy .display em { color: var(--color-accent); font-style: italic; }
+  .edu__philosophy-attr {
+    font-family: var(--font-hand);
+    font-size: 18px;
+    color: var(--color-accent);
+    margin-top: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+</style>

@@ -276,3 +276,280 @@ const stats = [
 </section>
 
 <PageFooter lang={lang} num="01" />
+
+<style>
+  .work { padding-bottom: 80px; }
+
+  /* company block */
+  .work__company {
+    margin-bottom: 56px;
+    position: relative;
+  }
+  .work__company:last-child { margin-bottom: 0; }
+  .work__company-header {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    align-items: stretch;
+    margin-bottom: 24px;
+  }
+  @media (min-width: 768px) {
+    .work__company-header { grid-template-columns: auto 1fr auto; gap: 24px; }
+  }
+  .work__logo {
+    width: 88px;
+    height: 88px;
+    border: var(--line) solid var(--color-accent);
+    border-radius: 8px;
+    background: var(--color-accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 38px;
+    line-height: 1;
+    color: var(--color-accent);
+    letter-spacing: -0.04em;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .work__logo::after {
+    content: attr(data-idx);
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: var(--color-bg);
+    border: var(--line) solid var(--color-accent);
+    border-radius: 999px;
+    padding: 2px 8px;
+    font-family: var(--font-mono);
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    color: var(--color-accent);
+  }
+  .work__company-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    min-width: 0;
+  }
+  .work__company-name {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(28px, 3.6vw, 38px);
+    line-height: 1.05;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+  }
+  .work__company-name .accent-dot { color: var(--color-accent); font-style: normal; }
+  .work__company-meta {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 6px;
+  }
+  .work__company-meta .chip { padding: 4px 10px; font-size: 10px; }
+  .work__company-aside {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .work__company-roles-count {
+    font-family: var(--font-hand);
+    font-size: 19px;
+    color: var(--color-ink-2);
+    white-space: nowrap;
+  }
+  .work__company-roles-count em {
+    color: var(--color-accent);
+    font-style: italic;
+    font-family: var(--font-display);
+    font-size: 24px;
+    margin-right: 4px;
+  }
+
+  /* timeline rail — axis at x=14 (mobile) / x=24 (desktop) */
+  .work__timeline {
+    position: relative;
+    padding-left: 44px;
+  }
+  @media (min-width: 768px) {
+    .work__timeline { padding-left: 64px; }
+  }
+
+  .role-card {
+    position: relative;
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .role-card:last-child { margin-bottom: 0; }
+
+  /* Per-card connector line: lives in the timeline's left padding,
+     centered exactly on the node axis (line border is 1.5px → offset by 0.75). */
+  .role-card::before {
+    content: "";
+    position: absolute;
+    left: -30.75px;
+    top: 0;
+    bottom: -16px;
+    border-left: var(--line) dashed var(--color-ink-3);
+    pointer-events: none;
+  }
+  @media (min-width: 768px) {
+    .role-card::before { left: -40.75px; }
+  }
+  .role-card:first-child::before { top: 32px; }
+  .role-card:last-child::before { bottom: calc(100% - 32px); }
+
+  .role-card__node {
+    position: absolute;
+    left: -44px;
+    top: 18px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: var(--line) solid var(--color-ink-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+  @media (min-width: 768px) {
+    .role-card__node { left: -56px; top: 16px; width: 32px; height: 32px; }
+  }
+  .role-card__node [data-icon] {
+    font-size: 14px !important;
+    color: var(--color-ink-2) !important;
+  }
+  @media (min-width: 768px) {
+    .role-card__node [data-icon] { font-size: 16px !important; }
+  }
+  .role-card.box.accent .role-card__node {
+    border-color: var(--color-accent);
+    background: var(--color-accent);
+  }
+  .role-card.box.accent .role-card__node [data-icon] { color: var(--color-bg) !important; }
+  .role-card__node-pulse {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-accent);
+    opacity: 0.5;
+    animation: pulse-ring 1.8s ease-out infinite;
+    pointer-events: none;
+  }
+
+  .role-card__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .role-card__head-left { min-width: 0; flex: 1 1 auto; }
+  .role-card__period-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 6px;
+  }
+  .role-card__period-row .label { font-size: 10px; }
+  .role-card__period-row .chip { padding: 2px 8px; font-size: 9px; }
+  .role-card__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(22px, 3vw, 28px);
+    line-height: 1.1;
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
+  }
+  .role-card.box.accent .role-card__title {
+    color: var(--color-ink);
+  }
+
+  .role-card__hand {
+    font-family: var(--font-hand);
+    font-size: 18px;
+    color: var(--color-accent);
+    margin-top: 4px;
+  }
+
+  .role-card__tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .role-card__tags .chip { padding: 4px 10px; font-size: 9px; gap: 5px; }
+  .role-card__tags .chip [data-icon] { font-size: 11px; }
+
+  /* achievements with icons */
+  .role-card__achievements {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .achievement {
+    display: grid;
+    grid-template-columns: 26px 1fr;
+    gap: 12px;
+    align-items: start;
+    font-size: 13.5px;
+    line-height: 1.55;
+    color: var(--color-ink);
+  }
+  .achievement__icon {
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    border: var(--line) solid var(--color-line);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg-2);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .achievement__icon [data-icon] {
+    font-size: 14px !important;
+    color: var(--color-accent) !important;
+  }
+  .role-card.box.accent .achievement__icon {
+    background: var(--color-bg);
+    border-color: var(--color-accent);
+  }
+
+  /* between-companies arrow */
+  .work__then {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 32px 0 24px;
+    padding-left: 0;
+  }
+  .work__then-arrow {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-hand);
+    font-size: 21px;
+    color: var(--color-accent);
+  }
+  .work__then-arrow [data-icon] { font-size: 20px !important; color: var(--color-accent) !important; }
+  .work__then-line {
+    flex: 1;
+    height: 0;
+    border-top: var(--line) dashed var(--color-ink-3);
+  }
+</style>
