@@ -157,6 +157,12 @@ const personSchema = {
         if (currentTheme) {
           e.newDocument.documentElement.classList.add("dark");
         }
+        // Pre-reveal on cross-page nav: Safari otherwise snapshots the new page
+        // with `.reveal` still at opacity:0 (before the IntersectionObserver
+        // can fire), which produces a visible empty-page flash mid-transition.
+        e.newDocument.querySelectorAll(".reveal").forEach((el) => {
+          el.classList.add("visible");
+        });
       });
 
       document.addEventListener("astro:after-swap", setThemeOnNavigation);
