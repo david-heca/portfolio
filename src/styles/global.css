@@ -372,24 +372,6 @@ img, svg { display: block; max-width: 100%; }
 .reveal-delay-4 { transition-delay: 0.4s; }
 
 /* ================================================================
-   VIEW TRANSITIONS
-   Tame the default root cross-fade so Safari renders it consistently
-   with Chromium (Safari's default longer fade tends to flicker).
-   ================================================================ */
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation-duration: 220ms;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation: none;
-  }
-}
-
-/* ================================================================
    SHARED SECTION BLOCKS
    Used by more than one component, so they stay global on purpose.
    Single-component styles live in each component's scoped <style>.
