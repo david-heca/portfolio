@@ -1,8 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import { useTranslations } from "@i18n/utils";
-import PageHeader from "@ui/PageHeader.astro";
-import PageFooter from "@ui/PageFooter.astro";
 
 export interface Props {
   lang: "es" | "en";
@@ -11,13 +9,8 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-interface Spec {
-  label: string;
-  value: string;
-}
-
+interface Spec { label: string; value: string }
 interface Project {
-  num: string;
   slug: string;
   title: string;
   desc: string;
@@ -26,376 +19,205 @@ interface Project {
   year: string;
   status: string;
   tags: string[];
-  image?: string;
+  image: string;
   href?: string;
 }
 
-const featured: Project = {
-  num: "01",
-  slug: "connie",
-  title: t("projects.list.connie.title"),
-  desc: t("projects.list.connie.description"),
-  specs: t("projects.list.connie.specs") as unknown as Spec[],
-  kind: t("projects.list.connie.kind"),
-  year: t("projects.list.connie.year"),
-  status: t("projects.list.connie.status"),
-  tags: ["RAG", "MCP", "Azure", "Python", "SQL", "JWT"],
-  image: "/assets/projects/connie.webp",
-};
+const build = (slug: string, tags: string[], image: string, href?: string): Project => ({
+  slug,
+  title: t(`projects.list.${slug}.title`),
+  desc: t(`projects.list.${slug}.description`),
+  specs: t(`projects.list.${slug}.specs`) as unknown as Spec[],
+  kind: t(`projects.list.${slug}.kind`),
+  year: t(`projects.list.${slug}.year`),
+  status: t(`projects.list.${slug}.status`),
+  tags,
+  image,
+  href,
+});
 
-const rest: Project[] = [
-  {
-    num: "02",
-    slug: "handheld",
-    title: t("projects.list.handheld.title"),
-    desc: t("projects.list.handheld.description"),
-    specs: t("projects.list.handheld.specs") as unknown as Spec[],
-    kind: t("projects.list.handheld.kind"),
-    year: t("projects.list.handheld.year"),
-    status: t("projects.list.handheld.status"),
-    tags: ["Java", "Android", "Material", "SQL"],
-    image: "/assets/projects/handheld.webp",
-  },
-  {
-    num: "03",
-    slug: "trace",
-    title: t("projects.list.trace.title"),
-    desc: t("projects.list.trace.description"),
-    specs: t("projects.list.trace.specs") as unknown as Spec[],
-    kind: t("projects.list.trace.kind"),
-    year: t("projects.list.trace.year"),
-    status: t("projects.list.trace.status"),
-    tags: ["C#", "DevExpress", "SQL"],
-    image: "/assets/projects/trace.webp",
-  },
-  {
-    num: "04",
-    slug: "portfolio",
-    title: t("projects.list.portfolio.title"),
-    desc: t("projects.list.portfolio.description"),
-    specs: t("projects.list.portfolio.specs") as unknown as Spec[],
-    kind: t("projects.list.portfolio.kind"),
-    year: t("projects.list.portfolio.year"),
-    status: t("projects.list.portfolio.status"),
-    tags: ["Astro", "Tailwind", "React"],
-    image: "/assets/projects/portfolio.webp",
-    href: "https://github.com/david-heca/portfolio",
-  },
+const featured = build("connie", ["RAG", "MCP", "Azure", "Python", "SQL"], "/assets/projects/connie.webp");
+const rest = [
+  build("handheld", ["Java", "Android", "SQL"], "/assets/projects/handheld.webp"),
+  build("trace", ["C#", "DevExpress", "SQL"], "/assets/projects/trace.webp"),
+  build("portfolio", ["Astro", "Tailwind", "TS"], "/assets/projects/portfolio.webp", "https://github.com/david-heca/portfolio"),
 ];
 ---
 
-<PageHeader
-  idx="02"
-  kicker={t("nav.projects")}
-  title={t("projects.headerTitle")}
-  italic={t("projects.headerItalic")}
-  sub={t("projects.description")}
-/>
+<section id="projects" class="projects section container">
+  <header class="sec-head reveal">
+    <p class="kicker">{t("nav.projects")}</p>
+    <h2 class="section-title">{t("projects.headerTitle")} <em>{t("projects.headerItalic")}</em></h2>
+    <p class="lead">{t("projects.description")}</p>
+  </header>
 
-<section class="projects container-editorial">
-  <div class="projects__featured reveal">
-    <div class="projects__cover">
-      <div class="placeholder">
-        {featured.image ? (
-          <Image
-            src={featured.image}
-            alt={featured.title}
-            width={1280}
-            height={800}
-            loading="lazy"
-            quality={85}
-          />
-        ) : (
-          <span>cover · {featured.title}</span>
-        )}
-      </div>
-      <div class="projects__cover-badge-l">
-        <span class="chip accent">
-          <span class="dot"></span>
-          {t("projects.featuredLabel")}
-        </span>
-      </div>
-      <div class="projects__cover-badge-r">
-        <span class="label">/ {featured.num}</span>
+  <article class="featured card reveal">
+    <div class="featured__cover">
+      <Image src={featured.image} alt={featured.title} width={1100} height={720} loading="lazy" quality={85} />
+      <span class="featured__badge">{t("projects.featuredLabel")}</span>
+    </div>
+    <div class="featured__body">
+      <p class="proj__meta">{featured.kind} · {featured.year} · {featured.status}</p>
+      <h3 class="featured__title">{featured.title}</h3>
+      <p class="featured__desc">{featured.desc}</p>
+      <dl class="specs">
+        {featured.specs.map((s) => (
+          <div class="specs__row">
+            <dt>{s.label}</dt>
+            <dd>{s.value}</dd>
+          </div>
+        ))}
+      </dl>
+      <div class="proj__tags">
+        {featured.tags.map((tag) => <span class="tag">{tag}</span>)}
       </div>
     </div>
-
-    <div class="projects__feat-content">
-      <div>
-        <div class="meta-row projects__feat-meta">
-          <span style="color: var(--color-accent);">{featured.kind}</span>
-          <span class="sep">·</span>
-          <span>{featured.year}</span>
-          <span class="sep">·</span>
-          <span>{featured.status}</span>
-        </div>
-        <div class="projects__feat-title">
-          {featured.title}<span class="accent-dot">.</span>
-        </div>
-        <div class="projects__feat-desc">{featured.desc}</div>
-        <dl class="spec-sheet projects__feat-specs">
-          {featured.specs.map((s) => (
-            <div class="spec-sheet__row">
-              <dt>{s.label}</dt>
-              <dd>{s.value}</dd>
-            </div>
-          ))}
-        </dl>
-      </div>
-      <div>
-        <div class="projects__feat-tags">
-          {featured.tags.map((t) => <span class="chip">{t}</span>)}
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="projects__divider reveal">
-    <span class="hr"></span>
-    <span class="label-mid">{t("projects.moreProjects")}</span>
-    <span class="hr"></span>
-  </div>
+  </article>
 
   <div class="projects__grid">
-    {rest.map((p, i) => (
-      <a
-        href={p.href ?? "#"}
-        target={p.href ? "_blank" : undefined}
-        rel={p.href ? "noopener noreferrer" : undefined}
-        class={`box solid project-card reveal reveal-delay-${Math.min(i + 1, 4)}`}
-        style={p.href ? "" : "pointer-events: none;"}
-      >
-        <div class="project-card__cover placeholder">
-          {p.image ? (
-            <Image
-              src={p.image}
-              alt={p.title}
-              width={800}
-              height={600}
-              loading="lazy"
-              quality={80}
-            />
-          ) : (
-            <span>cover · {p.title}</span>
-          )}
-        </div>
-        <div class="project-card__body">
-          <div class="project-card__head">
-            <span class="label">{p.kind} · {p.year}</span>
-            <span class="project-card__num">{p.num}</span>
+    {rest.map((p, i) => {
+      const Tag = p.href ? "a" : "div";
+      return (
+        <Tag
+          href={p.href}
+          target={p.href ? "_blank" : undefined}
+          rel={p.href ? "noopener noreferrer" : undefined}
+          class={`card proj reveal reveal-${Math.min(i + 1, 3)}`}
+        >
+          <div class="proj__cover">
+            <Image src={p.image} alt={p.title} width={720} height={480} loading="lazy" quality={80} />
           </div>
-          <div class="project-card__title">{p.title}</div>
-          <div class="project-card__desc">{p.desc}</div>
-          <dl class="spec-sheet project-card__specs">
-            {p.specs.map((s) => (
-              <div class="spec-sheet__row">
-                <dt>{s.label}</dt>
-                <dd>{s.value}</dd>
-              </div>
-            ))}
-          </dl>
-          <div class="project-card__tags">
-            {p.tags.map((t) => <span class="chip">{t}</span>)}
+          <div class="proj__body">
+            <p class="proj__meta">{p.kind} · {p.year}</p>
+            <h3 class="proj__title">{p.title}</h3>
+            <p class="proj__desc">{p.desc}</p>
+            <dl class="specs">
+              {p.specs.map((s) => (
+                <div class="specs__row">
+                  <dt>{s.label}</dt>
+                  <dd>{s.value}</dd>
+                </div>
+              ))}
+            </dl>
+            <div class="proj__tags">
+              {p.tags.map((tag) => <span class="tag">{tag}</span>)}
+            </div>
           </div>
-        </div>
-      </a>
-    ))}
+        </Tag>
+      );
+    })}
   </div>
 </section>
 
-<PageFooter lang={lang} num="02" />
-
 <style>
-  .projects { padding-bottom: 80px; }
-  .projects__featured {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-    margin: 10px 0 30px;
-  }
-  .projects__featured > * { min-width: 0; }
-  @media (min-width: 1024px) {
-    .projects__featured { grid-template-columns: 1.4fr 1fr; gap: 40px; }
-  }
-  .projects__cover {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 10;
-  }
-  @media (min-width: 1024px) {
-    .projects__cover {
-      aspect-ratio: auto;
-      height: 440px;
-    }
-  }
-  .projects__cover .placeholder { position: absolute; inset: 0; }
-  .projects__cover-badge-l {
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    z-index: 2;
-  }
-  .projects__cover-badge-r {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    z-index: 2;
-  }
-  .projects__feat-content {
-    padding: 8px 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 18px;
-  }
-  .projects__feat-meta { margin-bottom: 14px; }
-  .projects__feat-title {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 0.9;
-    font-size: clamp(56px, 9vw, 80px);
-    color: var(--color-ink);
-  }
-  .projects__feat-title .accent-dot { color: var(--color-accent); font-style: normal; }
-  .projects__feat-desc {
-    font-size: var(--text-lead);
-    line-height: var(--leading-prose);
-    margin-top: 18px;
-    max-width: 420px;
-    color: var(--color-ink);
-  }
+  .sec-head { max-width: 720px; margin-bottom: 56px; }
+  .sec-head .lead { margin-top: 20px; }
 
-  /* Ficha técnica — blueprint spec sheet (híbrido) */
-  .spec-sheet {
-    margin: 0;
-    border-top: var(--line) dashed var(--color-ink-3);
-  }
-  .spec-sheet__row {
-    display: grid;
-    grid-template-columns: 72px 1fr;
-    gap: 14px;
-    padding: 7px 0;
-    border-bottom: var(--line) dashed var(--color-ink-3);
-  }
-  .spec-sheet dt {
+  .proj__meta {
     font-family: var(--font-mono);
     font-size: var(--text-label-sm);
-    letter-spacing: var(--track-label);
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-ink-3);
     margin: 0;
-    padding-top: 2px;
   }
-  .spec-sheet dd {
-    margin: 0;
-    font-size: var(--text-body);
-    line-height: 1.45;
-    color: var(--color-ink);
-  }
-  .projects__feat-specs {
-    margin-top: 22px;
-    max-width: 440px;
-  }
-  .projects__feat-specs .spec-sheet__row { grid-template-columns: 84px 1fr; padding: 9px 0; }
-  .projects__feat-tags {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 16px;
-  }
-  .projects__feat-tags .chip { padding: 4px 10px; }
-  .projects__feat-actions {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-  }
-  .projects__feat-actions .chip { padding: 5px 14px; cursor: pointer; }
+  .proj__tags { display: flex; flex-wrap: wrap; gap: 7px; }
 
-  .projects__divider {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin: 10px 0 24px;
-  }
-  .projects__divider .hr { flex: 1; }
-  .projects__divider .label-mid {
-    font-family: var(--font-hand);
-    color: var(--color-ink-2);
-    font-size: 18px;
-    white-space: nowrap;
-  }
-
-  .projects__grid {
+  /* featured */
+  .featured {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 18px;
-  }
-  .projects__grid > * { min-width: 0; }
-  @media (min-width: 768px) {
-    .projects__grid { grid-template-columns: repeat(2, 1fr); }
-  }
-  @media (min-width: 1024px) {
-    .projects__grid { grid-template-columns: repeat(3, 1fr); }
-  }
-
-  .project-card {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
     overflow: hidden;
+    margin-bottom: 24px;
   }
-  .project-card__cover {
-    height: 180px;
-    border-radius: 0;
-    border: none;
-    border-bottom: var(--line) solid var(--color-ink-3);
-    position: relative;
+  @media (min-width: 900px) {
+    .featured { grid-template-columns: 1.2fr 1fr; align-items: stretch; }
   }
-  .project-card__cover img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  .featured__cover { position: relative; min-height: 280px; background: var(--color-bg-2); }
+  .featured__cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .featured__badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label-sm);
+    letter-spacing: 0.06em;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background: var(--color-accent);
+    color: var(--color-bg);
   }
-  .project-card__body {
-    padding: 14px 18px 18px;
+  .featured__body {
+    padding: clamp(24px, 3vw, 40px);
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 14px;
   }
-  .project-card__head {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 8px;
-  }
-  .project-card__num {
-    font-family: var(--font-hand);
-    font-size: 17px;
-    color: var(--color-ink-2);
-  }
-  .project-card__title {
+  .featured__title {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 32px;
+    font-size: clamp(34px, 5vw, 52px);
     line-height: 1;
     color: var(--color-ink);
+    margin: 4px 0 0;
   }
-  .project-card__desc {
+  .featured__desc {
     font-size: var(--text-body);
     line-height: 1.6;
     color: var(--color-ink-2);
+    margin: 0;
   }
-  .project-card__specs { margin-top: 2px; }
-  .project-card__specs .spec-sheet__row { grid-template-columns: 62px 1fr; gap: 10px; padding: 6px 0; }
-  .project-card__specs dt { font-size: 9px; letter-spacing: 0.12em; }
-  .project-card__specs dd { font-size: 11.5px; line-height: 1.4; color: var(--color-ink-2); }
-  .project-card__tags {
+
+  /* grid cards */
+  .projects__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  @media (min-width: 640px) { .projects__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .projects__grid { grid-template-columns: repeat(3, 1fr); } }
+
+  .proj { display: flex; flex-direction: column; overflow: hidden; }
+  .proj__cover { height: 200px; flex-shrink: 0; background: var(--color-bg-2); }
+  .proj__cover img { width: 100%; height: 100%; object-fit: cover; }
+  .proj__body {
+    padding: 22px;
     display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-    margin-top: 4px;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
   }
-  .project-card__tags .chip { padding: 2px 7px; font-size: 9px; }
+  .proj__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-card-title);
+    line-height: 1;
+    color: var(--color-ink);
+    margin: 2px 0 0;
+  }
+  .proj__desc {
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-ink-2);
+    margin: 0;
+  }
+
+  /* specs */
+  .specs { margin: 4px 0 0; display: flex; flex-direction: column; gap: 8px; }
+  .specs__row { display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: baseline; }
+  .specs dt {
+    font-family: var(--font-mono);
+    font-size: var(--text-label-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-3);
+    margin: 0;
+  }
+  .specs dd {
+    margin: 0;
+    font-size: var(--text-sm);
+    line-height: 1.45;
+    color: var(--color-ink-2);
+  }
+  .featured .specs__row { grid-template-columns: 80px 1fr; }
 </style>

@@ -6,28 +6,12 @@
   },
   "meta": {
     "home": {
-      "title": "David Herrera - IT Engineer & AI Solutions Architect",
-      "description": "AI Solutions Architect and Software Engineer based in Mexico City. I design and ship systems built on LLMs, RAG, MCP, .NET, Python and Azure that deliver value in production."
-    },
-    "projects": {
-      "title": "Projects - David Herrera",
-      "description": "Systems I've designed and shipped: enterprise RAG platforms, industrial software, Android RFID apps and automotive traceability."
-    },
-    "work": {
-      "title": "Experience - David Herrera",
-      "description": "Professional journey: from intern to AI Solutions Architect at BAACC Systems. LLMs, MCP, RAG, MLOps, .NET, Python, Azure."
-    },
-    "education": {
-      "title": "Education - David Herrera",
-      "description": "ICT Engineering (TESCo - TecNM), Programming Technician (CECyTEM) and continuous learning in AI, MLOps and development at Platzi. Azure AZ-900 and Python certifications."
-    },
-    "contact": {
-      "title": "Contact - David Herrera",
-      "description": "Available for freelance projects, collaborations and full-time opportunities. Email, LinkedIn, GitHub and Resume (ES/EN) in PDF."
+      "title": "David Herrera — AI Solutions Architect & Software Engineer",
+      "description": "AI Solutions Architect and Software Engineer based in Mexico City. I design and ship systems built on LLMs, RAG, MCP, .NET, Python and Azure that deliver real value."
     }
   },
   "nav": {
-    "home": "Home",
+    "about": "About",
     "work": "Experience",
     "education": "Education",
     "projects": "Projects",
@@ -35,85 +19,96 @@
     "cv": "CV"
   },
   "hero": {
-    "greeting": "Hi, nice to meet you",
-    "greetingTail": "(I'm)",
-    "metaBar": {
-      "city": "MEXICO CITY",
-      "status": "AVAILABLE",
-      "statusFor": "FOR WORK"
+    "greeting": "Hi, I'm",
+    "role": "AI Solutions Architect · Software Engineer",
+    "intro": "I design and ship production AI systems —RAG, MCP and MLOps— over the company's real data.",
+    "ctaProjects": "See projects",
+    "ctaContact": "Let's talk",
+    "location": "Mexico City",
+    "status": "Available for work"
+  },
+  "about": {
+    "label": "About me",
+    "heading": "Software, data <em>&</em> AI applied to the real world.",
+    "bio": {
+      "paragraph1": "Software engineer building at the intersection of <strong>backend, data, and applied AI</strong>. Four years turning business problems into systems that ship, scale, and stay maintainable instead of rotting into tech debt.",
+      "paragraph2": "Comfortable across the stack —from data model to frontend— but my current focus is <strong>RAG, MCP, and MLOps</strong> architectures over corporate data. I care that the AI systems I design are operable, observable, and debuggable in real production.",
+      "paragraph3": "I give talks on AI and data science at universities —Tec de Monterrey, UPVM Tultitlán and TESCo— to audiences of ~200 people, closing the loop between academic theory and what actually happens once a system meets production."
     },
-    "tagline": {
-      "role1": "Information Technologies and Communications Engineer",
-      "role2": "AI Solutions Architect"
-    },
-    "ctas": {
-      "work": "see selected work",
-      "email": "hello@davidherrera.dev"
-    },
-    "sticker": "MADE IN CDMX",
-    "currently": {
-      "label": "currently building",
-      "text": "Connie v2 — letting any team query years of internal documents, databases and spreadsheets in plain language, and get cited answers in seconds."
-    }
+    "principles": [
+      {
+        "title": "Production, not demos",
+        "body": "The interesting part isn't the tools — it's what happens once the system meets production and you have to keep it alive."
+      },
+      {
+        "title": "Systems you can operate",
+        "body": "The AI I design is observable, debuggable and operable in real production — not just on the happy path of a demo."
+      },
+      {
+        "title": "Share what you learn",
+        "body": "I speak at universities because closing the loop between theory and what happens in production makes all of us better."
+      }
+    ]
   },
   "work": {
     "headerTitle": "Professional",
     "headerItalic": "journey",
     "description": "The interesting part of making software isn't the tools — it's what happens once the system meets production and you have to keep it alive.",
+    "current": "Current role",
     "companies": {
       "baacc": {
         "name": "BAACC Systems S.A. de C.V.",
-        "totalPeriod": "Sep 2023 - Present",
-        "location": "Mexico State, Mexico",
+        "totalPeriod": "2023 — Present",
+        "location": "Mexico State",
         "workMode": "On-site",
         "roles": {
           "architect": {
             "title": "AI Solutions Architect",
-            "period": "Mar 2025 - Present",
+            "period": "Mar 2025 — Present",
             "type": "Full-time",
             "achievements": [
-              "Designed and shipped Connie from scratch (80% of the system): a production RAG platform serving 3 clients over their heterogeneous data —databases, PDFs, spreadsheets— with enterprise auth",
-              "End-to-end RAG pipelines on Azure: ingestion, chunking, retrieval, and serving with prompt observability",
-              "MCP servers connecting internal data sources to LLM clients — models consume tools without custom glue code",
-              "Brought MLOps practices to the team: retrieval evaluation, prompt and model versioning"
+              "Designed and shipped Connie from scratch (80% of the system): a production RAG platform serving 3 clients over their heterogeneous data —databases, PDFs, spreadsheets— with enterprise auth.",
+              "End-to-end RAG pipelines on Azure: ingestion, chunking, retrieval, and serving with prompt observability.",
+              "MCP servers connecting internal data sources to LLM clients — models consume tools without custom glue code.",
+              "Brought MLOps practices to the team: retrieval evaluation, prompt and model versioning."
             ]
           },
           "fullstack": {
             "title": "Fullstack Developer",
-            "period": "Jan 2024 - Mar 2025",
+            "period": "Jan 2024 — Mar 2025",
             "type": "Full-time",
             "achievements": [
-              "Desktop apps in .NET and Python for the shop floor — 24/7 industrial operation",
-              "Internal web apps with .NET and DevExpress for operations workflows",
-              "Database design and administration on SQL Server and PostgreSQL",
-              "Android app with RFID reader for field inventory and traceability"
+              "Desktop apps in .NET and Python for the shop floor — 24/7 industrial operation.",
+              "Internal web apps with .NET and DevExpress for operations workflows.",
+              "Database design and administration on SQL Server and PostgreSQL.",
+              "Android app with RFID reader for field inventory and traceability."
             ]
           },
           "junior": {
             "title": "Junior Fullstack Developer",
-            "period": "Sep 2023 - Jan 2024",
+            "period": "Sep 2023 — Jan 2024",
             "type": "Internship",
             "achievements": [
-              "Web modules and internal APIs",
-              "Database maintenance and technical documentation of the stack"
+              "Web modules and internal APIs.",
+              "Database maintenance and technical documentation of the stack."
             ]
           }
         }
       },
       "dec": {
         "name": "DEC Marketing",
-        "totalPeriod": "Mar 2022 - Sep 2023",
-        "location": "Mexico City, Mexico",
+        "totalPeriod": "Mar 2022 — Sep 2023",
+        "location": "Mexico City",
         "workMode": "Remote",
         "roles": {
           "webdev": {
             "title": "Junior Web Developer",
-            "period": "Mar 2022 - Sep 2023",
+            "period": "Mar 2022 — Sep 2023",
             "type": "Internship",
             "achievements": [
-              "Website development and support with HTML, CSS, JavaScript and CMS (WordPress, Joomla, OpenCart)",
-              "Hosting, security certificates and domain administration",
-              "Corporate email account management"
+              "Website development and support with HTML, CSS, JavaScript and CMS (WordPress, Joomla, OpenCart).",
+              "Hosting, security certificates and domain administration.",
+              "Corporate email account management."
             ]
           }
         }
@@ -123,38 +118,28 @@
   "education": {
     "headerTitle": "Learn &",
     "headerItalic": "teach",
-    "academicLabel": "// academic",
-    "certsLabel": "// certifications",
-    "currentLabel": "current",
     "description": "Academic background, certifications, and speaking engagements — because knowledge grows when shared.",
-    "sideCards": {
-      "languagesTitle": "// Languages",
-      "languagesBody": "Spanish <em>—</em> Native<br/>English <em>—</em> Professional",
-      "interestsTitle": "// Interests",
-      "interestsBody": "Generative AI, MLOps, distributed systems, specialty coffee, and — inevitably — typography.",
-      "philosophyTitle": "// Philosophy",
-      "philosophyBody": "<em>«</em>The best architecture is the one you don't need to defend<em>.»</em>"
-    },
-    "labels": {
-      "featured": "Featured"
-    },
+    "academicTitle": "Academic",
+    "certsTitle": "Certifications",
+    "languagesTitle": "Languages",
+    "interestsTitle": "Interests",
     "list": {
       "platzi": {
-        "institution": "Platzi - Technology School",
+        "institution": "Platzi — Technology School",
         "degree": "Technology Industry",
-        "period": "2022 - Present",
+        "period": "2022 — Present",
         "description": "Specialized courses in web development, artificial intelligence and emerging technologies."
       },
       "tesco": {
-        "institution": "Technological Institute of Higher Studies of Coacalco (TESCo) - TecNM",
-        "degree": "Information and Communication Technologies Engineering",
-        "period": "2019 - 2024",
+        "institution": "Higher Studies Institute of Coacalco (TESCo) — TecNM",
+        "degree": "Information & Communication Technologies Engineering",
+        "period": "2019 — 2024",
         "description": "Specialization in mobile application development."
       },
       "cecytem": {
-        "institution": "College of Scientific and Technological Studies of the State of Mexico (CECyTEM) - Tultepec",
+        "institution": "CECyTEM — Tultepec",
         "degree": "Programming Technician",
-        "period": "2016 - 2018",
+        "period": "2016 — 2018",
         "description": "Specialized training in software development and development methodologies."
       }
     },
@@ -163,7 +148,7 @@
         "name": "Azure AZ-900: Microsoft Azure Fundamentals"
       },
       "python": {
-        "name": "Python for Everybody Specialization"
+        "name": "Python for Everybody"
       }
     }
   },
@@ -171,15 +156,14 @@
     "headerTitle": "Selected",
     "headerItalic": "work",
     "description": "Some of the systems I've designed and shipped — from conversational AI over enterprise data to industrial software on the shop floor.",
-    "featuredLabel": "★ Featured",
-    "moreProjects": "— More projects —",
+    "featuredLabel": "Featured",
     "list": {
       "portfolio": {
         "title": "Portfolio",
-        "description": "This site. Editorial, bilingual and open source — v.2026 soft-brutalist design, hand-built.",
+        "description": "This site. Editorial, bilingual and open source — hand-built design.",
         "specs": [
           { "label": "Type", "value": "Personal project · open source" },
-          { "label": "Focus", "value": "ES/EN i18n, theming and View Transitions" },
+          { "label": "Focus", "value": "ES/EN i18n, theming and performance" },
           { "label": "License", "value": "MIT" }
         ],
         "kind": "Personal / Web",
@@ -227,18 +211,11 @@
   "contact": {
     "headerTitle": "Let's",
     "headerItalic": "talk",
-    "invite": "Tell me what you're <em>building</em>.",
-    "directLabel": "// direct",
-    "elsewhereLabel": "// elsewhere",
-    "cvLabel": "// résumé / cv",
-    "cvUpdated": "updated may 2026",
-    "availLabel": "/ availability",
-    "availText": "Booking new engagements for 2026",
-    "open": "open",
     "description": "I'm available for freelance projects, collaborations, and full-time opportunities. Tell me what you're building.",
+    "availText": "Booking projects for 2026",
     "cta": {
       "button": "Send me a message",
-      "note": "Reply within < 24h · Mexico City, GMT-6"
+      "note": "Reply within 24h · Mexico City, GMT-6"
     }
   },
   "common": {
@@ -246,46 +223,11 @@
       "license": "Open source · MIT"
     }
   },
-  "home": {
-    "credits": {
-      "label": "Technical stack",
-      "title": "stack — david@portfolio",
-      "command": "stack --all",
-      "rows": {
-        "backend": {
-          "label": "Backend",
-          "items": "C# · .NET · Python · PostgreSQL · SQL Server · JWT · OAuth · APIs"
-        },
-        "frontend": {
-          "label": "Frontend",
-          "items": "React · Tailwind · TypeScript · DevExpress"
-        },
-        "cloud": {
-          "label": "Cloud & Infra",
-          "items": "Azure · AWS · Docker · CI/CD · Pipelines"
-        },
-        "ai": {
-          "label": "AI & Data",
-          "items": "LLMs · RAG · MCP · MLOps · Prompts"
-        }
-      }
-    },
-    "aboutSection": {
-      "title": "About me",
-      "heading": "Software, data <em>&</em> AI applied to the real world.",
-      "bio": {
-        "paragraph1": "Software engineer building at the intersection of <strong>backend, data, and applied AI</strong>. Four years turning business problems into systems that ship, scale, and stay maintainable instead of rotting into tech debt.",
-        "paragraph2": "Comfortable across the stack — from data model to frontend — but my current focus is <strong>RAG, MCP, and MLOps</strong> architectures over corporate data. I care that the AI systems I design are operable, observable, and debuggable in real production.",
-        "paragraph3": "I give talks on AI and data science at universities —Tec de Monterrey, UPVM Tultitlán and TESCo— to audiences of ~200 people, closing the loop between academic theory and what actually happens once a system meets production."
-      }
-    }
-  },
   "notFound": {
     "title": "Page not found",
     "heading": "404",
     "subtitle": "Looks like you're lost",
     "description": "The page you are looking for doesn't exist or has been moved to another location.",
-    "terminalComment": "# This page went out for coffee ☕",
     "backButton": "Go back",
     "homeButton": "Go to home"
   }

@@ -1,0 +1,141 @@
+---
+import { useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+
+export interface Props {
+  lang: "es" | "en";
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="top" class="hero container">
+  <div class="hero__text">
+    <p class="kicker reveal">{t("hero.greeting")}</p>
+
+    <h1 class="hero__name reveal reveal-1">
+      David Herrera<span class="hero__dot">.</span>
+    </h1>
+
+    <p class="hero__role reveal reveal-1">{t("hero.role")}</p>
+
+    <p class="lead hero__intro reveal reveal-2">{t("hero.intro")}</p>
+
+    <div class="hero__actions reveal reveal-2">
+      <a href="#projects" class="btn btn--primary"><Icon name="ph:squares-four-duotone" />{t("hero.ctaProjects")}</a>
+      <a href="#contact" class="btn btn--ghost"><Icon name="ph:chat-circle-duotone" />{t("hero.ctaContact")}</a>
+    </div>
+
+    <div class="hero__meta reveal reveal-3">
+      <span><Icon name="ph:map-pin-duotone" />{t("hero.location")}</span>
+      <span class="hero__sep">·</span>
+      <span>GMT-6</span>
+    </div>
+  </div>
+
+  <div class="hero__photo reveal reveal-1">
+    <Image
+      src="/assets/profile-photo.webp"
+      alt="David Herrera"
+      width={440}
+      height={560}
+      loading="eager"
+      format="webp"
+      quality={85}
+    />
+    <div class="hero__socials">
+      <a href="https://github.com/david-heca" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Icon name="ph:github-logo-duotone" /></a>
+      <a href="https://www.linkedin.com/in/david-heca/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="ph:linkedin-logo-duotone" /></a>
+      <a href="https://x.com/david_heca_" target="_blank" rel="noopener noreferrer" aria-label="X"><Icon name="ph:x-logo-duotone" /></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
+    align-items: center;
+    padding-top: clamp(48px, 8vw, 96px);
+    padding-bottom: clamp(48px, 8vw, 96px);
+  }
+  @media (min-width: 900px) {
+    .hero { grid-template-columns: 1.35fr 1fr; gap: 64px; }
+  }
+
+  .hero__name {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.92;
+    font-size: clamp(56px, 11vw, 124px);
+    color: var(--color-ink);
+    margin: 14px 0 0;
+  }
+  .hero__dot { color: var(--color-accent); font-style: normal; }
+
+  .hero__role {
+    font-family: var(--font-mono);
+    font-size: clamp(14px, 1.6vw, 17px);
+    letter-spacing: 0.02em;
+    color: var(--color-ink);
+    margin: 18px 0 0;
+  }
+
+  .hero__intro { margin: 22px 0 0; }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .hero__meta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 28px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.04em;
+    color: var(--color-ink-2);
+  }
+  .hero__meta span { display: inline-flex; align-items: center; gap: 6px; }
+  .hero__meta [data-icon] { font-size: 14px; color: var(--color-accent); }
+  .hero__sep { color: var(--color-ink-3); }
+
+  .hero__photo { position: relative; max-width: 440px; justify-self: center; }
+  .hero__photo img {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-soft);
+  }
+  .hero__socials {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    display: inline-flex;
+    gap: 6px;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-bg) 78%, transparent);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--color-line);
+  }
+  .hero__socials a {
+    display: inline-flex;
+    color: var(--color-ink);
+    transition: color 0.15s ease, transform 0.15s ease;
+  }
+  .hero__socials a:hover { color: var(--color-accent); transform: translateY(-2px); }
+  .hero__socials [data-icon] { font-size: 19px; }
+</style>

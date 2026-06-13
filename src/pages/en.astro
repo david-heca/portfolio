@@ -1,6 +1,6 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import Home from "@sections/Home.astro";
+import Landing from "@sections/Landing.astro";
 import { useTranslations } from "@i18n/utils";
 
 const t = useTranslations("en");
@@ -11,5 +11,5 @@ const t = useTranslations("en");
   description={t("meta.home.description")}
   lang="en"
 >
-  <Home lang="en" />
+  <Landing lang="en" />
 </Layout>
