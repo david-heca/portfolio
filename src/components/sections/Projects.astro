@@ -11,11 +11,17 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
+interface Spec {
+  label: string;
+  value: string;
+}
+
 interface Project {
   num: string;
   slug: string;
   title: string;
   desc: string;
+  specs: Spec[];
   kind: string;
   year: string;
   status: string;
@@ -29,10 +35,11 @@ const featured: Project = {
   slug: "connie",
   title: t("projects.list.connie.title"),
   desc: t("projects.list.connie.description"),
+  specs: t("projects.list.connie.specs") as unknown as Spec[],
   kind: t("projects.list.connie.kind"),
   year: t("projects.list.connie.year"),
   status: t("projects.list.connie.status"),
-  tags: ["React", "RAG", "SQL", "JWT", "Python", "Azure"],
+  tags: ["RAG", "MCP", "Azure", "Python", "SQL", "JWT"],
   image: "/assets/projects/connie.webp",
 };
 
@@ -42,6 +49,7 @@ const rest: Project[] = [
     slug: "handheld",
     title: t("projects.list.handheld.title"),
     desc: t("projects.list.handheld.description"),
+    specs: t("projects.list.handheld.specs") as unknown as Spec[],
     kind: t("projects.list.handheld.kind"),
     year: t("projects.list.handheld.year"),
     status: t("projects.list.handheld.status"),
@@ -53,6 +61,7 @@ const rest: Project[] = [
     slug: "trace",
     title: t("projects.list.trace.title"),
     desc: t("projects.list.trace.description"),
+    specs: t("projects.list.trace.specs") as unknown as Spec[],
     kind: t("projects.list.trace.kind"),
     year: t("projects.list.trace.year"),
     status: t("projects.list.trace.status"),
@@ -64,6 +73,7 @@ const rest: Project[] = [
     slug: "portfolio",
     title: t("projects.list.portfolio.title"),
     desc: t("projects.list.portfolio.description"),
+    specs: t("projects.list.portfolio.specs") as unknown as Spec[],
     kind: t("projects.list.portfolio.kind"),
     year: t("projects.list.portfolio.year"),
     status: t("projects.list.portfolio.status"),
@@ -123,6 +133,14 @@ const rest: Project[] = [
           {featured.title}<span class="accent-dot">.</span>
         </div>
         <div class="projects__feat-desc">{featured.desc}</div>
+        <dl class="spec-sheet projects__feat-specs">
+          {featured.specs.map((s) => (
+            <div class="spec-sheet__row">
+              <dt>{s.label}</dt>
+              <dd>{s.value}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
       <div>
         <div class="projects__feat-tags">
@@ -168,6 +186,14 @@ const rest: Project[] = [
           </div>
           <div class="project-card__title">{p.title}</div>
           <div class="project-card__desc">{p.desc}</div>
+          <dl class="spec-sheet project-card__specs">
+            {p.specs.map((s) => (
+              <div class="spec-sheet__row">
+                <dt>{s.label}</dt>
+                <dd>{s.value}</dd>
+              </div>
+            ))}
+          </dl>
           <div class="project-card__tags">
             {p.tags.map((t) => <span class="chip">{t}</span>)}
           </div>
@@ -234,12 +260,45 @@ const rest: Project[] = [
   }
   .projects__feat-title .accent-dot { color: var(--color-accent); font-style: normal; }
   .projects__feat-desc {
-    font-size: 14px;
-    line-height: 1.65;
+    font-size: var(--text-lead);
+    line-height: var(--leading-prose);
     margin-top: 18px;
     max-width: 420px;
     color: var(--color-ink);
   }
+
+  /* Ficha técnica — blueprint spec sheet (híbrido) */
+  .spec-sheet {
+    margin: 0;
+    border-top: var(--line) dashed var(--color-ink-3);
+  }
+  .spec-sheet__row {
+    display: grid;
+    grid-template-columns: 72px 1fr;
+    gap: 14px;
+    padding: 7px 0;
+    border-bottom: var(--line) dashed var(--color-ink-3);
+  }
+  .spec-sheet dt {
+    font-family: var(--font-mono);
+    font-size: var(--text-label-sm);
+    letter-spacing: var(--track-label);
+    text-transform: uppercase;
+    color: var(--color-ink-3);
+    margin: 0;
+    padding-top: 2px;
+  }
+  .spec-sheet dd {
+    margin: 0;
+    font-size: var(--text-body);
+    line-height: 1.45;
+    color: var(--color-ink);
+  }
+  .projects__feat-specs {
+    margin-top: 22px;
+    max-width: 440px;
+  }
+  .projects__feat-specs .spec-sheet__row { grid-template-columns: 84px 1fr; padding: 9px 0; }
   .projects__feat-tags {
     display: flex;
     gap: 6px;
@@ -324,10 +383,14 @@ const rest: Project[] = [
     color: var(--color-ink);
   }
   .project-card__desc {
-    font-size: 13.5px;
+    font-size: var(--text-body);
     line-height: 1.6;
     color: var(--color-ink-2);
   }
+  .project-card__specs { margin-top: 2px; }
+  .project-card__specs .spec-sheet__row { grid-template-columns: 62px 1fr; gap: 10px; padding: 6px 0; }
+  .project-card__specs dt { font-size: 9px; letter-spacing: 0.12em; }
+  .project-card__specs dd { font-size: 11.5px; line-height: 1.4; color: var(--color-ink-2); }
   .project-card__tags {
     display: flex;
     gap: 5px;

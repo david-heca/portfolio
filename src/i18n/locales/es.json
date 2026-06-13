@@ -50,14 +50,10 @@
       "work": "ver trabajo",
       "email": "hello@davidherrera.dev"
     },
-    "stamp": {
-      "ringText": "★ DISPONIBLE · 2026 · NUEVOS PROYECTOS · ",
-      "core": "hablemos"
-    },
     "sticker": "MADE IN CDMX",
     "currently": {
       "label": "construyendo ahora",
-      "text": "Connie v2 · RAG multi-tenant en Azure y un MCP server que expone el corpus interno a clientes LLM."
+      "text": "Connie v2 — que cualquier área le pregunte en lenguaje natural a años de documentos, bases de datos y hojas de cálculo internas, y reciba respuestas citadas en segundos."
     }
   },
   "work": {
@@ -76,7 +72,7 @@
             "period": "Mar 2025 - Actualidad",
             "type": "Tiempo Completo",
             "achievements": [
-              "Diseño y construcción de Connie: plataforma RAG sobre datos corporativos heterogéneos con autenticación enterprise, en producción",
+              "Diseñé y llevé a producción Connie desde cero (80% del sistema): plataforma RAG que da servicio a 3 clientes sobre sus datos heterogéneos —bases de datos, PDFs, hojas de cálculo— con autenticación enterprise",
               "Pipelines RAG end-to-end sobre Azure: ingestión, chunking, retrieval y serving con observabilidad de prompts",
               "Servidores MCP que conectan fuentes internas con clientes LLM — los modelos consumen tools sin glue code custom",
               "Adopción de prácticas MLOps en el equipo: evaluación de retrieval, versionado de prompts y modelos"
@@ -180,28 +176,48 @@
     "list": {
       "portfolio": {
         "title": "Portafolio",
-        "description": "Este sitio. Astro + Tailwind, i18n bilingüe, theme switcher con persistencia y View Transitions. Open source bajo licencia MIT.",
+        "description": "Este sitio. Editorial, bilingüe y open source — diseño v.2026 brutalista soft, hecho a mano.",
+        "specs": [
+          { "label": "Tipo", "value": "Proyecto personal · open source" },
+          { "label": "Enfoque", "value": "i18n ES/EN, theming y View Transitions" },
+          { "label": "Licencia", "value": "MIT" }
+        ],
         "kind": "Personal / Web",
         "year": "2026",
         "status": "Live"
       },
       "connie": {
         "title": "Connie",
-        "description": "Plataforma RAG enterprise para conversar con datos corporativos heterogéneos en lenguaje natural. Auth empresarial, MCP server interno y pipelines de ingestión sobre Azure.",
+        "description": "De conocimiento disperso a respuestas citadas: cualquier área le pregunta en lenguaje natural a las bases de datos, PDFs y Excels internos — y obtiene la respuesta en segundos.",
+        "specs": [
+          { "label": "Antes", "value": "La info se perdía entre áreas o moría en burocracia" },
+          { "label": "Mi rol", "value": "Arquitecto · 80% del sistema, desde cero" },
+          { "label": "Escala", "value": "3 clientes en producción" }
+        ],
         "kind": "Trabajo / IA",
         "year": "2025",
         "status": "En producción"
       },
       "handheld": {
         "title": "HandHeld RFID",
-        "description": "App Android nativa con lector RFID para inventario y trazabilidad en campo. Reemplazó captura manual en operación industrial.",
+        "description": "Un inventario que antes tomaba semanas —o simplemente no se hacía— convertido en control en tiempo real desde el handheld.",
+        "specs": [
+          { "label": "Antes", "value": "Captura manual · semanas de retraso" },
+          { "label": "Ahora", "value": "Cada rack con RFID, cada movimiento al instante" },
+          { "label": "Impacto", "value": "Control de almacén mucho más preciso" }
+        ],
         "kind": "Trabajo / Móvil",
         "year": "2024",
         "status": "En producción"
       },
       "trace": {
         "title": "Trazabilidad Automotriz",
-        "description": "Sistema desktop que sigue piezas automotrices a lo largo de la línea de producción. C# .NET + DevExpress sobre SQL Server.",
+        "description": "Cada pieza automotriz trazada de principio a fin a lo largo de la línea de producción.",
+        "specs": [
+          { "label": "Clientes", "value": "Proveedores de Honda, GM y Stellantis" },
+          { "label": "Escala", "value": "Miles de piezas al día" },
+          { "label": "Alcance", "value": "Trazabilidad de extremo a extremo" }
+        ],
         "kind": "Trabajo / Desktop",
         "year": "2024",
         "status": "Entregado"
@@ -233,6 +249,8 @@
   "home": {
     "credits": {
       "label": "Stack técnico",
+      "title": "stack — david@portfolio",
+      "command": "stack --all",
       "rows": {
         "backend": {
           "label": "Backend",
@@ -258,7 +276,7 @@
       "bio": {
         "paragraph1": "Ingeniero de software construyendo en la intersección de <strong>backend, datos e IA aplicada</strong>. Cuatro años traduciendo problemas de negocio en sistemas que se entregan, escalan y se mantienen sin convertirse en deuda técnica.",
         "paragraph2": "Trabajo cómodo en todo el stack — del modelo de datos al frontend — pero mi foco actual son arquitecturas <strong>RAG, MCP y MLOps</strong> sobre datos corporativos. Me importa que los sistemas de IA que diseño se puedan operar, observar y debuggear en producción real.",
-        "paragraph3": "Doy charlas de IA y ciencia de datos en universidades — me gusta cerrar el loop entre la teoría académica y lo que de verdad pasa cuando un sistema toca producción."
+        "paragraph3": "Doy charlas de IA y ciencia de datos en universidades —Tec de Monterrey, UPVM Tultitlán y el TESCo— para audiencias de ~200 personas, cerrando el loop entre la teoría académica y lo que de verdad pasa cuando un sistema toca producción."
       }
     }
   },

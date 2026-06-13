@@ -283,8 +283,8 @@ const stats = [
   .edu__col-title { margin-bottom: 0; }
   .edu__col-count {
     font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.22em;
+    font-size: var(--text-label-sm);
+    letter-spacing: var(--track-label);
     color: var(--color-ink-3);
   }
   .edu__list {
@@ -325,7 +325,7 @@ const stats = [
   .edu-item__logo-initials {
     font-family: var(--font-mono);
     font-size: 9px;
-    letter-spacing: 0.16em;
+    letter-spacing: var(--track-label);
     color: var(--color-ink-2);
     text-transform: uppercase;
   }
@@ -339,8 +339,8 @@ const stats = [
   }
   .edu-item__year {
     font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.22em;
+    font-size: var(--text-label-sm);
+    letter-spacing: var(--track-label);
     text-transform: uppercase;
     color: var(--color-accent);
   }
@@ -348,7 +348,7 @@ const stats = [
     font-family: var(--font-display);
     font-style: italic;
     font-weight: 400;
-    font-size: clamp(20px, 2.6vw, 24px);
+    font-size: var(--text-title);
     line-height: 1.15;
     color: var(--color-ink);
     letter-spacing: -0.01em;
@@ -356,16 +356,16 @@ const stats = [
   .edu-item__school {
     margin-top: 6px;
     font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.18em;
+    font-size: var(--text-label-sm);
+    letter-spacing: var(--track-label);
     text-transform: uppercase;
     color: var(--color-ink-2);
     display: block;
     line-height: 1.5;
   }
   .edu-item__note {
-    font-size: 13px;
-    line-height: 1.6;
+    font-size: var(--text-body);
+    line-height: 1.7;
     color: var(--color-ink-2);
     margin-top: 10px;
     padding-top: 10px;
@@ -411,8 +411,8 @@ const stats = [
   }
   .cert-card__year {
     font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.22em;
+    font-size: var(--text-label-sm);
+    letter-spacing: var(--track-label);
     text-transform: uppercase;
     color: var(--color-ink-2);
   }
@@ -420,15 +420,15 @@ const stats = [
     font-family: var(--font-display);
     font-style: italic;
     font-weight: 400;
-    font-size: clamp(20px, 2.6vw, 24px);
+    font-size: var(--text-title);
     line-height: 1.15;
     color: var(--color-ink);
     letter-spacing: -0.01em;
   }
   .cert-card__issuer {
     font-family: var(--font-mono);
-    font-size: 10.5px;
-    letter-spacing: 0.18em;
+    font-size: var(--text-label-sm);
+    letter-spacing: var(--track-label);
     text-transform: uppercase;
     color: var(--color-ink-2);
   }
@@ -481,13 +481,12 @@ const stats = [
     color: var(--color-ink-2);
     font-style: normal;
     font-family: var(--font-mono);
-    font-style: normal;
-    font-size: 11px;
-    letter-spacing: 0.22em;
+    font-size: var(--text-label);
+    letter-spacing: var(--track-label);
     text-transform: uppercase;
   }
   .edu__meta-card-text {
-    font-size: 13px;
+    font-size: var(--text-body);
     line-height: 1.65;
     color: var(--color-ink);
   }
