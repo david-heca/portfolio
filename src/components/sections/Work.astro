@@ -1,8 +1,5 @@
 ---
 import { useTranslations } from "@i18n/utils";
-import { Icon } from "astro-icon/components";
-import PageHeader from "@ui/PageHeader.astro";
-import PageFooter from "@ui/PageFooter.astro";
 
 export interface Props {
   lang: "es" | "en";
@@ -11,23 +8,16 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-interface Tech { label: string; icon: string }
-interface Achievement { text: string; icon: string }
 interface Role {
   title: string;
   period: string;
   type: string;
-  icon: string;
-  hand?: string;
-  stack: Tech[];
-  bullets: Achievement[];
+  achievements: string[];
+  stack: string[];
   current?: boolean;
 }
-
 interface Company {
-  idx: string;
   name: string;
-  initials: string;
   span: string;
   loc: string;
   mode: string;
@@ -36,9 +26,7 @@ interface Company {
 
 const companies: Company[] = [
   {
-    idx: "01",
-    name: t("work.companies.baacc.name"),
-    initials: "BS",
+    name: t("work.companies.baacc.name").replace(/ S\.A\. de C\.V\./, ""),
     span: t("work.companies.baacc.totalPeriod"),
     loc: t("work.companies.baacc.location"),
     mode: t("work.companies.baacc.workMode"),
@@ -47,62 +35,28 @@ const companies: Company[] = [
         title: t("work.companies.baacc.roles.architect.title"),
         period: t("work.companies.baacc.roles.architect.period"),
         type: t("work.companies.baacc.roles.architect.type"),
-        icon: "ph:blueprint-duotone",
-        hand: lang === "es" ? "rol actual ↘" : "current role ↘",
-        stack: [
-          { label: "LLM", icon: "ph:brain-duotone" },
-          { label: "MCP", icon: "ph:plugs-connected-duotone" },
-          { label: "RAG", icon: "ph:database-duotone" },
-          { label: "MLOps", icon: "ph:test-tube-duotone" },
-          { label: "APIs", icon: "ph:share-network-duotone" },
-        ],
-        bullets: [
-          { text: t("work.companies.baacc.roles.architect.achievements.0"), icon: "ph:rocket-duotone" },
-          { text: t("work.companies.baacc.roles.architect.achievements.1"), icon: "ph:flow-arrow-duotone" },
-          { text: t("work.companies.baacc.roles.architect.achievements.2"), icon: "ph:plugs-connected-duotone" },
-          { text: t("work.companies.baacc.roles.architect.achievements.3"), icon: "ph:test-tube-duotone" },
-        ],
+        achievements: t("work.companies.baacc.roles.architect.achievements") as unknown as string[],
+        stack: ["LLMs", "RAG", "MCP", "MLOps", "Azure"],
         current: true,
       },
       {
         title: t("work.companies.baacc.roles.fullstack.title"),
         period: t("work.companies.baacc.roles.fullstack.period"),
         type: t("work.companies.baacc.roles.fullstack.type"),
-        icon: "ph:stack-duotone",
-        stack: [
-          { label: ".NET", icon: "ph:code-block-duotone" },
-          { label: "Python", icon: "ph:code-duotone" },
-          { label: "SQL", icon: "ph:database-duotone" },
-          { label: "Android", icon: "ph:device-mobile-duotone" },
-        ],
-        bullets: [
-          { text: t("work.companies.baacc.roles.fullstack.achievements.0"), icon: "ph:desktop-duotone" },
-          { text: t("work.companies.baacc.roles.fullstack.achievements.1"), icon: "ph:browser-duotone" },
-          { text: t("work.companies.baacc.roles.fullstack.achievements.2"), icon: "ph:database-duotone" },
-          { text: t("work.companies.baacc.roles.fullstack.achievements.3"), icon: "ph:device-mobile-duotone" },
-        ],
+        achievements: t("work.companies.baacc.roles.fullstack.achievements") as unknown as string[],
+        stack: [".NET", "Python", "SQL", "Android"],
       },
       {
         title: t("work.companies.baacc.roles.junior.title"),
         period: t("work.companies.baacc.roles.junior.period"),
         type: t("work.companies.baacc.roles.junior.type"),
-        icon: "ph:plant-duotone",
-        stack: [
-          { label: "MVC", icon: "ph:stack-duotone" },
-          { label: "SQL", icon: "ph:database-duotone" },
-          { label: "APIs", icon: "ph:share-network-duotone" },
-        ],
-        bullets: [
-          { text: t("work.companies.baacc.roles.junior.achievements.0"), icon: "ph:share-network-duotone" },
-          { text: t("work.companies.baacc.roles.junior.achievements.1"), icon: "ph:files-duotone" },
-        ],
+        achievements: t("work.companies.baacc.roles.junior.achievements") as unknown as string[],
+        stack: ["MVC", "SQL", "APIs"],
       },
     ],
   },
   {
-    idx: "02",
     name: t("work.companies.dec.name"),
-    initials: "DM",
     span: t("work.companies.dec.totalPeriod"),
     loc: t("work.companies.dec.location"),
     mode: t("work.companies.dec.workMode"),
@@ -111,445 +65,161 @@ const companies: Company[] = [
         title: t("work.companies.dec.roles.webdev.title"),
         period: t("work.companies.dec.roles.webdev.period"),
         type: t("work.companies.dec.roles.webdev.type"),
-        icon: "ph:browser-duotone",
-        hand: lang === "es" ? "← donde empezó todo" : "← where it all started",
-        stack: [
-          { label: "HTML", icon: "ph:code-duotone" },
-          { label: "CSS", icon: "ph:paint-brush-duotone" },
-          { label: "JS", icon: "ph:brackets-curly-duotone" },
-          { label: "WordPress", icon: "ph:globe-duotone" },
-        ],
-        bullets: [
-          { text: t("work.companies.dec.roles.webdev.achievements.0"), icon: "ph:browser-duotone" },
-          { text: t("work.companies.dec.roles.webdev.achievements.1"), icon: "ph:shield-check-duotone" },
-          { text: t("work.companies.dec.roles.webdev.achievements.2"), icon: "ph:envelope-duotone" },
-        ],
+        achievements: t("work.companies.dec.roles.webdev.achievements") as unknown as string[],
+        stack: ["HTML", "CSS", "JavaScript", "WordPress"],
       },
     ],
   },
 ];
-
-const totalRoles = companies.reduce((acc, c) => acc + c.roles.length, 0);
-
-const stats = [
-  {
-    num: "4",
-    suffix: lang === "es" ? "años" : "yrs",
-    label: lang === "es" ? "trayectoria" : "experience",
-    icon: "ph:clock-duotone",
-    accent: true,
-  },
-  {
-    num: String(companies.length),
-    label: lang === "es" ? "empresas" : "companies",
-    icon: "ph:buildings-duotone",
-  },
-  {
-    num: String(totalRoles),
-    label: lang === "es" ? "roles" : "roles",
-    icon: "ph:stack-duotone",
-  },
-  {
-    num: "∞",
-    label: lang === "es" ? "deploys" : "deploys",
-    icon: "ph:rocket-duotone",
-  },
-];
 ---
 
-<PageHeader
-  idx="01"
-  kicker={t("nav.work")}
-  title={t("work.headerTitle")}
-  italic={t("work.headerItalic")}
-  sub={t("work.description")}
-/>
+<section id="work" class="work section container">
+  <header class="sec-head reveal">
+    <p class="kicker">{t("nav.work")}</p>
+    <h2 class="section-title">{t("work.headerTitle")} <em>{t("work.headerItalic")}</em></h2>
+    <p class="lead work__lead">{t("work.description")}</p>
+  </header>
 
-<section class="work container-editorial">
-  <div class="stats-strip reveal">
-    {stats.map((s) => (
-      <div class="stats-strip__item">
-        <Icon name={s.icon} class="stats-strip__icon" />
-        <div class="stats-strip__num">
-          {s.accent ? <span class="accent">{s.num}</span> : s.num}
-          {s.suffix && <span style="font-size: 0.55em; color: var(--color-ink-2); margin-left: 4px; font-style: normal; font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;">{s.suffix}</span>}
-        </div>
-        <div class="stats-strip__label">{s.label}</div>
-      </div>
-    ))}
-  </div>
-
-  {companies.map((co, ci) => (
-    <>
+  <div class="work__list">
+    {companies.map((co) => (
       <article class="work__company reveal">
-        <header class="work__company-header">
-          <div class="work__logo" data-idx={`/ ${co.idx}`} aria-hidden="true">
-            {co.initials}
-          </div>
-          <div class="work__company-info">
-            <h3 class="work__company-name">
-              {co.name.replace(/ S\.A\. de C\.V\./, "")}<span class="accent-dot">.</span>
-            </h3>
-            <div class="work__company-meta">
-              <span class="chip soft">
-                <Icon name="ph:calendar-blank-duotone" />
-                {co.span}
-              </span>
-              <span class="chip">
-                <Icon name="ph:map-pin-duotone" />
-                {co.loc}
-              </span>
-              <span class="chip">
-                <Icon name="ph:buildings-duotone" />
-                {co.mode}
-              </span>
-            </div>
-          </div>
-          <div class="work__company-aside">
-            <span class="work__company-roles-count">
-              <em>{co.roles.length}</em>
-              {co.roles.length === 1 ? (lang === "es" ? "rol" : "role") : (lang === "es" ? "roles" : "roles")}
-            </span>
-          </div>
-        </header>
+        <div class="work__company-head">
+          <h3 class="work__company-name">{co.name}</h3>
+          <span class="work__company-meta">{co.span} · {co.loc} · {co.mode}</span>
+        </div>
 
-        <div class="work__timeline">
+        <div class="work__roles">
           {co.roles.map((r) => (
-            <div class={`role-card box ${r.current ? "accent" : ""}`}>
-              <span class="role-card__node" aria-hidden="true">
-                <Icon name={r.icon} />
-                {r.current && <span class="role-card__node-pulse"></span>}
-              </span>
-
-              <div class="role-card__head">
-                <div class="role-card__head-left">
-                  <div class="role-card__period-row">
-                    <span class="label accent">{r.period}</span>
-                    <span class="chip ghost">{r.type}</span>
-                    {r.current && (
-                      <span class="chip solid">
-                        <span class="dot" style="background: currentColor;"></span>
-                        {t("education.currentLabel")}
-                      </span>
-                    )}
-                  </div>
-                  <div class="role-card__title">{r.title}</div>
-                  {r.hand && <div class="role-card__hand">{r.hand}</div>}
-                </div>
+            <div class="role">
+              <div class="role__aside">
+                <span class="role__period">{r.period}</span>
+                {r.current && (
+                  <span class="role__now"><span class="dot"></span>{t("work.current")}</span>
+                )}
               </div>
-
-              <ul class="role-card__achievements">
-                {r.bullets.map((b) => (
-                  <li class="achievement">
-                    <span class="achievement__icon" aria-hidden="true">
-                      <Icon name={b.icon} />
-                    </span>
-                    <span>{b.text}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <div class="role-card__tags">
-                {r.stack.map((s) => (
-                  <span class={`chip ${r.current ? "soft" : ""}`}>
-                    <Icon name={s.icon} />
-                    {s.label}
-                  </span>
-                ))}
+              <div class="role__main">
+                <h4 class="role__title">{r.title}</h4>
+                <span class="role__type">{r.type}</span>
+                <ul class="role__achievements">
+                  {r.achievements.map((a) => <li>{a}</li>)}
+                </ul>
+                <div class="role__stack">
+                  {r.stack.map((s) => <span class="tag">{s}</span>)}
+                </div>
               </div>
             </div>
           ))}
         </div>
       </article>
-
-      {ci < companies.length - 1 && (
-        <div class="work__then reveal" aria-hidden="true">
-          <span class="work__then-arrow">
-            <Icon name="ph:arrow-bend-right-down-duotone" />
-            {lang === "es" ? "antes ·" : "before that ·"}
-          </span>
-          <span class="work__then-line"></span>
-        </div>
-      )}
-    </>
-  ))}
+    ))}
+  </div>
 </section>
 
-<PageFooter lang={lang} num="01" />
-
 <style>
-  .work { padding-bottom: 80px; }
+  .sec-head { max-width: 720px; margin-bottom: 56px; }
+  .work__lead { margin-top: 20px; }
 
-  /* company block */
-  .work__company {
-    margin-bottom: 56px;
-    position: relative;
-  }
-  .work__company:last-child { margin-bottom: 0; }
-  .work__company-header {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    align-items: stretch;
-    margin-bottom: 24px;
-  }
-  @media (min-width: 768px) {
-    .work__company-header { grid-template-columns: auto 1fr auto; gap: 24px; }
-  }
-  .work__logo {
-    width: 88px;
-    height: 88px;
-    border: var(--line) solid var(--color-accent);
-    border-radius: 8px;
-    background: var(--color-accent-soft);
+  .work__list { display: flex; flex-direction: column; gap: 56px; }
+
+  .work__company-head {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 38px;
-    line-height: 1;
-    color: var(--color-accent);
-    letter-spacing: -0.04em;
-    flex-shrink: 0;
-    position: relative;
-  }
-  .work__logo::after {
-    content: attr(data-idx);
-    position: absolute;
-    top: -10px;
-    right: -10px;
-    background: var(--color-bg);
-    border: var(--line) solid var(--color-accent);
-    border-radius: 999px;
-    padding: 2px 8px;
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: 0.18em;
-    color: var(--color-accent);
-  }
-  .work__company-info {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 6px;
-    min-width: 0;
+    align-items: baseline;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 20px;
+    padding-bottom: 18px;
+    margin-bottom: 28px;
+    border-bottom: 1px solid var(--color-line);
   }
   .work__company-name {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: clamp(28px, 3.6vw, 38px);
-    line-height: 1.05;
+    font-size: clamp(28px, 4vw, 40px);
+    line-height: 1;
     color: var(--color-ink);
-    letter-spacing: -0.01em;
+    margin: 0;
   }
-  .work__company-name .accent-dot { color: var(--color-accent); font-style: normal; }
   .work__company-meta {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 6px;
-  }
-  .work__company-meta .chip { padding: 4px 10px; font-size: 10px; }
-  .work__company-aside {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
-  .work__company-roles-count {
-    font-family: var(--font-hand);
-    font-size: 19px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.03em;
     color: var(--color-ink-2);
-    white-space: nowrap;
-  }
-  .work__company-roles-count em {
-    color: var(--color-accent);
-    font-style: italic;
-    font-family: var(--font-display);
-    font-size: 24px;
-    margin-right: 4px;
   }
 
-  /* timeline rail — axis at x=14 (mobile) / x=24 (desktop) */
-  .work__timeline {
-    position: relative;
-    padding-left: 44px;
-  }
-  @media (min-width: 768px) {
-    .work__timeline { padding-left: 64px; }
-  }
+  .work__roles { display: flex; flex-direction: column; gap: 36px; }
 
-  .role-card {
-    position: relative;
-    padding: 18px 22px;
-    display: flex;
-    flex-direction: column;
+  .role {
+    display: grid;
+    grid-template-columns: 1fr;
     gap: 12px;
-    margin-bottom: 16px;
-  }
-  .role-card:last-child { margin-bottom: 0; }
-
-  /* Per-card connector line: lives in the timeline's left padding,
-     centered exactly on the node axis (line border is 1.5px → offset by 0.75). */
-  .role-card::before {
-    content: "";
-    position: absolute;
-    left: -30.75px;
-    top: 0;
-    bottom: -16px;
-    border-left: var(--line) dashed var(--color-ink-3);
-    pointer-events: none;
   }
   @media (min-width: 768px) {
-    .role-card::before { left: -40.75px; }
+    .role { grid-template-columns: 170px 1fr; gap: 32px; }
   }
-  .role-card:first-child::before { top: 32px; }
-  .role-card:last-child::before { bottom: calc(100% - 32px); }
-
-  .role-card__node {
-    position: absolute;
-    left: -44px;
-    top: 18px;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--color-bg);
-    border: var(--line) solid var(--color-ink-3);
-    display: flex;
+  .role__aside { display: flex; flex-direction: column; gap: 10px; }
+  .role__period {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.04em;
+    color: var(--color-ink-2);
+  }
+  .role__now {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    z-index: 2;
-  }
-  @media (min-width: 768px) {
-    .role-card__node { left: -56px; top: 16px; width: 32px; height: 32px; }
-  }
-  .role-card__node [data-icon] {
-    font-size: 14px !important;
-    color: var(--color-ink-2) !important;
-  }
-  @media (min-width: 768px) {
-    .role-card__node [data-icon] { font-size: 16px !important; }
-  }
-  .role-card.box.accent .role-card__node {
-    border-color: var(--color-accent);
-    background: var(--color-accent);
-  }
-  .role-card.box.accent .role-card__node [data-icon] { color: var(--color-bg) !important; }
-  .role-card__node-pulse {
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-    border: 1.5px solid var(--color-accent);
-    opacity: 0.5;
-    animation: pulse-ring 1.8s ease-out infinite;
-    pointer-events: none;
-  }
-
-  .role-card__head {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .role-card__head-left { min-width: 0; flex: 1 1 auto; }
-  .role-card__period-row {
-    display: flex;
     gap: 8px;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: 6px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label-sm);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
   }
-  .role-card__period-row .label { font-size: 10px; }
-  .role-card__period-row .chip { padding: 2px 8px; font-size: 9px; }
-  .role-card__title {
+  .role__title {
     font-family: var(--font-display);
     font-style: italic;
-    font-weight: 400;
-    font-size: var(--text-title);
+    font-size: var(--text-card-title);
     line-height: 1.1;
     color: var(--color-ink);
-    letter-spacing: -0.01em;
-  }
-  .role-card.box.accent .role-card__title {
-    color: var(--color-ink);
-  }
-
-  .role-card__hand {
-    font-family: var(--font-hand);
-    font-size: 18px;
-    color: var(--color-accent);
-    margin-top: 4px;
-  }
-
-  .role-card__tags {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .role-card__tags .chip { padding: 4px 10px; font-size: 9px; gap: 5px; }
-  .role-card__tags .chip [data-icon] { font-size: 11px; }
-
-  /* achievements with icons */
-  .role-card__achievements {
-    list-style: none;
     margin: 0;
+  }
+  .role__type {
+    display: inline-block;
+    margin-top: 6px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label-sm);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-ink-3);
+  }
+  .role__achievements {
+    list-style: none;
+    margin: 18px 0 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
-  }
-  .achievement {
-    display: grid;
-    grid-template-columns: 26px 1fr;
     gap: 12px;
-    align-items: start;
-    font-size: var(--text-body);
-    line-height: 1.7;
-    color: var(--color-ink);
+    max-width: var(--measure);
   }
-  .achievement__icon {
-    width: 26px;
-    height: 26px;
-    border-radius: 6px;
-    border: var(--line) solid var(--color-line);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--color-bg-2);
-    flex-shrink: 0;
-    margin-top: 1px;
+  .role__achievements li {
+    position: relative;
+    padding-left: 22px;
+    font-size: var(--text-sm);
+    line-height: 1.6;
+    color: var(--color-ink-2);
   }
-  .achievement__icon [data-icon] {
-    font-size: 14px !important;
-    color: var(--color-accent) !important;
+  .role__achievements li::before {
+    content: "";
+    position: absolute;
+    left: 2px;
+    top: 10px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
   }
-  .role-card.box.accent .achievement__icon {
-    background: var(--color-bg);
-    border-color: var(--color-accent);
-  }
-
-  /* between-companies arrow */
-  .work__then {
+  .role__stack {
     display: flex;
-    align-items: center;
-    gap: 14px;
-    margin: 32px 0 24px;
-    padding-left: 0;
-  }
-  .work__then-arrow {
-    flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-family: var(--font-hand);
-    font-size: 21px;
-    color: var(--color-accent);
-  }
-  .work__then-arrow [data-icon] { font-size: 20px !important; color: var(--color-accent) !important; }
-  .work__then-line {
-    flex: 1;
-    height: 0;
-    border-top: var(--line) dashed var(--color-ink-3);
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 18px;
   }
 </style>

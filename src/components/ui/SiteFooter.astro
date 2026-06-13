@@ -1,0 +1,64 @@
+---
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const home = lang === "es" ? "/" : "/en";
+---
+
+<footer class="footer">
+  <div class="footer__inner container">
+    <a href={`${home}#top`} class="footer__brand">david<span>herrera</span></a>
+
+    <p class="footer__copy">© 2026 David Herrera</p>
+
+    <a
+      href="https://github.com/david-heca/portfolio"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="footer__link"
+    >
+      <Icon name="ph:github-logo-duotone" />
+      {t("common.footer.license")}
+    </a>
+  </div>
+</footer>
+
+<style>
+  .footer { border-top: 1px solid var(--color-line); }
+  .footer__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-block: 28px;
+  }
+  .footer__brand {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: 20px;
+    color: var(--color-ink);
+  }
+  .footer__brand span { color: var(--color-accent); }
+  .footer__copy {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.04em;
+    color: var(--color-ink-2);
+    margin: 0;
+  }
+  .footer__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.04em;
+    color: var(--color-ink-2);
+    transition: color 0.15s ease;
+  }
+  .footer__link:hover { color: var(--color-accent); }
+  .footer__link [data-icon] { font-size: 15px; }
+</style>

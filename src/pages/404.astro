@@ -5,47 +5,51 @@ import { getLangFromUrl, useTranslations } from "@i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const title = `${t("notFound.heading")} - ${t("notFound.title")}`;
+const title = `${t("notFound.heading")} — ${t("notFound.title")}`;
 const description = t("notFound.description");
+const home = lang === "es" ? "/" : "/en";
 ---
 
 <Layout title={title} description={description} lang={lang}>
-  <section class="container-editorial" style="padding: 96px 0 120px; position: relative; z-index: 5;">
-    <div class="label accent" style="margin-bottom: 24px;">// 404</div>
-
-    <h1
-      style="font-size: clamp(96px, 22vw, 320px); font-weight: 900; line-height: 0.88; letter-spacing: -0.05em; margin: 0 0 32px; color: var(--color-ink);"
-    >
-      4<span style="color: var(--color-accent); font-style: italic; font-weight: 300;">0</span>4
-    </h1>
-
-    <p style="font-size: clamp(22px, 4vw, 40px); font-weight: 500; letter-spacing: -0.02em; line-height: 1.15; color: var(--color-ink); max-width: 24ch; margin: 0 0 16px;">
-      {t("notFound.subtitle")}
-    </p>
-
-    <p style="font-size: 16px; color: var(--color-ink-2); max-width: 50ch; margin: 0 0 48px; line-height: 1.55;">
-      {t("notFound.description")}
-    </p>
-
-    <pre style="font-family: var(--font-mono); font-size: 12px; color: var(--color-ink-3); padding: 20px 24px; border: 1px solid var(--color-line); background: var(--color-bg); max-width: 52ch; margin: 0 0 40px; overflow-x: auto;">
-<span style="color: var(--color-accent);">$</span> curl -I {Astro.url.pathname}
-<span>HTTP/1.1 404 Not Found</span>
-
-<span style="color: var(--color-accent);">$</span> {t("notFound.terminalComment")}
-▋</pre>
-
-    <div style="display: flex; flex-wrap: wrap; gap: 12px;">
-      <button
-        onclick="history.back()"
-        class="contact__cta-btn press-effect"
-        style="background: transparent; color: var(--color-ink); border: 1px solid var(--color-line-strong);"
-      >
-        ← {t("notFound.backButton")}
-      </button>
-      <a href={lang === "es" ? "/" : "/en"} class="contact__cta-btn press-effect">
-        <span class="dot" aria-hidden="true"></span>
-        {t("notFound.homeButton")}
-      </a>
+  <section class="notfound container">
+    <p class="notfound__num">404</p>
+    <h1 class="notfound__title">{t("notFound.subtitle")}</h1>
+    <p class="notfound__desc">{t("notFound.description")}</p>
+    <div class="notfound__actions">
+      <a href={home} class="btn btn--primary">{t("notFound.homeButton")}</a>
+      <button onclick="history.back()" class="btn btn--ghost">← {t("notFound.backButton")}</button>
     </div>
   </section>
 </Layout>
+
+<style>
+  .notfound {
+    padding-top: clamp(80px, 14vw, 160px);
+    padding-bottom: clamp(80px, 14vw, 160px);
+    max-width: 640px;
+  }
+  .notfound__num {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(96px, 22vw, 220px);
+    line-height: 0.85;
+    color: var(--color-accent);
+    margin: 0;
+  }
+  .notfound__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.05;
+    color: var(--color-ink);
+    margin: 24px 0 0;
+  }
+  .notfound__desc {
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-ink-2);
+    margin: 16px 0 0;
+    max-width: 48ch;
+  }
+  .notfound__actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 40px; }
+</style>

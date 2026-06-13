@@ -1,8 +1,6 @@
 ---
 import { useTranslations } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
-import PageHeader from "@ui/PageHeader.astro";
-import PageFooter from "@ui/PageFooter.astro";
 
 export interface Props {
   lang: "es" | "en";
@@ -13,261 +11,126 @@ const t = useTranslations(lang);
 
 const email = "hello@davidherrera.dev";
 
-const elsewhere = [
-  { k: "github", v: "@david-heca", href: "https://github.com/david-heca" },
-  { k: "linkedin", v: "in/david-heca", href: "https://www.linkedin.com/in/david-heca/" },
-  { k: "x / twitter", v: "@david_heca_", href: "https://x.com/david_heca_" },
-  { k: "email", v: email, href: `mailto:${email}` },
+const channels = [
+  { label: "Email", value: email, href: `mailto:${email}`, icon: "ph:envelope-simple-duotone" },
+  { label: "GitHub", value: "@david-heca", href: "https://github.com/david-heca", icon: "ph:github-logo-duotone" },
+  { label: "LinkedIn", value: "in/david-heca", href: "https://www.linkedin.com/in/david-heca/", icon: "ph:linkedin-logo-duotone" },
+  { label: "X", value: "@david_heca_", href: "https://x.com/david_heca_", icon: "ph:x-logo-duotone" },
 ];
 
 const cvFiles = [
-  { lab: "PDF · ES", href: "/assets/documents/davidherrera-spanish.pdf" },
-  { lab: "PDF · EN", href: "/assets/documents/davidherrera-english.pdf" },
+  { lab: "CV · ES", href: "/assets/documents/davidherrera-spanish.pdf" },
+  { lab: "CV · EN", href: "/assets/documents/davidherrera-english.pdf" },
 ];
 ---
 
-<PageHeader
-  idx="04"
-  kicker={t("nav.contact")}
-  title={t("contact.headerTitle")}
-  italic={t("contact.headerItalic")}
-  sub={t("contact.description")}
-/>
+<section id="contact" class="contact section container">
+  <div class="contact__intro reveal">
+    <p class="kicker">{t("nav.contact")}</p>
+    <h2 class="contact__title">{t("contact.headerTitle")} <em>{t("contact.headerItalic")}</em></h2>
+    <p class="lead contact__lead">{t("contact.description")}</p>
 
-<section class="contact container-editorial">
-  <div class="contact__split">
-    <!-- left: invitation + CTA + meta -->
-    <div class="contact__intro reveal">
-      <div class="contact__invite hand lg">
+    <div class="contact__cta">
+      <a href={`mailto:${email}`} class="btn btn--primary">
         <Icon name="ph:paper-plane-tilt-duotone" />
-        <span set:html={t("contact.invite")}></span>
-      </div>
-
-      <div class="contact__cta">
-        <a href={`mailto:${email}`} class="contact__cta-btn press-effect">
-          <span class="dot"></span>
-          {t("contact.cta.button")}
-          <span aria-hidden="true">→</span>
-        </a>
-        <div class="contact__cta-note">{t("contact.cta.note")}</div>
-      </div>
-
-      <div class="contact__intro-meta meta-row">
-        <span class="icon-row"><Icon name="ph:map-pin-duotone" />{t("hero.metaBar.city")}</span>
-        <span class="sep">/</span>
-        <span class="icon-row"><Icon name="ph:clock-duotone" />GMT-6</span>
-        <span class="sep">/</span>
-        <span class="icon-row" style="color: var(--color-accent);">
-          <span class="pulse"></span>
-          {t("hero.metaBar.status")}
-        </span>
-      </div>
+        {t("contact.cta.button")}
+      </a>
     </div>
+    <p class="contact__note">{t("contact.cta.note")}</p>
+  </div>
 
-    <!-- right: channels stack -->
-    <div class="contact__channels">
-      <div class="box accent contact__direct reveal">
-        <div class="label accent">{t("contact.directLabel")}</div>
-        <div class="contact__direct-email">
-          <a href={`mailto:${email}`}>hello@<br />davidherrera.dev</a>
-        </div>
-        <div class="meta-row" style="margin-top: 12px;">
-          <a href={`mailto:${email}`}>copy</a>
-          <span class="sep">/</span>
-          <a href={`mailto:${email}`}>compose</a>
-        </div>
-      </div>
-
-      <div class="box solid contact__elsewhere reveal reveal-delay-1">
-        <div class="label accent">{t("contact.elsewhereLabel")}</div>
-        <div class="contact__elsewhere-grid">
-          {elsewhere.map((e) => (
-            <a
-              href={e.href}
-              target={e.href.startsWith("mailto:") ? undefined : "_blank"}
-              rel={e.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-              class="contact__elsewhere-item"
-            >
-              <span class="label">/ {e.k}</span>
-              <span class="hand sm">{e.v} ↗</span>
-            </a>
-          ))}
-        </div>
-      </div>
-
-      <div class="box solid contact__cv reveal reveal-delay-2">
-        <div class="contact__cv-head">
-          <div class="label accent">{t("contact.cvLabel")}</div>
-          <span class="hand dim sm">{t("contact.cvUpdated")}</span>
-        </div>
-        <div class="contact__cv-grid">
-          {cvFiles.map((f) => (
-            <a
-              href={f.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="box contact__cv-item"
-            >
-              <div class="contact__cv-label">↓ {f.lab}</div>
-            </a>
-          ))}
-        </div>
-      </div>
-
-      <div class="box contact__avail reveal reveal-delay-3">
-        <div>
-          <div class="label">{t("contact.availLabel")}</div>
-          <div class="hand sm" style="margin-top: 4px;">{t("contact.availText")}</div>
-        </div>
-        <span class="chip accent">
-          <span class="dot"></span>
-          {t("contact.open")}
+  <div class="contact__channels reveal reveal-1">
+    {channels.map((c) => (
+      <a
+        href={c.href}
+        target={c.href.startsWith("mailto:") ? undefined : "_blank"}
+        rel={c.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+        class="channel"
+      >
+        <span class="channel__icon"><Icon name={c.icon} /></span>
+        <span class="channel__text">
+          <span class="channel__label">{c.label}</span>
+          <span class="channel__value">{c.value}</span>
         </span>
-      </div>
+        <span class="channel__arrow" aria-hidden="true">↗</span>
+      </a>
+    ))}
+    <div class="contact__cv">
+      {cvFiles.map((f) => (
+        <a href={f.href} target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
+          <Icon name="ph:file-pdf-duotone" />
+          {f.lab}
+        </a>
+      ))}
     </div>
   </div>
 </section>
 
-<PageFooter lang={lang} num="04" />
-
 <style>
-  .contact { padding-bottom: 24px; }
-  .contact__split {
+  .contact {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 24px;
-    padding-top: 10px;
+    gap: 48px;
+    align-items: start;
   }
-  @media (min-width: 1024px) {
-    .contact__split { grid-template-columns: 1.1fr 1fr; gap: 40px; }
-  }
-  .contact__intro {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    padding-top: 8px;
-  }
-  .contact__invite {
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
-    font-family: var(--font-hand);
-    font-weight: 500;
-    font-size: clamp(28px, 4.5vw, 34px);
-    line-height: 1.15;
-    color: var(--color-ink);
-    flex-wrap: wrap;
-  }
-  .contact__invite [data-icon] {
-    font-size: clamp(28px, 4.5vw, 34px);
-    color: var(--color-accent);
-  }
-  .contact__invite em {
-    color: var(--color-accent);
-    font-style: italic;
-  }
-  .contact__intro-meta {
-    margin-top: 4px;
-  }
-  .contact__cta {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    align-items: flex-start;
-  }
-  .contact__cta-note {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-ink-2);
-  }
+  @media (min-width: 900px) { .contact { grid-template-columns: 1.1fr 0.9fr; gap: 64px; } }
 
-  .contact__channels {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .contact__direct { padding: 18px 22px; }
-  .contact__direct-email {
+  .contact__title {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: clamp(28px, 4.5vw, 36px);
-    margin-top: 8px;
-    color: var(--color-accent);
-    line-height: 1.05;
-    word-break: break-all;
-  }
-  .contact__direct-email a { color: inherit; }
-  .contact__elsewhere { padding: 16px 20px; }
-  .contact__elsewhere-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-top: 12px;
-  }
-  @media (max-width: 480px) {
-    .contact__elsewhere-grid { grid-template-columns: 1fr; }
-  }
-  .contact__elsewhere-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    padding: 8px 0;
-    border-bottom: var(--line) dashed var(--color-ink-3);
-    text-decoration: none;
-    color: inherit;
-    transition: color 0.15s ease;
-    gap: 8px;
-  }
-  .contact__elsewhere-item:hover { color: var(--color-accent); }
-  .contact__elsewhere-item .hand {
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+    font-size: clamp(48px, 8vw, 96px);
     color: var(--color-ink);
-    transition: color 0.15s ease;
+    margin: 14px 0 0;
   }
-  .contact__elsewhere-item:hover .hand { color: var(--color-accent); }
+  .contact__title em { color: var(--color-accent); font-style: italic; }
+  .contact__lead { margin-top: 22px; }
 
-  .contact__cv { padding: 16px 20px; }
-  .contact__cv-head {
+  .contact__cta {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    margin-bottom: 10px;
-    gap: 10px;
-  }
-  .contact__cv-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-  }
-  @media (max-width: 480px) {
-    .contact__cv-grid { grid-template-columns: 1fr; }
-  }
-  .contact__cv-item {
-    padding: 12px 14px;
-    text-align: center;
-    border-style: dashed;
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
     align-items: center;
-    transition: border-color 0.15s ease;
-  }
-  .contact__cv-item:hover { border-color: var(--color-accent); }
-  .contact__cv-label {
-    font-family: var(--font-hand);
-    color: var(--color-accent);
-    font-size: 19px;
-  }
-
-  .contact__avail {
-    padding: 14px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
     flex-wrap: wrap;
+    gap: 16px 20px;
+    margin-top: 32px;
   }
+  .contact__note {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.04em;
+    color: var(--color-ink-2);
+    margin: 16px 0 0;
+  }
+
+  .contact__channels { display: flex; flex-direction: column; }
+  .channel {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 4px;
+    border-bottom: 1px solid var(--color-line);
+    transition: padding 0.18s ease, color 0.18s ease;
+  }
+  .channel:first-child { border-top: 1px solid var(--color-line); }
+  .channel:hover { padding-left: 12px; color: var(--color-accent); }
+  .channel__icon {
+    display: inline-flex;
+    color: var(--color-accent);
+  }
+  .channel__icon [data-icon] { font-size: 22px; }
+  .channel__text { display: flex; flex-direction: column; gap: 2px; }
+  .channel__label {
+    font-family: var(--font-mono);
+    font-size: var(--text-label-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-3);
+  }
+  .channel__value { font-size: var(--text-body); color: var(--color-ink); }
+  .channel:hover .channel__value { color: var(--color-accent); }
+  .channel__arrow { margin-left: auto; color: var(--color-ink-3); }
+  .channel:hover .channel__arrow { color: var(--color-accent); }
+
+  .contact__cv { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 </style>

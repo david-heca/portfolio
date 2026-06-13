@@ -1,8 +1,6 @@
 ---
 import { useTranslations } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
-import PageHeader from "@ui/PageHeader.astro";
-import PageFooter from "@ui/PageFooter.astro";
 
 export interface Props {
   lang: "es" | "en";
@@ -11,555 +9,194 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-interface Tag { label: string; icon: string }
+const academicIcons: Record<string, string> = {
+  tesco: "ph:graduation-cap-duotone",
+  platzi: "ph:monitor-play-duotone",
+  cecytem: "ph:code-duotone",
+};
 
-const academic = [
-  {
-    year: t("education.list.tesco.period"),
-    title: t("education.list.tesco.degree"),
-    school: t("education.list.tesco.institution"),
-    note: t("education.list.tesco.description"),
-    initials: "TESCo",
-    icon: "ph:graduation-cap-duotone",
-  },
-  {
-    year: t("education.list.platzi.period"),
-    title: t("education.list.platzi.degree"),
-    school: t("education.list.platzi.institution"),
-    note: t("education.list.platzi.description"),
-    initials: "Platzi",
-    icon: "ph:monitor-play-duotone",
-  },
-  {
-    year: t("education.list.cecytem.period"),
-    title: t("education.list.cecytem.degree"),
-    school: t("education.list.cecytem.institution"),
-    note: t("education.list.cecytem.description"),
-    initials: "CECyTEM",
-    icon: "ph:code-duotone",
-  },
+const academic = ["tesco", "platzi", "cecytem"].map((k) => ({
+  icon: academicIcons[k],
+  year: t(`education.list.${k}.period`),
+  degree: t(`education.list.${k}.degree`),
+  school: t(`education.list.${k}.institution`),
+  note: t(`education.list.${k}.description`),
+}));
+
+const certs = [
+  { year: "2024", name: t("education.certifications.azure.name"), issuer: "Microsoft", icon: "ph:cloud-duotone", tags: ["Azure", "Cloud", "Security"] },
+  { year: "2022", name: t("education.certifications.python.name"), issuer: "U. Michigan · Coursera", icon: "ph:code-duotone", tags: ["Python", "SQL"] },
 ];
 
-interface Cert {
-  year: string;
-  title: string;
-  issuer: string;
-  icon: string;
-  tags: Tag[];
-  featured?: boolean;
-}
-
-const certs: Cert[] = [
-  {
-    year: "2024",
-    title: t("education.certifications.azure.name"),
-    issuer: "Microsoft",
-    icon: "ph:cloud-duotone",
-    tags: [
-      { label: "Azure", icon: "ph:cloud-duotone" },
-      { label: "Cloud", icon: "ph:cloud-arrow-up-duotone" },
-      { label: "Networking", icon: "ph:share-network-duotone" },
-      { label: "Security", icon: "ph:shield-check-duotone" },
-    ],
-    featured: true,
-  },
-  {
-    year: "2022",
-    title: t("education.certifications.python.name"),
-    issuer: "Michigan University · Coursera",
-    icon: "ph:code-duotone",
-    tags: [
-      { label: "Python", icon: "ph:code-duotone" },
-      { label: "Data Structures", icon: "ph:tree-structure-duotone" },
-      { label: "SQL", icon: "ph:database-duotone" },
-    ],
-  },
-];
-
-const interests = [
-  { label: lang === "es" ? "IA generativa" : "Generative AI", icon: "ph:sparkle-duotone" },
-  { label: "MLOps", icon: "ph:test-tube-duotone" },
-  { label: lang === "es" ? "Sistemas distribuidos" : "Distributed systems", icon: "ph:share-network-duotone" },
-  { label: lang === "es" ? "Café especialidad" : "Specialty coffee", icon: "ph:coffee-duotone" },
-  { label: lang === "es" ? "Tipografía" : "Typography", icon: "ph:text-aa-duotone" },
-];
-
-const stats = [
-  {
-    num: "10",
-    suffix: lang === "es" ? "años" : "yrs",
-    label: lang === "es" ? "estudiando" : "studying",
-    icon: "ph:graduation-cap-duotone",
-    accent: true,
-  },
-  {
-    num: String(academic.length),
-    label: lang === "es" ? "instituciones" : "institutions",
-    icon: "ph:buildings-duotone",
-  },
-  {
-    num: String(certs.length),
-    label: lang === "es" ? "certificaciones" : "certifications",
-    icon: "ph:certificate-duotone",
-  },
-  {
-    num: "∞",
-    label: lang === "es" ? "por aprender" : "to learn",
-    icon: "ph:book-open-duotone",
-  },
-];
+const interests = lang === "es"
+  ? ["IA generativa", "MLOps", "Sistemas distribuidos", "Café de especialidad", "Tipografía"]
+  : ["Generative AI", "MLOps", "Distributed systems", "Specialty coffee", "Typography"];
 ---
 
-<PageHeader
-  idx="03"
-  kicker={t("nav.education")}
-  title={t("education.headerTitle")}
-  italic={t("education.headerItalic")}
-  sub={t("education.description")}
-/>
-
-<section class="edu container-editorial">
-  <div class="stats-strip reveal">
-    {stats.map((s) => (
-      <div class="stats-strip__item">
-        <Icon name={s.icon} class="stats-strip__icon" />
-        <div class="stats-strip__num">
-          {s.accent ? <span class="accent">{s.num}</span> : s.num}
-          {s.suffix && <span style="font-size: 0.55em; color: var(--color-ink-2); margin-left: 4px; font-style: normal; font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase;">{s.suffix}</span>}
-        </div>
-        <div class="stats-strip__label">{s.label}</div>
-      </div>
-    ))}
-  </div>
+<section id="education" class="edu section container">
+  <header class="sec-head reveal">
+    <p class="kicker">{t("nav.education")}</p>
+    <h2 class="section-title">{t("education.headerTitle")} <em>{t("education.headerItalic")}</em></h2>
+    <p class="lead">{t("education.description")}</p>
+  </header>
 
   <div class="edu__split">
-    <div class="reveal">
-      <div class="edu__col-head">
-        <div class="label accent edu__col-title">{t("education.academicLabel")}</div>
-        <span class="edu__col-count">— {String(academic.length).padStart(2, "0")}</span>
-      </div>
+    <div class="edu__col reveal">
+      <p class="edu__col-label">{t("education.academicTitle")}</p>
       <div class="edu__list">
-        {academic.map((e, i) => (
-          <div class={`box edu-item reveal reveal-delay-${Math.min(i + 1, 4)}`}>
-            <div class="edu-item__logo" aria-hidden="true">
-              <Icon name={e.icon} />
-              <span class="edu-item__logo-initials">{e.initials}</span>
+        {academic.map((e) => (
+          <div class="edu-item">
+            <div class="edu-item__aside">
+              <Icon name={e.icon} class="edu-item__icon" />
+              <span class="edu-item__year">{e.year}</span>
             </div>
-            <div class="edu-item__body">
-              <div class="edu-item__year-row">
-                <span class="edu-item__year">{e.year}</span>
-              </div>
-              <div class="edu-item__title">{e.title}</div>
-              <span class="edu-item__school">{e.school}</span>
-              <div class="edu-item__note">{e.note}</div>
+            <div>
+              <h3 class="edu-item__degree">{e.degree}</h3>
+              <p class="edu-item__school">{e.school}</p>
+              <p class="edu-item__note">{e.note}</p>
             </div>
           </div>
         ))}
       </div>
     </div>
 
-    <div class="reveal reveal-delay-1">
-      <div class="edu__col-head">
-        <div class="label accent edu__col-title">{t("education.certsLabel")}</div>
-        <span class="edu__col-count">— {String(certs.length).padStart(2, "0")}</span>
-      </div>
+    <div class="edu__col reveal reveal-1">
+      <p class="edu__col-label">{t("education.certsTitle")}</p>
       <div class="edu__list">
-        {certs.map((c, i) => (
-          <div class={`cert-card ${c.featured ? "box accent" : "box"} reveal reveal-delay-${Math.min(i + 1, 4)}`}>
-            <div class="cert-card__head">
-              <div class="cert-card__head-left">
-                <span class="cert-card__icon" aria-hidden="true">
-                  <Icon name={c.icon} />
-                </span>
-                <span class="cert-card__year">{c.year}</span>
-              </div>
-              {c.featured && (
-                <span class="chip solid">
-                  <Icon name="ph:medal-duotone" />
-                  {t("education.labels.featured")}
-                </span>
-              )}
+        {certs.map((c) => (
+          <div class="cert">
+            <div class="cert__head">
+              <span class="cert__lead">
+                <Icon name={c.icon} class="cert__icon" />
+                <h3 class="cert__name">{c.name}</h3>
+              </span>
+              <span class="cert__year">{c.year}</span>
             </div>
-            <div class="cert-card__title">{c.title}</div>
-            <div class="cert-card__issuer">{c.issuer}</div>
-            <div class="cert-card__tags">
-              {c.tags.map((tg) => (
-                <span class={`chip ${c.featured ? "soft" : ""}`}>
-                  <Icon name={tg.icon} />
-                  {tg.label}
-                </span>
-              ))}
-            </div>
+            <p class="cert__issuer">{c.issuer}</p>
+            <div class="cert__tags">{c.tags.map((tg) => <span class="tag">{tg}</span>)}</div>
           </div>
         ))}
       </div>
-    </div>
-  </div>
 
-  <div class="edu__meta-strip">
-    <div class="box solid edu__meta-card reveal">
-      <div class="edu__meta-card-head">
-        <Icon name="ph:translate-duotone" />
-        <div class="label accent">{t("education.sideCards.languagesTitle")}</div>
-      </div>
-      <div class="edu__lang-list">
-        <div class="edu__lang-row">
-          <span class="edu__lang-name">{lang === "es" ? "Español" : "Spanish"}</span>
-          <span class="edu__lang-level">
-            <span class="edu__lang-bars">
-              <span class="edu__lang-bar on"></span>
-              <span class="edu__lang-bar on"></span>
-              <span class="edu__lang-bar on"></span>
-              <span class="edu__lang-bar on"></span>
-              <span class="edu__lang-bar on"></span>
-            </span>
-            {lang === "es" ? "Nativo" : "Native"}
-          </span>
+      <div class="edu__extra">
+        <div>
+          <p class="edu__col-label">{t("education.languagesTitle")}</p>
+          <p class="edu__langs">
+            {lang === "es" ? "Español — Nativo" : "Spanish — Native"}<br />
+            {lang === "es" ? "Inglés — Profesional" : "English — Professional"}
+          </p>
         </div>
-        <div class="edu__lang-row">
-          <span class="edu__lang-name">{lang === "es" ? "Inglés" : "English"}</span>
-          <span class="edu__lang-level">
-            <span class="edu__lang-bars">
-              <span class="edu__lang-bar on"></span>
-              <span class="edu__lang-bar on"></span>
-              <span class="edu__lang-bar on"></span>
-              <span class="edu__lang-bar on"></span>
-              <span class="edu__lang-bar"></span>
-            </span>
-            {lang === "es" ? "Profesional" : "Professional"}
-          </span>
+        <div>
+          <p class="edu__col-label">{t("education.interestsTitle")}</p>
+          <div class="cert__tags">{interests.map((i) => <span class="tag">{i}</span>)}</div>
         </div>
-      </div>
-    </div>
-
-    <div class="box solid edu__meta-card reveal reveal-delay-1">
-      <div class="edu__meta-card-head">
-        <Icon name="ph:sparkle-duotone" />
-        <div class="label accent">{t("education.sideCards.interestsTitle")}</div>
-      </div>
-      <div class="edu__interests">
-        {interests.map((it) => (
-          <span class="chip">
-            <Icon name={it.icon} />
-            {it.label}
-          </span>
-        ))}
-      </div>
-    </div>
-
-    <div class="box edu__meta-card edu__philosophy reveal reveal-delay-2">
-      <div class="edu__meta-card-head">
-        <Icon name="ph:quotes-duotone" />
-        <div class="label accent">{t("education.sideCards.philosophyTitle")}</div>
-      </div>
-      <div class="display" set:html={t("education.sideCards.philosophyBody")}></div>
-      <div class="edu__philosophy-attr">
-        <Icon name="ph:pen-nib-duotone" />
-        {lang === "es" ? "— guía personal" : "— personal guide"}
       </div>
     </div>
   </div>
 </section>
 
-<PageFooter lang={lang} num="03" />
-
 <style>
-  .edu { padding-bottom: 80px; }
+  .sec-head { max-width: 720px; margin-bottom: 56px; }
+  .sec-head .lead { margin-top: 20px; }
+
   .edu__split {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 28px;
-    padding-top: 10px;
+    gap: 48px;
   }
-  @media (min-width: 1024px) {
-    .edu__split { grid-template-columns: 1.15fr 1fr; gap: 40px; }
-  }
-  .edu__col-head {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 18px;
-  }
-  .edu__col-title { margin-bottom: 0; }
-  .edu__col-count {
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: var(--track-label);
-    color: var(--color-ink-3);
-  }
-  .edu__list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+  @media (min-width: 900px) { .edu__split { grid-template-columns: 1fr 1fr; gap: 64px; } }
 
-  /* academic — vertical timeline w/ year markers */
-  .edu-item {
-    padding: 16px 20px;
-    display: grid;
-    grid-template-columns: 64px 1fr;
-    gap: 18px;
-    align-items: start;
-    position: relative;
-  }
-  @media (max-width: 480px) {
-    .edu-item { grid-template-columns: 1fr; gap: 12px; }
-  }
-  .edu-item__logo {
-    width: 64px;
-    height: 64px;
-    border: var(--line) solid var(--color-line-strong);
-    border-radius: 8px;
-    background: var(--color-bg-2);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    flex-shrink: 0;
-  }
-  .edu-item__logo [data-icon] {
-    font-size: 22px !important;
-    color: var(--color-accent) !important;
-  }
-  .edu-item__logo-initials {
-    font-family: var(--font-mono);
-    font-size: 9px;
-    letter-spacing: var(--track-label);
-    color: var(--color-ink-2);
-    text-transform: uppercase;
-  }
-  .edu-item__body { min-width: 0; }
-  .edu-item__year-row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 6px;
-  }
-  .edu-item__year {
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: var(--track-label);
-    text-transform: uppercase;
-    color: var(--color-accent);
-  }
-  .edu-item__title {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 400;
-    font-size: var(--text-title);
-    line-height: 1.15;
-    color: var(--color-ink);
-    letter-spacing: -0.01em;
-  }
-  .edu-item__school {
-    margin-top: 6px;
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: var(--track-label);
-    text-transform: uppercase;
-    color: var(--color-ink-2);
-    display: block;
-    line-height: 1.5;
-  }
-  .edu-item__note {
-    font-size: var(--text-body);
-    line-height: 1.7;
-    color: var(--color-ink-2);
-    margin-top: 10px;
-    padding-top: 10px;
-    border-top: var(--line) dashed var(--color-ink-3);
-  }
-
-  /* certs */
-  .cert-card {
-    padding: 18px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    position: relative;
-  }
-  .cert-card__head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 10px;
-  }
-  .cert-card__head-left {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .cert-card__icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    background: var(--color-accent-soft);
-    border: var(--line) solid color-mix(in srgb, var(--color-accent) 28%, transparent);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .cert-card.box.accent .cert-card__icon {
-    background: var(--color-bg);
-    border-color: var(--color-accent);
-  }
-  .cert-card__icon [data-icon] {
-    font-size: 20px !important;
-    color: var(--color-accent) !important;
-  }
-  .cert-card__year {
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: var(--track-label);
-    text-transform: uppercase;
-    color: var(--color-ink-2);
-  }
-  .cert-card__title {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 400;
-    font-size: var(--text-title);
-    line-height: 1.15;
-    color: var(--color-ink);
-    letter-spacing: -0.01em;
-  }
-  .cert-card__issuer {
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: var(--track-label);
-    text-transform: uppercase;
-    color: var(--color-ink-2);
-  }
-  .cert-card__tags {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-top: 4px;
-    padding-top: 8px;
-    border-top: var(--line) dashed var(--color-ink-3);
-  }
-  .cert-card__tags .chip { padding: 3px 8px; font-size: 9px; gap: 5px; }
-  .cert-card__tags .chip [data-icon] { font-size: 10px; }
-
-  /* side-cards (idiomas / intereses / filosofía) */
-  .edu__meta-strip {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-    margin-top: 32px;
-  }
-  @media (min-width: 768px) {
-    .edu__meta-strip { grid-template-columns: 1fr 1fr; }
-  }
-  @media (min-width: 1024px) {
-    .edu__meta-strip { grid-template-columns: 1fr 1fr 1.3fr; gap: 18px; }
-  }
-  .edu__meta-card {
-    padding: 18px 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    position: relative;
-  }
-  .edu__meta-card-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-  .edu__meta-card-head [data-icon] {
-    font-size: 20px !important;
-    color: var(--color-accent) !important;
-  }
-  .edu__meta-card .display {
-    font-size: 19px;
-    line-height: 1.35;
-    color: var(--color-ink);
-  }
-  .edu__meta-card .display em {
-    color: var(--color-ink-2);
-    font-style: normal;
+  .edu__col-label {
     font-family: var(--font-mono);
     font-size: var(--text-label);
-    letter-spacing: var(--track-label);
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-  }
-  .edu__meta-card-text {
-    font-size: var(--text-body);
-    line-height: 1.65;
-    color: var(--color-ink);
+    color: var(--color-accent);
+    margin: 0 0 24px;
   }
 
-  .edu__lang-list {
+  .edu__list { display: flex; flex-direction: column; gap: 32px; }
+
+  .edu-item { display: grid; grid-template-columns: 1fr; gap: 4px; }
+  @media (min-width: 480px) { .edu-item { grid-template-columns: 110px 1fr; gap: 20px; } }
+  .edu-item__aside {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding-top: 3px;
+  }
+  @media (min-width: 480px) { .edu-item__aside { flex-direction: column; align-items: flex-start; gap: 8px; } }
+  .edu-item__icon { font-size: 26px; color: var(--color-accent); }
+  .edu-item__year {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.04em;
+    color: var(--color-ink-2);
+  }
+  .edu-item__degree {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-card-title);
+    line-height: 1.1;
+    color: var(--color-ink);
+    margin: 0;
+  }
+  .edu-item__school {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.02em;
+    color: var(--color-ink-2);
+    margin: 6px 0 0;
+  }
+  .edu-item__note {
+    font-size: var(--text-sm);
+    line-height: 1.55;
+    color: var(--color-ink-2);
+    margin: 10px 0 0;
+  }
+
+  .cert { padding-bottom: 28px; border-bottom: 1px solid var(--color-line); }
+  .cert:last-child { border-bottom: 0; padding-bottom: 0; }
+  .cert__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .cert__lead { display: flex; align-items: center; gap: 11px; min-width: 0; }
+  .cert__icon { font-size: 24px; color: var(--color-accent); }
+  .cert__name {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: var(--text-card-title);
+    line-height: 1.15;
+    color: var(--color-ink);
+    margin: 0;
+  }
+  .cert__year {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    color: var(--color-ink-3);
+    flex-shrink: 0;
+  }
+  .cert__issuer {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    color: var(--color-ink-2);
+    margin: 6px 0 12px;
+  }
+  .cert__tags { display: flex; flex-wrap: wrap; gap: 7px; }
+
+  .edu__extra {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-top: 4px;
+    gap: 28px;
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--color-line);
   }
-  .edu__lang-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 0;
-    border-bottom: var(--line) dashed var(--color-ink-3);
-    gap: 10px;
-  }
-  .edu__lang-row:last-child { border-bottom: 0; }
-  .edu__lang-name {
+  .edu__langs {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 18px;
+    font-size: 20px;
+    line-height: 1.5;
     color: var(--color-ink);
-  }
-  .edu__lang-level {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .edu__lang-bars {
-    display: inline-flex;
-    gap: 3px;
-  }
-  .edu__lang-bar {
-    width: 4px;
-    height: 12px;
-    border-radius: 1px;
-    background: var(--color-ink-3);
-  }
-  .edu__lang-bar.on { background: var(--color-accent); }
-
-  .edu__interests {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 4px;
-  }
-
-  .edu__philosophy {
-    background: var(--color-accent-soft) !important;
-    border-color: var(--color-accent) !important;
-  }
-  .edu__philosophy .display {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(20px, 2.4vw, 26px);
-    line-height: 1.2;
-    color: var(--color-ink);
-  }
-  .edu__philosophy .display em { color: var(--color-accent); font-style: italic; }
-  .edu__philosophy-attr {
-    font-family: var(--font-hand);
-    font-size: 18px;
-    color: var(--color-accent);
-    margin-top: 8px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+    margin: 0;
   }
 </style>
