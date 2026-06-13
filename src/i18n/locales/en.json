@@ -50,14 +50,10 @@
       "work": "see selected work",
       "email": "hello@davidherrera.dev"
     },
-    "stamp": {
-      "ringText": "★ AVAILABLE · 2026 · BOOKING NEW WORK · ",
-      "core": "let's talk"
-    },
     "sticker": "MADE IN CDMX",
     "currently": {
       "label": "currently building",
-      "text": "Connie v2 · multi-tenant RAG on Azure and an MCP server exposing the internal corpus to LLM clients."
+      "text": "Connie v2 — letting any team query years of internal documents, databases and spreadsheets in plain language, and get cited answers in seconds."
     }
   },
   "work": {
@@ -76,7 +72,7 @@
             "period": "Mar 2025 - Present",
             "type": "Full-time",
             "achievements": [
-              "Designed and built Connie: enterprise RAG platform over heterogeneous corporate data with enterprise auth — currently in production",
+              "Designed and shipped Connie from scratch (80% of the system): a production RAG platform serving 3 clients over their heterogeneous data —databases, PDFs, spreadsheets— with enterprise auth",
               "End-to-end RAG pipelines on Azure: ingestion, chunking, retrieval, and serving with prompt observability",
               "MCP servers connecting internal data sources to LLM clients — models consume tools without custom glue code",
               "Brought MLOps practices to the team: retrieval evaluation, prompt and model versioning"
@@ -180,28 +176,48 @@
     "list": {
       "portfolio": {
         "title": "Portfolio",
-        "description": "This site. Astro + Tailwind, bilingual i18n, theme switcher with persistence, and View Transitions. Open source under MIT license.",
+        "description": "This site. Editorial, bilingual and open source — v.2026 soft-brutalist design, hand-built.",
+        "specs": [
+          { "label": "Type", "value": "Personal project · open source" },
+          { "label": "Focus", "value": "ES/EN i18n, theming and View Transitions" },
+          { "label": "License", "value": "MIT" }
+        ],
         "kind": "Personal / Web",
         "year": "2026",
         "status": "Live"
       },
       "connie": {
         "title": "Connie",
-        "description": "Enterprise RAG platform to query heterogeneous corporate data in natural language. Enterprise auth, internal MCP server, and ingestion pipelines on Azure.",
+        "description": "From scattered knowledge to cited answers: any team queries the company's internal databases, PDFs and spreadsheets in plain language — and gets the answer in seconds.",
+        "specs": [
+          { "label": "Before", "value": "Info lost across teams or buried in red tape" },
+          { "label": "My role", "value": "Architect · 80% of the system, from scratch" },
+          { "label": "Scale", "value": "3 clients in production" }
+        ],
         "kind": "Work / AI",
         "year": "2025",
         "status": "In production"
       },
       "handheld": {
         "title": "HandHeld RFID",
-        "description": "Native Android app with RFID reader for field inventory and traceability. Replaced manual capture in industrial operation.",
+        "description": "An inventory that used to take weeks —or simply never happened— turned into real-time control from the handheld.",
+        "specs": [
+          { "label": "Before", "value": "Manual capture · weeks of delay" },
+          { "label": "Now", "value": "Every rack RFID-tagged, every move instant" },
+          { "label": "Impact", "value": "Far more accurate warehouse control" }
+        ],
         "kind": "Work / Mobile",
         "year": "2024",
         "status": "In production"
       },
       "trace": {
         "title": "Automotive Traceability",
-        "description": "Desktop system tracking automotive parts across the production line. C# .NET + DevExpress on SQL Server.",
+        "description": "Every automotive part traced end to end across the production line.",
+        "specs": [
+          { "label": "Clients", "value": "Suppliers to Honda, GM and Stellantis" },
+          { "label": "Scale", "value": "Thousands of parts per day" },
+          { "label": "Scope", "value": "End-to-end traceability" }
+        ],
         "kind": "Work / Desktop",
         "year": "2024",
         "status": "Delivered"
@@ -233,6 +249,8 @@
   "home": {
     "credits": {
       "label": "Technical stack",
+      "title": "stack — david@portfolio",
+      "command": "stack --all",
       "rows": {
         "backend": {
           "label": "Backend",
@@ -258,7 +276,7 @@
       "bio": {
         "paragraph1": "Software engineer building at the intersection of <strong>backend, data, and applied AI</strong>. Four years turning business problems into systems that ship, scale, and stay maintainable instead of rotting into tech debt.",
         "paragraph2": "Comfortable across the stack — from data model to frontend — but my current focus is <strong>RAG, MCP, and MLOps</strong> architectures over corporate data. I care that the AI systems I design are operable, observable, and debuggable in real production.",
-        "paragraph3": "I give talks on AI and data science at universities — I like closing the loop between academic theory and what actually happens once a system meets production."
+        "paragraph3": "I give talks on AI and data science at universities —Tec de Monterrey, UPVM Tultitlán and TESCo— to audiences of ~200 people, closing the loop between academic theory and what actually happens once a system meets production."
       }
     }
   },

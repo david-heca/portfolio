@@ -60,7 +60,17 @@ Portafolio personal construido con **Astro 5 + React 19 + Tailwind CSS 4**, desp
 - **CSS modular**: `src/styles/global.css` contiene solo el design system (tokens, reset, primitivas y utilidades compartidas como `.stats-strip` y `.contact__cta-btn`). Los estilos específicos de cada componente o sección viven en su `<style>` scoped.
 - **Una sola variable de acento**: `--color-accent` (light `#1e4fff`, dark `#4d7cff`). El resto de variantes translúcidas se derivan con `color-mix(in srgb, var(--color-accent) N%, transparent)` — para cambiar toda la paleta basta con editar dos líneas.
 - Paleta warm neutral: `--color-bg`, `--color-bg-2`, `--color-ink`, `--color-ink-2`, `--color-ink-3`, `--color-line`, `--color-line-strong`.
-- Fuentes: Satoshi (300–900, vía Fontshare) y JetBrains Mono (400, 500, vía Google Fonts).
+- **Sistema tipográfico de tres voces** (la identidad es **mono + serif**; cada fuente tiene un rol — no mezclar):
+  - `--font-display` → **Instrument Serif** (italic, Google Fonts): titulares gigantes expresivos y títulos de card.
+  - `--font-mono` → **JetBrains Mono** (300–500, Google Fonts): hace **doble trabajo intencional** — (a) voz de **lectura**: body, bio, descripciones, subtítulos, logros (calibrada con interlínea `--leading-prose` y medida `--measure` para leerse cómoda); (b) capa de **datos/etiquetas**: kickers, índices `00–04`, `.label`, chips, fichas (`.spec-sheet`), metadatos.
+  - `--font-sans` → **alias de `--font-mono`** (`--font-sans: var(--font-mono)`). Es la fuente del `<body>`. Se probó Satoshi como sans neutra pero desentonaba con las voces expresivas (serif/hand/mono) — se descartó.
+  - `--font-hand` → **Caveat** (Google Fonts): solo guiños manuscritos decorativos cortos (sticker, flechas, "más proyectos", roles count, invite de contacto). **Nunca contenido real de lectura.**
+- **Escala tipográfica tokenizada** (en `:root`, para matar el drift de tamaños): prosa y etiquetas usan tokens, no px sueltos.
+  - `--text-lead: 15px` (prosa principal: subtítulos, bio, descripciones, logros) · `--text-body: 13.5px` (prosa secundaria: notas, datos de ficha, "construyendo ahora").
+  - `--leading-prose: 1.75` + `--measure: 62ch` → interlínea y ancho de línea para que la mono se lea cómoda en bloques largos.
+  - `--text-title: clamp(22px, 2.6vw, 26px)` (Instrument Serif · todos los títulos de card: role/edu/cert).
+  - `--text-label: 11px` / `--text-label-sm: 10px` (JetBrains Mono) con `--track-label: 0.18em` (tracking único para toda etiqueta mono).
+  - Regla: al añadir texto, elige el token por **rol de contenido**, no inventes px. Los titulares gigantes (hero/page-header/featured) sí llevan `clamp()` por contexto.
 - **Container pattern**: `.container-editorial` (y `.nav__inner`, `.footer__inner`) aplican `max-width: 1280px` + padding-inline responsive (24/32/48/64px). Elementos con line/border full-width (`.nav`, `.footer`) viven fuera del container para que su línea atraviese todo el viewport.
 - **Grid de construcción**: `.page::before` dibuja líneas verticales (12 cols `lg+`, 6 `sm–md`, 4 `<sm`) con `box-shadow: inset -1px 0` para cerrar el grid en el borde derecho.
 - **Tipografía fluida**: `clamp()` en todos los headings gigantes (hero 56→220px, headers 44→140px, contact 52→180px).
@@ -69,7 +79,7 @@ Portafolio personal construido con **Astro 5 + React 19 + Tailwind CSS 4**, desp
 ### Patrones clave
 
 - Animaciones de revelación con `.reveal` + IntersectionObserver (root margin `-50px`), escalonadas con `reveal-delay-1..4`
-- Strip de credits (`.home-credits`) debajo del hero: spec sheet tipográfico con categorías (Backend/Frontend/Cloud/AI) en filas `dt`/`dd`
+- Stack técnico (`.home-credits`) debajo del hero: **terminal falso** (`.terminal`) con barra (dots + título `stack — david@portfolio`), línea de comando con caret parpadeante (`@keyframes terminal-blink`, respeta `reduced-motion`) y "output" por categoría (`backend/frontend/cloud/ai`). Las tecnologías clave se resaltan en accent vía el `Set` `stackHighlight` en el frontmatter (`.NET`, `Python`, `Azure`, `LLMs`, `RAG`, `MCP`, `MLOps`); los items se parten por `·` en tokens individuales. Cierra con línea `✓ {done}`.
 - Pulse del live dot del hero vía `@keyframes pulse-ring`
 - Rotación lenta del sello `Stamp` SVG (`@keyframes stamp-spin`, `16s linear infinite`)
 - Todas las animaciones respetan `prefers-reduced-motion: reduce`
