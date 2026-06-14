@@ -15,8 +15,31 @@
     "work": "Experiencia",
     "education": "Formación",
     "projects": "Proyectos",
+    "speaking": "Charlas",
     "contact": "Contacto",
     "cv": "CV"
+  },
+  "stack": {
+    "label": "Stack",
+    "title": "Con qué",
+    "titleItalic": "construyo",
+    "categories": {
+      "backend": { "label": "Backend", "items": ["C#", ".NET", "Python", "PostgreSQL", "SQL Server", "JWT", "OAuth", "APIs"] },
+      "frontend": { "label": "Frontend", "items": ["React", "Tailwind", "TypeScript", "DevExpress"] },
+      "cloud": { "label": "Nube & Infra", "items": ["Azure", "AWS", "Docker", "CI/CD", "Pipelines"] },
+      "ai": { "label": "IA & Datos", "items": ["LLMs", "RAG", "MCP", "MLOps", "Prompts"] }
+    }
+  },
+  "speaking": {
+    "label": "Charlas",
+    "title": "En el",
+    "titleItalic": "escenario",
+    "description": "Doy charlas de IA y ciencia de datos en universidades — cerrando el loop entre la teoría académica y lo que de verdad pasa cuando un sistema toca producción.",
+    "audience": "~200 asistentes por charla",
+    "venuesLabel": "Dónde",
+    "venues": ["EGADE Business School · Monterrey", "UPVM Tultitlán", "TESCo — TecNM"],
+    "topicsLabel": "Temas",
+    "topics": ["IA generativa", "RAG & MLOps", "Ciencia de datos"]
   },
   "hero": {
     "greeting": "Hola, soy",
