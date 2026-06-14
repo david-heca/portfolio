@@ -18,15 +18,17 @@ const principleIcons = [
 ---
 
 <section id="about" class="about section container">
-  <header class="about__head">
-    <p class="kicker reveal">{t("about.label")}</p>
-    <h2 class="section-title reveal reveal-1" set:html={t("about.heading")}></h2>
-  </header>
+  <div class="about__top">
+    <header class="about__head">
+      <p class="kicker reveal">{t("about.label")}</p>
+      <h2 class="section-title reveal reveal-1" set:html={t("about.heading")}></h2>
+    </header>
 
-  <div class="about__body">
-    <p class="prose reveal" set:html={t("about.bio.paragraph1")}></p>
-    <p class="prose reveal reveal-1" set:html={t("about.bio.paragraph2")}></p>
-    <p class="prose reveal reveal-2" set:html={t("about.bio.paragraph3")}></p>
+    <div class="about__body">
+      <p class="prose reveal" set:html={t("about.bio.paragraph1")}></p>
+      <p class="prose reveal reveal-1" set:html={t("about.bio.paragraph2")}></p>
+      <p class="prose reveal reveal-2" set:html={t("about.bio.paragraph3")}></p>
+    </div>
   </div>
 
   <div class="about__principles">
@@ -41,16 +43,15 @@ const principleIcons = [
 </section>
 
 <style>
-  .about {
+  .about__top {
     display: grid;
     grid-template-columns: 1fr;
     gap: 32px 64px;
     align-items: start;
   }
   @media (min-width: 1024px) {
-    .about { grid-template-columns: 0.85fr 1.15fr; }
+    .about__top { grid-template-columns: 0.85fr 1.15fr; }
     .about__head { position: sticky; top: 110px; }
-    .about__principles { grid-column: 1 / -1; }
   }
 
   .about__body {
