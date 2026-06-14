@@ -15,8 +15,31 @@
     "work": "Experience",
     "education": "Education",
     "projects": "Projects",
+    "speaking": "Speaking",
     "contact": "Contact",
     "cv": "CV"
+  },
+  "stack": {
+    "label": "Stack",
+    "title": "What I",
+    "titleItalic": "build with",
+    "categories": {
+      "backend": { "label": "Backend", "items": ["C#", ".NET", "Python", "PostgreSQL", "SQL Server", "JWT", "OAuth", "APIs"] },
+      "frontend": { "label": "Frontend", "items": ["React", "Tailwind", "TypeScript", "DevExpress"] },
+      "cloud": { "label": "Cloud & Infra", "items": ["Azure", "AWS", "Docker", "CI/CD", "Pipelines"] },
+      "ai": { "label": "AI & Data", "items": ["LLMs", "RAG", "MCP", "MLOps", "Prompts"] }
+    }
+  },
+  "speaking": {
+    "label": "Speaking",
+    "title": "On",
+    "titleItalic": "stage",
+    "description": "I give talks on AI and data science at universities — closing the loop between academic theory and what actually happens once a system meets production.",
+    "audience": "~200 attendees per talk",
+    "venuesLabel": "Where",
+    "venues": ["EGADE Business School · Monterrey", "UPVM Tultitlán", "TESCo — TecNM"],
+    "topicsLabel": "Topics",
+    "topics": ["Generative AI", "RAG & MLOps", "Data science"]
   },
   "hero": {
     "greeting": "Hi, I'm",

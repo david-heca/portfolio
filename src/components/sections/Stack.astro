@@ -1,0 +1,69 @@
+---
+import { useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+  lang: "es" | "en";
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const categories = ["backend", "frontend", "cloud", "ai"];
+const categoryIcons: Record<string, string> = {
+  backend: "ph:database-duotone",
+  frontend: "ph:browser-duotone",
+  cloud: "ph:cloud-duotone",
+  ai: "ph:brain-duotone",
+};
+const keyTech = new Set([".NET", "Python", "Azure", "AWS", "LLMs", "RAG", "MCP", "MLOps"]);
+---
+
+<section id="stack" class="stack section container">
+  <header class="sec-head reveal">
+    <p class="kicker">{t("stack.label")}</p>
+    <h2 class="section-title">{t("stack.title")} <em>{t("stack.titleItalic")}</em></h2>
+  </header>
+
+  <div class="stack__grid">
+    {categories.map((c, i) => {
+      const items = t(`stack.categories.${c}.items`) as unknown as string[];
+      return (
+        <div class={`stack__cat reveal reveal-${Math.min(i + 1, 3)}`}>
+          <p class="stack__cat-label"><Icon name={categoryIcons[c]} />{t(`stack.categories.${c}.label`)}</p>
+          <div class="stack__tags">
+            {items.map((it) => <span class={`tag${keyTech.has(it) ? " tag--key" : ""}`}>{it}</span>)}
+          </div>
+        </div>
+      );
+    })}
+  </div>
+</section>
+
+<style>
+  .sec-head { max-width: 720px; margin-bottom: 56px; }
+
+  .stack__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  @media (min-width: 640px) { .stack__grid { grid-template-columns: 1fr 1fr; gap: 40px; } }
+  @media (min-width: 1024px) { .stack__grid { grid-template-columns: repeat(4, 1fr); gap: 32px; } }
+
+  .stack__cat-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .stack__cat-label [data-icon] { font-size: 19px; }
+  .stack__tags { display: flex; flex-wrap: wrap; gap: 8px; }
+</style>

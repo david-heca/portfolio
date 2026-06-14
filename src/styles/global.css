@@ -219,6 +219,10 @@ a.card:hover {
   color: var(--color-accent);
   background: var(--color-accent-soft);
 }
+.tag--key {
+  border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
+  color: var(--color-accent);
+}
 
 /* ----- status dot ----- */
 .dot {
