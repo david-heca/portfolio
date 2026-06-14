@@ -13,6 +13,7 @@ const navItems = [
   { id: "work", label: t("nav.work") },
   { id: "projects", label: t("nav.projects") },
   { id: "education", label: t("nav.education") },
+  { id: "speaking", label: t("nav.speaking") },
   { id: "contact", label: t("nav.contact") },
 ];
 
@@ -22,7 +23,7 @@ const cvHref = lang === "es"
 ---
 
 <header class="nav">
-  <div class="nav__inner container">
+  <div class="nav__inner">
     <a href={`${home}#top`} class="nav__brand" aria-label="David Herrera">
       david<span>herrera</span>
     </a>
@@ -69,45 +70,53 @@ const cvHref = lang === "es"
     position: sticky;
     top: 0;
     z-index: 50;
-    background: color-mix(in srgb, var(--color-bg) 82%, transparent);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--color-line);
+    padding: 14px 16px;
   }
+
   .nav__inner {
+    max-width: 1000px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding-block: 16px;
+    padding: 8px 8px 8px 22px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-bg) 70%, transparent);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    backdrop-filter: blur(16px) saturate(1.4);
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-soft);
   }
 
   .nav__brand {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 23px;
+    font-size: 22px;
     color: var(--color-ink);
+    flex-shrink: 0;
   }
   .nav__brand span { color: var(--color-accent); }
 
   .nav__links {
     display: none;
-    gap: 28px;
+    gap: 4px;
     align-items: center;
   }
   @media (min-width: 1024px) { .nav__links { display: inline-flex; } }
   .nav__link {
-    font-size: 14px;
+    font-size: 13.5px;
     font-weight: 500;
     color: var(--color-ink-2);
-    transition: color 0.15s ease;
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: color 0.15s ease, background-color 0.15s ease;
   }
-  .nav__link:hover,
-  .nav__link.active { color: var(--color-ink); }
-  .nav__link.active { color: var(--color-accent); }
+  .nav__link:hover { color: var(--color-ink); background: var(--color-bg-2); }
+  .nav__link.active { color: var(--color-accent); background: var(--color-accent-soft); }
 
-  .nav__utils { display: inline-flex; align-items: center; gap: 12px; }
-  .nav__utils-desktop { display: none; align-items: center; gap: 12px; }
+  .nav__utils { display: inline-flex; align-items: center; gap: 10px; }
+  .nav__utils-desktop { display: none; align-items: center; gap: 10px; }
   @media (min-width: 1024px) { .nav__utils-desktop { display: inline-flex; } }
 
   .menu-btn {
@@ -118,30 +127,40 @@ const cvHref = lang === "es"
     border: 0;
     color: var(--color-ink-2);
     cursor: pointer;
-    min-width: 44px;
-    min-height: 44px;
+    width: 40px;
+    height: 40px;
+    border-radius: 999px;
   }
+  .menu-btn:hover { background: var(--color-bg-2); color: var(--color-ink); }
   @media (min-width: 1024px) { .menu-btn { display: none; } }
 
   .mobile-menu {
     position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--color-bg);
-    border-bottom: 1px solid var(--color-line);
+    top: calc(100% - 2px);
+    left: 16px;
+    right: 16px;
+    max-width: 1000px;
+    margin: 0 auto;
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--color-bg) 88%, transparent);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
     transform: translateY(-8px);
     opacity: 0;
     pointer-events: none;
     transition: transform 0.2s ease, opacity 0.2s ease;
   }
   .mobile-menu.open { transform: none; opacity: 1; pointer-events: auto; }
-  .mobile-menu nav { display: flex; flex-direction: column; padding: 8px 0; }
+  .mobile-menu nav { display: flex; flex-direction: column; padding: 8px; }
   .mobile-menu__link {
-    padding: 15px 24px;
+    padding: 13px 16px;
     font-size: 16px;
     font-weight: 500;
     color: var(--color-ink);
+    border-radius: var(--radius-sm);
   }
   .mobile-menu__link:hover { background: var(--color-bg-2); color: var(--color-accent); }
   .mobile-menu__footer {
@@ -149,7 +168,7 @@ const cvHref = lang === "es"
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding: 16px 24px;
+    padding: 14px 16px;
     border-top: 1px solid var(--color-line);
   }
 </style>
