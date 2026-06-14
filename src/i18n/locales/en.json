@@ -30,6 +30,17 @@
       "ai": { "label": "AI & Data", "items": ["LLMs", "RAG", "MCP", "MLOps", "Prompts"] }
     }
   },
+  "github": {
+    "label": "Activity",
+    "title": "Code,",
+    "titleItalic": "day by day",
+    "description": "My public GitHub activity over the past year.",
+    "total": "contributions in the last year",
+    "legendLess": "less",
+    "legendMore": "more",
+    "cta": "View GitHub profile",
+    "unavailable": "Couldn't load activity right now."
+  },
   "speaking": {
     "label": "Speaking",
     "title": "On",

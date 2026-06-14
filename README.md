@@ -1,23 +1,25 @@
 # David Herrera — Portfolio
 
-Bilingual portfolio with an editorial-brutalist design. Built with Astro.
+Bilingual single-page portfolio with a warm, minimalist design. Built with Astro.
 
 **[davidherrera.dev](https://davidherrera.dev)**
 
 ## Tech Stack
 
-- **Astro 6** — Static site generation with View Transitions
-- **Tailwind CSS 4** — Utility layer alongside a semantic custom-CSS design system
-- **Satoshi + JetBrains Mono** — Typography (Fontshare + Google Fonts)
-- **Cloudflare Workers** — Deployment with global CDN, DDoS protection, and edge caching
+- **Astro 6** — Static single-page site with View Transitions, no UI framework or islands
+- **Tailwind CSS 4** — Utility layer alongside a token-driven custom-CSS design system
+- **Instrument Serif · Hanken Grotesk · JetBrains Mono** — Typography (Google Fonts)
+- **Phosphor icons** via `astro-icon` + `@iconify-json/ph`
+- **Cloudflare Workers** — Static asset deployment via `wrangler`, with gzip/brotli precompressed at build
 
 ## Quick Start
 
 ```bash
 pnpm install
-pnpm run dev # localhost:4321
-pnpm run build # production build → /dist
-pnpm run preview # preview production build
+pnpm run dev      # localhost:4321
+pnpm run build    # production build → /dist
+pnpm run preview  # preview production build
+pnpm run deploy   # build + deploy to Cloudflare Workers
 ```
 
 ## Project Structure
@@ -25,36 +27,42 @@ pnpm run preview # preview production build
 ```
 src/
 ├── components/
-│   ├── sections/      # Home, Work, Projects, Education, Contact
-│   └── ui/            # Navbar, ThemeToggle, LanguagePicker,
-│                      # PageHeader, PageFooter, Stamp
+│   ├── sections/      # Landing (composer), Hero, About, Stack, GitHub,
+│   │                  # Work, Projects, Education, Speaking, Contact
+│   └── ui/            # Navbar, SiteFooter, ThemeToggle, LanguagePicker
 ├── i18n/
 │   ├── locales/       # es.json, en.json
 │   ├── index.ts       # locale registry
 │   └── utils.ts       # useTranslations(lang)
 ├── layouts/           # Layout.astro (SEO, theme bootstrap, fonts)
-├── pages/             # Routing (index, en, [...slug], 404)
-└── styles/            # global.css (design tokens + editorial classes)
+├── pages/             # index.astro (ES), en.astro (EN), 404.astro
+└── styles/            # global.css (design tokens + shared primitives)
 ```
+
+The whole site is **one landing per language**. Sections compose in order
+(Hero → About → Stack → GitHub → Work → Projects → Education → Speaking → Contact → Footer)
+and navigation is anchor-based (`#about`, `#work`, …) with an IntersectionObserver scrollspy.
 
 ## Design
 
-Editorial-brutalist soft, v.2026:
+Token-driven warm minimalist system — to retune the look you edit CSS variables in
+`src/styles/global.css`, not components:
 
-- Warm neutral palette (`#f5f3ee` / `#111110`) with a single electric-blue accent (`#1e4fff` light, `#4d7cff` dark)
-- Visible 12-column construction grid (responsive 12 → 6 → 4 cols)
-- Large expressive typography (hero name up to 220px, section headers up to 140px) with fluid `clamp()` scaling
-- Technical-credits spec sheet and numbered per-page footers
-- Unicode typographic glyphs (`↗`, `→`, `↓`, `★`) instead of UI icons
+- Warm neutral palette (`#f5f1ea` / `#0e0d0b`) with a single green accent (`#2f7a68` light, `#8fd0bf` dark); translucent variants derive via `color-mix`
+- Three typefaces, one role each: Instrument Serif (italic display & titles), Hanken Grotesk (reading & UI), JetBrains Mono (labels, metadata, tags)
+- Generous vertical rhythm with fluid `clamp()` spacing and type scale
+- Floating pill navbar with backdrop blur and active-section highlight
 
 ## Features
 
 - Bilingual (ES/EN) with browser auto-detection, `localStorage` persistence, and hreflang SEO
-- Light/dark theme with system preference and no-flash bootstrap
+- Light/dark/system theme with no-flash bootstrap, preserved across View Transitions
+- GitHub contribution heatmap fetched at build time (public API, graceful fallback, zero client JS)
 - Scroll reveal animations with staggered delays, respects `prefers-reduced-motion`
-- View Transitions with persistent navbar across navigations
-- Fully responsive — content max-width 1280px with full-width nav/footer borders
+- View Transitions with a persistent navbar across navigations
+- Fully responsive — content max-width 1180px, co-located mobile menu
+- SEO: hreflang + x-default, canonical, Open Graph, Twitter Cards, JSON-LD (`Person`), sitemap, `robots.txt`
 
 ## License
 
-MIT 
+MIT

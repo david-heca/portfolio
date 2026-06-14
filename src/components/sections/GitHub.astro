@@ -1,0 +1,209 @@
+---
+import { useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
+
+export interface Props {
+  lang: "es" | "en";
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const USER = "david-heca";
+const PROFILE = `https://github.com/${USER}`;
+
+type Day = { date: string; count: number; level: number };
+
+// Build-time fetch of the contribution calendar (public, no auth).
+// Wrapped so a slow/down upstream never breaks the build — falls back to a link.
+let days: Day[] | null = null;
+let total = 0;
+try {
+  const res = await fetch(
+    `https://github-contributions-api.jogruber.de/v4/${USER}?y=last`,
+    { signal: AbortSignal.timeout(8000) },
+  );
+  if (res.ok) {
+    const data = await res.json();
+    days = Array.isArray(data?.contributions) ? data.contributions : null;
+    total =
+      typeof data?.total?.lastYear === "number"
+        ? data.total.lastYear
+        : (days?.reduce((s: number, d: Day) => s + (d.count || 0), 0) ?? 0);
+  }
+} catch {
+  days = null;
+}
+
+// Group days into week-columns; pad the first column so weekdays align (Sun = row 0).
+let weeks: (Day | null)[][] = [];
+let monthLabels: { col: number; name: string }[] = [];
+if (days?.length) {
+  const firstDow = new Date(`${days[0].date}T00:00:00Z`).getUTCDay();
+  const padded: (Day | null)[] = [...Array(firstDow).fill(null), ...days];
+  for (let i = 0; i < padded.length; i += 7) weeks.push(padded.slice(i, i + 7));
+
+  const monthFmt = new Intl.DateTimeFormat(lang, { month: "short", timeZone: "UTC" });
+  let prevMonth = -1;
+  weeks.forEach((week, col) => {
+    const first = week.find(Boolean) as Day | undefined;
+    if (!first) return;
+    const m = new Date(`${first.date}T00:00:00Z`).getUTCMonth();
+    if (m !== prevMonth) {
+      monthLabels.push({ col, name: monthFmt.format(new Date(`${first.date}T00:00:00Z`)) });
+      prevMonth = m;
+    }
+  });
+}
+
+const dateFmt = new Intl.DateTimeFormat(lang, { dateStyle: "medium", timeZone: "UTC" });
+const cell = (d: Day) => `${d.count} · ${dateFmt.format(new Date(`${d.date}T00:00:00Z`))}`;
+---
+
+<section id="github" class="gh section container">
+  <header class="sec-head reveal">
+    <p class="kicker">{t("github.label")}</p>
+    <h2 class="section-title">{t("github.title")} <em>{t("github.titleItalic")}</em></h2>
+    <p class="lead gh__lead">{t("github.description")}</p>
+  </header>
+
+  {days?.length ? (
+    <div class="gh__card reveal reveal-1">
+      <div class="gh__scroll">
+        <div class="gh__graph" role="img" aria-label={`${total} ${t("github.total")}`}>
+          <div class="gh__months">
+            {monthLabels.map((m) => (
+              <span class="gh__month" style={`grid-column: ${m.col + 1}`}>{m.name}</span>
+            ))}
+          </div>
+          <div class="gh__weeks">
+            {weeks.map((week) => (
+              <div class="gh__week">
+                {Array.from({ length: 7 }).map((_, row) => {
+                  const d = week[row];
+                  return d ? (
+                    <span class="gh__day" data-level={d.level} title={cell(d)}></span>
+                  ) : (
+                    <span class="gh__day gh__day--empty"></span>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div class="gh__foot">
+        <p class="gh__total"><strong>{total.toLocaleString(lang)}</strong> {t("github.total")}</p>
+        <div class="gh__legend">
+          <span>{t("github.legendLess")}</span>
+          <span class="gh__day" data-level="0"></span>
+          <span class="gh__day" data-level="1"></span>
+          <span class="gh__day" data-level="2"></span>
+          <span class="gh__day" data-level="3"></span>
+          <span class="gh__day" data-level="4"></span>
+          <span>{t("github.legendMore")}</span>
+        </div>
+      </div>
+    </div>
+  ) : (
+    <div class="gh__card gh__card--empty reveal reveal-1">
+      <p class="gh__unavailable">{t("github.unavailable")}</p>
+    </div>
+  )}
+
+  <a class="link gh__cta reveal reveal-2" href={PROFILE} target="_blank" rel="noopener noreferrer">
+    <Icon name="ph:github-logo-duotone" />
+    {t("github.cta")}
+    <span aria-hidden="true">↗</span>
+  </a>
+</section>
+
+<style>
+  .sec-head { max-width: 720px; margin-bottom: 40px; }
+  .gh__lead { margin-top: 18px; }
+
+  .gh__card {
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-soft);
+    padding: 24px;
+  }
+
+  /* graph scrolls horizontally on narrow viewports without breaking layout */
+  .gh__scroll { overflow-x: auto; padding-bottom: 6px; }
+  .gh__graph {
+    --gh-gap: 3px;
+    --gh-size: clamp(9px, 1.15vw, 12px);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    width: max-content;
+    margin-inline: auto; /* centra cuando sobra ancho; scroll cuando no cabe */
+  }
+
+  .gh__months {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: calc(var(--gh-size) + var(--gh-gap));
+    font-family: var(--font-mono);
+    font-size: var(--text-label-sm);
+    letter-spacing: 0.04em;
+    color: var(--color-ink-2);
+    height: 14px;
+  }
+  .gh__month { white-space: nowrap; }
+
+  .gh__weeks { display: flex; gap: var(--gh-gap); }
+  .gh__week { display: grid; grid-template-rows: repeat(7, var(--gh-size)); gap: var(--gh-gap); }
+
+  .gh__day {
+    width: var(--gh-size);
+    height: var(--gh-size);
+    border-radius: 2px;
+    background: var(--lvl, var(--color-bg-2));
+  }
+  .gh__day[data-level="0"] { --lvl: color-mix(in srgb, var(--color-ink) 8%, var(--color-bg-2)); }
+  .gh__day[data-level="1"] { --lvl: color-mix(in srgb, var(--color-accent) 28%, var(--color-bg-2)); }
+  .gh__day[data-level="2"] { --lvl: color-mix(in srgb, var(--color-accent) 52%, var(--color-bg-2)); }
+  .gh__day[data-level="3"] { --lvl: color-mix(in srgb, var(--color-accent) 76%, var(--color-bg-2)); }
+  .gh__day[data-level="4"] { --lvl: var(--color-accent); }
+  .gh__day--empty { background: transparent; }
+
+  .gh__foot {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 20px;
+    padding-top: 18px;
+    border-top: 1px solid var(--color-line);
+  }
+  .gh__total { margin: 0; font-size: var(--text-sm); color: var(--color-ink-2); }
+  .gh__total strong { color: var(--color-ink); font-weight: 600; }
+
+  .gh__legend {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label-sm);
+    color: var(--color-ink-2);
+  }
+  .gh__legend .gh__day { --gh-size: 11px; width: 11px; height: 11px; }
+  .gh__legend span:first-child { margin-right: 4px; }
+  .gh__legend span:last-child { margin-left: 4px; }
+
+  .gh__card--empty { display: flex; align-items: center; justify-content: center; min-height: 120px; }
+  .gh__unavailable { margin: 0; font-size: var(--text-sm); color: var(--color-ink-2); }
+
+  .gh__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .gh__cta [data-icon] { font-size: 18px; }
+</style>
