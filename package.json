@@ -12,10 +12,8 @@
   "dependencies": {
     "@astrojs/sitemap": "3.7.2",
     "@iconify-json/ph": "^1.2.2",
-    "@tailwindcss/vite": "^4.1.18",
     "astro": "6.3.7",
-    "astro-icon": "^1.1.5",
-    "tailwindcss": "^4.1.18"
+    "astro-icon": "^1.1.5"
   },
   "devDependencies": {
     "vite-plugin-compression": "^0.5.1"

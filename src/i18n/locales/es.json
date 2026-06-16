@@ -25,21 +25,10 @@
     "titleItalic": "construyo",
     "categories": {
       "backend": { "label": "Backend", "items": ["C#", ".NET", "Python", "PostgreSQL", "SQL Server", "JWT", "OAuth", "APIs"] },
-      "frontend": { "label": "Frontend", "items": ["React", "Tailwind", "TypeScript", "DevExpress"] },
+      "frontend": { "label": "Frontend", "items": ["React", "Tailwind", "TypeScript", "DevExpress", "Astro"] },
       "cloud": { "label": "Nube & Infra", "items": ["Azure", "AWS", "Docker", "CI/CD", "Pipelines"] },
       "ai": { "label": "IA & Datos", "items": ["LLMs", "RAG", "MCP", "MLOps", "Prompts"] }
     }
-  },
-  "github": {
-    "label": "Actividad",
-    "title": "Código,",
-    "titleItalic": "día a día",
-    "description": "Mi actividad pública en GitHub durante el último año.",
-    "total": "contribuciones en el último año",
-    "legendLess": "menos",
-    "legendMore": "más",
-    "cta": "Ver perfil en GitHub",
-    "unavailable": "No se pudo cargar la actividad en este momento."
   },
   "speaking": {
     "label": "Charlas",
