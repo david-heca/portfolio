@@ -3,8 +3,6 @@ import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
 import viteCompression from "vite-plugin-compression";
 
-import tailwindcss from "@tailwindcss/vite";
-
 export default defineConfig({
   integrations: [icon(), sitemap()],
   site: "https://davidherrera.dev",
@@ -34,7 +32,6 @@ export default defineConfig({
 
   vite: {
     plugins: [
-      tailwindcss(),
       viteCompression({
         verbose: false,
         disable: false,

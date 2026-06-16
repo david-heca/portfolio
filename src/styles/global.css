@@ -1,17 +1,12 @@
-@import "tailwindcss";
-
-@variant dark (&:where(.dark, .dark *));
-
 /* Design system: tokens, reset, shared primitives.
    Section layout lives in each component's scoped <style>. */
 
-@theme {
+:root {
+  /* typefaces — one role each */
   --font-display: "Instrument Serif", Georgia, serif;
   --font-sans: "Hanken Grotesk", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, monospace;
-}
 
-:root {
   /* warm neutral palette — one accent, the rest derives from it */
   --color-bg: #f5f1ea;
   --color-bg-2: #ebe5d9;
@@ -57,8 +52,11 @@
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 40px -24px rgba(0, 0, 0, 0.6);
 }
 
-/* ----- base ----- */
-*, *::before, *::after { box-sizing: border-box; }
+/* ----- base (reset — replaces Tailwind preflight) ----- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid; }
+h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+ul, ol, menu { list-style: none; }
+table { border-collapse: collapse; }
 
 html {
   scroll-behavior: smooth;
@@ -79,8 +77,10 @@ html, body {
   text-rendering: optimizeLegibility;
 }
 
+body { min-height: 100vh; display: flex; flex-direction: column; }
+
 a { color: inherit; text-decoration: none; }
-button { font: inherit; color: inherit; }
+button { font: inherit; color: inherit; background: none; cursor: pointer; }
 img, svg { display: block; max-width: 100%; }
 [data-icon] { flex-shrink: 0; }
 
@@ -103,6 +103,8 @@ img, svg { display: block; max-width: 100%; }
 @media (min-width: 768px) { .container { padding-inline: 40px; } }
 @media (min-width: 1024px) { .container { padding-inline: 56px; } }
 
+.page { display: flex; flex-direction: column; flex-grow: 1; }
+
 .section { padding-block: var(--section-y); }
 
 /* ----- type primitives ----- */
@@ -112,15 +114,6 @@ img, svg { display: block; max-width: 100%; }
   letter-spacing: var(--track-label);
   text-transform: uppercase;
   color: var(--color-accent);
-}
-
-.display {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: 0.95;
-  color: var(--color-ink);
 }
 
 .section-title {
@@ -174,18 +167,6 @@ img, svg { display: block; max-width: 100%; }
 .btn:active { transform: translateY(0) scale(0.98); }
 .btn--sm { padding: 8px 14px; font-size: 13px; }
 .btn [data-icon] { font-size: 1.15em; }
-
-.link {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  font-weight: 500;
-  color: var(--color-ink);
-  transition: color 0.18s ease;
-}
-.link .arrow { transition: transform 0.18s ease; color: var(--color-accent); }
-.link:hover { color: var(--color-accent); }
-.link:hover .arrow { transform: translate(2px, -2px); }
 
 /* ----- card ----- */
 .card {

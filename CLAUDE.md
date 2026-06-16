@@ -15,13 +15,13 @@ No hay testing ni linter configurado.
 
 ## Arquitectura
 
-Portafolio personal con **Astro 6 + Tailwind CSS 4**, desplegado en **Cloudflare Workers** (assets estáticos servidos vía `wrangler.jsonc`, fallback a `404-page`) con compresión gzip/brotli precomputada en el build. Diseño minimalista cálido: una sola landing, tipografía expresiva (serif italic) sobre lectura limpia (grotesk), paleta warm neutral con un acento verde.
+Portafolio personal con **Astro 6** y CSS propio (design system token-driven en `global.css`, sin framework de utilidades), desplegado en **Cloudflare Workers** (assets estáticos servidos vía `wrangler.jsonc`, fallback a `404-page`) con compresión gzip/brotli precomputada en el build. Diseño minimalista cálido: una sola landing, tipografía expresiva (serif italic) sobre lectura limpia (grotesk), paleta warm neutral con un acento verde.
 
 ### Single-page
 
 - Todo el sitio es **una landing por idioma**. No hay subrutas (`/work`, `/projects`, etc. ya no existen).
-- `src/pages/index.astro` (ES) y `src/pages/en.astro` (EN) renderizan `Landing.astro`, que compone las secciones en orden: Hero → About → Stack → GitHub → Work → Projects → Education → Speaking → Contact → SiteFooter.
-- La navegación es por **anclas**; el navbar resalta la sección activa con un scrollspy (IntersectionObserver). Los enlaces del nav son `#about`, `#work`, `#projects`, `#education`, `#speaking`, `#contact`. Las secciones Stack (`#stack`) y GitHub (`#github`) tienen ancla pero **no** figuran en el nav.
+- `src/pages/index.astro` (ES) y `src/pages/en.astro` (EN) renderizan `Landing.astro`, que compone las secciones en orden: Hero → About → Stack → Work → Projects → Education → Speaking → Contact → SiteFooter.
+- La navegación es por **anclas**; el navbar resalta la sección activa con un scrollspy (IntersectionObserver). Los enlaces del nav son `#about`, `#work`, `#projects`, `#education`, `#speaking`, `#contact`. La sección Stack (`#stack`) tiene ancla pero **no** figura en el nav.
 - Cada sección recibe `lang: "es" | "en"` como prop y lleva su `<style>` scoped.
 
 ### Enrutamiento bilingüe (ES/EN)
@@ -54,13 +54,12 @@ Todo el design system es **token-driven**: para reajustar el look se editan vari
   - `--font-sans` → **Hanken Grotesk**: voz de lectura (body, bio, descripciones) y UI (nav, botones).
   - `--font-mono` → **JetBrains Mono**: etiquetas, metadatos, periodos, tags (`.kicker`, `.tag`).
 - **Tokens de layout:** `--container` (1180px), `--section-y` (espaciado vertical generoso por sección), `--radius`, `--radius-sm`.
-- **Primitivas compartidas** (en `global.css`): `.container`, `.section`, `.kicker`, `.section-title`, `.lead`, `.prose`, sistema de botones (`.btn` / `.btn--primary` / `.btn--ghost` / `.btn--sm` + `.link`), `.card`, `.tag`, `.dot` (con `.dot--pulse`), `.seg` (toggles), y `.reveal` (animación de entrada con IntersectionObserver, escalonada con `.reveal-1..3`).
+- **Primitivas compartidas** (en `global.css`): `.container`, `.section`, `.kicker`, `.section-title`, `.lead`, `.prose`, sistema de botones (`.btn` / `.btn--primary` / `.btn--ghost` / `.btn--sm`), `.card`, `.tag` (con `.tag--key`), `.dot`, `.seg` (toggles), y `.reveal` (animación de entrada con IntersectionObserver, escalonada con `.reveal-1..3`).
 - Los estilos específicos de cada sección viven en su `<style>` scoped, no en global.
 
 ### Componentes
 
-- **Secciones** (`src/components/sections/`): `Landing` (compositor), `Hero`, `About` (bio + principios), `Stack`, `GitHub` (heatmap de contribuciones), `Work`, `Projects`, `Education`, `Speaking`, `Contact`. Astro puro, sin islands.
-- **`GitHub.astro`** dibuja un heatmap de contribuciones (estilo GitHub) con datos del usuario `david-heca`. El fetch ocurre **en build-time** contra la API pública `github-contributions-api.jogruber.de` (sin auth), envuelto en `try/catch` con timeout y fallback a un enlace al perfil — si el upstream falla, el build no se rompe. Cero JS de cliente: los tooltips son `title` nativos y los tonos derivan del acento con `color-mix` por nivel (0–4). Los datos se refrescan en cada deploy.
+- **Secciones** (`src/components/sections/`): `Landing` (compositor), `Hero`, `About` (bio + principios), `Stack`, `Work`, `Projects`, `Education`, `Speaking`, `Contact`. Astro puro, sin islands.
 - **UI** (`src/components/ui/`): `Navbar` (anclas + scrollspy + menú móvil co-locado), `SiteFooter` (footer global único), `ThemeToggle`, `LanguagePicker`.
 - **Iconos:** Phosphor vía `astro-icon` + `@iconify-json/ph`, monocromáticos (`<Icon name="ph:nombre" />`), heredan color con `currentColor`. Uso mínimo y deliberado.
 

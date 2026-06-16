@@ -31,6 +31,16 @@ const certs = [
 const interests = lang === "es"
   ? ["IA generativa", "MLOps", "Sistemas distribuidos", "Café de especialidad", "Tipografía"]
   : ["Generative AI", "MLOps", "Distributed systems", "Specialty coffee", "Typography"];
+
+const languages = lang === "es"
+  ? [
+      { name: "Español", level: "Nativo", score: 5 },
+      { name: "Inglés", level: "Profesional", score: 4 },
+    ]
+  : [
+      { name: "Spanish", level: "Native", score: 5 },
+      { name: "English", level: "Professional", score: 4 },
+    ];
 ---
 
 <section id="education" class="edu section container">
@@ -81,10 +91,19 @@ const interests = lang === "es"
       <div class="edu__extra">
         <div>
           <p class="edu__col-label">{t("education.languagesTitle")}</p>
-          <p class="edu__langs">
-            {lang === "es" ? "Español — Nativo" : "Spanish — Native"}<br />
-            {lang === "es" ? "Inglés — Profesional" : "English — Professional"}
-          </p>
+          <ul class="langs">
+            {languages.map((l) => (
+              <li class="lang">
+                <span class="lang__name">{l.name}</span>
+                <span class="lang__meter" role="img" aria-label={`${l.level} — ${l.score}/5`}>
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <span class={`lang__pip${i < l.score ? " is-on" : ""}`}></span>
+                  ))}
+                </span>
+                <span class="lang__level">{l.level}</span>
+              </li>
+            ))}
+          </ul>
         </div>
         <div>
           <p class="edu__col-label">{t("education.interestsTitle")}</p>
@@ -191,12 +210,44 @@ const interests = lang === "es"
     padding-top: 32px;
     border-top: 1px solid var(--color-line);
   }
-  .edu__langs {
+  .langs { display: flex; flex-direction: column; gap: 16px; margin: 0; }
+  .lang {
+    display: grid;
+    grid-template-columns: 5.5em auto 1fr;
+    align-items: center;
+    gap: 14px;
+  }
+  .lang__name {
     font-family: var(--font-display);
     font-style: italic;
     font-size: 20px;
-    line-height: 1.5;
+    line-height: 1;
     color: var(--color-ink);
-    margin: 0;
+  }
+  .lang__meter { display: inline-flex; align-items: center; gap: 6px; }
+  .lang__pip {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--color-ink) 12%, transparent);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+  .lang__pip.is-on { background: var(--color-accent); }
+  .reveal.visible .lang__pip.is-on { animation: pip-pop 0.4s ease backwards; }
+  .lang__level {
+    justify-self: end;
+    font-family: var(--font-mono);
+    font-size: var(--text-label-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-2);
+  }
+
+  @keyframes pip-pop {
+    from { transform: scale(0.4); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .reveal.visible .lang__pip.is-on { animation: none; }
   }
 </style>
