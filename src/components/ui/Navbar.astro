@@ -3,23 +3,22 @@ import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
 import ThemeToggle from "@ui/ThemeToggle.astro";
 import LanguagePicker from "@ui/LanguagePicker.astro";
+import { sections } from "@/config";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const home = lang === "es" ? "/" : "/en";
 
 const navItems = [
-  { id: "about", label: t("nav.about") },
-  { id: "work", label: t("nav.work") },
-  { id: "projects", label: t("nav.projects") },
-  { id: "education", label: t("nav.education") },
-  { id: "speaking", label: t("nav.speaking") },
-  { id: "contact", label: t("nav.contact") },
+  { id: "about", label: t("nav.about"), icon: "ph:user" },
+  { id: "work", label: t("nav.work"), icon: "ph:briefcase" },
+  { id: "projects", label: t("nav.projects"), icon: "ph:squares-four" },
+  { id: "education", label: t("nav.education"), icon: "ph:graduation-cap" },
+  ...(sections.speaking
+    ? [{ id: "speaking", label: t("nav.speaking"), icon: "ph:microphone-stage" }]
+    : []),
+  { id: "contact", label: t("nav.contact"), icon: "ph:paper-plane-tilt" },
 ];
-
-const cvHref = lang === "es"
-  ? "/assets/documents/davidherrera-spanish.pdf"
-  : "/assets/documents/davidherrera-english.pdf";
 ---
 
 <header class="nav">
@@ -30,18 +29,17 @@ const cvHref = lang === "es"
 
     <nav class="nav__links" aria-label="Primary">
       {navItems.map((item) => (
-        <a href={`#${item.id}`} class="nav__link" data-spy={item.id}>{item.label}</a>
+        <a href={`#${item.id}`} class="nav__link" data-spy={item.id}>
+          <Icon name={item.icon} aria-hidden="true" />
+          {item.label}
+        </a>
       ))}
     </nav>
 
     <div class="nav__utils">
-      <LanguagePicker />
       <div class="nav__utils-desktop">
+        <LanguagePicker />
         <ThemeToggle />
-        <a href={cvHref} target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
-          <Icon name="ph:read-cv-logo-duotone" />
-          {t("nav.cv")}
-        </a>
       </div>
       <button id="menu-btn" class="menu-btn" aria-label="Menu" aria-expanded="false">
         <Icon name="ph:list-bold" style="font-size: 22px;" />
@@ -52,15 +50,15 @@ const cvHref = lang === "es"
   <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
     <nav aria-label="Mobile">
       {navItems.map((item) => (
-        <a href={`#${item.id}`} class="mobile-menu__link">{item.label}</a>
+        <a href={`#${item.id}`} class="mobile-menu__link">
+          <Icon name={item.icon} aria-hidden="true" />
+          {item.label}
+        </a>
       ))}
     </nav>
     <div class="mobile-menu__footer">
+      <LanguagePicker expanded />
       <ThemeToggle />
-      <a href={cvHref} target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
-        <Icon name="ph:read-cv-logo-duotone" />
-        {t("nav.cv")}
-      </a>
     </div>
   </div>
 </header>
@@ -105,18 +103,31 @@ const cvHref = lang === "es"
   }
   @media (min-width: 1024px) { .nav__links { display: inline-flex; } }
   .nav__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
     font-size: 13.5px;
+    line-height: 1;
     font-weight: 500;
     color: var(--color-ink-2);
-    padding: 8px 14px;
+    padding: 8px 13px;
     border-radius: 999px;
     transition: color 0.15s ease, background-color 0.15s ease;
   }
   .nav__link:hover { color: var(--color-ink); background: var(--color-bg-2); }
   .nav__link.active { color: var(--color-accent); background: var(--color-accent-soft); }
+  .nav__link [data-icon] {
+    width: 15px;
+    height: 15px;
+    font-size: 15px;
+    color: var(--color-ink-3);
+    transition: color 0.15s ease;
+  }
+  .nav__link:hover [data-icon] { color: var(--color-ink-2); }
+  .nav__link.active [data-icon] { color: var(--color-accent); }
 
   .nav__utils { display: inline-flex; align-items: center; gap: 10px; }
-  .nav__utils-desktop { display: none; align-items: center; gap: 10px; }
+  .nav__utils-desktop { display: none; align-items: center; gap: 4px; }
   @media (min-width: 1024px) { .nav__utils-desktop { display: inline-flex; } }
 
   .menu-btn {
@@ -156,18 +167,30 @@ const cvHref = lang === "es"
   .mobile-menu.open { transform: none; opacity: 1; pointer-events: auto; }
   .mobile-menu nav { display: flex; flex-direction: column; padding: 8px; }
   .mobile-menu__link {
+    display: flex;
+    align-items: center;
+    gap: 13px;
     padding: 13px 16px;
     font-size: 16px;
+    line-height: 1;
     font-weight: 500;
     color: var(--color-ink);
     border-radius: var(--radius-sm);
   }
-  .mobile-menu__link:hover { background: var(--color-bg-2); color: var(--color-accent); }
+  .mobile-menu__link:hover { background: var(--color-bg-2); color: var(--color-ink); }
+  .mobile-menu__link [data-icon] {
+    width: 19px;
+    height: 19px;
+    font-size: 19px;
+    color: var(--color-ink-3);
+    transition: color 0.15s ease;
+  }
+  .mobile-menu__link:hover [data-icon] { color: var(--color-ink-2); }
+
   .mobile-menu__footer {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 12px;
+    gap: 6px;
     padding: 14px 16px;
     border-top: 1px solid var(--color-line);
   }
