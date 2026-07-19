@@ -104,12 +104,15 @@ const t = useTranslations(lang);
     }
 
     function cycle(btn: HTMLButtonElement) {
-      const next = CYCLE[(CYCLE.indexOf(getPref()) + 1) % CYCLE.length];
+      // Hay que leer la preferencia actual ANTES de escribir la nueva: si no,
+      // getPref() ya devuelve `next` y la comparación de abajo siempre empata.
+      const current = getPref();
+      const next = CYCLE[(CYCLE.indexOf(current) + 1) % CYCLE.length];
       if (next === "system") localStorage.removeItem(THEME_KEY);
       else localStorage.setItem(THEME_KEY, next);
 
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      const sameTheme = resolve(next) === resolve(getPref());
+      const sameTheme = resolve(next) === resolve(current);
       if (reduced || sameTheme || typeof (document as any).startViewTransition !== "function") {
         apply(next);
         return;
