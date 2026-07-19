@@ -50,7 +50,7 @@ const navItems = [
   <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
     <nav aria-label="Mobile">
       {navItems.map((item) => (
-        <a href={`#${item.id}`} class="mobile-menu__link">
+        <a href={`#${item.id}`} class="mobile-menu__link" data-spy={item.id}>
           <Icon name={item.icon} aria-hidden="true" />
           {item.label}
         </a>
@@ -186,6 +186,8 @@ const navItems = [
     transition: color 0.15s ease;
   }
   .mobile-menu__link:hover [data-icon] { color: var(--color-ink-2); }
+  .mobile-menu__link.active { color: var(--color-accent); background: var(--color-accent-soft); }
+  .mobile-menu__link.active [data-icon] { color: var(--color-accent); }
 
   .mobile-menu__footer {
     display: flex;
@@ -218,24 +220,59 @@ const navItems = [
   }
 
   function setupSpy() {
-    const links = document.querySelectorAll<HTMLElement>(".nav__link[data-spy]");
+    const links = [...document.querySelectorAll<HTMLElement>("[data-spy]")];
     if (!links.length) return;
-    const byId = new Map([...links].map((l) => [l.dataset.spy, l]));
-    const obs = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((e) => {
-          if (e.isIntersecting) {
-            links.forEach((l) => l.classList.remove("active"));
-            byId.get(e.target.id)?.classList.add("active");
-          }
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    byId.forEach((_, id) => {
-      const el = id && document.getElementById(id);
-      if (el) obs.observe(el);
-    });
+
+    // Ids únicos en orden de aparición; cada id puede tener varios enlaces
+    // (navbar de escritorio + menú móvil) y todos se marcan a la vez.
+    const ids = [...new Set(links.map((l) => l.dataset.spy!))];
+    const targets = ids
+      .map((id) => ({ id, el: document.getElementById(id) }))
+      .filter((t): t is { id: string; el: HTMLElement } => !!t.el);
+    if (!targets.length) return;
+
+    // Con true, el hero cuenta como la primera sección y siempre hay una
+    // activa. Con false, por encima de la primera sección no se marca ninguna.
+    const HIGHLIGHT_FIRST_AT_TOP = true;
+
+    let queued = false;
+
+    function update() {
+      queued = false;
+      const line = window.scrollY + window.innerHeight * 0.35;
+
+      let currentId: string | null = HIGHLIGHT_FIRST_AT_TOP ? targets[0].id : null;
+      for (const t of targets) {
+        if (t.el.getBoundingClientRect().top + window.scrollY <= line) currentId = t.id;
+      }
+
+      // Al final de la página gana la última sección aunque sea corta y nunca
+      // llegue a cruzar la línea.
+      const atBottom =
+        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      if (atBottom) currentId = targets[targets.length - 1].id;
+
+      links.forEach((l) => l.classList.toggle("active", l.dataset.spy === currentId));
+    }
+
+    function onScroll() {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(update);
+    }
+
+    // En cada navegación se vuelve a montar: hay que soltar el listener
+    // anterior o se van acumulando.
+    const prev = (window as any).__spyCleanup;
+    if (prev) prev();
+    (window as any).__spyCleanup = () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    update();
   }
 
   setupMenu();
