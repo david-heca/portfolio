@@ -1,44 +1,87 @@
 ---
 import { getLangFromUrl } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
 
-const lang = getLangFromUrl(Astro.url);
-const currentPath = Astro.url.pathname;
-
-function getPathForLang(l: string) {
-  let path = currentPath;
-  const parts = path.split("/");
-  if (parts[1] === "en" || parts[1] === "es") {
-    parts.splice(1, 1);
-    path = parts.join("/") || "/";
-  }
-  if (l === "es") return path;
-  return `/${l}${path === "/" ? "" : path}`;
+export interface Props {
+  /** Muestra el nombre nativo completo ("English") en vez del código ("EN"). */
+  expanded?: boolean;
 }
 
-const esHref = getPathForLang("es");
-const enHref = getPathForLang("en");
+const { expanded = false } = Astro.props;
+
+const lang = getLangFromUrl(Astro.url);
+const target = lang === "es" ? "en" : "es";
+
+const currentPath = Astro.url.pathname;
+const parts = currentPath.split("/");
+if (parts[1] === "en" || parts[1] === "es") parts.splice(1, 1);
+const basePath = parts.join("/") || "/";
+const href = target === "es" ? basePath : `/en${basePath === "/" ? "" : basePath}`;
+
+const nativeName = target === "es" ? "Español" : "English";
+const label = expanded ? nativeName : target.toUpperCase();
 ---
 
-<div class="seg lang-picker" role="group" aria-label="Language">
-  <a
-    href={esHref}
-    data-target-lang="es"
-    class={lang === "es" ? "active" : ""}
-    aria-current={lang === "es" ? "true" : undefined}
-    title="Español"
-  >ES</a>
-  <a
-    href={enHref}
-    data-target-lang="en"
-    class={lang === "en" ? "active" : ""}
-    aria-current={lang === "en" ? "true" : undefined}
-    title="English"
-  >EN</a>
-</div>
+<a
+  href={href}
+  hreflang={target}
+  lang={target}
+  data-target-lang={target}
+  class:list={["lang-switch", expanded && "lang-switch--expanded"]}
+  aria-label={target === "es" ? "Ver en español" : "View in English"}
+  title={nativeName}
+>
+  <Icon name="ph:globe-simple" aria-hidden="true" />
+  <span>{label}</span>
+</a>
+
+<style>
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 8px;
+    border-radius: 999px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: 0.12em;
+    color: var(--color-ink-2);
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+  .lang-switch:hover,
+  .lang-switch:focus-visible {
+    color: var(--color-ink);
+    background: var(--color-bg-2);
+  }
+  /* Caja fija: el icono no depende de la métrica de la fuente, así no se
+     recoloca cuando JetBrains Mono termina de cargar. */
+  .lang-switch [data-icon] {
+    width: 15px;
+    height: 15px;
+    font-size: 15px;
+  }
+  .lang-switch span {
+    line-height: 1;
+    /* compensa el letter-spacing sobrante tras la última letra */
+    margin-right: -0.12em;
+    /* Nudge óptico: las mayúsculas no usan el hueco del descendente, así que
+       centrar la caja las deja altas respecto del icono. Sube o baja este
+       valor si hace falta afinarlo; no afecta al layout. */
+    position: relative;
+    top: 0.08em;
+  }
+
+  .lang-switch--expanded {
+    font-size: var(--text-sm);
+    letter-spacing: 0.04em;
+  }
+  .lang-switch--expanded span { margin-right: -0.04em; }
+</style>
 
 <script>
-  function setupLangPicker() {
-    document.querySelectorAll<HTMLAnchorElement>(".lang-picker [data-target-lang]").forEach((el) => {
+  function setupLangSwitch() {
+    document.querySelectorAll<HTMLAnchorElement>("[data-target-lang]").forEach((el) => {
       if (el.dataset.langReady) return;
       el.addEventListener("click", () => {
         const t = el.dataset.targetLang;
@@ -47,6 +90,6 @@ const enHref = getPathForLang("en");
       el.dataset.langReady = "true";
     });
   }
-  setupLangPicker();
-  document.addEventListener("astro:page-load", setupLangPicker);
+  setupLangSwitch();
+  document.addEventListener("astro:page-load", setupLangSwitch);
 </script>

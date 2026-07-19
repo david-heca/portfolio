@@ -1,8 +1,8 @@
 {
   "theme": {
-    "light": "Light",
-    "dark": "Dark",
-    "system": "System"
+    "toLight": "Switch to light mode",
+    "toDark": "Switch to dark mode",
+    "toSystem": "Follow system"
   },
   "meta": {
     "home": {
@@ -16,18 +16,56 @@
     "education": "Education",
     "projects": "Projects",
     "speaking": "Speaking",
-    "contact": "Contact",
-    "cv": "CV"
+    "contact": "Contact"
   },
   "stack": {
     "label": "Stack",
     "title": "What I",
     "titleItalic": "build with",
     "categories": {
-      "backend": { "label": "Backend", "items": ["C#", ".NET", "Python", "PostgreSQL", "SQL Server", "JWT", "OAuth", "APIs"] },
-      "frontend": { "label": "Frontend", "items": ["React", "Tailwind", "TypeScript", "DevExpress", "Astro"] },
-      "cloud": { "label": "Cloud & Infra", "items": ["Azure", "AWS", "Docker", "CI/CD", "Pipelines"] },
-      "ai": { "label": "AI & Data", "items": ["LLMs", "RAG", "MCP", "MLOps", "Prompts"] }
+      "backend": {
+        "label": "Backend",
+        "items": [
+          "C#",
+          ".NET",
+          "Python",
+          "PostgreSQL",
+          "SQL Server",
+          "JWT",
+          "OAuth",
+          "APIs"
+        ]
+      },
+      "frontend": {
+        "label": "Frontend",
+        "items": [
+          "React",
+          "Tailwind",
+          "TypeScript",
+          "DevExpress",
+          "Astro"
+        ]
+      },
+      "cloud": {
+        "label": "Cloud & Infra",
+        "items": [
+          "Azure",
+          "AWS",
+          "Docker",
+          "CI/CD",
+          "Pipelines"
+        ]
+      },
+      "ai": {
+        "label": "AI & Data",
+        "items": [
+          "LLMs",
+          "RAG",
+          "MCP",
+          "MLOps",
+          "Prompts"
+        ]
+      }
     }
   },
   "speaking": {
@@ -37,9 +75,17 @@
     "description": "I give talks on AI and data science at universities — closing the loop between academic theory and what actually happens once a system meets production.",
     "audience": "~200 attendees per talk",
     "venuesLabel": "Where",
-    "venues": ["EGADE Business School · Monterrey", "UPVM Tultitlán", "TESCo — TecNM"],
+    "venues": [
+      "EGADE Business School · Monterrey",
+      "UPVM Tultitlán",
+      "TESCo — TecNM"
+    ],
     "topicsLabel": "Topics",
-    "topics": ["Generative AI", "RAG & MLOps", "Data science"]
+    "topics": [
+      "Generative AI",
+      "RAG & MLOps",
+      "Data science"
+    ]
   },
   "hero": {
     "greeting": "Hi, I'm",
@@ -185,9 +231,18 @@
         "title": "Portfolio",
         "description": "This site. Editorial, bilingual and open source — hand-built design.",
         "specs": [
-          { "label": "Type", "value": "Personal project · open source" },
-          { "label": "Focus", "value": "ES/EN i18n, theming and performance" },
-          { "label": "License", "value": "MIT" }
+          {
+            "label": "Type",
+            "value": "Personal project · open source"
+          },
+          {
+            "label": "Focus",
+            "value": "ES/EN i18n, theming and performance"
+          },
+          {
+            "label": "License",
+            "value": "MIT"
+          }
         ],
         "kind": "Personal / Web",
         "year": "2026",
@@ -197,9 +252,18 @@
         "title": "Connie",
         "description": "From scattered knowledge to cited answers: any team queries the company's internal databases, PDFs and spreadsheets in plain language — and gets the answer in seconds.",
         "specs": [
-          { "label": "Before", "value": "Info lost across teams or buried in red tape" },
-          { "label": "My role", "value": "Architect · 80% of the system, from scratch" },
-          { "label": "Scale", "value": "3 clients in production" }
+          {
+            "label": "Before",
+            "value": "Info lost across teams or buried in red tape"
+          },
+          {
+            "label": "My role",
+            "value": "Architect · 80% of the system, from scratch"
+          },
+          {
+            "label": "Scale",
+            "value": "3 clients in production"
+          }
         ],
         "kind": "Work / AI",
         "year": "2025",
@@ -209,9 +273,18 @@
         "title": "HandHeld RFID",
         "description": "An inventory that used to take weeks —or simply never happened— turned into real-time control from the handheld.",
         "specs": [
-          { "label": "Before", "value": "Manual capture · weeks of delay" },
-          { "label": "Now", "value": "Every rack RFID-tagged, every move instant" },
-          { "label": "Impact", "value": "Far more accurate warehouse control" }
+          {
+            "label": "Before",
+            "value": "Manual capture · weeks of delay"
+          },
+          {
+            "label": "Now",
+            "value": "Every rack RFID-tagged, every move instant"
+          },
+          {
+            "label": "Impact",
+            "value": "Far more accurate warehouse control"
+          }
         ],
         "kind": "Work / Mobile",
         "year": "2024",
@@ -221,9 +294,18 @@
         "title": "Automotive Traceability",
         "description": "Every automotive part traced end to end across the production line.",
         "specs": [
-          { "label": "Clients", "value": "Suppliers to Honda, GM and Stellantis" },
-          { "label": "Scale", "value": "Thousands of parts per day" },
-          { "label": "Scope", "value": "End-to-end traceability" }
+          {
+            "label": "Clients",
+            "value": "Suppliers to Honda, GM and Stellantis"
+          },
+          {
+            "label": "Scale",
+            "value": "Thousands of parts per day"
+          },
+          {
+            "label": "Scope",
+            "value": "End-to-end traceability"
+          }
         ],
         "kind": "Work / Desktop",
         "year": "2024",

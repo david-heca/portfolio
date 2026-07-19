@@ -6,92 +6,139 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 ---
 
-<div class="seg theme-toggle" role="radiogroup" aria-label="Theme">
-  <button
-    type="button"
-    data-theme="light"
-    class="theme-toggle__btn"
-    role="radio"
-    aria-checked="false"
-    aria-label={t("theme.light")}
-    title={t("theme.light")}
-  >
-    <Icon name="ph:sun-duotone" />
-  </button>
-  <button
-    type="button"
-    data-theme="system"
-    class="theme-toggle__btn"
-    role="radio"
-    aria-checked="false"
-    aria-label={t("theme.system")}
-    title={t("theme.system")}
-  >
-    <Icon name="ph:monitor-duotone" />
-  </button>
-  <button
-    type="button"
-    data-theme="dark"
-    class="theme-toggle__btn"
-    role="radio"
-    aria-checked="false"
-    aria-label={t("theme.dark")}
-    title={t("theme.dark")}
-  >
-    <Icon name="ph:moon-duotone" />
-  </button>
-</div>
+<button
+  type="button"
+  class="theme-toggle"
+  aria-label={t("theme.toDark")}
+  title={t("theme.toDark")}
+  data-to-light={t("theme.toLight")}
+  data-to-dark={t("theme.toDark")}
+  data-to-system={t("theme.toSystem")}
+>
+  <Icon name="ph:sun" class="theme-toggle__glyph theme-toggle__glyph--light" />
+  <Icon name="ph:moon" class="theme-toggle__glyph theme-toggle__glyph--dark" />
+  <Icon name="ph:monitor" class="theme-toggle__glyph theme-toggle__glyph--system" />
+</button>
+
+<style>
+  .theme-toggle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--color-ink-2);
+    cursor: pointer;
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+  .theme-toggle:hover,
+  .theme-toggle:focus-visible {
+    color: var(--color-ink);
+    background: var(--color-bg-2);
+  }
+
+  /* El glifo refleja la preferencia actual; el title dice qué hará el click. */
+  .theme-toggle__glyph {
+    position: absolute;
+    font-size: 17px;
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.6);
+    transition: opacity 0.25s ease, transform 0.35s ease;
+  }
+  :global(html[data-theme-pref="light"]) .theme-toggle__glyph--light,
+  :global(html[data-theme-pref="dark"]) .theme-toggle__glyph--dark,
+  :global(html[data-theme-pref="system"]) .theme-toggle__glyph--system,
+  :global(html:not([data-theme-pref])) .theme-toggle__glyph--system {
+    opacity: 1;
+    transform: none;
+  }
+</style>
 
 <script>
   type ThemePref = "light" | "dark" | "system";
 
   function setupThemeToggle() {
     const root = document.documentElement;
-    const wrappers = document.querySelectorAll<HTMLElement>(".theme-toggle");
-    if (!wrappers.length) return;
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".theme-toggle");
+    if (!buttons.length) return;
 
     const THEME_KEY = "color-theme";
+    const CYCLE: ThemePref[] = ["light", "dark", "system"];
+    const NEXT_LABEL: Record<ThemePref, string> = {
+      light: "toLight",
+      dark: "toDark",
+      system: "toSystem",
+    };
 
-    function getStoredTheme(): ThemePref {
+    function getPref(): ThemePref {
       const v = localStorage.getItem(THEME_KEY);
-      if (v === "light" || v === "dark" || v === "system") return v;
-      return "system";
+      return v === "light" || v === "dark" ? v : "system";
     }
 
-    function resolveTheme(pref: ThemePref): "light" | "dark" {
-      if (pref === "system") {
-        return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    function resolve(pref: ThemePref): "light" | "dark" {
+      if (pref !== "system") return pref;
+      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    }
+
+    function apply(pref: ThemePref) {
+      root.classList.toggle("dark", resolve(pref) === "dark");
+      root.dataset.themePref = pref;
+      syncLabels(pref);
+    }
+
+    function syncLabels(pref: ThemePref) {
+      const next = CYCLE[(CYCLE.indexOf(pref) + 1) % CYCLE.length];
+      const key = NEXT_LABEL[next];
+      buttons.forEach((b) => {
+        const label = b.dataset[key];
+        if (label) {
+          b.setAttribute("aria-label", label);
+          b.setAttribute("title", label);
+        }
+      });
+    }
+
+    function cycle(btn: HTMLButtonElement) {
+      const next = CYCLE[(CYCLE.indexOf(getPref()) + 1) % CYCLE.length];
+      if (next === "system") localStorage.removeItem(THEME_KEY);
+      else localStorage.setItem(THEME_KEY, next);
+
+      const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const sameTheme = resolve(next) === resolve(getPref());
+      if (reduced || sameTheme || typeof (document as any).startViewTransition !== "function") {
+        apply(next);
+        return;
       }
-      return pref;
+
+      // Barrido circular desde el propio botón.
+      const r = btn.getBoundingClientRect();
+      const x = r.left + r.width / 2;
+      const y = r.top + r.height / 2;
+      const radius = Math.hypot(
+        Math.max(x, window.innerWidth - x),
+        Math.max(y, window.innerHeight - y),
+      );
+      root.style.setProperty("--theme-x", `${x}px`);
+      root.style.setProperty("--theme-y", `${y}px`);
+      root.style.setProperty("--theme-r", `${radius}px`);
+      root.classList.add("theme-switching");
+
+      const vt = (document as any).startViewTransition(() => apply(next));
+      vt.finished.finally(() => root.classList.remove("theme-switching"));
     }
 
-    function applyTheme(theme: "light" | "dark") {
-      if (theme === "dark") root.classList.add("dark");
-      else root.classList.remove("dark");
-    }
-
-    function setActive(pref: ThemePref) {
-      document.querySelectorAll<HTMLButtonElement>(".theme-toggle__btn").forEach((b) => {
-        const active = b.dataset.theme === pref;
-        b.setAttribute("aria-checked", active ? "true" : "false");
-      });
-    }
-
-    const currentPref = getStoredTheme();
-    applyTheme(resolveTheme(currentPref));
-    setActive(currentPref);
-
-    wrappers.forEach((wrapper) => {
-      if (wrapper.dataset.ready) return;
-      wrapper.querySelectorAll<HTMLButtonElement>(".theme-toggle__btn").forEach((b) => {
-        b.addEventListener("click", () => {
-          const pref = b.dataset.theme as ThemePref;
-          localStorage.setItem(THEME_KEY, pref);
-          applyTheme(resolveTheme(pref));
-          setActive(pref);
-        });
-      });
-      wrapper.dataset.ready = "true";
+    syncLabels(getPref());
+    // Tras el primer frame ya se puede animar sin que el estado inicial rebote.
+    requestAnimationFrame(() => root.classList.add("theme-ready"));
+    buttons.forEach((b) => {
+      if (b.dataset.ready) return;
+      b.addEventListener("click", () => cycle(b));
+      b.dataset.ready = "true";
     });
   }
 

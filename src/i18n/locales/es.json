@@ -1,8 +1,8 @@
 {
   "theme": {
-    "light": "Claro",
-    "dark": "Oscuro",
-    "system": "Sistema"
+    "toLight": "Cambiar a modo claro",
+    "toDark": "Cambiar a modo oscuro",
+    "toSystem": "Seguir al sistema"
   },
   "meta": {
     "home": {
@@ -16,18 +16,56 @@
     "education": "Formación",
     "projects": "Proyectos",
     "speaking": "Charlas",
-    "contact": "Contacto",
-    "cv": "CV"
+    "contact": "Contacto"
   },
   "stack": {
     "label": "Stack",
     "title": "Con qué",
     "titleItalic": "construyo",
     "categories": {
-      "backend": { "label": "Backend", "items": ["C#", ".NET", "Python", "PostgreSQL", "SQL Server", "JWT", "OAuth", "APIs"] },
-      "frontend": { "label": "Frontend", "items": ["React", "Tailwind", "TypeScript", "DevExpress", "Astro"] },
-      "cloud": { "label": "Nube & Infra", "items": ["Azure", "AWS", "Docker", "CI/CD", "Pipelines"] },
-      "ai": { "label": "IA & Datos", "items": ["LLMs", "RAG", "MCP", "MLOps", "Prompts"] }
+      "backend": {
+        "label": "Backend",
+        "items": [
+          "C#",
+          ".NET",
+          "Python",
+          "PostgreSQL",
+          "SQL Server",
+          "JWT",
+          "OAuth",
+          "APIs"
+        ]
+      },
+      "frontend": {
+        "label": "Frontend",
+        "items": [
+          "React",
+          "Tailwind",
+          "TypeScript",
+          "DevExpress",
+          "Astro"
+        ]
+      },
+      "cloud": {
+        "label": "Nube & Infra",
+        "items": [
+          "Azure",
+          "AWS",
+          "Docker",
+          "CI/CD",
+          "Pipelines"
+        ]
+      },
+      "ai": {
+        "label": "IA & Datos",
+        "items": [
+          "LLMs",
+          "RAG",
+          "MCP",
+          "MLOps",
+          "Prompts"
+        ]
+      }
     }
   },
   "speaking": {
@@ -37,9 +75,17 @@
     "description": "Doy charlas de IA y ciencia de datos en universidades — cerrando el loop entre la teoría académica y lo que de verdad pasa cuando un sistema toca producción.",
     "audience": "~200 asistentes por charla",
     "venuesLabel": "Dónde",
-    "venues": ["EGADE Business School · Monterrey", "UPVM Tultitlán", "TESCo — TecNM"],
+    "venues": [
+      "EGADE Business School · Monterrey",
+      "UPVM Tultitlán",
+      "TESCo — TecNM"
+    ],
     "topicsLabel": "Temas",
-    "topics": ["IA generativa", "RAG & MLOps", "Ciencia de datos"]
+    "topics": [
+      "IA generativa",
+      "RAG & MLOps",
+      "Ciencia de datos"
+    ]
   },
   "hero": {
     "greeting": "Hola, soy",
@@ -185,9 +231,18 @@
         "title": "Portafolio",
         "description": "Este sitio. Editorial, bilingüe y open source — diseño hecho a mano.",
         "specs": [
-          { "label": "Tipo", "value": "Proyecto personal · open source" },
-          { "label": "Enfoque", "value": "i18n ES/EN, theming y rendimiento" },
-          { "label": "Licencia", "value": "MIT" }
+          {
+            "label": "Tipo",
+            "value": "Proyecto personal · open source"
+          },
+          {
+            "label": "Enfoque",
+            "value": "i18n ES/EN, theming y rendimiento"
+          },
+          {
+            "label": "Licencia",
+            "value": "MIT"
+          }
         ],
         "kind": "Personal / Web",
         "year": "2026",
@@ -197,9 +252,18 @@
         "title": "Connie",
         "description": "De conocimiento disperso a respuestas citadas: cualquier área le pregunta en lenguaje natural a las bases de datos, PDFs y Excels internos — y obtiene la respuesta en segundos.",
         "specs": [
-          { "label": "Antes", "value": "La info se perdía entre áreas o moría en burocracia" },
-          { "label": "Mi rol", "value": "Arquitecto · 80% del sistema, desde cero" },
-          { "label": "Escala", "value": "3 clientes en producción" }
+          {
+            "label": "Antes",
+            "value": "La info se perdía entre áreas o moría en burocracia"
+          },
+          {
+            "label": "Mi rol",
+            "value": "Arquitecto · 80% del sistema, desde cero"
+          },
+          {
+            "label": "Escala",
+            "value": "3 clientes en producción"
+          }
         ],
         "kind": "Trabajo / IA",
         "year": "2025",
@@ -209,9 +273,18 @@
         "title": "HandHeld RFID",
         "description": "Un inventario que antes tomaba semanas —o simplemente no se hacía— convertido en control en tiempo real desde el handheld.",
         "specs": [
-          { "label": "Antes", "value": "Captura manual · semanas de retraso" },
-          { "label": "Ahora", "value": "Cada rack con RFID, cada movimiento al instante" },
-          { "label": "Impacto", "value": "Control de almacén mucho más preciso" }
+          {
+            "label": "Antes",
+            "value": "Captura manual · semanas de retraso"
+          },
+          {
+            "label": "Ahora",
+            "value": "Cada rack con RFID, cada movimiento al instante"
+          },
+          {
+            "label": "Impacto",
+            "value": "Control de almacén mucho más preciso"
+          }
         ],
         "kind": "Trabajo / Móvil",
         "year": "2024",
@@ -221,9 +294,18 @@
         "title": "Trazabilidad Automotriz",
         "description": "Cada pieza automotriz trazada de principio a fin a lo largo de la línea de producción.",
         "specs": [
-          { "label": "Clientes", "value": "Proveedores de Honda, GM y Stellantis" },
-          { "label": "Escala", "value": "Miles de piezas al día" },
-          { "label": "Alcance", "value": "Trazabilidad de extremo a extremo" }
+          {
+            "label": "Clientes",
+            "value": "Proveedores de Honda, GM y Stellantis"
+          },
+          {
+            "label": "Escala",
+            "value": "Miles de piezas al día"
+          },
+          {
+            "label": "Alcance",
+            "value": "Trazabilidad de extremo a extremo"
+          }
         ],
         "kind": "Trabajo / Desktop",
         "year": "2024",

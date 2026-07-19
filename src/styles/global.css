@@ -214,34 +214,26 @@ a.card:hover {
   flex-shrink: 0;
 }
 
-/* ----- segmented control (theme + lang toggles) ----- */
-.seg {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid var(--color-line-strong);
-  border-radius: 999px;
-  overflow: hidden;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  height: 32px;
+/* Hasta que el toggle de tema no está montado, sus glifos no deben animar:
+   si no, el estado inicial entra rotando y se ve como un rebote al recargar. */
+html:not(.theme-ready) .theme-toggle__glyph { transition: none; }
+
+/* ----- barrido circular al cambiar de tema -----
+   Acotado a .theme-switching para no pisar las transiciones de navegación. */
+html.theme-switching::view-transition-old(root),
+html.theme-switching::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
-.seg > * {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 0 11px;
-  height: 100%;
-  color: var(--color-ink-2);
-  cursor: pointer;
-  background: transparent;
-  border: 0;
-  transition: background-color 0.15s ease, color 0.15s ease;
+html.theme-switching::view-transition-old(root) { z-index: 1; }
+html.theme-switching::view-transition-new(root) {
+  z-index: 2;
+  animation: theme-sweep 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.seg > *:hover { color: var(--color-ink); }
-.seg [data-icon] { font-size: 14px; }
-.seg .active,
-.seg [aria-checked="true"] { background: var(--color-ink); color: var(--color-bg); }
+@keyframes theme-sweep {
+  from { clip-path: circle(0 at var(--theme-x) var(--theme-y)); }
+  to { clip-path: circle(var(--theme-r) at var(--theme-x) var(--theme-y)); }
+}
 
 /* ----- reveal on scroll ----- */
 .reveal {

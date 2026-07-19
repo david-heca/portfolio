@@ -159,6 +159,8 @@ const personSchema = {
         } else {
           document.documentElement.classList.remove("dark");
         }
+
+        document.documentElement.dataset.themePref = themePreference;
       }
 
       document.addEventListener("astro:before-swap", (e) => {
@@ -167,6 +169,8 @@ const personSchema = {
         if (currentTheme) {
           e.newDocument.documentElement.classList.add("dark");
         }
+        e.newDocument.documentElement.dataset.themePref =
+          document.documentElement.dataset.themePref || "system";
       });
 
       document.addEventListener("astro:after-swap", setThemeOnNavigation);
