@@ -6,16 +6,20 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "deploy": "astro build && npx wrangler deploy",
+    "deploy": "astro build && wrangler deploy",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/sitemap": "3.7.3",
+    "@fontsource/hanken-grotesk": "^5.3.0",
+    "@fontsource/instrument-serif": "^5.3.0",
+    "@fontsource/jetbrains-mono": "^5.3.0",
     "@iconify-json/ph": "^1.2.2",
     "astro": "7.0.7",
     "astro-icon": "^1.1.5"
   },
   "devDependencies": {
-    "vite-plugin-compression": "^0.5.1"
+    "vite-plugin-compression": "^0.5.1",
+    "wrangler": "^4.114.0"
   }
 }
