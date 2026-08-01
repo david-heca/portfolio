@@ -15,7 +15,7 @@ No hay testing ni linter configurado.
 
 ## Arquitectura
 
-Portafolio personal con **Astro 6** y CSS propio (design system token-driven en `global.css`, sin framework de utilidades), desplegado en **Cloudflare Workers** (assets estáticos servidos vía `wrangler.jsonc`, fallback a `404-page`) con compresión gzip/brotli precomputada en el build. Diseño minimalista cálido: una sola landing, tipografía expresiva (serif italic) sobre lectura limpia (grotesk), paleta warm neutral con un acento verde.
+Portafolio personal con **Astro 7** y CSS propio (design system token-driven en `global.css`, sin framework de utilidades), desplegado en **Cloudflare Workers** (assets estáticos servidos vía `wrangler.jsonc`, fallback a `404-page`) con compresión gzip/brotli precomputada en el build. Diseño minimalista cálido: una sola landing, tipografía expresiva (serif italic) sobre lectura limpia (grotesk), paleta warm neutral con un acento verde.
 
 ### Single-page
 
@@ -23,6 +23,7 @@ Portafolio personal con **Astro 6** y CSS propio (design system token-driven en 
 - `src/pages/index.astro` (ES) y `src/pages/en.astro` (EN) renderizan `Landing.astro`, que compone las secciones en orden: Hero → About → Stack → Work → Projects → Education → Speaking → Contact → SiteFooter.
 - La navegación es por **anclas**; el navbar resalta la sección activa con un scrollspy (IntersectionObserver). Los enlaces del nav son `#about`, `#work`, `#projects`, `#education`, `#speaking`, `#contact`. La sección Stack (`#stack`) tiene ancla pero **no** figura en el nav.
 - Cada sección recibe `lang: "es" | "en"` como prop y lleva su `<style>` scoped.
+- `src/config.ts` activa/desactiva secciones. Apagar una la quita de la landing y del nav. **Speaking está apagada ahora mismo.**
 
 ### Enrutamiento bilingüe (ES/EN)
 
@@ -49,7 +50,7 @@ Todo el design system es **token-driven**: para reajustar el look se editan vari
 
 - **Un solo acento:** `--color-accent` (light `#2f7a68`, dark `#8fd0bf`). Las variantes translúcidas derivan con `color-mix`.
 - **Paleta warm neutral:** `--color-bg`, `--color-bg-2`, `--color-surface`, `--color-ink`, `--color-ink-2`, `--color-ink-3`, `--color-line`, `--color-line-strong`.
-- **Tres tipografías, un rol cada una** (Google Fonts):
+- **Tres tipografías, un rol cada una** (self-hosted vía `@fontsource`, importadas en `Layout.astro`):
   - `--font-display` → **Instrument Serif** (italic): titulares y títulos de sección/card.
   - `--font-sans` → **Hanken Grotesk**: voz de lectura (body, bio, descripciones) y UI (nav, botones).
   - `--font-mono` → **JetBrains Mono**: etiquetas, metadatos, periodos, tags (`.kicker`, `.tag`).
