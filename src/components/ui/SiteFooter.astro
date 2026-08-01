@@ -1,6 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
+import pkg from "../../../package.json";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -11,7 +12,7 @@ const home = lang === "es" ? "/" : "/en";
   <div class="footer__inner container">
     <a href={`${home}#top`} class="footer__brand">david<span>herrera</span></a>
 
-    <p class="footer__copy">© 2026 David Herrera</p>
+    <p class="footer__copy">© 2026 David Herrera · v{pkg.version}</p>
 
     <a
       href="https://github.com/david-heca/portfolio"
