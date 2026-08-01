@@ -225,91 +225,60 @@
     "headerTitle": "Selected",
     "headerItalic": "work",
     "description": "Some of the systems I've designed and shipped — from conversational AI over enterprise data to industrial software on the shop floor.",
-    "featuredLabel": "Featured",
+    "spec": {
+      "challenge": "Challenge",
+      "role": "Role",
+      "impact": "Impact"
+    },
+    "context": {
+      "work": "Work",
+      "personal": "Personal"
+    },
+    "domain": {
+      "ai": "AI",
+      "mobile": "Mobile",
+      "desktop": "Desktop",
+      "web": "Web"
+    },
+    "status": {
+      "production": "In production",
+      "delivered": "Delivered",
+      "live": "Live",
+      "archived": "Archived"
+    },
+    "link": {
+      "repo": "View repo",
+      "live": "Visit",
+      "private": "Internal system"
+    },
     "list": {
       "portfolio": {
         "title": "Portfolio",
         "description": "This site. Editorial, bilingual and open source — hand-built design.",
-        "specs": [
-          {
-            "label": "Type",
-            "value": "Personal project · open source"
-          },
-          {
-            "label": "Focus",
-            "value": "ES/EN i18n, theming and performance"
-          },
-          {
-            "label": "License",
-            "value": "MIT"
-          }
-        ],
-        "kind": "Personal / Web",
-        "year": "2026",
-        "status": "Live"
+        "challenge": "A site of my own, no templates and no utility framework",
+        "role": "Design and implementation, end to end",
+        "impact": "Bilingual, near-zero client JS, open source"
       },
       "connie": {
         "title": "Connie",
         "description": "From scattered knowledge to cited answers: any team queries the company's internal databases, PDFs and spreadsheets in plain language — and gets the answer in seconds.",
-        "specs": [
-          {
-            "label": "Before",
-            "value": "Info lost across teams or buried in red tape"
-          },
-          {
-            "label": "My role",
-            "value": "Architect · 80% of the system, from scratch"
-          },
-          {
-            "label": "Scale",
-            "value": "3 clients in production"
-          }
-        ],
-        "kind": "Work / AI",
-        "year": "2025",
-        "status": "In production"
+        "challenge": "Knowledge scattered across databases, PDFs and spreadsheets",
+        "role": "Architect · 80% of the system, from scratch",
+        "impact": "3 clients in production, cited answers in seconds"
       },
       "handheld": {
         "title": "HandHeld RFID",
         "description": "An inventory that used to take weeks —or simply never happened— turned into real-time control from the handheld.",
-        "specs": [
-          {
-            "label": "Before",
-            "value": "Manual capture · weeks of delay"
-          },
-          {
-            "label": "Now",
-            "value": "Every rack RFID-tagged, every move instant"
-          },
-          {
-            "label": "Impact",
-            "value": "Far more accurate warehouse control"
-          }
-        ],
-        "kind": "Work / Mobile",
-        "year": "2024",
-        "status": "In production"
+        "challenge": "Manual inventory capture, weeks behind reality",
+        "role": "End-to-end build of the Android app and RFID reading",
+        "impact": "Every rack tagged, every move instant"
       },
       "trace": {
         "title": "Automotive Traceability",
         "description": "Every automotive part traced end to end across the production line.",
-        "specs": [
-          {
-            "label": "Clients",
-            "value": "Tier-1 automotive suppliers"
-          },
-          {
-            "label": "Scale",
-            "value": "Thousands of parts per day"
-          },
-          {
-            "label": "Scope",
-            "value": "End-to-end traceability"
-          }
-        ],
-        "kind": "Work / Desktop",
-        "year": "2024",
-        "status": "Delivered"
+        "challenge": "No part-level traceability across the production line",
+        "role": "Built the shop-floor desktop system",
+        "impact": "Thousands of parts a day, traced end to end"
       }
     }
   },

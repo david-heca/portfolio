@@ -225,91 +225,60 @@
     "headerTitle": "Trabajo",
     "headerItalic": "seleccionado",
     "description": "Algunos de los sistemas que he diseñado y enviado — desde IA conversacional sobre datos empresariales hasta software industrial en planta.",
-    "featuredLabel": "Destacado",
+    "spec": {
+      "challenge": "Reto",
+      "role": "Rol",
+      "impact": "Impacto"
+    },
+    "context": {
+      "work": "Trabajo",
+      "personal": "Personal"
+    },
+    "domain": {
+      "ai": "IA",
+      "mobile": "Móvil",
+      "desktop": "Escritorio",
+      "web": "Web"
+    },
+    "status": {
+      "production": "En producción",
+      "delivered": "Entregado",
+      "live": "En línea",
+      "archived": "Archivado"
+    },
+    "link": {
+      "repo": "Ver repo",
+      "live": "Visitar",
+      "private": "Sistema interno"
+    },
     "list": {
       "portfolio": {
         "title": "Portafolio",
         "description": "Este sitio. Editorial, bilingüe y open source — diseño hecho a mano.",
-        "specs": [
-          {
-            "label": "Tipo",
-            "value": "Proyecto personal · open source"
-          },
-          {
-            "label": "Enfoque",
-            "value": "i18n ES/EN, theming y rendimiento"
-          },
-          {
-            "label": "Licencia",
-            "value": "MIT"
-          }
-        ],
-        "kind": "Personal / Web",
-        "year": "2026",
-        "status": "Live"
+        "challenge": "Un sitio propio, sin plantillas ni framework de utilidades",
+        "role": "Diseño e implementación completos",
+        "impact": "Bilingüe, prácticamente sin JS de cliente, open source"
       },
       "connie": {
         "title": "Connie",
         "description": "De conocimiento disperso a respuestas citadas: cualquier área le pregunta en lenguaje natural a las bases de datos, PDFs y Excels internos — y obtiene la respuesta en segundos.",
-        "specs": [
-          {
-            "label": "Antes",
-            "value": "La info se perdía entre áreas o moría en burocracia"
-          },
-          {
-            "label": "Mi rol",
-            "value": "Arquitecto · 80% del sistema, desde cero"
-          },
-          {
-            "label": "Escala",
-            "value": "3 clientes en producción"
-          }
-        ],
-        "kind": "Trabajo / IA",
-        "year": "2025",
-        "status": "En producción"
+        "challenge": "Conocimiento disperso entre bases de datos, PDFs y hojas de cálculo",
+        "role": "Arquitecto · 80% del sistema, desde cero",
+        "impact": "3 clientes en producción, respuestas citadas en segundos"
       },
       "handheld": {
         "title": "HandHeld RFID",
         "description": "Un inventario que antes tomaba semanas —o simplemente no se hacía— convertido en control en tiempo real desde el handheld.",
-        "specs": [
-          {
-            "label": "Antes",
-            "value": "Captura manual · semanas de retraso"
-          },
-          {
-            "label": "Ahora",
-            "value": "Cada rack con RFID, cada movimiento al instante"
-          },
-          {
-            "label": "Impacto",
-            "value": "Control de almacén mucho más preciso"
-          }
-        ],
-        "kind": "Trabajo / Móvil",
-        "year": "2024",
-        "status": "En producción"
+        "challenge": "Captura manual de inventario, con semanas de retraso",
+        "role": "Desarrollo end-to-end de la app Android y la lectura RFID",
+        "impact": "Cada rack etiquetado, cada movimiento al instante"
       },
       "trace": {
         "title": "Trazabilidad Automotriz",
         "description": "Cada pieza automotriz trazada de principio a fin a lo largo de la línea de producción.",
-        "specs": [
-          {
-            "label": "Clientes",
-            "value": "Proveedores Tier-1 del sector automotriz"
-          },
-          {
-            "label": "Escala",
-            "value": "Miles de piezas al día"
-          },
-          {
-            "label": "Alcance",
-            "value": "Trazabilidad de extremo a extremo"
-          }
-        ],
-        "kind": "Trabajo / Desktop",
-        "year": "2024",
-        "status": "Entregado"
+        "challenge": "Sin trazabilidad de pieza a lo largo de la línea de producción",
+        "role": "Desarrollo del sistema de escritorio en planta",
+        "impact": "Miles de piezas al día, trazadas de extremo a extremo"
       }
     }
   },

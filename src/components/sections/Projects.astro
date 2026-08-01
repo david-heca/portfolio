@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { useTranslations } from "@i18n/utils";
+import { projects } from "@/data/projects";
 
 export interface Props {
   lang: "es" | "en";
@@ -9,39 +10,21 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-interface Spec { label: string; value: string }
-interface Project {
-  slug: string;
-  title: string;
-  desc: string;
-  specs: Spec[];
-  kind: string;
-  year: string;
-  status: string;
-  tags: string[];
-  image: string;
-  href?: string;
-}
+const SPECS = ["challenge", "role", "impact"] as const;
 
-const build = (slug: string, tags: string[], image: string, href?: string): Project => ({
-  slug,
-  title: t(`projects.list.${slug}.title`),
-  desc: t(`projects.list.${slug}.description`),
-  specs: t(`projects.list.${slug}.specs`) as unknown as Spec[],
-  kind: t(`projects.list.${slug}.kind`),
-  year: t(`projects.list.${slug}.year`),
-  status: t(`projects.list.${slug}.status`),
-  tags,
-  image,
-  href,
-});
-
-const featured = build("connie", ["RAG", "MCP", "Azure", "Python", "SQL"], "/assets/projects/connie.webp");
-const rest = [
-  build("handheld", ["Java", "Android", "SQL"], "/assets/projects/handheld.webp"),
-  build("trace", ["C#", "DevExpress", "SQL"], "/assets/projects/trace.webp"),
-  build("portfolio", ["Astro", "CSS", "TS"], "/assets/projects/portfolio.webp", "https://github.com/david-heca/portfolio"),
-];
+const items = projects.map((p) => ({
+  ...p,
+  title: t(`projects.list.${p.slug}.title`),
+  desc: t(`projects.list.${p.slug}.description`),
+  specs: SPECS.map((key) => ({
+    label: t(`projects.spec.${key}`),
+    value: t(`projects.list.${p.slug}.${key}`),
+  })),
+  meta: `${t(`projects.context.${p.context}`)} · ${t(`projects.domain.${p.domain}`)}`,
+  statusLabel: t(`projects.status.${p.status}`),
+  href: p.link.kind === "private" ? undefined : p.link.href,
+  linkLabel: t(`projects.link.${p.link.kind}`),
+}));
 ---
 
 <section id="projects" class="projects section container">
@@ -51,61 +34,53 @@ const rest = [
     <p class="lead">{t("projects.description")}</p>
   </header>
 
-  <article class="featured card reveal">
-    <div class="featured__cover">
-      <Image src={featured.image} alt={featured.title} width={1100} height={720} loading="lazy" quality={85} />
-      <span class="featured__badge">{t("projects.featuredLabel")}</span>
-    </div>
-    <div class="featured__body">
-      <p class="proj__meta">{featured.kind} · {featured.year} · {featured.status}</p>
-      <h3 class="featured__title">{featured.title}</h3>
-      <p class="featured__desc">{featured.desc}</p>
-      <dl class="specs">
-        {featured.specs.map((s) => (
-          <div class="specs__row">
-            <dt>{s.label}</dt>
-            <dd>{s.value}</dd>
-          </div>
-        ))}
-      </dl>
-      <div class="proj__tags">
-        {featured.tags.map((tag) => <span class="tag">{tag}</span>)}
-      </div>
-    </div>
-  </article>
+  <div class="index">
+    {items.map((p, i) => (
+      <article class={`row reveal reveal-${Math.min(i + 1, 3)}`}>
+        <div class="row__aside">
+          <span class="row__year">{p.year}</span>
+          <span class="row__status"><span class="dot"></span>{p.statusLabel}</span>
+          <span class="row__meta">{p.meta}</span>
+        </div>
 
-  <div class="projects__grid">
-    {rest.map((p, i) => {
-      const Tag = p.href ? "a" : "div";
-      return (
-        <Tag
-          href={p.href}
-          target={p.href ? "_blank" : undefined}
-          rel={p.href ? "noopener noreferrer" : undefined}
-          class={`card proj reveal reveal-${Math.min(i + 1, 3)}`}
-        >
-          <div class="proj__cover">
-            <Image src={p.image} alt={p.title} width={720} height={480} loading="lazy" quality={80} />
+        <div class="row__main">
+          <h3 class="row__title">
+            {p.href ? (
+              <a href={p.href} target="_blank" rel="noopener noreferrer">
+                {p.title}<span class="row__arrow" aria-hidden="true">↗</span>
+              </a>
+            ) : (
+              p.title
+            )}
+          </h3>
+          <p class="row__desc">{p.desc}</p>
+
+          <dl class="specs">
+            {p.specs.map((s) => (
+              <div class="specs__row">
+                <dt>{s.label}</dt>
+                <dd>{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <div class="row__foot">
+            {p.tags.map((tag) => <span class="tag">{tag}</span>)}
+            {p.href ? (
+              <a class="chip chip--link" href={p.href} target="_blank" rel="noopener noreferrer">
+                {p.linkLabel}<span aria-hidden="true">↗</span>
+              </a>
+            ) : (
+              <span class="chip chip--private">{p.linkLabel}</span>
+            )}
           </div>
-          <div class="proj__body">
-            <p class="proj__meta">{p.kind} · {p.year}</p>
-            <h3 class="proj__title">{p.title}</h3>
-            <p class="proj__desc">{p.desc}</p>
-            <dl class="specs">
-              {p.specs.map((s) => (
-                <div class="specs__row">
-                  <dt>{s.label}</dt>
-                  <dd>{s.value}</dd>
-                </div>
-              ))}
-            </dl>
-            <div class="proj__tags">
-              {p.tags.map((tag) => <span class="tag">{tag}</span>)}
-            </div>
-          </div>
-        </Tag>
-      );
-    })}
+        </div>
+
+        <div class="row__thumb">
+          <Image src={p.image} alt={p.title} width={520} height={358} loading="lazy" quality={80} />
+        </div>
+      </article>
+    ))}
   </div>
 </section>
 
@@ -113,102 +88,84 @@ const rest = [
   .sec-head { max-width: 720px; margin-bottom: 56px; }
   .sec-head .lead { margin-top: 20px; }
 
-  .proj__meta {
+  .index { display: flex; flex-direction: column; }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
+    padding-block: 34px;
+    border-top: 1px solid var(--color-line);
+  }
+  .row:last-child { border-bottom: 1px solid var(--color-line); }
+  /* Misma retícula que los roles de Work: la página mantiene un solo ritmo. */
+  @media (min-width: 860px) {
+    .row {
+      grid-template-columns: 170px minmax(0, 1fr) 190px;
+      gap: 32px;
+      align-items: start;
+    }
+  }
+
+  .row__aside { display: flex; flex-direction: column; gap: 9px; }
+  .row__year {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    color: var(--color-ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .row__status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label-sm);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .row__meta {
     font-family: var(--font-mono);
     font-size: var(--text-label-sm);
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--color-ink-3);
-    margin: 0;
-  }
-  .proj__tags { display: flex; flex-wrap: wrap; gap: 7px; }
-
-  /* featured */
-  .featured {
-    display: grid;
-    grid-template-columns: 1fr;
-    overflow: hidden;
-    margin-bottom: 24px;
-  }
-  @media (min-width: 900px) {
-    .featured { grid-template-columns: 1.2fr 1fr; align-items: stretch; }
-  }
-  .featured__cover { position: relative; min-height: 280px; background: var(--color-bg-2); }
-  .featured__cover img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .featured__badge {
-    position: absolute;
-    top: 16px;
-    left: 16px;
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: 0.06em;
-    padding: 6px 12px;
-    border-radius: 999px;
-    background: var(--color-accent);
-    color: var(--color-bg);
-  }
-  .featured__body {
-    padding: clamp(24px, 3vw, 40px);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-  .featured__title {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(34px, 5vw, 52px);
-    line-height: 1;
-    color: var(--color-ink);
-    margin: 4px 0 0;
-  }
-  .featured__desc {
-    font-size: var(--text-body);
-    line-height: 1.6;
-    color: var(--color-ink-2);
-    margin: 0;
   }
 
-  /* grid cards */
-  .projects__grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-  @media (min-width: 640px) { .projects__grid { grid-template-columns: repeat(2, 1fr); } }
-  @media (min-width: 1024px) { .projects__grid { grid-template-columns: repeat(3, 1fr); } }
-
-  .proj { display: flex; flex-direction: column; overflow: hidden; }
-  .proj__cover { height: 200px; flex-shrink: 0; background: var(--color-bg-2); }
-  .proj__cover img { width: 100%; height: 100%; object-fit: cover; }
-  .proj__body {
-    padding: 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    flex: 1;
-  }
-  .proj__title {
+  .row__title {
     font-family: var(--font-display);
     font-style: italic;
     font-size: var(--text-card-title);
-    line-height: 1;
+    line-height: 1.05;
     color: var(--color-ink);
-    margin: 2px 0 0;
+    margin: 0;
   }
-  .proj__desc {
+  .row__title a {
+    color: inherit;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 10px;
+    transition: color 0.18s ease;
+  }
+  .row__title a:hover { color: var(--color-accent); }
+  .row__arrow { font-style: normal; font-size: 0.6em; color: var(--color-accent); }
+
+  .row__desc {
     font-size: var(--text-sm);
     line-height: 1.6;
     color: var(--color-ink-2);
-    margin: 0;
+    margin: 8px 0 0;
+    max-width: 58ch;
   }
 
-  /* specs */
-  .specs { margin: 4px 0 0; display: flex; flex-direction: column; gap: 8px; }
-  .specs__row { display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: baseline; }
+  .specs { margin: 20px 0 0; display: flex; flex-direction: column; gap: 9px; }
+  .specs__row { display: grid; grid-template-columns: 82px minmax(0, 1fr); gap: 16px; align-items: baseline; }
   .specs dt {
     font-family: var(--font-mono);
     font-size: var(--text-label-sm);
-    letter-spacing: 0.08em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--color-ink-3);
     margin: 0;
@@ -219,5 +176,48 @@ const rest = [
     line-height: 1.45;
     color: var(--color-ink-2);
   }
-  .featured .specs__row { grid-template-columns: 80px 1fr; }
+
+  .row__foot {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  /* El chip resuelve que una fila sin enlace no parezca clicable. */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: 999px;
+    padding: 5px 12px;
+  }
+  .chip--private {
+    border: 1px dashed var(--color-line-strong);
+    color: var(--color-ink-3);
+  }
+  .chip--link {
+    border: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+  }
+  .chip--link:hover {
+    background: var(--color-accent-soft);
+    border-color: var(--color-accent);
+  }
+
+  .row__thumb {
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    background: var(--color-bg-2);
+    aspect-ratio: 16 / 11;
+  }
+  .row__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  @media (max-width: 859px) { .row__thumb { max-width: 240px; } }
 </style>
