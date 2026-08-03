@@ -13,18 +13,34 @@ interface Role {
   period: string;
   type: string;
   achievements: string[];
-  stack: string[];
+  /** Opcional: un rol recién empezado todavía no tiene stack que enseñar. */
+  stack?: string[];
   current?: boolean;
 }
 interface Company {
   name: string;
   span: string;
-  loc: string;
-  mode: string;
+  loc?: string;
+  mode?: string;
   roles: Role[];
 }
 
 const companies: Company[] = [
+  {
+    name: t("work.companies.hypertech.name"),
+    span: t("work.companies.hypertech.totalPeriod"),
+    loc: t("work.companies.hypertech.location"),
+    mode: t("work.companies.hypertech.workMode"),
+    roles: [
+      {
+        title: t("work.companies.hypertech.roles.appliedai.title"),
+        period: t("work.companies.hypertech.roles.appliedai.period"),
+        type: t("work.companies.hypertech.roles.appliedai.type"),
+        achievements: t("work.companies.hypertech.roles.appliedai.achievements") as unknown as string[],
+        current: true,
+      },
+    ],
+  },
   {
     name: t("work.companies.baacc.name").replace(/ S\.A\. de C\.V\./, ""),
     span: t("work.companies.baacc.totalPeriod"),
@@ -37,7 +53,6 @@ const companies: Company[] = [
         type: t("work.companies.baacc.roles.architect.type"),
         achievements: t("work.companies.baacc.roles.architect.achievements") as unknown as string[],
         stack: ["LLMs", "RAG", "MCP", "MLOps", "Azure"],
-        current: true,
       },
       {
         title: t("work.companies.baacc.roles.fullstack.title"),
@@ -85,7 +100,7 @@ const companies: Company[] = [
       <article class="work__company reveal">
         <div class="work__company-head">
           <h3 class="work__company-name">{co.name}</h3>
-          <span class="work__company-meta">{co.span} · {co.loc} · {co.mode}</span>
+          <span class="work__company-meta">{[co.span, co.loc, co.mode].filter(Boolean).join(" · ")}</span>
         </div>
 
         <div class="work__roles">
@@ -103,9 +118,11 @@ const companies: Company[] = [
                 <ul class="role__achievements">
                   {r.achievements.map((a) => <li>{a}</li>)}
                 </ul>
-                <div class="role__stack">
-                  {r.stack.map((s) => <span class="tag">{s}</span>)}
-                </div>
+                {r.stack && (
+                  <div class="role__stack">
+                    {r.stack.map((s) => <span class="tag">{s}</span>)}
+                  </div>
+                )}
               </div>
             </div>
           ))}

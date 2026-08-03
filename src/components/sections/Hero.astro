@@ -13,7 +13,10 @@ const t = useTranslations(lang);
 
 <section id="top" class="hero container">
   <div class="hero__text">
-    <p class="kicker reveal">{t("hero.greeting")}</p>
+    <p class="hero__place reveal">
+      <Icon name="ph:map-pin-duotone" />
+      {t("hero.location")}
+    </p>
 
     <h1 class="hero__name reveal reveal-1">
       David Herrera<span class="hero__dot">.</span>
@@ -23,15 +26,9 @@ const t = useTranslations(lang);
 
     <p class="lead hero__intro reveal reveal-2">{t("hero.intro")}</p>
 
-    <div class="hero__actions reveal reveal-2">
+    <div class="hero__actions reveal reveal-3">
       <a href="#projects" class="btn btn--primary"><Icon name="ph:squares-four-duotone" />{t("hero.ctaProjects")}</a>
       <a href="#contact" class="btn btn--ghost"><Icon name="ph:chat-circle-duotone" />{t("hero.ctaContact")}</a>
-    </div>
-
-    <div class="hero__meta reveal reveal-3">
-      <span><Icon name="ph:map-pin-duotone" />{t("hero.location")}</span>
-      <span class="hero__sep">·</span>
-      <span>GMT-6</span>
     </div>
   </div>
 
@@ -66,6 +63,18 @@ const t = useTranslations(lang);
     .hero { grid-template-columns: 1.35fr 1fr; gap: 64px; }
   }
 
+  .hero__place {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--track-label);
+    text-transform: uppercase;
+    color: var(--color-ink-2);
+  }
+  .hero__place [data-icon] { font-size: 14px; color: var(--color-accent); }
+
   .hero__name {
     font-family: var(--font-display);
     font-style: italic;
@@ -79,14 +88,16 @@ const t = useTranslations(lang);
   .hero__dot { color: var(--color-accent); font-style: normal; }
 
   .hero__role {
-    font-family: var(--font-mono);
-    font-size: clamp(14px, 1.6vw, 17px);
-    letter-spacing: 0.02em;
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(20px, 2.6vw, 28px);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
     color: var(--color-ink);
-    margin: 18px 0 0;
+    margin: 20px 0 0;
   }
 
-  .hero__intro { margin: 22px 0 0; }
+  .hero__intro { margin: 20px 0 0; }
 
   .hero__actions {
     display: flex;
@@ -94,21 +105,6 @@ const t = useTranslations(lang);
     gap: 12px;
     margin-top: 32px;
   }
-
-  .hero__meta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 28px;
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: 0.04em;
-    color: var(--color-ink-2);
-  }
-  .hero__meta span { display: inline-flex; align-items: center; gap: 6px; }
-  .hero__meta [data-icon] { font-size: 14px; color: var(--color-accent); }
-  .hero__sep { color: var(--color-ink-3); }
 
   .hero__photo { position: relative; max-width: 440px; justify-self: center; }
   .hero__photo img {

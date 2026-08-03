@@ -20,6 +20,12 @@
   --color-accent-soft: color-mix(in srgb, var(--color-accent) 12%, transparent);
   --shadow-soft: 0 1px 2px rgba(26, 24, 21, 0.04), 0 16px 40px -24px rgba(26, 24, 21, 0.18);
 
+  /* Degradado de página: el fondo recorre estos tres tonos de arriba abajo.
+     --color-bg sigue siendo el color plano de referencia (color-mix, botones). */
+  --bg-top: #f8f5ef;
+  --bg-mid: #f1ebdf;
+  --bg-end: #e7e6da;
+
   /* type scale — pick by role, never hardcode px */
   --text-label-sm: 11px;   /* mono micro: spec keys, card meta */
   --text-label: 12px;      /* mono labels, kickers, periods */
@@ -50,6 +56,10 @@
   --color-accent: #8fd0bf;
   --color-accent-soft: color-mix(in srgb, var(--color-accent) 16%, transparent);
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 40px -24px rgba(0, 0, 0, 0.6);
+
+  --bg-top: #0c0b09;
+  --bg-mid: #12110e;
+  --bg-end: #0b1210;
 }
 
 /* ----- base (reset — replaces Tailwind preflight) ----- */
@@ -62,12 +72,22 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 88px;
   overflow-x: clip;
+  /* El fondo vive solo aquí y <body> se queda transparente: el área de pintado
+     del root es el documento completo, así que el degradado se reparte a lo
+     largo de toda la página y se recorre al hacer scroll — sin JS ni capas.
+     background-color queda de respaldo plano. */
+  background-color: var(--color-bg);
+  background-image: linear-gradient(
+    180deg,
+    var(--bg-top) 0%,
+    var(--bg-mid) 52%,
+    var(--bg-end) 100%
+  );
 }
 
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--color-bg);
   color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: var(--text-body);
