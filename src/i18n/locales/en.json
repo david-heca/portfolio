@@ -196,7 +196,9 @@
           }
         }
       }
-    }
+    },
+    "showMore": "Show more",
+    "showLess": "Show less"
   },
   "education": {
     "headerTitle": "How I",

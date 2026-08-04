@@ -1,5 +1,6 @@
 ---
 import { useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
 
 export interface Props {
   lang: "es" | "en";
@@ -116,8 +117,22 @@ const companies: Company[] = [
                 <h4 class="role__title">{r.title}</h4>
                 <span class="role__type">{r.type}</span>
                 <ul class="role__achievements">
-                  {r.achievements.map((a) => <li>{a}</li>)}
+                  <li>{r.achievements[0]}</li>
                 </ul>
+                {r.achievements.length > 1 && (
+                  <details class="role__more">
+                    <summary class="role__more-toggle">
+                      <span class="role__more-label role__more-label--more">
+                        {t("work.showMore")} ({r.achievements.length - 1})
+                      </span>
+                      <span class="role__more-label role__more-label--less">{t("work.showLess")}</span>
+                      <Icon name="ph:caret-down" class="role__more-caret" />
+                    </summary>
+                    <ul class="role__achievements role__achievements--extra">
+                      {r.achievements.slice(1).map((a) => <li>{a}</li>)}
+                    </ul>
+                  </details>
+                )}
                 {r.stack && (
                   <div class="role__stack">
                     {r.stack.map((s) => <span class="tag">{s}</span>)}
@@ -231,6 +246,31 @@ const companies: Company[] = [
     border-radius: 50%;
     background: var(--color-ink-3);
   }
+  /* Un logro por etapa; el resto se despliega. <details> nativo: sin JS,
+     accesible por teclado y el contenido sigue estando para Cmd+F y el SEO. */
+  .role__more { margin-top: 14px; }
+  .role__more-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-mono);
+    font-size: var(--text-label-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-ink-3);
+    transition: color 0.15s ease;
+  }
+  .role__more-toggle::-webkit-details-marker { display: none; }
+  .role__more-toggle:hover { color: var(--color-accent); }
+  .role__more-caret { font-size: 13px; transition: transform 0.2s ease; }
+  .role__more[open] .role__more-caret { transform: rotate(180deg); }
+  .role__more-label--less { display: none; }
+  .role__more[open] .role__more-label--more { display: none; }
+  .role__more[open] .role__more-label--less { display: inline; }
+  .role__achievements--extra { margin-top: 14px; }
+
   .role__stack {
     display: flex;
     flex-wrap: wrap;

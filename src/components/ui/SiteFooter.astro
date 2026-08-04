@@ -27,6 +27,8 @@ const home = lang === "es" ? "/" : "/en";
 </footer>
 
 <style>
+  /* El sol del final vive en el root (global.css), no aquí: así no lo recorta
+     ninguna caja y puede difuminarse por encima de esta franja. */
   .footer { border-top: 1px solid var(--color-line); }
   .footer__inner {
     display: flex;
@@ -34,7 +36,7 @@ const home = lang === "es" ? "/" : "/en";
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 16px;
-    padding-block: 28px;
+    padding-block: 40px 34px;
   }
   .footer__brand {
     font-family: var(--font-display);

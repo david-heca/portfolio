@@ -21,10 +21,19 @@
   --shadow-soft: 0 1px 2px rgba(26, 24, 21, 0.04), 0 16px 40px -24px rgba(26, 24, 21, 0.18);
 
   /* Degradado de página: el fondo recorre estos tres tonos de arriba abajo.
-     --color-bg sigue siendo el color plano de referencia (color-mix, botones). */
-  --bg-top: #f8f5ef;
-  --bg-mid: #f1ebdf;
-  --bg-end: #e7e6da;
+     --color-bg sigue siendo el color plano de referencia (color-mix, botones).
+     El tramo top→mid es corto a propósito y el mid→end hace ~3x el recorrido:
+     así la mitad superior se lee plana y el cambio se acusa al bajar. */
+  --bg-top: #faf7f1;
+  --bg-mid: #f3ede1;
+  --bg-end: #dcd5c2;
+
+  /* Sol del final de página: núcleo claro que se disuelve en un halo del acento
+     y muere en transparente, dejando ver --bg-end. Subir la opacidad del núcleo
+     o el % del halo lo hace más evidente; la altura se ajusta en el
+     radial-gradient de html. */
+  --glow-core: rgba(255, 252, 244, 0.95);
+  --glow-halo: color-mix(in srgb, var(--color-accent) 18%, transparent);
 
   /* type scale — pick by role, never hardcode px */
   --text-label-sm: 11px;   /* mono micro: spec keys, card meta */
@@ -60,9 +69,12 @@
   --color-accent-soft: color-mix(in srgb, var(--color-accent) 16%, transparent);
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 40px -24px rgba(0, 0, 0, 0.6);
 
-  --bg-top: #0c0b09;
-  --bg-mid: #12110e;
-  --bg-end: #0b1210;
+  --bg-top: #0a0908;
+  --bg-mid: #0e0d0b;
+  --bg-end: #101c18;
+
+  --glow-core: rgba(226, 255, 246, 0.9);
+  --glow-halo: color-mix(in srgb, var(--color-accent) 34%, transparent);
 }
 
 /* ----- base (reset — replaces Tailwind preflight) ----- */
@@ -80,12 +92,24 @@ html {
      largo de toda la página y se recorre al hacer scroll — sin JS ni capas.
      background-color queda de respaldo plano. */
   background-color: var(--color-bg);
-  background-image: linear-gradient(
-    180deg,
-    var(--bg-top) 0%,
-    var(--bg-mid) 52%,
-    var(--bg-end) 100%
-  );
+  /* Dos capas: el sol del final va encima del degradado vertical. Al vivir en
+     el root, se ancla al fondo real del documento y se difumina hacia arriba
+     sin ninguna caja que lo recorte. */
+  background-image:
+    radial-gradient(
+      270% 370px at 50% 100%,
+      var(--glow-core) 0%,
+      var(--glow-halo) -10%,
+      color-mix(in srgb, var(--glow-halo) 42%, transparent) 52%,
+      transparent 100%
+    ),
+    linear-gradient(
+      180deg,
+      var(--bg-top) 0%,
+      var(--bg-mid) 55%,
+      var(--bg-end) 100%
+    );
+  background-repeat: no-repeat;
 }
 
 html, body {
