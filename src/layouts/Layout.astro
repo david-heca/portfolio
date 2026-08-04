@@ -15,9 +15,11 @@ export interface Props {
   title: string;
   description: string;
   lang?: "es" | "en";
+  /** Solo para <title>; og:/twitter: siguen usando `title`. */
+  tabTitle?: string;
 }
 
-const { title, description, lang = "es" } = Astro.props;
+const { title, description, lang = "es", tabTitle = title } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL("/assets/dh.webp", Astro.site);
@@ -132,7 +134,7 @@ const personSchema = {
       set:html={JSON.stringify(personSchema)}
     />
 
-    <title>{title}</title>
+    <title>{tabTitle}</title>
 
     <script is:inline>
       if (
