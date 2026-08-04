@@ -2,15 +2,13 @@
  * Proyectos de la landing.
  *
  * Los ejes taxonómicos son enums cerrados: sus etiquetas visibles viven en
- * `projects.context/domain/status/link` de cada locale, no en cada proyecto.
- * Así ES y EN no pueden divergir y un proyecto nuevo no inventa vocabulario.
+ * `projects.status/link` de cada locale, no en cada proyecto. Así ES y EN no
+ * pueden divergir y un proyecto nuevo no inventa vocabulario.
  *
  * Lo traducible de cada proyecto es solo el texto propio (título, descripción
  * y las tres ranuras reto/rol/impacto), en `projects.list.<slug>`.
  */
 
-export type Context = "work" | "personal";
-export type Domain = "ai" | "mobile" | "desktop" | "web";
 export type Status = "production" | "delivered" | "live" | "archived";
 
 /** `private` cubre lo que no se puede enlazar: sistemas internos de cliente. */
@@ -20,8 +18,6 @@ export type Link =
 
 export interface Project {
   slug: string;
-  context: Context;
-  domain: Domain;
   status: Status;
   year: string;
   tags: string[];
@@ -33,8 +29,6 @@ export interface Project {
 export const projects: Project[] = [
   {
     slug: "connie",
-    context: "work",
-    domain: "ai",
     status: "production",
     year: "2025",
     tags: ["RAG", "MCP", "Azure", "Python", "SQL"],
@@ -43,8 +37,6 @@ export const projects: Project[] = [
   },
   {
     slug: "handheld",
-    context: "work",
-    domain: "mobile",
     status: "production",
     year: "2024",
     tags: ["Java", "Android", "SQL"],
@@ -53,8 +45,6 @@ export const projects: Project[] = [
   },
   {
     slug: "trace",
-    context: "work",
-    domain: "desktop",
     status: "delivered",
     year: "2024",
     tags: ["C#", "DevExpress", "SQL"],
@@ -63,8 +53,6 @@ export const projects: Project[] = [
   },
   {
     slug: "portfolio",
-    context: "personal",
-    domain: "web",
     status: "live",
     year: "2026",
     tags: ["Astro", "CSS", "TS"],

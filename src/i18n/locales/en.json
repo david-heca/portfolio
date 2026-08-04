@@ -89,7 +89,7 @@
   },
   "hero": {
     "role": "Applied AI Engineer",
-    "intro": "I build AI systems on top of the data companies already have: RAG, MCP and MLOps. I come from backend, so I also take care of the databases, APIs and infrastructure underneath.",
+    "intro": "I build AI systems on corporate data. The hard part is almost never the model.",
     "ctaProjects": "See projects",
     "ctaContact": "Let's talk",
     "location": "Mexico City"
@@ -98,22 +98,22 @@
     "label": "About me",
     "heading": "Software, data <em>&</em> AI someone uses every day.",
     "bio": {
-      "paragraph1": "I started out building WordPress sites and managing hosting. Today I design and ship AI systems. In between, <strong>backend, data and applied AI</strong> — and finding out that the hard part is almost never the model.",
-      "paragraph2": "I move comfortably across the stack, from data model to frontend, but my job right now is <strong>RAG, MCP and MLOps</strong> over corporate data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs.",
-      "paragraph3": "I also teach, sort of: talks on AI and data science at universities —EGADE, UPVM Tultitlán, TESCo—, around 200 people per session. It's the best way I know to find the parts of my own work I still can't explain."
+      "paragraph1": "I started out building WordPress sites and managing hosting. Today I design and ship AI systems. In between, <strong>backend, data and applied AI</strong>.",
+      "paragraph2": "I move from data model to frontend, but my job right now is <strong>RAG, MCP and MLOps</strong> over corporate data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs.",
+      "paragraph3": "I also teach, sort of: talks on AI and data science at universities —EGADE, UPVM Tultitlán, TESCo—, around 200 people per session."
     },
     "principles": [
       {
         "title": "Production, not demos",
-        "body": "A demo falls over and nothing happens. What I ship has to still be standing on the weekend, when nobody is watching it."
+        "body": "Error handling, retries and alerting, not a notebook that works on my machine."
       },
       {
         "title": "Systems you can operate",
-        "body": "If I can't explain why the model answered that, it isn't finished. Logs, retrieval evaluation and versioning from day one."
+        "body": "Logs, retrieval evaluation and versioning from day one."
       },
       {
         "title": "Share what you learn",
-        "body": "Almost everything I know came from people who bothered to write down what worked for them. I try to pay back my share."
+        "body": "Almost everything I know came from people who wrote down what worked for them."
       }
     ]
   },
@@ -245,16 +245,6 @@
       "challenge": "Challenge",
       "role": "Role",
       "impact": "Impact"
-    },
-    "context": {
-      "work": "Work",
-      "personal": "Personal"
-    },
-    "domain": {
-      "ai": "AI",
-      "mobile": "Mobile",
-      "desktop": "Desktop",
-      "web": "Web"
     },
     "status": {
       "production": "In production",

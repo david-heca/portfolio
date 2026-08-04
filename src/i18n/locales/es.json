@@ -89,7 +89,7 @@
   },
   "hero": {
     "role": "Applied AI Engineer",
-    "intro": "Construyo sistemas de IA sobre los datos que las empresas ya tienen: RAG, MCP y MLOps. Vengo del backend, así que también me encargo de las bases de datos, las APIs y la infraestructura que hay debajo.",
+    "intro": "Construyo sistemas de IA sobre datos corporativos. La parte difícil casi nunca es el modelo.",
     "ctaProjects": "Ver proyectos",
     "ctaContact": "Hablemos",
     "location": "Ciudad de México"
@@ -98,22 +98,22 @@
     "label": "Sobre mí",
     "heading": "Software, datos <em>&</em> IA que alguien usa a diario.",
     "bio": {
-      "paragraph1": "Empecé montando sitios en WordPress y administrando hosting. Hoy diseño y llevo a producción sistemas de IA. En medio, <strong>backend, datos e IA aplicada</strong> — y descubrir que la parte difícil casi nunca es el modelo.",
-      "paragraph2": "Me muevo bien en todo el stack, del modelo de datos al frontend, pero hoy mi trabajo es <strong>RAG, MCP y MLOps</strong> sobre datos corporativos: bases que nadie documentó, PDFs escaneados, Excels con quince pestañas.",
-      "paragraph3": "También doy clase, más o menos: charlas de IA y ciencia de datos en universidades —EGADE, UPVM Tultitlán, el TESCo—, unas 200 personas por sesión. Es la mejor forma que conozco de encontrar las partes de mi trabajo que todavía no sé explicar."
+      "paragraph1": "Empecé montando sitios en WordPress y administrando hosting. Hoy diseño y llevo a producción sistemas de IA. En medio, <strong>backend, datos e IA aplicada</strong>.",
+      "paragraph2": "Me muevo del modelo de datos al frontend, pero hoy mi trabajo es <strong>RAG, MCP y MLOps</strong> sobre datos corporativos: bases que nadie documentó, PDFs escaneados, Excels con quince pestañas.",
+      "paragraph3": "También doy clase, más o menos: charlas de IA y ciencia de datos en universidades —EGADE, UPVM Tultitlán, el TESCo—, unas 200 personas por sesión."
     },
     "principles": [
       {
         "title": "Producción, no demos",
-        "body": "Una demo se cae y no pasa nada. Lo que entrego tiene que seguir de pie el fin de semana, cuando nadie lo está mirando."
+        "body": "Manejo de errores, reintentos y alertas, no un notebook que funciona en mi máquina."
       },
       {
         "title": "Sistemas que se operan",
-        "body": "Si no puedo explicar por qué el modelo respondió eso, no está terminado. Logs, evaluación de retrieval y versionado desde el día uno."
+        "body": "Logs, evaluación de retrieval y versionado desde el día uno."
       },
       {
         "title": "Compartir lo aprendido",
-        "body": "Casi todo lo que sé lo aprendí de gente que se tomó la molestia de escribir lo que le funcionó. Intento devolver la parte que me toca."
+        "body": "Casi todo lo que sé lo aprendí de gente que escribió lo que le funcionó."
       }
     ]
   },
@@ -245,16 +245,6 @@
       "challenge": "Reto",
       "role": "Rol",
       "impact": "Impacto"
-    },
-    "context": {
-      "work": "Trabajo",
-      "personal": "Personal"
-    },
-    "domain": {
-      "ai": "IA",
-      "mobile": "Móvil",
-      "desktop": "Escritorio",
-      "web": "Web"
     },
     "status": {
       "production": "En producción",
