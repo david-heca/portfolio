@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
 import { useTranslations } from "@i18n/utils";
 import { projects } from "@/data/projects";
 
@@ -20,7 +21,6 @@ const items = projects.map((p) => ({
     label: t(`projects.spec.${key}`),
     value: t(`projects.list.${p.slug}.${key}`),
   })),
-  meta: `${t(`projects.context.${p.context}`)} · ${t(`projects.domain.${p.domain}`)}`,
   statusLabel: t(`projects.status.${p.status}`),
   href: p.link.kind === "private" ? undefined : p.link.href,
   linkLabel: t(`projects.link.${p.link.kind}`),
@@ -40,14 +40,13 @@ const items = projects.map((p) => ({
         <div class="row__aside">
           <span class="row__year">{p.year}</span>
           <span class="row__status"><span class="dot"></span>{p.statusLabel}</span>
-          <span class="row__meta">{p.meta}</span>
         </div>
 
         <div class="row__main">
           <h3 class="row__title">
             {p.href ? (
               <a href={p.href} target="_blank" rel="noopener noreferrer">
-                {p.title}<span class="row__arrow" aria-hidden="true">↗</span>
+                {p.title}<span class="row__arrow" aria-hidden="true"><Icon name="ph:arrow-up-right" /></span>
               </a>
             ) : (
               p.title
@@ -68,7 +67,7 @@ const items = projects.map((p) => ({
             {p.tags.map((tag) => <span class="tag">{tag}</span>)}
             {p.href ? (
               <a class="chip chip--link" href={p.href} target="_blank" rel="noopener noreferrer">
-                {p.linkLabel}<span aria-hidden="true">↗</span>
+                {p.linkLabel}<Icon name="ph:arrow-up-right" aria-hidden="true" />
               </a>
             ) : (
               <span class="chip chip--private">{p.linkLabel}</span>
@@ -125,14 +124,6 @@ const items = projects.map((p) => ({
     text-transform: uppercase;
     color: var(--color-accent);
   }
-  .row__meta {
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-ink-3);
-  }
-
   .row__title {
     font-family: var(--font-display);
     font-style: italic;
@@ -150,7 +141,7 @@ const items = projects.map((p) => ({
     transition: color 0.18s ease;
   }
   .row__title a:hover { color: var(--color-accent); }
-  .row__arrow { font-style: normal; font-size: 0.6em; color: var(--color-accent); }
+  .row__arrow { display: inline-flex; font-size: 0.62em; color: var(--color-accent); }
 
   .row__desc {
     font-size: var(--text-sm);
@@ -197,6 +188,7 @@ const items = projects.map((p) => ({
     border-radius: 999px;
     padding: 5px 12px;
   }
+  .chip [data-icon] { font-size: 13px; }
   .chip--private {
     border: 1px dashed var(--color-line-strong);
     color: var(--color-ink-3);

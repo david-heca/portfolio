@@ -30,6 +30,9 @@
   --text-label-sm: 11px;   /* mono micro: spec keys, card meta */
   --text-label: 12px;      /* mono labels, kickers, periods */
   --track-label: 0.16em;
+  /* El mono se reserva a etiquetas en mayúsculas, tags y cifras. Lo que se lee
+     como frase (institución, emisor, notas, footer) usa sans a este tamaño. */
+  --text-meta: 13.5px;
   --text-sm: 14.5px;       /* secondary prose: card descriptions, notes, achievements */
   --text-body: 16px;       /* primary prose: bio, featured description, channel values */
   --text-lead: clamp(18px, 2.1vw, 21px);  /* section lead */

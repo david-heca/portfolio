@@ -14,21 +14,19 @@ const t = useTranslations(lang);
 <section id="top" class="hero container">
   <div class="hero__text">
     <p class="hero__place reveal">
-      <Icon name="ph:map-pin-duotone" />
+      <Icon name="ph:map-pin" />
       {t("hero.location")}
     </p>
 
-    <h1 class="hero__name reveal reveal-1">
-      David Herrera<span class="hero__dot">.</span>
-    </h1>
+    <h1 class="hero__name reveal reveal-1">David Herrera</h1>
 
     <p class="hero__role reveal reveal-1">{t("hero.role")}</p>
 
     <p class="lead hero__intro reveal reveal-2">{t("hero.intro")}</p>
 
     <div class="hero__actions reveal reveal-3">
-      <a href="#projects" class="btn btn--primary"><Icon name="ph:squares-four-duotone" />{t("hero.ctaProjects")}</a>
-      <a href="#contact" class="btn btn--ghost"><Icon name="ph:chat-circle-duotone" />{t("hero.ctaContact")}</a>
+      <a href="#projects" class="btn btn--primary"><Icon name="ph:squares-four" />{t("hero.ctaProjects")}</a>
+      <a href="#contact" class="btn btn--ghost"><Icon name="ph:chat-circle" />{t("hero.ctaContact")}</a>
     </div>
   </div>
 
@@ -43,9 +41,9 @@ const t = useTranslations(lang);
       quality={85}
     />
     <div class="hero__socials">
-      <a href="https://github.com/david-heca" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Icon name="ph:github-logo-duotone" /></a>
-      <a href="https://www.linkedin.com/in/david-heca/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="ph:linkedin-logo-duotone" /></a>
-      <a href="https://x.com/david_heca_" target="_blank" rel="noopener noreferrer" aria-label="X"><Icon name="ph:x-logo-duotone" /></a>
+      <a href="https://github.com/david-heca" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Icon name="ph:github-logo" /></a>
+      <a href="https://www.linkedin.com/in/david-heca/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="ph:linkedin-logo" /></a>
+      <a href="https://x.com/david_heca_" target="_blank" rel="noopener noreferrer" aria-label="X"><Icon name="ph:x-logo" /></a>
     </div>
   </div>
 </section>
@@ -85,7 +83,6 @@ const t = useTranslations(lang);
     color: var(--color-ink);
     margin: 14px 0 0;
   }
-  .hero__dot { color: var(--color-accent); font-style: normal; }
 
   .hero__role {
     font-family: var(--font-sans);
@@ -112,7 +109,6 @@ const t = useTranslations(lang);
     height: auto;
     border-radius: var(--radius);
     border: 1px solid var(--color-line);
-    box-shadow: var(--shadow-soft);
   }
   .hero__socials {
     position: absolute;

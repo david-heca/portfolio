@@ -16,7 +16,7 @@ const alt = lang === "es" ? "David dando una charla" : "David giving a talk";
 
 <section id="speaking" class="speaking section container">
   <div class="speaking__photo reveal">
-    <span class="speaking__photo-ph" aria-hidden="true"><Icon name="ph:microphone-stage-duotone" /></span>
+    <span class="speaking__photo-ph" aria-hidden="true"><Icon name="ph:microphone-stage" /></span>
     <img src="/assets/speaking.webp" alt={alt} loading="lazy" onerror="this.style.display='none'" />
   </div>
 
@@ -26,7 +26,7 @@ const alt = lang === "es" ? "David dando una charla" : "David giving a talk";
     <p class="lead speaking__lead">{t("speaking.description")}</p>
 
     <div class="speaking__audience">
-      <Icon name="ph:users-three-duotone" />
+      <Icon name="ph:users-three" />
       {t("speaking.audience")}
     </div>
 
@@ -34,7 +34,7 @@ const alt = lang === "es" ? "David dando una charla" : "David giving a talk";
       <div>
         <p class="speaking__meta-label">{t("speaking.venuesLabel")}</p>
         <ul class="speaking__venues">
-          {venues.map((v) => <li><Icon name="ph:map-pin-duotone" />{v}</li>)}
+          {venues.map((v) => <li><Icon name="ph:map-pin" />{v}</li>)}
         </ul>
       </div>
       <div>
@@ -62,12 +62,11 @@ const alt = lang === "es" ? "David dando una charla" : "David giving a talk";
     justify-self: center;
     border-radius: var(--radius);
     border: 1px solid var(--color-line);
-    box-shadow: var(--shadow-soft);
     overflow: hidden;
     background: var(--color-bg-2);
   }
   .speaking__photo-ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-  .speaking__photo-ph [data-icon] { font-size: 72px; color: var(--color-ink-3); }
+  .speaking__photo-ph [data-icon] { font-size: 64px; color: var(--color-ink-3); }
   .speaking__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
   .speaking__lead { margin-top: 22px; }
@@ -82,7 +81,7 @@ const alt = lang === "es" ? "David dando una charla" : "David giving a talk";
     font-size: var(--text-card-title);
     color: var(--color-ink);
   }
-  .speaking__audience [data-icon] { font-size: 28px; color: var(--color-accent); }
+  .speaking__audience [data-icon] { font-size: 26px; color: var(--color-accent); }
 
   .speaking__meta {
     display: grid;
@@ -109,6 +108,6 @@ const alt = lang === "es" ? "David dando una charla" : "David giving a talk";
     font-size: var(--text-sm);
     color: var(--color-ink);
   }
-  .speaking__venues [data-icon] { font-size: 17px; color: var(--color-accent); }
+  .speaking__venues [data-icon] { font-size: 16px; color: var(--color-accent); }
   .speaking__topics { display: flex; flex-wrap: wrap; gap: 8px; }
 </style>

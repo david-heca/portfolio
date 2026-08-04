@@ -12,10 +12,10 @@ const t = useTranslations(lang);
 const email = "hello@davidherrera.dev";
 
 const channels = [
-  { label: "Email", value: email, href: `mailto:${email}`, icon: "ph:envelope-simple-duotone" },
-  { label: "GitHub", value: "@david-heca", href: "https://github.com/david-heca", icon: "ph:github-logo-duotone" },
-  { label: "LinkedIn", value: "in/david-heca", href: "https://www.linkedin.com/in/david-heca/", icon: "ph:linkedin-logo-duotone" },
-  { label: "X", value: "@david_heca_", href: "https://x.com/david_heca_", icon: "ph:x-logo-duotone" },
+  { label: "Email", value: email, href: `mailto:${email}`, icon: "ph:envelope-simple" },
+  { label: "GitHub", value: "@david-heca", href: "https://github.com/david-heca", icon: "ph:github-logo" },
+  { label: "LinkedIn", value: "in/david-heca", href: "https://www.linkedin.com/in/david-heca/", icon: "ph:linkedin-logo" },
+  { label: "X", value: "@david_heca_", href: "https://x.com/david_heca_", icon: "ph:x-logo" },
 ];
 
 const cvFiles = [
@@ -32,7 +32,7 @@ const cvFiles = [
 
     <div class="contact__cta">
       <a href={`mailto:${email}`} class="btn btn--primary">
-        <Icon name="ph:paper-plane-tilt-duotone" />
+        <Icon name="ph:paper-plane-tilt" />
         {t("contact.cta.button")}
       </a>
     </div>
@@ -52,13 +52,13 @@ const cvFiles = [
           <span class="channel__label">{c.label}</span>
           <span class="channel__value">{c.value}</span>
         </span>
-        <span class="channel__arrow" aria-hidden="true">↗</span>
+        <span class="channel__arrow" aria-hidden="true"><Icon name="ph:arrow-up-right" /></span>
       </a>
     ))}
     <div class="contact__cv">
       {cvFiles.map((f) => (
         <a href={f.href} target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
-          <Icon name="ph:file-pdf-duotone" />
+          <Icon name="ph:file-pdf" />
           {f.lab}
         </a>
       ))}
@@ -96,9 +96,7 @@ const cvFiles = [
     margin-top: 32px;
   }
   .contact__note {
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: 0.04em;
+    font-size: var(--text-meta);
     color: var(--color-ink-2);
     margin: 16px 0 0;
   }
@@ -118,7 +116,7 @@ const cvFiles = [
     display: inline-flex;
     color: var(--color-accent);
   }
-  .channel__icon [data-icon] { font-size: 22px; }
+  .channel__icon [data-icon] { font-size: 21px; }
   .channel__text { display: flex; flex-direction: column; gap: 2px; }
   .channel__label {
     font-family: var(--font-mono);
@@ -129,7 +127,8 @@ const cvFiles = [
   }
   .channel__value { font-size: var(--text-body); color: var(--color-ink); }
   .channel:hover .channel__value { color: var(--color-accent); }
-  .channel__arrow { margin-left: auto; color: var(--color-ink-3); }
+  .channel__arrow { display: inline-flex; margin-left: auto; color: var(--color-ink-3); }
+  .channel__arrow [data-icon] { font-size: 17px; }
   .channel:hover .channel__arrow { color: var(--color-accent); }
 
   .contact__cv { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }

@@ -1,7 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import { getLangFromUrl, useTranslations } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
@@ -17,9 +17,10 @@ const home = lang === "es" ? "/" : "/en";
     <h1 class="notfound__title">{t("notFound.subtitle")}</h1>
     <p class="notfound__desc">{t("notFound.description")}</p>
     <div class="notfound__actions">
-      <button onclick="history.back()" class="btn btn--ghost"
-        ><Icon name="ph:arrow-fat-left-duotone" /> {t("notFound.backButton")}</button
-      >
+      <button onclick="history.back()" class="btn btn--ghost">
+        <Icon name="ph:arrow-left" />
+        {t("notFound.backButton")}
+      </button>
     </div>
   </section>
 </Layout>

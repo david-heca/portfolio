@@ -20,7 +20,7 @@ const home = lang === "es" ? "/" : "/en";
       rel="noopener noreferrer"
       class="footer__link"
     >
-      <Icon name="ph:github-logo-duotone" />
+      <Icon name="ph:github-logo" />
       {t("common.footer.license")}
     </a>
   </div>
@@ -44,9 +44,7 @@ const home = lang === "es" ? "/" : "/en";
   }
   .footer__brand span { color: var(--color-accent); }
   .footer__copy {
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: 0.04em;
+    font-size: var(--text-meta);
     color: var(--color-ink-2);
     margin: 0;
   }
@@ -54,12 +52,10 @@ const home = lang === "es" ? "/" : "/en";
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: 0.04em;
+    font-size: var(--text-meta);
     color: var(--color-ink-2);
     transition: color 0.15s ease;
   }
   .footer__link:hover { color: var(--color-accent); }
-  .footer__link [data-icon] { font-size: 15px; }
+  .footer__link [data-icon] { font-size: 16px; }
 </style>

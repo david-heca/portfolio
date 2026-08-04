@@ -53,7 +53,7 @@ Todo el design system es **token-driven**: para reajustar el look se editan vari
 - **Tres tipografías, un rol cada una** (self-hosted vía `@fontsource`, importadas en `Layout.astro`):
   - `--font-display` → **Instrument Serif** (italic): titulares y títulos de sección/card.
   - `--font-sans` → **Hanken Grotesk**: voz de lectura (body, bio, descripciones) y UI (nav, botones).
-  - `--font-mono` → **JetBrains Mono**: etiquetas, metadatos, periodos, tags (`.kicker`, `.tag`).
+  - `--font-mono` → **JetBrains Mono**: solo etiquetas en mayúsculas con tracking, tags/chips y cifras (años, periodos). Lo que se lee como frase —institución, emisor, ubicación, notas, footer— va en sans a `--text-meta`.
 - **Tokens de layout:** `--container` (1180px), `--section-y` (espaciado vertical generoso por sección), `--radius`, `--radius-sm`.
 - **Primitivas compartidas** (en `global.css`): `.container`, `.section`, `.kicker`, `.section-title`, `.lead`, `.prose`, sistema de botones (`.btn` / `.btn--primary` / `.btn--ghost` / `.btn--sm`), `.card`, `.tag` (con `.tag--key`), `.dot`, `.seg` (toggles), y `.reveal` (animación de entrada con IntersectionObserver, escalonada con `.reveal-1..3`).
 - Los estilos específicos de cada sección viven en su `<style>` scoped, no en global.
@@ -62,7 +62,8 @@ Todo el design system es **token-driven**: para reajustar el look se editan vari
 
 - **Secciones** (`src/components/sections/`): `Landing` (compositor), `Hero`, `About` (bio + principios), `Stack`, `Work`, `Projects`, `Education`, `Speaking`, `Contact`. Astro puro, sin islands.
 - **UI** (`src/components/ui/`): `Navbar` (anclas + scrollspy + menú móvil co-locado), `SiteFooter` (footer global único), `ThemeToggle`, `LanguagePicker`.
-- **Iconos:** Phosphor vía `astro-icon` + `@iconify-json/ph`, monocromáticos (`<Icon name="ph:nombre" />`), heredan color con `currentColor`. Uso mínimo y deliberado.
+- **Iconos:** Phosphor vía `astro-icon` + `@iconify-json/ph`, siempre el peso **regular** (nunca `-duotone` ni otras variantes), monocromáticos (`<Icon name="ph:nombre" />`), heredan color con `currentColor`.
+- **Nada de glifos como icono:** flechas y símbolos van como `<Icon>`, nunca como carácter (`↗`, `→`). Algunos navegadores los resuelven contra una fuente de emoji y rompen el tono.
 
 ### Path aliases (tsconfig.json)
 
