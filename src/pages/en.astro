@@ -1,6 +1,7 @@
 ---
 import Layout from "@layouts/Layout.astro";
 import Landing from "@sections/Landing.astro";
+import SiteFooter from "@ui/SiteFooter.astro";
 import { useTranslations } from "@i18n/utils";
 
 const t = useTranslations("en");
@@ -13,4 +14,5 @@ const t = useTranslations("en");
   lang="en"
 >
   <Landing lang="en" />
+  <SiteFooter slot="footer" />
 </Layout>

@@ -16,7 +16,7 @@ const currentPath = Astro.url.pathname;
 const parts = currentPath.split("/");
 if (parts[1] === "en" || parts[1] === "es") parts.splice(1, 1);
 const basePath = parts.join("/") || "/";
-const href = target === "es" ? basePath : `/en${basePath === "/" ? "" : basePath}`;
+const href = target === "es" ? basePath : `/en${basePath === "/" ? "/" : basePath}`;
 
 const nativeName = target === "es" ? "Español" : "English";
 const label = expanded ? nativeName : target.toUpperCase();

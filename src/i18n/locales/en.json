@@ -6,7 +6,7 @@
   },
   "meta": {
     "home": {
-      "title": "David Herrera — Applied AI Engineer",
+      "title": "David Herrera — Applied AI Engineer in Mexico City",
       "description": "Applied AI Engineer in Mexico City. I build RAG and MCP systems on top of the data companies already have, with .NET, Python and Azure."
     }
   },
@@ -281,6 +281,12 @@
   "common": {
     "footer": {
       "license": "Open source · MIT"
+    },
+    "langHint": {
+      "label": "Switch language",
+      "text": "This site is also available in English.",
+      "cta": "View in English",
+      "dismiss": "Dismiss"
     }
   },
   "notFound": {

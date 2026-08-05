@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from "astro:transitions";
 import Navbar from "@ui/Navbar.astro";
+import LanguageHint from "@ui/LanguageHint.astro";
 import "@fontsource/instrument-serif/latin-400.css";
 import "@fontsource/instrument-serif/latin-400-italic.css";
 import "@fontsource/hanken-grotesk/latin-400.css";
@@ -28,8 +29,9 @@ const pathname = Astro.url.pathname;
 const esPath = lang === "en"
   ? (pathname === "/en" || pathname === "/en/" ? "/" : pathname.replace(/^\/en\//, "/"))
   : pathname;
+// Con barra: sin ella el hreflang no casa con el canonical y Google lo descarta.
 const enPath = lang === "es"
-  ? (pathname === "/" ? "/en" : `/en${pathname}`)
+  ? (pathname === "/" ? "/en/" : `/en${pathname}`)
   : pathname;
 const esURL = new URL(esPath, Astro.site);
 const enURL = new URL(enPath, Astro.site);
@@ -104,8 +106,9 @@ const personSchema = {
     <link rel="alternate" hreflang="en" href={enURL} />
     <link rel="alternate" hreflang="x-default" href={esURL} />
 
-    <link rel="alternate" type="application/pdf" hreflang="es" href={cvEsURL} title="Currículum (ES)" />
-    <link rel="alternate" type="application/pdf" hreflang="en" href={cvEnURL} title="Resume (EN)" />
+    <!-- Sin hreflang: cada valor admite una sola URL y competían con el par de arriba. -->
+    <link rel="alternate" type="application/pdf" href={cvEsURL} title="Currículum (ES)" />
+    <link rel="alternate" type="application/pdf" href={cvEnURL} title="Resume (EN)" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="David Herrera" />
@@ -135,6 +138,9 @@ const personSchema = {
     />
 
     <title>{tabTitle}</title>
+
+    <!-- `.reveal` solo se esconde bajo `.js`: sin JS el contenido se ve entero. -->
+    <script is:inline>document.documentElement.classList.add("js");</script>
 
     <script is:inline>
       if (
@@ -172,6 +178,8 @@ const personSchema = {
         if (currentTheme) {
           e.newDocument.documentElement.classList.add("dark");
         }
+        // Los scripts inline de <head> no se reejecutan al hacer swap.
+        e.newDocument.documentElement.classList.add("js");
         e.newDocument.documentElement.dataset.themePref =
           document.documentElement.dataset.themePref || "system";
       });
@@ -197,33 +205,23 @@ const personSchema = {
       setThemeOnNavigation();
     </script>
 
+    <!-- Solo con preferencia elegida a mano. Autodetectar aquí rebotaba a los
+         rastreadores fuera de "/", que es el canonical y el x-default; para eso
+         está LanguageHint, que propone el cambio en vez de forzarlo. -->
     <script is:inline>
       (function() {
-        var KEY = "preferred-lang";
-        var stored = localStorage.getItem(KEY);
+        var stored = localStorage.getItem("preferred-lang");
+        if (stored !== "es" && stored !== "en") return;
+
         var path = window.location.pathname;
         var currentLang = (path === "/en" || path.startsWith("/en/")) ? "en" : "es";
+        if (stored === currentLang) return;
 
-        function buildPath(targetLang) {
-          if (targetLang === "en") return path === "/" ? "/en" : "/en" + path;
-          return path === "/en" ? "/" : path.replace(/^\/en\//, "/") || "/";
-        }
+        var target = stored === "en"
+          ? (path === "/" ? "/en/" : "/en" + path)
+          : (path === "/en" || path === "/en/" ? "/" : path.replace(/^\/en\//, "/") || "/");
 
-        // explicit ES or EN preference: honor it
-        if (stored === "es" || stored === "en") {
-          if (stored !== currentLang) window.location.replace(buildPath(stored));
-          return;
-        }
-
-        // "auto" or unset: detect from navigator (browser/system config)
-        var langs = navigator.languages || [navigator.language];
-        var detected = "es";
-        for (var i = 0; i < langs.length; i++) {
-          if (langs[i].startsWith("en")) { detected = "en"; break; }
-          if (langs[i].startsWith("es")) { detected = "es"; break; }
-        }
-
-        if (detected !== currentLang) window.location.replace(buildPath(detected));
+        window.location.replace(target);
       })();
     </script>
   </head>
@@ -233,6 +231,11 @@ const personSchema = {
     <main class="page">
       <slot />
     </main>
+
+    <!-- Fuera de <main>: dentro no cuenta como landmark `contentinfo`. -->
+    <slot name="footer" />
+
+    <LanguageHint />
 
     <script>
       function setupRevealAnimations() {

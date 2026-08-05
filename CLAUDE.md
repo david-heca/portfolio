@@ -31,7 +31,9 @@ Portafolio personal con **Astro 7** y CSS propio (design system token-driven en 
 - Traducciones en `src/i18n/locales/{es,en}.json`. `useTranslations(lang)` devuelve `t(key)` con notación de punto.
 - Algunas claves traen HTML inline (`<em>`, `<strong>`) y se renderizan con `set:html`.
 - Arrays en el JSON (p.ej. `about.principles`, `projects.list.*.specs`, `work.*.achievements`) se consumen con `t(...) as unknown as T[]`.
-- Detección de idioma del navegador en la primera visita; persistida en `localStorage['preferred-lang']`.
+- **La autodetección propone, no redirige.** `LanguageHint` (`src/components/ui/LanguageHint.astro`) lee `navigator.languages` y, si no coincide con el idioma de la página, muestra un aviso descartable con el enlace al otro idioma. Redirigir automáticamente sacaba a los rastreadores de `/` —canonical y x-default—, contra las anotaciones del propio `<head>`.
+- El único redirect que queda exige preferencia explícita: el `LanguagePicker` la guarda en `localStorage['preferred-lang']`. `lang-hint-dismissed` recuerda que el aviso se cerró.
+- Las URLs internas de inglés llevan barra final (`/en/`): es la forma que emite el build, la del canonical y la del sitemap.
 
 ### SEO
 

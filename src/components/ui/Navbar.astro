@@ -7,7 +7,7 @@ import { sections } from "@/config";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const home = lang === "es" ? "/" : "/en";
+const home = lang === "es" ? "/" : "/en/";
 
 const navItems = [
   { id: "about", label: t("nav.about"), icon: "ph:user" },

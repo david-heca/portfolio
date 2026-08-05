@@ -6,7 +6,7 @@
   },
   "meta": {
     "home": {
-      "title": "David Herrera — Applied AI Engineer",
+      "title": "David Herrera — Applied AI Engineer en Ciudad de México",
       "description": "Applied AI Engineer en CDMX. Construyo sistemas RAG y MCP sobre los datos que las empresas ya tienen, con .NET, Python y Azure."
     }
   },
@@ -281,6 +281,12 @@
   "common": {
     "footer": {
       "license": "Código abierto · MIT"
+    },
+    "langHint": {
+      "label": "Cambiar de idioma",
+      "text": "Este sitio también está en español.",
+      "cta": "Ver en español",
+      "dismiss": "Cerrar aviso"
     }
   },
   "notFound": {

@@ -283,12 +283,13 @@ html.theme-switching::view-transition-new(root) {
 }
 
 /* ----- reveal on scroll ----- */
-.reveal {
+/* Solo bajo `.js`: sin JS el contenido nace visible. */
+.js .reveal {
   opacity: 0;
   transform: translateY(16px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
-.reveal.visible { opacity: 1; transform: none; }
+.js .reveal.visible { opacity: 1; transform: none; }
 .reveal-1 { transition-delay: 0.08s; }
 .reveal-2 { transition-delay: 0.16s; }
 .reveal-3 { transition-delay: 0.24s; }
@@ -300,5 +301,6 @@ html.theme-switching::view-transition-new(root) {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
+  /* `.js` para igualar especificidad con la regla de arriba. */
+  .js .reveal { opacity: 1; transform: none; }
 }

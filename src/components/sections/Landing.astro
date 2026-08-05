@@ -7,7 +7,6 @@ import Projects from "@sections/Projects.astro";
 import Education from "@sections/Education.astro";
 import Speaking from "@sections/Speaking.astro";
 import Contact from "@sections/Contact.astro";
-import SiteFooter from "@ui/SiteFooter.astro";
 import { sections } from "@/config";
 
 export interface Props {
@@ -25,4 +24,3 @@ const { lang } = Astro.props;
 <Education lang={lang} />
 {sections.speaking && <Speaking lang={lang} />}
 <Contact lang={lang} />
-<SiteFooter />

@@ -5,7 +5,7 @@ import pkg from "../../../package.json";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-const home = lang === "es" ? "/" : "/en";
+const home = lang === "es" ? "/" : "/en/";
 ---
 
 <footer class="footer">

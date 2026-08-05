@@ -1,0 +1,146 @@
+---
+import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
+
+const lang = getLangFromUrl(Astro.url);
+const target = lang === "es" ? "en" : "es";
+
+// El aviso se lee en el idioma que ofrece, no en el de la página.
+const tt = useTranslations(target);
+const href = target === "en" ? "/en/" : "/";
+---
+
+<div class="hint" data-lang-hint={target} lang={target} role="region" aria-label={tt("common.langHint.label")} hidden>
+  <p class="hint__text">{tt("common.langHint.text")}</p>
+  <a class="hint__cta" href={href} hreflang={target}>
+    {tt("common.langHint.cta")}
+    <Icon name="ph:arrow-right" aria-hidden="true" />
+  </a>
+  <button class="hint__close" type="button" data-lang-hint-close aria-label={tt("common.langHint.dismiss")}>
+    <Icon name="ph:x" aria-hidden="true" />
+  </button>
+</div>
+
+<style>
+  .hint {
+    position: fixed;
+    z-index: 40;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: max-content;
+    max-width: calc(100vw - 32px);
+    padding: 12px 12px 12px 20px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-line-strong);
+    border-radius: 999px;
+    box-shadow: var(--shadow-soft);
+  }
+  .hint[hidden] { display: none; }
+
+  .hint__text {
+    font-size: var(--text-meta);
+    color: var(--color-ink);
+    margin: 0;
+  }
+
+  .hint__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-label-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    border: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
+    border-radius: 999px;
+    padding: 7px 14px;
+    transition: background-color 0.18s ease, border-color 0.18s ease;
+  }
+  .hint__cta:hover {
+    background: var(--color-accent-soft);
+    border-color: var(--color-accent);
+  }
+  .hint__cta [data-icon] { font-size: 13px; }
+
+  .hint__close {
+    display: inline-flex;
+    flex-shrink: 0;
+    padding: 6px;
+    border-radius: 50%;
+    color: var(--color-ink-3);
+    transition: color 0.15s ease, background-color 0.15s ease;
+  }
+  .hint__close:hover { color: var(--color-ink); background: var(--color-bg-2); }
+  .hint__close [data-icon] { font-size: 15px; }
+
+  @media (max-width: 560px) {
+    .hint {
+      left: 16px;
+      right: 16px;
+      width: auto;
+      transform: none;
+      flex-wrap: wrap;
+      border-radius: var(--radius);
+      padding: 16px;
+    }
+    .hint__text { flex: 1 1 100%; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .hint { animation: hint-in 0.32s ease both; }
+    @keyframes hint-in {
+      from { opacity: 0; transform: translate(-50%, 12px); }
+    }
+    @media (max-width: 560px) {
+      @keyframes hint-in {
+        from { opacity: 0; transform: translateY(12px); }
+      }
+    }
+  }
+</style>
+
+<script>
+  const STORE_KEY = "preferred-lang";
+  const DISMISS_KEY = "lang-hint-dismissed";
+
+  function detectLang(): string | null {
+    const langs = navigator.languages || [navigator.language];
+    for (const l of langs) {
+      if (l.startsWith("en")) return "en";
+      if (l.startsWith("es")) return "es";
+    }
+    return null;
+  }
+
+  function setupLangHint() {
+    const el = document.querySelector<HTMLElement>("[data-lang-hint]");
+    // `astro:page-load` también dispara en la carga inicial: sin esto los
+    // listeners se enlazan dos veces.
+    if (!el || el.dataset.hintReady) return;
+
+    const target = el.dataset.langHint;
+    if (localStorage.getItem(STORE_KEY) || localStorage.getItem(DISMISS_KEY)) return;
+    if (detectLang() !== target) return;
+
+    el.dataset.hintReady = "true";
+    el.hidden = false;
+
+    el.querySelector("[data-lang-hint-close]")?.addEventListener("click", () => {
+      localStorage.setItem(DISMISS_KEY, "1");
+      el.hidden = true;
+    });
+
+    el.querySelector(".hint__cta")?.addEventListener("click", () => {
+      if (target) localStorage.setItem(STORE_KEY, target);
+    });
+  }
+
+  setupLangHint();
+  document.addEventListener("astro:page-load", setupLangHint);
+</script>
