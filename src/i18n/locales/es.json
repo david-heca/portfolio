@@ -202,12 +202,10 @@
   },
   "education": {
     "headerTitle": "Cómo",
-    "headerItalic": "aprendí",
-    "description": "Dónde estudié, qué certifiqué y en qué se me va el tiempo libre.",
+    "headerItalic": "aprendo",
+    "description": "Dónde estudié y lo que sigo estudiando por mi cuenta.",
     "academicTitle": "Académico",
     "certsTitle": "Certificaciones",
-    "languagesTitle": "Idiomas",
-    "interestsTitle": "Intereses",
     "list": {
       "platzi": {
         "institution": "Platzi — Escuela de Tecnología",

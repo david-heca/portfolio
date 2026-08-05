@@ -1,6 +1,5 @@
 ---
 import { useTranslations } from "@i18n/utils";
-import { Icon } from "astro-icon/components";
 
 export interface Props {
   lang: "es" | "en";
@@ -9,38 +8,36 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const academicIcons: Record<string, string> = {
-  tesco: "ph:graduation-cap",
-  platzi: "ph:monitor-play",
-  cecytem: "ph:code",
-};
+interface Entry {
+  period: string;
+  title: string;
+  meta: string;
+  note?: string;
+  /** El nodo lleno en la línea marca lo que sigue en curso. */
+  current?: boolean;
+}
 
-const academic = ["tesco", "platzi", "cecytem"].map((k) => ({
-  icon: academicIcons[k],
-  year: t(`education.list.${k}.period`),
-  degree: t(`education.list.${k}.degree`),
-  school: t(`education.list.${k}.institution`),
-  note: t(`education.list.${k}.description`),
+const academic: Entry[] = [
+  { key: "tesco" },
+  { key: "platzi", current: true },
+  { key: "cecytem" },
+].map(({ key, current }) => ({
+  period: t(`education.list.${key}.period`),
+  title: t(`education.list.${key}.degree`),
+  meta: t(`education.list.${key}.institution`),
+  note: t(`education.list.${key}.description`),
+  current,
 }));
 
-const certs = [
-  { year: "2024", name: t("education.certifications.azure.name"), issuer: "Microsoft", icon: "ph:cloud", tags: ["Azure", "Cloud", "Security"] },
-  { year: "2022", name: t("education.certifications.python.name"), issuer: "U. Michigan · Coursera", icon: "ph:code", tags: ["Python", "SQL"] },
+const certs: Entry[] = [
+  { period: "2024", title: t("education.certifications.azure.name"), meta: "Microsoft" },
+  { period: "2022", title: t("education.certifications.python.name"), meta: "U. Michigan · Coursera" },
 ];
 
-const interests = lang === "es"
-  ? ["IA generativa", "MLOps", "Sistemas distribuidos", "Café de especialidad", "Tipografía"]
-  : ["Generative AI", "MLOps", "Distributed systems", "Specialty coffee", "Typography"];
-
-const languages = lang === "es"
-  ? [
-      { name: "Español", level: "Nativo" },
-      { name: "Inglés", level: "B2" },
-    ]
-  : [
-      { name: "Spanish", level: "Native" },
-      { name: "English", level: "B2" },
-    ];
+const groups = [
+  { label: t("education.academicTitle"), entries: academic },
+  { label: t("education.certsTitle"), entries: certs },
+];
 ---
 
 <section id="education" class="edu section container">
@@ -50,62 +47,24 @@ const languages = lang === "es"
     <p class="lead">{t("education.description")}</p>
   </header>
 
-  <div class="edu__split">
-    <div class="edu__col reveal">
-      <p class="edu__col-label">{t("education.academicTitle")}</p>
-      <div class="edu__list">
-        {academic.map((e) => (
-          <div class="edu-item">
-            <div class="edu-item__aside">
-              <Icon name={e.icon} class="edu-item__icon" />
-              <span class="edu-item__year">{e.year}</span>
+  <div class="edu__groups">
+    {groups.map((g, i) => (
+      <div class={`edu__group reveal reveal-${Math.min(i + 1, 3)}`}>
+        <p class="edu__label">{g.label}</p>
+        <div class="edu__list">
+          {g.entries.map((e) => (
+            <div class:list={["edu-item", e.current && "edu-item--current"]}>
+              <span class="edu-item__period">{e.period}</span>
+              <div class="edu-item__body">
+                <h3 class="edu-item__title">{e.title}</h3>
+                <p class="edu-item__meta">{e.meta}</p>
+                {e.note && <p class="edu-item__note">{e.note}</p>}
+              </div>
             </div>
-            <div>
-              <h3 class="edu-item__degree">{e.degree}</h3>
-              <p class="edu-item__school">{e.school}</p>
-              <p class="edu-item__note">{e.note}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <div class="edu__col reveal reveal-1">
-      <p class="edu__col-label">{t("education.certsTitle")}</p>
-      <div class="edu__list">
-        {certs.map((c) => (
-          <div class="cert">
-            <div class="cert__head">
-              <span class="cert__lead">
-                <Icon name={c.icon} class="cert__icon" />
-                <h3 class="cert__name">{c.name}</h3>
-              </span>
-              <span class="cert__year">{c.year}</span>
-            </div>
-            <p class="cert__issuer">{c.issuer}</p>
-            <div class="cert__tags">{c.tags.map((tg) => <span class="tag">{tg}</span>)}</div>
-          </div>
-        ))}
-      </div>
-
-      <div class="edu__extra">
-        <div>
-          <p class="edu__col-label">{t("education.languagesTitle")}</p>
-          <ul class="langs">
-            {languages.map((l) => (
-              <li class="lang">
-                <span class="lang__name">{l.name}</span>
-                <span class="lang__level">{l.level}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <p class="edu__col-label">{t("education.interestsTitle")}</p>
-          <div class="cert__tags">{interests.map((i) => <span class="tag">{i}</span>)}</div>
+          ))}
         </div>
       </div>
-    </div>
+    ))}
   </div>
 </section>
 
@@ -113,114 +72,103 @@ const languages = lang === "es"
   .sec-head { max-width: 720px; margin-bottom: 56px; }
   .sec-head .lead { margin-top: 20px; }
 
-  .edu__split {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 48px;
-  }
-  @media (min-width: 900px) { .edu__split { grid-template-columns: 1fr 1fr; gap: 64px; } }
+  .edu__groups { display: flex; flex-direction: column; gap: 72px; }
 
-  .edu__col-label {
+  .edu__label {
     font-family: var(--font-mono);
     font-size: var(--text-label);
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--color-accent);
-    margin: 0 0 24px;
+    margin: 0 0 32px;
   }
 
-  .edu__list { display: flex; flex-direction: column; gap: 32px; }
-
-  .edu-item { display: grid; grid-template-columns: 1fr; gap: 4px; }
-  @media (min-width: 480px) { .edu-item { grid-template-columns: 110px 1fr; gap: 20px; } }
-  .edu-item__aside {
+  .edu__list {
+    position: relative;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 10px;
-    padding-top: 3px;
+    flex-direction: column;
+    gap: 44px;
   }
-  @media (min-width: 480px) { .edu-item__aside { flex-direction: column; align-items: flex-start; gap: 8px; } }
-  .edu-item__icon { font-size: 24px; color: var(--color-accent); }
-  .edu-item__year {
+
+  .edu-item {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-left: 22px;
+  }
+
+  /* El hilo vertical es la cronología: sostiene la sección y marca dónde
+     sigue abierta. Se desvanece en los extremos para no cortar en seco. */
+  .edu__list::before {
+    content: "";
+    position: absolute;
+    left: 3px;
+    top: 6px;
+    bottom: 6px;
+    width: 1px;
+    background: var(--color-line-strong);
+    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+  }
+
+  .edu-item::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    box-shadow: inset 0 0 0 1px var(--color-line-strong);
+  }
+  .edu-item--current::before {
+    background: var(--color-accent);
+    box-shadow: 0 0 0 5px var(--color-accent-soft);
+  }
+
+  @media (min-width: 768px) {
+    .edu-item {
+      grid-template-columns: 128px minmax(0, 660px);
+      gap: 44px;
+      padding-left: 0;
+    }
+    /* Rail de 128px + medio gap: el hilo cae justo entre fecha y contenido,
+       y el cuerpo arranca en 172px, el mismo del rail de Work. */
+    .edu__list::before { left: 150px; }
+    .edu-item::before { left: 147px; }
+    .edu-item__period { text-align: right; }
+  }
+
+  .edu-item__period {
     font-family: var(--font-mono);
     font-size: var(--text-label);
     letter-spacing: 0.04em;
     color: var(--color-ink-2);
+    font-variant-numeric: tabular-nums;
+    padding-top: 7px;
   }
-  .edu-item__degree {
+  .edu-item--current .edu-item__period { color: var(--color-accent); }
+
+  .edu-item__title {
     font-family: var(--font-display);
     font-style: italic;
     font-size: var(--text-card-title);
     line-height: 1.1;
     color: var(--color-ink);
     margin: 0;
+    text-wrap: balance;
   }
-  .edu-item__school {
+  .edu-item__meta {
     font-size: var(--text-meta);
     color: var(--color-ink-2);
-    margin: 6px 0 0;
+    margin: 8px 0 0;
   }
   .edu-item__note {
     font-size: var(--text-sm);
     line-height: 1.55;
-    color: var(--color-ink-2);
-    margin: 10px 0 0;
-  }
-
-  .cert { padding-bottom: 28px; border-bottom: 1px solid var(--color-line); }
-  .cert:last-child { border-bottom: 0; padding-bottom: 0; }
-  .cert__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
-  .cert__lead { display: flex; align-items: center; gap: 11px; min-width: 0; }
-  .cert__icon { font-size: 22px; color: var(--color-accent); }
-  .cert__name {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: var(--text-card-title);
-    line-height: 1.15;
-    color: var(--color-ink);
-    margin: 0;
-  }
-  .cert__year {
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
     color: var(--color-ink-3);
-    flex-shrink: 0;
-  }
-  .cert__issuer {
-    font-size: var(--text-meta);
-    color: var(--color-ink-2);
-    margin: 6px 0 12px;
-  }
-  .cert__tags { display: flex; flex-wrap: wrap; gap: 7px; }
-
-  .edu__extra {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-    margin-top: 40px;
-    padding-top: 32px;
-    border-top: 1px solid var(--color-line);
-  }
-  .langs { display: flex; flex-direction: column; gap: 14px; margin: 0; }
-  .lang {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
-  }
-  .lang__name {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: 20px;
-    line-height: 1;
-    color: var(--color-ink);
-  }
-  .lang__level {
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-ink-2);
+    margin: 12px 0 0;
   }
 </style>
