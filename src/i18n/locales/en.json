@@ -240,12 +240,7 @@
   "projects": {
     "headerTitle": "Selected",
     "headerItalic": "work",
-    "description": "Four systems: three running inside companies and one you're looking at right now.",
-    "spec": {
-      "challenge": "Challenge",
-      "role": "Role",
-      "impact": "Impact"
-    },
+    "description": "Software someone opens in the morning to get their work done.",
     "status": {
       "production": "In production",
       "delivered": "Delivered",
@@ -260,31 +255,19 @@
     "list": {
       "portfolio": {
         "title": "Portfolio",
-        "description": "This site. I designed and wrote the whole thing, no template and no CSS framework.",
-        "challenge": "Having a site that didn't look like everyone else's",
-        "role": "All of it: design, code and copy",
-        "impact": "ES/EN, near-zero client JS, open source"
+        "description": "This site. I designed and wrote the whole thing, no template and no CSS framework. Bilingual, with almost no client-side JavaScript."
       },
       "connie": {
         "title": "Connie",
-        "description": "You ask the company's databases, PDFs and spreadsheets in plain language, and it answers citing where each figure came from. Three clients use it daily.",
-        "challenge": "Knowledge scattered across databases, PDFs and spreadsheets",
-        "role": "Architect · 80% of the system, from scratch",
-        "impact": "3 clients in production"
+        "description": "You ask the company's databases, PDFs and spreadsheets in plain language, and it answers citing where each figure came from. I designed it from scratch and wrote 80% of the system. Three clients use it daily."
       },
       "handheld": {
         "title": "HandHeld RFID",
-        "description": "Android app with an RFID reader. Inventory went from taking weeks —or never happening— to being done walking the warehouse floor.",
-        "challenge": "Manual inventory capture, weeks behind reality",
-        "role": "Android app and RFID reading, end to end",
-        "impact": "Inventory in a day, not in weeks"
+        "description": "Android app with an RFID reader, end to end. Inventory went from taking weeks —or never happening— to being done walking the warehouse floor."
       },
       "trace": {
         "title": "Automotive Traceability",
-        "description": "Shop-floor desktop system: every part gets logged as it passes each station on the line.",
-        "challenge": "No part-level traceability across the production line",
-        "role": "Built the shop-floor desktop system",
-        "impact": "Thousands of parts a day, every one findable"
+        "description": "Shop-floor desktop system. Every part gets logged as it passes each station on the line; thousands of them a day."
       }
     }
   },

@@ -240,12 +240,7 @@
   "projects": {
     "headerTitle": "Trabajo",
     "headerItalic": "seleccionado",
-    "description": "Cuatro sistemas: tres corriendo dentro de empresas y uno que estás viendo ahora mismo.",
-    "spec": {
-      "challenge": "Reto",
-      "role": "Rol",
-      "impact": "Impacto"
-    },
+    "description": "Software que alguien abre por la mañana para hacer su trabajo.",
     "status": {
       "production": "En producción",
       "delivered": "Entregado",
@@ -260,31 +255,19 @@
     "list": {
       "portfolio": {
         "title": "Portafolio",
-        "description": "Este sitio. Lo diseñé y lo escribí entero, sin plantilla y sin framework de CSS.",
-        "challenge": "Tener un sitio que no se pareciera a los demás",
-        "role": "Todo: diseño, código y contenido",
-        "impact": "ES/EN, casi cero JS en cliente, código abierto"
+        "description": "Este sitio. Lo diseñé y lo escribí entero, sin plantilla y sin framework de CSS. Bilingüe y con casi nada de JavaScript en el cliente."
       },
       "connie": {
         "title": "Connie",
-        "description": "Le preguntas en español a las bases de datos, PDFs y Excels de la empresa, y responde citando de dónde sacó cada dato. Tres clientes la usan a diario.",
-        "challenge": "El conocimiento estaba repartido entre bases de datos, PDFs y hojas de cálculo",
-        "role": "Arquitecto · 80% del sistema, desde cero",
-        "impact": "3 clientes en producción"
+        "description": "Le preguntas en español a las bases de datos, PDFs y Excels de la empresa, y responde citando de dónde sacó cada dato. La diseñé desde cero y escribí el 80% del sistema. Tres clientes la usan a diario."
       },
       "handheld": {
         "title": "HandHeld RFID",
-        "description": "App Android con lector RFID. El inventario pasó de tomar semanas —o de no hacerse— a resolverse caminando por la nave.",
-        "challenge": "Captura manual de inventario, con semanas de retraso",
-        "role": "App Android y lectura RFID, de extremo a extremo",
-        "impact": "Inventario en un día, no en semanas"
+        "description": "App Android con lector RFID, de extremo a extremo. El inventario pasó de tomar semanas —o de no hacerse— a resolverse caminando por la nave."
       },
       "trace": {
         "title": "Trazabilidad Automotriz",
-        "description": "Sistema de escritorio para piso de planta: cada pieza queda registrada al pasar por cada estación de la línea.",
-        "challenge": "Sin trazabilidad de pieza a lo largo de la línea de producción",
-        "role": "Desarrollo del sistema de escritorio en planta",
-        "impact": "Miles de piezas al día, cada una localizable"
+        "description": "Sistema de escritorio para piso de planta. Cada pieza queda registrada al pasar por cada estación de la línea; son miles al día."
       }
     }
   },

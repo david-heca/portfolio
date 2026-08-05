@@ -11,16 +11,10 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const SPECS = ["challenge", "role", "impact"] as const;
-
 const items = projects.map((p) => ({
   ...p,
   title: t(`projects.list.${p.slug}.title`),
   desc: t(`projects.list.${p.slug}.description`),
-  specs: SPECS.map((key) => ({
-    label: t(`projects.spec.${key}`),
-    value: t(`projects.list.${p.slug}.${key}`),
-  })),
   statusLabel: t(`projects.status.${p.status}`),
   href: p.link.kind === "private" ? undefined : p.link.href,
   linkLabel: t(`projects.link.${p.link.kind}`),
@@ -53,15 +47,6 @@ const items = projects.map((p) => ({
             )}
           </h3>
           <p class="row__desc">{p.desc}</p>
-
-          <dl class="specs">
-            {p.specs.map((s) => (
-              <div class="specs__row">
-                <dt>{s.label}</dt>
-                <dd>{s.value}</dd>
-              </div>
-            ))}
-          </dl>
 
           <div class="row__foot">
             {p.tags.map((tag) => <span class="tag">{tag}</span>)}
@@ -149,23 +134,6 @@ const items = projects.map((p) => ({
     color: var(--color-ink-2);
     margin: 8px 0 0;
     max-width: 58ch;
-  }
-
-  .specs { margin: 20px 0 0; display: flex; flex-direction: column; gap: 9px; }
-  .specs__row { display: grid; grid-template-columns: 82px minmax(0, 1fr); gap: 16px; align-items: baseline; }
-  .specs dt {
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-ink-3);
-    margin: 0;
-  }
-  .specs dd {
-    margin: 0;
-    font-size: var(--text-sm);
-    line-height: 1.45;
-    color: var(--color-ink-2);
   }
 
   .row__foot {

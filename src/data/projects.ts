@@ -5,8 +5,8 @@
  * `projects.status/link` de cada locale, no en cada proyecto. Así ES y EN no
  * pueden divergir y un proyecto nuevo no inventa vocabulario.
  *
- * Lo traducible de cada proyecto es solo el texto propio (título, descripción
- * y las tres ranuras reto/rol/impacto), en `projects.list.<slug>`.
+ * Lo traducible de cada proyecto es solo su texto propio (título y descripción),
+ * en `projects.list.<slug>`.
  */
 
 export type Status = "production" | "delivered" | "live" | "archived";
