@@ -201,7 +201,7 @@ const navItems = [
   function setupMenu() {
     const btn = document.getElementById("menu-btn");
     const menu = document.getElementById("mobile-menu");
-    if (!btn || !menu || (btn as HTMLElement).dataset.ready) return;
+    if (!btn || !menu || btn.dataset.ready) return;
     let open = false;
     const set = (v: boolean) => {
       open = v;
@@ -215,16 +215,20 @@ const navItems = [
       if (open && !menu.contains(e.target as Node) && e.target !== btn) set(false);
     });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && open) set(false); });
-    (btn as HTMLElement).dataset.ready = "true";
+    btn.dataset.ready = "true";
   }
 
   function setupSpy() {
     const links = [...document.querySelectorAll<HTMLElement>("[data-spy]")];
-    if (!links.length) return;    const ids = [...new Set(links.map((l) => l.dataset.spy!))];
+    if (!links.length) return;
+
+    const ids = [...new Set(links.map((l) => l.dataset.spy!))];
     const targets = ids
       .map((id) => ({ id, el: document.getElementById(id) }))
       .filter((t): t is { id: string; el: HTMLElement } => !!t.el);
-    if (!targets.length) return;    const HIGHLIGHT_FIRST_AT_TOP = true;
+    if (!targets.length) return;
+
+    const HIGHLIGHT_FIRST_AT_TOP = true;
 
     let queued = false;
 
@@ -252,9 +256,8 @@ const navItems = [
     }
 
     // Se remonta en cada navegación: sin esto los listeners se acumulan.
-    const prev = (window as any).__spyCleanup;
-    if (prev) prev();
-    (window as any).__spyCleanup = () => {
+    window.__spyCleanup?.();
+    window.__spyCleanup = () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
     };
