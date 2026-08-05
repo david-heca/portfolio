@@ -98,8 +98,6 @@ const groups = [
     padding-left: 22px;
   }
 
-  /* El hilo vertical es la cronología: sostiene la sección y marca dónde
-     sigue abierta. Se desvanece en los extremos para no cortar en seco. */
   .edu__list::before {
     content: "";
     position: absolute;
@@ -134,8 +132,7 @@ const groups = [
       gap: 44px;
       padding-left: 0;
     }
-    /* Rail de 128px + medio gap: el hilo cae justo entre fecha y contenido,
-       y el cuerpo arranca en 172px, el mismo del rail de Work. */
+    /* 128px de rail + medio gap: el hilo cae entre fecha y contenido. */
     .edu__list::before { left: 150px; }
     .edu-item::before { left: 147px; }
     .edu-item__period { text-align: right; }

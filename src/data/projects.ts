@@ -1,14 +1,4 @@
-/**
- * Proyectos de la landing.
- *
- * Los ejes taxonómicos son enums cerrados: sus etiquetas visibles viven en
- * `projects.status/link` de cada locale, no en cada proyecto. Así ES y EN no
- * pueden divergir y un proyecto nuevo no inventa vocabulario.
- *
- * Lo traducible de cada proyecto es solo su texto propio (título y descripción),
- * en `projects.list.<slug>`.
- */
-
+/** Las etiquetas de `status`/`link` viven en los locales, no aquí, para que ES y EN no diverjan. */
 export type Status = "production" | "delivered" | "live" | "archived";
 
 /** `private` cubre lo que no se puede enlazar: sistemas internos de cliente. */

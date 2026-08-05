@@ -42,7 +42,6 @@ const t = useTranslations(lang);
     background: var(--color-bg-2);
   }
 
-  /* El glifo refleja la preferencia actual; el title dice qué hará el click. */
   .theme-toggle__glyph {
     position: absolute;
     font-size: 17px;
@@ -121,10 +120,7 @@ const t = useTranslations(lang);
       ) {
         apply(next);
         return;
-      }
-
-      // Barrido circular desde el propio botón.
-      const r = btn.getBoundingClientRect();
+      }      const r = btn.getBoundingClientRect();
       const x = r.left + r.width / 2;
       const y = r.top + r.height / 2;
       const radius = Math.hypot(
@@ -140,9 +136,7 @@ const t = useTranslations(lang);
       vt.finished.finally(() => root.classList.remove("theme-switching"));
     }
 
-    syncLabels(getPref());
-    // Tras el primer frame ya se puede animar sin que el estado inicial rebote.
-    requestAnimationFrame(() => root.classList.add("theme-ready"));
+    syncLabels(getPref());    requestAnimationFrame(() => root.classList.add("theme-ready"));
     buttons.forEach((b) => {
       if (b.dataset.ready) return;
       b.addEventListener("click", () => cycle(b));

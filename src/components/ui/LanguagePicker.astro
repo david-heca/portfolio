@@ -54,8 +54,7 @@ const label = expanded ? nativeName : target.toUpperCase();
     color: var(--color-ink);
     background: var(--color-bg-2);
   }
-  /* Caja fija: el icono no depende de la métrica de la fuente, así no se
-     recoloca cuando JetBrains Mono termina de cargar. */
+  /* Caja fija: evita el salto cuando termina de cargar JetBrains Mono. */
   .lang-switch [data-icon] {
     width: 15px;
     height: 15px;
@@ -65,9 +64,7 @@ const label = expanded ? nativeName : target.toUpperCase();
     line-height: 1;
     /* compensa el letter-spacing sobrante tras la última letra */
     margin-right: -0.12em;
-    /* Nudge óptico: las mayúsculas no usan el hueco del descendente, así que
-       centrar la caja las deja altas respecto del icono. Sube o baja este
-       valor si hace falta afinarlo; no afecta al layout. */
+    /* Nudge óptico: las mayúsculas no usan el hueco del descendente. */
     position: relative;
     top: 0.08em;
   }
