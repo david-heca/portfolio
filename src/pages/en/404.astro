@@ -4,9 +4,8 @@ import NotFound from "@sections/NotFound.astro";
 import SiteFooter from "@ui/SiteFooter.astro";
 import { useTranslations } from "@i18n/utils";
 
-// El idioma no se deduce de la URL: el build congela esta página en un solo
-// HTML. El gemelo inglés vive en `/en/404` y Cloudflare sirve el más cercano.
-const lang = "es" as const;
+// Cloudflare sirve el `404.html` más cercano al path pedido: este cubre `/en/*`.
+const lang = "en" as const;
 const t = useTranslations(lang);
 ---
 

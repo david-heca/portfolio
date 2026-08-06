@@ -1,0 +1,89 @@
+---
+import { Icon } from "astro-icon/components";
+import { useTranslations } from "@i18n/utils";
+
+export interface Props {
+  lang: "es" | "en";
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const home = lang === "es" ? "/" : "/en/";
+---
+
+<section class="notfound container">
+  <p class="notfound__num">404</p>
+  <h1 class="notfound__title">{t("notFound.subtitle")}</h1>
+  <p class="notfound__desc">{t("notFound.description")}</p>
+  <div class="notfound__actions">
+    <a href={home} class="btn btn--primary">
+      <Icon name="ph:house" aria-hidden="true" />
+      {t("notFound.homeButton")}
+    </a>
+    <!-- Sin historial propio "volver" no lleva a ninguna parte: lo revela el script. -->
+    <button type="button" data-back class="btn btn--ghost" hidden>
+      <Icon name="ph:arrow-left" aria-hidden="true" />
+      {t("notFound.backButton")}
+    </button>
+  </div>
+</section>
+
+<style>
+  .notfound {
+    padding-top: clamp(80px, 14vw, 160px);
+    padding-bottom: clamp(80px, 14vw, 160px);
+    max-width: 640px;
+  }
+  .notfound__num {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(96px, 22vw, 220px);
+    line-height: 0.85;
+    color: var(--color-accent);
+    margin: 0;
+  }
+  .notfound__title {
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(32px, 5vw, 52px);
+    line-height: 1.05;
+    color: var(--color-ink);
+    margin: 24px 0 0;
+  }
+  .notfound__desc {
+    font-size: var(--text-body);
+    line-height: var(--leading);
+    color: var(--color-ink-2);
+    margin: 16px 0 0;
+    max-width: 48ch;
+  }
+  .notfound__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 40px;
+  }
+  .notfound__actions .btn[hidden] { display: none; }
+</style>
+
+<script>
+  function setupBack() {
+    const btn = document.querySelector<HTMLButtonElement>("[data-back]");
+    if (!btn || btn.dataset.ready) return;
+
+    let sameOrigin = false;
+    try {
+      sameOrigin =
+        !!document.referrer &&
+        new URL(document.referrer).origin === window.location.origin;
+    } catch {}
+    if (!sameOrigin) return;
+
+    btn.hidden = false;
+    btn.addEventListener("click", () => history.back());
+    btn.dataset.ready = "true";
+  }
+
+  setupBack();
+  document.addEventListener("astro:page-load", setupBack);
+</script>

@@ -1,11 +1,21 @@
 /* Design system: tokens, reset, shared primitives.
    Section layout lives in each component's scoped <style>. */
 
+/* Junicode (OFL, psb1558/Junicode-font) subseteado a latin desde el VF de 1.2 MB.
+   Solo la italic: es la única voz de display y el sitio nunca la pide en roman. */
+@font-face {
+  font-family: "Junicode";
+  src: url("/assets/fonts/junicode-italic.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: italic;
+  font-display: swap;
+}
+
 :root {
   /* typefaces — one role each */
-  --font-display: "Instrument Serif", Georgia, serif;
-  --font-sans: "Hanken Grotesk", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", "SF Mono", ui-monospace, monospace;
+  --font-display: "Junicode", Georgia, serif;
+  --font-text: "Schibsted Grotesk Variable", system-ui, sans-serif;
+  --font-mono: "Maple Mono", "SF Mono", ui-monospace, monospace;
 
   /* warm neutral palette — one accent, the rest derives from it */
   --color-bg: #f5f1ea;
@@ -35,13 +45,16 @@
   --text-label-sm: 11px;   /* mono micro: spec keys, card meta */
   --text-label: 12px;      /* mono labels, kickers, periods */
   --track-label: 0.16em;
-  /* Lo que se lee como frase (institución, emisor, notas, footer) va en sans
-     a este tamaño; el mono se reserva a etiquetas, tags y cifras. */
+  /* Lo que se lee como frase (institución, emisor, notas, footer) va en la
+     sans a este tamaño; el mono se reserva a etiquetas, tags y cifras. */
   --text-meta: 13.5px;
   --text-sm: 14.5px;       /* secondary prose: card descriptions, notes, achievements */
   --text-body: 16px;       /* primary prose: bio, featured description, channel values */
   --text-lead: clamp(18px, 2.1vw, 21px);  /* section lead */
-  --text-card-title: clamp(22px, 2.5vw, 26px);  /* serif card titles (role/degree/cert/project) */
+  /* Títulos de card (rol/grado/certificado/proyecto): sans 600, no italic.
+     La italic queda reservada al hero, los títulos de sección y la marca —si
+     baja a este nivel deja de significar énfasis y el sitio se satura. */
+  --text-card-title: clamp(19px, 2.1vw, 22px);
   --leading: 1.65;
   --measure: 60ch;
 
@@ -84,21 +97,13 @@ html {
   scroll-padding-top: 88px;
   overflow-x: clip;
   background-color: var(--color-bg);
-  background-image:
-    linear-gradient(
-      180deg,
-      var(--bg-top) 0%,
-      var(--bg-mid) 55%,
-      var(--bg-end) 100%
-    );
-  background-repeat: no-repeat;
 }
 
 html, body {
   margin: 0;
   padding: 0;
   color: var(--color-ink);
-  font-family: var(--font-sans);
+  font-family: var(--font-text);
   font-size: var(--text-body);
   line-height: var(--leading);
   -webkit-font-smoothing: antialiased;
@@ -151,7 +156,7 @@ img, svg { display: block; max-width: 100%; }
   font-weight: 400;
   letter-spacing: -0.02em;
   line-height: 1;
-  font-size: clamp(38px, 6vw, 68px);
+  font-size: clamp(38px, 6vw, 58px);
   color: var(--color-ink);
   margin: 14px 0 0;
 }
@@ -170,7 +175,7 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-ink-2);
   max-width: var(--measure);
 }
-.prose strong { color: var(--color-ink); font-weight: 600; }
+.prose strong { color: var(--color-ink); font-weight: 500; }
 
 /* ----- buttons (cozy) ----- */
 .btn {
@@ -178,7 +183,7 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-family: var(--font-sans);
+  font-family: var(--font-text);
   font-weight: 500;
   font-size: 15px;
   line-height: 1;

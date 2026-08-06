@@ -9,6 +9,12 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const home = lang === "es" ? "/" : "/en/";
 
+// Fuera de la landing (404) las anclas no existen y el clic no hacía nada:
+// ahí el enlace tiene que llevar a la landing con su ancla.
+const path = Astro.url.pathname;
+const onLanding = path === "/" || path === "/en" || path === "/en/";
+const anchor = (id: string) => (onLanding ? `#${id}` : `${home}#${id}`);
+
 const navItems = [
   { id: "about", label: t("nav.about"), icon: "ph:user" },
   { id: "work", label: t("nav.work"), icon: "ph:briefcase" },
@@ -29,7 +35,7 @@ const navItems = [
 
     <nav class="nav__links" aria-label="Primary">
       {navItems.map((item) => (
-        <a href={`#${item.id}`} class="nav__link" data-spy={item.id}>
+        <a href={anchor(item.id)} class="nav__link" data-spy={item.id}>
           <Icon name={item.icon} aria-hidden="true" />
           {item.label}
         </a>
@@ -50,7 +56,7 @@ const navItems = [
   <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
     <nav aria-label="Mobile">
       {navItems.map((item) => (
-        <a href={`#${item.id}`} class="mobile-menu__link" data-spy={item.id}>
+        <a href={anchor(item.id)} class="mobile-menu__link" data-spy={item.id}>
           <Icon name={item.icon} aria-hidden="true" />
           {item.label}
         </a>

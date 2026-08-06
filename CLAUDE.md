@@ -35,10 +35,17 @@ Portafolio personal con **Astro 7** y CSS propio (design system token-driven en 
 - El único redirect que queda exige preferencia explícita: el `LanguagePicker` la guarda en `localStorage['preferred-lang']`. `lang-hint-dismissed` recuerda que el aviso se cerró.
 - Las URLs internas de inglés llevan barra final (`/en/`): es la forma que emite el build, la del canonical y la del sitemap.
 
+### 404
+
+- **Una página por idioma**: `src/pages/404.astro` y `src/pages/en/404.astro`, ambas envoltorios finos sobre `@sections/NotFound.astro`. El idioma va **hardcodeado** en cada página: el build congela cada HTML y `getLangFromUrl` devolvería siempre `es`.
+- Cloudflare sirve el `404.html` más cercano al path pedido, así que `/en/*` cae en el suyo. Astro escribe las rutas anidadas como `en/404/index.html`, y la integración `nested-404` de `astro.config.ts` lo renombra a `en/404.html` al terminar el build. Sin ese paso el 404 inglés no se encuentra nunca.
+- Fuera de la landing, el `Navbar` convierte sus anclas en absolutas (`/#about`): en el 404 esas secciones no existen y el clic no hacía nada.
+
 ### SEO
 
 - hreflang ES/EN + x-default, canonical, Open Graph, Twitter Cards y JSON-LD (`Person`) en `Layout.astro`.
-- Sitemap vía `@astrojs/sitemap`; `robots.txt` en `public/`.
+- `Layout` acepta `noindex` (lo usan los 404): emite `noindex, follow` y omite canonical y hreflang. No añadir un `<meta name="googlebot">` con `index`: para Googlebot **tiene prioridad sobre `robots`** y anularía el `noindex`.
+- Sitemap vía `@astrojs/sitemap`, con un `filter` que descarta los 404; `robots.txt` en `public/`.
 
 ### Temas
 
@@ -52,10 +59,12 @@ Todo el design system es **token-driven**: para reajustar el look se editan vari
 
 - **Un solo acento:** `--color-accent` (light `#2f7a68`, dark `#8fd0bf`). Las variantes translúcidas derivan con `color-mix`.
 - **Paleta warm neutral:** `--color-bg`, `--color-bg-2`, `--color-surface`, `--color-ink`, `--color-ink-2`, `--color-ink-3`, `--color-line`, `--color-line-strong`.
-- **Tres tipografías, un rol cada una** (self-hosted vía `@fontsource`, importadas en `Layout.astro`):
-  - `--font-display` → **Instrument Serif** (italic): titulares y títulos de sección/card.
-  - `--font-sans` → **Hanken Grotesk**: voz de lectura (body, bio, descripciones) y UI (nav, botones).
-  - `--font-mono` → **JetBrains Mono**: solo etiquetas en mayúsculas con tracking, tags/chips y cifras (años, periodos). Lo que se lee como frase —institución, emisor, ubicación, notas, footer— va en sans a `--text-meta`.
+- **Tres tipografías, un rol cada una.** El serif es la excepción, no la regla: es lo que le da carácter al sitio y por eso hay que racionarlo.
+  - `--font-display` → **Junicode italic**: solo hero, títulos de sección, nombres de empresa en Work, el 404 y la marca (nav/footer). Siempre `font-style: italic`; no existe la roman.
+  - `--font-text` → **Schibsted Grotesk Variable**: voz de lectura (body, bio, descripciones), UI (nav, botones) y **títulos de card** (rol, grado, certificado, proyecto, principio) en `600` con `letter-spacing: -0.01em`.
+  - `--font-mono` → **Maple Mono**: solo etiquetas en mayúsculas con tracking, tags/chips y cifras (años, periodos). Lo que se lee como frase —institución, emisor, ubicación, notas, footer— va en la sans a `--text-meta`.
+- **No bajar la italic al nivel de card.** Ya pasó una vez: con Junicode en los seis niveles a la vez la italic deja de significar énfasis y la página se satura. El sitio tiene tres alturas —sección, empresa, card— y solo las dos primeras llevan serif.
+- **Junicode se autoaloja** (`public/assets/fonts/junicode-italic.woff2`, OFL, no está en Fontsource). Su `@font-face` vive en `global.css`. Sale del VF de `psb1558/Junicode-font` subseteado a latin: de 1.2 MB a 52 KB, con `wght 300–700` variable, `wdth` y `ENLA` fijados y features `kern,liga`. Para regenerarlo: `pyftsubset` primero (el GSUB completo desborda al guardar) y `varLib.instancer` después.
 - **Tokens de layout:** `--container` (1180px), `--section-y` (espaciado vertical generoso por sección), `--radius`, `--radius-sm`.
 - **Primitivas compartidas** (en `global.css`): `.container`, `.section`, `.kicker`, `.section-title`, `.lead`, `.prose`, sistema de botones (`.btn` / `.btn--primary` / `.btn--ghost` / `.btn--sm`), `.card`, `.tag` (con `.tag--key`), `.dot`, `.seg` (toggles), y `.reveal` (animación de entrada con IntersectionObserver, escalonada con `.reveal-1..3`).
 - Los estilos específicos de cada sección viven en su `<style>` scoped, no en global.
