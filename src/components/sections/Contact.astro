@@ -12,10 +12,10 @@ const t = useTranslations(lang);
 const email = "hello@davidherrera.dev";
 
 const channels = [
-  { label: "Email", value: email, href: `mailto:${email}`, icon: "ph:envelope-simple" },
-  { label: "GitHub", value: "@david-heca", href: "https://github.com/david-heca", icon: "ph:github-logo" },
-  { label: "LinkedIn", value: "in/david-heca", href: "https://www.linkedin.com/in/david-heca/", icon: "ph:linkedin-logo" },
-  { label: "X", value: "@david_heca_", href: "https://x.com/david_heca_", icon: "ph:x-logo" },
+  { label: "Email", value: email, href: `mailto:${email}`, icon: "ph:envelope-simple-duotone" },
+  { label: "GitHub", value: "@david-heca", href: "https://github.com/david-heca", icon: "ph:github-logo-duotone" },
+  { label: "LinkedIn", value: "in/david-heca", href: "https://www.linkedin.com/in/david-heca/", icon: "ph:linkedin-logo-duotone" },
+  { label: "X", value: "@david_heca_", href: "https://x.com/david_heca_", icon: "ph:x-logo-duotone" },
 ];
 
 const cvFiles = [
@@ -32,7 +32,7 @@ const cvFiles = [
 
     <div class="contact__cta">
       <a href={`mailto:${email}`} class="btn btn--primary">
-        <Icon name="ph:paper-plane-tilt" />
+        <Icon name="ph:paper-plane-tilt-duotone" />
         {t("contact.cta.button")}
       </a>
     </div>
@@ -58,7 +58,7 @@ const cvFiles = [
     <div class="contact__cv">
       {cvFiles.map((f) => (
         <a href={f.href} target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
-          <Icon name="ph:file-pdf" />
+          <Icon name="ph:file-pdf-duotone" />
           {f.lab}
         </a>
       ))}

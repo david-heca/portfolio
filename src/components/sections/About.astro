@@ -10,7 +10,7 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const principles = t<{ title: string; body: string }[]>("about.principles");
-const principleIcons = ["ph:rocket-launch", "ph:gauge", "ph:chalkboard-teacher"];
+const principleIcons = ["ph:rocket-launch-duotone", "ph:gauge-duotone", "ph:chalkboard-teacher-duotone"];
 ---
 
 <section id="about" class="about section container">
@@ -30,7 +30,7 @@ const principleIcons = ["ph:rocket-launch", "ph:gauge", "ph:chalkboard-teacher"]
   <div class="about__principles">
     {principles.map((p, i) => (
       <div class={`about__principle reveal reveal-${Math.min(i + 1, 3)}`}>
-        <span class="about__principle-icon"><Icon name={principleIcons[i] ?? "ph:circle"} /></span>
+        <span class="about__principle-icon"><Icon name={principleIcons[i] ?? "ph:circle-duotone"} /></span>
         <h3 class="card-title about__principle-title">{p.title}</h3>
         <p class="prose-sm about__principle-body">{p.body}</p>
       </div>

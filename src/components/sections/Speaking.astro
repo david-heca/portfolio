@@ -16,7 +16,7 @@ const alt = t("speaking.photoAlt");
 
 <section id="speaking" class="speaking section container">
   <div class="speaking__photo reveal">
-    <span class="speaking__photo-ph" aria-hidden="true"><Icon name="ph:microphone-stage" /></span>
+    <span class="speaking__photo-ph" aria-hidden="true"><Icon name="ph:microphone-stage-duotone" /></span>
     <img src="/assets/speaking.webp" alt={alt} loading="lazy" onerror="this.style.display='none'" />
   </div>
 
@@ -26,7 +26,7 @@ const alt = t("speaking.photoAlt");
     <p class="lead speaking__lead">{t("speaking.description")}</p>
 
     <div class="card-title speaking__audience">
-      <Icon name="ph:users-three" />
+      <Icon name="ph:users-three-duotone" />
       {t("speaking.audience")}
     </div>
 
@@ -34,7 +34,7 @@ const alt = t("speaking.photoAlt");
       <div>
         <p class="kicker speaking__meta-label">{t("speaking.venuesLabel")}</p>
         <ul class="speaking__venues">
-          {venues.map((v) => <li><Icon name="ph:map-pin" />{v}</li>)}
+          {venues.map((v) => <li><Icon name="ph:map-pin-duotone" />{v}</li>)}
         </ul>
       </div>
       <div>

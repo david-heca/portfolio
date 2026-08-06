@@ -19,14 +19,14 @@ const onLanding = path === "/" || path === "/en" || path === "/en/";
 const anchor = (id: string) => (onLanding ? `#${id}` : `${home}#${id}`);
 
 const navItems = [
-  { id: "about", label: t("nav.about"), icon: "ph:user" },
-  { id: "work", label: t("nav.work"), icon: "ph:briefcase" },
-  { id: "projects", label: t("nav.projects"), icon: "ph:squares-four" },
-  { id: "education", label: t("nav.education"), icon: "ph:graduation-cap" },
+  { id: "about", label: t("nav.about"), icon: "ph:user-duotone" },
+  { id: "work", label: t("nav.work"), icon: "ph:briefcase-duotone" },
+  { id: "projects", label: t("nav.projects"), icon: "ph:squares-four-duotone" },
+  { id: "education", label: t("nav.education"), icon: "ph:graduation-cap-duotone" },
   ...(sections.speaking
-    ? [{ id: "speaking", label: t("nav.speaking"), icon: "ph:microphone-stage" }]
+    ? [{ id: "speaking", label: t("nav.speaking"), icon: "ph:microphone-stage-duotone" }]
     : []),
-  { id: "contact", label: t("nav.contact"), icon: "ph:paper-plane-tilt" },
+  { id: "contact", label: t("nav.contact"), icon: "ph:paper-plane-tilt-duotone" },
 ];
 ---
 
@@ -51,7 +51,7 @@ const navItems = [
         <ThemeToggle lang={lang} />
       </div>
       <button id="menu-btn" class="pill menu-btn" aria-label="Menu" aria-expanded="false">
-        <Icon name="ph:list-bold" />
+        <Icon name="ph:list-duotone" />
       </button>
     </div>
   </div>

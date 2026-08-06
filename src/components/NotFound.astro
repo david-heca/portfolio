@@ -17,12 +17,12 @@ const home = getHome(lang);
   <p class="prose notfound__desc">{t("notFound.description")}</p>
   <div class="notfound__actions">
     <a href={home} class="btn btn--primary">
-      <Icon name="ph:house" aria-hidden="true" />
+      <Icon name="ph:house-duotone" aria-hidden="true" />
       {t("notFound.homeButton")}
     </a>
     <!-- Oculto salvo que el referrer sea de este sitio: si no, "volver" no lleva a ninguna parte. -->
     <button type="button" data-back class="btn btn--ghost" hidden>
-      <Icon name="ph:arrow-left" aria-hidden="true" />
+      <Icon name="ph:arrow-left-duotone" aria-hidden="true" />
       {t("notFound.backButton")}
     </button>
   </div>
