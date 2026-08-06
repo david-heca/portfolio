@@ -1,14 +1,18 @@
 ---
-import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { useTranslations, type Lang } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
 
-const lang = getLangFromUrl(Astro.url);
+export interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
 <button
   type="button"
-  class="theme-toggle"
+  class="pill theme-toggle"
   aria-label={t("theme.toDark")}
   title={t("theme.toDark")}
   data-to-light={t("theme.toLight")}
@@ -21,26 +25,7 @@ const t = useTranslations(lang);
 </button>
 
 <style>
-  .theme-toggle {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    padding: 0;
-    border: 0;
-    border-radius: 999px;
-    background: transparent;
-    color: var(--color-ink-2);
-    cursor: pointer;
-    transition: color 0.15s ease, background-color 0.15s ease;
-  }
-  .theme-toggle:hover,
-  .theme-toggle:focus-visible {
-    color: var(--color-ink);
-    background: var(--color-bg-2);
-  }
+  .theme-toggle { position: relative; width: 32px; height: 32px; }
 
   .theme-toggle__glyph {
     position: absolute;
@@ -116,11 +101,13 @@ const t = useTranslations(lang);
         reduced ||
         sameTheme ||
         mobile ||
-        typeof (document as any).startViewTransition !== "function"
+        typeof document.startViewTransition !== "function"
       ) {
         apply(next);
         return;
-      }      const r = btn.getBoundingClientRect();
+      }
+
+      const r = btn.getBoundingClientRect();
       const x = r.left + r.width / 2;
       const y = r.top + r.height / 2;
       const radius = Math.hypot(
@@ -132,11 +119,12 @@ const t = useTranslations(lang);
       root.style.setProperty("--theme-r", `${radius}px`);
       root.classList.add("theme-switching");
 
-      const vt = (document as any).startViewTransition(() => apply(next));
+      const vt = document.startViewTransition!(() => apply(next));
       vt.finished.finally(() => root.classList.remove("theme-switching"));
     }
 
-    syncLabels(getPref());    requestAnimationFrame(() => root.classList.add("theme-ready"));
+    syncLabels(getPref());
+    requestAnimationFrame(() => root.classList.add("theme-ready"));
     buttons.forEach((b) => {
       if (b.dataset.ready) return;
       b.addEventListener("click", () => cycle(b));

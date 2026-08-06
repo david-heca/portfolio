@@ -7,6 +7,7 @@
   "meta": {
     "home": {
       "title": "David Herrera — Applied AI Engineer in Mexico City",
+      "tabTitle": "David Herrera",
       "description": "Applied AI Engineer in Mexico City. I build RAG and MCP systems on top of the data companies already have, with .NET, Python and Azure."
     }
   },
@@ -85,7 +86,8 @@
       "Generative AI",
       "RAG & MLOps",
       "Data science"
-    ]
+    ],
+    "photoAlt": "David giving a talk"
   },
   "hero": {
     "role": "Applied AI Engineer",
@@ -140,7 +142,7 @@
         }
       },
       "baacc": {
-        "name": "BAACC Systems S.A. de C.V.",
+        "name": "BAACC Systems",
         "totalPeriod": "2023 — 2026",
         "location": "Mexico State",
         "workMode": "On-site",

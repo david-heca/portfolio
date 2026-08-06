@@ -1,16 +1,19 @@
 ---
-import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { getHome, useTranslations, type Lang } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
 import ThemeToggle from "@ui/ThemeToggle.astro";
 import LanguagePicker from "@ui/LanguagePicker.astro";
 import { sections } from "@/config";
 
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const home = lang === "es" ? "/" : "/en/";
+export interface Props {
+  lang: Lang;
+}
 
-// Fuera de la landing (404) las anclas no existen y el clic no hacía nada:
-// ahí el enlace tiene que llevar a la landing con su ancla.
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const home = getHome(lang);
+
+// Fuera de la landing no hay anclas: el enlace tiene que apuntar a la landing.
 const path = Astro.url.pathname;
 const onLanding = path === "/" || path === "/en" || path === "/en/";
 const anchor = (id: string) => (onLanding ? `#${id}` : `${home}#${id}`);
@@ -35,7 +38,7 @@ const navItems = [
 
     <nav class="nav__links" aria-label="Primary">
       {navItems.map((item) => (
-        <a href={anchor(item.id)} class="nav__link" data-spy={item.id}>
+        <a href={anchor(item.id)} class="pill nav__link" data-spy={item.id}>
           <Icon name={item.icon} aria-hidden="true" />
           {item.label}
         </a>
@@ -44,11 +47,11 @@ const navItems = [
 
     <div class="nav__utils">
       <div class="nav__utils-desktop">
-        <LanguagePicker />
-        <ThemeToggle />
+        <LanguagePicker lang={lang} />
+        <ThemeToggle lang={lang} />
       </div>
-      <button id="menu-btn" class="menu-btn" aria-label="Menu" aria-expanded="false">
-        <Icon name="ph:list-bold" style="font-size: 22px;" />
+      <button id="menu-btn" class="pill menu-btn" aria-label="Menu" aria-expanded="false">
+        <Icon name="ph:list-bold" />
       </button>
     </div>
   </div>
@@ -63,8 +66,8 @@ const navItems = [
       ))}
     </nav>
     <div class="mobile-menu__footer">
-      <LanguagePicker expanded />
-      <ThemeToggle />
+      <LanguagePicker lang={lang} expanded />
+      <ThemeToggle lang={lang} />
     </div>
   </div>
 </header>
@@ -108,25 +111,19 @@ const navItems = [
   }
   @media (min-width: 1024px) { .nav__links { display: inline-flex; } }
   .nav__link {
-    display: inline-flex;
-    align-items: center;
     gap: 7px;
     font-size: 13.5px;
     line-height: 1;
     font-weight: 500;
-    color: var(--color-ink-2);
     padding: 8px 13px;
-    border-radius: 999px;
-    transition: color 0.15s ease, background-color 0.15s ease;
   }
-  .nav__link:hover { color: var(--color-ink); background: var(--color-bg-2); }
   .nav__link.active { color: var(--color-accent); background: var(--color-accent-soft); }
   .nav__link [data-icon] {
     width: 15px;
     height: 15px;
     font-size: 15px;
     color: var(--color-ink-3);
-    transition: color 0.15s ease;
+    transition: color var(--t-fast) ease;
   }
   .nav__link:hover [data-icon] { color: var(--color-ink-2); }
   .nav__link.active [data-icon] { color: var(--color-accent); }
@@ -135,19 +132,8 @@ const navItems = [
   .nav__utils-desktop { display: none; align-items: center; gap: 4px; }
   @media (min-width: 1024px) { .nav__utils-desktop { display: inline-flex; } }
 
-  .menu-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border: 0;
-    color: var(--color-ink-2);
-    cursor: pointer;
-    width: 40px;
-    height: 40px;
-    border-radius: 999px;
-  }
-  .menu-btn:hover { background: var(--color-bg-2); color: var(--color-ink); }
+  .menu-btn { width: 40px; height: 40px; }
+  .menu-btn [data-icon] { font-size: 22px; }
   @media (min-width: 1024px) { .menu-btn { display: none; } }
 
   .mobile-menu {
@@ -167,7 +153,7 @@ const navItems = [
     transform: translateY(-8px);
     opacity: 0;
     pointer-events: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
+    transition: transform var(--t-base) ease, opacity var(--t-base) ease;
   }
   .mobile-menu.open { transform: none; opacity: 1; pointer-events: auto; }
   .mobile-menu nav { display: flex; flex-direction: column; padding: 8px; }
@@ -188,7 +174,7 @@ const navItems = [
     height: 19px;
     font-size: 19px;
     color: var(--color-ink-3);
-    transition: color 0.15s ease;
+    transition: color var(--t-fast) ease;
   }
   .mobile-menu__link:hover [data-icon] { color: var(--color-ink-2); }
   .mobile-menu__link.active { color: var(--color-accent); background: var(--color-accent-soft); }
@@ -204,10 +190,14 @@ const navItems = [
 </style>
 
 <script>
+  /** El <header> se reemplaza en cada navegación; `document` no. */
+  let closeMenu: (() => void) | null = null;
+
   function setupMenu() {
     const btn = document.getElementById("menu-btn");
     const menu = document.getElementById("mobile-menu");
-    if (!btn || !menu || btn.dataset.ready) return;
+    if (!btn || !menu) return;
+
     let open = false;
     const set = (v: boolean) => {
       open = v;
@@ -215,16 +205,20 @@ const navItems = [
       btn.setAttribute("aria-expanded", String(v));
       menu.setAttribute("aria-hidden", String(!v));
     };
+    closeMenu = () => set(false);
+
+    if (btn.dataset.ready) return;
     btn.addEventListener("click", (e) => { e.stopPropagation(); set(!open); });
     menu.querySelectorAll("a").forEach((l) => l.addEventListener("click", () => set(false)));
-    document.addEventListener("click", (e) => {
-      if (open && !menu.contains(e.target as Node) && e.target !== btn) set(false);
-    });
-    document.addEventListener("keydown", (e) => { if (e.key === "Escape" && open) set(false); });
     btn.dataset.ready = "true";
   }
 
   function setupSpy() {
+    // Antes de cualquier salida: si la página nueva no tiene secciones, los
+    // listeners de la anterior se quedarían vivos apuntando a nodos muertos.
+    window.__spyCleanup?.();
+    window.__spyCleanup = undefined;
+
     const links = [...document.querySelectorAll<HTMLElement>("[data-spy]")];
     if (!links.length) return;
 
@@ -261,8 +255,6 @@ const navItems = [
       requestAnimationFrame(update);
     }
 
-    // Se remonta en cada navegación: sin esto los listeners se acumulan.
-    window.__spyCleanup?.();
     window.__spyCleanup = () => {
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
@@ -272,6 +264,16 @@ const navItems = [
     window.addEventListener("resize", onScroll);
     update();
   }
+
+  // Sobre `document`, así que se registran una sola vez por sesión.
+  document.addEventListener("click", (e) => {
+    const menu = document.getElementById("mobile-menu");
+    if (!menu?.classList.contains("open")) return;
+    if (menu.contains(e.target as Node)) return;
+    if ((e.target as HTMLElement).closest?.("#menu-btn")) return;
+    closeMenu?.();
+  });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu?.(); });
 
   setupMenu();
   setupSpy();

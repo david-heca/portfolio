@@ -37,13 +37,13 @@ const companies: Company[] = [
         title: t("work.companies.hypertech.roles.appliedai.title"),
         period: t("work.companies.hypertech.roles.appliedai.period"),
         type: t("work.companies.hypertech.roles.appliedai.type"),
-        achievements: t("work.companies.hypertech.roles.appliedai.achievements") as unknown as string[],
+        achievements: t<string[]>("work.companies.hypertech.roles.appliedai.achievements"),
         current: true,
       },
     ],
   },
   {
-    name: t("work.companies.baacc.name").replace(/ S\.A\. de C\.V\./, ""),
+    name: t("work.companies.baacc.name"),
     span: t("work.companies.baacc.totalPeriod"),
     loc: t("work.companies.baacc.location"),
     mode: t("work.companies.baacc.workMode"),
@@ -52,21 +52,21 @@ const companies: Company[] = [
         title: t("work.companies.baacc.roles.architect.title"),
         period: t("work.companies.baacc.roles.architect.period"),
         type: t("work.companies.baacc.roles.architect.type"),
-        achievements: t("work.companies.baacc.roles.architect.achievements") as unknown as string[],
+        achievements: t<string[]>("work.companies.baacc.roles.architect.achievements"),
         stack: ["LLMs", "RAG", "MCP", "MLOps", "Azure"],
       },
       {
         title: t("work.companies.baacc.roles.fullstack.title"),
         period: t("work.companies.baacc.roles.fullstack.period"),
         type: t("work.companies.baacc.roles.fullstack.type"),
-        achievements: t("work.companies.baacc.roles.fullstack.achievements") as unknown as string[],
+        achievements: t<string[]>("work.companies.baacc.roles.fullstack.achievements"),
         stack: [".NET", "Python", "SQL", "Android"],
       },
       {
         title: t("work.companies.baacc.roles.junior.title"),
         period: t("work.companies.baacc.roles.junior.period"),
         type: t("work.companies.baacc.roles.junior.type"),
-        achievements: t("work.companies.baacc.roles.junior.achievements") as unknown as string[],
+        achievements: t<string[]>("work.companies.baacc.roles.junior.achievements"),
         stack: ["MVC", "SQL", "APIs"],
       },
     ],
@@ -81,7 +81,7 @@ const companies: Company[] = [
         title: t("work.companies.dec.roles.webdev.title"),
         period: t("work.companies.dec.roles.webdev.period"),
         type: t("work.companies.dec.roles.webdev.type"),
-        achievements: t("work.companies.dec.roles.webdev.achievements") as unknown as string[],
+        achievements: t<string[]>("work.companies.dec.roles.webdev.achievements"),
         stack: ["HTML", "CSS", "JavaScript", "WordPress"],
       },
     ],
@@ -93,7 +93,7 @@ const companies: Company[] = [
   <header class="sec-head reveal">
     <p class="kicker">{t("nav.work")}</p>
     <h2 class="section-title">{t("work.headerTitle")} <em>{t("work.headerItalic")}</em></h2>
-    <p class="lead work__lead">{t("work.description")}</p>
+    <p class="lead">{t("work.description")}</p>
   </header>
 
   <div class="work__list">
@@ -110,31 +110,31 @@ const companies: Company[] = [
               <div class="role__aside">
                 <span class="role__period">{r.period}</span>
                 {r.current && (
-                  <span class="role__now"><span class="dot"></span>{t("work.current")}</span>
+                  <span class="status"><span class="dot"></span>{t("work.current")}</span>
                 )}
               </div>
               <div class="role__main">
-                <h4 class="role__title">{r.title}</h4>
-                <span class="role__type">{r.type}</span>
-                <ul class="role__achievements">
+                <h4 class="card-title">{r.title}</h4>
+                <span class="label role__type">{r.type}</span>
+                <ul class="prose-sm role__achievements">
                   <li>{r.achievements[0]}</li>
                 </ul>
                 {r.achievements.length > 1 && (
                   <details class="role__more">
-                    <summary class="role__more-toggle">
+                    <summary class="label role__more-toggle">
                       <span class="role__more-label role__more-label--more">
                         {t("work.showMore")} ({r.achievements.length - 1})
                       </span>
                       <span class="role__more-label role__more-label--less">{t("work.showLess")}</span>
                       <Icon name="ph:caret-down" class="role__more-caret" />
                     </summary>
-                    <ul class="role__achievements role__achievements--extra">
+                    <ul class="prose-sm role__achievements role__achievements--extra">
                       {r.achievements.slice(1).map((a) => <li>{a}</li>)}
                     </ul>
                   </details>
                 )}
                 {r.stack && (
-                  <div class="role__stack">
+                  <div class="tag-row role__stack">
                     {r.stack.map((s) => <span class="tag">{s}</span>)}
                   </div>
                 )}
@@ -148,9 +148,6 @@ const companies: Company[] = [
 </section>
 
 <style>
-  .sec-head { max-width: 720px; margin-bottom: 56px; }
-  .work__lead { margin-top: 20px; }
-
   .work__list { display: flex; flex-direction: column; gap: 56px; }
 
   .work__company-head {
@@ -192,51 +189,17 @@ const companies: Company[] = [
     font-size: var(--text-label);
     letter-spacing: 0.04em;
     color: var(--color-ink-2);
+    font-variant-numeric: tabular-nums;
   }
-  .role__now {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-  }
-  .role__title {
-    font-family: var(--font-text);
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    font-size: var(--text-card-title);
-    line-height: 1.1;
-    color: var(--color-ink);
-    margin: 0;
-  }
-  .role__type {
-    display: inline-block;
-    margin-top: 6px;
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-ink-3);
-  }
+  .role__type { display: inline-block; margin-top: 6px; }
   .role__achievements {
-    list-style: none;
     margin: 18px 0 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
     gap: 12px;
     max-width: var(--measure);
   }
-  .role__achievements li {
-    position: relative;
-    padding-left: 22px;
-    font-size: var(--text-sm);
-    line-height: 1.6;
-    color: var(--color-ink-2);
-  }
+  .role__achievements li { position: relative; padding-left: 22px; }
   .role__achievements li::before {
     content: "";
     position: absolute;
@@ -254,27 +217,16 @@ const companies: Company[] = [
     align-items: center;
     gap: 8px;
     cursor: pointer;
-    list-style: none;
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-ink-3);
-    transition: color 0.15s ease;
+    transition: color var(--t-fast) ease;
   }
   .role__more-toggle::-webkit-details-marker { display: none; }
   .role__more-toggle:hover { color: var(--color-accent); }
-  .role__more-caret { font-size: 13px; transition: transform 0.2s ease; }
+  .role__more-caret { font-size: 13px; transition: transform var(--t-base) ease; }
   .role__more[open] .role__more-caret { transform: rotate(180deg); }
   .role__more-label--less { display: none; }
   .role__more[open] .role__more-label--more { display: none; }
   .role__more[open] .role__more-label--less { display: inline; }
   .role__achievements--extra { margin-top: 14px; }
 
-  .role__stack {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    margin-top: 18px;
-  }
+  .role__stack { margin-top: 18px; }
 </style>

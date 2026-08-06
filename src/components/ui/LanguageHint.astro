@@ -1,22 +1,26 @@
 ---
-import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { getHome, useTranslations, type Lang } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
 
-const lang = getLangFromUrl(Astro.url);
-const target = lang === "es" ? "en" : "es";
+export interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const target: Lang = lang === "es" ? "en" : "es";
 
 // El aviso se lee en el idioma que ofrece, no en el de la página.
 const tt = useTranslations(target);
-const href = target === "en" ? "/en/" : "/";
+const href = getHome(target);
 ---
 
 <div class="hint" data-lang-hint={target} lang={target} role="region" aria-label={tt("common.langHint.label")} hidden>
   <p class="hint__text">{tt("common.langHint.text")}</p>
-  <a class="hint__cta" href={href} hreflang={target}>
+  <a class="tag tag--key hint__cta" href={href} hreflang={target}>
     {tt("common.langHint.cta")}
     <Icon name="ph:arrow-right" aria-hidden="true" />
   </a>
-  <button class="hint__close" type="button" data-lang-hint-close aria-label={tt("common.langHint.dismiss")}>
+  <button class="pill hint__close" type="button" data-lang-hint-close aria-label={tt("common.langHint.dismiss")}>
     <Icon name="ph:x" aria-hidden="true" />
   </button>
 </div>
@@ -48,35 +52,16 @@ const href = target === "en" ? "/en/" : "/";
   }
 
   .hint__cta {
-    display: inline-flex;
-    align-items: center;
     gap: 6px;
     flex-shrink: 0;
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--color-accent);
-    border: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
-    border-radius: 999px;
+    letter-spacing: var(--track-label-sm);
+    font-size: var(--text-label-sm);
     padding: 7px 14px;
-    transition: background-color 0.18s ease, border-color 0.18s ease;
-  }
-  .hint__cta:hover {
-    background: var(--color-accent-soft);
-    border-color: var(--color-accent);
   }
   .hint__cta [data-icon] { font-size: 13px; }
 
-  .hint__close {
-    display: inline-flex;
-    flex-shrink: 0;
-    padding: 6px;
-    border-radius: 50%;
-    color: var(--color-ink-3);
-    transition: color 0.15s ease, background-color 0.15s ease;
-  }
-  .hint__close:hover { color: var(--color-ink); background: var(--color-bg-2); }
+  .hint__close { flex-shrink: 0; padding: 6px; color: var(--color-ink-3); }
   .hint__close [data-icon] { font-size: 15px; }
 
   @media (max-width: 560px) {
@@ -120,8 +105,8 @@ const href = target === "en" ? "/en/" : "/";
 
   function setupLangHint() {
     const el = document.querySelector<HTMLElement>("[data-lang-hint]");
-    // `astro:page-load` también dispara en la carga inicial: sin esto los
-    // listeners se enlazan dos veces.
+    // `astro:page-load` también dispara en la carga inicial; sin la guarda
+    // los listeners se duplican.
     if (!el || el.dataset.hintReady) return;
 
     const target = el.dataset.langHint;

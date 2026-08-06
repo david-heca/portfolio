@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
+import { localizePath, type Lang } from "@i18n/utils";
 import Navbar from "@ui/Navbar.astro";
 import LanguageHint from "@ui/LanguageHint.astro";
 // Junicode se autoaloja (no está en Fontsource): su @font-face vive en global.css.
@@ -10,26 +11,21 @@ import "@styles/global.css";
 export interface Props {
   title: string;
   description: string;
-  lang?: "es" | "en";
+  lang: Lang;
   /** Solo para <title>; og:/twitter: siguen usando `title`. */
   tabTitle?: string;
   /** Fuera del índice: sin canonical ni hreflang, que solo valen para páginas reales. */
   noindex?: boolean;
 }
 
-const { title, description, lang = "es", tabTitle = title, noindex = false } = Astro.props;
+const { title, description, lang, tabTitle = title, noindex = false } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL("/assets/dh.webp", Astro.site);
 
 const pathname = Astro.url.pathname;
-const esPath = lang === "en"
-  ? (pathname === "/en" || pathname === "/en/" ? "/" : pathname.replace(/^\/en\//, "/"))
-  : pathname;
-// Con barra: sin ella el hreflang no casa con el canonical y Google lo descarta.
-const enPath = lang === "es"
-  ? (pathname === "/" ? "/en/" : `/en${pathname}`)
-  : pathname;
+const esPath = localizePath(pathname, "es");
+const enPath = localizePath(pathname, "en");
 const esURL = new URL(esPath, Astro.site);
 const enURL = new URL(enPath, Astro.site);
 
@@ -145,6 +141,9 @@ const personSchema = {
     <!-- `.reveal` solo se esconde bajo `.js`: sin JS el contenido se ve entero. -->
     <script is:inline>document.documentElement.classList.add("js");</script>
 
+    <!-- En Safari el barrido circular del cambio de tema no funciona, así que se
+         desactivan las View Transitions y el tema cambia en seco. `ThemeToggle`
+         hace lo mismo en móvil, donde el efecto tampoco aporta. -->
     <script is:inline>
       if (
         typeof navigator !== "undefined" &&
@@ -208,28 +207,18 @@ const personSchema = {
       setThemeOnNavigation();
     </script>
 
-    <!-- Solo con preferencia elegida a mano. Autodetectar aquí rebotaba a los
-         rastreadores fuera de "/", que es el canonical y el x-default; para eso
-         está LanguageHint, que propone el cambio en vez de forzarlo. -->
-    <script is:inline>
-      (function() {
-        var stored = localStorage.getItem("preferred-lang");
-        if (stored !== "es" && stored !== "en") return;
-
-        var path = window.location.pathname;
-        var currentLang = (path === "/en" || path.startsWith("/en/")) ? "en" : "es";
-        if (stored === currentLang) return;
-
-        var target = stored === "en"
-          ? (path === "/" ? "/en/" : "/en" + path)
-          : (path === "/en" || path === "/en/" ? "/" : path.replace(/^\/en\//, "/") || "/");
-
-        window.location.replace(target);
-      })();
+    <!-- Redirige solo con preferencia explícita: autodetectar aquí sacaría a los
+         rastreadores de "/", que es el canonical y el x-default. Las dos rutas
+         llegan resueltas para no reimplementar el mapeo es↔en en el cliente. -->
+    <script is:inline define:vars={{ lang, esPath, enPath }}>
+      var stored = localStorage.getItem("preferred-lang");
+      if ((stored === "es" || stored === "en") && stored !== lang) {
+        window.location.replace(stored === "es" ? esPath : enPath);
+      }
     </script>
   </head>
   <body>
-    <Navbar transition:persist="navbar" />
+    <Navbar lang={lang} />
 
     <main class="page">
       <slot />
@@ -238,25 +227,28 @@ const personSchema = {
     <!-- Fuera de <main>: dentro no cuenta como landmark `contentinfo`. -->
     <slot name="footer" />
 
-    <LanguageHint />
+    <LanguageHint lang={lang} />
 
     <script>
+      // `astro:page-load` también dispara en la carga inicial, así que esto corre
+      // dos veces de salida y una más por navegación: sin desconectar el anterior
+      // se acumulan observers sobre nodos ya desmontados.
+      let revealObserver: IntersectionObserver | undefined;
+
       function setupRevealAnimations() {
-        const observer = new IntersectionObserver(
+        revealObserver?.disconnect();
+        revealObserver = new IntersectionObserver(
           (entries) => {
-            entries.forEach((entry) => {
-              if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-              }
-            });
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              entry.target.classList.add("visible");
+              revealObserver?.unobserve(entry.target);
+            }
           },
           { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
         );
 
-        document.querySelectorAll(".reveal").forEach((el) => {
-          observer.observe(el);
-        });
+        document.querySelectorAll(".reveal").forEach((el) => revealObserver!.observe(el));
       }
 
       setupRevealAnimations();

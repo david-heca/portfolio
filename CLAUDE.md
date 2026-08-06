@@ -1,95 +1,68 @@
 # CLAUDE.md
 
-Orientación para Claude Code al trabajar en este repositorio.
+Reglas para trabajar en este repositorio.
+
+Documenta lo que **no** se deduce leyendo el código: invariantes, restricciones y los porqués que costaría redescubrir. El inventario —qué secciones existen, qué primitivas hay en `global.css`, qué aliases define `tsconfig.json`— se lee del código. Si algo de aquí se puede verificar abriendo un archivo, sobra.
 
 ## Comandos
 
 ```bash
-pnpm dev       # Dev server con hot reload (localhost:4321)
-pnpm build     # Build de producción en /dist
-pnpm preview   # Vista previa del build
-pnpm deploy    # Build + despliegue a Cloudflare Workers (wrangler)
+pnpm dev       # localhost:4321
+pnpm build     # /dist
+pnpm preview
+pnpm deploy    # build + wrangler
 ```
 
-No hay testing ni linter configurado.
+## Stack
 
-## Arquitectura
+Astro 7 estático con CSS propio, desplegado en Cloudflare Workers. Sin React, sin islands, sin tests, sin linter.
 
-Portafolio personal con **Astro 7** y CSS propio (design system token-driven en `global.css`, sin framework de utilidades), desplegado en **Cloudflare Workers** (assets estáticos servidos vía `wrangler.jsonc`, fallback a `404-page`) con compresión gzip/brotli precomputada en el build. Diseño minimalista cálido: una sola landing, tipografía expresiva (serif italic) sobre lectura limpia (grotesk), paleta warm neutral con un acento verde.
+Todo el sitio es **una landing por idioma** y la navegación es por anclas, no por rutas. Necesitar una subruta es señal de que algo no encaja en el modelo, no permiso para crearla. `src/config.ts` enciende y apaga secciones: apagar una la quita de la landing y del nav a la vez.
 
-### Single-page
+## Bilingüe — ES en `/`, EN en `/en/`
 
-- Todo el sitio es **una landing por idioma**. No hay subrutas (`/work`, `/projects`, etc. ya no existen).
-- `src/pages/index.astro` (ES) y `src/pages/en.astro` (EN) renderizan `Landing.astro`, que compone las secciones en orden: Hero → About → Stack → Work → Projects → Education → Speaking → Contact → SiteFooter.
-- La navegación es por **anclas**; el navbar resalta la sección activa con un scrollspy (IntersectionObserver). Los enlaces del nav son `#about`, `#work`, `#projects`, `#education`, `#speaking`, `#contact`. La sección Stack (`#stack`) tiene ancla pero **no** figura en el nav.
-- Cada sección recibe `lang: "es" | "en"` como prop y lleva su `<style>` scoped.
-- `src/config.ts` activa/desactiva secciones. Apagar una la quita de la landing y del nav. **Speaking está apagada ahora mismo.**
+- Traducciones en `src/i18n/locales/{es,en}.json`; `useTranslations(lang)` devuelve `t<T>()` con notación de punto. Las claves con HTML inline se renderizan con `set:html`. **Ningún texto visible se escribe en un componente**, ni siquiera un `alt`.
+- **`localizePath()` es la única implementación del mapeo es↔en**, y `getHome()` la única de la portada por idioma. Las usan el hreflang, el conmutador y el redirect por preferencia; una segunda copia acabaría divirgiendo en la barra final.
+- **Las URLs internas de inglés llevan barra final** (`/en/`). Es la forma que emite el build, la del canonical y la del sitemap; sin ella aparecen redirects y el hreflang deja de casar.
+- **El idioma viaja por prop desde la página, nunca se deduce de la URL en un componente.** Dos fuentes de verdad para el mismo dato es como se cuelan las páginas medio traducidas.
+- **La autodetección propone, no redirige.** Redirigir según `navigator.languages` saca a los rastreadores de `/`, que es el canonical y el x-default. El único redirect admisible exige una preferencia que el usuario haya elegido a mano.
 
-### Enrutamiento bilingüe (ES/EN)
+## 404
 
-- Español por defecto (`/`); inglés con prefijo (`/en`).
-- Traducciones en `src/i18n/locales/{es,en}.json`. `useTranslations(lang)` devuelve `t(key)` con notación de punto.
-- Algunas claves traen HTML inline (`<em>`, `<strong>`) y se renderizan con `set:html`.
-- Arrays en el JSON (p.ej. `about.principles`, `projects.list.*.specs`, `work.*.achievements`) se consumen con `t(...) as unknown as T[]`.
-- **La autodetección propone, no redirige.** `LanguageHint` (`src/components/ui/LanguageHint.astro`) lee `navigator.languages` y, si no coincide con el idioma de la página, muestra un aviso descartable con el enlace al otro idioma. Redirigir automáticamente sacaba a los rastreadores de `/` —canonical y x-default—, contra las anotaciones del propio `<head>`.
-- El único redirect que queda exige preferencia explícita: el `LanguagePicker` la guarda en `localStorage['preferred-lang']`. `lang-hint-dismissed` recuerda que el aviso se cerró.
-- Las URLs internas de inglés llevan barra final (`/en/`): es la forma que emite el build, la del canonical y la del sitemap.
+- **Una página por idioma, con el `lang` hardcodeado.** El build congela cada HTML, así que derivar el idioma de la URL devolvería siempre el de por defecto.
+- Cloudflare sirve el `404.html` **más cercano** al path pedido, pero Astro escribe las rutas anidadas como `404/index.html`. La integración `nested-404` de `astro.config.ts` las renombra al terminar el build; sin ese paso el 404 traducido no se encuentra nunca.
+- Fuera de la landing, el `Navbar` emite sus anclas en absoluto: en una página sin secciones, `#about` no lleva a ninguna parte.
 
-### 404
+## SEO
 
-- **Una página por idioma**: `src/pages/404.astro` y `src/pages/en/404.astro`, ambas envoltorios finos sobre `@sections/NotFound.astro`. El idioma va **hardcodeado** en cada página: el build congela cada HTML y `getLangFromUrl` devolvería siempre `es`.
-- Cloudflare sirve el `404.html` más cercano al path pedido, así que `/en/*` cae en el suyo. Astro escribe las rutas anidadas como `en/404/index.html`, y la integración `nested-404` de `astro.config.ts` lo renombra a `en/404.html` al terminar el build. Sin ese paso el 404 inglés no se encuentra nunca.
-- Fuera de la landing, el `Navbar` convierte sus anclas en absolutas (`/#about`): en el 404 esas secciones no existen y el clic no hacía nada.
+- `Layout` centraliza canonical, hreflang, Open Graph, Twitter Cards y JSON-LD. Acepta `noindex` para lo que no es contenido indexable.
+- **No añadir `<meta name="googlebot">`.** Para Googlebot tiene prioridad sobre `robots`, así que un `index` ahí anula cualquier `noindex`.
 
-### SEO
+## Temas
 
-- hreflang ES/EN + x-default, canonical, Open Graph, Twitter Cards y JSON-LD (`Person`) en `Layout.astro`.
-- `Layout` acepta `noindex` (lo usan los 404): emite `noindex, follow` y omite canonical y hreflang. No añadir un `<meta name="googlebot">` con `index`: para Googlebot **tiene prioridad sobre `robots`** y anularía el `noindex`.
-- Sitemap vía `@astrojs/sitemap`, con un `filter` que descarta los 404; `robots.txt` en `public/`.
+La clase `.dark` se aplica en `<html>` **antes del paint** y se preserva entre View Transitions con `astro:before-swap`. Los scripts inline de `<head>` no se reejecutan al hacer swap: lo que deba sobrevivir a una navegación se copia en ese handler.
 
-### Temas
+## Diseño
 
-- Variables CSS light/dark en `global.css`. La clase `.dark` en `<html>` se aplica antes del paint.
-- Persistido en `localStorage['color-theme']` (`light`/`dark`/`system`), preservado entre View Transitions con `astro:before-swap`.
-- Control en `ThemeToggle.astro` (segmented pill `.seg`).
+- **Token-driven.** Para reajustar el look se editan variables en `global.css`, nunca componentes. Un valor literal dentro de un `<style>` scoped es un token que falta.
+- **Un solo acento.** Las variantes translúcidas derivan con `color-mix`; no se declaran a mano.
+- **El serif es la excepción.** `--font-display` (Junicode italic) marca solo los dos niveles altos de la jerarquía —el título de sección y su divisor—. Por debajo va `.card-title`, en sans. Si la italic baja al nivel de card deja de significar énfasis y la página se satura.
+- **Un rol por tipografía.** Display para titulares; `--font-text` para leer y para la UI; `--font-mono` solo para etiquetas en mayúsculas con tracking, tags y cifras. Lo que se lee como frase va en la sans aunque contenga números.
+- **Las primitivas viven en `global.css`; el layout de cada sección, en su `<style>` scoped.** Un patrón que aparece en tres sitios ya es una primitiva.
+- Una sola acción primaria por vista; el resto en `.btn--ghost`.
+- Iconos Phosphor en peso regular vía `astro-icon`, monocromáticos, heredando `currentColor`. **Nunca un glifo como icono** (`↗`, `→`): algunos navegadores los resuelven contra una fuente de emoji.
+- Imágenes en WebP. Toda animación respeta `prefers-reduced-motion`.
+- Antes de añadir decoración, agotar el espacio y la jerarquía.
 
-## Sistema de diseño (`src/styles/global.css`)
+## Código
 
-Todo el design system es **token-driven**: para reajustar el look se editan variables, no componentes.
+- **Comentar solo lo no obvio, y comentar la restricción, no la historia.** Un comentario explica por qué el código tiene que ser así; nunca cuenta qué se probó antes ni cuándo se cambió.
+- `src/components/sections/` son bloques de la landing; `src/components/ui/`, chrome reutilizable en cualquier página; `src/components/`, lo que no es ni una cosa ni la otra.
+- Importar siempre por alias, no con rutas relativas que suban de carpeta.
+- **El `<header>` se reemplaza en cada navegación; `document` y `window` no.** Un listener sobre el elemento se registra en su `setup()` con guarda `dataset.ready`; uno sobre `document` se registra una sola vez a nivel de módulo. Mezclarlos acumula listeners en cada navegación.
+- **`astro:page-load` también dispara en la carga inicial**, así que todo `setup()` corre dos veces de salida: tiene que ser idempotente. La llamada directa no sobra —sin ella el efecto esperaría al evento `load`—; lo que hace falta es la guarda.
+- Un `cleanup()` va antes de cualquier `return` temprano, no después: si la página nueva no tiene lo que el script busca es justo cuando más hace falta soltar lo de la anterior.
 
-- **Un solo acento:** `--color-accent` (light `#2f7a68`, dark `#8fd0bf`). Las variantes translúcidas derivan con `color-mix`.
-- **Paleta warm neutral:** `--color-bg`, `--color-bg-2`, `--color-surface`, `--color-ink`, `--color-ink-2`, `--color-ink-3`, `--color-line`, `--color-line-strong`.
-- **Tres tipografías, un rol cada una.** El serif es la excepción, no la regla: es lo que le da carácter al sitio y por eso hay que racionarlo.
-  - `--font-display` → **Junicode italic**: solo hero, títulos de sección, nombres de empresa en Work, el 404 y la marca (nav/footer). Siempre `font-style: italic`; no existe la roman.
-  - `--font-text` → **Schibsted Grotesk Variable**: voz de lectura (body, bio, descripciones), UI (nav, botones) y **títulos de card** (rol, grado, certificado, proyecto, principio) en `600` con `letter-spacing: -0.01em`.
-  - `--font-mono` → **Maple Mono**: solo etiquetas en mayúsculas con tracking, tags/chips y cifras (años, periodos). Lo que se lee como frase —institución, emisor, ubicación, notas, footer— va en la sans a `--text-meta`.
-- **No bajar la italic al nivel de card.** Ya pasó una vez: con Junicode en los seis niveles a la vez la italic deja de significar énfasis y la página se satura. El sitio tiene tres alturas —sección, empresa, card— y solo las dos primeras llevan serif.
-- **Junicode se autoaloja** (`public/assets/fonts/junicode-italic.woff2`, OFL, no está en Fontsource). Su `@font-face` vive en `global.css`. Sale del VF de `psb1558/Junicode-font` subseteado a latin: de 1.2 MB a 52 KB, con `wght 300–700` variable, `wdth` y `ENLA` fijados y features `kern,liga`. Para regenerarlo: `pyftsubset` primero (el GSUB completo desborda al guardar) y `varLib.instancer` después.
-- **Tokens de layout:** `--container` (1180px), `--section-y` (espaciado vertical generoso por sección), `--radius`, `--radius-sm`.
-- **Primitivas compartidas** (en `global.css`): `.container`, `.section`, `.kicker`, `.section-title`, `.lead`, `.prose`, sistema de botones (`.btn` / `.btn--primary` / `.btn--ghost` / `.btn--sm`), `.card`, `.tag` (con `.tag--key`), `.dot`, `.seg` (toggles), y `.reveal` (animación de entrada con IntersectionObserver, escalonada con `.reveal-1..3`).
-- Los estilos específicos de cada sección viven en su `<style>` scoped, no en global.
+## Junicode
 
-### Componentes
-
-- **Secciones** (`src/components/sections/`): `Landing` (compositor), `Hero`, `About` (bio + principios), `Stack`, `Work`, `Projects`, `Education`, `Speaking`, `Contact`. Astro puro, sin islands.
-- **UI** (`src/components/ui/`): `Navbar` (anclas + scrollspy + menú móvil co-locado), `SiteFooter` (footer global único), `ThemeToggle`, `LanguagePicker`.
-- **Iconos:** Phosphor vía `astro-icon` + `@iconify-json/ph`, siempre el peso **regular** (nunca `-duotone` ni otras variantes), monocromáticos (`<Icon name="ph:nombre" />`), heredan color con `currentColor`.
-- **Nada de glifos como icono:** flechas y símbolos van como `<Icon>`, nunca como carácter (`↗`, `→`). Algunos navegadores los resuelven contra una fuente de emoji y rompen el tono.
-
-### Path aliases (tsconfig.json)
-
-`@/*` → `src/*`, `@components/*`, `@sections/*`, `@ui/*`, `@layouts/*`, `@styles/*`, `@utils/*`, `@i18n/*`, `@assets/*` → `public/assets/*`
-
-### Principios de mantenimiento
-
-- Minimalismo: antes de añadir un elemento decorativo, preferir más espacio y mejor jerarquía.
-- Sin comentarios-ensayo: comentar solo lo no obvio.
-- Jerarquía de acciones: una sola acción primaria por vista; el resto, `.btn--ghost` o `.link`.
-- Imágenes en WebP; el retrato del hero con `loading="eager"`.
-- Todas las animaciones respetan `prefers-reduced-motion`.
-
-### Lo que este proyecto **no** tiene
-
-- No hay subrutas ni páginas separadas por sección (es single-page).
-- No hay React, islands, terminal falso, sellos, stickers, ni tipografía manuscrita (Caveat).
-- No hay framework de testing ni linter.
+Se autoaloja en `public/assets/fonts/` (OFL, no está en Fontsource). Para regenerarlo desde el VF de `psb1558/Junicode-font`: **subsetear con `pyftsubset` primero y fijar los ejes con `varLib.instancer` después** — en el orden inverso el GSUB completo desborda al guardar. Se fijan `wdth` y `ENLA`, se conserva `wght` variable y solo se retienen las features `kern,liga`.

@@ -1,18 +1,19 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import Landing from "@sections/Landing.astro";
+import Landing from "@components/Landing.astro";
 import SiteFooter from "@ui/SiteFooter.astro";
-import { useTranslations } from "@i18n/utils";
+import { useTranslations, type Lang } from "@i18n/utils";
 
-const t = useTranslations("es");
+const lang: Lang = "es";
+const t = useTranslations(lang);
 ---
 
 <Layout
   title={t("meta.home.title")}
-  tabTitle="David Herrera"
+  tabTitle={t("meta.home.tabTitle")}
   description={t("meta.home.description")}
-  lang="es"
+  lang={lang}
 >
-  <Landing lang="es" />
-  <SiteFooter slot="footer" />
+  <Landing lang={lang} />
+  <SiteFooter slot="footer" lang={lang} />
 </Layout>

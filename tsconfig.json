@@ -15,9 +15,7 @@
       "@ui/*": ["./src/components/ui/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@styles/*": ["./src/styles/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@i18n/*": ["./src/i18n/*"],
-      "@assets/*": ["./public/assets/*"]
+      "@i18n/*": ["./src/i18n/*"]
     }
   }
 }

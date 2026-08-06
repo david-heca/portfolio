@@ -1,5 +1,5 @@
-/* Design system: tokens, reset, shared primitives.
-   Section layout lives in each component's scoped <style>. */
+/* Design system: tokens, reset y primitivas compartidas.
+   El layout de cada sección vive en su <style> scoped. */
 
 /* Junicode (OFL, psb1558/Junicode-font) subseteado a latin desde el VF de 1.2 MB.
    Solo la italic: es la única voz de display y el sitio nunca la pide en roman. */
@@ -12,12 +12,12 @@
 }
 
 :root {
-  /* typefaces — one role each */
+  /* tipografías — un rol cada una */
   --font-display: "Junicode", Georgia, serif;
   --font-text: "Schibsted Grotesk Variable", system-ui, sans-serif;
   --font-mono: "Maple Mono", "SF Mono", ui-monospace, monospace;
 
-  /* warm neutral palette — one accent, the rest derives from it */
+  /* paleta warm neutral — un solo acento; sus variantes derivan con color-mix */
   --color-bg: #f5f1ea;
   --color-bg-2: #ebe5d9;
   --color-surface: #fbf8f2;
@@ -30,30 +30,23 @@
   --color-accent-soft: color-mix(in srgb, var(--color-accent) 12%, transparent);
   --shadow-soft: 0 1px 2px rgba(26, 24, 21, 0.04), 0 16px 40px -24px rgba(26, 24, 21, 0.18);
 
-  /* top→mid es corto y mid→end hace ~3x el recorrido: la mitad superior queda
-     plana. --color-bg sigue siendo el color plano de referencia. */
-  --bg-top: #faf7f1;
-  --bg-mid: #f3ede1;
-  --bg-end: #dcd5c2;
+  /* Hover de color; el resto de gestos —transform, sombra, apertura— van a --t-base. */
+  --t-fast: 0.15s;
+  --t-base: 0.2s;
 
-  /* Sol del final. Más evidente: subir la opacidad del núcleo o el % del halo.
-     La altura se ajusta en el radial-gradient de html. */
-  --glow-core: rgba(255, 252, 244, 0.95);
-  --glow-halo: color-mix(in srgb, var(--color-accent) 18%, transparent);
-
-  /* type scale — pick by role, never hardcode px */
-  --text-label-sm: 11px;   /* mono micro: spec keys, card meta */
-  --text-label: 12px;      /* mono labels, kickers, periods */
+  /* escala tipográfica — se elige por rol, nunca se escribe el px */
+  --text-label-sm: 11px;   /* mono micro: claves de spec, meta de card */
+  --text-label: 12px;      /* etiquetas mono, kickers, periodos */
   --track-label: 0.16em;
+  --track-label-sm: 0.08em;
   /* Lo que se lee como frase (institución, emisor, notas, footer) va en la
      sans a este tamaño; el mono se reserva a etiquetas, tags y cifras. */
   --text-meta: 13.5px;
-  --text-sm: 14.5px;       /* secondary prose: card descriptions, notes, achievements */
-  --text-body: 16px;       /* primary prose: bio, featured description, channel values */
-  --text-lead: clamp(18px, 2.1vw, 21px);  /* section lead */
-  /* Títulos de card (rol/grado/certificado/proyecto): sans 600, no italic.
-     La italic queda reservada al hero, los títulos de sección y la marca —si
-     baja a este nivel deja de significar énfasis y el sitio se satura. */
+  --text-sm: 14.5px;       /* prosa secundaria: descripciones, notas, logros */
+  --text-body: 16px;       /* prosa principal: bio, descripción destacada, canales */
+  --text-lead: clamp(18px, 2.1vw, 21px);  /* entradilla de sección */
+  /* Títulos de card. La italic solo marca el título de sección y su divisor;
+     por debajo deja de significar énfasis. */
   --text-card-title: clamp(19px, 2.1vw, 22px);
   --leading: 1.65;
   --measure: 60ch;
@@ -77,16 +70,9 @@
   --color-accent: #8fd0bf;
   --color-accent-soft: color-mix(in srgb, var(--color-accent) 16%, transparent);
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 40px -24px rgba(0, 0, 0, 0.6);
-
-  --bg-top: #0a0908;
-  --bg-mid: #0e0d0b;
-  --bg-end: #101c18;
-
-  --glow-core: rgba(226, 255, 246, 0.9);
-  --glow-halo: color-mix(in srgb, var(--color-accent) 34%, transparent);
 }
 
-/* ----- base (reset — replaces Tailwind preflight) ----- */
+/* ----- base (reset) ----- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; border: 0 solid; }
 h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
 ul, ol, menu { list-style: none; }
@@ -141,6 +127,9 @@ img, svg { display: block; max-width: 100%; }
 
 .section { padding-block: var(--section-y); }
 
+.sec-head { max-width: 720px; margin-bottom: 56px; }
+.sec-head .lead { margin-top: 20px; }
+
 /* ----- type primitives ----- */
 .kicker {
   font-family: var(--font-mono);
@@ -150,17 +139,50 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-accent);
 }
 
+/* Micro-etiqueta mono. El color lo pone quien la usa. */
+.label {
+  font-family: var(--font-mono);
+  font-size: var(--text-label-sm);
+  letter-spacing: var(--track-label-sm);
+  text-transform: uppercase;
+  color: var(--color-ink-3);
+}
+
+/* "En curso": punto + etiqueta acento. */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: var(--text-label-sm);
+  letter-spacing: var(--track-label-sm);
+  text-transform: uppercase;
+  color: var(--color-accent);
+}
+
+/* El tamaño y el interlineado se ajustan por instancia con las dos variables. */
 .section-title {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 400;
   letter-spacing: -0.02em;
-  line-height: 1;
-  font-size: clamp(38px, 6vw, 58px);
+  line-height: var(--display-leading, 1);
+  font-size: var(--display-size, clamp(38px, 6vw, 58px));
   color: var(--color-ink);
   margin: 14px 0 0;
 }
 .section-title em { color: var(--color-accent); font-style: italic; }
+
+/* Título de card: rol, grado, certificado, proyecto, principio. */
+.card-title {
+  font-family: var(--font-text);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  font-size: var(--text-card-title);
+  line-height: 1.1;
+  color: var(--color-ink);
+  margin: 0;
+}
 
 .lead {
   font-size: var(--text-lead);
@@ -177,7 +199,13 @@ img, svg { display: block; max-width: 100%; }
 }
 .prose strong { color: var(--color-ink); font-weight: 500; }
 
-/* ----- buttons (cozy) ----- */
+.prose-sm {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  color: var(--color-ink-2);
+}
+
+/* ----- buttons ----- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -191,8 +219,9 @@ img, svg { display: block; max-width: 100%; }
   border-radius: 999px;
   border: 1px solid transparent;
   cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease,
-    background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  transition: transform var(--t-base) ease, box-shadow var(--t-base) ease,
+    background-color var(--t-base) ease, border-color var(--t-base) ease,
+    color var(--t-base) ease;
 }
 .btn--primary { background: var(--color-accent); color: var(--color-bg); }
 .btn--primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
@@ -202,17 +231,20 @@ img, svg { display: block; max-width: 100%; }
 .btn--sm { padding: 8px 14px; font-size: 13px; }
 .btn [data-icon] { font-size: 1.15em; }
 
-/* ----- card ----- */
-.card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+/* ----- píldora interactiva (enlaces del nav, toggles, menú) -----
+   Solo comportamiento: el tamaño lo pone cada uso. */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  color: var(--color-ink-2);
+  transition: color var(--t-fast) ease, background-color var(--t-fast) ease;
 }
-a.card:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-soft);
-  border-color: var(--color-line-strong);
+.pill:hover,
+.pill:focus-visible {
+  color: var(--color-ink);
+  background: var(--color-bg-2);
 }
 
 /* ----- tag (single style) ----- */
@@ -220,14 +252,15 @@ a.card:hover {
   display: inline-flex;
   align-items: center;
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: var(--text-label);
   letter-spacing: 0.04em;
   padding: 5px 11px;
   border-radius: 999px;
   border: 1px solid var(--color-line);
   color: var(--color-ink-2);
   white-space: nowrap;
-  transition: border-color 0.15s ease, color 0.15s ease, background-color 0.15s ease;
+  transition: border-color var(--t-fast) ease, color var(--t-fast) ease,
+    background-color var(--t-fast) ease;
 }
 .tag:hover {
   border-color: var(--color-accent);
@@ -238,8 +271,21 @@ a.card:hover {
   border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
   color: var(--color-accent);
 }
+/* Lo que no se puede enlazar: sin hover, porque no es accionable. */
+.tag--muted {
+  border-style: dashed;
+  border-color: var(--color-line-strong);
+  color: var(--color-ink-3);
+}
+.tag--muted:hover {
+  border-color: var(--color-line-strong);
+  color: var(--color-ink-3);
+  background: none;
+}
 
-/* ----- status dot ----- */
+.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ----- punto de estado ----- */
 .dot {
   width: 8px;
   height: 8px;
@@ -268,7 +314,7 @@ html.theme-switching::view-transition-new(root) {
   to { clip-path: circle(var(--theme-r) at var(--theme-x) var(--theme-y)); }
 }
 
-/* ----- reveal on scroll ----- */
+/* ----- reveal al hacer scroll ----- */
 /* Solo bajo `.js`: sin JS el contenido nace visible. */
 .js .reveal {
   opacity: 0;

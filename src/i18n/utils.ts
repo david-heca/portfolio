@@ -1,19 +1,35 @@
-import { ui, defaultLang } from './index';
+import { ui, defaultLang, type Lang } from './index';
 
-export function getLangFromUrl(url: URL) {
-  const [, lang] = url.pathname.split('/');
-  if (lang in ui) return lang as keyof typeof ui;
-  return defaultLang;
+export type { Lang };
+
+export function getLangFromUrl(url: URL): Lang {
+  const [, segment] = url.pathname.split('/');
+  return segment in ui ? (segment as Lang) : defaultLang;
 }
 
-export function useTranslations(lang: keyof typeof ui) {
-  return function t(key: string) {
-    const keys = key.split('.');
-    let value: any = ui[lang] || ui[defaultLang];
-    for (const k of keys) {
-      value = value?.[k];
-      if (value === undefined) return key;
-    }
-    return value || key;
-  }
+/** Portada del idioma. El inglés lleva barra final: es la forma que emite el
+ *  build, la del canonical y la del sitemap. */
+export function getHome(lang: Lang): string {
+  return lang === defaultLang ? '/' : `/${lang}/`;
+}
+
+/** Única implementación del mapeo es↔en. La comparten el hreflang, el
+ *  conmutador de idioma y el redirect por preferencia guardada. */
+export function localizePath(pathname: string, target: Lang): string {
+  const bare = pathname.replace(/^\/en(?=\/|$)/, '') || '/';
+  if (target === defaultLang) return bare;
+  return bare === '/' ? '/en/' : `/en${bare}`;
+}
+
+export function useTranslations(lang: Lang) {
+  /** El parámetro de tipo cubre las claves que guardan arrays u objetos. */
+  return function t<T = string>(key: string): T {
+    const value = key
+      .split('.')
+      .reduce<unknown>(
+        (acc, k) => (acc as Record<string, unknown> | undefined)?.[k],
+        ui[lang],
+      );
+    return (value ?? key) as T;
+  };
 }

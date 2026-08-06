@@ -9,9 +9,9 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const venues = t("speaking.venues") as unknown as string[];
-const topics = t("speaking.topics") as unknown as string[];
-const alt = lang === "es" ? "David dando una charla" : "David giving a talk";
+const venues = t<string[]>("speaking.venues");
+const topics = t<string[]>("speaking.topics");
+const alt = t("speaking.photoAlt");
 ---
 
 <section id="speaking" class="speaking section container">
@@ -25,21 +25,21 @@ const alt = lang === "es" ? "David dando una charla" : "David giving a talk";
     <h2 class="section-title">{t("speaking.title")} <em>{t("speaking.titleItalic")}</em></h2>
     <p class="lead speaking__lead">{t("speaking.description")}</p>
 
-    <div class="speaking__audience">
+    <div class="card-title speaking__audience">
       <Icon name="ph:users-three" />
       {t("speaking.audience")}
     </div>
 
     <div class="speaking__meta">
       <div>
-        <p class="speaking__meta-label">{t("speaking.venuesLabel")}</p>
+        <p class="kicker speaking__meta-label">{t("speaking.venuesLabel")}</p>
         <ul class="speaking__venues">
           {venues.map((v) => <li><Icon name="ph:map-pin" />{v}</li>)}
         </ul>
       </div>
       <div>
-        <p class="speaking__meta-label">{t("speaking.topicsLabel")}</p>
-        <div class="speaking__topics">{topics.map((tp) => <span class="tag">{tp}</span>)}</div>
+        <p class="kicker speaking__meta-label">{t("speaking.topicsLabel")}</p>
+        <div class="tag-row speaking__topics">{topics.map((tp) => <span class="tag">{tp}</span>)}</div>
       </div>
     </div>
   </div>
@@ -69,19 +69,9 @@ const alt = lang === "es" ? "David dando una charla" : "David giving a talk";
   .speaking__photo-ph [data-icon] { font-size: 64px; color: var(--color-ink-3); }
   .speaking__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
-  .speaking__lead { margin-top: 22px; }
+  .speaking__lead { margin-top: 20px; }
 
-  .speaking__audience {
-    display: inline-flex;
-    align-items: center;
-    gap: 11px;
-    margin-top: 26px;
-    font-family: var(--font-text);
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    font-size: var(--text-card-title);
-    color: var(--color-ink);
-  }
+  .speaking__audience { display: inline-flex; align-items: center; gap: 11px; margin-top: 26px; }
   .speaking__audience [data-icon] { font-size: 26px; color: var(--color-accent); }
 
   .speaking__meta {
@@ -92,16 +82,9 @@ const alt = lang === "es" ? "David dando una charla" : "David giving a talk";
     padding-top: 28px;
     border-top: 1px solid var(--color-line);
   }
-  @media (min-width: 560px) { .speaking__meta { grid-template-columns: 1fr 1fr; } }
-  .speaking__meta-label {
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    margin: 0 0 14px;
-  }
-  .speaking__venues { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 11px; }
+  @media (min-width: 768px) { .speaking__meta { grid-template-columns: 1fr 1fr; } }
+  .speaking__meta-label { margin-bottom: 14px; }
+  .speaking__venues { display: flex; flex-direction: column; gap: 11px; }
   .speaking__venues li {
     display: flex;
     align-items: center;
@@ -110,5 +93,4 @@ const alt = lang === "es" ? "David dando una charla" : "David giving a talk";
     color: var(--color-ink);
   }
   .speaking__venues [data-icon] { font-size: 16px; color: var(--color-accent); }
-  .speaking__topics { display: flex; flex-wrap: wrap; gap: 8px; }
 </style>

@@ -1,20 +1,19 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import NotFound from "@components/NotFound.astro";
+import Landing from "@components/Landing.astro";
 import SiteFooter from "@ui/SiteFooter.astro";
 import { useTranslations, type Lang } from "@i18n/utils";
 
-// Cloudflare sirve el `404.html` más cercano al path pedido: este cubre `/en/*`.
 const lang: Lang = "en";
 const t = useTranslations(lang);
 ---
 
 <Layout
-  title={`${t("notFound.heading")} — ${t("notFound.title")}`}
-  description={t("notFound.description")}
+  title={t("meta.home.title")}
+  tabTitle={t("meta.home.tabTitle")}
+  description={t("meta.home.description")}
   lang={lang}
-  noindex
 >
-  <NotFound lang={lang} />
+  <Landing lang={lang} />
   <SiteFooter slot="footer" lang={lang} />
 </Layout>

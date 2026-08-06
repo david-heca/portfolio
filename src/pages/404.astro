@@ -1,12 +1,12 @@
 ---
 import Layout from "@layouts/Layout.astro";
-import NotFound from "@sections/NotFound.astro";
+import NotFound from "@components/NotFound.astro";
 import SiteFooter from "@ui/SiteFooter.astro";
-import { useTranslations } from "@i18n/utils";
+import { useTranslations, type Lang } from "@i18n/utils";
 
 // El idioma no se deduce de la URL: el build congela esta página en un solo
 // HTML. El gemelo inglés vive en `/en/404` y Cloudflare sirve el más cercano.
-const lang = "es" as const;
+const lang: Lang = "es";
 const t = useTranslations(lang);
 ---
 
@@ -17,5 +17,5 @@ const t = useTranslations(lang);
   noindex
 >
   <NotFound lang={lang} />
-  <SiteFooter slot="footer" />
+  <SiteFooter slot="footer" lang={lang} />
 </Layout>

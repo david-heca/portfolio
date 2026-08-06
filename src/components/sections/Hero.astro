@@ -18,7 +18,7 @@ const t = useTranslations(lang);
       {t("hero.location")}
     </p>
 
-    <h1 class="hero__name reveal reveal-1">David Herrera</h1>
+    <h1 class="section-title hero__name reveal reveal-1">David Herrera</h1>
 
     <p class="hero__role reveal reveal-1">{t("hero.role")}</p>
 
@@ -73,16 +73,7 @@ const t = useTranslations(lang);
   }
   .hero__place [data-icon] { font-size: 14px; color: var(--color-accent); }
 
-  .hero__name {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 0.92;
-    font-size: clamp(56px, 11vw, 124px);
-    color: var(--color-ink);
-    margin: 14px 0 0;
-  }
+  .hero__name { --display-size: clamp(56px, 11vw, 124px); --display-leading: 0.92; }
 
   .hero__role {
     font-family: var(--font-text);

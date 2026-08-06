@@ -1,26 +1,26 @@
 ---
 import { Icon } from "astro-icon/components";
-import { useTranslations } from "@i18n/utils";
+import { getHome, useTranslations, type Lang } from "@i18n/utils";
 
 export interface Props {
-  lang: "es" | "en";
+  lang: Lang;
 }
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const home = lang === "es" ? "/" : "/en/";
+const home = getHome(lang);
 ---
 
 <section class="notfound container">
   <p class="notfound__num">404</p>
-  <h1 class="notfound__title">{t("notFound.subtitle")}</h1>
-  <p class="notfound__desc">{t("notFound.description")}</p>
+  <h1 class="section-title notfound__title">{t("notFound.subtitle")}</h1>
+  <p class="prose notfound__desc">{t("notFound.description")}</p>
   <div class="notfound__actions">
     <a href={home} class="btn btn--primary">
       <Icon name="ph:house" aria-hidden="true" />
       {t("notFound.homeButton")}
     </a>
-    <!-- Sin historial propio "volver" no lleva a ninguna parte: lo revela el script. -->
+    <!-- Oculto salvo que el referrer sea de este sitio: si no, "volver" no lleva a ninguna parte. -->
     <button type="button" data-back class="btn btn--ghost" hidden>
       <Icon name="ph:arrow-left" aria-hidden="true" />
       {t("notFound.backButton")}
@@ -43,20 +43,11 @@ const home = lang === "es" ? "/" : "/en/";
     margin: 0;
   }
   .notfound__title {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(32px, 5vw, 52px);
-    line-height: 1.05;
-    color: var(--color-ink);
-    margin: 24px 0 0;
+    --display-size: clamp(32px, 5vw, 52px);
+    --display-leading: 1.05;
+    margin-top: 24px;
   }
-  .notfound__desc {
-    font-size: var(--text-body);
-    line-height: var(--leading);
-    color: var(--color-ink-2);
-    margin: 16px 0 0;
-    max-width: 48ch;
-  }
+  .notfound__desc { margin-top: 16px; max-width: 48ch; }
   .notfound__actions {
     display: flex;
     flex-wrap: wrap;

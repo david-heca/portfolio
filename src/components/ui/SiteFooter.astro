@@ -1,11 +1,15 @@
 ---
-import { getLangFromUrl, useTranslations } from "@i18n/utils";
+import { getHome, useTranslations, type Lang } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
 import pkg from "../../../package.json";
 
-const lang = getLangFromUrl(Astro.url);
+export interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
 const t = useTranslations(lang);
-const home = lang === "es" ? "/" : "/en/";
+const home = getHome(lang);
 ---
 
 <footer class="footer">
@@ -54,7 +58,7 @@ const home = lang === "es" ? "/" : "/en/";
     gap: 7px;
     font-size: var(--text-meta);
     color: var(--color-ink-2);
-    transition: color 0.15s ease;
+    transition: color var(--t-fast) ease;
   }
   .footer__link:hover { color: var(--color-accent); }
   .footer__link [data-icon] { font-size: 16px; }

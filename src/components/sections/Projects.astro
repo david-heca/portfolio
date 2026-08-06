@@ -33,11 +33,11 @@ const items = projects.map((p) => ({
       <article class={`row reveal reveal-${Math.min(i + 1, 3)}`}>
         <div class="row__aside">
           <span class="row__year">{p.year}</span>
-          <span class="row__status"><span class="dot"></span>{p.statusLabel}</span>
+          <span class="status"><span class="dot"></span>{p.statusLabel}</span>
         </div>
 
         <div class="row__main">
-          <h3 class="row__title">
+          <h3 class="card-title row__title">
             {p.href ? (
               <a href={p.href} target="_blank" rel="noopener noreferrer">
                 {p.title}<span class="row__arrow" aria-hidden="true"><Icon name="ph:arrow-up-right" /></span>
@@ -46,16 +46,16 @@ const items = projects.map((p) => ({
               p.title
             )}
           </h3>
-          <p class="row__desc">{p.desc}</p>
+          <p class="prose-sm row__desc">{p.desc}</p>
 
-          <div class="row__foot">
+          <div class="tag-row row__foot">
             {p.tags.map((tag) => <span class="tag">{tag}</span>)}
             {p.href ? (
-              <a class="chip chip--link" href={p.href} target="_blank" rel="noopener noreferrer">
+              <a class="tag tag--key row__link" href={p.href} target="_blank" rel="noopener noreferrer">
                 {p.linkLabel}<Icon name="ph:arrow-up-right" aria-hidden="true" />
               </a>
             ) : (
-              <span class="chip chip--private">{p.linkLabel}</span>
+              <span class="tag tag--muted">{p.linkLabel}</span>
             )}
           </div>
         </div>
@@ -69,9 +69,6 @@ const items = projects.map((p) => ({
 </section>
 
 <style>
-  .sec-head { max-width: 720px; margin-bottom: 56px; }
-  .sec-head .lead { margin-top: 20px; }
-
   .index { display: flex; flex-direction: column; }
 
   .row {
@@ -82,7 +79,7 @@ const items = projects.map((p) => ({
     border-top: 1px solid var(--color-line);
   }
   .row:last-child { border-bottom: 1px solid var(--color-line); }
-  @media (min-width: 860px) {
+  @media (min-width: 900px) {
     .row {
       grid-template-columns: 170px minmax(0, 1fr) 190px;
       gap: 32px;
@@ -93,90 +90,33 @@ const items = projects.map((p) => ({
   .row__aside { display: flex; flex-direction: column; gap: 9px; }
   .row__year {
     font-family: var(--font-mono);
-    font-size: 15px;
+    font-size: var(--text-label);
     letter-spacing: 0.04em;
     color: var(--color-ink);
     font-variant-numeric: tabular-nums;
   }
-  .row__status {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-  }
-  .row__title {
-    font-family: var(--font-text);
-    font-weight: 500;
-    letter-spacing: -0.01em;
-    font-size: var(--text-card-title);
-    line-height: 1.05;
-    color: var(--color-ink);
-    margin: 0;
-  }
   .row__title a {
-    color: inherit;
-    text-decoration: none;
     display: inline-flex;
     align-items: baseline;
     gap: 10px;
-    transition: color 0.18s ease;
+    transition: color var(--t-base) ease;
   }
   .row__title a:hover { color: var(--color-accent); }
   .row__arrow { display: inline-flex; font-size: 0.62em; color: var(--color-accent); }
 
-  .row__desc {
-    font-size: var(--text-sm);
-    line-height: 1.6;
-    color: var(--color-ink-2);
-    margin: 8px 0 0;
-    max-width: 58ch;
-  }
+  .row__desc { margin: 8px 0 0; max-width: var(--measure); }
 
-  .row__foot {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-    margin-top: 20px;
-  }
-
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border-radius: 999px;
-    padding: 5px 12px;
-  }
-  .chip [data-icon] { font-size: 13px; }
-  .chip--private {
-    border: 1px dashed var(--color-line-strong);
-    color: var(--color-ink-3);
-  }
-  .chip--link {
-    border: 1px solid color-mix(in srgb, var(--color-accent) 40%, transparent);
-    color: var(--color-accent);
-    text-decoration: none;
-    transition: background-color 0.18s ease, border-color 0.18s ease;
-  }
-  .chip--link:hover {
-    background: var(--color-accent-soft);
-    border-color: var(--color-accent);
-  }
+  .row__foot { align-items: center; margin-top: 20px; }
+  .row__link { gap: 7px; }
+  .row__link [data-icon] { font-size: 13px; }
 
   .row__thumb {
     border-radius: var(--radius-sm);
     overflow: hidden;
     background: var(--color-bg-2);
     aspect-ratio: 16 / 11;
+    max-width: 240px;
   }
-  .row__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  @media (max-width: 859px) { .row__thumb { max-width: 240px; } }
+  .row__thumb img { width: 100%; height: 100%; object-fit: cover; }
+  @media (min-width: 900px) { .row__thumb { max-width: none; } }
 </style>

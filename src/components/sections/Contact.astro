@@ -27,7 +27,7 @@ const cvFiles = [
 <section id="contact" class="contact section container">
   <div class="contact__intro reveal">
     <p class="kicker">{t("nav.contact")}</p>
-    <h2 class="contact__title">{t("contact.headerTitle")} <em>{t("contact.headerItalic")}</em></h2>
+    <h2 class="section-title contact__title">{t("contact.headerTitle")} <em>{t("contact.headerItalic")}</em></h2>
     <p class="lead contact__lead">{t("contact.description")}</p>
 
     <div class="contact__cta">
@@ -49,7 +49,7 @@ const cvFiles = [
       >
         <span class="channel__icon"><Icon name={c.icon} /></span>
         <span class="channel__text">
-          <span class="channel__label">{c.label}</span>
+          <span class="label">{c.label}</span>
           <span class="channel__value">{c.value}</span>
         </span>
         <span class="channel__arrow" aria-hidden="true"><Icon name="ph:arrow-up-right" /></span>
@@ -75,18 +75,8 @@ const cvFiles = [
   }
   @media (min-width: 900px) { .contact { grid-template-columns: 1.1fr 0.9fr; gap: 64px; } }
 
-  .contact__title {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 0.98;
-    font-size: clamp(48px, 8vw, 96px);
-    color: var(--color-ink);
-    margin: 14px 0 0;
-  }
-  .contact__title em { color: var(--color-accent); font-style: italic; }
-  .contact__lead { margin-top: 22px; }
+  .contact__title { --display-size: clamp(48px, 8vw, 96px); --display-leading: 0.98; }
+  .contact__lead { margin-top: 20px; }
 
   .contact__cta {
     display: flex;
@@ -118,13 +108,7 @@ const cvFiles = [
   }
   .channel__icon [data-icon] { font-size: 21px; }
   .channel__text { display: flex; flex-direction: column; gap: 2px; }
-  .channel__label {
-    font-family: var(--font-mono);
-    font-size: var(--text-label-sm);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-ink-3);
-  }
+
   .channel__value { font-size: var(--text-body); color: var(--color-ink); }
   .channel:hover .channel__value { color: var(--color-accent); }
   .channel__arrow { display: inline-flex; margin-left: auto; color: var(--color-ink-3); }
