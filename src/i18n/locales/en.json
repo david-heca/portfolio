@@ -6,7 +6,7 @@
   },
   "meta": {
     "home": {
-      "title": "David Herrera — Applied AI Engineer in Mexico City",
+      "title": "David Herrera - Applied AI Engineer in Mexico City",
       "tabTitle": "David Herrera",
       "description": "Applied AI Engineer in Mexico City. I build RAG and MCP systems on top of the data companies already have, with .NET, Python and Azure."
     }
@@ -79,7 +79,7 @@
     "venues": [
       "EGADE Business School · Monterrey",
       "UPVM Tultitlán",
-      "TESCo — TecNM"
+      "TESCo - TecNM"
     ],
     "topicsLabel": "Topics",
     "topics": [
@@ -102,7 +102,7 @@
     "bio": {
       "paragraph1": "I started out building WordPress sites and managing hosting. Today I design and ship AI systems. In between, <strong>backend, data and applied AI</strong>.",
       "paragraph2": "I move from data model to frontend, but my job right now is <strong>RAG, MCP and MLOps</strong> over corporate data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs.",
-      "paragraph3": "I also teach, sort of: talks on AI and data science at universities —EGADE, UPVM Tultitlán, TESCo—, around 200 people per session."
+      "paragraph3": "I also teach, sort of: talks on AI and data science at universities -EGADE, UPVM Tultitlán, TESCo-, around 200 people per session."
     },
     "principles": [
       {
@@ -127,13 +127,13 @@
     "companies": {
       "hypertech": {
         "name": "Hypertech",
-        "totalPeriod": "2026 — Present",
+        "totalPeriod": "2026 - Present",
         "location": "Mexico City",
         "workMode": "Remote",
         "roles": {
           "appliedai": {
             "title": "Applied AI Engineer",
-            "period": "Jul 2026 — Present",
+            "period": "Jul 2026 - Present",
             "type": "Full-time",
             "achievements": [
               "I bring AI into the team's internal processes and into the financial software the consultancy builds for its clients."
@@ -143,13 +143,13 @@
       },
       "baacc": {
         "name": "BAACC Systems",
-        "totalPeriod": "2023 — 2026",
+        "totalPeriod": "2023 - 2026",
         "location": "Mexico State",
         "workMode": "On-site",
         "roles": {
           "architect": {
             "title": "AI Solutions Architect",
-            "period": "Mar 2025 — Jul 2026",
+            "period": "Mar 2025 - Jul 2026",
             "type": "Full-time",
             "achievements": [
               "Connie, from zero to production: I wrote 80% of the system. A RAG platform now serving 3 clients over their databases, PDFs and spreadsheets, with enterprise auth.",
@@ -160,7 +160,7 @@
           },
           "fullstack": {
             "title": "Fullstack Developer",
-            "period": "Jan 2024 — Mar 2025",
+            "period": "Jan 2024 - Mar 2025",
             "type": "Full-time",
             "achievements": [
               "Desktop apps in .NET and Python for the shop floor, running 24/7.",
@@ -171,7 +171,7 @@
           },
           "junior": {
             "title": "Junior Fullstack Developer",
-            "period": "Sep 2023 — Jan 2024",
+            "period": "Sep 2023 - Jan 2024",
             "type": "Internship",
             "achievements": [
               "Web modules and internal APIs.",
@@ -182,13 +182,13 @@
       },
       "dec": {
         "name": "DEC Marketing",
-        "totalPeriod": "Mar 2022 — Sep 2023",
+        "totalPeriod": "Mar 2022 - Sep 2023",
         "location": "Mexico City",
         "workMode": "Remote",
         "roles": {
           "webdev": {
             "title": "Junior Web Developer",
-            "period": "Mar 2022 — Sep 2023",
+            "period": "Mar 2022 - Sep 2023",
             "type": "Internship",
             "achievements": [
               "Websites and support with HTML, CSS, JavaScript and CMS: WordPress, Joomla, OpenCart.",
@@ -210,21 +210,21 @@
     "certsTitle": "Certifications",
     "list": {
       "platzi": {
-        "institution": "Platzi — Technology School",
+        "institution": "Platzi - Technology School",
         "degree": "Technology Industry",
-        "period": "2022 — Present",
+        "period": "2022 - Present",
         "description": "Where I keep up: web development, AI and whatever comes next."
       },
       "tesco": {
-        "institution": "Higher Studies Institute of Coacalco (TESCo) — TecNM",
+        "institution": "Higher Studies Institute of Coacalco (TESCo) - TecNM",
         "degree": "Information & Communication Technologies Engineering",
-        "period": "2019 — 2024",
+        "period": "2019 - 2024",
         "description": "Specialization in mobile application development."
       },
       "cecytem": {
-        "institution": "CECyTEM — Tultepec",
+        "institution": "CECyTEM - Tultepec",
         "degree": "Programming Technician",
-        "period": "2016 — 2018",
+        "period": "2016 - 2018",
         "description": "Programming back in high school: my first real contact with code."
       }
     },
@@ -263,7 +263,7 @@
       },
       "handheld": {
         "title": "HandHeld RFID",
-        "description": "Android app with an RFID reader, end to end. Inventory went from taking weeks —or never happening— to being done walking the warehouse floor."
+        "description": "Android app with an RFID reader, end to end. Inventory went from taking weeks -or never happening- to being done walking the warehouse floor."
       },
       "trace": {
         "title": "Automotive Traceability",

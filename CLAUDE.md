@@ -2,7 +2,7 @@
 
 Reglas para trabajar en este repositorio.
 
-Documenta lo que **no** se deduce leyendo el código: invariantes, restricciones y los porqués que costaría redescubrir. El inventario —qué secciones existen, qué primitivas hay en `global.css`, qué aliases define `tsconfig.json`— se lee del código. Si algo de aquí se puede verificar abriendo un archivo, sobra.
+Documenta lo que **no** se deduce leyendo el código: invariantes, restricciones y los porqués que costaría redescubrir. El inventario -qué secciones existen, qué primitivas hay en `global.css`, qué aliases define `tsconfig.json`- se lee del código. Si algo de aquí se puede verificar abriendo un archivo, sobra.
 
 ## Comandos
 
@@ -19,7 +19,7 @@ Astro 7 estático con CSS propio, desplegado en Cloudflare Workers. Sin React, s
 
 Todo el sitio es **una landing por idioma** y la navegación es por anclas, no por rutas. Necesitar una subruta es señal de que algo no encaja en el modelo, no permiso para crearla. `src/config.ts` enciende y apaga secciones: apagar una la quita de la landing y del nav a la vez.
 
-## Bilingüe — ES en `/`, EN en `/en/`
+## Bilingüe - ES en `/`, EN en `/en/`
 
 - Traducciones en `src/i18n/locales/{es,en}.json`; `useTranslations(lang)` devuelve `t<T>()` con notación de punto. Las claves con HTML inline se renderizan con `set:html`. **Ningún texto visible se escribe en un componente**, ni siquiera un `alt`.
 - **`localizePath()` es la única implementación del mapeo es↔en**, y `getHome()` la única de la portada por idioma. Las usan el hreflang, el conmutador y el redirect por preferencia; una segunda copia acabaría divirgiendo en la barra final.
@@ -46,7 +46,7 @@ La clase `.dark` se aplica en `<html>` **antes del paint** y se preserva entre V
 
 - **Token-driven.** Para reajustar el look se editan variables en `global.css`, nunca componentes. Un valor literal dentro de un `<style>` scoped es un token que falta.
 - **Un solo acento.** Las variantes translúcidas derivan con `color-mix`; no se declaran a mano.
-- **El serif es la excepción.** `--font-display` (Junicode italic) marca solo los dos niveles altos de la jerarquía —el título de sección y su divisor—. Por debajo va `.card-title`, en sans. Si la italic baja al nivel de card deja de significar énfasis y la página se satura.
+- **El serif es la excepción.** `--font-display` (Junicode italic) marca solo los dos niveles altos de la jerarquía -el título de sección y su divisor-. Por debajo va `.card-title`, en sans. Si la italic baja al nivel de card deja de significar énfasis y la página se satura.
 - **Un rol por tipografía.** Display para titulares; `--font-text` para leer y para la UI; `--font-mono` solo para etiquetas en mayúsculas con tracking, tags y cifras. Lo que se lee como frase va en la sans aunque contenga números.
 - **Las primitivas viven en `global.css`; el layout de cada sección, en su `<style>` scoped.** Un patrón que aparece en tres sitios ya es una primitiva.
 - Una sola acción primaria por vista; el resto en `.btn--ghost`.
@@ -60,9 +60,9 @@ La clase `.dark` se aplica en `<html>` **antes del paint** y se preserva entre V
 - `src/components/sections/` son bloques de la landing; `src/components/ui/`, chrome reutilizable en cualquier página; `src/components/`, lo que no es ni una cosa ni la otra.
 - Importar siempre por alias, no con rutas relativas que suban de carpeta.
 - **El `<header>` se reemplaza en cada navegación; `document` y `window` no.** Un listener sobre el elemento se registra en su `setup()` con guarda `dataset.ready`; uno sobre `document` se registra una sola vez a nivel de módulo. Mezclarlos acumula listeners en cada navegación.
-- **`astro:page-load` también dispara en la carga inicial**, así que todo `setup()` corre dos veces de salida: tiene que ser idempotente. La llamada directa no sobra —sin ella el efecto esperaría al evento `load`—; lo que hace falta es la guarda.
+- **`astro:page-load` también dispara en la carga inicial**, así que todo `setup()` corre dos veces de salida: tiene que ser idempotente. La llamada directa no sobra -sin ella el efecto esperaría al evento `load`-; lo que hace falta es la guarda.
 - Un `cleanup()` va antes de cualquier `return` temprano, no después: si la página nueva no tiene lo que el script busca es justo cuando más hace falta soltar lo de la anterior.
 
 ## Junicode
 
-Se autoaloja en `public/assets/fonts/` (OFL, no está en Fontsource). Para regenerarlo desde el VF de `psb1558/Junicode-font`: **subsetear con `pyftsubset` primero y fijar los ejes con `varLib.instancer` después** — en el orden inverso el GSUB completo desborda al guardar. Se fijan `wdth` y `ENLA`, se conserva `wght` variable y solo se retienen las features `kern,liga`.
+Se autoaloja en `public/assets/fonts/` (OFL, no está en Fontsource). Para regenerarlo desde el VF de `psb1558/Junicode-font`: **subsetear con `pyftsubset` primero y fijar los ejes con `varLib.instancer` después** - en el orden inverso el GSUB completo desborda al guardar. Se fijan `wdth` y `ENLA`, se conserva `wght` variable y solo se retienen las features `kern,liga`.
