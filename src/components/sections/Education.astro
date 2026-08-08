@@ -54,10 +54,10 @@ const groups = [
         <div class="edu__list">
           {g.entries.map((e) => (
             <div class:list={["edu-item", e.current && "edu-item--current"]}>
-              <span class="edu-item__period">{e.period}</span>
+              <span class="rail edu-item__period">{e.period}</span>
               <div class="edu-item__body">
                 <h3 class="card-title edu-item__title">{e.title}</h3>
-                <p class="edu-item__meta">{e.meta}</p>
+                <p class="meta edu-item__meta">{e.meta}</p>
                 {e.note && <p class="prose-sm edu-item__note">{e.note}</p>}
               </div>
             </div>
@@ -128,21 +128,10 @@ const groups = [
     .edu-item__period { text-align: right; }
   }
 
-  .edu-item__period {
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: 0.04em;
-    color: var(--color-ink-2);
-    font-variant-numeric: tabular-nums;
-    padding-top: 7px;
-  }
+  .edu-item__period { padding-top: 7px; }
   .edu-item--current .edu-item__period { color: var(--color-accent); }
 
   .edu-item__title { text-wrap: balance; }
-  .edu-item__meta {
-    font-size: var(--text-meta);
-    color: var(--color-ink-2);
-    margin: 8px 0 0;
-  }
-  .edu-item__note { color: var(--color-ink-3); margin-top: 12px; }
+  .edu-item__meta { margin: 8px 0 0; }
+  .edu-item__note { margin-top: 12px; }
 </style>

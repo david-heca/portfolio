@@ -16,13 +16,13 @@ const home = getHome(lang);
   <div class="footer__inner container">
     <a href={`${home}#top`} class="footer__brand">david<span>herrera</span></a>
 
-    <p class="footer__copy">© 2026 David Herrera · v{pkg.version}</p>
+    <p class="meta">© 2026 David Herrera · v{pkg.version}</p>
 
     <a
       href="https://github.com/david-heca/portfolio"
       target="_blank"
       rel="noopener noreferrer"
-      class="footer__link"
+      class="meta footer__link"
     >
       <Icon name="ph:github-logo-duotone" />
       {t("common.footer.license")}
@@ -43,23 +43,16 @@ const home = getHome(lang);
   .footer__brand {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 20px;
+    font-size: var(--text-brand);
     color: var(--color-ink);
   }
   .footer__brand span { color: var(--color-accent); }
-  .footer__copy {
-    font-size: var(--text-meta);
-    color: var(--color-ink-2);
-    margin: 0;
-  }
   .footer__link {
     display: inline-flex;
     align-items: center;
     gap: 7px;
-    font-size: var(--text-meta);
-    color: var(--color-ink-2);
     transition: color var(--t-fast) ease;
   }
   .footer__link:hover { color: var(--color-accent); }
-  .footer__link [data-icon] { font-size: 16px; }
+  .footer__link [data-icon] { font-size: var(--icon); }
 </style>

@@ -33,7 +33,7 @@ const alt = t("speaking.photoAlt");
     <div class="speaking__meta">
       <div>
         <p class="kicker speaking__meta-label">{t("speaking.venuesLabel")}</p>
-        <ul class="speaking__venues">
+        <ul class="prose-sm speaking__venues">
           {venues.map((v) => <li><Icon name="ph:map-pin-duotone" />{v}</li>)}
         </ul>
       </div>
@@ -66,13 +66,15 @@ const alt = t("speaking.photoAlt");
     background: var(--color-bg-2);
   }
   .speaking__photo-ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+  /* Fuera de la escala a propósito: se dimensiona contra la caja de 440px, no
+     contra un texto, y solo aparece si la imagen falla. */
   .speaking__photo-ph [data-icon] { font-size: 64px; color: var(--color-ink-3); }
   .speaking__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 
   .speaking__lead { margin-top: 20px; }
 
   .speaking__audience { display: inline-flex; align-items: center; gap: 11px; margin-top: 26px; }
-  .speaking__audience [data-icon] { font-size: 26px; color: var(--color-accent); }
+  .speaking__audience [data-icon] { font-size: var(--icon-2xl); color: var(--color-accent); }
 
   .speaking__meta {
     display: grid;
@@ -85,12 +87,6 @@ const alt = t("speaking.photoAlt");
   @media (min-width: 768px) { .speaking__meta { grid-template-columns: 1fr 1fr; } }
   .speaking__meta-label { margin-bottom: 14px; }
   .speaking__venues { display: flex; flex-direction: column; gap: 11px; }
-  .speaking__venues li {
-    display: flex;
-    align-items: center;
-    gap: 9px;
-    font-size: var(--text-sm);
-    color: var(--color-ink);
-  }
-  .speaking__venues [data-icon] { font-size: 16px; color: var(--color-accent); }
+  .speaking__venues li { display: flex; align-items: center; gap: 9px; }
+  .speaking__venues [data-icon] { font-size: var(--icon); color: var(--color-accent); }
 </style>

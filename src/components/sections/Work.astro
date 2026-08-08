@@ -100,15 +100,15 @@ const companies: Company[] = [
     {companies.map((co) => (
       <article class="work__company reveal">
         <div class="work__company-head">
-          <h3 class="work__company-name">{co.name}</h3>
-          <span class="work__company-meta">{[co.span, co.loc, co.mode].filter(Boolean).join(" · ")}</span>
+          <h3 class="section-title work__company-name">{co.name}</h3>
+          <span class="meta">{[co.span, co.loc, co.mode].filter(Boolean).join(" · ")}</span>
         </div>
 
         <div class="work__roles">
           {co.roles.map((r) => (
             <div class="role">
               <div class="role__aside">
-                <span class="role__period">{r.period}</span>
+                <span class="rail">{r.period}</span>
                 {r.current && (
                   <span class="status"><span class="dot"></span>{t("work.current")}</span>
                 )}
@@ -160,18 +160,7 @@ const companies: Company[] = [
     margin-bottom: 28px;
     border-bottom: 1px solid var(--color-line);
   }
-  .work__company-name {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(28px, 4vw, 40px);
-    line-height: 1;
-    color: var(--color-ink);
-    margin: 0;
-  }
-  .work__company-meta {
-    font-size: var(--text-meta);
-    color: var(--color-ink-2);
-  }
+  .work__company-name { --display-size: var(--display-sm); margin: 0; }
 
   .work__roles { display: flex; flex-direction: column; gap: 36px; }
 
@@ -184,13 +173,6 @@ const companies: Company[] = [
     .role { grid-template-columns: 170px 1fr; gap: 32px; }
   }
   .role__aside { display: flex; flex-direction: column; gap: 10px; }
-  .role__period {
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: 0.04em;
-    color: var(--color-ink-2);
-    font-variant-numeric: tabular-nums;
-  }
   .role__type { display: inline-block; margin-top: 6px; }
   .role__achievements {
     margin: 18px 0 0;
@@ -221,7 +203,7 @@ const companies: Company[] = [
   }
   .role__more-toggle::-webkit-details-marker { display: none; }
   .role__more-toggle:hover { color: var(--color-accent); }
-  .role__more-caret { font-size: 13px; transition: transform var(--t-base) ease; }
+  .role__more-caret { font-size: var(--icon-sm); transition: transform var(--t-base) ease; }
   .role__more[open] .role__more-caret { transform: rotate(180deg); }
   .role__more-label--less { display: none; }
   .role__more[open] .role__more-label--more { display: none; }

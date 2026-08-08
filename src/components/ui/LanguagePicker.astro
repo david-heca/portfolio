@@ -36,28 +36,30 @@ const label = expanded ? nativeName : target.toUpperCase();
     padding: 0 8px;
     font-family: var(--font-mono);
     font-size: var(--text-label);
-    letter-spacing: 0.12em;
+    letter-spacing: var(--track-label);
   }
   /* Caja fija: evita el salto cuando acaba de cargar la mono. */
   .lang-switch [data-icon] {
-    width: 15px;
-    height: 15px;
-    font-size: 15px;
+    width: var(--icon);
+    height: var(--icon);
+    font-size: var(--icon);
   }
   .lang-switch span {
-    line-height: 1;
-    /* compensa el letter-spacing sobrante tras la última letra */
-    margin-right: -0.12em;
-    /* Nudge óptico: las mayúsculas no usan el hueco del descendente. */
+    line-height: var(--leading-flat);
+    /* Compensa el letter-spacing sobrante tras la última letra. Va atado al mismo
+       token que lo genera: si divergen, la etiqueta se descentra en la píldora. */
+    margin-right: calc(-1 * var(--track-label));
+    /* Nudge óptico: las mayúsculas no usan el hueco del descendente. El valor
+       coincide con --track-label-sm por casualidad; no es tracking, no lo tokenices. */
     position: relative;
     top: 0.08em;
   }
 
   .lang-switch--expanded {
     font-size: var(--text-sm);
-    letter-spacing: 0.04em;
+    letter-spacing: var(--track-tag);
   }
-  .lang-switch--expanded span { margin-right: -0.04em; }
+  .lang-switch--expanded span { margin-right: calc(-1 * var(--track-tag)); }
 </style>
 
 <script>

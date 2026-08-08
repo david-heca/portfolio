@@ -13,7 +13,7 @@ const t = useTranslations(lang);
 
 <section id="top" class="hero container">
   <div class="hero__text">
-    <p class="hero__place reveal">
+    <p class="kicker hero__place reveal">
       <Icon name="ph:map-pin-duotone" />
       {t("hero.location")}
     </p>
@@ -61,26 +61,24 @@ const t = useTranslations(lang);
     .hero { grid-template-columns: 1.35fr 1fr; gap: 64px; }
   }
 
+  /* Único kicker en gris del sitio: en acento competiría con el nombre que tiene
+     debajo. Volver a la norma es borrar el color. */
   .hero__place {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: var(--track-label);
-    text-transform: uppercase;
     color: var(--color-ink-2);
   }
-  .hero__place [data-icon] { font-size: 14px; color: var(--color-accent); }
+  .hero__place [data-icon] { font-size: var(--icon-sm); color: var(--color-accent); }
 
-  .hero__name { --display-size: clamp(56px, 11vw, 124px); --display-leading: 0.92; }
+  .hero__name { --display-size: var(--display-xl); --display-leading: 0.92; }
 
   .hero__role {
     font-family: var(--font-text);
-    font-weight: 500;
-    font-size: clamp(20px, 2.6vw, 28px);
-    line-height: 1.25;
-    letter-spacing: -0.01em;
+    font-weight: var(--weight-medium);
+    font-size: var(--text-subhead);
+    line-height: var(--leading-title);
+    letter-spacing: var(--track-snug);
     color: var(--color-ink);
     margin: 20px 0 0;
   }
@@ -120,5 +118,5 @@ const t = useTranslations(lang);
     transition: color 0.15s ease, transform 0.15s ease;
   }
   .hero__socials a:hover { color: var(--color-accent); transform: translateY(-2px); }
-  .hero__socials [data-icon] { font-size: 19px; }
+  .hero__socials [data-icon] { font-size: var(--icon-lg); }
 </style>

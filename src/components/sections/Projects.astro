@@ -32,7 +32,7 @@ const items = projects.map((p) => ({
     {items.map((p, i) => (
       <article class={`row reveal reveal-${Math.min(i + 1, 3)}`}>
         <div class="row__aside">
-          <span class="row__year">{p.year}</span>
+          <span class="rail">{p.year}</span>
           <span class="status"><span class="dot"></span>{p.statusLabel}</span>
         </div>
 
@@ -88,13 +88,6 @@ const items = projects.map((p) => ({
   }
 
   .row__aside { display: flex; flex-direction: column; gap: 9px; }
-  .row__year {
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: 0.04em;
-    color: var(--color-ink);
-    font-variant-numeric: tabular-nums;
-  }
   .row__title a {
     display: inline-flex;
     align-items: baseline;
@@ -108,7 +101,7 @@ const items = projects.map((p) => ({
 
   .row__foot { align-items: center; margin-top: 20px; }
   .row__link { gap: 7px; }
-  .row__link [data-icon] { font-size: 13px; }
+  .row__link [data-icon] { font-size: var(--icon-sm); }
 
   .row__thumb {
     border-radius: var(--radius-sm);

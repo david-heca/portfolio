@@ -36,7 +36,7 @@ const cvFiles = [
         {t("contact.cta.button")}
       </a>
     </div>
-    <p class="contact__note">{t("contact.cta.note")}</p>
+    <p class="meta contact__note">{t("contact.cta.note")}</p>
   </div>
 
   <div class="contact__channels reveal reveal-1">
@@ -75,7 +75,7 @@ const cvFiles = [
   }
   @media (min-width: 900px) { .contact { grid-template-columns: 1.1fr 0.9fr; gap: 64px; } }
 
-  .contact__title { --display-size: clamp(48px, 8vw, 96px); --display-leading: 0.98; }
+  .contact__title { --display-size: var(--display-lg); --display-leading: 0.98; }
   .contact__lead { margin-top: 20px; }
 
   .contact__cta {
@@ -85,11 +85,7 @@ const cvFiles = [
     gap: 16px 20px;
     margin-top: 32px;
   }
-  .contact__note {
-    font-size: var(--text-meta);
-    color: var(--color-ink-2);
-    margin: 16px 0 0;
-  }
+  .contact__note { margin: 16px 0 0; }
 
   .contact__channels { display: flex; flex-direction: column; }
   .channel {
@@ -106,13 +102,13 @@ const cvFiles = [
     display: inline-flex;
     color: var(--color-accent);
   }
-  .channel__icon [data-icon] { font-size: 21px; }
+  .channel__icon [data-icon] { font-size: var(--icon-xl); }
   .channel__text { display: flex; flex-direction: column; gap: 2px; }
 
   .channel__value { font-size: var(--text-body); color: var(--color-ink); }
   .channel:hover .channel__value { color: var(--color-accent); }
   .channel__arrow { display: inline-flex; margin-left: auto; color: var(--color-ink-3); }
-  .channel__arrow [data-icon] { font-size: 17px; }
+  .channel__arrow [data-icon] { font-size: var(--icon); }
   .channel:hover .channel__arrow { color: var(--color-accent); }
 
   .contact__cv { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }

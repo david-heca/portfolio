@@ -12,7 +12,7 @@ const home = getHome(lang);
 ---
 
 <section class="notfound container">
-  <p class="notfound__num">404</p>
+  <p class="section-title notfound__num">404</p>
   <h1 class="section-title notfound__title">{t("notFound.subtitle")}</h1>
   <p class="prose notfound__desc">{t("notFound.description")}</p>
   <div class="notfound__actions">
@@ -35,18 +35,12 @@ const home = getHome(lang);
     max-width: 640px;
   }
   .notfound__num {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: clamp(96px, 22vw, 220px);
-    line-height: 0.85;
+    --display-size: var(--display-2xl);
+    --display-leading: 0.85;
     color: var(--color-accent);
     margin: 0;
   }
-  .notfound__title {
-    --display-size: clamp(32px, 5vw, 52px);
-    --display-leading: 1.05;
-    margin-top: 24px;
-  }
+  .notfound__title { margin-top: 24px; }
   .notfound__desc { margin-top: 16px; max-width: 48ch; }
   .notfound__actions {
     display: flex;

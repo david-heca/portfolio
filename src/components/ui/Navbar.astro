@@ -98,7 +98,7 @@ const navItems = [
   .nav__brand {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 22px;
+    font-size: var(--text-brand);
     color: var(--color-ink);
     flex-shrink: 0;
   }
@@ -112,16 +112,16 @@ const navItems = [
   @media (min-width: 1024px) { .nav__links { display: inline-flex; } }
   .nav__link {
     gap: 7px;
-    font-size: 13.5px;
-    line-height: 1;
-    font-weight: 500;
+    font-size: var(--text-meta);
+    line-height: var(--leading-flat);
+    font-weight: var(--weight-medium);
     padding: 8px 13px;
   }
   .nav__link.active { color: var(--color-accent); background: var(--color-accent-soft); }
   .nav__link [data-icon] {
-    width: 15px;
-    height: 15px;
-    font-size: 15px;
+    width: var(--icon);
+    height: var(--icon);
+    font-size: var(--icon);
     color: var(--color-ink-3);
     transition: color var(--t-fast) ease;
   }
@@ -133,7 +133,7 @@ const navItems = [
   @media (min-width: 1024px) { .nav__utils-desktop { display: inline-flex; } }
 
   .menu-btn { width: 40px; height: 40px; }
-  .menu-btn [data-icon] { font-size: 22px; }
+  .menu-btn [data-icon] { font-size: var(--icon-xl); }
   @media (min-width: 1024px) { .menu-btn { display: none; } }
 
   .mobile-menu {
@@ -162,17 +162,17 @@ const navItems = [
     align-items: center;
     gap: 13px;
     padding: 13px 16px;
-    font-size: 16px;
-    line-height: 1;
-    font-weight: 500;
+    font-size: var(--text-body);
+    line-height: var(--leading-flat);
+    font-weight: var(--weight-medium);
     color: var(--color-ink);
     border-radius: var(--radius-sm);
   }
   .mobile-menu__link:hover { background: var(--color-bg-2); color: var(--color-ink); }
   .mobile-menu__link [data-icon] {
-    width: 19px;
-    height: 19px;
-    font-size: 19px;
+    width: var(--icon-lg);
+    height: var(--icon-lg);
+    font-size: var(--icon-lg);
     color: var(--color-ink-3);
     transition: color var(--t-fast) ease;
   }

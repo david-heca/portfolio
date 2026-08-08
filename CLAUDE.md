@@ -49,6 +49,17 @@ La clase `.dark` se aplica en `<html>` **antes del paint** y se preserva entre V
 - **El serif es la excepción.** `--font-display` (Junicode italic) marca solo los dos niveles altos de la jerarquía -el título de sección y su divisor-. Por debajo va `.card-title`, en sans. Si la italic baja al nivel de card deja de significar énfasis y la página se satura.
 - **Un rol por tipografía.** Display para titulares; `--font-text` para leer y para la UI; `--font-mono` solo para etiquetas en mayúsculas con tracking, tags y cifras. Lo que se lee como frase va en la sans aunque contenga números.
 - **Las primitivas viven en `global.css`; el layout de cada sección, en su `<style>` scoped.** Un patrón que aparece en tres sitios ya es una primitiva.
+- **Solo tres colores llevan texto.** `--color-ink` para títulos y el valor principal de un bloque; `--color-ink-2` para toda la prosa secundaria, meta, fechas y `.label`; `--color-accent` para kickers, `.status`, los `em` de los títulos y los hover. **`--color-ink-3` no pinta texto nunca**: da ~2:1 de contraste y está calibrado para viñetas, hairlines e iconos en reposo. Si un texto necesita bajar de tono, ya está en ink-2; lo que necesita es menos cuerpo, no menos tinta.
+- **El tier display se elige entre los cinco tokens `--display-*`.** `--display-size` es el hook por instancia, no permiso para escribir un `clamp` nuevo: toda la display pasa por `.section-title` para heredar el `--track-tight` que la distingue. `--display-leading` sí es óptico y se ajusta por instancia.
+- **`.lead` y `.card-title` comparten cuerpo a propósito**, y por eso comparten token. Separarlos en dos tamaños a 1px de distancia no crea jerarquía: la crean el peso y el color.
+- **`--weight-medium` es solo para la sans.** La mono se carga en un único peso estático, así que aplicárselo da negrita sintética del navegador.
+- El kicker del hero es el único en gris: en acento competiría con el nombre que tiene debajo. Volver a la norma es borrar ese `color`.
+- **No hay linter que atrape un token mal escrito.** Un `var(--typo)` no falla el build: la propiedad se vuelve `unset` y **hereda** en silencio. Tras tocar tokens, correr el `comm` de abajo; solo deben salir los hooks conocidos (`--display-size`, `--display-leading`) y las variables que pone el JS del tema (`--theme-x/y/r`).
+
+  ```bash
+  comm -13 <(grep -oE '^\s*--[a-z0-9-]+' src/styles/global.css | tr -d ' ' | sort -u) \
+           <(grep -ohrE 'var\(--[a-z0-9-]+' src/ | sed 's/var(//' | sort -u)
+  ```
 - Una sola acción primaria por vista; el resto en `.btn--ghost`.
 - Iconos Phosphor en peso regular vía `astro-icon`, monocromáticos, heredando `currentColor`. **Nunca un glifo como icono** (`↗`, `→`): algunos navegadores los resuelven contra una fuente de emoji.
 - Imágenes en WebP. Toda animación respeta `prefers-reduced-motion`.

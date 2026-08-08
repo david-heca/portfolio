@@ -26,7 +26,9 @@
   --color-ink-3: #b4ad9f;
   --color-line: rgba(26, 24, 21, 0.12);
   --color-line-strong: rgba(26, 24, 21, 0.26);
-  --color-accent: #2f7a68;
+  /* El acento pesa lo mismo en los dos temas: ~6.3:1 aquí, ~7.4:1 en oscuro.
+     Sin equilibrar, en claro quedaba por debajo de la prosa y en oscuro por encima. */
+  --color-accent: #256254;
   --color-accent-soft: color-mix(in srgb, var(--color-accent) 12%, transparent);
   --shadow-soft: 0 1px 2px rgba(26, 24, 21, 0.04), 0 16px 40px -24px rgba(26, 24, 21, 0.18);
 
@@ -37,19 +39,47 @@
   /* escala tipográfica - se elige por rol, nunca se escribe el px */
   --text-label-sm: 11px;   /* mono micro: claves de spec, meta de card */
   --text-label: 12px;      /* etiquetas mono, kickers, periodos */
-  --track-label: 0.16em;
-  --track-label-sm: 0.08em;
   /* Lo que se lee como frase (institución, emisor, notas, footer) va en la
      sans a este tamaño; el mono se reserva a etiquetas, tags y cifras. */
   --text-meta: 13.5px;
   --text-sm: 14.5px;       /* prosa secundaria: descripciones, notas, logros */
   --text-body: 16px;       /* prosa principal: bio, descripción destacada, canales */
-  --text-lead: clamp(18px, 2.1vw, 21px);  /* entradilla de sección */
-  /* Títulos de card. La italic solo marca el título de sección y su divisor;
-     por debajo deja de significar énfasis. */
-  --text-card-title: clamp(19px, 2.1vw, 22px);
-  --leading: 1.65;
+  /* Entradilla de sección y título de card comparten cuerpo a propósito: lo que
+     los separa es el peso y el color, no el tamaño. */
+  --text-lead: clamp(19px, 2.1vw, 22px);
+  --text-subhead: clamp(20px, 2.6vw, 28px);  /* único tier sans por encima de .card-title */
+  --text-brand: 21px;      /* wordmark, igual en el nav y en el pie */
+
+  /* tier display (Junicode italic) - se elige un token, no se escribe un clamp */
+  --display-2xl: clamp(96px, 22vw, 220px);  /* solo el numeral del 404 */
+  --display-xl: clamp(56px, 11vw, 124px);
+  --display-lg: clamp(48px, 8vw, 96px);
+  --display: clamp(38px, 6vw, 58px);
+  --display-sm: clamp(28px, 4vw, 40px);
+
+  /* tracking - negativo para display y títulos, positivo para mono en mayúsculas */
+  --track-tight: -0.02em;  /* display */
+  --track-snug: -0.01em;   /* título de card y subhead */
+  --track-tag: 0.04em;     /* cifras y tags */
+  --track-label-sm: 0.08em;
+  --track-label: 0.16em;
+
+  --leading: 1.65;         /* prosa */
+  --leading-snug: 1.5;     /* entradilla */
+  --leading-title: 1.25;   /* subhead */
+  --leading-tight: 1.1;    /* título de card */
+  --leading-flat: 1;       /* una sola línea: botones, enlaces del nav */
+  /* La mono se carga en un solo peso estático: aplicar esto a un elemento mono
+     da negrita sintética. Solo para la sans, que sí es variable. */
+  --weight-medium: 500;
   --measure: 60ch;
+
+  /* iconos - cinco escalones; nunca un px suelto */
+  --icon-sm: 14px;
+  --icon: 16px;
+  --icon-lg: 19px;
+  --icon-xl: 22px;
+  --icon-2xl: 28px;
 
   /* layout */
   --container: 1180px;
@@ -67,7 +97,7 @@
   --color-ink-3: #4a473f;
   --color-line: rgba(231, 226, 214, 0.12);
   --color-line-strong: rgba(231, 226, 214, 0.24);
-  --color-accent: #8fd0bf;
+  --color-accent: #5fae9a;
   --color-accent-soft: color-mix(in srgb, var(--color-accent) 16%, transparent);
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 40px -24px rgba(0, 0, 0, 0.6);
 }
@@ -139,13 +169,13 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-accent);
 }
 
-/* Micro-etiqueta mono. El color lo pone quien la usa. */
+/* Micro-etiqueta mono. */
 .label {
   font-family: var(--font-mono);
   font-size: var(--text-label-sm);
   letter-spacing: var(--track-label-sm);
   text-transform: uppercase;
-  color: var(--color-ink-3);
+  color: var(--color-ink-2);
 }
 
 /* "En curso": punto + etiqueta acento. */
@@ -160,33 +190,35 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-accent);
 }
 
-/* El tamaño y el interlineado se ajustan por instancia con las dos variables. */
+/* Toda la display pasa por aquí. El escalón se elige con --display-size entre los
+   cuatro tokens; --display-leading sí es óptico y se ajusta por instancia. */
 .section-title {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 400;
-  letter-spacing: -0.02em;
-  line-height: var(--display-leading, 1);
-  font-size: var(--display-size, clamp(38px, 6vw, 58px));
+  letter-spacing: var(--track-tight);
+  line-height: var(--display-leading, var(--leading-flat));
+  font-size: var(--display-size, var(--display));
   color: var(--color-ink);
   margin: 14px 0 0;
 }
 .section-title em { color: var(--color-accent); font-style: italic; }
 
-/* Título de card: rol, grado, certificado, proyecto, principio. */
+/* Título de card: rol, grado, certificado, proyecto, principio. Comparte cuerpo
+   con .lead a propósito; lo que los separa es el peso y el color. */
 .card-title {
   font-family: var(--font-text);
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  font-size: var(--text-card-title);
-  line-height: 1.1;
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--track-snug);
+  font-size: var(--text-lead);
+  line-height: var(--leading-tight);
   color: var(--color-ink);
   margin: 0;
 }
 
 .lead {
   font-size: var(--text-lead);
-  line-height: 1.5;
+  line-height: var(--leading-snug);
   color: var(--color-ink-2);
   max-width: 52ch;
 }
@@ -197,12 +229,28 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-ink-2);
   max-width: var(--measure);
 }
-.prose strong { color: var(--color-ink); font-weight: 500; }
+.prose strong { color: var(--color-ink); font-weight: var(--weight-medium); }
 
 .prose-sm {
   font-size: var(--text-sm);
-  line-height: 1.6;
+  line-height: var(--leading);
   color: var(--color-ink-2);
+}
+
+/* Frase de apoyo junto a un título: institución, emisor, nota, pie. Sans, nunca
+   mono: el mono se reserva a etiquetas, tags y cifras. */
+.meta {
+  font-size: var(--text-meta);
+  color: var(--color-ink-2);
+}
+
+/* Cifra del rail izquierdo: año o periodo. Tabular para que las columnas caseen. */
+.rail {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--track-tag);
+  color: var(--color-ink-2);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ----- buttons ----- */
@@ -212,9 +260,9 @@ img, svg { display: block; max-width: 100%; }
   justify-content: center;
   gap: 8px;
   font-family: var(--font-text);
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 1;
+  font-weight: var(--weight-medium);
+  font-size: var(--text-sm);
+  line-height: var(--leading-flat);
   padding: 13px 22px;
   border-radius: 999px;
   border: 1px solid transparent;
@@ -228,7 +276,7 @@ img, svg { display: block; max-width: 100%; }
 .btn--ghost { border-color: var(--color-line-strong); color: var(--color-ink); }
 .btn--ghost:hover { border-color: var(--color-accent); color: var(--color-accent); background: var(--color-accent-soft); }
 .btn:active { transform: translateY(0) scale(0.98); }
-.btn--sm { padding: 8px 14px; font-size: 13px; }
+.btn--sm { padding: 8px 14px; font-size: var(--text-meta); }
 .btn [data-icon] { font-size: 1.15em; }
 
 /* ----- píldora interactiva (enlaces del nav, toggles, menú) -----
@@ -253,7 +301,7 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
   font-family: var(--font-mono);
   font-size: var(--text-label);
-  letter-spacing: 0.04em;
+  letter-spacing: var(--track-tag);
   padding: 5px 11px;
   border-radius: 999px;
   border: 1px solid var(--color-line);
