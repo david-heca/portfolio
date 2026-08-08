@@ -74,8 +74,8 @@ const items = projects.map((p) => ({
   .row {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 18px;
-    padding-block: 34px;
+    gap: 16px;
+    padding-block: 32px;
     border-top: 1px solid var(--color-line);
   }
   .row:last-child { border-bottom: 1px solid var(--color-line); }
@@ -87,11 +87,11 @@ const items = projects.map((p) => ({
     }
   }
 
-  .row__aside { display: flex; flex-direction: column; gap: 9px; }
+  .row__aside { display: flex; flex-direction: column; gap: 8px; }
   .row__title a {
     display: inline-flex;
     align-items: baseline;
-    gap: 10px;
+    gap: 12px;
     transition: color var(--t-base) ease;
   }
   .row__title a:hover { color: var(--color-accent); }
@@ -100,7 +100,7 @@ const items = projects.map((p) => ({
   .row__desc { margin: 8px 0 0; max-width: var(--measure); }
 
   .row__foot { align-items: center; margin-top: 20px; }
-  .row__link { gap: 7px; }
+  .row__link { gap: 8px; }
   .row__link [data-icon] { font-size: var(--icon-sm); }
 
   .row__thumb {

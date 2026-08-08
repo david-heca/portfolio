@@ -60,6 +60,8 @@ La clase `.dark` se aplica en `<html>` **antes del paint** y se preserva entre V
   comm -13 <(grep -oE '^\s*--[a-z0-9-]+' src/styles/global.css | tr -d ' ' | sort -u) \
            <(grep -ohrE 'var\(--[a-z0-9-]+' src/ | sed 's/var(//' | sort -u)
   ```
+- **El ritmo va en rejilla de 4px; la forma no.** `gap` y `margin` -el espacio *entre* elementos- son múltiplos de 4. El `padding` de algo con fondo, borde o radio es **forma**: está calibrado contra el texto que envuelve, y llevarlo a rejilla cambia la silueta del control, no lo unifica. Por eso `.btn` es `13px 22px` y `.tag` es `5px 11px`. Un `padding` sobre un bloque pelado sí es ritmo y sí va en rejilla.
+- Lo que se sale de la rejilla por alineación óptica lleva comentario diciéndolo -el `padding-top` de la fecha en Education, el `gap` de etiqueta y valor en Contact-. Sin esa nota, el siguiente que pase lo "arregla".
 - Una sola acción primaria por vista; el resto en `.btn--ghost`.
 - Iconos Phosphor en peso regular vía `astro-icon`, monocromáticos, heredando `currentColor`. **Nunca un glifo como icono** (`↗`, `→`): algunos navegadores los resuelven contra una fuente de emoji.
 - Imágenes en WebP. Toda animación respeta `prefers-reduced-motion`.

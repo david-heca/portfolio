@@ -156,7 +156,7 @@ const companies: Company[] = [
     justify-content: space-between;
     flex-wrap: wrap;
     gap: 8px 20px;
-    padding-bottom: 18px;
+    padding-bottom: 16px;
     margin-bottom: 28px;
     border-bottom: 1px solid var(--color-line);
   }
@@ -172,16 +172,16 @@ const companies: Company[] = [
   @media (min-width: 768px) {
     .role { grid-template-columns: 170px 1fr; gap: 32px; }
   }
-  .role__aside { display: flex; flex-direction: column; gap: 10px; }
-  .role__type { display: inline-block; margin-top: 6px; }
+  .role__aside { display: flex; flex-direction: column; gap: 12px; }
+  .role__type { display: inline-block; margin-top: 8px; }
   .role__achievements {
-    margin: 18px 0 0;
+    margin: 16px 0 0;
     display: flex;
     flex-direction: column;
     gap: 12px;
     max-width: var(--measure);
   }
-  .role__achievements li { position: relative; padding-left: 22px; }
+  .role__achievements li { position: relative; padding-left: 24px; }
   .role__achievements li::before {
     content: "";
     position: absolute;
@@ -193,7 +193,7 @@ const companies: Company[] = [
     background: var(--color-ink-3);
   }
   /* <details> nativo: el contenido plegado sigue en el DOM para Cmd+F y SEO. */
-  .role__more { margin-top: 14px; }
+  .role__more { margin-top: 16px; }
   .role__more-toggle {
     display: inline-flex;
     align-items: center;
@@ -208,7 +208,7 @@ const companies: Company[] = [
   .role__more-label--less { display: none; }
   .role__more[open] .role__more-label--more { display: none; }
   .role__more[open] .role__more-label--less { display: inline; }
-  .role__achievements--extra { margin-top: 14px; }
+  .role__achievements--extra { margin-top: 16px; }
 
-  .role__stack { margin-top: 18px; }
+  .role__stack { margin-top: 16px; }
 </style>

@@ -169,24 +169,21 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-accent);
 }
 
-/* Micro-etiqueta mono. */
-.label {
+/* Micro-etiqueta mono. `.status` es la misma voz en acento y con punto. */
+.label,
+.status {
   font-family: var(--font-mono);
   font-size: var(--text-label-sm);
   letter-spacing: var(--track-label-sm);
   text-transform: uppercase;
-  color: var(--color-ink-2);
 }
+.label { color: var(--color-ink-2); }
 
 /* "En curso": punto + etiqueta acento. */
 .status {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  font-family: var(--font-mono);
-  font-size: var(--text-label-sm);
-  letter-spacing: var(--track-label-sm);
-  text-transform: uppercase;
   color: var(--color-accent);
 }
 
@@ -200,7 +197,7 @@ img, svg { display: block; max-width: 100%; }
   line-height: var(--display-leading, var(--leading-flat));
   font-size: var(--display-size, var(--display));
   color: var(--color-ink);
-  margin: 14px 0 0;
+  margin: 16px 0 0;
 }
 .section-title em { color: var(--color-accent); font-style: italic; }
 

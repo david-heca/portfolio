@@ -104,7 +104,7 @@ const t = useTranslations(lang);
     bottom: 16px;
     left: 16px;
     display: inline-flex;
-    gap: 6px;
+    gap: 8px;
     padding: 7px 10px;
     border-radius: 999px;
     background: color-mix(in srgb, var(--color-bg) 78%, transparent);
@@ -115,7 +115,7 @@ const t = useTranslations(lang);
   .hero__socials a {
     display: inline-flex;
     color: var(--color-ink);
-    transition: color 0.15s ease, transform 0.15s ease;
+    transition: color var(--t-fast) ease, transform var(--t-fast) ease;
   }
   .hero__socials a:hover { color: var(--color-accent); transform: translateY(-2px); }
   .hero__socials [data-icon] { font-size: var(--icon-lg); }
