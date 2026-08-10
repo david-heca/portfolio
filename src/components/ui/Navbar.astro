@@ -3,7 +3,6 @@ import { getHome, useTranslations, type Lang } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
 import ThemeToggle from "@ui/ThemeToggle.astro";
 import LanguagePicker from "@ui/LanguagePicker.astro";
-import { sections } from "@/config";
 
 export interface Props {
   lang: Lang;
@@ -23,9 +22,7 @@ const navItems = [
   { id: "work", label: t("nav.work"), icon: "ph:briefcase-duotone" },
   { id: "projects", label: t("nav.projects"), icon: "ph:squares-four-duotone" },
   { id: "education", label: t("nav.education"), icon: "ph:graduation-cap-duotone" },
-  ...(sections.speaking
-    ? [{ id: "speaking", label: t("nav.speaking"), icon: "ph:microphone-stage-duotone" }]
-    : []),
+  { id: "speaking", label: t("nav.speaking"), icon: "ph:microphone-stage-duotone" },
   { id: "contact", label: t("nav.contact"), icon: "ph:paper-plane-tilt-duotone" },
 ];
 ---

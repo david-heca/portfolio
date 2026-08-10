@@ -32,9 +32,6 @@ const enURL = new URL(enPath, Astro.site);
 const ogLocale = lang === "es" ? "es_MX" : "en_US";
 const ogLocaleAlt = lang === "es" ? "en_US" : "es_MX";
 
-const cvEsURL = new URL("/assets/documents/davidherrera-spanish.pdf", Astro.site);
-const cvEnURL = new URL("/assets/documents/davidherrera-english.pdf", Astro.site);
-
 const personSchema = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -104,10 +101,6 @@ const personSchema = {
         <link rel="alternate" hreflang="x-default" href={esURL} />
       </>
     )}
-
-    <!-- Sin hreflang: cada valor admite una sola URL y competían con el par de arriba. -->
-    <link rel="alternate" type="application/pdf" href={cvEsURL} title="Currículum (ES)" />
-    <link rel="alternate" type="application/pdf" href={cvEnURL} title="Resume (EN)" />
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="David Herrera" />

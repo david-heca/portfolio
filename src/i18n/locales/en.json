@@ -73,10 +73,11 @@
     "label": "Speaking",
     "title": "On",
     "titleItalic": "stage",
-    "description": "Talks on AI and data science at universities. No hype slides: what breaks, what it costs, and what ends up working.",
-    "audience": "~200 attendees per talk",
+    "description": "Talks on AI and data science at universities and conferences. I bring systems that are already in production, with their numbers and the parts that went wrong.",
+    "audience": "~100 attendees per talk",
     "venuesLabel": "Where",
     "venues": [
+      "Data Day 2025",
       "EGADE Business School · Monterrey",
       "UPVM Tultitlán",
       "TESCo - TecNM"
@@ -94,7 +95,7 @@
     "intro": "I build AI systems on corporate data. The hard part is almost never the model.",
     "ctaProjects": "See projects",
     "ctaContact": "Let's talk",
-    "location": "Mexico City"
+    "location": "Mexico City Metro Area"
   },
   "about": {
     "label": "About me",
@@ -102,7 +103,7 @@
     "bio": {
       "paragraph1": "I started out building WordPress sites and managing hosting. Today I design and ship AI systems. In between, <strong>backend, data and applied AI</strong>.",
       "paragraph2": "I move from data model to frontend, but my job right now is <strong>RAG, MCP and MLOps</strong> over corporate data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs.",
-      "paragraph3": "I also teach, sort of: talks on AI and data science at universities -EGADE, UPVM Tultitlán, TESCo-, around 200 people per session."
+      "paragraph3": "I also teach, sort of: talks on AI and data science at Data Day and at universities -EGADE, UPVM Tultitlán, TESCo-, around 100 people per session."
     },
     "principles": [
       {
@@ -224,7 +225,7 @@
       "cecytem": {
         "institution": "CECyTEM - Tultepec",
         "degree": "Programming Technician",
-        "period": "2016 - 2018",
+        "period": "2015 - 2018",
         "description": "Programming back in high school: my first real contact with code."
       }
     },
@@ -278,6 +279,10 @@
     "cta": {
       "button": "Send me a message",
       "note": "Usually same-day · Mexico City, GMT-6"
+    },
+    "cv": {
+      "es": "CV · ES",
+      "en": "CV · EN"
     }
   },
   "common": {

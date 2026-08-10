@@ -18,9 +18,11 @@ const channels = [
   { label: "X", value: "@david_heca_", href: "https://x.com/david_heca_", icon: "ph:x-logo-duotone" },
 ];
 
+// El CV vive en Reactive Resume, no en el repo: es la única copia y se actualiza
+// sin desplegar. Un PDF en public/ se queda viejo y va a un repo público.
 const cvFiles = [
-  { lab: "CV · ES", href: "/assets/documents/davidherrera-spanish.pdf" },
-  { lab: "CV · EN", href: "/assets/documents/davidherrera-english.pdf" },
+  { lab: t("contact.cv.es"), href: "https://rxresu.me/david-heca/davidherrera-spanish" },
+  { lab: t("contact.cv.en"), href: "https://rxresu.me/david-heca/davidherrera-english" },
 ];
 ---
 
@@ -58,7 +60,7 @@ const cvFiles = [
     <div class="contact__cv">
       {cvFiles.map((f) => (
         <a href={f.href} target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
-          <Icon name="ph:file-pdf-duotone" />
+          <Icon name="ph:read-cv-logo-duotone" />
           {f.lab}
         </a>
       ))}

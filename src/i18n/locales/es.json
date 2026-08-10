@@ -73,10 +73,11 @@
     "label": "Charlas",
     "title": "En el",
     "titleItalic": "escenario",
-    "description": "Charlas de IA y ciencia de datos en universidades. Sin slides de hype: qué se rompe, qué cuesta y qué sí acaba funcionando.",
-    "audience": "~200 asistentes por charla",
+    "description": "Charlas de IA y ciencia de datos en universidades y conferencias. Llevo sistemas que ya están en producción, con sus números y con las partes que salieron mal.",
+    "audience": "~100 asistentes por charla",
     "venuesLabel": "Dónde",
     "venues": [
+      "Data Day 2025",
       "EGADE Business School · Monterrey",
       "UPVM Tultitlán",
       "TESCo - TecNM"
@@ -94,7 +95,7 @@
     "intro": "Construyo sistemas de IA sobre datos corporativos. La parte difícil casi nunca es el modelo.",
     "ctaProjects": "Ver proyectos",
     "ctaContact": "Hablemos",
-    "location": "Ciudad de México"
+    "location": "Zona Metropolitana de CDMX"
   },
   "about": {
     "label": "Sobre mí",
@@ -102,7 +103,7 @@
     "bio": {
       "paragraph1": "Empecé montando sitios en WordPress y administrando hosting. Hoy diseño y llevo a producción sistemas de IA. En medio, <strong>backend, datos e IA aplicada</strong>.",
       "paragraph2": "Me muevo del modelo de datos al frontend, pero hoy mi trabajo es <strong>RAG, MCP y MLOps</strong> sobre datos corporativos: bases que nadie documentó, PDFs escaneados, Excels con quince pestañas.",
-      "paragraph3": "También doy clase, más o menos: charlas de IA y ciencia de datos en universidades -EGADE, UPVM Tultitlán, el TESCo-, unas 200 personas por sesión."
+      "paragraph3": "También doy clase, más o menos: charlas de IA y ciencia de datos en el Data Day y en universidades -EGADE, UPVM Tultitlán, el TESCo-, unas 100 personas por sesión."
     },
     "principles": [
       {
@@ -148,7 +149,7 @@
         "workMode": "Presencial",
         "roles": {
           "architect": {
-            "title": "Arquitecto de Soluciones de IA",
+            "title": "AI Solutions Architect",
             "period": "Mar 2025 - Jul 2026",
             "type": "Tiempo completo",
             "achievements": [
@@ -170,7 +171,7 @@
             ]
           },
           "junior": {
-            "title": "Fullstack Developer Jr.",
+            "title": "Junior Fullstack Developer",
             "period": "Sep 2023 - Ene 2024",
             "type": "Prácticas",
             "achievements": [
@@ -187,7 +188,7 @@
         "workMode": "Remoto",
         "roles": {
           "webdev": {
-            "title": "Web Developer Jr.",
+            "title": "Junior Web Developer",
             "period": "Mar 2022 - Sep 2023",
             "type": "Prácticas",
             "achievements": [
@@ -224,7 +225,7 @@
       "cecytem": {
         "institution": "CECyTEM - Tultepec",
         "degree": "Técnico en Programación",
-        "period": "2016 - 2018",
+        "period": "2015 - 2018",
         "description": "Programación desde la prepa: mi primer contacto serio con el código."
       }
     },
@@ -278,6 +279,10 @@
     "cta": {
       "button": "Escríbeme",
       "note": "Suelo responder el mismo día · CDMX, GMT-6"
+    },
+    "cv": {
+      "es": "CV · ES",
+      "en": "CV · EN"
     }
   },
   "common": {

@@ -43,16 +43,12 @@ src/
 │   ├── index.astro    # ES landing
 │   ├── 404.astro      # ES 404
 │   └── en/            # index.astro, 404.astro
-├── styles/            # global.css (design tokens + shared primitives)
-└── config.ts          # section toggles
+└── styles/            # global.css (design tokens + shared primitives)
 ```
 
 The whole site is **one landing per language**. Sections compose in order
 (Hero → About → Stack → Work → Projects → Education → Speaking → Contact → Footer)
 and navigation is anchor-based (`#about`, `#work`, …) with a scroll-position scrollspy.
-
-Sections can be switched off in `src/config.ts` - a disabled section disappears from
-the page and from the nav. Speaking is currently off.
 
 The 404 is one hardcoded page per language. A build integration in `astro.config.ts`
 rewrites Astro's nested `404/index.html` to `404.html`, which is the filename
@@ -82,5 +78,5 @@ Token-driven warm minimalist system - to retune the look you edit CSS variables 
 The **code** is MIT - see [LICENSE](LICENSE). Feel free to reuse the structure,
 design system, or i18n setup.
 
-The **content** is not: personal copy, biography, CV documents, photographs, and
-project imagery are excluded from the license. Please swap them for your own.
+The **content** is not: personal copy, biography, photographs, and project imagery
+are excluded from the license. Please swap them for your own.
