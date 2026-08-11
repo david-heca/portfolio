@@ -1,5 +1,6 @@
 ---
 import { useTranslations } from "@i18n/utils";
+import { studies, certifications } from "@/data/education";
 
 export interface Props {
   lang: "es" | "en";
@@ -8,31 +9,43 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-interface Entry {
+const ongoing = t("education.ongoing");
+const axisFrom = Math.min(...studies.map((s) => s.from), ...certifications.map((c) => c.year));
+const axisTo = Math.max(
+  new Date().getFullYear(),
+  ...studies.map((s) => s.to ?? 0),
+  ...certifications.map((c) => c.year),
+);
+
+/** Posición de un año sobre el eje, en porcentaje del ancho de la fila. */
+const at = (year: number) => ((year - axisFrom) / (axisTo - axisFrom)) * 100;
+const track = (from: number, to: number) =>
+  `--from:${at(from).toFixed(2)}%;--span:${(at(to) - at(from)).toFixed(2)}%`;
+
+interface Row {
   period: string;
   title: string;
   meta: string;
-  note?: string;
-  /** El nodo lleno en la línea marca lo que sigue en curso. */
+  track: string;
   current?: boolean;
+  point?: boolean;
 }
 
-const academic: Entry[] = [
-  { key: "tesco" },
-  { key: "platzi", current: true },
-  { key: "cecytem" },
-].map(({ key, current }) => ({
-  period: t(`education.list.${key}.period`),
+const academic: Row[] = studies.map(({ key, from, to }) => ({
+  period: `${from} - ${to ?? ongoing}`,
   title: t(`education.list.${key}.degree`),
-  meta: t(`education.list.${key}.institution`),
-  note: t(`education.list.${key}.description`),
-  current,
+  meta: [t(`education.list.${key}.institution`), t(`education.list.${key}.description`)].join(" · "),
+  track: track(from, to ?? axisTo),
+  current: to === undefined,
 }));
 
-const certs: Entry[] = [
-  { period: "2024", title: t("education.certifications.azure.name"), meta: "Microsoft" },
-  { period: "2022", title: t("education.certifications.python.name"), meta: "U. Michigan · Coursera" },
-];
+const certs: Row[] = certifications.map(({ key, year }) => ({
+  period: String(year),
+  title: t(`education.certifications.${key}.name`),
+  meta: t(`education.certifications.${key}.issuer`),
+  track: track(year, year),
+  point: true,
+}));
 
 const groups = [
   { label: t("education.academicTitle"), entries: academic },
@@ -49,91 +62,94 @@ const groups = [
 
   <div class="edu__groups">
     {groups.map((g, i) => (
-      <div class={`edu__group reveal reveal-${Math.min(i + 1, 3)}`}>
-        <p class="kicker edu__label">{g.label}</p>
-        <div class="edu__list">
+      <div class={`edu__group reveal reveal-${i + 1}`}>
+        <h3 class="label edu__label">{g.label}</h3>
+        <ul class="edu__list">
           {g.entries.map((e) => (
-            <div class:list={["edu-item", e.current && "edu-item--current"]}>
+            <li
+              class:list={["edu-item", e.current && "edu-item--current", e.point && "edu-item--point"]}
+              style={e.track}
+            >
               <span class="rail edu-item__period">{e.period}</span>
               <div class="edu-item__body">
-                <h3 class="card-title edu-item__title">{e.title}</h3>
+                <h4 class="card-title edu-item__title">{e.title}</h4>
                 <p class="meta edu-item__meta">{e.meta}</p>
-                {e.note && <p class="prose-sm edu-item__note">{e.note}</p>}
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     ))}
   </div>
+
+  <p class="edu__scale reveal reveal-3" aria-hidden="true">
+    <span class="label">{axisFrom}</span>
+    <span class="label">{axisTo}</span>
+  </p>
 </section>
 
 <style>
-  .edu__groups { display: flex; flex-direction: column; gap: 72px; }
+  .edu__groups { display: flex; flex-direction: column; gap: 48px; }
 
-  .edu__label { margin-bottom: 32px; }
-
-  .edu__list {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 44px;
+  .edu__label {
+    display: block;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-line);
   }
+
+  .edu__list { display: flex; flex-direction: column; }
 
   .edu-item {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 8px;
-    padding-left: 24px;
+    gap: 4px;
+    padding-block: 20px;
+    border-bottom: 1px solid var(--color-line);
+    transition: background-color var(--t-fast) ease;
+  }
+  .edu-item:hover { background: var(--color-accent-soft); }
+
+  /* Subgrid: el raíl mide lo que mida el periodo más largo y las filas siguen
+     casando entre sí, sin fijar un ancho a ojo. */
+  @media (min-width: 640px) {
+    .edu__list { display: grid; grid-template-columns: max-content minmax(0, 1fr); }
+    .edu-item { grid-column: 1 / -1; grid-template-columns: subgrid; gap: 32px; }
   }
 
-  .edu__list::before {
+  /* El hilo del pie de cada fila hace de eje: el tramo en acento son los años
+     que ocupó, sobre una escala que comparten todas las filas de la sección.
+     Por eso el ancho de la fila manda y el texto se queda en su medida. */
+  .edu-item::after {
     content: "";
     position: absolute;
-    left: 3px;
-    top: 6px;
-    bottom: 6px;
-    width: 1px;
-    background: var(--color-line-strong);
-    -webkit-mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
-    mask-image: linear-gradient(to bottom, transparent, #000 12%, #000 88%, transparent);
+    bottom: -1px;
+    left: var(--from);
+    width: var(--span);
+    height: 2px;
+    background: var(--color-accent);
   }
-
-  .edu-item::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 9px;
+  /* Lo que sigue abierto no topa con nada: se desvanece. */
+  .edu-item--current::after {
+    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
+    mask-image: linear-gradient(to right, #000 85%, transparent);
+  }
+  /* Un certificado es una fecha, no un periodo: en el eje es un punto. */
+  .edu-item--point::after {
     width: 7px;
     height: 7px;
+    bottom: -3px;
+    margin-left: -3px;
     border-radius: 50%;
-    background: var(--color-bg);
-    box-shadow: inset 0 0 0 1px var(--color-line-strong);
-  }
-  .edu-item--current::before {
-    background: var(--color-accent);
-    box-shadow: 0 0 0 5px var(--color-accent-soft);
   }
 
-  @media (min-width: 768px) {
-    .edu-item {
-      grid-template-columns: 128px minmax(0, 660px);
-      gap: 44px;
-      padding-left: 0;
-    }
-    /* 128px de rail + medio gap: el hilo cae entre fecha y contenido. */
-    .edu__list::before { left: 150px; }
-    .edu-item::before { left: 147px; }
-    .edu-item__period { text-align: right; }
-  }
-
-  /* Alineación óptica, no ritmo: cuadra la línea base de la fecha mono con la
-     del título de al lado, que es más grande. Fuera de rejilla a propósito. */
-  .edu-item__period { padding-top: 7px; }
+  /* Alineación óptica: cuadra la base del periodo con la del título, que es más
+     grande. Fuera de rejilla a propósito. */
+  .edu-item__period { padding-top: 3px; }
   .edu-item--current .edu-item__period { color: var(--color-accent); }
 
+  .edu-item__body { max-width: var(--measure); }
   .edu-item__title { text-wrap: balance; }
-  .edu-item__meta { margin: 8px 0 0; }
-  .edu-item__note { margin-top: 12px; }
+  .edu-item__meta { margin-top: 4px; }
+
+  .edu__scale { display: flex; justify-content: space-between; margin-top: 12px; }
 </style>

@@ -30,6 +30,10 @@
   --color-accent: #256254;
   --color-accent-soft: color-mix(in srgb, var(--color-accent) 12%, transparent);
   --shadow-soft: 0 1px 2px rgba(26, 24, 21, 0.04), 0 16px 40px -24px rgba(26, 24, 21, 0.18);
+  /* Rótulo sobre foto. Es el único par que no cambia con el tema: lo que hay
+     debajo es la imagen, no el fondo de la página. */
+  --color-scrim: rgba(14, 13, 11, 0.78);
+  --color-on-scrim: #f5f1ea;
 
   /* Hover de color; el resto de gestos -transform, sombra, apertura- van a --t-base. */
   --t-fast: 0.15s;

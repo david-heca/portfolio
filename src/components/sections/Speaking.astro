@@ -1,6 +1,7 @@
 ---
-import { useTranslations } from "@i18n/utils";
+import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
+import { useTranslations } from "@i18n/utils";
 
 export interface Props {
   lang: "es" | "en";
@@ -11,82 +12,95 @@ const t = useTranslations(lang);
 
 const venues = t<string[]>("speaking.venues");
 const topics = t<string[]>("speaking.topics");
-const alt = t("speaking.photoAlt");
 ---
 
 <section id="speaking" class="speaking section container">
-  <div class="speaking__photo reveal">
-    <span class="speaking__photo-ph" aria-hidden="true"><Icon name="ph:microphone-stage-duotone" /></span>
-    <img src="/assets/speaking.webp" alt={alt} loading="lazy" onerror="this.style.display='none'" />
+  <div class="speaking__top reveal">
+    <header class="sec-head speaking__intro">
+      <p class="kicker">{t("speaking.label")}</p>
+      <h2 class="section-title">{t("speaking.title")} <em>{t("speaking.titleItalic")}</em></h2>
+      <p class="lead">{t("speaking.description")}</p>
+    </header>
+    <div class="speaking__stat">
+      <p class="section-title speaking__figure">{t("speaking.attendees")}</p>
+      <p class="label speaking__figure-label">{t("speaking.attendeesLabel")}</p>
+    </div>
   </div>
 
-  <div class="speaking__content reveal reveal-1">
-    <p class="kicker">{t("speaking.label")}</p>
-    <h2 class="section-title">{t("speaking.title")} <em>{t("speaking.titleItalic")}</em></h2>
-    <p class="lead speaking__lead">{t("speaking.description")}</p>
+  <figure class="speaking__media reveal reveal-1">
+    <Image
+      src="/assets/speaking.webp"
+      alt={t("speaking.photoAlt")}
+      width={889}
+      height={1185}
+      loading="lazy"
+      quality={80}
+    />
+    <ul class="speaking__venues" aria-label={t("speaking.venuesLabel")}>
+      {venues.map((v) => (
+        <li class="label speaking__venue"><Icon name="ph:map-pin-duotone" />{v}</li>
+      ))}
+    </ul>
+  </figure>
 
-    <div class="card-title speaking__audience">
-      <Icon name="ph:users-three-duotone" />
-      {t("speaking.audience")}
-    </div>
-
-    <div class="speaking__meta">
-      <div>
-        <p class="kicker speaking__meta-label">{t("speaking.venuesLabel")}</p>
-        <ul class="prose-sm speaking__venues">
-          {venues.map((v) => <li><Icon name="ph:map-pin-duotone" />{v}</li>)}
-        </ul>
-      </div>
-      <div>
-        <p class="kicker speaking__meta-label">{t("speaking.topicsLabel")}</p>
-        <div class="tag-row speaking__topics">{topics.map((tp) => <span class="tag">{tp}</span>)}</div>
-      </div>
-    </div>
+  <div class="speaking__topics reveal reveal-2">
+    <p class="label">{t("speaking.topicsLabel")}</p>
+    <div class="tag-row">{topics.map((tp) => <span class="tag">{tp}</span>)}</div>
   </div>
 </section>
 
 <style>
-  .speaking {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 40px;
-    align-items: center;
+  .speaking__top { display: grid; gap: 32px; align-items: end; }
+  @media (min-width: 900px) {
+    .speaking__top { grid-template-columns: minmax(0, 1fr) 300px; gap: 56px; }
+    .speaking__stat { text-align: right; }
   }
-  @media (min-width: 900px) { .speaking { grid-template-columns: 0.85fr 1.15fr; gap: 64px; } }
 
-  .speaking__photo {
+  .speaking__intro { margin-bottom: 0; }
+
+  .speaking__figure {
+    --display-size: var(--display-lg);
+    --display-leading: 0.9;
+    margin: 0;
+    color: var(--color-accent);
+  }
+  .speaking__figure-label { margin-top: 8px; }
+
+  .speaking__media {
     position: relative;
-    aspect-ratio: 1 / 1;
-    width: 100%;
-    max-width: 440px;
-    justify-self: center;
-    border-radius: var(--radius);
-    border: 1px solid var(--color-line);
+    margin-top: 44px;
     overflow: hidden;
+    border-radius: var(--radius);
     background: var(--color-bg-2);
+    aspect-ratio: 16 / 10;
   }
-  .speaking__photo-ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
-  /* Fuera de la escala a propósito: se dimensiona contra la caja de 440px, no
-     contra un texto, y solo aparece si la imagen falla. */
-  .speaking__photo-ph [data-icon] { font-size: 64px; color: var(--color-ink-3); }
-  .speaking__photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-
-  .speaking__lead { margin-top: 20px; }
-
-  .speaking__audience { display: inline-flex; align-items: center; gap: 12px; margin-top: 24px; }
-  .speaking__audience [data-icon] { font-size: var(--icon-2xl); color: var(--color-accent); }
-
-  .speaking__meta {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 28px;
-    margin-top: 32px;
-    padding-top: 28px;
-    border-top: 1px solid var(--color-line);
+  @media (min-width: 768px) { .speaking__media { aspect-ratio: 21 / 8; } }
+  /* El original es vertical y el marco apaisado se come casi todo: el encuadre
+     se ancla arriba para que el recorte caiga sobre la cara, no sobre el torso. */
+  .speaking__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
   }
-  @media (min-width: 768px) { .speaking__meta { grid-template-columns: 1fr 1fr; } }
-  .speaking__meta-label { margin-bottom: 16px; }
-  .speaking__venues { display: flex; flex-direction: column; gap: 12px; }
-  .speaking__venues li { display: flex; align-items: center; gap: 8px; }
-  .speaking__venues [data-icon] { font-size: var(--icon); color: var(--color-accent); }
+
+  .speaking__venues {
+    position: absolute;
+    inset: auto 0 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    padding: 20px 24px;
+    background: linear-gradient(to top, var(--color-scrim), transparent);
+  }
+  .speaking__venue { display: inline-flex; align-items: center; gap: 8px; color: var(--color-on-scrim); }
+  .speaking__venue [data-icon] { font-size: var(--icon-sm); }
+
+  .speaking__topics {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 16px;
+    margin-top: 24px;
+  }
 </style>

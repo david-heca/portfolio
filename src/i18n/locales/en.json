@@ -74,7 +74,8 @@
     "title": "On",
     "titleItalic": "stage",
     "description": "Talks on AI and data science at universities and conferences. I bring systems that are already in production, with their numbers and the parts that went wrong.",
-    "audience": "~100 attendees per talk",
+    "attendees": "~100",
+    "attendeesLabel": "Attendees per talk",
     "venuesLabel": "Where",
     "venues": [
       "Data Day 2025",
@@ -207,34 +208,34 @@
     "headerTitle": "How I",
     "headerItalic": "learn",
     "description": "Where I studied, and what I keep studying on my own.",
+    "ongoing": "Present",
     "academicTitle": "Academic",
     "certsTitle": "Certifications",
     "list": {
       "platzi": {
         "institution": "Platzi - Technology School",
         "degree": "Technology Industry",
-        "period": "2022 - Present",
         "description": "Where I keep up: web development, AI and whatever comes next."
       },
       "tesco": {
         "institution": "Higher Studies Institute of Coacalco (TESCo) - TecNM",
         "degree": "Information & Communication Technologies Engineering",
-        "period": "2019 - 2024",
         "description": "Specialization in mobile application development."
       },
       "cecytem": {
         "institution": "CECyTEM - Tultepec",
         "degree": "Programming Technician",
-        "period": "2015 - 2018",
         "description": "Programming back in high school: my first real contact with code."
       }
     },
     "certifications": {
       "azure": {
-        "name": "Azure AZ-900: Microsoft Azure Fundamentals"
+        "name": "Azure AZ-900: Microsoft Azure Fundamentals",
+        "issuer": "Microsoft"
       },
       "python": {
-        "name": "Python for Everybody"
+        "name": "Python for Everybody",
+        "issuer": "U. Michigan · Coursera"
       }
     }
   },
@@ -242,6 +243,8 @@
     "headerTitle": "Selected",
     "headerItalic": "work",
     "description": "Software someone opens in the morning to get their work done.",
+    "countLabel": "cases",
+    "specLink": "Link",
     "status": {
       "production": "In production",
       "delivered": "Delivered",
@@ -256,19 +259,75 @@
     "list": {
       "portfolio": {
         "title": "Portfolio",
-        "description": "This site. I designed and wrote the whole thing, no template and no CSS framework. Bilingual, with almost no client-side JavaScript."
+        "description": "This site. I designed and wrote the whole thing, no template and no CSS framework. Bilingual, with almost no client-side JavaScript.",
+        "specs": [
+          {
+            "label": "Template",
+            "value": "None"
+          },
+          {
+            "label": "Languages",
+            "value": "ES · EN"
+          },
+          {
+            "label": "Client-side JS",
+            "value": "Almost none"
+          }
+        ]
       },
       "connie": {
         "title": "Connie",
-        "description": "You ask the company's databases, PDFs and spreadsheets in plain language, and it answers citing where each figure came from. I designed it from scratch and wrote 80% of the system. Three clients use it daily."
+        "description": "You ask the company's databases, PDFs and spreadsheets in plain language, and it answers citing where each figure came from. I designed it from scratch and wrote 80% of the system. Three clients use it daily.",
+        "specs": [
+          {
+            "label": "Role",
+            "value": "Design + 80% of the code"
+          },
+          {
+            "label": "Clients",
+            "value": "3 in production"
+          },
+          {
+            "label": "Sources",
+            "value": "SQL · PDF · XLSX"
+          }
+        ]
       },
       "handheld": {
         "title": "HandHeld RFID",
-        "description": "Android app with an RFID reader, end to end. Inventory went from taking weeks -or never happening- to being done walking the warehouse floor."
+        "description": "Android app with an RFID reader, end to end. Inventory went from taking weeks -or never happening- to being done walking the warehouse floor.",
+        "specs": [
+          {
+            "label": "Scope",
+            "value": "End to end"
+          },
+          {
+            "label": "Before",
+            "value": "Weeks of inventory"
+          },
+          {
+            "label": "After",
+            "value": "A walk through the floor"
+          }
+        ]
       },
       "trace": {
         "title": "Automotive Traceability",
-        "description": "Shop-floor desktop system. Every part gets logged as it passes each station on the line; thousands of them a day."
+        "description": "Shop-floor desktop system. Every part gets logged as it passes each station on the line; thousands of them a day.",
+        "specs": [
+          {
+            "label": "Where",
+            "value": "Shop floor"
+          },
+          {
+            "label": "Volume",
+            "value": "Thousands of parts / day"
+          },
+          {
+            "label": "Shift",
+            "value": "24/7"
+          }
+        ]
       }
     }
   },

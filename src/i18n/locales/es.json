@@ -74,7 +74,8 @@
     "title": "En el",
     "titleItalic": "escenario",
     "description": "Charlas de IA y ciencia de datos en universidades y conferencias. Llevo sistemas que ya están en producción, con sus números y con las partes que salieron mal.",
-    "audience": "~100 asistentes por charla",
+    "attendees": "~100",
+    "attendeesLabel": "Asistentes por charla",
     "venuesLabel": "Dónde",
     "venues": [
       "Data Day 2025",
@@ -207,34 +208,34 @@
     "headerTitle": "Cómo",
     "headerItalic": "aprendo",
     "description": "Dónde estudié y lo que sigo estudiando por mi cuenta.",
+    "ongoing": "Actualidad",
     "academicTitle": "Académico",
     "certsTitle": "Certificaciones",
     "list": {
       "platzi": {
         "institution": "Platzi - Escuela de Tecnología",
         "degree": "Industria de la Tecnología",
-        "period": "2022 - Actualidad",
         "description": "Donde me pongo al día: desarrollo web, IA y lo que vaya saliendo."
       },
       "tesco": {
         "institution": "Tecnológico de Estudios Superiores de Coacalco (TESCo) - TecNM",
         "degree": "Ing. en Tecnologías de la Información & Comunicaciones",
-        "period": "2019 - 2024",
         "description": "Especialización en desarrollo de aplicaciones móviles."
       },
       "cecytem": {
         "institution": "CECyTEM - Tultepec",
         "degree": "Técnico en Programación",
-        "period": "2015 - 2018",
         "description": "Programación desde la prepa: mi primer contacto serio con el código."
       }
     },
     "certifications": {
       "azure": {
-        "name": "Azure AZ-900: Microsoft Azure Fundamentals"
+        "name": "Azure AZ-900: Microsoft Azure Fundamentals",
+        "issuer": "Microsoft"
       },
       "python": {
-        "name": "Python for Everybody"
+        "name": "Python for Everybody",
+        "issuer": "U. Michigan · Coursera"
       }
     }
   },
@@ -242,6 +243,8 @@
     "headerTitle": "Trabajo",
     "headerItalic": "seleccionado",
     "description": "Software que alguien abre por la mañana para hacer su trabajo.",
+    "countLabel": "casos",
+    "specLink": "Enlace",
     "status": {
       "production": "En producción",
       "delivered": "Entregado",
@@ -256,19 +259,75 @@
     "list": {
       "portfolio": {
         "title": "Portafolio",
-        "description": "Este sitio. Lo diseñé y lo escribí entero, sin plantilla y sin framework de CSS. Bilingüe y con casi nada de JavaScript en el cliente."
+        "description": "Este sitio. Lo diseñé y lo escribí entero, sin plantilla y sin framework de CSS. Bilingüe y con casi nada de JavaScript en el cliente.",
+        "specs": [
+          {
+            "label": "Plantilla",
+            "value": "Ninguna"
+          },
+          {
+            "label": "Idiomas",
+            "value": "ES · EN"
+          },
+          {
+            "label": "JS en cliente",
+            "value": "Casi nada"
+          }
+        ]
       },
       "connie": {
         "title": "Connie",
-        "description": "Le preguntas en español a las bases de datos, PDFs y Excels de la empresa, y responde citando de dónde sacó cada dato. La diseñé desde cero y escribí el 80% del sistema. Tres clientes la usan a diario."
+        "description": "Le preguntas en español a las bases de datos, PDFs y Excels de la empresa, y responde citando de dónde sacó cada dato. La diseñé desde cero y escribí el 80% del sistema. Tres clientes la usan a diario.",
+        "specs": [
+          {
+            "label": "Rol",
+            "value": "Diseño + 80% del código"
+          },
+          {
+            "label": "Clientes",
+            "value": "3 en producción"
+          },
+          {
+            "label": "Fuentes",
+            "value": "SQL · PDF · XLSX"
+          }
+        ]
       },
       "handheld": {
         "title": "HandHeld RFID",
-        "description": "App Android con lector RFID, de extremo a extremo. El inventario pasó de tomar semanas -o de no hacerse- a resolverse caminando por la nave."
+        "description": "App Android con lector RFID, de extremo a extremo. El inventario pasó de tomar semanas -o de no hacerse- a resolverse caminando por la nave.",
+        "specs": [
+          {
+            "label": "Alcance",
+            "value": "De extremo a extremo"
+          },
+          {
+            "label": "Antes",
+            "value": "Semanas de inventario"
+          },
+          {
+            "label": "Después",
+            "value": "Una caminata por la nave"
+          }
+        ]
       },
       "trace": {
         "title": "Trazabilidad Automotriz",
-        "description": "Sistema de escritorio para piso de planta. Cada pieza queda registrada al pasar por cada estación de la línea; son miles al día."
+        "description": "Sistema de escritorio para piso de planta. Cada pieza queda registrada al pasar por cada estación de la línea; son miles al día.",
+        "specs": [
+          {
+            "label": "Dónde",
+            "value": "Piso de planta"
+          },
+          {
+            "label": "Volumen",
+            "value": "Miles de piezas / día"
+          },
+          {
+            "label": "Turno",
+            "value": "24/7"
+          }
+        ]
       }
     }
   },

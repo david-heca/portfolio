@@ -8,108 +8,177 @@ export interface Props {
   lang: "es" | "en";
 }
 
+interface Spec {
+  label: string;
+  value: string;
+}
+
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const items = projects.map((p) => ({
+const items = projects.map((p, i) => ({
   ...p,
+  ordinal: String(i + 1).padStart(2, "0"),
   title: t(`projects.list.${p.slug}.title`),
   desc: t(`projects.list.${p.slug}.description`),
+  specs: t<Spec[]>(`projects.list.${p.slug}.specs`),
   statusLabel: t(`projects.status.${p.status}`),
   href: p.link.kind === "private" ? undefined : p.link.href,
   linkLabel: t(`projects.link.${p.link.kind}`),
 }));
+
+const years = projects.map((p) => Number(p.year));
+const span = [...new Set([Math.min(...years), Math.max(...years)])].join(" - ");
+const summary = `${projects.length} ${t("projects.countLabel")} · ${span}`;
 ---
 
 <section id="projects" class="projects section container">
-  <header class="sec-head reveal">
-    <p class="kicker">{t("nav.projects")}</p>
-    <h2 class="section-title">{t("projects.headerTitle")} <em>{t("projects.headerItalic")}</em></h2>
-    <p class="lead">{t("projects.description")}</p>
+  <header class="projects__head reveal">
+    <div>
+      <p class="kicker">{t("nav.projects")}</p>
+      <h2 class="section-title">{t("projects.headerTitle")} <em>{t("projects.headerItalic")}</em></h2>
+    </div>
+    <p class="label projects__summary">{summary}</p>
   </header>
+  <p class="lead projects__lead reveal">{t("projects.description")}</p>
 
-  <div class="index">
+  <ol class="cases">
     {items.map((p, i) => (
-      <article class={`row reveal reveal-${Math.min(i + 1, 3)}`}>
-        <div class="row__aside">
-          <span class="rail">{p.year}</span>
-          <span class="status"><span class="dot"></span>{p.statusLabel}</span>
-        </div>
+      <li class:list={["case", "reveal", `reveal-${Math.min(i + 1, 3)}`, i % 2 === 1 && "case--flip"]}>
+        <p class="section-title case__ordinal" aria-hidden="true">{p.ordinal}</p>
 
-        <div class="row__main">
-          <h3 class="card-title row__title">
-            {p.href ? (
-              <a href={p.href} target="_blank" rel="noopener noreferrer">
-                {p.title}<span class="row__arrow" aria-hidden="true"><Icon name="ph:arrow-up-right" /></span>
-              </a>
-            ) : (
-              p.title
-            )}
-          </h3>
-          <p class="prose-sm row__desc">{p.desc}</p>
-
-          <div class="tag-row row__foot">
+        <div class="case__body">
+          <div class="case__head">
+            <h3 class="card-title case__title">{p.title}</h3>
+            <span class="status"><span class="dot"></span>{p.statusLabel}</span>
+          </div>
+          <p class="prose case__desc">{p.desc}</p>
+          <div class="tag-row case__tags">
             {p.tags.map((tag) => <span class="tag">{tag}</span>)}
-            {p.href ? (
-              <a class="tag tag--key row__link" href={p.href} target="_blank" rel="noopener noreferrer">
-                {p.linkLabel}<Icon name="ph:arrow-up-right" aria-hidden="true" />
-              </a>
-            ) : (
-              <span class="tag tag--muted">{p.linkLabel}</span>
-            )}
           </div>
         </div>
 
-        <div class="row__thumb">
-          <Image src={p.image} alt={p.title} width={520} height={358} loading="lazy" quality={80} />
+        <div class="case__media">
+          <div class="case__frame">
+            <Image src={p.image} alt={p.title} width={800} height={600} loading="lazy" quality={80} />
+          </div>
+          <dl class="spec">
+            {p.specs.map((s) => (
+              <>
+                <dt class="label">{s.label}</dt>
+                <dd class="label spec__value">{s.value}</dd>
+              </>
+            ))}
+            <dt class="label">{t("projects.specLink")}</dt>
+            <dd class="label spec__link">
+              {p.href ? (
+                <a href={p.href} target="_blank" rel="noopener noreferrer">
+                  {p.linkLabel}<Icon name="ph:arrow-up-right" aria-hidden="true" />
+                </a>
+              ) : (
+                p.linkLabel
+              )}
+            </dd>
+          </dl>
         </div>
-      </article>
+      </li>
     ))}
-  </div>
+  </ol>
 </section>
 
 <style>
-  .index { display: flex; flex-direction: column; }
-
-  .row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 16px;
-    padding-block: 32px;
-    border-top: 1px solid var(--color-line);
+  .projects__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px 40px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--color-line);
   }
-  .row:last-child { border-bottom: 1px solid var(--color-line); }
+  /* Alineación óptica: sube la etiqueta hasta la línea base de la display, que
+     apoya por encima del borde de su caja. Fuera de rejilla a propósito. */
+  .projects__summary { padding-bottom: 6px; }
+
+  .projects__lead { margin-top: 24px; max-width: 46ch; }
+
+  .cases { display: flex; flex-direction: column; gap: 72px; margin-top: 72px; }
+
+  .case { display: grid; gap: 24px; }
   @media (min-width: 900px) {
-    .row {
-      grid-template-columns: 170px minmax(0, 1fr) 190px;
-      gap: 32px;
-      align-items: start;
+    .case {
+      grid-template-columns: 96px minmax(0, 1fr) 36%;
+      gap: 40px;
+      align-items: center;
     }
+    .case--flip { grid-template-columns: 36% minmax(0, 1fr) 96px; }
+    .case--flip .case__media { order: -1; }
+    .case--flip .case__ordinal { order: 1; text-align: right; }
+    .case--flip .case__body { text-align: right; }
+    .case--flip .case__head { flex-direction: row-reverse; }
+    .case--flip .case__desc { margin-inline: auto 0; }
+    .case--flip .case__tags { justify-content: flex-end; }
+    .cases { gap: 88px; }
   }
 
-  .row__aside { display: flex; flex-direction: column; gap: 8px; }
-  .row__title a {
-    display: inline-flex;
-    align-items: baseline;
-    gap: 12px;
-    transition: color var(--t-base) ease;
+  .case__ordinal {
+    margin: 0;
+    color: color-mix(in srgb, var(--color-accent) 42%, transparent);
   }
-  .row__title a:hover { color: var(--color-accent); }
-  .row__arrow { display: inline-flex; font-size: 0.62em; color: var(--color-accent); }
 
-  .row__desc { margin: 8px 0 0; max-width: var(--measure); }
+  .case__head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+  .case__title { font-size: var(--text-subhead); }
+  .case__desc { margin-top: 12px; max-width: 46ch; }
+  .case__tags { margin-top: 20px; }
 
-  .row__foot { align-items: center; margin-top: 20px; }
-  .row__link { gap: 8px; }
-  .row__link [data-icon] { font-size: var(--icon-sm); }
-
-  .row__thumb {
-    border-radius: var(--radius-sm);
+  .case__media { position: relative; }
+  .case__frame {
     overflow: hidden;
+    border-radius: var(--radius-sm);
     background: var(--color-bg-2);
-    aspect-ratio: 16 / 11;
-    max-width: 240px;
+    aspect-ratio: 4 / 3;
   }
-  .row__thumb img { width: 100%; height: 100%; object-fit: cover; }
-  @media (min-width: 900px) { .row__thumb { max-width: none; } }
+  .case__frame img { width: 100%; height: 100%; object-fit: cover; }
+
+  .spec {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 0 16px;
+    margin-top: 16px;
+  }
+  .spec dd { text-align: right; }
+  .spec dt,
+  .spec dd {
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .spec > :nth-last-child(-n + 2) { padding-bottom: 0; border-bottom: 0; }
+  .spec__value { color: var(--color-ink); }
+  .spec__link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-accent);
+  }
+  .spec__link [data-icon] { font-size: var(--icon-sm); }
+
+  /* Sin puntero que pueda posarse -táctil- la ficha se lee bajo la imagen; con
+     él se superpone y solo aparece al enfocar o pasar por encima. */
+  @media (hover: hover) {
+    .spec {
+      position: absolute;
+      inset: 0;
+      align-content: end;
+      margin-top: 0;
+      padding: 22px;
+      border-radius: var(--radius-sm);
+      background: color-mix(in srgb, var(--color-bg) 90%, transparent);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      opacity: 0;
+      transition: opacity var(--t-base) ease;
+    }
+    .case__media:hover .spec,
+    .case__media:focus-within .spec { opacity: 1; }
+  }
 </style>
