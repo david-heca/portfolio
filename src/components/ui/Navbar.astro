@@ -6,9 +6,11 @@ import LanguagePicker from "@ui/LanguagePicker.astro";
 
 export interface Props {
   lang: Lang;
+  /** Solo de paso hacia `LanguagePicker`: la ruta equivalente en el otro idioma. */
+  switchTo: string;
 }
 
-const { lang } = Astro.props;
+const { lang, switchTo } = Astro.props;
 const t = useTranslations(lang);
 const home = getHome(lang);
 
@@ -44,7 +46,7 @@ const navItems = [
 
     <div class="nav__utils">
       <div class="nav__utils-desktop">
-        <LanguagePicker lang={lang} />
+        <LanguagePicker lang={lang} href={switchTo} />
         <ThemeToggle lang={lang} />
       </div>
       <button id="menu-btn" class="pill menu-btn" aria-label="Menu" aria-expanded="false">
@@ -63,7 +65,7 @@ const navItems = [
       ))}
     </nav>
     <div class="mobile-menu__footer">
-      <LanguagePicker lang={lang} expanded />
+      <LanguagePicker lang={lang} href={switchTo} expanded />
       <ThemeToggle lang={lang} />
     </div>
   </div>

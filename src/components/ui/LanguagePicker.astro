@@ -1,16 +1,18 @@
 ---
-import { localizePath, type Lang } from "@i18n/utils";
+import { type Lang } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
 
 export interface Props {
   lang: Lang;
+  /** Lo resuelve `Layout`, que ya calcula el mapeo para el hreflang: derivarlo aquí
+   *  de la URL sería la segunda copia que acaba divergiendo. */
+  href: string;
   /** Muestra el nombre nativo completo ("English") en vez del código ("EN"). */
   expanded?: boolean;
 }
 
-const { lang, expanded = false } = Astro.props;
+const { lang, href, expanded = false } = Astro.props;
 const target: Lang = lang === "es" ? "en" : "es";
-const href = localizePath(Astro.url.pathname, target);
 
 const nativeName = target === "es" ? "Español" : "English";
 const label = expanded ? nativeName : target.toUpperCase();

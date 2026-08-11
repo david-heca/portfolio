@@ -1,6 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
-import { localizePath, type Lang } from "@i18n/utils";
+import { getHome, localizePath, type Lang } from "@i18n/utils";
 import Navbar from "@ui/Navbar.astro";
 import LanguageHint from "@ui/LanguageHint.astro";
 // Junicode se autoaloja (no está en Fontsource): su @font-face vive en global.css.
@@ -23,11 +23,14 @@ const { title, description, lang, tabTitle = title, noindex = false } = Astro.pr
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL("/assets/dh.webp", Astro.site);
 
+// El 404 se sirve bajo cualquier ruta, así que el pathname que congela el build no
+// identifica nada: ahí el equivalente en el otro idioma solo puede ser su portada.
 const pathname = Astro.url.pathname;
-const esPath = localizePath(pathname, "es");
-const enPath = localizePath(pathname, "en");
+const esPath = noindex ? getHome("es") : localizePath(pathname, "es");
+const enPath = noindex ? getHome("en") : localizePath(pathname, "en");
 const esURL = new URL(esPath, Astro.site);
 const enURL = new URL(enPath, Astro.site);
+const switchTo = lang === "es" ? enPath : esPath;
 
 const ogLocale = lang === "es" ? "es_MX" : "en_US";
 const ogLocaleAlt = lang === "es" ? "en_US" : "es_MX";
@@ -202,16 +205,19 @@ const personSchema = {
 
     <!-- Redirige solo con preferencia explícita: autodetectar aquí sacaría a los
          rastreadores de "/", que es el canonical y el x-default. Las dos rutas
-         llegan resueltas para no reimplementar el mapeo es↔en en el cliente. -->
-    <script is:inline define:vars={{ lang, esPath, enPath }}>
-      var stored = localStorage.getItem("preferred-lang");
-      if ((stored === "es" || stored === "en") && stored !== lang) {
-        window.location.replace(stored === "es" ? esPath : enPath);
-      }
-    </script>
+         llegan resueltas para no reimplementar el mapeo es↔en en el cliente.
+         Fuera del índice no corre: convertiría el 404 en un 200 en otra URL. -->
+    {!noindex && (
+      <script is:inline define:vars={{ lang, esPath, enPath }}>
+        var stored = localStorage.getItem("preferred-lang");
+        if ((stored === "es" || stored === "en") && stored !== lang) {
+          window.location.replace(stored === "es" ? esPath : enPath);
+        }
+      </script>
+    )}
   </head>
   <body>
-    <Navbar lang={lang} />
+    <Navbar lang={lang} switchTo={switchTo} />
 
     <main class="page">
       <slot />
@@ -223,9 +229,7 @@ const personSchema = {
     <LanguageHint lang={lang} />
 
     <script>
-      // `astro:page-load` también dispara en la carga inicial, así que esto corre
-      // dos veces de salida y una más por navegación: sin desconectar el anterior
-      // se acumulan observers sobre nodos ya desmontados.
+      // Sin desconectar el anterior se acumulan observers sobre nodos desmontados.
       let revealObserver: IntersectionObserver | undefined;
 
       function setupRevealAnimations() {
@@ -244,8 +248,62 @@ const personSchema = {
         document.querySelectorAll(".reveal").forEach((el) => revealObserver!.observe(el));
       }
 
+      /** Las secciones se enlazan con anclas -sin JS, y para un rastreador, tienen
+       *  que serlo-, pero al pulsarlas el fragmento no llega a la URL. Un destino en
+       *  otra página no se toca: navega con fragmento y se limpia al aterrizar. */
+      function sectionFor(link: HTMLAnchorElement): HTMLElement | null {
+        const url = new URL(link.href);
+        if (url.origin !== location.origin) return null;
+        if (url.pathname !== location.pathname || url.search !== location.search) return null;
+        const id = decodeURIComponent(url.hash.slice(1));
+        return id ? document.getElementById(id) : null;
+      }
+
+      function goToSection(section: HTMLElement) {
+        // Sin opciones: el suavizado y el offset bajo el navbar salen de `global.css`.
+        section.scrollIntoView();
+        // El foco lo movía el fragmento; sin reponerlo, teclado y lector de pantalla
+        // se quedan al principio de la página.
+        section.setAttribute("tabindex", "-1");
+        section.focus({ preventScroll: true });
+      }
+
+      // Sobre `document`, así que se registra una sola vez por sesión. La captura no
+      // es opcional: el ClientRouter escucha el mismo clic en burbujeo y solo se
+      // aparta si le llega ya con `preventDefault`.
+      document.addEventListener(
+        "click",
+        (e) => {
+          if (e.defaultPrevented || e.button !== 0) return;
+          if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
+          const link = (e.target as Element | null)?.closest?.("a");
+          if (!(link instanceof HTMLAnchorElement)) return;
+          if (link.hasAttribute("download") || (link.target && link.target !== "_self")) return;
+          const section = sectionFor(link);
+          if (!section) return;
+          e.preventDefault();
+          goToSection(section);
+        },
+        { capture: true },
+      );
+
+      /** Un enlace compartido sí trae fragmento, y una navegación entre páginas lo
+       *  arrastra. El salto va instantáneo porque se llega ya colocado, y
+       *  `history.state` se reescribe tal cual: el router guarda ahí el scroll. */
+      function dropHash() {
+        if (!location.hash) return;
+        document
+          .getElementById(decodeURIComponent(location.hash.slice(1)))
+          ?.scrollIntoView({ behavior: "instant" });
+        history.replaceState(history.state, "", location.pathname + location.search);
+      }
+
       setupRevealAnimations();
-      document.addEventListener("astro:page-load", setupRevealAnimations);
+      dropHash();
+      document.addEventListener("astro:page-load", () => {
+        setupRevealAnimations();
+        dropHash();
+      });
     </script>
   </body>
 </html>

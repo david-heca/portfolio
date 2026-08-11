@@ -2,11 +2,6 @@ import { ui, defaultLang, type Lang } from './index';
 
 export type { Lang };
 
-export function getLangFromUrl(url: URL): Lang {
-  const [, segment] = url.pathname.split('/');
-  return segment in ui ? (segment as Lang) : defaultLang;
-}
-
 /** Portada del idioma. El inglés lleva barra final: es la forma que emite el
  *  build, la del canonical y la del sitemap. */
 export function getHome(lang: Lang): string {

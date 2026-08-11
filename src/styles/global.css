@@ -1,5 +1,4 @@
-/* Design system: tokens, reset y primitivas compartidas.
-   El layout de cada sección vive en su <style> scoped. */
+/* Aquí solo lo compartido: el layout de cada sección vive en su <style> scoped. */
 
 /* Junicode (OFL, psb1558/Junicode-font) subseteado a latin desde el VF de 1.2 MB.
    Solo la italic: es la única voz de display y el sitio nunca la pide en roman. */
@@ -39,9 +38,7 @@
   /* escala tipográfica - se elige por rol, nunca se escribe el px */
   --text-label-sm: 11px;   /* mono micro: claves de spec, meta de card */
   --text-label: 12px;      /* etiquetas mono, kickers, periodos */
-  /* Lo que se lee como frase (institución, emisor, notas, footer) va en la
-     sans a este tamaño; el mono se reserva a etiquetas, tags y cifras. */
-  --text-meta: 13.5px;
+  --text-meta: 13.5px;     /* frase de apoyo: institución, emisor, notas, pie */
   --text-sm: 14.5px;       /* prosa secundaria: descripciones, notas, logros */
   --text-body: 16px;       /* prosa principal: bio, descripción destacada, canales */
   /* Entradilla de sección y título de card comparten cuerpo a propósito: lo que
@@ -179,7 +176,6 @@ img, svg { display: block; max-width: 100%; }
 }
 .label { color: var(--color-ink-2); }
 
-/* "En curso": punto + etiqueta acento. */
 .status {
   display: inline-flex;
   align-items: center;
@@ -201,8 +197,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .section-title em { color: var(--color-accent); font-style: italic; }
 
-/* Título de card: rol, grado, certificado, proyecto, principio. Comparte cuerpo
-   con .lead a propósito; lo que los separa es el peso y el color. */
+/* Título de card: rol, grado, certificado, proyecto, principio. */
 .card-title {
   font-family: var(--font-text);
   font-weight: var(--weight-medium);
@@ -234,8 +229,7 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-ink-2);
 }
 
-/* Frase de apoyo junto a un título: institución, emisor, nota, pie. Sans, nunca
-   mono: el mono se reserva a etiquetas, tags y cifras. */
+/* Sans, nunca mono: el mono se reserva a etiquetas, tags y cifras. */
 .meta {
   font-size: var(--text-meta);
   color: var(--color-ink-2);
@@ -359,8 +353,8 @@ html.theme-switching::view-transition-new(root) {
   to { clip-path: circle(var(--theme-r) at var(--theme-x) var(--theme-y)); }
 }
 
-/* ----- reveal al hacer scroll ----- */
-/* Solo bajo `.js`: sin JS el contenido nace visible. */
+/* ----- reveal al hacer scroll -----
+   Solo bajo `.js`: sin JS el contenido nace visible. */
 .js .reveal {
   opacity: 0;
   transform: translateY(16px);
