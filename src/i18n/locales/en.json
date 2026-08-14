@@ -9,6 +9,16 @@
       "title": "David Herrera - Applied AI Engineer in Mexico City",
       "tabTitle": "David Herrera",
       "description": "Applied AI Engineer in Mexico City. I build RAG and MCP systems on top of the data companies already have, with .NET, Python and Azure."
+    },
+    "cases": {
+      "title": "Cases - David Herrera",
+      "tabTitle": "Cases",
+      "description": "How the AI systems and software I've shipped were actually built, with the decisions and the parts that failed."
+    },
+    "notes": {
+      "title": "Notes - David Herrera",
+      "tabTitle": "Notes",
+      "description": "Technical notes on RAG, MCP and corporate data, written from what I run into in production."
     }
   },
   "nav": {
@@ -17,65 +27,32 @@
     "education": "Education",
     "projects": "Projects",
     "speaking": "Speaking",
-    "contact": "Contact"
+    "contact": "Contact",
+    "cases": "Cases",
+    "notes": "Notes"
   },
-  "stack": {
-    "label": "Stack",
-    "title": "What I",
-    "titleItalic": "build with",
-    "categories": {
-      "backend": {
-        "label": "Backend",
-        "items": [
-          "C#",
-          ".NET",
-          "Python",
-          "PostgreSQL",
-          "SQL Server",
-          "JWT",
-          "OAuth",
-          "APIs"
-        ]
-      },
-      "frontend": {
-        "label": "Frontend",
-        "items": [
-          "React",
-          "Tailwind",
-          "TypeScript",
-          "DevExpress",
-          "Astro"
-        ]
-      },
-      "cloud": {
-        "label": "Cloud & Infra",
-        "items": [
-          "Azure",
-          "AWS",
-          "Docker",
-          "CI/CD",
-          "Pipelines"
-        ]
-      },
-      "ai": {
-        "label": "AI & Data",
-        "items": [
-          "LLMs",
-          "RAG",
-          "MCP",
-          "MLOps",
-          "Prompts"
-        ]
-      }
+  "cases": {
+    "title": "Cases",
+    "description": "How each system was actually built, including the parts that went wrong.",
+    "empty": "No cases published yet.",
+    "backToIndex": "All cases",
+    "readCase": "Read the case",
+    "fields": {
+      "role": "Role",
+      "year": "Year",
+      "status": "Status"
     }
   },
+  "notes": {
+    "title": "Notes",
+    "description": "Field notes on what I run into taking AI to production.",
+    "empty": "No notes published yet.",
+    "backToIndex": "All notes",
+    "readNote": "Read the note"
+  },
   "speaking": {
-    "label": "Speaking",
-    "title": "On",
-    "titleItalic": "stage",
-    "description": "Talks on AI and data science at universities and conferences. I bring systems that are already in production, with their numbers and the parts that went wrong.",
-    "attendees": "~100",
-    "attendeesLabel": "Attendees per talk",
+    "title": "On stage",
+    "description": "Talks on AI and data science at universities and conferences, around a hundred people each. I bring systems that are already in production, with their numbers and the parts that went wrong.",
     "venuesLabel": "Where",
     "venues": [
       "Data Day 2025",
@@ -93,37 +70,22 @@
   },
   "hero": {
     "role": "Applied AI Engineer",
-    "intro": "I build AI systems on corporate data. The hard part is almost never the model.",
+    "thesis": "The hard part is almost never the model.",
+    "intro": "I build AI systems on the data companies already have.",
     "ctaProjects": "See projects",
     "ctaContact": "Let's talk",
     "location": "Mexico City Metro Area"
   },
   "about": {
-    "label": "About me",
     "heading": "Software, data <em>&</em> AI someone uses every day.",
     "bio": {
       "paragraph1": "I started out building WordPress sites and managing hosting. Today I design and ship AI systems. In between, <strong>backend, data and applied AI</strong>.",
       "paragraph2": "I move from data model to frontend, but my job right now is <strong>RAG, MCP and MLOps</strong> over corporate data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs.",
       "paragraph3": "I also teach, sort of: talks on AI and data science at Data Day and at universities -EGADE, UPVM Tultitlán, TESCo-, around 100 people per session."
-    },
-    "principles": [
-      {
-        "title": "Production, not demos",
-        "body": "Error handling, retries and alerting, not a notebook that works on my machine."
-      },
-      {
-        "title": "Systems you can operate",
-        "body": "Logs, retrieval evaluation and versioning from day one."
-      },
-      {
-        "title": "Share what you learn",
-        "body": "Almost everything I know came from people who wrote down what worked for them."
-      }
-    ]
+    }
   },
   "work": {
-    "headerTitle": "Professional",
-    "headerItalic": "journey",
+    "headerTitle": "Professional journey",
     "description": "From building WordPress sites to shipping AI to production. Here's what I did at each company.",
     "current": "Current role",
     "companies": {
@@ -205,8 +167,7 @@
     "showLess": "Show less"
   },
   "education": {
-    "headerTitle": "How I",
-    "headerItalic": "learn",
+    "headerTitle": "How I learn",
     "description": "Where I studied, and what I keep studying on my own.",
     "ongoing": "Present",
     "academicTitle": "Academic",
@@ -240,8 +201,7 @@
     }
   },
   "projects": {
-    "headerTitle": "Selected",
-    "headerItalic": "work",
+    "headerTitle": "Selected work",
     "description": "Software someone opens in the morning to get their work done.",
     "countLabel": "cases",
     "specLink": "Link",
@@ -332,22 +292,14 @@
     }
   },
   "contact": {
-    "headerTitle": "Let's",
-    "headerItalic": "talk",
+    "headerTitle": "Let's talk",
     "description": "If you've got something going with AI, data or backend, write me. I read everything, even if it's only to give an opinion.",
     "cta": {
       "button": "Send me a message",
       "note": "Usually same-day · Mexico City, GMT-6"
-    },
-    "cv": {
-      "es": "CV · ES",
-      "en": "CV · EN"
     }
   },
   "common": {
-    "footer": {
-      "license": "Open source · MIT"
-    },
     "langHint": {
       "label": "Switch language",
       "text": "This site is also available in English.",
