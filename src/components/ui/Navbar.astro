@@ -1,5 +1,5 @@
 ---
-import { getHome, useTranslations, type Lang } from "@i18n/utils";
+import { getHome, localizePath, useTranslations, type Lang } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
 import ThemeToggle from "@ui/ThemeToggle.astro";
 import LanguagePicker from "@ui/LanguagePicker.astro";
@@ -19,25 +19,45 @@ const path = Astro.url.pathname;
 const onLanding = path === "/" || path === "/en" || path === "/en/";
 const anchor = (id: string) => (onLanding ? `#${id}` : `${home}#${id}`);
 
-const navItems = [
-  { id: "about", label: t("nav.about"), icon: "ph:user-duotone" },
-  { id: "work", label: t("nav.work"), icon: "ph:briefcase-duotone" },
-  { id: "projects", label: t("nav.projects"), icon: "ph:squares-four-duotone" },
-  { id: "education", label: t("nav.education"), icon: "ph:graduation-cap-duotone" },
-  { id: "speaking", label: t("nav.speaking"), icon: "ph:microphone-stage-duotone" },
-  { id: "contact", label: t("nav.contact"), icon: "ph:paper-plane-tilt-duotone" },
+/** Anclas de la portada. Formación y Charlas quedan fuera del nav a propósito: se
+ *  llega a ellas leyendo, y el nav no aguanta ocho entradas a 1024px. */
+const sectionItems = [
+  { id: "about", label: t("nav.about"), icon: "ph:user" },
+  { id: "work", label: t("nav.work"), icon: "ph:briefcase" },
+  { id: "projects", label: t("nav.projects"), icon: "ph:squares-four" },
+  { id: "contact", label: t("nav.contact"), icon: "ph:paper-plane-tilt" },
 ];
+
+/** Rutas reales: sin `data-spy`, que solo vale para secciones de la portada. El
+ *  prefijo de idioma sale de `localizePath`, la única implementación del mapeo. */
+const routeItems = [
+  { href: localizePath("/cases/", lang), label: t("nav.cases"), icon: "ph:folder-open" },
+  { href: localizePath("/notes/", lang), label: t("nav.notes"), icon: "ph:article" },
+];
+
+/** Una ruta está activa también en sus páginas de detalle, no solo en el índice. */
+const isCurrent = (href: string) => path === href || path.startsWith(href);
 ---
 
 <header class="nav">
-  <div class="nav__inner">
+  <div class="nav__inner container">
     <a href={`${home}#top`} class="nav__brand" aria-label="David Herrera">
       david<span>herrera</span>
     </a>
 
     <nav class="nav__links" aria-label="Primary">
-      {navItems.map((item) => (
+      {sectionItems.map((item) => (
         <a href={anchor(item.id)} class="pill nav__link" data-spy={item.id}>
+          <Icon name={item.icon} aria-hidden="true" />
+          {item.label}
+        </a>
+      ))}
+      {routeItems.map((item) => (
+        <a
+          href={item.href}
+          class="pill nav__link"
+          aria-current={isCurrent(item.href) ? "page" : undefined}
+        >
           <Icon name={item.icon} aria-hidden="true" />
           {item.label}
         </a>
@@ -50,15 +70,26 @@ const navItems = [
         <ThemeToggle lang={lang} />
       </div>
       <button id="menu-btn" class="pill menu-btn" aria-label="Menu" aria-expanded="false">
-        <Icon name="ph:list-duotone" />
+        <Icon name="ph:list" />
       </button>
     </div>
   </div>
 
   <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu__inner container">
     <nav aria-label="Mobile">
-      {navItems.map((item) => (
+      {sectionItems.map((item) => (
         <a href={anchor(item.id)} class="mobile-menu__link" data-spy={item.id}>
+          <Icon name={item.icon} aria-hidden="true" />
+          {item.label}
+        </a>
+      ))}
+      {routeItems.map((item) => (
+        <a
+          href={item.href}
+          class="mobile-menu__link"
+          aria-current={isCurrent(item.href) ? "page" : undefined}
+        >
           <Icon name={item.icon} aria-hidden="true" />
           {item.label}
         </a>
@@ -68,30 +99,28 @@ const navItems = [
       <LanguagePicker lang={lang} href={switchTo} expanded />
       <ThemeToggle lang={lang} />
     </div>
+    </div>
   </div>
 </header>
 
 <style>
+  /* Barra a todo el ancho, no isla flotante: con la página construida a filos, un
+     bloque redondeado suspendido era lo único que no apoyaba en nada. El borde
+     inferior es la primera línea del armazón. */
   .nav {
     position: sticky;
     top: 0;
     z-index: 50;
-    padding: 14px 16px;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-line);
   }
 
   .nav__inner {
-    max-width: 1000px;
-    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: 8px 8px 8px 22px;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--color-bg) 70%, transparent);
-    -webkit-backdrop-filter: blur(16px) saturate(1.4);
-    backdrop-filter: blur(16px) saturate(1.4);
-    border: 1px solid var(--color-line);
+    padding-block: 11px;
   }
 
   .nav__brand {
@@ -101,7 +130,9 @@ const navItems = [
     color: var(--color-ink);
     flex-shrink: 0;
   }
-  .nav__brand span { color: var(--color-accent); }
+  /* El wordmark sigue en dos voces, pero la segunda baja de gris en vez de
+     cambiar de tono: es el otro sitio -con el `em` de About- donde queda Junicode. */
+  .nav__brand span { color: var(--color-ink-2); }
 
   .nav__links {
     display: none;
@@ -116,7 +147,19 @@ const navItems = [
     font-weight: var(--weight-medium);
     padding: 8px 13px;
   }
-  .nav__link.active { color: var(--color-accent); background: var(--color-accent-soft); }
+  /* Dos estados distintos, y antes compartían una sola señal.
+     `.active` es el spy de la portada: por dónde vas leyendo. Cambia en cada
+     scroll, así que solo sube de gris a tinta y no se mueve nada. */
+  .nav__link.active { color: var(--color-ink); }
+
+  /* Estar en una página sí es un hecho, y se marca invirtiendo: es el mismo gesto
+     que la acción primaria y el único "color" del sistema. Gana al hover a
+     propósito -en la página donde ya estás no hay nada que previsualizar-. */
+  .nav__link[aria-current="page"] {
+    background: var(--color-ink);
+    color: var(--color-bg);
+  }
+
   .nav__link [data-icon] {
     width: var(--icon);
     height: var(--icon);
@@ -125,7 +168,8 @@ const navItems = [
     transition: color var(--t-fast) ease;
   }
   .nav__link:hover [data-icon] { color: var(--color-ink-2); }
-  .nav__link.active [data-icon] { color: var(--color-accent); }
+  .nav__link.active [data-icon] { color: var(--color-ink); }
+  .nav__link[aria-current="page"] [data-icon] { color: var(--color-bg); }
 
   .nav__utils { display: inline-flex; align-items: center; gap: 12px; }
   .nav__utils-desktop { display: none; align-items: center; gap: 4px; }
@@ -137,17 +181,11 @@ const navItems = [
 
   .mobile-menu {
     position: absolute;
-    top: calc(100% - 2px);
-    left: 16px;
-    right: 16px;
-    max-width: 1000px;
-    margin: 0 auto;
-    border-radius: var(--radius);
-    background: color-mix(in srgb, var(--color-bg) 88%, transparent);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
-    border: 1px solid var(--color-line);
-    box-shadow: var(--shadow-soft);
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-bg);
+    border-bottom: 1px solid var(--color-line);
     overflow: hidden;
     transform: translateY(-8px);
     opacity: 0;
@@ -155,12 +193,16 @@ const navItems = [
     transition: transform var(--t-base) ease, opacity var(--t-base) ease;
   }
   .mobile-menu.open { transform: none; opacity: 1; pointer-events: auto; }
-  .mobile-menu nav { display: flex; flex-direction: column; padding: 8px; }
+  .mobile-menu__inner { padding-block: 8px 0; }
+  .mobile-menu nav { display: flex; flex-direction: column; }
+  /* El texto arranca en el filo de la columna; el fondo del hover se sale un poco
+     para no morder la letra. */
   .mobile-menu__link {
     display: flex;
     align-items: center;
     gap: 12px;
-    padding: 13px 16px;
+    padding: 13px 12px;
+    margin-inline: -12px;
     font-size: var(--text-body);
     line-height: var(--leading-flat);
     font-weight: var(--weight-medium);
@@ -176,14 +218,21 @@ const navItems = [
     transition: color var(--t-fast) ease;
   }
   .mobile-menu__link:hover [data-icon] { color: var(--color-ink-2); }
-  .mobile-menu__link.active { color: var(--color-accent); background: var(--color-accent-soft); }
-  .mobile-menu__link.active [data-icon] { color: var(--color-accent); }
+  /* Mismo reparto que en escritorio: el spy solo marca el icono, la página actual
+     se invierte. */
+  .mobile-menu__link.active [data-icon] { color: var(--color-ink); }
+  .mobile-menu__link[aria-current="page"] {
+    background: var(--color-ink);
+    color: var(--color-bg);
+  }
+  .mobile-menu__link[aria-current="page"] [data-icon] { color: var(--color-bg); }
 
   .mobile-menu__footer {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 14px 16px;
+    margin-top: 8px;
+    padding-block: 14px;
     border-top: 1px solid var(--color-line);
   }
 </style>
