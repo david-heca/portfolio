@@ -1,6 +1,5 @@
 ---
 import { useTranslations } from "@i18n/utils";
-import { Icon } from "astro-icon/components";
 
 export interface Props {
   lang: "es" | "en";
@@ -8,15 +7,11 @@ export interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-
-const principles = t<{ title: string; body: string }[]>("about.principles");
-const principleIcons = ["ph:rocket-launch-duotone", "ph:gauge-duotone", "ph:chalkboard-teacher-duotone"];
 ---
 
 <section id="about" class="about section container">
   <div class="about__top">
     <header class="about__head">
-      <p class="kicker reveal">{t("about.label")}</p>
       <h2 class="section-title reveal reveal-1" set:html={t("about.heading")}></h2>
     </header>
 
@@ -25,16 +20,6 @@ const principleIcons = ["ph:rocket-launch-duotone", "ph:gauge-duotone", "ph:chal
       <p class="prose reveal reveal-1" set:html={t("about.bio.paragraph2")}></p>
       <p class="prose reveal reveal-2" set:html={t("about.bio.paragraph3")}></p>
     </div>
-  </div>
-
-  <div class="about__principles">
-    {principles.map((p, i) => (
-      <div class={`about__principle reveal reveal-${Math.min(i + 1, 3)}`}>
-        <span class="about__principle-icon"><Icon name={principleIcons[i] ?? "ph:circle-duotone"} /></span>
-        <h3 class="card-title about__principle-title">{p.title}</h3>
-        <p class="prose-sm about__principle-body">{p.body}</p>
-      </div>
-    ))}
   </div>
 </section>
 
@@ -55,19 +40,4 @@ const principleIcons = ["ph:rocket-launch-duotone", "ph:gauge-duotone", "ph:chal
     flex-direction: column;
     gap: 20px;
   }
-
-  .about__principles {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 24px;
-    margin-top: 24px;
-    padding-top: 40px;
-    border-top: 1px solid var(--color-line);
-  }
-  @media (min-width: 768px) {
-    .about__principles { grid-template-columns: repeat(3, 1fr); gap: 32px; }
-  }
-  .about__principle-icon { display: block; margin-bottom: 16px; }
-  .about__principle-icon [data-icon] { font-size: var(--icon-2xl); color: var(--color-accent); }
-  .about__principle-title { margin-bottom: 12px; }
 </style>
