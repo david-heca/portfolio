@@ -6,7 +6,11 @@ Solo lo que **no** se deduce leyendo el código: invariantes, restricciones y po
 
 Astro estático con CSS propio sobre Cloudflare Workers, con `pnpm`. Sin React, sin islands, sin tests, sin linter.
 
-Todo el sitio es **una landing por idioma** y la navegación es por anclas, no por rutas. Necesitar una subruta es señal de que algo no encaja en el modelo, no permiso para crearla.
+**La portada es una landing por idioma; el sitio no.** Dentro de la landing se navega por anclas. Fuera están `/casos/` y `/notas/`, que son rutas reales: el texto largo es la única razón por la que el sitio deja de ser un CV, y no cabe en una landing.
+
+- **La prosa larga vive en `src/content/`, nunca en `src/i18n/locales/`.** El locale es para etiquetas de UI; su lookup por dot-path y el tipado contra `es` sirven para eso y convertirían un caso de dos mil palabras en un muro de strings escapados.
+- **El slug es idéntico en los dos idiomas** -`/casos/connie` y `/en/casos/connie`-. Traducirlo obligaría a un mapa de rutas junto a `localizePath()`, o sea la segunda copia del mapeo que acaba divergiendo.
+- **Una entrada se publica solo si existe en los dos idiomas**; `localizedEntries()` esconde la que va sola. Media traducción deja el hreflang apuntando a una página que el build no emitió.
 
 ## Bilingüe - ES en `/`, EN en `/en/`
 
@@ -26,10 +30,17 @@ Todo el sitio es **una landing por idioma** y la navegación es por anclas, no p
 ## Diseño
 
 - **Token-driven.** Para reajustar el look se editan variables en `global.css`, nunca componentes. Un valor literal dentro de un `<style>` scoped es un token que falta.
+- **La página tiene armazón visible, y no es decoración.** Dos filos verticales en `.page` marcan la caja del contenido; cada sección cierra con una línea que se sale del contenedor hasta el borde de la pantalla. Los verticales caen en el **borde exterior** del contenedor, no donde arranca el texto: así el `--pad` de la columna es además el aire entre la línea y la letra, y no hace falta un hueco aparte. Si dejaran de derivar del contenedor, sobran -una rejilla que no mide nada es adorno-.
+- **Nada flota por encima del armazón.** El navbar es una barra a todo el ancho con su filo, no una isla redondeada. Las esquinas van a escuadra (`--radius` y `--radius-sm` en 0): una foto redondeada es lo único que no puede alinearse contra una recta. Se salvan los círculos que son puntos -`.dot`, viñetas, el hito del eje de formación-.
+- **«Por dónde vas» y «dónde estás» no son el mismo estado.** El spy de la portada -`.active`, que cambia en cada scroll- solo sube el enlace de gris a tinta; no mueve ni pinta nada más, o el nav se convierte en un semáforo. Estar en una ruta -`[aria-current="page"]`- sí es un hecho, y se marca invirtiendo el enlace, que es el mismo gesto que la acción primaria. Darles la misma señal fue el error que hubo que deshacer.
 - **Las primitivas viven en `global.css`; el layout de cada sección, en su `<style>` scoped.** Un patrón que aparece en tres sitios ya es una primitiva.
-- **Un solo acento.** Las variantes translúcidas derivan con `color-mix`; no se declaran a mano.
-- **Solo tres colores llevan texto.** `--color-ink` para títulos y el valor principal de un bloque; `--color-ink-2` para toda la prosa secundaria, meta, fechas y `.label`; `--color-accent` para kickers, `.status`, los `em` de los títulos y los hover. **`--color-ink-3` no pinta texto nunca**: da ~2:1 de contraste y está calibrado para viñetas, hairlines e iconos en reposo. Si un texto necesita bajar de tono, ya está en ink-2; lo que necesita es menos cuerpo, no menos tinta.
-- **El serif es la excepción.** `--font-display` marca solo los dos niveles altos de la jerarquía; por debajo va la sans. Si la italic baja al nivel de card deja de significar énfasis y la página se satura.
+- **La paleta no tiene tono.** Blanco puro, negro puro y grises neutros; ni un `#rrggbb` con color en todo el sitio. Un fondo teñido es lo que hace que una página converja con el gusto de su año, y no hay tinte que no envejezca. **No introducir un acento de color**: si algo no se distingue, le falta peso, espacio o subrayado, no color.
+- **Solo dos tintas llevan texto.** `--color-ink` para títulos, el valor principal de un bloque y los enlaces; `--color-ink-2` para toda la prosa secundaria, meta, fechas y `.label`. **`--color-ink-3` no pinta texto nunca**: da ~2:1 de contraste y está calibrado para viñetas, hairlines e iconos en reposo. Si un texto necesita bajar de tono, ya está en ink-2; lo que necesita es menos cuerpo, no menos tinta.
+- **`--color-accent` existe pero vale tinta.** Se mantiene para que los hover sigan siendo un salto de gris a negro con una sola declaración. Las variantes translúcidas derivan con `color-mix`; no se declaran a mano.
+- **Un enlace sin subrayado no se ve.** Sin tono que lo separe del texto, el subrayado es lo único que lo señala. Vale la inversión -fondo tinta, texto papel- para la acción primaria.
+- **El serif no titula: firma.** `--font-display` aparece en dos sitios de todo el sitio -el wordmark del nav y el `<em>` de `about.heading`- y en ninguno lleva el peso de un titular; los títulos son la sans a `--weight-medium`. Repartida por las secciones, la italic dejaba de significar énfasis y se leía como plantilla, con el copy escrito para llenar el hueco -«Hablemos *ahora*»- en vez de al revés. Por eso los locales ya no tienen clave para la mitad en italic: sin hueco, el patrón no puede volver.
+- **Lo más grande de la portada es la tesis, no el nombre.** El `h1` sigue siendo el nombre, porque el nivel de encabezado dice de quién va la página y el cuerpo de letra dice qué mirar primero; son preguntas distintas y no tienen por qué contestarse igual.
+- **Ninguna sección lleva etiqueta en versalitas sobre el título.** La única que queda es la ubicación del hero, que es un dato y no un rótulo. Sobre un título es autoridad editorial prestada, y estaba en 8 de 8.
 - **Un rol por tipografía.** Display para titulares; `--font-text` para leer y para la UI; `--font-mono` solo para etiquetas en mayúsculas con tracking, tags y cifras. Lo que se lee como frase va en la sans aunque contenga números.
 - **Los tamaños display salen de los tokens `--display-*`** y pasan por `.section-title` para heredar el tracking que los distingue. `--display-size` es el hook por instancia, no permiso para escribir un `clamp` nuevo; `--display-leading` sí es óptico.
 - **`--weight-medium` es solo para la sans.** La mono se carga en un único peso estático, así que aplicárselo da negrita sintética del navegador.
