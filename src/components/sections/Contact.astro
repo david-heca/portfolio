@@ -12,29 +12,21 @@ const t = useTranslations(lang);
 const email = "hello@davidherrera.dev";
 
 const channels = [
-  { label: "Email", value: email, href: `mailto:${email}`, icon: "ph:envelope-simple-duotone" },
-  { label: "GitHub", value: "@david-heca", href: "https://github.com/david-heca", icon: "ph:github-logo-duotone" },
-  { label: "LinkedIn", value: "in/david-heca", href: "https://www.linkedin.com/in/david-heca/", icon: "ph:linkedin-logo-duotone" },
-  { label: "X", value: "@david_heca_", href: "https://x.com/david_heca_", icon: "ph:x-logo-duotone" },
-];
-
-// El CV vive en Reactive Resume, no en el repo: es la única copia y se actualiza
-// sin desplegar. Un PDF en public/ se queda viejo y va a un repo público.
-const cvFiles = [
-  { lab: t("contact.cv.es"), href: "https://rxresu.me/david-heca/davidherrera-spanish" },
-  { lab: t("contact.cv.en"), href: "https://rxresu.me/david-heca/davidherrera-english" },
+  { label: "Email", value: email, href: `mailto:${email}`, icon: "ph:envelope-simple" },
+  { label: "GitHub", value: "@david-heca", href: "https://github.com/david-heca", icon: "ph:github-logo" },
+  { label: "LinkedIn", value: "in/david-heca", href: "https://www.linkedin.com/in/david-heca/", icon: "ph:linkedin-logo" },
+  { label: "X", value: "@david_heca_", href: "https://x.com/david_heca_", icon: "ph:x-logo" },
 ];
 ---
 
 <section id="contact" class="contact section container">
   <div class="contact__intro reveal">
-    <p class="kicker">{t("nav.contact")}</p>
-    <h2 class="section-title contact__title">{t("contact.headerTitle")} <em>{t("contact.headerItalic")}</em></h2>
+    <h2 class="section-title contact__title">{t("contact.headerTitle")}</h2>
     <p class="lead contact__lead">{t("contact.description")}</p>
 
     <div class="contact__cta">
       <a href={`mailto:${email}`} class="btn btn--primary">
-        <Icon name="ph:paper-plane-tilt-duotone" />
+        <Icon name="ph:paper-plane-tilt" />
         {t("contact.cta.button")}
       </a>
     </div>
@@ -50,21 +42,11 @@ const cvFiles = [
         class="channel"
       >
         <span class="channel__icon"><Icon name={c.icon} /></span>
-        <span class="channel__text">
-          <span class="label">{c.label}</span>
-          <span class="channel__value">{c.value}</span>
-        </span>
+        <span class="label channel__label">{c.label}</span>
+        <span class="channel__value">{c.value}</span>
         <span class="channel__arrow" aria-hidden="true"><Icon name="ph:arrow-up-right" /></span>
       </a>
     ))}
-    <div class="contact__cv">
-      {cvFiles.map((f) => (
-        <a href={f.href} target="_blank" rel="noopener noreferrer" class="btn btn--ghost btn--sm">
-          <Icon name="ph:read-cv-logo-duotone" />
-          {f.lab}
-        </a>
-      ))}
-    </div>
   </div>
 </section>
 
@@ -89,30 +71,68 @@ const cvFiles = [
   }
   .contact__note { margin: 16px 0 0; }
 
-  .contact__channels { display: flex; flex-direction: column; }
+  /* Rejilla de celdas, no lista. Las divisiones no son bordes de cada celda: son
+     el hilo de un `gap` de 1px sobre un fondo de línea, así que nunca se doblan
+     donde dos celdas se tocan y el conjunto se lee como una sola pieza. */
+  .contact__channels {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1px;
+    background: var(--color-line);
+    border-block: 1px solid var(--color-line);
+  }
+  @media (min-width: 520px) {
+    .contact__channels { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
   .channel {
+    position: relative;
     display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 16px 4px;
-    border-bottom: 1px solid var(--color-line);
-    transition: padding var(--t-base) ease, color var(--t-base) ease;
+    flex-direction: column;
+    gap: 6px;
+    min-height: 136px;
+    padding: 22px 20px;
+    background: var(--color-bg);
+    transition: background-color var(--t-base) ease, color var(--t-base) ease;
   }
-  .channel:first-child { border-top: 1px solid var(--color-line); }
-  .channel:hover { padding-left: 12px; color: var(--color-accent); }
-  .channel__icon {
+
+  /* `auto` empuja etiqueta y valor al pie: el icono ancla arriba y el texto se
+     alinea entre celdas aunque el valor ocupe dos líneas. */
+  .channel__icon { margin-bottom: auto; color: var(--color-ink); }
+  .channel__icon [data-icon] { font-size: var(--icon-2xl); }
+
+  .channel__label { color: var(--color-ink-2); }
+  .channel__value {
+    font-size: var(--text-sm);
+    line-height: var(--leading-snug);
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+  }
+
+  .channel__arrow {
+    position: absolute;
+    top: 22px;
+    right: 20px;
     display: inline-flex;
-    color: var(--color-accent);
+    color: var(--color-ink-3);
+    transition: color var(--t-fast) ease, transform var(--t-fast) ease;
   }
-  .channel__icon [data-icon] { font-size: var(--icon-xl); }
-  /* Fuera de rejilla a propósito: etiqueta y valor son una unidad, no dos filas. */
-  .channel__text { display: flex; flex-direction: column; gap: 2px; }
-
-  .channel__value { font-size: var(--text-body); color: var(--color-ink); }
-  .channel:hover .channel__value { color: var(--color-accent); }
-  .channel__arrow { display: inline-flex; margin-left: auto; color: var(--color-ink-3); }
   .channel__arrow [data-icon] { font-size: var(--icon); }
-  .channel:hover .channel__arrow { color: var(--color-accent); }
 
-  .contact__cv { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+  /* La celda se invierte entera: es el único gesto de "color" que tiene el sistema
+     y aquí hace de tecla. */
+  .channel:hover,
+  .channel:focus-visible {
+    background: var(--color-ink);
+    color: var(--color-bg);
+    /* El anillo de foco es tinta y sobre tinta no se vería. */
+    outline-color: var(--color-bg);
+  }
+  .channel:hover :is(.channel__icon, .channel__label, .channel__value, .channel__arrow),
+  .channel:focus-visible :is(.channel__icon, .channel__label, .channel__value, .channel__arrow) {
+    color: var(--color-bg);
+  }
+  .channel:hover .channel__arrow,
+  .channel:focus-visible .channel__arrow { transform: translate(2px, -2px); }
+
 </style>
