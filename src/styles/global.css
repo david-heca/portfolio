@@ -16,24 +16,29 @@
   --font-text: "Schibsted Grotesk Variable", system-ui, sans-serif;
   --font-mono: "Maple Mono", "SF Mono", ui-monospace, monospace;
 
-  /* paleta warm neutral - un solo acento; sus variantes derivan con color-mix */
-  --color-bg: #f5f1ea;
-  --color-bg-2: #ebe5d9;
-  --color-surface: #fbf8f2;
-  --color-ink: #1a1815;
-  --color-ink-2: #6b6660;
-  --color-ink-3: #b4ad9f;
-  --color-line: rgba(26, 24, 21, 0.12);
-  --color-line-strong: rgba(26, 24, 21, 0.26);
-  /* El acento pesa lo mismo en los dos temas: ~6.3:1 aquí, ~7.4:1 en oscuro.
-     Sin equilibrar, en claro quedaba por debajo de la prosa y en oscuro por encima. */
-  --color-accent: #256254;
-  --color-accent-soft: color-mix(in srgb, var(--color-accent) 12%, transparent);
-  --shadow-soft: 0 1px 2px rgba(26, 24, 21, 0.04), 0 16px 40px -24px rgba(26, 24, 21, 0.18);
+  /* Paleta sin tono: blanco puro, negro puro y grises neutros. Un fondo teñido es
+     lo que hace que un sitio converja con el gusto de su año -el crema del que
+     viene este era, dígito arriba o abajo, el default de todo el mundo-. Sin tinte
+     no hay con qué converger, y el peso cae en la escala y el espacio. */
+  --color-bg: #ffffff;
+  --color-bg-2: #f4f4f4;
+  --color-surface: #fafafa;
+  --color-ink: #000000;
+  --color-ink-2: #6b6b6b;   /* 5.2:1 sobre el fondo */
+  --color-ink-3: #b0b0b0;   /* ~2.2:1: viñetas, hairlines e iconos en reposo */
+  --color-line: rgba(0, 0, 0, 0.14);
+  --color-line-strong: rgba(0, 0, 0, 0.3);
+  /* No hay color de acento. El énfasis lo llevan el peso, el subrayado y la
+     inversión, así que el rol de acento se resuelve en tinta plena: donde antes
+     había un salto de tono ahora hay uno de gris a negro, que se ve igual de bien
+     y no envejece. Si algún día vuelve un tono, se cambia solo esta línea. */
+  --color-accent: var(--color-ink);
+  --color-accent-soft: color-mix(in srgb, var(--color-ink) 8%, transparent);
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05), 0 16px 40px -24px rgba(0, 0, 0, 0.25);
   /* Rótulo sobre foto. Es el único par que no cambia con el tema: lo que hay
      debajo es la imagen, no el fondo de la página. */
-  --color-scrim: rgba(14, 13, 11, 0.78);
-  --color-on-scrim: #f5f1ea;
+  --color-scrim: rgba(0, 0, 0, 0.8);
+  --color-on-scrim: #ffffff;
 
   /* Hover de color; el resto de gestos -transform, sombra, apertura- van a --t-base. */
   --t-fast: 0.15s;
@@ -41,7 +46,7 @@
 
   /* escala tipográfica - se elige por rol, nunca se escribe el px */
   --text-label-sm: 11px;   /* mono micro: claves de spec, meta de card */
-  --text-label: 12px;      /* etiquetas mono, kickers, periodos */
+  --text-label: 12px;      /* etiquetas mono, periodos, ubicación del hero */
   --text-meta: 13.5px;     /* frase de apoyo: institución, emisor, notas, pie */
   --text-sm: 14.5px;       /* prosa secundaria: descripciones, notas, logros */
   --text-body: 16px;       /* prosa principal: bio, descripción destacada, canales */
@@ -84,23 +89,34 @@
 
   /* layout */
   --container: 1180px;
+  /* La sangría de la columna. Como el armazón cae en el borde exterior del
+     contenedor, este valor es además el aire entre el filo y el texto. */
+  --pad: 24px;
+  --frame-inset: 16px;     /* lo mínimo entre el armazón y el borde de la ventana */
   --section-y: clamp(72px, 11vw, 140px);
-  --radius: 16px;
-  --radius-sm: 10px;
+  /* A escuadra. Una foto o un bloque con la esquina redondeada es lo único que no
+     puede alinearse contra una línea recta, y en una página construida a filos se
+     nota como una pieza suelta. Volver a redondear es editar estas dos líneas. */
+  --radius: 0;
+  --radius-sm: 0;
+  --radius-xs: 2px;        /* solo lo que envuelve una palabra: código en línea */
+  /* Botones y tags van casi a escuadra. Sin color con que marcar jerarquía, la
+     silueta es lo que separa un control de un adorno; la píldora los ablandaba
+     todos por igual. Subir esta línea a 999px devuelve el look anterior. */
+  --radius-control: 2px;
 }
 
 :root.dark {
-  --color-bg: #0e0d0b;
-  --color-bg-2: #141310;
-  --color-surface: #16140f;
-  --color-ink: #e7e2d6;
-  --color-ink-2: #8f897e;
-  --color-ink-3: #4a473f;
-  --color-line: rgba(231, 226, 214, 0.12);
-  --color-line-strong: rgba(231, 226, 214, 0.24);
-  --color-accent: #5fae9a;
-  --color-accent-soft: color-mix(in srgb, var(--color-accent) 16%, transparent);
-  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 40px -24px rgba(0, 0, 0, 0.6);
+  --color-bg: #000000;
+  --color-bg-2: #121212;
+  --color-surface: #0d0d0d;
+  --color-ink: #ffffff;
+  --color-ink-2: #9a9a9a;   /* 7.5:1 sobre el fondo */
+  --color-ink-3: #4d4d4d;   /* ~2.4:1: mismo papel que en claro */
+  --color-line: rgba(255, 255, 255, 0.16);
+  --color-line-strong: rgba(255, 255, 255, 0.32);
+  --color-accent-soft: color-mix(in srgb, var(--color-ink) 12%, transparent);
+  --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.6), 0 16px 40px -24px rgba(0, 0, 0, 0.9);
 }
 
 /* ----- base (reset) ----- */
@@ -111,7 +127,7 @@ table { border-collapse: collapse; }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 88px;
+  scroll-padding-top: 72px;  /* alto de la barra, que ya no flota */
   overflow-x: clip;
   background-color: var(--color-bg);
 }
@@ -138,39 +154,72 @@ img, svg { display: block; max-width: 100%; }
 ::selection { background: var(--color-accent); color: var(--color-bg); }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid var(--color-ink);
   outline-offset: 3px;
-  border-radius: 2px;
+  border-radius: var(--radius-control);
 }
 :focus:not(:focus-visible) { outline: none; }
 
 /* ----- layout ----- */
+@media (min-width: 768px) { :root { --pad: 40px; } }
+@media (min-width: 1024px) { :root { --pad: 56px; } }
+
 .container {
   width: 100%;
   max-width: var(--container);
   margin-inline: auto;
-  padding-inline: 24px;
+  padding-inline: var(--pad);
 }
-@media (min-width: 768px) { .container { padding-inline: 40px; } }
-@media (min-width: 1024px) { .container { padding-inline: 56px; } }
 
-.page { display: flex; flex-direction: column; flex-grow: 1; }
+/* ----- el armazón visible -----
+   Sin color, lo único que queda para marcar estructura es la línea. Estos dos
+   filos no son una rejilla de fondo -eso sería adorno-: caen en el borde exterior
+   del contenedor, así que lo que separa la línea del texto es el `--pad` de la
+   columna y no hace falta un hueco aparte. Si dejaran de derivar del contenedor,
+   sobran.
+
+   Por debajo de 768px no se dibujan: con `--pad` en 24 el aire no da y encajonan
+   en vez de medir. */
+.page { display: flex; flex-direction: column; flex-grow: 1; position: relative; }
+@media (min-width: 768px) {
+  .page::before,
+  .page::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: var(--color-line);
+    pointer-events: none;
+  }
+  .page::before { left: max(var(--frame-inset), 50% - var(--container) / 2); }
+  .page::after { right: max(var(--frame-inset), 50% - var(--container) / 2); }
+}
 
 .section { padding-block: var(--section-y); }
+
+/* El corte entre secciones se sale de la columna hasta el borde de la pantalla:
+   la sección termina en la página, no en el contenedor. El desbordamiento lo
+   recorta el `overflow-x: clip` del html, que ya estaba puesto.
+   `.hero` no lleva `.section` -tiene su propia altura- pero sí cierra igual. */
+.section,
+.hero { position: relative; }
+.section::after,
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  margin-inline: calc(50% - 50vw);
+  height: 1px;
+  background: var(--color-line);
+  pointer-events: none;
+}
 
 .sec-head { max-width: 720px; margin-bottom: 56px; }
 .sec-head .lead { margin-top: 20px; }
 
 /* ----- type primitives ----- */
-.kicker {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--track-label);
-  text-transform: uppercase;
-  color: var(--color-accent);
-}
-
-/* Micro-etiqueta mono. `.status` es la misma voz en acento y con punto. */
+/* Micro-etiqueta mono. `.status` es la misma voz con punto. */
 .label,
 .status {
   font-family: var(--font-mono);
@@ -180,26 +229,37 @@ img, svg { display: block; max-width: 100%; }
 }
 .label { color: var(--color-ink-2); }
 
+/* El punto va en tinta plena y el texto en gris: sin tono, el estado se señala
+   con la marca, no subiendo de peso toda la etiqueta. */
 .status {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: var(--color-accent);
+  color: var(--color-ink-2);
 }
 
 /* Toda la display pasa por aquí. El escalón se elige con --display-size entre los
-   cuatro tokens; --display-leading sí es óptico y se ajusta por instancia. */
+   cuatro tokens; --display-leading sí es óptico y se ajusta por instancia.
+   La voz es la sans a peso medio: el serif dejó de ser el titular. */
 .section-title {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 400;
+  font-family: var(--font-text);
+  font-weight: var(--weight-medium);
   letter-spacing: var(--track-tight);
   line-height: var(--display-leading, var(--leading-flat));
   font-size: var(--display-size, var(--display));
   color: var(--color-ink);
-  margin: 16px 0 0;
+  margin: 0;
+  text-wrap: balance;
 }
-.section-title em { color: var(--color-accent); font-style: italic; }
+
+/* La firma. Junicode sobrevive en dos sitios de todo el sitio -este `em` y el
+   wordmark del nav- y en ninguno lleva el peso de un titular. Es lo que la
+   mantiene siendo excepción: repartida por las secciones dejaba de significar. */
+.section-title em {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+}
 
 /* Título de card: rol, grado, certificado, proyecto, principio. */
 .card-title {
@@ -233,6 +293,113 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-ink-2);
 }
 
+/* ----- prosa larga -----
+   El Markdown de casos y notas. `.prose` es un párrafo suelto; esto es el
+   documento entero, y por eso trae sus propios saltos entre bloques. El ancho lo
+   fija cada hijo, no el contenedor: así el código y las figuras se salen del
+   `--measure` sin sacar al texto con ellos. */
+.longform {
+  font-size: var(--text-body);
+  line-height: var(--leading);
+  color: var(--color-ink-2);
+}
+.longform > * { max-width: var(--measure); }
+.longform > * + * { margin-top: 20px; }
+
+.longform h2,
+.longform h3 {
+  color: var(--color-ink);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--track-snug);
+}
+.longform h2 {
+  font-size: var(--text-subhead);
+  line-height: var(--leading-title);
+  margin-top: 56px;
+}
+.longform h3 {
+  font-size: var(--text-lead);
+  line-height: var(--leading-tight);
+  margin-top: 40px;
+}
+/* Un encabezado que abre el documento no arrastra el hueco de separación. */
+.longform > :first-child { margin-top: 0; }
+
+.longform strong { color: var(--color-ink); font-weight: var(--weight-medium); }
+
+.longform a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.longform li { position: relative; padding-left: 24px; }
+.longform li + li { margin-top: 8px; }
+/* Alineación óptica: la viñeta se centra contra la primera línea, no contra la
+   caja del <li>, que crece con el texto. Fuera de rejilla a propósito. */
+.longform ul > li::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: calc(var(--leading) * 0.5em);
+  width: 6px;
+  height: 1px;
+  background: var(--color-ink-3);
+}
+.longform ol { counter-reset: longform-item; }
+.longform ol > li::before {
+  counter-increment: longform-item;
+  content: counter(longform-item) ".";
+  position: absolute;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  color: var(--color-ink-3);
+}
+
+.longform blockquote {
+  border-left: 1px solid var(--color-line-strong);
+  padding-left: 20px;
+}
+
+.longform code {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  color: var(--color-ink);
+  background: var(--color-bg-2);
+  border-radius: var(--radius-xs);
+  padding: 2px 5px;
+}
+
+.longform pre {
+  max-width: none;
+  overflow-x: auto;
+  background: var(--color-bg-2);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+}
+.longform pre code {
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  font-size: var(--text-sm);
+}
+
+.longform hr {
+  max-width: none;
+  border-top: 1px solid var(--color-line);
+  margin-block: 48px;
+}
+
+.longform figure { max-width: none; }
+.longform img { border-radius: var(--radius-sm); border: 1px solid var(--color-line); }
+.longform figcaption {
+  font-size: var(--text-meta);
+  color: var(--color-ink-2);
+  margin-top: 10px;
+}
+
 /* Sans, nunca mono: el mono se reserva a etiquetas, tags y cifras. */
 .meta {
   font-size: var(--text-meta);
@@ -259,15 +426,17 @@ img, svg { display: block; max-width: 100%; }
   font-size: var(--text-sm);
   line-height: var(--leading-flat);
   padding: 13px 22px;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   border: 1px solid transparent;
   cursor: pointer;
-  transition: transform var(--t-base) ease, box-shadow var(--t-base) ease,
+  transition: transform var(--t-base) ease,
     background-color var(--t-base) ease, border-color var(--t-base) ease,
     color var(--t-base) ease;
 }
-.btn--primary { background: var(--color-accent); color: var(--color-bg); }
-.btn--primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-soft); }
+/* La acción primaria es el fondo invertido: sin tono, la única jerarquía de color
+   que queda es tinta contra papel. */
+.btn--primary { background: var(--color-ink); color: var(--color-bg); }
+.btn--primary:hover { transform: translateY(-2px); }
 .btn--ghost { border-color: var(--color-line-strong); color: var(--color-ink); }
 .btn--ghost:hover { border-color: var(--color-accent); color: var(--color-accent); background: var(--color-accent-soft); }
 .btn:active { transform: translateY(0) scale(0.98); }
@@ -280,7 +449,7 @@ img, svg { display: block; max-width: 100%; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   color: var(--color-ink-2);
   transition: color var(--t-fast) ease, background-color var(--t-fast) ease;
 }
@@ -298,7 +467,7 @@ img, svg { display: block; max-width: 100%; }
   font-size: var(--text-label);
   letter-spacing: var(--track-tag);
   padding: 5px 11px;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   border: 1px solid var(--color-line);
   color: var(--color-ink-2);
   white-space: nowrap;
@@ -333,7 +502,7 @@ img, svg { display: block; max-width: 100%; }
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--color-accent);
+  background: var(--color-ink);
   flex-shrink: 0;
 }
 

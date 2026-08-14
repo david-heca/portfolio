@@ -1,8 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
-import { useTranslations } from "@i18n/utils";
+import { localizePath, useTranslations } from "@i18n/utils";
 import { projects } from "@/data/projects";
+import { localizedEntries } from "@/data/collections";
 
 export interface Props {
   lang: "es" | "en";
@@ -16,9 +17,18 @@ interface Spec {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
-const items = projects.map((p, i) => ({
+/** Un proyecto enlaza a su caso solo si el caso está publicado en los dos idiomas. */
+const casesBase = localizePath("/cases/", lang);
+const caseHrefByProject = new Map(
+  (await localizedEntries("cases", lang)).map(({ slug, entry }) => [
+    entry.data.project ?? slug,
+    `${casesBase}${slug}/`,
+  ]),
+);
+
+const items = projects.map((p) => ({
   ...p,
-  ordinal: String(i + 1).padStart(2, "0"),
+  caseHref: caseHrefByProject.get(p.slug),
   title: t(`projects.list.${p.slug}.title`),
   desc: t(`projects.list.${p.slug}.description`),
   specs: t<Spec[]>(`projects.list.${p.slug}.specs`),
@@ -34,10 +44,7 @@ const summary = `${projects.length} ${t("projects.countLabel")} · ${span}`;
 
 <section id="projects" class="projects section container">
   <header class="projects__head reveal">
-    <div>
-      <p class="kicker">{t("nav.projects")}</p>
-      <h2 class="section-title">{t("projects.headerTitle")} <em>{t("projects.headerItalic")}</em></h2>
-    </div>
+    <h2 class="section-title">{t("projects.headerTitle")}</h2>
     <p class="label projects__summary">{summary}</p>
   </header>
   <p class="lead projects__lead reveal">{t("projects.description")}</p>
@@ -45,8 +52,6 @@ const summary = `${projects.length} ${t("projects.countLabel")} · ${span}`;
   <ol class="cases">
     {items.map((p, i) => (
       <li class:list={["case", "reveal", `reveal-${Math.min(i + 1, 3)}`, i % 2 === 1 && "case--flip"]}>
-        <p class="section-title case__ordinal" aria-hidden="true">{p.ordinal}</p>
-
         <div class="case__body">
           <div class="case__head">
             <h3 class="card-title case__title">{p.title}</h3>
@@ -56,6 +61,11 @@ const summary = `${projects.length} ${t("projects.countLabel")} · ${span}`;
           <div class="tag-row case__tags">
             {p.tags.map((tag) => <span class="tag">{tag}</span>)}
           </div>
+          {p.caseHref && (
+            <a class="case__read" href={p.caseHref}>
+              {t("cases.readCase")}<Icon name="ph:arrow-right" aria-hidden="true" />
+            </a>
+          )}
         </div>
 
         <div class="case__media">
@@ -107,13 +117,12 @@ const summary = `${projects.length} ${t("projects.countLabel")} · ${span}`;
   .case { display: grid; gap: 24px; }
   @media (min-width: 900px) {
     .case {
-      grid-template-columns: 96px minmax(0, 1fr) 36%;
+      grid-template-columns: minmax(0, 1fr) 36%;
       gap: 40px;
       align-items: center;
     }
-    .case--flip { grid-template-columns: 36% minmax(0, 1fr) 96px; }
+    .case--flip { grid-template-columns: 36% minmax(0, 1fr); }
     .case--flip .case__media { order: -1; }
-    .case--flip .case__ordinal { order: 1; text-align: right; }
     .case--flip .case__body { text-align: right; }
     .case--flip .case__head { flex-direction: row-reverse; }
     .case--flip .case__desc { margin-inline: auto 0; }
@@ -121,15 +130,30 @@ const summary = `${projects.length} ${t("projects.countLabel")} · ${span}`;
     .cases { gap: 88px; }
   }
 
-  .case__ordinal {
-    margin: 0;
-    color: color-mix(in srgb, var(--color-accent) 42%, transparent);
-  }
-
   .case__head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
   .case__title { font-size: var(--text-subhead); }
   .case__desc { margin-top: 12px; max-width: 46ch; }
   .case__tags { margin-top: 20px; }
+
+  /* Sin tono que lo distinga del resto del texto, un enlace necesita el subrayado
+     para leerse como enlace. */
+  .case__read {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+    font-size: var(--text-sm);
+    font-weight: var(--weight-medium);
+    line-height: var(--leading-flat);
+    color: var(--color-ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .case__read [data-icon] {
+    font-size: var(--icon);
+    transition: transform var(--t-fast) ease;
+  }
+  .case__read:hover [data-icon] { transform: translateX(3px); }
 
   .case__media { position: relative; }
   .case__frame {
@@ -163,7 +187,9 @@ const summary = `${projects.length} ${t("projects.countLabel")} · ${span}`;
   .spec__link [data-icon] { font-size: var(--icon-sm); }
 
   /* Sin puntero que pueda posarse -táctil- la ficha se lee bajo la imagen; con
-     él se superpone y solo aparece al enfocar o pasar por encima. */
+     él se superpone y solo aparece al enfocar o pasar por encima. Superpuesta va
+     sobre la foto, no sobre el fondo de la página: de ahí el par de scrim, que es
+     el mismo en los dos temas. */
   @media (hover: hover) {
     .spec {
       position: absolute;
@@ -172,12 +198,15 @@ const summary = `${projects.length} ${t("projects.countLabel")} · ${span}`;
       margin-top: 0;
       padding: 22px;
       border-radius: var(--radius-sm);
-      background: color-mix(in srgb, var(--color-bg) 90%, transparent);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: var(--color-scrim);
       opacity: 0;
       transition: opacity var(--t-base) ease;
     }
+    .spec dt,
+    .spec dd { border-bottom-color: color-mix(in srgb, var(--color-on-scrim) 24%, transparent); }
+    .spec .label { color: color-mix(in srgb, var(--color-on-scrim) 72%, transparent); }
+    .spec__value,
+    .spec__link a { color: var(--color-on-scrim); }
     .case__media:hover .spec,
     .case__media:focus-within .spec { opacity: 1; }
   }

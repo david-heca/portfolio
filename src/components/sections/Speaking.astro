@@ -15,17 +15,13 @@ const topics = t<string[]>("speaking.topics");
 ---
 
 <section id="speaking" class="speaking section container">
-  <div class="speaking__top reveal">
-    <header class="sec-head speaking__intro">
-      <p class="kicker">{t("speaking.label")}</p>
-      <h2 class="section-title">{t("speaking.title")} <em>{t("speaking.titleItalic")}</em></h2>
-      <p class="lead">{t("speaking.description")}</p>
-    </header>
-    <div class="speaking__stat">
-      <p class="section-title speaking__figure">{t("speaking.attendees")}</p>
-      <p class="label speaking__figure-label">{t("speaking.attendeesLabel")}</p>
-    </div>
-  </div>
+  {/* La cifra de asistentes vive dentro de la frase. En tamaño display, con su
+      etiqueta debajo, era el patrón de métrica de portada: ocupa mucho y no
+      informa de más. */}
+  <header class="sec-head reveal">
+    <h2 class="section-title">{t("speaking.title")}</h2>
+    <p class="lead">{t("speaking.description")}</p>
+  </header>
 
   <figure class="speaking__media reveal reveal-1">
     <Image
@@ -38,7 +34,7 @@ const topics = t<string[]>("speaking.topics");
     />
     <ul class="speaking__venues" aria-label={t("speaking.venuesLabel")}>
       {venues.map((v) => (
-        <li class="label speaking__venue"><Icon name="ph:map-pin-duotone" />{v}</li>
+        <li class="label speaking__venue"><Icon name="ph:map-pin" />{v}</li>
       ))}
     </ul>
   </figure>
@@ -50,22 +46,6 @@ const topics = t<string[]>("speaking.topics");
 </section>
 
 <style>
-  .speaking__top { display: grid; gap: 32px; align-items: end; }
-  @media (min-width: 900px) {
-    .speaking__top { grid-template-columns: minmax(0, 1fr) 300px; gap: 56px; }
-    .speaking__stat { text-align: right; }
-  }
-
-  .speaking__intro { margin-bottom: 0; }
-
-  .speaking__figure {
-    --display-size: var(--display-lg);
-    --display-leading: 0.9;
-    margin: 0;
-    color: var(--color-accent);
-  }
-  .speaking__figure-label { margin-top: 8px; }
-
   .speaking__media {
     position: relative;
     margin-top: 44px;

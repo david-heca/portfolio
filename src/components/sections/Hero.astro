@@ -13,20 +13,27 @@ const t = useTranslations(lang);
 
 <section id="top" class="hero container">
   <div class="hero__text">
-    <p class="kicker hero__place reveal">
-      <Icon name="ph:map-pin-duotone" />
+    <p class="hero__place reveal">
+      <Icon name="ph:map-pin" />
       {t("hero.location")}
     </p>
 
-    <h1 class="section-title hero__name reveal reveal-1">David Herrera</h1>
-
-    <p class="hero__role reveal reveal-1">{t("hero.role")}</p>
+    {/* Lo más grande de la página es la afirmación, no el nombre. El `h1` sigue
+        siendo el nombre porque es de quien va la página: el nivel de encabezado
+        y el cuerpo de letra responden a preguntas distintas. */}
+    <p class="section-title hero__thesis reveal reveal-1">{t("hero.thesis")}</p>
 
     <p class="lead hero__intro reveal reveal-2">{t("hero.intro")}</p>
 
+    <div class="hero__who reveal reveal-2">
+      <h1 class="hero__name">David Herrera</h1>
+      <span class="hero__sep" aria-hidden="true">·</span>
+      <p class="hero__role">{t("hero.role")}</p>
+    </div>
+
     <div class="hero__actions reveal reveal-3">
-      <a href="#projects" class="btn btn--primary"><Icon name="ph:squares-four-duotone" />{t("hero.ctaProjects")}</a>
-      <a href="#contact" class="btn btn--ghost"><Icon name="ph:chat-circle-duotone" />{t("hero.ctaContact")}</a>
+      <a href="#projects" class="btn btn--primary">{t("hero.ctaProjects")}</a>
+      <a href="#contact" class="btn btn--ghost">{t("hero.ctaContact")}</a>
     </div>
   </div>
 
@@ -41,9 +48,9 @@ const t = useTranslations(lang);
       quality={85}
     />
     <div class="hero__socials">
-      <a href="https://github.com/david-heca" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Icon name="ph:github-logo-duotone" /></a>
-      <a href="https://www.linkedin.com/in/david-heca/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="ph:linkedin-logo-duotone" /></a>
-      <a href="https://x.com/david_heca_" target="_blank" rel="noopener noreferrer" aria-label="X"><Icon name="ph:x-logo-duotone" /></a>
+      <a href="https://github.com/david-heca" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Icon name="ph:github-logo" /></a>
+      <a href="https://www.linkedin.com/in/david-heca/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="ph:linkedin-logo" /></a>
+      <a href="https://x.com/david_heca_" target="_blank" rel="noopener noreferrer" aria-label="X"><Icon name="ph:x-logo" /></a>
     </div>
   </div>
 </section>
@@ -61,29 +68,41 @@ const t = useTranslations(lang);
     .hero { grid-template-columns: 1.35fr 1fr; gap: 64px; }
   }
 
-  /* Único kicker en gris del sitio: en acento competiría con el nombre que tiene
-     debajo. Volver a la norma es borrar el color. */
+  /* Única etiqueta en versalitas que queda en el sitio. Sobre los títulos de
+     sección se quitó: ahí era un adorno editorial; aquí es un dato. */
   .hero__place {
     display: inline-flex;
     align-items: center;
     gap: 8px;
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--track-label);
+    text-transform: uppercase;
     color: var(--color-ink-2);
   }
-  .hero__place [data-icon] { font-size: var(--icon-sm); color: var(--color-accent); }
+  .hero__place [data-icon] { font-size: var(--icon-sm); color: var(--color-ink-3); }
 
-  .hero__name { --display-size: var(--display-xl); --display-leading: 0.92; }
-
-  .hero__role {
-    font-family: var(--font-text);
-    font-weight: var(--weight-medium);
-    font-size: var(--text-subhead);
-    line-height: var(--leading-title);
-    letter-spacing: var(--track-snug);
-    color: var(--color-ink);
-    margin: 20px 0 0;
+  .hero__thesis {
+    --display-size: var(--display-lg);
+    --display-leading: 1;
+    margin-top: 24px;
+    max-width: 15ch;
   }
 
-  .hero__intro { margin: 20px 0 0; }
+  .hero__intro { margin-top: 24px; }
+
+  .hero__who {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+    margin-top: 28px;
+    font-size: var(--text-body);
+    line-height: var(--leading-snug);
+  }
+  .hero__name { font-weight: var(--weight-medium); color: var(--color-ink); }
+  .hero__sep { color: var(--color-ink-3); }
+  .hero__role { color: var(--color-ink-2); }
 
   .hero__actions {
     display: flex;
@@ -96,9 +115,12 @@ const t = useTranslations(lang);
   .hero__photo img {
     width: 100%;
     height: auto;
-    border-radius: var(--radius);
+    border-radius: var(--radius-sm);
     border: 1px solid var(--color-line);
   }
+
+  /* Va sobre la foto, no sobre el fondo de la página: usa el par de scrim, que no
+     cambia con el tema. */
   .hero__socials {
     position: absolute;
     bottom: 16px;
@@ -106,17 +128,14 @@ const t = useTranslations(lang);
     display: inline-flex;
     gap: 8px;
     padding: 7px 10px;
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--color-bg) 78%, transparent);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
-    border: 1px solid var(--color-line);
+    border-radius: var(--radius-control);
+    background: var(--color-scrim);
   }
   .hero__socials a {
     display: inline-flex;
-    color: var(--color-ink);
+    color: color-mix(in srgb, var(--color-on-scrim) 78%, transparent);
     transition: color var(--t-fast) ease, transform var(--t-fast) ease;
   }
-  .hero__socials a:hover { color: var(--color-accent); transform: translateY(-2px); }
+  .hero__socials a:hover { color: var(--color-on-scrim); transform: translateY(-2px); }
   .hero__socials [data-icon] { font-size: var(--icon-lg); }
 </style>
