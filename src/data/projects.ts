@@ -1,5 +1,8 @@
 /** Las etiquetas de `status`/`link` viven en los locales, no aquí, para que ES y EN no diverjan. */
-export type Status = "production" | "delivered" | "live" | "archived";
+/** Array antes que unión: el schema de las colecciones necesita los valores en
+ *  runtime, y así el tipo y el `z.enum` no pueden separarse. */
+export const STATUSES = ["production", "delivered", "live", "archived"] as const;
+export type Status = (typeof STATUSES)[number];
 
 /** `private` cubre lo que no se puede enlazar: sistemas internos de cliente. */
 export type Link =

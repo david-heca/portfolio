@@ -1,0 +1,19 @@
+---
+import Layout from "@layouts/Layout.astro";
+import CasesIndex from "@components/CasesIndex.astro";
+import SiteFooter from "@ui/SiteFooter.astro";
+import { useTranslations, type Lang } from "@i18n/utils";
+
+const lang: Lang = "en";
+const t = useTranslations(lang);
+---
+
+<Layout
+  title={t("meta.cases.title")}
+  tabTitle={t("meta.cases.tabTitle")}
+  description={t("meta.cases.description")}
+  lang={lang}
+>
+  <CasesIndex lang={lang} />
+  <SiteFooter slot="footer" lang={lang} />
+</Layout>

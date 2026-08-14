@@ -1,0 +1,74 @@
+---
+import { Icon } from "astro-icon/components";
+import { render, type CollectionEntry } from "astro:content";
+import { localizePath, useTranslations, type Lang } from "@i18n/utils";
+
+export interface Props {
+  lang: Lang;
+  entry: CollectionEntry<"notes">;
+}
+
+const { lang, entry } = Astro.props;
+const t = useTranslations(lang);
+const { Content } = await render(entry);
+const index = localizePath("/notes/", lang);
+
+const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<article class="note-page section container">
+  <a class="note-page__back" href={index}>
+    <Icon name="ph:arrow-left" aria-hidden="true" />
+    {t("notes.backToIndex")}
+  </a>
+
+  <header class="note-page__head">
+    <h1 class="section-title note-page__title">{entry.data.title}</h1>
+    <p class="lead note-page__summary">{entry.data.summary}</p>
+
+    <p class="meta note-page__meta">
+      <time datetime={entry.data.date.toISOString()}>{dateFormat.format(entry.data.date)}</time>
+    </p>
+
+    {entry.data.tags.length > 0 && (
+      <div class="tag-row note-page__tags">
+        {entry.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+      </div>
+    )}
+  </header>
+
+  <div class="longform note-page__body">
+    <Content />
+  </div>
+</article>
+
+<style>
+  .note-page__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: var(--text-meta);
+    line-height: var(--leading-flat);
+    color: var(--color-ink-2);
+    transition: color var(--t-fast) ease;
+  }
+  .note-page__back:hover { color: var(--color-accent); }
+  .note-page__back [data-icon] { font-size: var(--icon); }
+
+  .note-page__head {
+    max-width: 720px;
+    margin-top: 32px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--color-line);
+  }
+  .note-page__title { --display-size: var(--display); --display-leading: 1.04; }
+  .note-page__summary { margin-top: 20px; }
+  .note-page__meta { margin-top: 20px; }
+  .note-page__tags { margin-top: 24px; }
+
+  .note-page__body { margin-top: 56px; }
+</style>

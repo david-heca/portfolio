@@ -1,0 +1,26 @@
+---
+import Layout from "@layouts/Layout.astro";
+import NoteDetail from "@components/NoteDetail.astro";
+import SiteFooter from "@ui/SiteFooter.astro";
+import { localizedEntries } from "@/data/collections";
+import type { Lang } from "@i18n/utils";
+
+/** El idioma va literal: `getStaticPaths` corre aislado y no ve el módulo. */
+export async function getStaticPaths() {
+  const items = await localizedEntries("notes", "en");
+  return items.map(({ slug, entry }) => ({ params: { slug }, props: { entry } }));
+}
+
+const lang: Lang = "en";
+const { entry } = Astro.props;
+---
+
+<Layout
+  title={`${entry.data.title} - David Herrera`}
+  tabTitle={entry.data.title}
+  description={entry.data.summary}
+  lang={lang}
+>
+  <NoteDetail lang={lang} entry={entry} />
+  <SiteFooter slot="footer" lang={lang} />
+</Layout>

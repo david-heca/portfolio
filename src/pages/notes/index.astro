@@ -1,0 +1,19 @@
+---
+import Layout from "@layouts/Layout.astro";
+import NotesIndex from "@components/NotesIndex.astro";
+import SiteFooter from "@ui/SiteFooter.astro";
+import { useTranslations, type Lang } from "@i18n/utils";
+
+const lang: Lang = "es";
+const t = useTranslations(lang);
+---
+
+<Layout
+  title={t("meta.notes.title")}
+  tabTitle={t("meta.notes.tabTitle")}
+  description={t("meta.notes.description")}
+  lang={lang}
+>
+  <NotesIndex lang={lang} />
+  <SiteFooter slot="footer" lang={lang} />
+</Layout>
