@@ -300,6 +300,11 @@
     }
   },
   "common": {
+    "channels": {
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "x": "X"
+    },
     "langHint": {
       "label": "Switch language",
       "text": "This site is also available in English.",

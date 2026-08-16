@@ -10,13 +10,6 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const email = "hello@davidherrera.dev";
-
-const channels = [
-  { label: "Email", value: email, href: `mailto:${email}`, icon: "ph:envelope-simple" },
-  { label: "GitHub", value: "@david-heca", href: "https://github.com/david-heca", icon: "ph:github-logo" },
-  { label: "LinkedIn", value: "in/david-heca", href: "https://www.linkedin.com/in/david-heca/", icon: "ph:linkedin-logo" },
-  { label: "X", value: "@david_heca_", href: "https://x.com/david_heca_", icon: "ph:x-logo" },
-];
 ---
 
 <section id="contact" class="contact section container">
@@ -30,109 +23,14 @@ const channels = [
         {t("contact.cta.button")}
       </a>
     </div>
-    <p class="meta contact__note">{t("contact.cta.note")}</p>
-  </div>
 
-  <div class="contact__channels reveal reveal-1">
-    {channels.map((c) => (
-      <a
-        href={c.href}
-        target={c.href.startsWith("mailto:") ? undefined : "_blank"}
-        rel={c.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-        class="channel"
-      >
-        <span class="channel__icon"><Icon name={c.icon} /></span>
-        <span class="label channel__label">{c.label}</span>
-        <span class="channel__value">{c.value}</span>
-        <span class="channel__arrow" aria-hidden="true"><Icon name="ph:arrow-up-right" /></span>
-      </a>
-    ))}
+    <p class="meta contact__note">{t("contact.cta.note")}</p>
   </div>
 </section>
 
 <style>
-  .contact {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 48px;
-    align-items: start;
-  }
-  @media (min-width: 900px) { .contact { grid-template-columns: 1.1fr 0.9fr; gap: 64px; } }
-
   .contact__title { --display-size: var(--display-lg); --display-leading: 0.98; }
   .contact__lead { margin-top: 20px; }
-
-  .contact__cta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px 20px;
-    margin-top: 32px;
-  }
+  .contact__cta { margin-top: 32px; }
   .contact__note { margin: 16px 0 0; }
-
-  /* Rejilla de celdas, no lista. Las divisiones no son bordes de cada celda: son
-     el hilo de un `gap` de 1px sobre un fondo de línea, así que nunca se doblan
-     donde dos celdas se tocan y el conjunto se lee como una sola pieza. */
-  .contact__channels {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1px;
-    background: var(--color-line);
-    border-block: 1px solid var(--color-line);
-  }
-  @media (min-width: 520px) {
-    .contact__channels { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  }
-
-  .channel {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    min-height: 136px;
-    padding: 22px 20px;
-    background: var(--color-bg);
-    transition: background-color var(--t-base) ease, color var(--t-base) ease;
-  }
-
-  /* `auto` empuja etiqueta y valor al pie: el icono ancla arriba y el texto se
-     alinea entre celdas aunque el valor ocupe dos líneas. */
-  .channel__icon { margin-bottom: auto; color: var(--color-ink); }
-  .channel__icon [data-icon] { font-size: var(--icon-2xl); }
-
-  .channel__label { color: var(--color-ink-2); }
-  .channel__value {
-    font-size: var(--text-sm);
-    line-height: var(--leading-snug);
-    color: var(--color-ink);
-    overflow-wrap: anywhere;
-  }
-
-  .channel__arrow {
-    position: absolute;
-    top: 22px;
-    right: 20px;
-    display: inline-flex;
-    color: var(--color-ink-3);
-    transition: color var(--t-fast) ease, transform var(--t-fast) ease;
-  }
-  .channel__arrow [data-icon] { font-size: var(--icon); }
-
-  /* La celda se invierte entera: es el único gesto de "color" que tiene el sistema
-     y aquí hace de tecla. */
-  .channel:hover,
-  .channel:focus-visible {
-    background: var(--color-ink);
-    color: var(--color-bg);
-    /* El anillo de foco es tinta y sobre tinta no se vería. */
-    outline-color: var(--color-bg);
-  }
-  .channel:hover :is(.channel__icon, .channel__label, .channel__value, .channel__arrow),
-  .channel:focus-visible :is(.channel__icon, .channel__label, .channel__value, .channel__arrow) {
-    color: var(--color-bg);
-  }
-  .channel:hover .channel__arrow,
-  .channel:focus-visible .channel__arrow { transform: translate(2px, -2px); }
-
 </style>

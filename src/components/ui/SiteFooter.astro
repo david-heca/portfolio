@@ -1,5 +1,6 @@
 ---
-import { getHome, type Lang } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
+import { getHome, useTranslations, type Lang } from "@i18n/utils";
 import pkg from "../../../package.json";
 
 export interface Props {
@@ -7,21 +8,43 @@ export interface Props {
 }
 
 const { lang } = Astro.props;
+const t = useTranslations(lang);
 const home = getHome(lang);
+
+/** Sin etiqueta visible, el nombre de la red solo existe para el árbol de
+ *  accesibilidad; sigue siendo texto, así que sale del locale. */
+const channels = [
+  { key: "github", href: "https://github.com/david-heca", icon: "ph:github-logo" },
+  { key: "linkedin", href: "https://www.linkedin.com/in/david-heca/", icon: "ph:linkedin-logo" },
+  { key: "x", href: "https://x.com/david_heca_", icon: "ph:x-logo" },
+];
 ---
 
 <footer class="footer">
   <div class="footer__inner container">
     <a href={`${home}#top`} class="footer__brand">david<span>herrera</span></a>
 
-    <p class="meta">© 2026 David Herrera · v{pkg.version}</p>
+    <p class="meta">© 2026 · v{pkg.version}</p>
+
+    <div class="footer__channels">
+      {channels.map((c) => (
+        <a href={c.href} target="_blank" rel="noopener noreferrer" class="channel">
+          <Icon name={c.icon} aria-hidden="true" />
+          <span class="sr-only">{t(`common.channels.${c.key}`)}</span>
+        </a>
+      ))}
+    </div>
   </div>
 </footer>
 
 <style>
   /* Sin borde propio: la última sección ya cierra con su línea a todo el ancho, y
-     las dos juntas se leían como un trazo de 2px. */
+     las dos juntas se leían como un trazo de 2px. Esa línea es además la que
+     sostiene las marcas, y por eso caen aquí y no en cada página: desde que el
+     último bloque absorbe el sobrante de `.page`, el filo de cierre queda pegado
+     al borde superior del pie en todas ellas. */
   .footer__inner {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -36,4 +59,31 @@ const home = getHome(lang);
     color: var(--color-ink);
   }
   .footer__brand span { color: var(--color-ink-2); }
+
+  /* Las marcas se sientan sobre esa línea y la interrumpen: el fondo es lo que
+     abre el hueco por el que pasan. Fuera de flujo, así que el reparto del pie
+     no las ve. */
+  .footer__channels {
+    position: absolute;
+    top: 0;
+    /* Alineación óptica: el tirón devuelve el último icono al borde de la
+       columna, del que lo apartaría el propio hueco. Fuera de rejilla. */
+    right: calc(var(--pad) - 20px);
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding-inline: 20px;
+    background: var(--color-bg);
+  }
+
+  .channel {
+    display: grid;
+    color: var(--color-ink-2);
+    transition: color var(--t-fast) ease;
+  }
+  .channel [data-icon] { font-size: var(--icon-xl); }
+
+  .channel:hover,
+  .channel:focus-visible { color: var(--color-ink); }
 </style>

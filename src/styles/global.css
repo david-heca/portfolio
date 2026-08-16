@@ -160,6 +160,17 @@ img, svg { display: block; max-width: 100%; }
 }
 :focus:not(:focus-visible) { outline: none; }
 
+/* Nombre accesible de un control que solo enseña un icono: fuera de la vista,
+   dentro del árbol de accesibilidad. `display: none` lo sacaría de los dos. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
 /* ----- layout ----- */
 @media (min-width: 768px) { :root { --pad: 40px; } }
 @media (min-width: 1024px) { :root { --pad: 56px; } }
