@@ -93,6 +93,12 @@
      contenedor, este valor es además el aire entre el filo y el texto. */
   --pad: 24px;
   --frame-inset: 16px;     /* lo mínimo entre el armazón y el borde de la ventana */
+  /* Dónde cae un filo vertical. Hay dos formas de la misma cantidad porque hay
+     dos sistemas de coordenadas: el filo se mide contra `.page`, que no incluye
+     la barra de scroll -de ahí el `50%`-, y la banda de las marcas de registro
+     contra la ventana. Las dos derivan de los mismos dos tokens. */
+  --frame-x: max(var(--frame-inset), 50% - var(--container) / 2);
+  --frame-x-vw: max(var(--frame-inset), 50vw - var(--container) / 2);
   --section-y: clamp(72px, 11vw, 140px);
   /* A escuadra. Una foto o un bloque con la esquina redondeada es lo único que no
      puede alinearse contra una línea recta, y en una página construida a filos se
@@ -203,8 +209,8 @@ img, svg { display: block; max-width: 100%; }
     background: var(--color-line);
     pointer-events: none;
   }
-  .page::before { left: max(var(--frame-inset), 50% - var(--container) / 2); }
-  .page::after { right: max(var(--frame-inset), 50% - var(--container) / 2); }
+  .page::before { left: var(--frame-x); }
+  .page::after { right: var(--frame-x); }
 }
 
 /* El último bloque absorbe el alto sobrante de `.page`. Sin esto, en una página
@@ -229,6 +235,39 @@ img, svg { display: block; max-width: 100%; }
   height: 1px;
   background: var(--color-line);
   pointer-events: none;
+}
+
+/* La marca de registro del cruce: donde la línea de cierre atraviesa un filo
+   vertical, los dos trazos se engrosan 9px en `--color-ink-3`, que es más oscuro
+   que `--color-line`. No es una forma nueva sobre la página; es el cruce dicho en
+   voz alta. Los 9px son 4+1+4: simétricos alrededor de la línea de 1px.
+
+   Va en `background-image` y no en elementos porque `::after` ya es la línea y a
+   una sección no le quedan más pseudoelementos. Las longitudes son `vw` a
+   propósito: un porcentaje en `background-position` se mide contra el hueco que
+   deja la imagen, no contra la caja, y descuadraría cada marca su propio ancho. */
+@media (min-width: 768px) {
+  .section::before,
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: auto 0 -4px;
+    margin-inline: calc(50% - 50vw);
+    height: 9px;
+    background-image:
+      linear-gradient(var(--color-ink-3), var(--color-ink-3)),
+      linear-gradient(var(--color-ink-3), var(--color-ink-3)),
+      linear-gradient(var(--color-ink-3), var(--color-ink-3)),
+      linear-gradient(var(--color-ink-3), var(--color-ink-3));
+    background-size: 1px 9px, 9px 1px, 1px 9px, 9px 1px;
+    background-position:
+      left var(--frame-x-vw) top 0,
+      left calc(var(--frame-x-vw) - 4px) top 4px,
+      right var(--frame-x-vw) top 0,
+      right calc(var(--frame-x-vw) - 4px) top 4px;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
 }
 
 .sec-head { max-width: 720px; margin-bottom: 56px; }
