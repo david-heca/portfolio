@@ -6,10 +6,10 @@ Solo lo que **no** se deduce leyendo el código: invariantes, restricciones y po
 
 Astro estático con CSS propio sobre Cloudflare Workers, con `pnpm`. Sin React, sin islands, sin tests, sin linter.
 
-**La portada es una landing por idioma; el sitio no.** Dentro de la landing se navega por anclas. Fuera están `/casos/` y `/notas/`, que son rutas reales: el texto largo es la única razón por la que el sitio deja de ser un CV, y no cabe en una landing.
+**La portada es una landing por idioma; el sitio no.** Dentro de la landing se navega por anclas. Fuera están `/cases/` y `/notes/`, que son rutas reales: el texto largo es la única razón por la que el sitio deja de ser un CV, y no cabe en una landing.
 
 - **La prosa larga vive en `src/content/`, nunca en `src/i18n/locales/`.** El locale es para etiquetas de UI; su lookup por dot-path y el tipado contra `es` sirven para eso y convertirían un caso de dos mil palabras en un muro de strings escapados.
-- **El slug es idéntico en los dos idiomas** -`/casos/connie` y `/en/casos/connie`-. Traducirlo obligaría a un mapa de rutas junto a `localizePath()`, o sea la segunda copia del mapeo que acaba divergiendo.
+- **La ruta no se traduce, ni el segmento ni el slug** -`/cases/connie` y `/en/cases/connie`-. Traducirla obligaría a un mapa de rutas junto a `localizePath()`, o sea la segunda copia del mapeo que acaba divergiendo.
 - **Una entrada se publica solo si existe en los dos idiomas**; `localizedEntries()` esconde la que va sola. Media traducción deja el hreflang apuntando a una página que el build no emitió.
 
 ## Bilingüe - ES en `/`, EN en `/en/`

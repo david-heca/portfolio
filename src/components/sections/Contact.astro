@@ -22,6 +22,9 @@ const email = "hello@davidherrera.dev";
         <Icon name="ph:paper-plane-tilt" />
         {t("contact.cta.button")}
       </a>
+      <!-- Texto, no enlace: el botón de al lado ya es este mismo `mailto:`. Está
+           para poder leerla y copiarla a otro cliente. -->
+      <span class="contact__email">{email}</span>
     </div>
 
     <p class="meta contact__note">{t("contact.cta.note")}</p>
@@ -31,6 +34,15 @@ const email = "hello@davidherrera.dev";
 <style>
   .contact__title { --display-size: var(--display-lg); --display-leading: 0.98; }
   .contact__lead { margin-top: 20px; }
-  .contact__cta { margin-top: 32px; }
+  .contact__cta {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px 20px;
+    margin-top: 32px;
+  }
+  /* Mismo cuerpo que la etiqueta del botón, en tinta secundaria: al lado sin
+     competir. */
+  .contact__email { font-size: var(--text-sm); color: var(--color-ink-2); }
   .contact__note { margin: 16px 0 0; }
 </style>
