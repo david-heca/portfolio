@@ -196,6 +196,11 @@ img, svg { display: block; max-width: 100%; }
   .page::after { right: max(var(--frame-inset), 50% - var(--container) / 2); }
 }
 
+/* El último bloque absorbe el alto sobrante de `.page`. Sin esto, en una página
+   corta el sobrante se acumula al final del flex: la línea de cierre se queda a
+   media altura y los filos verticales llegan al pie sin nada que los cruce. */
+.page > :last-child { flex-grow: 1; }
+
 .section { padding-block: var(--section-y); }
 
 /* El corte entre secciones se sale de la columna hasta el borde de la pantalla:

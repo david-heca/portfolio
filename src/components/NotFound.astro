@@ -11,7 +11,7 @@ const t = useTranslations(lang);
 const home = getHome(lang);
 ---
 
-<section class="notfound container">
+<section class="notfound section container">
   <p class="section-title notfound__num">404</p>
   <h1 class="section-title notfound__title">{t("notFound.subtitle")}</h1>
   <p class="prose notfound__desc">{t("notFound.description")}</p>
@@ -29,6 +29,8 @@ const home = getHome(lang);
 </section>
 
 <style>
+  /* Lleva `.section` solo por la línea de cierre; el aire es suyo, no el de una
+     sección de la portada. */
   .notfound {
     padding-top: clamp(80px, 14vw, 160px);
     padding-bottom: clamp(80px, 14vw, 160px);
