@@ -1,0 +1,24 @@
+# Cabeceras que pone Cloudflare al servir el asset. No son <meta>: un <meta> lo
+# lee el parser cuando la página ya llegó, y estas tienen que llegar con ella.
+# `_headers` no se publica como archivo; Workers lo consume en el deploy.
+
+# `unsafe-inline` en script-src no es negociable: el arranque del tema y el
+# redirect por preferencia corren inline en <head> antes del paint, y con
+# `define:vars` su hash cambia por página y por idioma. El resto de directivas
+# cierran todo lo demás, que es de donde vendría un script ajeno.
+/*
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# Nombre con hash: el contenido no puede cambiar sin cambiar la URL.
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Sin hash, pero el subset de Junicode solo cambia si se renombra el archivo.
+# Las imágenes se quedan con el default de Workers -revalidación por etag-: ahí
+# sí se reemplaza el archivo sin tocar el nombre.
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
