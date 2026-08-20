@@ -40,11 +40,6 @@ export default defineConfig({
   integrations: [icon(), sitemap({ filter: (page) => !/\/404\/?$/.test(page) }), prepareDist],
   site: "https://davidherrera.dev",
 
-  prefetch: {
-    prefetchAll: false,
-    defaultStrategy: "hover",
-  },
-
   server: {
     host: true,
     open: true,
