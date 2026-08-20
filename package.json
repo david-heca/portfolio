@@ -18,7 +18,6 @@
     "astro-icon": "^1.1.5"
   },
   "devDependencies": {
-    "vite-plugin-compression": "^0.5.1",
     "wrangler": "^4.114.0"
   }
 }

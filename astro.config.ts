@@ -1,7 +1,6 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
-import viteCompression from "vite-plugin-compression";
 import { readdir, rename, rm } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -51,29 +50,9 @@ export default defineConfig({
     open: true,
   },
 
+  /* Nada de precomprimir en el build: Workers no negocia un `.br`/`.gz` de al lado
+     -lo serviría como un archivo más- y Cloudflare ya comprime en el edge. */
   build: {
     inlineStylesheets: "auto",
-  },
-
-  vite: {
-    plugins: [
-      viteCompression({
-        verbose: false,
-        disable: false,
-        threshold: 10240,
-        algorithm: "gzip",
-        ext: ".gz",
-      }),
-      viteCompression({
-        verbose: false,
-        disable: false,
-        threshold: 10240,
-        algorithm: "brotliCompress",
-        ext: ".br",
-      }),
-    ],
-    build: {
-      cssCodeSplit: true,
-    },
   },
 });
