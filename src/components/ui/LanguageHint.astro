@@ -1,17 +1,20 @@
 ---
-import { getHome, useTranslations, type Lang } from "@i18n/utils";
+import { useTranslations, type Lang } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
 
 export interface Props {
   lang: Lang;
+  /** Equivalente de esta página en el otro idioma. Llega resuelto desde `Layout`,
+   *  que ya lo calcula para el hreflang y el conmutador: mandar a la portada
+   *  costaría la página que el visitante estaba leyendo. */
+  href: string;
 }
 
-const { lang } = Astro.props;
+const { lang, href } = Astro.props;
 const target: Lang = lang === "es" ? "en" : "es";
 
 // El aviso se lee en el idioma que ofrece, no en el de la página.
 const tt = useTranslations(target);
-const href = getHome(target);
 ---
 
 <div class="hint" data-lang-hint={target} lang={target} role="region" aria-label={tt("common.langHint.label")} hidden>

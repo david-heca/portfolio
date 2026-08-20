@@ -226,7 +226,7 @@ const personSchema = {
     <!-- Fuera de <main>: dentro no cuenta como landmark `contentinfo`. -->
     <slot name="footer" />
 
-    <LanguageHint lang={lang} />
+    <LanguageHint lang={lang} href={switchTo} />
 
     <script>
       // Sin desconectar el anterior se acumulan observers sobre nodos desmontados.
