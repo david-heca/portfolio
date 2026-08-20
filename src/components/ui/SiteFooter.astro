@@ -11,8 +11,8 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const home = getHome(lang);
 
-/** Sin etiqueta visible, el nombre de la red solo existe para el árbol de
- *  accesibilidad; sigue siendo texto, así que sale del locale. */
+const year = new Date().getFullYear();
+
 const channels = [
   { key: "github", href: "https://github.com/david-heca", icon: "ph:github-logo" },
   { key: "linkedin", href: "https://www.linkedin.com/in/david-heca/", icon: "ph:linkedin-logo" },
@@ -24,7 +24,7 @@ const channels = [
   <div class="footer__inner container">
     <a href={`${home}#top`} class="footer__brand">david<span>herrera</span></a>
 
-    <p class="meta">© 2026 · v{pkg.version}</p>
+    <p class="meta">© {year} · v{pkg.version}</p>
 
     <div class="footer__channels">
       {channels.map((c) => (
@@ -38,11 +38,6 @@ const channels = [
 </footer>
 
 <style>
-  /* Sin borde propio: la última sección ya cierra con su línea a todo el ancho, y
-     las dos juntas se leían como un trazo de 2px. Esa línea es además la que
-     sostiene las marcas, y por eso caen aquí y no en cada página: desde que el
-     último bloque absorbe el sobrante de `.page`, el filo de cierre queda pegado
-     al borde superior del pie en todas ellas. */
   .footer__inner {
     position: relative;
     display: flex;
@@ -60,14 +55,9 @@ const channels = [
   }
   .footer__brand span { color: var(--color-ink-2); }
 
-  /* Las marcas se sientan sobre esa línea y la interrumpen: el fondo es lo que
-     abre el hueco por el que pasan. Fuera de flujo, así que el reparto del pie
-     no las ve. */
   .footer__channels {
     position: absolute;
     top: 0;
-    /* Alineación óptica: el tirón devuelve el último icono al borde de la
-       columna, del que lo apartaría el propio hueco. Fuera de rejilla. */
     right: calc(var(--pad) - 20px);
     transform: translateY(-50%);
     display: flex;
