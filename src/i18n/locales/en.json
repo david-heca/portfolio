@@ -300,6 +300,7 @@
     }
   },
   "common": {
+    "skipToContent": "Skip to content",
     "channels": {
       "github": "GitHub",
       "linkedin": "LinkedIn",

@@ -1,6 +1,6 @@
 ---
 import { ClientRouter } from "astro:transitions";
-import { getHome, localizePath, type Lang } from "@i18n/utils";
+import { getHome, localizePath, useTranslations, type Lang } from "@i18n/utils";
 import Navbar from "@ui/Navbar.astro";
 import LanguageHint from "@ui/LanguageHint.astro";
 // Junicode se autoaloja (no está en Fontsource): su @font-face vive en global.css.
@@ -19,6 +19,7 @@ export interface Props {
 }
 
 const { title, description, lang, tabTitle = title, noindex = false } = Astro.props;
+const t = useTranslations(lang);
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const socialImageURL = new URL("/assets/dh.webp", Astro.site);
@@ -217,9 +218,14 @@ const personSchema = {
     )}
   </head>
   <body>
+    <!-- Primer foco de la página: el nav son ocho enlaces que se repiten en todas.
+         El manejador de anclas de más abajo lo trata como a cualquier otra: mueve
+         el scroll y el foco sin ensuciar la URL. -->
+    <a class="skip-link" href="#main">{t("common.skipToContent")}</a>
+
     <Navbar lang={lang} switchTo={switchTo} />
 
-    <main class="page">
+    <main id="main" class="page">
       <slot />
     </main>
 

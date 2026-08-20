@@ -177,6 +177,26 @@ img, svg { display: block; max-width: 100%; }
   white-space: nowrap;
 }
 
+/* Salta el nav, que son ocho enlaces repetidos en todas las páginas. Fuera de la
+   vista hasta que recibe el foco -no `display: none`, o dejaría de ser tabulable-,
+   y al aparecer es la acción primaria: tinta invertida, como el botón. El foco se
+   dibuja en papel porque el fondo ya es tinta. */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 60;             /* por encima del nav, que es lo que salta */
+  transform: translateY(-100%);
+  background: var(--color-ink);
+  color: var(--color-bg);
+  font-weight: var(--weight-medium);
+  font-size: var(--text-sm);
+  line-height: var(--leading-flat);
+  padding: 13px 22px;      /* forma: el mismo bloque que `.btn` */
+}
+.skip-link:focus { transform: none; }
+.skip-link:focus-visible { outline-color: var(--color-bg); outline-offset: -6px; }
+
 /* ----- layout ----- */
 @media (min-width: 768px) { :root { --pad: 40px; } }
 @media (min-width: 1024px) { :root { --pad: 56px; } }
