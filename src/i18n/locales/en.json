@@ -13,12 +13,12 @@
     "cases": {
       "title": "Cases - David Herrera",
       "tabTitle": "Cases",
-      "description": "How the AI systems and software I've shipped were actually built, with the decisions and the parts that failed."
+      "description": "How the AI systems and software I've shipped were actually built: decisions, architecture and numbers."
     },
     "notes": {
       "title": "Notes - David Herrera",
       "tabTitle": "Notes",
-      "description": "Technical notes on RAG, MCP and corporate data, written from what I run into in production."
+      "description": "Technical notes on RAG, MCP and corporate data."
     }
   },
   "nav": {
@@ -52,11 +52,11 @@
   },
   "speaking": {
     "title": "On stage",
-    "description": "Talks on AI and data science at universities and conferences, around a hundred people each. I bring systems that are already in production, with their numbers and the parts that went wrong.",
+    "description": "Around a hundred people per session. I bring systems that are already in production, with their numbers.",
     "venuesLabel": "Where",
     "venues": [
       "Data Day 2025",
-      "EGADE Business School · Monterrey",
+      "EGADE Business School - Tecnológico de Monterrey",
       "UPVM Tultitlán",
       "TESCo - TecNM"
     ],
@@ -71,22 +71,22 @@
   "hero": {
     "role": "Applied AI Engineer",
     "thesis": "The hard part is almost never the model.",
-    "intro": "I build AI systems on the data companies already have.",
+    "intro": "I like building crazy ideas and making them survive production.",
     "ctaProjects": "See projects",
     "ctaContact": "Let's talk",
     "location": "Mexico City Metro Area"
   },
   "about": {
-    "heading": "Software, data <em>&</em> AI someone uses every day.",
+    "heading": "Software, data <em>&</em> AI",
     "bio": {
-      "paragraph1": "I started out building WordPress sites and managing hosting. Today I design and ship AI systems. In between, <strong>backend, data and applied AI</strong>.",
-      "paragraph2": "I move from data model to frontend, but my job right now is <strong>RAG, MCP and MLOps</strong> over corporate data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs.",
-      "paragraph3": "I also teach, sort of: talks on AI and data science at Data Day and at universities -EGADE, UPVM Tultitlán, TESCo-, around 100 people per session."
+      "paragraph1": "I started out building WordPress sites and managing traditional hosting. Today I design and ship systems with <strong>applied AI</strong>.",
+      "paragraph2": "I work across the whole stack, but my job right now is <strong>RAG, MCP and MLOps</strong> over corporate data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs.",
+      "paragraph3": "I also give talks on applied AI and data science, at conferences and universities."
     }
   },
   "work": {
     "headerTitle": "Professional journey",
-    "description": "From building WordPress sites to shipping AI to production. Here's what I did at each company.",
+    "description": "Three companies and five roles, from intern to Applied AI Engineer.",
     "current": "Current role",
     "companies": {
       "hypertech": {
@@ -116,7 +116,7 @@
             "period": "Mar 2025 - Jul 2026",
             "type": "Full-time",
             "achievements": [
-              "Connie, from zero to production: I wrote 80% of the system. A RAG platform now serving 3 clients over their databases, PDFs and spreadsheets, with enterprise auth.",
+              "Connie, from zero to production: I designed the RAG platform and wrote 80% of the system. Three of the consultancy's clients now use it daily.",
               "End-to-end RAG pipelines on Azure: ingestion, chunking, retrieval and serving, with prompt observability.",
               "MCP servers connecting internal data sources to LLM clients: models consume tools without bespoke glue code.",
               "Brought MLOps practices into the team: retrieval evaluation, prompt and model versioning."
@@ -168,7 +168,7 @@
   },
   "education": {
     "headerTitle": "How I learn",
-    "description": "Where I studied, and what I keep studying on my own.",
+    "description": "Where I studied, and what I keep learning on my own.",
     "ongoing": "Present",
     "academicTitle": "Academic",
     "certsTitle": "Certifications",
@@ -219,7 +219,7 @@
     "list": {
       "portfolio": {
         "title": "Portfolio",
-        "description": "This site. I designed and wrote the whole thing, no template and no CSS framework. Bilingual, with almost no client-side JavaScript.",
+        "description": "This site. Astro, hand-written CSS and TypeScript, built from scratch. It's on its fourth version.",
         "specs": [
           {
             "label": "Template",
@@ -237,7 +237,7 @@
       },
       "connie": {
         "title": "Connie",
-        "description": "You ask the company's databases, PDFs and spreadsheets in plain language, and it answers citing where each figure came from. I designed it from scratch and wrote 80% of the system. Three clients use it daily.",
+        "description": "You ask the company's databases, PDFs and spreadsheets in plain language, and it answers citing where each figure came from. Multi-client and multi-source, with enterprise auth.",
         "specs": [
           {
             "label": "Role",
@@ -255,7 +255,7 @@
       },
       "handheld": {
         "title": "HandHeld RFID",
-        "description": "Android app with an RFID reader, end to end. Inventory went from taking weeks -or never happening- to being done walking the warehouse floor.",
+        "description": "Android app with a Zebra RFID reader. Inventory went from taking weeks (or never happening) to being done walking the client's warehouse.",
         "specs": [
           {
             "label": "Scope",
@@ -267,13 +267,13 @@
           },
           {
             "label": "After",
-            "value": "A walk through the floor"
+            "value": "A walk through the warehouse"
           }
         ]
       },
       "trace": {
         "title": "Automotive Traceability",
-        "description": "Shop-floor desktop system. Every part gets logged as it passes each station on the line; thousands of them a day.",
+        "description": "A WinForms desktop app for the shop floor. Every part gets logged as it passes the stations on the assembly line.",
         "specs": [
           {
             "label": "Where",
@@ -293,10 +293,10 @@
   },
   "contact": {
     "headerTitle": "Let's talk",
-    "description": "If you've got something going with AI, data or backend, write me. I read everything, even if it's only to give an opinion.",
+    "description": "If you've got an idea, or you just want to say hi, write me. I usually reply the same day.",
     "cta": {
       "button": "Send me a message",
-      "note": "Usually same-day · Mexico City, GMT-6"
+      "note": "Mexico City, GMT-6"
     }
   },
   "common": {

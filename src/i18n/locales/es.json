@@ -13,12 +13,12 @@
     "cases": {
       "title": "Casos - David Herrera",
       "tabTitle": "Casos",
-      "description": "Cómo se construyeron los sistemas de IA y el software que he llevado a producción, con las decisiones y las partes que fallaron."
+      "description": "Cómo se construyeron los sistemas de IA y el software que he llevado a producción: decisiones, arquitectura y números."
     },
     "notes": {
       "title": "Notas - David Herrera",
       "tabTitle": "Notas",
-      "description": "Notas técnicas sobre RAG, MCP y datos corporativos, escritas desde lo que me encuentro en producción."
+      "description": "Notas técnicas sobre RAG, MCP y datos corporativos."
     }
   },
   "nav": {
@@ -52,11 +52,11 @@
   },
   "speaking": {
     "title": "En el escenario",
-    "description": "Charlas de IA y ciencia de datos en universidades y conferencias, de alrededor de cien asistentes cada una. Llevo sistemas que ya están en producción, con sus números y con las partes que salieron mal.",
+    "description": "Unas cien personas por sesión. Llevo sistemas que ya están en producción, con sus números.",
     "venuesLabel": "Dónde",
     "venues": [
       "Data Day 2025",
-      "EGADE Business School · Monterrey",
+      "EGADE Business School - Tecnológico de Monterrey",
       "UPVM Tultitlán",
       "TESCo - TecNM"
     ],
@@ -71,22 +71,22 @@
   "hero": {
     "role": "Applied AI Engineer",
     "thesis": "La parte difícil casi nunca es el modelo.",
-    "intro": "Construyo sistemas de IA sobre los datos que las empresas ya tienen.",
+    "intro": "Me gusta desarrollar ideas locas y que sobrevivan a producción.",
     "ctaProjects": "Ver proyectos",
     "ctaContact": "Hablemos",
     "location": "Zona Metropolitana de CDMX"
   },
   "about": {
-    "heading": "Software, datos <em>&</em> IA que alguien usa a diario.",
+    "heading": "Software, datos <em>&</em> IA",
     "bio": {
-      "paragraph1": "Empecé montando sitios en WordPress y administrando hosting. Hoy diseño y llevo a producción sistemas de IA. En medio, <strong>backend, datos e IA aplicada</strong>.",
-      "paragraph2": "Me muevo del modelo de datos al frontend, pero hoy mi trabajo es <strong>RAG, MCP y MLOps</strong> sobre datos corporativos: bases que nadie documentó, PDFs escaneados, Excels con quince pestañas.",
-      "paragraph3": "También doy clase, más o menos: charlas de IA y ciencia de datos en el Data Day y en universidades -EGADE, UPVM Tultitlán, el TESCo-, unas 100 personas por sesión."
+      "paragraph1": "Empecé desarrollando sitios en WordPress y administrando hosting tradicional. Hoy diseño y llevo a producción sistemas con <strong>IA aplicada</strong>.",
+      "paragraph2": "Me muevo por todo el stack, pero hoy mi trabajo es <strong>RAG, MCP y MLOps</strong> sobre datos corporativos: bases que nadie documentó, PDFs escaneados, Excels con quince pestañas.",
+      "paragraph3": "También doy charlas de IA y ciencia de datos aplicada, en conferencias y en universidades."
     }
   },
   "work": {
     "headerTitle": "Trayectoria",
-    "description": "De montar sitios en WordPress a llevar IA a producción. Esto es lo que hice en cada empresa.",
+    "description": "Tres empresas y cinco roles, de prácticas a Applied AI Engineer.",
     "current": "Rol actual",
     "companies": {
       "hypertech": {
@@ -116,7 +116,7 @@
             "period": "Mar 2025 - Jul 2026",
             "type": "Tiempo completo",
             "achievements": [
-              "Connie, de cero a producción: escribí el 80% del sistema. Plataforma RAG que hoy da servicio a 3 clientes sobre sus bases de datos, PDFs y hojas de cálculo, con autenticación enterprise.",
+              "Connie, de cero a producción: diseñé la plataforma RAG y escribí el 80% del sistema. Hoy la usan a diario tres clientes de la consultora.",
               "Pipelines RAG end-to-end sobre Azure: ingestión, chunking, retrieval y serving, con observabilidad de prompts.",
               "Servidores MCP que conectan las fuentes internas con clientes LLM: los modelos consumen tools sin glue code a medida.",
               "Metí prácticas de MLOps en el equipo: evaluación de retrieval, versionado de prompts y de modelos."
@@ -168,7 +168,7 @@
   },
   "education": {
     "headerTitle": "Cómo aprendo",
-    "description": "Dónde estudié y lo que sigo estudiando por mi cuenta.",
+    "description": "Dónde estudié y lo que sigo aprendiendo por mi cuenta.",
     "ongoing": "Actualidad",
     "academicTitle": "Académico",
     "certsTitle": "Certificaciones",
@@ -219,7 +219,7 @@
     "list": {
       "portfolio": {
         "title": "Portafolio",
-        "description": "Este sitio. Lo diseñé y lo escribí entero, sin plantilla y sin framework de CSS. Bilingüe y con casi nada de JavaScript en el cliente.",
+        "description": "Este sitio. Astro, CSS propio y TypeScript, escrito desde cero. Va por la cuarta versión.",
         "specs": [
           {
             "label": "Plantilla",
@@ -237,7 +237,7 @@
       },
       "connie": {
         "title": "Connie",
-        "description": "Le preguntas en español a las bases de datos, PDFs y Excels de la empresa, y responde citando de dónde sacó cada dato. La diseñé desde cero y escribí el 80% del sistema. Tres clientes la usan a diario.",
+        "description": "Le preguntas en español a las bases de datos, PDFs y hojas de cálculo de la empresa, y responde citando de dónde salió cada dato. Multicliente y multifuente, con autenticación enterprise.",
         "specs": [
           {
             "label": "Rol",
@@ -255,7 +255,7 @@
       },
       "handheld": {
         "title": "HandHeld RFID",
-        "description": "App Android con lector RFID, de extremo a extremo. El inventario pasó de tomar semanas -o de no hacerse- a resolverse caminando por la nave.",
+        "description": "App Android con lector RFID Zebra. El inventario pasó de tomar semanas (o de no hacerse) a resolverse caminando por el almacén del cliente.",
         "specs": [
           {
             "label": "Alcance",
@@ -267,13 +267,13 @@
           },
           {
             "label": "Después",
-            "value": "Una caminata por la nave"
+            "value": "Una caminata por el almacén"
           }
         ]
       },
       "trace": {
         "title": "Trazabilidad Automotriz",
-        "description": "Sistema de escritorio para piso de planta. Cada pieza queda registrada al pasar por cada estación de la línea; son miles al día.",
+        "description": "Aplicación de escritorio en WinForms para piso de planta. Cada pieza queda registrada al pasar por las estaciones de la línea de ensamble.",
         "specs": [
           {
             "label": "Dónde",
@@ -293,10 +293,10 @@
   },
   "contact": {
     "headerTitle": "Hablemos",
-    "description": "Si traes algo entre manos con IA, datos o backend, escríbeme. Leo todo, aunque sea solo para opinar.",
+    "description": "Si tienes alguna idea o simplemente quieres saludar, escríbeme. Suelo responder el mismo día.",
     "cta": {
       "button": "Escríbeme",
-      "note": "Suelo responder el mismo día · CDMX, GMT-6"
+      "note": "Ciudad de México, GMT-6"
     }
   },
   "common": {
