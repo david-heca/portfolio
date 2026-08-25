@@ -10,11 +10,6 @@
       "tabTitle": "David Herrera",
       "description": "Applied AI Engineer en CDMX. Construyo sistemas RAG y MCP sobre los datos que las empresas ya tienen, con .NET, Python y Azure."
     },
-    "cases": {
-      "title": "Casos - David Herrera",
-      "tabTitle": "Casos",
-      "description": "Cómo se construyeron los sistemas de IA y el software que he llevado a producción: decisiones, arquitectura y números."
-    },
     "notes": {
       "title": "Notas - David Herrera",
       "tabTitle": "Notas",
@@ -28,20 +23,7 @@
     "projects": "Proyectos",
     "speaking": "Charlas",
     "contact": "Contacto",
-    "cases": "Casos",
     "notes": "Notas"
-  },
-  "cases": {
-    "title": "Casos",
-    "description": "El detalle de cómo se construyó cada sistema, incluidas las partes que salieron mal.",
-    "empty": "Todavía no hay casos publicados.",
-    "backToIndex": "Todos los casos",
-    "readCase": "Leer el caso",
-    "fields": {
-      "role": "Rol",
-      "year": "Año",
-      "status": "Estado"
-    }
   },
   "notes": {
     "title": "Notas",

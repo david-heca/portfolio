@@ -10,11 +10,6 @@
       "tabTitle": "David Herrera",
       "description": "Applied AI Engineer in Mexico City. I build RAG and MCP systems on top of the data companies already have, with .NET, Python and Azure."
     },
-    "cases": {
-      "title": "Cases - David Herrera",
-      "tabTitle": "Cases",
-      "description": "How the AI systems and software I've shipped were actually built: decisions, architecture and numbers."
-    },
     "notes": {
       "title": "Notes - David Herrera",
       "tabTitle": "Notes",
@@ -28,20 +23,7 @@
     "projects": "Projects",
     "speaking": "Speaking",
     "contact": "Contact",
-    "cases": "Cases",
     "notes": "Notes"
-  },
-  "cases": {
-    "title": "Cases",
-    "description": "How each system was actually built, including the parts that went wrong.",
-    "empty": "No cases published yet.",
-    "backToIndex": "All cases",
-    "readCase": "Read the case",
-    "fields": {
-      "role": "Role",
-      "year": "Year",
-      "status": "Status"
-    }
   },
   "notes": {
     "title": "Notes",

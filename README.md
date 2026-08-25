@@ -33,17 +33,16 @@ src/
 │   ├── ui/            # Navbar, SiteFooter, ThemeToggle,
 │   │                  # LanguagePicker, LanguageHint
 │   ├── Landing.astro  # composes the sections in order
-│   ├── CasesIndex · CaseDetail
 │   ├── NotesIndex · NoteDetail
 │   └── NotFound.astro # shared 404 body
-├── content/           # long-form prose: cases/{es,en}, notes/{es,en}
+├── content/           # long-form prose: notes/{es,en}
 ├── data/              # projects.ts, education.ts, collections.ts
 ├── i18n/
 │   ├── locales/       # es.json, en.json — every visible UI string
 │   ├── index.ts       # locale registry; `en` is typed against `es`
 │   └── utils.ts       # useTranslations(lang), localizePath(), getHome()
 ├── layouts/           # Layout.astro (head, theme bootstrap, fonts, anchors)
-├── pages/             # index, cases/, notes/, 404 — and the same under en/
+├── pages/             # index, notes/, 404 — and the same under en/
 └── styles/            # global.css (design tokens + shared primitives)
 ```
 
@@ -56,12 +55,11 @@ scroll-position scrollspy. Everything else is a real route:
 | ES | EN |
 | --- | --- |
 | `/` | `/en/` |
-| `/cases/`, `/cases/<slug>/` | `/en/cases/`, `/en/cases/<slug>/` |
 | `/notes/`, `/notes/<slug>/` | `/en/notes/`, `/en/notes/<slug>/` |
 | `/404.html` | `/en/404.html` |
 
-Neither the segment nor the slug is translated - `/cases/connie` and
-`/en/cases/connie` - so `localizePath()` stays the single implementation of the
+Neither the segment nor the slug is translated - `/notes/<slug>` and
+`/en/notes/<slug>` - so `localizePath()` stays the single implementation of the
 es↔en mapping, shared by the hreflang tags, the language switcher and the
 stored-preference redirect.
 

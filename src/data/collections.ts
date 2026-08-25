@@ -1,7 +1,7 @@
 import { getCollection, type CollectionEntry } from "astro:content";
 import type { Lang } from "@i18n/utils";
 
-export type CollectionName = "cases" | "notes";
+export type CollectionName = "notes";
 
 export interface LocalizedEntry<N extends CollectionName> {
   slug: string;
@@ -40,12 +40,5 @@ export async function localizedEntries<N extends CollectionName>(
     .filter((e) => langOf(e.id) === lang)
     .map((e) => ({ slug: slugOf(e.id), entry: e }))
     .filter(({ slug }) => es.has(slug) && en.has(slug))
-    .sort((a, b) => sortKey(b.entry) - sortKey(a.entry));
-}
-
-/** Los casos ordenan por año y las notas por fecha; ambos a milisegundos. */
-function sortKey(entry: CollectionEntry<CollectionName>): number {
-  const data = entry.data as { date?: Date; year?: string };
-  if (data.date) return data.date.getTime();
-  return data.year ? Date.UTC(Number(data.year), 0, 1) : 0;
+    .sort((a, b) => b.entry.data.date.getTime() - a.entry.data.date.getTime());
 }
