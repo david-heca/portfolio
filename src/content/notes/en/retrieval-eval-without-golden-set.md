@@ -6,20 +6,80 @@ tags: ["RAG", "Evaluation", "MLOps"]
 draft: true
 ---
 
-> **To fill in.** First note. The structure below is a suggestion: if the topic wants another
-> shape, change it. What shouldn't change is that it comes from something that happened to you and
-> not from a search.
+None of the clients I've built a RAG system for had a labelled set of questions and answers, and
+none was going to build one. Building it means sitting the person who knows the business best down
+for two or three days to write questions and mark which document answers each one, and that person
+already has a job.
 
-## The problem
+The evaluation literature starts exactly where I couldn't: by assuming that set exists. What
+follows is how I got to measuring without it.
 
-> Why the RAG evaluation literature assumes a labelled set, and why on a real project it almost
-> never exists.
+## First, the questions that already exist
 
-## What I did instead
+Before generating anything, it pays to look for where people already ask: support tickets, the
+inbox of the team answering those questions by hand today, the intranet search box and, as soon as
+there is something to show, the demo's own log.
 
-> The concrete procedure. What you built, what you compared it against, and how long it took to
-> put together.
+Those questions carry something no synthetic question has: the vocabulary of the person asking,
+which is not the document's. Someone writes "how much have we spent on project X so far" and the
+document says "cumulative accrued amount". That gap between the two ways of saying it is exactly
+what you are evaluating.
 
-## Where this approach fails
+Labelling them is cheaper than it looks, because you don't need the answer: it's enough to mark
+which document - or which page - contains it. Fifty questions marked that way are enough to measure
+recall@k, which is the question that matters. Does the right document make it into the context? If
+it doesn't, no prompt fixes it afterwards.
 
-> What it doesn't capture, and the cases where it has misled you.
+## Then, generate the rest from the corpus
+
+When you can't gather even fifty, you fill in backwards: take a chunk of the corpus, ask a model
+for the question that chunk answers, and there's your pair. Free, and in quantity.
+
+And biased. The question gets written with the chunk's own words, so measuring against it measures
+how much a text resembles itself. Everything scores high, no change appears to make anything worse,
+and the number sits still when it should move.
+
+It helps, halfway:
+
+- Ask for the question the way someone who hasn't read the document would write it, in the real
+  user's register: short, abbreviated, using the internal name for things.
+- Drop any question that repeats a rare term from the chunk verbatim.
+
+Halfway, because a synthetic set is good for detecting that something broke, not for claiming that
+something improved.
+
+## Compare two versions rather than score one
+
+Scoring an answer one to five doesn't hold up: the same person doesn't score the same on Tuesday as
+on Thursday, and two people never score the same at all.
+
+Asking which of two is better does hold up. Freeze the question set, generate the answers with the
+old configuration and the new one, put them side by side without saying which is which, and let the
+judge pick. Thirty questions and one person is forty minutes. With a model as judge the volume
+stops mattering, but you have to review a handful of its verdicts by hand: if the judge disagrees
+with you on the easy ones, you won't know whether what went up is the system or its quirk.
+
+## What has to be versioned
+
+The question set, frozen and in the repository. The results, in the same commit as the prompt, the
+model and the chunking parameters that produced them. Without that, "this improved" can't be
+compared against anything two weeks later, which is exactly when someone asks.
+
+## Where it has fooled me
+
+Raising k improves recall almost every time: the more chunks come in, the more often the right one
+is among them. And it makes the answers worse at the same time, because along with the right one
+come four others covering the same ground with a different year's figures, and the model blends
+them. The retrieval table goes up and the user's screen gets worse.
+
+> **To fill in - only you have this.** The specific case where the measurement said yes and the
+> answer was worse: what they asked, what came back, and how you found out it was wrong.
+
+None of this replaces a set labelled by someone who knows the business. It's there so you don't
+depend on that set arriving.
+
+<!-- Draft written by Claude from general craft, not from your project. Before dropping `draft`,
+     confirm or correct: (1) that you did mine real questions from tickets/inbox/logs - if you
+     didn't, that section goes; (2) the figures: fifty questions, thirty, forty minutes; (3) whether
+     you used a model judge or only hand review; (4) the gap under "Where it has fooled me". The
+     date is still the scaffold's, 2026-08-13. Keep this in sync with the Spanish file. -->
