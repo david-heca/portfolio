@@ -265,10 +265,16 @@ img, svg { display: block; max-width: 100%; }
    Va en `background-image` y no en elementos porque `::after` ya es la línea y a
    una sección no le quedan más pseudoelementos. Las longitudes son `vw` a
    propósito: un porcentaje en `background-position` se mide contra el hueco que
-   deja la imagen, no contra la caja, y descuadraría cada marca su propio ancho. */
+   deja la imagen, no contra la caja, y descuadraría cada marca su propio ancho.
+
+   El borde inferior del nav es la primera línea del armazón y cruza los mismos
+   filos, así que lleva la misma marca. Sin ella el arranque de los verticales era
+   el único cruce mudo de la página, y en una ruta corta -donde el primer cierre
+   de sección cae fuera de pantalla- es el único que se ve. */
 @media (min-width: 768px) {
   .section::before,
-  .hero::before {
+  .hero::before,
+  .nav::after {
     content: "";
     position: absolute;
     inset: auto 0 -4px;
@@ -288,6 +294,10 @@ img, svg { display: block; max-width: 100%; }
     background-repeat: no-repeat;
     pointer-events: none;
   }
+  /* Los offsets se miden contra la caja de padding, y el borde del nav queda
+     fuera de ella: un pixel más abajo que el cierre de una sección, que no lleva
+     borde. */
+  .nav::after { bottom: -5px; }
 }
 
 .sec-head { max-width: 720px; margin-bottom: 56px; }
