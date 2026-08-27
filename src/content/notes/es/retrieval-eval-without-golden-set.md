@@ -1,9 +1,9 @@
 ---
 title: "Evaluar retrieval cuando el cliente no tiene conjunto dorado"
 summary: "Ningún cliente llega con preguntas y respuestas etiquetadas, y casi ninguno va a construirlas. Cómo medir de todas formas si el retrieval mejoró."
-date: 2026-08-13
+date: 2026-08-26
 tags: ["RAG", "Evaluación", "MLOps"]
-draft: true
+draft: false
 ---
 
 Ninguno de los clientes para los que he montado un RAG tenía un conjunto de preguntas y respuestas
@@ -55,9 +55,10 @@ el jueves, y dos personas no puntúan igual nunca.
 
 Preguntar cuál de dos es mejor sí aguanta. Congelas el conjunto de preguntas, generas las
 respuestas con la configuración vieja y con la nueva, las pones al lado sin decir cuál es cuál y
-quien juzga elige. Treinta preguntas y una persona son cuarenta minutos. Con un modelo de juez el
-volumen deja de importar, pero hay que revisar a mano un puñado de sus veredictos: si el juez no
-coincide contigo en los casos fáciles, no vas a saber si lo que sube es el sistema o su manía.
+quien juzga elige. Yo uso un modelo de juez: a mano nadie se relee el conjunto entero cada vez que
+toca un parámetro, y con el modelo el volumen deja de importar. Lo que sí hay que hacer es revisar
+unos cuantos de sus veredictos: si el juez no coincide contigo en los casos fáciles, no vas a saber
+si lo que sube es el sistema o su manía.
 
 ## Lo que hay que versionar
 
@@ -65,21 +66,5 @@ El conjunto de preguntas, congelado y en el repositorio. Los resultados, en el m
 prompt, el modelo y los parámetros de troceado que los produjeron. Sin eso, «esto ha mejorado» no
 se puede comparar con nada dentro de dos semanas, que es justo cuando alguien lo pregunta.
 
-## Dónde me ha engañado
-
-Subir k mejora el recall casi siempre: cuantos más fragmentos entran, más veces está dentro el
-correcto. Y a la vez empeora las respuestas, porque con el correcto entran otros cuatro que hablan
-de lo mismo con las cifras de otro año, y el modelo los mezcla. La tabla de retrieval sube y la
-pantalla del usuario empeora.
-
-> **Por rellenar - esto solo lo tienes tú.** El caso concreto en el que la medida dijo que sí y la
-> respuesta era peor: qué preguntaron, qué salió, y cómo te enteraste de que estaba mal.
-
 Nada de esto sustituye a un conjunto etiquetado por alguien que conozca el negocio. Sirve para no
 depender de que llegue.
-
-<!-- Borrador escrito por Claude a partir del oficio general, no de tu proyecto. Antes de quitar
-     `draft`, confirma o corrige: (1) que buscaste preguntas reales en tickets/correo/logs -si no
-     lo hiciste, esa sección se cae-; (2) las cifras: cincuenta preguntas, treinta, cuarenta
-     minutos; (3) si usaste modelo de juez o solo revisión a mano; (4) el hueco de "Dónde me ha
-     engañado". La fecha sigue siendo la del andamio, 2026-08-13. -->

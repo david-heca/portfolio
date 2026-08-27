@@ -1,9 +1,9 @@
 ---
 title: "Evaluating retrieval when the client has no golden set"
 summary: "No client arrives with labelled questions and answers, and almost none will build them. How to measure whether retrieval improved anyway."
-date: 2026-08-13
+date: 2026-08-26
 tags: ["RAG", "Evaluation", "MLOps"]
-draft: true
+draft: false
 ---
 
 None of the clients I've built a RAG system for had a labelled set of questions and answers, and
@@ -55,9 +55,10 @@ on Thursday, and two people never score the same at all.
 
 Asking which of two is better does hold up. Freeze the question set, generate the answers with the
 old configuration and the new one, put them side by side without saying which is which, and let the
-judge pick. Thirty questions and one person is forty minutes. With a model as judge the volume
-stops mattering, but you have to review a handful of its verdicts by hand: if the judge disagrees
-with you on the easy ones, you won't know whether what went up is the system or its quirk.
+judge pick. I use a model as judge: by hand nobody rereads the whole set every time a parameter
+moves, and with the model the volume stops mattering. What you do have to do is review a fair few of
+its verdicts: if the judge disagrees with you on the easy ones, you won't know whether what went up
+is the system or its quirk.
 
 ## What has to be versioned
 
@@ -65,21 +66,5 @@ The question set, frozen and in the repository. The results, in the same commit 
 model and the chunking parameters that produced them. Without that, "this improved" can't be
 compared against anything two weeks later, which is exactly when someone asks.
 
-## Where it has fooled me
-
-Raising k improves recall almost every time: the more chunks come in, the more often the right one
-is among them. And it makes the answers worse at the same time, because along with the right one
-come four others covering the same ground with a different year's figures, and the model blends
-them. The retrieval table goes up and the user's screen gets worse.
-
-> **To fill in - only you have this.** The specific case where the measurement said yes and the
-> answer was worse: what they asked, what came back, and how you found out it was wrong.
-
 None of this replaces a set labelled by someone who knows the business. It's there so you don't
 depend on that set arriving.
-
-<!-- Draft written by Claude from general craft, not from your project. Before dropping `draft`,
-     confirm or correct: (1) that you did mine real questions from tickets/inbox/logs - if you
-     didn't, that section goes; (2) the figures: fifty questions, thirty, forty minutes; (3) whether
-     you used a model judge or only hand review; (4) the gap under "Where it has fooled me". The
-     date is still the scaffold's, 2026-08-13. Keep this in sync with the Spanish file. -->
