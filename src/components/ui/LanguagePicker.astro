@@ -1,5 +1,5 @@
 ---
-import { type Lang } from "@i18n/utils";
+import { otherLang, useTranslations, type Lang } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
 
 export interface Props {
@@ -12,9 +12,12 @@ export interface Props {
 }
 
 const { lang, href, expanded = false } = Astro.props;
-const target: Lang = lang === "es" ? "en" : "es";
+const target = otherLang(lang);
 
-const nativeName = target === "es" ? "Español" : "English";
+// La etiqueta se lee en el idioma que ofrece, no en el de la página.
+const tt = useTranslations(target);
+
+const nativeName = tt("common.langHint.nativeName");
 const label = expanded ? nativeName : target.toUpperCase();
 ---
 
@@ -24,7 +27,7 @@ const label = expanded ? nativeName : target.toUpperCase();
   lang={target}
   data-target-lang={target}
   class:list={["pill", "lang-switch", expanded && "lang-switch--expanded"]}
-  aria-label={target === "es" ? "Ver en español" : "View in English"}
+  aria-label={tt("common.langHint.cta")}
   title={nativeName}
 >
   <Icon name="ph:globe-simple" aria-hidden="true" />

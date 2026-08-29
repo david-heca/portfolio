@@ -1,9 +1,9 @@
 ---
-import { useTranslations } from "@i18n/utils";
+import { useTranslations, type Lang } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
 
 export interface Props {
-  lang: "es" | "en";
+  lang: Lang;
 }
 
 const { lang } = Astro.props;
@@ -125,7 +125,7 @@ const companies: Company[] = [
                         {t("work.showMore")} ({r.achievements.length - 1})
                       </span>
                       <span class="role__more-label role__more-label--less">{t("work.showLess")}</span>
-                      <Icon name="ph:caret-down" class="role__more-caret" />
+                      <Icon name="ph:caret-down" class="role__more-caret" aria-hidden="true" />
                     </summary>
                     <ul class="prose-sm role__achievements role__achievements--extra">
                       {r.achievements.slice(1).map((a) => <li>{a}</li>)}

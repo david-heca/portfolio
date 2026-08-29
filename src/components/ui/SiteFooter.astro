@@ -1,6 +1,7 @@
 ---
 import { Icon } from "astro-icon/components";
 import { getHome, useTranslations, type Lang } from "@i18n/utils";
+import { channels } from "@/data/contact";
 import pkg from "../../../package.json";
 
 export interface Props {
@@ -13,11 +14,6 @@ const home = getHome(lang);
 
 const year = new Date().getFullYear();
 
-const channels = [
-  { key: "github", href: "https://github.com/david-heca", icon: "ph:github-logo" },
-  { key: "linkedin", href: "https://www.linkedin.com/in/david-heca/", icon: "ph:linkedin-logo" },
-  { key: "x", href: "https://x.com/david_heca_", icon: "ph:x-logo" },
-];
 ---
 
 <footer class="footer">
@@ -45,9 +41,7 @@ const channels = [
 </footer>
 
 <style>
-  /* En estrecho va en columna: en fila, `space-between` separa tres piezas cortas
-     hasta dejar un hueco en medio más ancho que ellas. El aire de arriba es mayor
-     que el de abajo porque el notch de los canales se come el borde superior. */
+  /* Más aire arriba que abajo: el notch de los canales se come el borde. */
   .footer__inner {
     position: relative;
     display: flex;
@@ -74,16 +68,15 @@ const channels = [
   }
   .footer__brand span { color: var(--color-ink-2); }
 
-  /* 6px y no 8 de rejilla: el corazón va dentro de una frase, así que lo que tiene
-     que parecer a los lados es un espacio de palabra, no una separación. */
+  /* Fuera de rejilla: dentro de una frase el hueco tiene que leerse como espacio
+     de palabra, y 8px ya separa. */
   .footer__made {
     display: inline-flex;
     align-items: center;
     gap: 6px;
   }
-  /* Duotone es una sola tinta: las dos capas son currentColor y la de relleno va
-     al 20%, así que hereda el gris de la línea sin salirse de la paleta. Va un
-     escalón por encima del texto porque un corazón no llena su caja. */
+  /* Duotone sigue siendo una tinta: las dos capas son currentColor, la de relleno
+     al 20%. */
   .footer__heart { font-size: var(--icon); }
 
   .footer__channels {

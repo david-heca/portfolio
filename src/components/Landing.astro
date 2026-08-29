@@ -6,9 +6,10 @@ import Projects from "@sections/Projects.astro";
 import Education from "@sections/Education.astro";
 import Speaking from "@sections/Speaking.astro";
 import Contact from "@sections/Contact.astro";
+import { type Lang } from "@i18n/utils";
 
 export interface Props {
-  lang: "es" | "en";
+  lang: Lang;
 }
 
 const { lang } = Astro.props;

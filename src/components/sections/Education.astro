@@ -1,9 +1,9 @@
 ---
-import { useTranslations } from "@i18n/utils";
+import { useTranslations, type Lang } from "@i18n/utils";
 import { studies, certifications } from "@/data/education";
 
 export interface Props {
-  lang: "es" | "en";
+  lang: Lang;
 }
 
 const { lang } = Astro.props;
@@ -61,7 +61,7 @@ const groups = [
 
   <div class="edu__groups">
     {groups.map((g, i) => (
-      <div class={`edu__group reveal reveal-${i + 1}`}>
+      <div class:list={["edu__group", "reveal", `reveal-${Math.min(i + 1, 3)}`]}>
         <h3 class="label edu__label">{g.label}</h3>
         <ul class="edu__list">
           {g.entries.map((e) => (
@@ -115,9 +115,8 @@ const groups = [
     .edu-item { grid-column: 1 / -1; grid-template-columns: subgrid; gap: 32px; }
   }
 
-  /* El hilo del pie de cada fila hace de eje: el tramo en acento son los años
-     que ocupó, sobre una escala que comparten todas las filas de la sección.
-     Por eso el ancho de la fila manda y el texto se queda en su medida. */
+  /* El tramo se mide sobre una escala que comparten todas las filas, así que
+     manda el ancho de la fila y no la medida del texto. */
   .edu-item::after {
     content: "";
     position: absolute;

@@ -1,11 +1,11 @@
 ---
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
-import { useTranslations } from "@i18n/utils";
+import { useTranslations, type Lang } from "@i18n/utils";
 import { projects } from "@/data/projects";
 
 export interface Props {
-  lang: "es" | "en";
+  lang: Lang;
 }
 
 interface Spec {
@@ -150,10 +150,8 @@ const summary = `${projects.length} ${t("projects.countLabel")} · ${span}`;
   }
   .spec__link [data-icon] { font-size: var(--icon-sm); }
 
-  /* Sin puntero que pueda posarse -táctil- la ficha se lee bajo la imagen; con
-     él se superpone y solo aparece al enfocar o pasar por encima. Superpuesta va
-     sobre la foto, no sobre el fondo de la página: de ahí el par de scrim, que es
-     el mismo en los dos temas. */
+  /* En táctil la ficha se lee bajo la imagen; con puntero se superpone, y por eso
+     usa el par de scrim: debajo está la foto, no el fondo de la página. */
   @media (hover: hover) {
     .spec {
       position: absolute;

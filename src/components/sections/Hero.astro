@@ -1,10 +1,11 @@
 ---
-import { useTranslations } from "@i18n/utils";
+import { channels } from "@/data/contact";
+import { useTranslations, type Lang } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro:assets";
 
 export interface Props {
-  lang: "es" | "en";
+  lang: Lang;
 }
 
 const { lang } = Astro.props;
@@ -14,13 +15,10 @@ const t = useTranslations(lang);
 <section id="top" class="hero container">
   <div class="hero__text">
     <p class="hero__place reveal">
-      <Icon name="ph:map-pin" />
+      <Icon name="ph:map-pin" aria-hidden="true" />
       {t("hero.location")}
     </p>
 
-    {/* Lo más grande de la página es la afirmación, no el nombre. El `h1` sigue
-        siendo el nombre porque es de quien va la página: el nivel de encabezado
-        y el cuerpo de letra responden a preguntas distintas. */}
     <p class="section-title hero__thesis reveal reveal-1">{t("hero.thesis")}</p>
 
     <p class="lead hero__intro reveal reveal-2">{t("hero.intro")}</p>
@@ -48,9 +46,12 @@ const t = useTranslations(lang);
       quality={85}
     />
     <div class="hero__socials">
-      <a href="https://github.com/david-heca" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Icon name="ph:github-logo" /></a>
-      <a href="https://www.linkedin.com/in/david-heca/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="ph:linkedin-logo" /></a>
-      <a href="https://x.com/david_heca_" target="_blank" rel="noopener noreferrer" aria-label="X"><Icon name="ph:x-logo" /></a>
+      {channels.map((c) => (
+        <a href={c.href} target="_blank" rel="noopener noreferrer">
+          <Icon name={c.icon} aria-hidden="true" />
+          <span class="sr-only">{t(`common.channels.${c.key}`)}</span>
+        </a>
+      ))}
     </div>
   </div>
 </section>
@@ -68,8 +69,7 @@ const t = useTranslations(lang);
     .hero { grid-template-columns: 1.35fr 1fr; gap: 64px; }
   }
 
-  /* Única etiqueta en versalitas que queda en el sitio. Sobre los títulos de
-     sección se quitó: ahí era un adorno editorial; aquí es un dato. */
+  /* La única versalita del sitio: aquí es un dato, no un rótulo. */
   .hero__place {
     display: inline-flex;
     align-items: center;

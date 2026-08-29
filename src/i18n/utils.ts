@@ -8,6 +8,12 @@ export function getHome(lang: Lang): string {
   return lang === defaultLang ? '/' : `/${lang}/`;
 }
 
+/** El otro idioma. Vive aquí por lo mismo que `localizePath`: dos copias de la
+ *  bifurcación acaban divergiendo. */
+export function otherLang(lang: Lang): Lang {
+  return lang === defaultLang ? 'en' : defaultLang;
+}
+
 /** Única implementación del mapeo es↔en. La comparten el hreflang, el
  *  conmutador de idioma y el redirect por preferencia guardada. */
 export function localizePath(pathname: string, target: Lang): string {

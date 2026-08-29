@@ -19,8 +19,8 @@ const path = Astro.url.pathname;
 const onLanding = path === "/" || path === "/en" || path === "/en/";
 const anchor = (id: string) => (onLanding ? `#${id}` : `${home}#${id}`);
 
-/** Anclas de la portada. Formación y Charlas quedan fuera del nav a propósito: se
- *  llega a ellas leyendo, y el nav no aguanta ocho entradas a 1024px. */
+/** Anclas de la portada. Formación y Charlas quedan fuera a propósito: el nav no
+ *  aguanta ocho entradas a 1024px. */
 const sectionItems = [
   { id: "about", label: t("nav.about"), icon: "ph:user" },
   { id: "work", label: t("nav.work"), icon: "ph:briefcase" },
@@ -44,7 +44,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
       david<span>herrera</span>
     </a>
 
-    <nav class="nav__links" aria-label="Primary">
+    <nav class="nav__links" aria-label={t("nav.primaryLabel")}>
       {sectionItems.map((item) => (
         <a href={anchor(item.id)} class="pill nav__link" data-spy={item.id}>
           <Icon name={item.icon} aria-hidden="true" />
@@ -68,15 +68,15 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
         <LanguagePicker lang={lang} href={switchTo} />
         <ThemeToggle lang={lang} />
       </div>
-      <button id="menu-btn" class="pill menu-btn" aria-label="Menu" aria-expanded="false">
-        <Icon name="ph:list" />
+      <button id="menu-btn" class="pill menu-btn" aria-label={t("nav.menuLabel")} aria-expanded="false">
+        <Icon name="ph:list" aria-hidden="true" />
       </button>
     </div>
   </div>
 
   <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
     <div class="mobile-menu__inner container">
-    <nav aria-label="Mobile">
+    <nav aria-label={t("nav.mobileLabel")}>
       {sectionItems.map((item) => (
         <a href={anchor(item.id)} class="mobile-menu__link" data-spy={item.id}>
           <Icon name={item.icon} aria-hidden="true" />
@@ -103,9 +103,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
 </header>
 
 <style>
-  /* Barra a todo el ancho, no isla flotante: con la página construida a filos, un
-     bloque redondeado suspendido era lo único que no apoyaba en nada. El borde
-     inferior es la primera línea del armazón. */
+  /* El borde inferior es la primera línea del armazón. */
   .nav {
     position: sticky;
     top: 0;
@@ -129,8 +127,6 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
     color: var(--color-ink);
     flex-shrink: 0;
   }
-  /* El wordmark sigue en dos voces, pero la segunda baja de gris en vez de
-     cambiar de tono: es el otro sitio -con el `em` de About- donde queda Junicode. */
   .nav__brand span { color: var(--color-ink-2); }
 
   .nav__links {
@@ -146,14 +142,12 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
     font-weight: var(--weight-medium);
     padding: 8px 13px;
   }
-  /* Dos estados distintos, y antes compartían una sola señal.
-     `.active` es el spy de la portada: por dónde vas leyendo. Cambia en cada
-     scroll, así que solo sube de gris a tinta y no se mueve nada. */
+  /* Spy de la portada: cambia en cada scroll, así que solo sube de gris a tinta.
+     Mover o pintar algo más convierte el nav en un semáforo. */
   .nav__link.active { color: var(--color-ink); }
 
-  /* Estar en una página sí es un hecho, y se marca invirtiendo: es el mismo gesto
-     que la acción primaria y el único "color" del sistema. Gana al hover a
-     propósito -en la página donde ya estás no hay nada que previsualizar-. */
+  /* Gana al hover a propósito: en la página donde ya estás no hay nada que
+     previsualizar. */
   .nav__link[aria-current="page"] {
     background: var(--color-ink);
     color: var(--color-bg);
@@ -194,8 +188,6 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
   .mobile-menu.open { transform: none; opacity: 1; pointer-events: auto; }
   .mobile-menu__inner { padding-block: 8px 0; }
   .mobile-menu nav { display: flex; flex-direction: column; }
-  /* El texto arranca en el filo de la columna; el fondo del hover se sale un poco
-     para no morder la letra. */
   .mobile-menu__link {
     display: flex;
     align-items: center;
@@ -217,8 +209,6 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
     transition: color var(--t-fast) ease;
   }
   .mobile-menu__link:hover [data-icon] { color: var(--color-ink-2); }
-  /* Mismo reparto que en escritorio: el spy solo marca el icono, la página actual
-     se invierte. */
   .mobile-menu__link.active [data-icon] { color: var(--color-ink); }
   .mobile-menu__link[aria-current="page"] {
     background: var(--color-ink);
@@ -241,6 +231,10 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
   let closeMenu: (() => void) | null = null;
 
   function setupMenu() {
+    // Antes de cualquier salida: los listeners de `document` siguen llamando a
+    // `closeMenu`, y si la página nueva no trae menú apuntaría al nodo anterior.
+    closeMenu = null;
+
     const btn = document.getElementById("menu-btn");
     const menu = document.getElementById("mobile-menu");
     if (!btn || !menu) return;

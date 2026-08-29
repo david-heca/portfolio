@@ -19,18 +19,18 @@
   "nav": {
     "about": "About",
     "work": "Experience",
-    "education": "Education",
     "projects": "Projects",
-    "speaking": "Speaking",
     "contact": "Contact",
-    "notes": "Notes"
+    "notes": "Notes",
+    "primaryLabel": "Primary navigation",
+    "mobileLabel": "Mobile navigation",
+    "menuLabel": "Menu"
   },
   "notes": {
     "title": "Notes",
     "description": "Field notes on what I run into taking AI to production.",
     "empty": "No notes published yet.",
-    "backToIndex": "All notes",
-    "readNote": "Read the note"
+    "backToIndex": "All notes"
   },
   "speaking": {
     "title": "On stage",
@@ -297,7 +297,8 @@
       "label": "Switch language",
       "text": "This site is also available in English.",
       "cta": "View in English",
-      "dismiss": "Dismiss"
+      "dismiss": "Dismiss",
+      "nativeName": "English"
     }
   },
   "notFound": {

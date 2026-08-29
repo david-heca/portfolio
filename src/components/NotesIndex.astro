@@ -67,7 +67,7 @@ const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
 
   .index-row__body { display: block; }
   .index-row__title { display: block; transition: color var(--t-fast) ease; }
-  .index-row__summary { display: block; margin-top: 10px; max-width: 60ch; }
+  .index-row__summary { display: block; margin-top: 10px; max-width: var(--measure); }
 
   .index-row__link:hover .index-row__title,
   .index-row__link:focus-visible .index-row__title { color: var(--color-accent); }

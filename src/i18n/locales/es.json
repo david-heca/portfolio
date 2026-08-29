@@ -19,18 +19,18 @@
   "nav": {
     "about": "Sobre mí",
     "work": "Experiencia",
-    "education": "Formación",
     "projects": "Proyectos",
-    "speaking": "Charlas",
     "contact": "Contacto",
-    "notes": "Notas"
+    "notes": "Notas",
+    "primaryLabel": "Navegación principal",
+    "mobileLabel": "Navegación móvil",
+    "menuLabel": "Menú"
   },
   "notes": {
     "title": "Notas",
     "description": "Notas de campo sobre lo que me encuentro llevando IA a producción.",
     "empty": "Todavía no hay notas publicadas.",
-    "backToIndex": "Todas las notas",
-    "readNote": "Leer la nota"
+    "backToIndex": "Todas las notas"
   },
   "speaking": {
     "title": "En el escenario",
@@ -297,7 +297,8 @@
       "label": "Cambiar de idioma",
       "text": "Este sitio también está en español.",
       "cta": "Ver en español",
-      "dismiss": "Cerrar aviso"
+      "dismiss": "Cerrar aviso",
+      "nativeName": "Español"
     }
   },
   "notFound": {

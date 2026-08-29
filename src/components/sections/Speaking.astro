@@ -1,10 +1,10 @@
 ---
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
-import { useTranslations } from "@i18n/utils";
+import { useTranslations, type Lang } from "@i18n/utils";
 
 export interface Props {
-  lang: "es" | "en";
+  lang: Lang;
 }
 
 const { lang } = Astro.props;
@@ -15,9 +15,6 @@ const topics = t<string[]>("speaking.topics");
 ---
 
 <section id="speaking" class="speaking section container">
-  {/* La cifra de asistentes vive dentro de la frase. En tamaño display, con su
-      etiqueta debajo, era el patrón de métrica de portada: ocupa mucho y no
-      informa de más. */}
   <header class="sec-head reveal">
     <h2 class="section-title">{t("speaking.title")}</h2>
     <p class="lead">{t("speaking.description")}</p>
@@ -34,7 +31,7 @@ const topics = t<string[]>("speaking.topics");
     />
     <ul class="speaking__venues" aria-label={t("speaking.venuesLabel")}>
       {venues.map((v) => (
-        <li class="label speaking__venue"><Icon name="ph:map-pin" />{v}</li>
+        <li class="label speaking__venue"><Icon name="ph:map-pin" aria-hidden="true" />{v}</li>
       ))}
     </ul>
   </figure>

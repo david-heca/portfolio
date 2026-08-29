@@ -1,15 +1,14 @@
 ---
-import { useTranslations } from "@i18n/utils";
+import { email } from "@/data/contact";
+import { useTranslations, type Lang } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
 
 export interface Props {
-  lang: "es" | "en";
+  lang: Lang;
 }
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-
-const email = "hello@davidherrera.dev";
 ---
 
 <section id="contact" class="contact section container">
@@ -19,7 +18,7 @@ const email = "hello@davidherrera.dev";
 
     <div class="contact__cta">
       <a href={`mailto:${email}`} class="btn btn--primary">
-        <Icon name="ph:paper-plane-tilt" />
+        <Icon name="ph:paper-plane-tilt" aria-hidden="true" />
         {t("contact.cta.button")}
       </a>
       <!-- Texto, no enlace: el botón de al lado ya es este mismo `mailto:`. Está
@@ -41,8 +40,6 @@ const email = "hello@davidherrera.dev";
     gap: 16px 20px;
     margin-top: 32px;
   }
-  /* Mismo cuerpo que la etiqueta del botón, en tinta secundaria: al lado sin
-     competir. */
   .contact__email { font-size: var(--text-sm); color: var(--color-ink-2); }
   .contact__note { margin: 16px 0 0; }
 </style>

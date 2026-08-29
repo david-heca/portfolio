@@ -13,14 +13,10 @@ const langOf = (id: string) => id.slice(0, id.indexOf("/"));
 const slugOf = (id: string) => id.slice(id.indexOf("/") + 1);
 
 /**
- * Entradas de una colección para un idioma, ya ordenadas de más reciente a más
- * antigua.
+ * Entradas de una colección para un idioma, de más reciente a más antigua.
  *
  * Solo sale lo que existe en los dos idiomas: media traducción deja el hreflang
- * apuntando a una página que no se emitió y el conmutador de idioma en un 404.
- * Es la misma regla que `Dict = typeof es` impone sobre las etiquetas de UI.
- *
- * Los borradores se ven mientras se escribe y desaparecen en el build de producción.
+ * apuntando a una página que no se emitió. Los borradores caen en producción.
  */
 export async function localizedEntries<N extends CollectionName>(
   name: N,

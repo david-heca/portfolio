@@ -1,5 +1,5 @@
 ---
-import { useTranslations, type Lang } from "@i18n/utils";
+import { otherLang, useTranslations, type Lang } from "@i18n/utils";
 import { Icon } from "astro-icon/components";
 
 export interface Props {
@@ -11,7 +11,7 @@ export interface Props {
 }
 
 const { lang, href } = Astro.props;
-const target: Lang = lang === "es" ? "en" : "es";
+const target = otherLang(lang);
 
 // El aviso se lee en el idioma que ofrece, no en el de la página.
 const tt = useTranslations(target);

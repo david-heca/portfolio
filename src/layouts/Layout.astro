@@ -2,6 +2,7 @@
 import { ClientRouter } from "astro:transitions";
 import { getHome, localizePath, useTranslations, type Lang } from "@i18n/utils";
 import Navbar from "@ui/Navbar.astro";
+import { channels, email } from "@/data/contact";
 import LanguageHint from "@ui/LanguageHint.astro";
 // Junicode se autoaloja (no está en Fontsource): su @font-face vive en global.css.
 import "@fontsource-variable/outfit/wght.css";
@@ -54,7 +55,7 @@ const personSchema = {
     addressLocality: "Mexico City",
     addressCountry: "MX",
   },
-  email: "mailto:hello@davidherrera.dev",
+  email: `mailto:${email}`,
   knowsAbout: [
     "Software Engineering",
     "Artificial Intelligence",
@@ -70,11 +71,7 @@ const personSchema = {
     "PostgreSQL",
   ],
   knowsLanguage: ["es", "en"],
-  sameAs: [
-    "https://www.linkedin.com/in/david-heca/",
-    "https://github.com/david-heca",
-    "https://x.com/david_heca_",
-  ],
+  sameAs: channels.map((c) => c.href),
 };
 ---
 
@@ -218,9 +215,6 @@ const personSchema = {
     )}
   </head>
   <body>
-    <!-- Primer foco de la página: el nav son ocho enlaces que se repiten en todas.
-         El manejador de anclas de más abajo lo trata como a cualquier otra: mueve
-         el scroll y el foco sin ensuciar la URL. -->
     <a class="skip-link" href="#main">{t("common.skipToContent")}</a>
 
     <Navbar lang={lang} switchTo={switchTo} />

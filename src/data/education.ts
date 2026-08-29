@@ -1,6 +1,5 @@
-/** Los años son estructura -sitúan cada fila en el eje- y el texto que se lee
- *  sale de los locales. Escribir "2019 - 2024" en el copy dejaría que la frase
- *  y el tramo pintado dijeran cosas distintas. */
+/** Los años son estructura: sitúan cada fila en el eje. Escribirlos también en el
+ *  copy dejaría que la frase y el tramo pintado dijeran cosas distintas. */
 export interface Study {
   key: string;
   from: number;

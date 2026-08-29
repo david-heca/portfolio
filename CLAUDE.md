@@ -6,16 +6,16 @@ Solo lo que **no** se deduce leyendo el código: invariantes, restricciones y po
 
 Astro estático con CSS propio sobre Cloudflare Workers, con `pnpm`. Sin React, sin islands, sin tests, sin linter.
 
-**La portada es una landing por idioma; el sitio no.** Dentro de la landing se navega por anclas. Fuera están `/cases/` y `/notes/`, que son rutas reales: el texto largo es la única razón por la que el sitio deja de ser un CV, y no cabe en una landing.
+**La portada es una landing por idioma; el sitio no.** Dentro de la landing se navega por anclas. Fuera está `/notes/`, que es una ruta real: el texto largo es la única razón por la que el sitio deja de ser un CV, y no cabe en una landing.
 
 - **La prosa larga vive en `src/content/`, nunca en `src/i18n/locales/`.** El locale es para etiquetas de UI; su lookup por dot-path y el tipado contra `es` sirven para eso y convertirían un caso de dos mil palabras en un muro de strings escapados.
-- **La ruta no se traduce, ni el segmento ni el slug** -`/cases/connie` y `/en/cases/connie`-. Traducirla obligaría a un mapa de rutas junto a `localizePath()`, o sea la segunda copia del mapeo que acaba divergiendo.
+- **La ruta no se traduce, ni el segmento ni el slug** -`/notes/rag-eval` y `/en/notes/rag-eval`-. Traducirla obligaría a un mapa de rutas junto a `localizePath()`, o sea la segunda copia del mapeo que acaba divergiendo.
 - **Una entrada se publica solo si existe en los dos idiomas**; `localizedEntries()` esconde la que va sola. Media traducción deja el hreflang apuntando a una página que el build no emitió.
 
 ## Bilingüe - ES en `/`, EN en `/en/`
 
 - **Ningún texto visible se escribe en un componente**, ni siquiera un `alt`: todo sale de `src/i18n/locales/`.
-- **`localizePath()` y `getHome()` son la única implementación del mapeo es↔en.** Las comparten el hreflang, el conmutador y el redirect por preferencia; una segunda copia acabaría divergiendo en la barra final.
+- **`localizePath()`, `getHome()` y `otherLang()` son la única implementación del mapeo es↔en.** Las comparten el hreflang, el conmutador y el redirect por preferencia; una segunda copia acabaría divergiendo en la barra final.
 - **Las URLs internas de inglés llevan barra final** (`/en/`): es la forma que emite el build, la del canonical y la del sitemap. Sin ella aparecen redirects y el hreflang deja de casar.
 - **El idioma viaja por prop desde la página, nunca se deduce de la URL en un componente.** Dos fuentes de verdad para el mismo dato es como se cuelan las páginas medio traducidas.
 - **La autodetección propone, no redirige.** Redirigir según `navigator.languages` saca a los rastreadores de `/`, que es el canonical y el x-default. El único redirect admisible exige una preferencia que el usuario haya elegido a mano.

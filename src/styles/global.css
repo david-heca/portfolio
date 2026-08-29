@@ -1,7 +1,5 @@
-/* Aquí solo lo compartido: el layout de cada sección vive en su <style> scoped. */
-
-/* Junicode (OFL, psb1558/Junicode-font) subseteado a latin desde el VF de 1.2 MB.
-   Solo la italic: es la única voz de display y el sitio nunca la pide en roman. */
+/* Junicode (OFL, psb1558/Junicode-font): solo la italic, subseteada a latin
+   desde el VF de 1.2 MB. */
 @font-face {
   font-family: "Junicode";
   src: url("/assets/fonts/junicode-italic.woff2") format("woff2");
@@ -11,15 +9,12 @@
 }
 
 :root {
-  /* tipografías - un rol cada una */
+  /* tipografías */
   --font-display: "Junicode", Georgia, serif;
   --font-text: "Outfit Variable", system-ui, sans-serif;
   --font-mono: "Maple Mono", "SF Mono", ui-monospace, monospace;
 
-  /* Paleta sin tono: blanco puro, negro puro y grises neutros. Un fondo teñido es
-     lo que hace que un sitio converja con el gusto de su año -el crema del que
-     viene este era, dígito arriba o abajo, el default de todo el mundo-. Sin tinte
-     no hay con qué converger, y el peso cae en la escala y el espacio. */
+  /* paleta */
   --color-bg: #ffffff;
   --color-bg-2: #f4f4f4;
   --color-surface: #fafafa;
@@ -28,42 +23,35 @@
   --color-ink-3: #b0b0b0;   /* ~2.2:1: viñetas, hairlines e iconos en reposo */
   --color-line: rgba(0, 0, 0, 0.14);
   --color-line-strong: rgba(0, 0, 0, 0.3);
-  /* No hay color de acento. El énfasis lo llevan el peso, el subrayado y la
-     inversión, así que el rol de acento se resuelve en tinta plena: donde antes
-     había un salto de tono ahora hay uno de gris a negro, que se ve igual de bien
-     y no envejece. Si algún día vuelve un tono, se cambia solo esta línea. */
   --color-accent: var(--color-ink);
   --color-accent-soft: color-mix(in srgb, var(--color-ink) 8%, transparent);
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05), 0 16px 40px -24px rgba(0, 0, 0, 0.25);
-  /* Rótulo sobre foto. Es el único par que no cambia con el tema: lo que hay
-     debajo es la imagen, no el fondo de la página. */
+  /* No cambia con el tema: debajo está la foto, no el fondo de la página. */
   --color-scrim: rgba(0, 0, 0, 0.8);
   --color-on-scrim: #ffffff;
 
-  /* Hover de color; el resto de gestos -transform, sombra, apertura- van a --t-base. */
+  /* --t-fast solo para color; el resto de gestos a --t-base. */
   --t-fast: 0.15s;
   --t-base: 0.2s;
 
-  /* escala tipográfica - se elige por rol, nunca se escribe el px */
+  /* escala tipográfica - se elige por rol */
   --text-label-sm: 11px;   /* mono micro: claves de spec, meta de card */
   --text-label: 12px;      /* etiquetas mono, periodos, ubicación del hero */
   --text-meta: 13.5px;     /* frase de apoyo: institución, emisor, notas, pie */
   --text-sm: 14.5px;       /* prosa secundaria: descripciones, notas, logros */
   --text-body: 16px;       /* prosa principal: bio, descripción destacada, canales */
-  /* Entradilla de sección y título de card comparten cuerpo a propósito: lo que
-     los separa es el peso y el color, no el tamaño. */
+  /* Mismo cuerpo que .card-title a propósito: los separa el peso y el color. */
   --text-lead: clamp(19px, 2.1vw, 22px);
   --text-subhead: clamp(20px, 2.6vw, 28px);  /* único tier sans por encima de .card-title */
   --text-brand: 21px;      /* wordmark, igual en el nav y en el pie */
 
-  /* tier display (Junicode italic) - se elige un token, no se escribe un clamp */
+  /* tier display */
   --display-2xl: clamp(96px, 22vw, 220px);  /* solo el numeral del 404 */
-  --display-xl: clamp(56px, 11vw, 124px);
   --display-lg: clamp(48px, 8vw, 96px);
   --display: clamp(38px, 6vw, 58px);
   --display-sm: clamp(28px, 4vw, 40px);
 
-  /* tracking - negativo para display y títulos, positivo para mono en mayúsculas */
+  /* tracking */
   --track-tight: -0.02em;  /* display */
   --track-snug: -0.01em;   /* título de card y subhead */
   --track-tag: 0.04em;     /* cifras y tags */
@@ -75,40 +63,31 @@
   --leading-title: 1.25;   /* subhead */
   --leading-tight: 1.1;    /* título de card */
   --leading-flat: 1;       /* una sola línea: botones, enlaces del nav */
-  /* La mono se carga en un solo peso estático: aplicar esto a un elemento mono
-     da negrita sintética. Solo para la sans, que sí es variable. */
+  /* Solo para la sans: la mono es de peso estático y el navegador la emborrona
+     con negrita sintética. */
   --weight-medium: 500;
   --measure: 60ch;
 
-  /* iconos - cinco escalones; nunca un px suelto */
+  /* iconos */
   --icon-sm: 14px;
   --icon: 16px;
   --icon-lg: 19px;
   --icon-xl: 22px;
-  --icon-2xl: 28px;
 
   /* layout */
   --container: 1180px;
-  /* La sangría de la columna. Como el armazón cae en el borde exterior del
-     contenedor, este valor es además el aire entre el filo y el texto. */
+  /* El armazón cae en el borde exterior del contenedor, así que esto es también
+     el aire entre el filo y el texto. */
   --pad: 24px;
   --frame-inset: 16px;     /* lo mínimo entre el armazón y el borde de la ventana */
-  /* Dónde cae un filo vertical. Hay dos formas de la misma cantidad porque hay
-     dos sistemas de coordenadas: el filo se mide contra `.page`, que no incluye
-     la barra de scroll -de ahí el `50%`-, y la banda de las marcas de registro
-     contra la ventana. Las dos derivan de los mismos dos tokens. */
+  /* La misma cantidad en dos sistemas de coordenadas: `.page` no incluye la barra
+     de scroll -de ahí el `50%`-; la banda de las marcas se mide contra la ventana. */
   --frame-x: max(var(--frame-inset), 50% - var(--container) / 2);
   --frame-x-vw: max(var(--frame-inset), 50vw - var(--container) / 2);
   --section-y: clamp(72px, 11vw, 140px);
-  /* A escuadra. Una foto o un bloque con la esquina redondeada es lo único que no
-     puede alinearse contra una línea recta, y en una página construida a filos se
-     nota como una pieza suelta. Volver a redondear es editar estas dos líneas. */
   --radius: 0;
   --radius-sm: 0;
   --radius-xs: 2px;        /* solo lo que envuelve una palabra: código en línea */
-  /* Botones y tags van casi a escuadra. Sin color con que marcar jerarquía, la
-     silueta es lo que separa un control de un adorno; la píldora los ablandaba
-     todos por igual. Subir esta línea a 999px devuelve el look anterior. */
   --radius-control: 2px;
 }
 
@@ -166,8 +145,8 @@ img, svg { display: block; max-width: 100%; }
 }
 :focus:not(:focus-visible) { outline: none; }
 
-/* Nombre accesible de un control que solo enseña un icono: fuera de la vista,
-   dentro del árbol de accesibilidad. `display: none` lo sacaría de los dos. */
+/* Fuera de la vista pero dentro del árbol de accesibilidad: `display: none`
+   lo sacaría de los dos. */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -177,10 +156,8 @@ img, svg { display: block; max-width: 100%; }
   white-space: nowrap;
 }
 
-/* Salta el nav, que son ocho enlaces repetidos en todas las páginas. Fuera de la
-   vista hasta que recibe el foco -no `display: none`, o dejaría de ser tabulable-,
-   y al aparecer es la acción primaria: tinta invertida, como el botón. El foco se
-   dibuja en papel porque el fondo ya es tinta. */
+/* Oculto hasta recibir el foco, pero no con `display: none`: dejaría de ser
+   tabulable. El foco se dibuja en papel porque el fondo ya es tinta. */
 .skip-link {
   position: fixed;
   top: 0;
@@ -209,14 +186,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ----- el armazón visible -----
-   Sin color, lo único que queda para marcar estructura es la línea. Estos dos
-   filos no son una rejilla de fondo -eso sería adorno-: caen en el borde exterior
-   del contenedor, así que lo que separa la línea del texto es el `--pad` de la
-   columna y no hace falta un hueco aparte. Si dejaran de derivar del contenedor,
-   sobran.
-
-   Por debajo de 768px no se dibujan: con `--pad` en 24 el aire no da y encajonan
-   en vez de medir. */
+   Por debajo de 768px no se dibujan: con `--pad` en 24 el aire no da. */
 .page { display: flex; flex-direction: column; flex-grow: 1; position: relative; }
 @media (min-width: 768px) {
   .page::before,
@@ -233,17 +203,14 @@ img, svg { display: block; max-width: 100%; }
   .page::after { right: var(--frame-x); }
 }
 
-/* El último bloque absorbe el alto sobrante de `.page`. Sin esto, en una página
-   corta el sobrante se acumula al final del flex: la línea de cierre se queda a
-   media altura y los filos verticales llegan al pie sin nada que los cruce. */
+/* En una página corta, sin esto el sobrante del flex se acumula al final: la línea
+   de cierre queda a media altura y los filos llegan al pie sin nada que los cruce. */
 .page > :last-child { flex-grow: 1; }
 
 .section { padding-block: var(--section-y); }
 
-/* El corte entre secciones se sale de la columna hasta el borde de la pantalla:
-   la sección termina en la página, no en el contenedor. El desbordamiento lo
-   recorta el `overflow-x: clip` del html, que ya estaba puesto.
-   `.hero` no lleva `.section` -tiene su propia altura- pero sí cierra igual. */
+/* El desbordamiento lo recorta el `overflow-x: clip` del html.
+   `.hero` no lleva `.section` -tiene su propia altura- pero cierra igual. */
 .section,
 .hero { position: relative; }
 .section::after,
@@ -257,20 +224,15 @@ img, svg { display: block; max-width: 100%; }
   pointer-events: none;
 }
 
-/* La marca de registro del cruce: donde la línea de cierre atraviesa un filo
-   vertical, los dos trazos se engrosan 9px en `--color-ink-3`, que es más oscuro
-   que `--color-line`. No es una forma nueva sobre la página; es el cruce dicho en
-   voz alta. Los 9px son 4+1+4: simétricos alrededor de la línea de 1px.
+/* Marca de registro donde la línea de cierre cruza un filo vertical. Los 9px son
+   4+1+4: simétricos alrededor de la línea de 1px.
 
-   Va en `background-image` y no en elementos porque `::after` ya es la línea y a
-   una sección no le quedan más pseudoelementos. Las longitudes son `vw` a
-   propósito: un porcentaje en `background-position` se mide contra el hueco que
-   deja la imagen, no contra la caja, y descuadraría cada marca su propio ancho.
+   Va en `background-image` porque `::after` ya es la línea y a una sección no le
+   quedan más pseudoelementos. Las longitudes son `vw` y no `%`: un porcentaje en
+   `background-position` se mide contra el hueco que deja la imagen, no contra la
+   caja, y descuadraría cada marca su propio ancho.
 
-   El borde inferior del nav es la primera línea del armazón y cruza los mismos
-   filos, así que lleva la misma marca. Sin ella el arranque de los verticales era
-   el único cruce mudo de la página, y en una ruta corta -donde el primer cierre
-   de sección cae fuera de pantalla- es el único que se ve. */
+   El borde del nav cruza los mismos filos, así que lleva la misma marca. */
 @media (min-width: 768px) {
   .section::before,
   .hero::before,
@@ -294,9 +256,8 @@ img, svg { display: block; max-width: 100%; }
     background-repeat: no-repeat;
     pointer-events: none;
   }
-  /* Los offsets se miden contra la caja de padding, y el borde del nav queda
-     fuera de ella: un pixel más abajo que el cierre de una sección, que no lleva
-     borde. */
+  /* Los offsets se miden contra la caja de padding y el borde del nav queda fuera
+     de ella: un pixel más abajo que el cierre de una sección, que no lleva borde. */
   .nav::after { bottom: -5px; }
 }
 
@@ -304,7 +265,6 @@ img, svg { display: block; max-width: 100%; }
 .sec-head .lead { margin-top: 20px; }
 
 /* ----- type primitives ----- */
-/* Micro-etiqueta mono. `.status` es la misma voz con punto. */
 .label,
 .status {
   font-family: var(--font-mono);
@@ -314,8 +274,6 @@ img, svg { display: block; max-width: 100%; }
 }
 .label { color: var(--color-ink-2); }
 
-/* El punto va en tinta plena y el texto en gris: sin tono, el estado se señala
-   con la marca, no subiendo de peso toda la etiqueta. */
 .status {
   display: inline-flex;
   align-items: center;
@@ -323,9 +281,8 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-ink-2);
 }
 
-/* Toda la display pasa por aquí. El escalón se elige con --display-size entre los
-   cuatro tokens; --display-leading sí es óptico y se ajusta por instancia.
-   La voz es la sans a peso medio: el serif dejó de ser el titular. */
+/* El escalón se elige con --display-size entre los cuatro tokens; --display-leading
+   es óptico y se ajusta por instancia. */
 .section-title {
   font-family: var(--font-text);
   font-weight: var(--weight-medium);
@@ -337,16 +294,12 @@ img, svg { display: block; max-width: 100%; }
   text-wrap: balance;
 }
 
-/* La firma. Junicode sobrevive en dos sitios de todo el sitio -este `em` y el
-   wordmark del nav- y en ninguno lleva el peso de un titular. Es lo que la
-   mantiene siendo excepción: repartida por las secciones dejaba de significar. */
 .section-title em {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 400;
 }
 
-/* Título de card: rol, grado, certificado, proyecto, principio. */
 .card-title {
   font-family: var(--font-text);
   font-weight: var(--weight-medium);
@@ -379,10 +332,8 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ----- prosa larga -----
-   El Markdown de casos y notas. `.prose` es un párrafo suelto; esto es el
-   documento entero, y por eso trae sus propios saltos entre bloques. El ancho lo
-   fija cada hijo, no el contenedor: así el código y las figuras se salen del
-   `--measure` sin sacar al texto con ellos. */
+   El ancho lo fija cada hijo y no el contenedor: así el código y las figuras se
+   salen del `--measure` sin arrastrar al texto. */
 .longform {
   font-size: var(--text-body);
   line-height: var(--leading);
@@ -420,8 +371,8 @@ img, svg { display: block; max-width: 100%; }
 
 .longform li { position: relative; padding-left: 24px; }
 .longform li + li { margin-top: 8px; }
-/* Alineación óptica: la viñeta se centra contra la primera línea, no contra la
-   caja del <li>, que crece con el texto. Fuera de rejilla a propósito. */
+/* Fuera de rejilla a propósito: la viñeta se centra contra la primera línea, no
+   contra la caja del <li>, que crece con el texto. */
 .longform ul > li::before {
   content: "";
   position: absolute;
@@ -485,13 +436,12 @@ img, svg { display: block; max-width: 100%; }
   margin-top: 10px;
 }
 
-/* Sans, nunca mono: el mono se reserva a etiquetas, tags y cifras. */
 .meta {
   font-size: var(--text-meta);
   color: var(--color-ink-2);
 }
 
-/* Cifra del rail izquierdo: año o periodo. Tabular para que las columnas caseen. */
+/* Tabular para que las cifras del rail casen en columna. */
 .rail {
   font-family: var(--font-mono);
   font-size: var(--text-label);
@@ -518,14 +468,11 @@ img, svg { display: block; max-width: 100%; }
     background-color var(--t-base) ease, border-color var(--t-base) ease,
     color var(--t-base) ease;
 }
-/* La acción primaria es el fondo invertido: sin tono, la única jerarquía de color
-   que queda es tinta contra papel. */
 .btn--primary { background: var(--color-ink); color: var(--color-bg); }
 .btn--primary:hover { transform: translateY(-2px); }
 .btn--ghost { border-color: var(--color-line-strong); color: var(--color-ink); }
 .btn--ghost:hover { border-color: var(--color-accent); color: var(--color-accent); background: var(--color-accent-soft); }
 .btn:active { transform: translateY(0) scale(0.98); }
-.btn--sm { padding: 8px 14px; font-size: var(--text-meta); }
 .btn [data-icon] { font-size: 1.15em; }
 
 /* ----- píldora interactiva (enlaces del nav, toggles, menú) -----
@@ -567,17 +514,6 @@ img, svg { display: block; max-width: 100%; }
 .tag--key {
   border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
   color: var(--color-accent);
-}
-/* Lo que no se puede enlazar: sin hover, porque no es accionable. */
-.tag--muted {
-  border-style: dashed;
-  border-color: var(--color-line-strong);
-  color: var(--color-ink-3);
-}
-.tag--muted:hover {
-  border-color: var(--color-line-strong);
-  color: var(--color-ink-3);
-  background: none;
 }
 
 .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
