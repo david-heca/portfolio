@@ -147,29 +147,9 @@ const summary = `${projects.length} ${t("projects.countLabel")} · ${span}`;
     align-items: center;
     gap: 6px;
     color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
   .spec__link [data-icon] { font-size: var(--icon-sm); }
 
-  /* En táctil la ficha se lee bajo la imagen; con puntero se superpone, y por eso
-     usa el par de scrim: debajo está la foto, no el fondo de la página. */
-  @media (hover: hover) {
-    .spec {
-      position: absolute;
-      inset: 0;
-      align-content: end;
-      margin-top: 0;
-      padding: 22px;
-      border-radius: var(--radius-sm);
-      background: var(--color-scrim);
-      opacity: 0;
-      transition: opacity var(--t-base) ease;
-    }
-    .spec dt,
-    .spec dd { border-bottom-color: color-mix(in srgb, var(--color-on-scrim) 24%, transparent); }
-    .spec .label { color: color-mix(in srgb, var(--color-on-scrim) 72%, transparent); }
-    .spec__value,
-    .spec__link a { color: var(--color-on-scrim); }
-    .project__media:hover .spec,
-    .project__media:focus-within .spec { opacity: 1; }
-  }
 </style>

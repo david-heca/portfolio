@@ -186,21 +186,22 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ----- el armazón visible -----
+   Un solo pseudoelemento con bordes, no dos cajas de 1px: a `.nav` no le queda el
+   otro -su `::after` es la marca de registro-.
    Por debajo de 768px no se dibujan: con `--pad` en 24 el aire no da. */
 .page { display: flex; flex-direction: column; flex-grow: 1; position: relative; }
+.footer { position: relative; }
 @media (min-width: 768px) {
+  .nav::before,
   .page::before,
-  .page::after {
+  .footer::before {
     content: "";
     position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: var(--color-line);
+    inset: 0 var(--frame-x);
+    border-left: 1px solid var(--color-line);
+    border-right: 1px solid var(--color-line);
     pointer-events: none;
   }
-  .page::before { left: var(--frame-x); }
-  .page::after { right: var(--frame-x); }
 }
 
 /* En una página corta, sin esto el sobrante del flex se acumula al final: la línea

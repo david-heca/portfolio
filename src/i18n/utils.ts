@@ -8,8 +8,6 @@ export function getHome(lang: Lang): string {
   return lang === defaultLang ? '/' : `/${lang}/`;
 }
 
-/** El otro idioma. Vive aquí por lo mismo que `localizePath`: dos copias de la
- *  bifurcación acaban divergiendo. */
 export function otherLang(lang: Lang): Lang {
   return lang === defaultLang ? 'en' : defaultLang;
 }
