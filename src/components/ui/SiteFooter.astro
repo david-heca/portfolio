@@ -24,6 +24,13 @@ const channels = [
   <div class="footer__inner container">
     <a href={`${home}#top`} class="footer__brand">david<span>herrera</span></a>
 
+    <p class="meta footer__made">
+      {t("common.footer.madeWith")}
+      <Icon name="ph:heart-duotone" class="footer__heart" aria-hidden="true" />
+      <span class="sr-only">{t("common.footer.love")}</span>
+      {t("common.footer.madeFrom")}
+    </p>
+
     <p class="meta">© {year} · v{pkg.version}</p>
 
     <div class="footer__channels">
@@ -38,14 +45,26 @@ const channels = [
 </footer>
 
 <style>
+  /* En estrecho va en columna: en fila, `space-between` separa tres piezas cortas
+     hasta dejar un hueco en medio más ancho que ellas. El aire de arriba es mayor
+     que el de abajo porque el notch de los canales se come el borde superior. */
   .footer__inner {
     position: relative;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-    padding-block: 40px 32px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding-block: 52px 32px;
+  }
+  @media (min-width: 640px) {
+    .footer__inner {
+      flex-direction: row;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px 24px;
+      padding-block: 40px 32px;
+    }
   }
   .footer__brand {
     font-family: var(--font-display);
@@ -54,6 +73,18 @@ const channels = [
     color: var(--color-ink);
   }
   .footer__brand span { color: var(--color-ink-2); }
+
+  /* 6px y no 8 de rejilla: el corazón va dentro de una frase, así que lo que tiene
+     que parecer a los lados es un espacio de palabra, no una separación. */
+  .footer__made {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  /* Duotone es una sola tinta: las dos capas son currentColor y la de relleno va
+     al 20%, así que hereda el gris de la línea sin salirse de la paleta. Va un
+     escalón por encima del texto porque un corazón no llena su caja. */
+  .footer__heart { font-size: var(--icon); }
 
   .footer__channels {
     position: absolute;

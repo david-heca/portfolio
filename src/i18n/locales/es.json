@@ -288,6 +288,11 @@
       "linkedin": "LinkedIn",
       "x": "X"
     },
+    "footer": {
+      "madeWith": "Hecho con",
+      "love": "amor",
+      "madeFrom": "desde México"
+    },
     "langHint": {
       "label": "Cambiar de idioma",
       "text": "Este sitio también está en español.",

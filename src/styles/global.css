@@ -13,7 +13,7 @@
 :root {
   /* tipografías - un rol cada una */
   --font-display: "Junicode", Georgia, serif;
-  --font-text: "Schibsted Grotesk Variable", system-ui, sans-serif;
+  --font-text: "Outfit Variable", system-ui, sans-serif;
   --font-mono: "Maple Mono", "SF Mono", ui-monospace, monospace;
 
   /* Paleta sin tono: blanco puro, negro puro y grises neutros. Un fondo teñido es

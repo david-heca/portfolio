@@ -9,7 +9,7 @@ route trees for the long-form writing. Achromatic, typographic, no framework.
 
 - **Astro 7** - static output with View Transitions; no UI framework, no islands, no tests, no linter
 - **Custom CSS** - token-driven design system in `global.css`, no utility framework
-- **Schibsted Grotesk · Maple Mono · Junicode** - the first two via `@fontsource`, Junicode self-hosted in `public/assets/fonts/` (it isn't on Fontsource; only the italic, subset to latin)
+- **Outfit · Maple Mono · Junicode** - the first two via `@fontsource`, Junicode self-hosted in `public/assets/fonts/` (it isn't on Fontsource; only the italic, subset to latin)
 - **Phosphor icons** via `astro-icon` + `@iconify-json/ph`
 - **Cloudflare Workers** - static assets deployed with `wrangler`; response headers in `public/_headers`
 
@@ -81,7 +81,7 @@ Token-driven - to retune the look you edit CSS variables in
 - **No hue.** Pure white, pure black and neutral grays; there is no accent color anywhere. Emphasis is carried by weight, underline and inversion (ink background, paper text) for the primary action
 - **A visible frame, and it measures something.** Two vertical edges mark the outer bound of the content box and every section closes with a rule that bleeds past the container to the edge of the screen
 - **Square corners** (`--radius` at 0). The only circles left are the ones that are dots
-- **One role per typeface**: Schibsted Grotesk for titles, reading and UI; Maple Mono for uppercase tracked labels, tags and figures; Junicode italic signs in exactly two places (the nav wordmark and one `<em>`), and never carries a headline
+- **One role per typeface**: Outfit for titles, reading and UI; Maple Mono for uppercase tracked labels, tags and figures; Junicode italic signs in exactly two places (the nav wordmark and one `<em>`), and never carries a headline
 - 4px rhythm for the space *between* elements; the padding of anything with a background is shape, calibrated against its own text
 - Light/dark/system theme with a no-flash bootstrap, preserved across View Transitions; every animation respects `prefers-reduced-motion`
 
