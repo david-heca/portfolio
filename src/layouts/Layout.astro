@@ -135,18 +135,6 @@ const personSchema = {
     <!-- `.reveal` solo se esconde bajo `.js`: sin JS el contenido se ve entero. -->
     <script is:inline>document.documentElement.classList.add("js");</script>
 
-    <!-- En Safari el barrido circular del cambio de tema no funciona, así que se
-         desactivan las View Transitions y el tema cambia en seco. `ThemeToggle`
-         hace lo mismo en móvil, donde el efecto tampoco aporta. -->
-    <script is:inline>
-      if (
-        typeof navigator !== "undefined" &&
-        /^((?!chrome|android|crios|fxios).)*safari/i.test(navigator.userAgent)
-      ) {
-        document.startViewTransition = undefined;
-      }
-    </script>
-
     <ClientRouter />
 
     <script is:inline>

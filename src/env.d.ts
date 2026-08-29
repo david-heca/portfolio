@@ -5,10 +5,6 @@ declare global {
     /** El listener de `prefers-color-scheme` ya está enlazado (Layout). */
     __themeMediaListener?: boolean;
   }
-
-  interface Document {
-    startViewTransition?: (callback: () => void) => { finished: Promise<void> };
-  }
 }
 
 export {};

@@ -531,23 +531,6 @@ img, svg { display: block; max-width: 100%; }
 /* Sin esto el estado inicial del toggle entra rotando al recargar. */
 html:not(.theme-ready) .theme-toggle__glyph { transition: none; }
 
-/* ----- barrido circular al cambiar de tema -----
-   Acotado a .theme-switching para no pisar las transiciones de navegación. */
-html.theme-switching::view-transition-old(root),
-html.theme-switching::view-transition-new(root) {
-  animation: none;
-  mix-blend-mode: normal;
-}
-html.theme-switching::view-transition-old(root) { z-index: 1; }
-html.theme-switching::view-transition-new(root) {
-  z-index: 2;
-  animation: theme-sweep 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-@keyframes theme-sweep {
-  from { clip-path: circle(0 at var(--theme-x) var(--theme-y)); }
-  to { clip-path: circle(var(--theme-r) at var(--theme-x) var(--theme-y)); }
-}
-
 /* ----- reveal al hacer scroll -----
    Solo bajo `.js`: sin JS el contenido nace visible. */
 .js .reveal {
