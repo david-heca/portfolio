@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import { localizePath, useTranslations, type Lang } from "@i18n/utils";
 import { localizedEntries } from "@/data/collections";
 
@@ -35,7 +36,10 @@ const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
             </time>
 
             <span class="index-row__body">
-              <span class="card-title index-row__title">{entry.data.title}</span>
+              <span class="card-title index-row__title">
+                {entry.data.title}
+                <Icon name="ph:arrow-right" aria-hidden="true" />
+              </span>
               <span class="prose-sm index-row__summary">{entry.data.summary}</span>
             </span>
           </a>
@@ -69,6 +73,23 @@ const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
   .index-row__title { display: block; transition: color var(--t-fast) ease; }
   .index-row__summary { display: block; margin-top: 10px; max-width: var(--measure); }
 
+  /* Dentro del título y no en una columna aparte: en móvil la fila solo tiene una,
+     y la flecha señala al título, no a la caja. */
+  .index-row__title [data-icon] {
+    display: inline-block;
+    /* Alineación óptica contra la mayúscula del título. Fuera de rejilla a propósito. */
+    vertical-align: -0.1em;
+    margin-left: 8px;
+    font-size: var(--icon);
+    color: var(--color-ink-3);
+    transition: color var(--t-fast) ease, transform var(--t-base) ease;
+  }
+
   .index-row__link:hover .index-row__title,
   .index-row__link:focus-visible .index-row__title { color: var(--color-accent); }
+  .index-row__link:hover .index-row__title [data-icon],
+  .index-row__link:focus-visible .index-row__title [data-icon] {
+    color: var(--color-accent);
+    transform: translateX(4px);
+  }
 </style>

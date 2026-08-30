@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import { useTranslations, type Lang } from "@i18n/utils";
 import { studies, certifications } from "@/data/education";
 
@@ -48,8 +49,8 @@ const certs: Row[] = certifications.map(({ key, year }) => ({
 }));
 
 const groups = [
-  { label: t("education.academicTitle"), entries: academic },
-  { label: t("education.certsTitle"), entries: certs },
+  { label: t("education.academicTitle"), icon: "ph:graduation-cap", entries: academic },
+  { label: t("education.certsTitle"), icon: "ph:certificate", entries: certs },
 ];
 ---
 
@@ -62,7 +63,10 @@ const groups = [
   <div class="edu__groups">
     {groups.map((g, i) => (
       <div class:list={["edu__group", "reveal", `reveal-${Math.min(i + 1, 3)}`]}>
-        <h3 class="label edu__label">{g.label}</h3>
+        <h3 class="label edu__label">
+          <Icon name={g.icon} aria-hidden="true" />
+          {g.label}
+        </h3>
         <ul class="edu__list">
           {g.entries.map((e) => (
             <li
@@ -91,10 +95,13 @@ const groups = [
   .edu__groups { display: flex; flex-direction: column; gap: 48px; }
 
   .edu__label {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     padding-bottom: 12px;
     border-bottom: 1px solid var(--color-line);
   }
+  .edu__label [data-icon] { font-size: var(--icon); color: var(--color-ink-3); }
 
   .edu__list { display: flex; flex-direction: column; }
 

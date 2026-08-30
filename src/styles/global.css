@@ -36,7 +36,7 @@
 
   /* escala tipográfica - se elige por rol */
   --text-label-sm: 11px;   /* mono micro: claves de spec, meta de card */
-  --text-label: 12px;      /* etiquetas mono, periodos, ubicación del hero */
+  --text-label: 12px;      /* etiquetas mono, periodos, tags */
   --text-meta: 13.5px;     /* frase de apoyo: institución, emisor, notas, pie */
   --text-sm: 14.5px;       /* prosa secundaria: descripciones, notas, logros */
   --text-body: 16px;       /* prosa principal: bio, descripción destacada, canales */
@@ -491,6 +491,25 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-ink);
   background: var(--color-bg-2);
 }
+
+/* Forma del enlace del nav. Vive aquí porque la comparten los enlaces de la barra
+   y el conmutador de idioma, y tienen que ser la misma caja: una segunda copia
+   divergiría en el padding. El estado -spy, `[aria-current]`- lo pone cada uso. */
+.pill--nav {
+  gap: 8px;
+  font-size: var(--text-meta);
+  line-height: var(--leading-flat);
+  font-weight: var(--weight-medium);
+  padding: 8px 13px;
+}
+.pill--nav [data-icon] {
+  width: var(--icon);
+  height: var(--icon);
+  font-size: var(--icon);
+  color: var(--color-ink-3);
+  transition: color var(--t-fast) ease;
+}
+.pill--nav:hover [data-icon] { color: var(--color-ink-2); }
 
 /* ----- tag (single style) ----- */
 .tag {

@@ -46,7 +46,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
 
     <nav class="nav__links" aria-label={t("nav.primaryLabel")}>
       {sectionItems.map((item) => (
-        <a href={anchor(item.id)} class="pill nav__link" data-spy={item.id}>
+        <a href={anchor(item.id)} class="pill pill--nav nav__link" data-spy={item.id}>
           <Icon name={item.icon} aria-hidden="true" />
           {item.label}
         </a>
@@ -54,7 +54,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
       {routeItems.map((item) => (
         <a
           href={item.href}
-          class="pill nav__link"
+          class="pill pill--nav nav__link"
           aria-current={isCurrent(item.href) ? "page" : undefined}
         >
           <Icon name={item.icon} aria-hidden="true" />
@@ -135,13 +135,6 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
     align-items: center;
   }
   @media (min-width: 1024px) { .nav__links { display: inline-flex; } }
-  .nav__link {
-    gap: 8px;
-    font-size: var(--text-meta);
-    line-height: var(--leading-flat);
-    font-weight: var(--weight-medium);
-    padding: 8px 13px;
-  }
   /* Spy de la portada: cambia en cada scroll, así que solo sube de gris a tinta.
      Mover o pintar algo más convierte el nav en un semáforo. */
   .nav__link.active { color: var(--color-ink); }
@@ -153,14 +146,6 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
     color: var(--color-bg);
   }
 
-  .nav__link [data-icon] {
-    width: var(--icon);
-    height: var(--icon);
-    font-size: var(--icon);
-    color: var(--color-ink-3);
-    transition: color var(--t-fast) ease;
-  }
-  .nav__link:hover [data-icon] { color: var(--color-ink-2); }
   .nav__link.active [data-icon] { color: var(--color-ink); }
   .nav__link[aria-current="page"] [data-icon] { color: var(--color-bg); }
 

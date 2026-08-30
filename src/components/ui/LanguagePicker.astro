@@ -26,7 +26,7 @@ const label = expanded ? nativeName : target.toUpperCase();
   hreflang={target}
   lang={target}
   data-target-lang={target}
-  class:list={["pill", "lang-switch", expanded && "lang-switch--expanded"]}
+  class:list={["pill", "pill--nav", "lang-switch", expanded && "lang-switch--expanded"]}
   aria-label={tt("common.langHint.cta")}
   title={nativeName}
 >
@@ -35,36 +35,9 @@ const label = expanded ? nativeName : target.toUpperCase();
 </a>
 
 <style>
-  .lang-switch {
-    gap: 8px;
-    height: 32px;
-    padding: 0 8px;
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: var(--track-label);
-  }
-  /* Caja fija: evita el salto cuando acaba de cargar la mono. */
-  .lang-switch [data-icon] {
-    width: var(--icon);
-    height: var(--icon);
-    font-size: var(--icon);
-  }
-  .lang-switch span {
-    line-height: var(--leading-flat);
-    /* Compensa el letter-spacing sobrante tras la última letra. Va atado al mismo
-       token que lo genera: si divergen, la etiqueta se descentra en la píldora. */
-    margin-right: calc(-1 * var(--track-label));
-    /* Nudge óptico: las mayúsculas no usan el hueco del descendente. El valor
-       coincide con --track-label-sm por casualidad; no es tracking, no lo tokenices. */
-    position: relative;
-    top: 0.08em;
-  }
-
-  .lang-switch--expanded {
-    font-size: var(--text-sm);
-    letter-spacing: var(--track-tag);
-  }
-  .lang-switch--expanded span { margin-right: calc(-1 * var(--track-tag)); }
+  /* Toda la caja sale de `.pill--nav`: aquí solo lo que no comparte con un enlace
+     del nav. En sans y sin tracking, así que no hace falta compensar nada. */
+  .lang-switch--expanded { font-size: var(--text-sm); }
 </style>
 
 <script>

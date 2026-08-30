@@ -37,7 +37,10 @@ const topics = t<string[]>("speaking.topics");
   </figure>
 
   <div class="speaking__topics reveal reveal-2">
-    <p class="label">{t("speaking.topicsLabel")}</p>
+    <p class="label speaking__topics-label">
+      <Icon name="ph:hash" aria-hidden="true" />
+      {t("speaking.topicsLabel")}
+    </p>
     <div class="tag-row">{topics.map((tp) => <span class="tag">{tp}</span>)}</div>
   </div>
 </section>
@@ -72,6 +75,9 @@ const topics = t<string[]>("speaking.topics");
   }
   .speaking__venue { display: inline-flex; align-items: center; gap: 8px; color: var(--color-on-scrim); }
   .speaking__venue [data-icon] { font-size: var(--icon-sm); }
+
+  .speaking__topics-label { display: inline-flex; align-items: center; gap: 8px; }
+  .speaking__topics-label [data-icon] { font-size: var(--icon-sm); color: var(--color-ink-3); }
 
   .speaking__topics {
     display: flex;

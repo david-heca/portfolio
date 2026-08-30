@@ -14,14 +14,9 @@ const t = useTranslations(lang);
 
 <section id="top" class="hero container">
   <div class="hero__text">
-    <p class="hero__place reveal">
-      <Icon name="ph:map-pin" aria-hidden="true" />
-      {t("hero.location")}
-    </p>
+    <p class="section-title hero__thesis reveal">{t("hero.thesis")}</p>
 
-    <p class="section-title hero__thesis reveal reveal-1">{t("hero.thesis")}</p>
-
-    <p class="lead hero__intro reveal reveal-2">{t("hero.intro")}</p>
+    <p class="lead hero__intro reveal reveal-1">{t("hero.intro")}</p>
 
     <div class="hero__who reveal reveal-2">
       <h1 class="hero__name">David Herrera</h1>
@@ -30,8 +25,14 @@ const t = useTranslations(lang);
     </div>
 
     <div class="hero__actions reveal reveal-3">
-      <a href="#projects" class="btn btn--primary">{t("hero.ctaProjects")}</a>
-      <a href="#contact" class="btn btn--ghost">{t("hero.ctaContact")}</a>
+      <a href="#projects" class="btn btn--primary">
+        <Icon name="ph:squares-four" aria-hidden="true" />
+        {t("hero.ctaProjects")}
+      </a>
+      <a href="#contact" class="btn btn--ghost">
+        <Icon name="ph:paper-plane-tilt" aria-hidden="true" />
+        {t("hero.ctaContact")}
+      </a>
     </div>
   </div>
 
@@ -69,23 +70,9 @@ const t = useTranslations(lang);
     .hero { grid-template-columns: 1.35fr 1fr; gap: 64px; }
   }
 
-  /* La única versalita del sitio: aquí es un dato, no un rótulo. */
-  .hero__place {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: var(--track-label);
-    text-transform: uppercase;
-    color: var(--color-ink-2);
-  }
-  .hero__place [data-icon] { font-size: var(--icon-sm); color: var(--color-ink-3); }
-
   .hero__thesis {
     --display-size: var(--display-lg);
     --display-leading: 1;
-    margin-top: 24px;
     max-width: 15ch;
   }
 

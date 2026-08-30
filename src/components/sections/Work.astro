@@ -23,6 +23,9 @@ interface Company {
   span: string;
   loc?: string;
   mode?: string;
+  /** Va aquí y no en el locale: la modalidad es un hecho de la empresa, y el
+   *  locale solo guarda cómo se dice. */
+  modeIcon?: string;
   roles: Role[];
 }
 
@@ -32,6 +35,7 @@ const companies: Company[] = [
     span: t("work.companies.hypertech.totalPeriod"),
     loc: t("work.companies.hypertech.location"),
     mode: t("work.companies.hypertech.workMode"),
+    modeIcon: "ph:house",
     roles: [
       {
         title: t("work.companies.hypertech.roles.appliedai.title"),
@@ -47,6 +51,7 @@ const companies: Company[] = [
     span: t("work.companies.baacc.totalPeriod"),
     loc: t("work.companies.baacc.location"),
     mode: t("work.companies.baacc.workMode"),
+    modeIcon: "ph:buildings",
     roles: [
       {
         title: t("work.companies.baacc.roles.architect.title"),
@@ -76,6 +81,7 @@ const companies: Company[] = [
     span: t("work.companies.dec.totalPeriod"),
     loc: t("work.companies.dec.location"),
     mode: t("work.companies.dec.workMode"),
+    modeIcon: "ph:house",
     roles: [
       {
         title: t("work.companies.dec.roles.webdev.title"),
@@ -100,7 +106,13 @@ const companies: Company[] = [
       <article class="work__company reveal">
         <div class="work__company-head">
           <h3 class="section-title work__company-name">{co.name}</h3>
-          <span class="meta">{[co.span, co.loc, co.mode].filter(Boolean).join(" · ")}</span>
+          <p class="meta work__company-meta">
+            <span><Icon name="ph:calendar-blank" aria-hidden="true" />{co.span}</span>
+            {co.loc && <span><Icon name="ph:map-pin" aria-hidden="true" />{co.loc}</span>}
+            {co.mode && co.modeIcon && (
+              <span><Icon name={co.modeIcon} aria-hidden="true" />{co.mode}</span>
+            )}
+          </p>
         </div>
 
         <div class="work__roles">
@@ -160,6 +172,19 @@ const companies: Company[] = [
     border-bottom: 1px solid var(--color-line);
   }
   .work__company-name { --display-size: var(--display-sm); margin: 0; }
+
+  /* En flujo, no en flex: la cabecera alinea por línea base y un SVG como primer
+     ítem flex no tiene, así que la sintetiza y descuadra la fila contra el título. */
+  .work__company-meta span { white-space: nowrap; }
+  .work__company-meta span:not(:last-child) { margin-right: 16px; }
+  .work__company-meta [data-icon] {
+    display: inline-block;
+    /* Alineación óptica contra la minúscula del texto. Fuera de rejilla a propósito. */
+    vertical-align: -0.15em;
+    margin-right: 8px;
+    font-size: var(--icon-sm);
+    color: var(--color-ink-3);
+  }
 
   .work__roles { display: flex; flex-direction: column; gap: 36px; }
 

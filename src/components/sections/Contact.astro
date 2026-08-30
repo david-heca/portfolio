@@ -26,7 +26,10 @@ const t = useTranslations(lang);
       <span class="contact__email">{email}</span>
     </div>
 
-    <p class="meta contact__note">{t("contact.cta.note")}</p>
+    <p class="meta contact__note">
+      <Icon name="ph:clock" aria-hidden="true" />
+      {t("contact.cta.note")}
+    </p>
   </div>
 </section>
 
@@ -41,5 +44,11 @@ const t = useTranslations(lang);
     margin-top: 32px;
   }
   .contact__email { font-size: var(--text-sm); color: var(--color-ink-2); }
-  .contact__note { margin: 16px 0 0; }
+  .contact__note {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 16px 0 0;
+  }
+  .contact__note [data-icon] { font-size: var(--icon-sm); color: var(--color-ink-3); }
 </style>
