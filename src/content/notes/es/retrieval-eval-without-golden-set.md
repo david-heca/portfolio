@@ -1,70 +1,61 @@
 ---
-title: "Evaluar retrieval cuando el cliente no tiene conjunto dorado"
-summary: "Ningún cliente llega con preguntas y respuestas etiquetadas, y casi ninguno va a construirlas. Cómo medir de todas formas si el retrieval mejoró."
+title: "Evaluar retrieval cuando el cliente no tiene golden set"
+summary: "Ningún cliente llega con las preguntas etiquetadas y casi ninguno las va a etiquetar. Cómo medir si el retrieval mejoró sin ese punto de partida."
 date: 2026-08-26
 tags: ["RAG", "Evaluación", "MLOps"]
 draft: false
 ---
 
-Ninguno de los clientes para los que he montado un RAG tenía un conjunto de preguntas y respuestas
-etiquetado, y ninguno iba a construirlo. Construirlo significa sentar dos o tres días a la persona
-que más sabe del negocio a escribir preguntas y marcar qué documento contesta cada una, y esa
-persona ya tiene un trabajo.
+Ninguno de los clientes para los que armé un RAG tenía preguntas etiquetadas contra sus documentos,
+y ninguno iba a ponerse a etiquetarlas. Etiquetar significa ocupar dos o tres días a la persona que
+más sabe del negocio, y esa persona ya tiene trabajo.
 
-La literatura de evaluación empieza justo donde yo no podía empezar: dando ese conjunto por hecho.
-Lo que sigue es cómo llegué a medir sin él.
+Casi todo lo que se ha escrito sobre evaluación de retrieval arranca dando ese golden set por
+hecho. Así fue como acabé midiendo sin él.
 
-## Primero, las preguntas que ya existen
+## Las preguntas que ya existen
 
-Antes de generar nada conviene buscar dónde pregunta ya la gente: los tickets de soporte, el correo
-del equipo que hoy contesta esas dudas a mano, el buscador de la intranet y, en cuanto haya algo
-que enseñar, el log de la propia demo.
+Antes de generar nada busco dónde pregunta ya la gente: los tickets de soporte, el buzón del equipo
+que hoy contesta esas dudas a mano, el buscador de la intranet y, en cuanto hay demo, sus propios
+logs.
 
-Esas preguntas traen algo que ninguna pregunta sintética tiene: el vocabulario de quien pregunta,
-que no es el del documento. Alguien escribe «cuánto llevamos gastado en el proyecto X» y el
-documento dice «importe devengado acumulado». Ese hueco entre las dos formas de decirlo es
-exactamente lo que estás evaluando.
+Esas preguntas traen el vocabulario de quien pregunta, que no es el del documento. Alguien escribe
+«cuánto llevamos gastado en el proyecto X» y el documento dice «importe devengado acumulado». Medir
+sobre ese hueco es medir lo que falla en producción.
 
-Etiquetarlas sale más barato de lo que parece, porque no hace falta la respuesta: basta con marcar
-qué documento -o qué página- la contiene. Con cincuenta preguntas marcadas así ya se puede medir
-recall@k, que es la pregunta que importa. ¿Entra el documento correcto en el contexto? Si no entra,
-no hay prompt que lo arregle después.
+Etiquetarlas sale barato porque no hace falta la respuesta: basta marcar qué documento -o qué
+página- la contiene. Con cincuenta ya se calcula recall@k. ¿Entra el documento correcto en el
+contexto? Si no entra, no hay prompt que lo arregle después.
 
-## Después, generar el resto desde el corpus
+## Generar el resto desde el corpus
 
-Cuando no se juntan ni cincuenta, se rellena al revés: coges un fragmento del corpus, le pides a un
-modelo la pregunta que ese fragmento contesta, y ya tienes el par. Sale gratis y en cantidad.
+Cuando no se juntan ni cincuenta, relleno al revés: tomo un fragmento del corpus, le pido a un
+modelo la pregunta que ese fragmento contesta y ya tengo el par. Sale gratis y en cantidad, con un
+sesgo grande encima: la pregunta se escribe con las palabras del fragmento, así que medir contra
+ella es medir cuánto se parece un texto a sí mismo. Todo puntúa alto y el número se queda quieto
+cuando debería moverse.
 
-Y sale sesgado. La pregunta se escribe con las palabras del fragmento, así que medir contra ella es
-medir cuánto se parece un texto a sí mismo. Todo puntúa alto, ningún cambio parece empeorar nada y
-el número se queda quieto cuando debería moverse.
+El sesgo se recorta pidiendo la pregunta como la escribiría alguien que no ha leído el documento
+-en el registro del usuario real, con el nombre interno de las cosas- y descartando la que repite
+literal un término poco frecuente del fragmento. Aun así lo uso como alarma: si un cambio hunde el
+número, algo se rompió. Cuando sube, no me lo creo.
 
-Ayuda, a medias:
+## Comparar dos versiones
 
-- Pedir la pregunta como la escribiría quien no ha leído el documento, en el registro del usuario
-  real: corta, abreviada y con el nombre interno de las cosas.
-- Descartar la pregunta que repite literal un término poco frecuente del fragmento.
+Puntuar una respuesta del uno al cinco no me ha funcionado nunca. La misma persona no puntúa igual
+el martes que el jueves, y dos personas no coinciden jamás.
 
-A medias porque un conjunto sintético sirve para detectar que algo se ha roto, no para afirmar que
-algo ha mejorado.
-
-## Comparar dos versiones antes que puntuar una
-
-Puntuar una respuesta del uno al cinco no aguanta: la misma persona no puntúa igual el martes que
-el jueves, y dos personas no puntúan igual nunca.
-
-Preguntar cuál de dos es mejor sí aguanta. Congelas el conjunto de preguntas, generas las
-respuestas con la configuración vieja y con la nueva, las pones al lado sin decir cuál es cuál y
-quien juzga elige. Yo uso un modelo de juez: a mano nadie se relee el conjunto entero cada vez que
-toca un parámetro, y con el modelo el volumen deja de importar. Lo que sí hay que hacer es revisar
-unos cuantos de sus veredictos: si el juez no coincide contigo en los casos fáciles, no vas a saber
-si lo que sube es el sistema o su manía.
+Elegir entre dos aguanta mucho mejor. Congelo el conjunto de preguntas, genero las respuestas con
+la configuración vieja y con la nueva, las pongo lado a lado sin decir cuál es cuál y quien juzga
+elige. Uso un modelo de juez porque a mano nadie se relee el conjunto entero cada vez que muevo un
+parámetro, y con el modelo el volumen deja de importar. Con la condición de revisar unos cuantos de
+sus veredictos: si el juez no coincide conmigo en los casos fáciles, no voy a saber si lo que sube
+es el sistema o su manía.
 
 ## Lo que hay que versionar
 
 El conjunto de preguntas, congelado y en el repositorio. Los resultados, en el mismo commit que el
-prompt, el modelo y los parámetros de troceado que los produjeron. Sin eso, «esto ha mejorado» no
-se puede comparar con nada dentro de dos semanas, que es justo cuando alguien lo pregunta.
+prompt, el modelo y los parámetros de chunking que los produjeron. Dos semanas después alguien
+pregunta si aquello mejoró, y sin eso no hay con qué comparar.
 
-Nada de esto sustituye a un conjunto etiquetado por alguien que conozca el negocio. Sirve para no
-depender de que llegue.
+Nada de esto es un golden set. Es lo que uso mientras no lo hay, que hasta ahora ha sido siempre.
