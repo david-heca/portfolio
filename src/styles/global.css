@@ -92,7 +92,10 @@ h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
 ul, ol, menu { list-style: none; }
 table { border-collapse: collapse; }
 
-html { background-color: var(--color-bg); }
+/* `color-scheme` para que barras de scroll, controles nativos y el marcador de
+   <details> sigan al tema del sitio, no al del sistema. */
+html { background-color: var(--color-bg); color-scheme: light; }
+html.dark { color-scheme: dark; }
 
 html, body {
   margin: 0;

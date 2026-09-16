@@ -32,7 +32,7 @@ const t = useTranslations(lang);
     font-size: var(--icon);
     opacity: 0;
     transform: rotate(-90deg) scale(0.6);
-    transition: opacity 0.25s ease, transform 0.35s ease;
+    transition: opacity var(--t-base) ease, transform var(--t-base) ease;
   }
   :global(html[data-theme-pref="light"]) .theme-toggle__glyph--light,
   :global(html[data-theme-pref="dark"]) .theme-toggle__glyph--dark,
@@ -47,33 +47,17 @@ const t = useTranslations(lang);
   type ThemePref = "light" | "dark" | "system";
 
   function setupThemeToggle() {
+    const theme = window.__theme;
     const root = document.documentElement;
     const buttons = document.querySelectorAll<HTMLButtonElement>(".theme-toggle");
-    if (!buttons.length) return;
+    if (!theme || !buttons.length) return;
 
-    const THEME_KEY = "color-theme";
     const CYCLE: ThemePref[] = ["light", "dark", "system"];
     const NEXT_LABEL: Record<ThemePref, string> = {
       light: "toLight",
       dark: "toDark",
       system: "toSystem",
     };
-
-    function getPref(): ThemePref {
-      const v = localStorage.getItem(THEME_KEY);
-      return v === "light" || v === "dark" ? v : "system";
-    }
-
-    function resolve(pref: ThemePref): "light" | "dark" {
-      if (pref !== "system") return pref;
-      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    }
-
-    function apply(pref: ThemePref) {
-      root.classList.toggle("dark", resolve(pref) === "dark");
-      root.dataset.themePref = pref;
-      syncLabels(pref);
-    }
 
     function syncLabels(pref: ThemePref) {
       const next = CYCLE[(CYCLE.indexOf(pref) + 1) % CYCLE.length];
@@ -87,14 +71,20 @@ const t = useTranslations(lang);
       });
     }
 
+    /** El cambio es seco a propósito: un fundido entre paletas invertidas pasa
+     *  por gris sobre gris, y lo oscuro parece llegar tarde. Solo gira el glifo. */
     function cycle() {
-      const next = CYCLE[(CYCLE.indexOf(getPref()) + 1) % CYCLE.length];
-      if (next === "system") localStorage.removeItem(THEME_KEY);
-      else localStorage.setItem(THEME_KEY, next);
-      apply(next);
+      const next = CYCLE[(CYCLE.indexOf(theme!.pref()) + 1) % CYCLE.length];
+      try {
+        if (next === "system") localStorage.removeItem(theme!.key);
+        else localStorage.setItem(theme!.key, next);
+      } catch {}
+
+      theme!.paint(next);
+      syncLabels(next);
     }
 
-    syncLabels(getPref());
+    syncLabels(theme.pref());
     requestAnimationFrame(() => root.classList.add("theme-ready"));
     buttons.forEach((b) => {
       if (b.dataset.ready) return;

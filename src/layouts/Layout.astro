@@ -88,8 +88,9 @@ const personSchema = {
       name="robots"
       content={noindex ? "noindex, follow" : "index, follow, max-image-preview:large"}
     />
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-    <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <!-- Sin media query: lo pinta el script del tema, para que la barra del
+         navegador siga al tema elegido y no al del sistema. -->
+    <meta name="theme-color" content="#ffffff" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -135,54 +136,53 @@ const personSchema = {
     <ClientRouter />
 
     <script is:inline>
-      function setThemeOnNavigation() {
-        const themePreference = localStorage.getItem("color-theme") || "system";
-        const resolvedTheme =
-          themePreference === "system"
-            ? window.matchMedia("(prefers-color-scheme: dark)").matches
-              ? "dark"
-              : "light"
-            : themePreference;
+      /* Única implementación de "pintar el tema": la clase, la preferencia y el
+         color de la barra del navegador. `ThemeToggle` solo decide cuál toca. */
+      (function () {
+        var KEY = "color-theme";
+        var media = window.matchMedia("(prefers-color-scheme: dark)");
+        var root = document.documentElement;
 
-        if (resolvedTheme === "dark") {
-          document.documentElement.classList.add("dark");
-        } else {
-          document.documentElement.classList.remove("dark");
-        }
-
-        document.documentElement.dataset.themePref = themePreference;
-      }
-
-      document.addEventListener("astro:before-swap", (e) => {
-        const currentTheme =
-          document.documentElement.classList.contains("dark");
-        if (currentTheme) {
-          e.newDocument.documentElement.classList.add("dark");
-        }
-        // Los scripts inline de <head> no se reejecutan al hacer swap.
-        e.newDocument.documentElement.dataset.themePref =
-          document.documentElement.dataset.themePref || "system";
-      });
-
-      document.addEventListener("astro:after-swap", setThemeOnNavigation);
-
-      if (!window.__themeMediaListener) {
-        const media = window.matchMedia("(prefers-color-scheme: dark)");
-        const handler = () => {
-          const preference = localStorage.getItem("color-theme");
-          if (preference === "system" || !preference) {
-            setThemeOnNavigation();
+        function pref() {
+          try {
+            var v = localStorage.getItem(KEY);
+            return v === "light" || v === "dark" ? v : "system";
+          } catch (e) {
+            return "system";
           }
-        };
-
-        if (media.addEventListener) {
-          media.addEventListener("change", handler);
         }
 
-        window.__themeMediaListener = true;
-      }
+        function paint(p) {
+          var dark = p === "dark" || (p === "system" && media.matches);
+          root.classList.toggle("dark", dark);
+          root.dataset.themePref = p;
+          // Mismo valor que `--color-bg`. Va literal: en la primera pasada la hoja
+          // de estilos todavía no ha cargado y no se puede leer el token.
+          var meta = document.querySelector('meta[name="theme-color"]');
+          if (meta) meta.setAttribute("content", dark ? "#000000" : "#ffffff");
+        }
 
-      setThemeOnNavigation();
+        window.__theme = { key: KEY, pref: pref, paint: paint };
+
+        // Los scripts inline de <head> no se reejecutan al hacer swap: el documento
+        // nuevo hereda lo ya pintado para que no parpadee antes de `after-swap`.
+        document.addEventListener("astro:before-swap", function (e) {
+          var next = e.newDocument.documentElement;
+          if (root.classList.contains("dark")) next.classList.add("dark");
+          next.dataset.themePref = root.dataset.themePref || "system";
+        });
+        document.addEventListener("astro:after-swap", function () { paint(pref()); });
+
+        // `addEventListener` sobre MediaQueryList falta en Safari < 14: sin la guarda
+        // el script muere aquí y la página carga sin tema.
+        if (media.addEventListener) {
+          media.addEventListener("change", function () {
+            if (pref() === "system") paint("system");
+          });
+        }
+
+        paint(pref());
+      })();
     </script>
 
     <!-- Redirige solo con preferencia explícita: autodetectar aquí sacaría a los
