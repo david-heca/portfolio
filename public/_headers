@@ -4,10 +4,12 @@
 
 # `unsafe-inline` en script-src no es negociable: el arranque del tema y el
 # redirect por preferencia corren inline en <head> antes del paint, y con
-# `define:vars` su hash cambia por página y por idioma. El resto de directivas
-# cierran todo lo demás, que es de donde vendría un script ajeno.
+# `define:vars` su hash cambia por página y por idioma. `data:` en img-src es
+# para la onda: va en `mask` con data URI en global.css, y `mask-image` cae bajo
+# img-src; sin él se ve en dev -que no manda cabeceras- y no en producción. El
+# resto de directivas cierran todo lo demás, que es de donde vendría un script ajeno.
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
