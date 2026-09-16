@@ -8,11 +8,6 @@ export interface Props {
   lang: Lang;
 }
 
-interface Spec {
-  label: string;
-  value: string;
-}
-
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 
@@ -20,18 +15,11 @@ const items = projects.map((p) => ({
   ...p,
   title: t(`projects.list.${p.slug}.title`),
   desc: t(`projects.list.${p.slug}.description`),
-  specs: t<Spec[]>(`projects.list.${p.slug}.specs`),
-  statusLabel: t(`projects.status.${p.status}`),
-  href: p.link.kind === "private" ? undefined : p.link.href,
-  linkLabel: t(`projects.link.${p.link.kind}`),
 }));
 ---
 
 <section id="projects" class="section container">
-  <header class="sec-head">
-    <h2 class="section-title">{t("projects.headerTitle")}</h2>
-    <p class="prose">{t("projects.description")}</p>
-  </header>
+  <h2 class="section-title">{t("projects.title")}</h2>
 
   <ol class="projects">
     {items.map((p) => (
@@ -42,34 +30,18 @@ const items = projects.map((p) => ({
 
         <div class="project__body">
           <div class="project__head">
-            <h3 class="card-title">{p.title}</h3>
+            <h3 class="card-title">
+              {p.href ? (
+                <a href={p.href} target="_blank" rel="noopener noreferrer" class="card-link project__link">
+                  {p.title}<Icon name="ph:arrow-up-right" aria-hidden="true" />
+                </a>
+              ) : (
+                p.title
+              )}
+            </h3>
             <span class="rail">{p.year}</span>
           </div>
           <p class="prose-sm project__desc">{p.desc}</p>
-
-          <dl class="spec">
-            {p.specs.map((s) => (
-              <>
-                <dt class="label">{s.label}</dt>
-                <dd class="meta spec__value">{s.value}</dd>
-              </>
-            ))}
-            <dt class="label">{t("projects.stackLabel")}</dt>
-            <dd class="tag-row">
-              {p.tags.map((tag) => <span class="tag">{tag}</span>)}
-            </dd>
-          </dl>
-
-          <p class="facts project__facts">
-            <span><span class="dot"></span>{p.statusLabel}</span>
-            {p.href ? (
-              <a href={p.href} target="_blank" rel="noopener noreferrer" class="link">
-                {p.linkLabel}<Icon name="ph:arrow-up-right" aria-hidden="true" />
-              </a>
-            ) : (
-              <span><Icon name="ph:lock-simple" aria-hidden="true" />{p.linkLabel}</span>
-            )}
-          </p>
         </div>
       </li>
     ))}
@@ -82,10 +54,12 @@ const items = projects.map((p) => ({
   .project {
     display: flex;
     align-items: flex-start;
-    gap: 20px;
-    padding-block: 24px;
+    gap: var(--gap-row);
+    padding-block: 20px;
   }
   .project + .project { border-top: 1px solid var(--color-line); }
+  .project:first-child { padding-top: 0; }
+  .project:last-child { padding-bottom: 0; }
 
   .project__body { flex: 1; min-width: 0; }
 
@@ -95,24 +69,8 @@ const items = projects.map((p) => ({
     justify-content: space-between;
     gap: 16px;
   }
-  .project__desc { margin-top: 8px; }
+  .project__desc { margin-top: 4px; }
 
-  /* Las claves en mono y los valores en sans, a la misma altura: es una ficha,
-     no una tabla, así que no lleva filos entre pares. */
-  .spec {
-    display: grid;
-    grid-template-columns: max-content minmax(0, 1fr);
-    gap: 4px 16px;
-    margin-top: 16px;
-  }
-  /* Alineación óptica: la mono micro se apoya en la línea base de la sans, que
-     tiene más cuerpo. Fuera de rejilla a propósito. */
-  .spec dt { padding-top: 3px; }
-  .spec__value { color: var(--color-ink); }
-
-  /* Los tags son una fila más de la ficha: mismo cuerpo que el resto de valores.
-     Alineación óptica contra la mono micro. Fuera de rejilla a propósito. */
-  .spec .tag-row { gap: 4px 12px; padding-top: 2px; }
-
-  .project__facts { margin-top: 16px; }
+  .project__link:hover [data-icon],
+  .project__link:focus-visible [data-icon] { transform: translate(2px, -2px); }
 </style>

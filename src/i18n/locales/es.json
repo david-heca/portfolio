@@ -22,26 +22,8 @@
   },
   "notes": {
     "title": "Notas",
-    "description": "Notas de campo sobre lo que me encuentro llevando IA a producción.",
     "empty": "Todavía no hay notas publicadas.",
     "all": "Todas las notas"
-  },
-  "speaking": {
-    "title": "En el escenario",
-    "description": "Unas cien personas por sesión. Llevo sistemas que ya están en producción, con sus números.",
-    "venuesLabel": "Dónde",
-    "venues": [
-      "Data Day 2025",
-      "EGADE Business School - Tecnológico de Monterrey",
-      "UPVM Tultitlán",
-      "TESCo - TecNM"
-    ],
-    "topicsLabel": "Temas",
-    "topics": [
-      "IA generativa",
-      "RAG & MLOps",
-      "Ciencia de datos"
-    ]
   },
   "intro": {
     "role": "Applied AI Engineer",
@@ -52,218 +34,84 @@
       "paragraph2": "Me muevo por todo el stack, pero hoy mi trabajo es <strong>RAG, MCP y MLOps</strong> sobre datos corporativos: bases que nadie documentó, PDFs escaneados, Excels con quince pestañas."
     }
   },
-  "work": {
-    "headerTitle": "Trayectoria",
-    "description": "Tres empresas y cinco roles, de prácticas a Applied AI Engineer.",
-    "current": "Rol actual",
-    "companies": {
-      "hypertech": {
-        "name": "Hypertech",
-        "totalPeriod": "2026 - Actualidad",
-        "location": "Ciudad de México",
-        "workMode": "Remoto",
-        "roles": {
-          "appliedai": {
-            "title": "Applied AI Engineer",
-            "period": "Jul 2026 - Actualidad",
-            "type": "Tiempo completo",
-            "achievements": [
-              "Integro IA en los procesos internos del equipo y en el software financiero que la consultora construye para sus clientes."
-            ]
-          }
-        }
-      },
-      "baacc": {
-        "name": "BAACC Systems",
-        "totalPeriod": "2023 - 2026",
-        "location": "Estado de México",
-        "workMode": "Presencial",
-        "roles": {
-          "architect": {
-            "title": "AI Solutions Architect",
-            "period": "Mar 2025 - Jul 2026",
-            "type": "Tiempo completo",
-            "achievements": [
-              "Connie, de cero a producción: diseñé la plataforma RAG y escribí el 80% del sistema. Hoy la usan a diario tres clientes de la consultora.",
-              "Pipelines RAG end-to-end sobre Azure: ingestión, chunking, retrieval y serving, con observabilidad de prompts.",
-              "Servidores MCP que conectan las fuentes internas con clientes LLM: los modelos consumen tools sin glue code a medida.",
-              "Metí prácticas de MLOps en el equipo: evaluación de retrieval, versionado de prompts y de modelos."
-            ]
-          },
-          "fullstack": {
-            "title": "Fullstack Developer",
-            "period": "Ene 2024 - Mar 2025",
-            "type": "Tiempo completo",
-            "achievements": [
-              "Apps de escritorio en .NET y Python para piso de planta, en operación 24/7.",
-              "Apps web internas con .NET y DevExpress para flujos de operaciones.",
-              "Diseño y administración de bases de datos en SQL Server y PostgreSQL.",
-              "App Android con lector RFID para inventario y trazabilidad en campo."
-            ]
-          },
-          "junior": {
-            "title": "Junior Fullstack Developer",
-            "period": "Sep 2023 - Ene 2024",
-            "type": "Prácticas",
-            "achievements": [
-              "Módulos web y APIs internas.",
-              "Mantenimiento de bases de datos y documentación técnica del stack."
-            ]
-          }
-        }
-      },
-      "dec": {
-        "name": "DEC Marketing",
-        "totalPeriod": "Mar 2022 - Sep 2023",
-        "location": "Ciudad de México",
-        "workMode": "Remoto",
-        "roles": {
-          "webdev": {
-            "title": "Junior Web Developer",
-            "period": "Mar 2022 - Sep 2023",
-            "type": "Prácticas",
-            "achievements": [
-              "Sitios web y soporte con HTML, CSS, JavaScript y CMS: WordPress, Joomla, OpenCart.",
-              "Administración de hosting, certificados y dominios.",
-              "Gestión de las cuentas de correo corporativas."
-            ]
-          }
-        }
-      }
-    },
-    "showMore": "Ver más",
-    "showLess": "Ver menos"
-  },
-  "education": {
-    "headerTitle": "Cómo aprendo",
-    "description": "Dónde estudié y lo que sigo aprendiendo por mi cuenta.",
-    "ongoing": "Actualidad",
-    "academicTitle": "Académico",
-    "certsTitle": "Certificaciones",
-    "list": {
-      "platzi": {
-        "institution": "Platzi - Escuela de Tecnología",
-        "degree": "Industria de la Tecnología",
-        "description": "Donde me pongo al día: desarrollo web, IA y lo que vaya saliendo."
-      },
-      "tesco": {
-        "institution": "Tecnológico de Estudios Superiores de Coacalco (TESCo) - TecNM",
-        "degree": "Ing. en Tecnologías de la Información & Comunicaciones",
-        "description": "Especialización en desarrollo de aplicaciones móviles."
-      },
-      "cecytem": {
-        "institution": "CECyTEM - Tultepec",
-        "degree": "Técnico en Programación",
-        "description": "Programación desde la prepa: mi primer contacto serio con el código."
-      }
-    },
-    "certifications": {
-      "azure": {
-        "name": "Azure AZ-900: Microsoft Azure Fundamentals",
-        "issuer": "Microsoft"
-      },
-      "python": {
-        "name": "Python for Everybody",
-        "issuer": "U. Michigan · Coursera"
-      }
-    }
-  },
   "projects": {
-    "headerTitle": "Trabajo seleccionado",
-    "description": "Software que alguien abre por la mañana para hacer su trabajo.",
-    "stackLabel": "Stack",
-    "status": {
-      "production": "En producción",
-      "delivered": "Entregado",
-      "live": "En línea",
-      "archived": "Archivado"
-    },
-    "link": {
-      "repo": "Ver repo",
-      "live": "Visitar",
-      "private": "Sistema interno"
-    },
+    "title": "Proyectos",
     "list": {
       "portfolio": {
         "title": "Portafolio",
-        "description": "Este sitio. Astro, CSS propio y TypeScript, escrito desde cero. Va por la quinta versión.",
-        "specs": [
-          {
-            "label": "Plantilla",
-            "value": "Ninguna"
-          },
-          {
-            "label": "Idiomas",
-            "value": "ES · EN"
-          },
-          {
-            "label": "JS en cliente",
-            "value": "Casi nada"
-          }
-        ]
+        "description": "Este sitio. Astro, CSS propio y TypeScript, escrito desde cero. Va por la quinta versión."
       },
       "connie": {
         "title": "Connie",
-        "description": "Le preguntas en español a las bases de datos, PDFs y hojas de cálculo de la empresa, y responde citando de dónde salió cada dato. Multicliente y multifuente, con autenticación enterprise.",
-        "specs": [
-          {
-            "label": "Rol",
-            "value": "Diseño + 80% del código"
-          },
-          {
-            "label": "Clientes",
-            "value": "3 en producción"
-          },
-          {
-            "label": "Fuentes",
-            "value": "SQL · PDF · XLSX"
-          }
-        ]
+        "description": "Le preguntas en español a las bases de datos, PDFs y hojas de cálculo de la empresa, y responde citando de dónde salió cada dato. Multicliente y multifuente, con autenticación enterprise."
       },
       "handheld": {
         "title": "HandHeld RFID",
-        "description": "App Android con lector RFID Zebra. El inventario pasó de tomar semanas (o de no hacerse) a resolverse caminando por el almacén del cliente.",
-        "specs": [
-          {
-            "label": "Alcance",
-            "value": "De extremo a extremo"
-          },
-          {
-            "label": "Antes",
-            "value": "Semanas de inventario"
-          },
-          {
-            "label": "Después",
-            "value": "Una caminata por el almacén"
-          }
-        ]
+        "description": "App Android con lector RFID Zebra. El inventario pasó de tomar semanas (o de no hacerse) a resolverse caminando por el almacén del cliente."
       },
       "trace": {
         "title": "Trazabilidad Automotriz",
-        "description": "Aplicación de escritorio en WinForms para piso de planta. Cada pieza queda registrada al pasar por las estaciones de la línea de ensamble.",
-        "specs": [
-          {
-            "label": "Dónde",
-            "value": "Piso de planta"
-          },
-          {
-            "label": "Volumen",
-            "value": "Miles de piezas / día"
-          },
-          {
-            "label": "Turno",
-            "value": "24/7"
-          }
-        ]
+        "description": "Aplicación de escritorio en WinForms para piso de planta. Cada pieza queda registrada al pasar por las estaciones de la línea de ensamble."
+      }
+    }
+  },
+  "work": {
+    "title": "Experiencia",
+    "companies": {
+      "hypertech": "Hypertech",
+      "baacc": "BAACC Systems",
+      "dec": "DEC Marketing"
+    },
+    "roles": {
+      "appliedai": {
+        "title": "Applied AI Engineer",
+        "summary": "Integro IA en los procesos internos del equipo y en el software financiero que la consultora construye para sus clientes."
+      },
+      "architect": {
+        "title": "AI Solutions Architect",
+        "summary": "Connie, de cero a producción: diseñé la plataforma RAG y escribí el 80% del sistema, que hoy usan a diario tres clientes de la consultora. Además, servidores MCP sobre las fuentes internas y prácticas de MLOps en el equipo."
+      },
+      "fullstack": {
+        "title": "Fullstack Developer",
+        "summary": "Apps de escritorio y web en .NET y Python para piso de planta y operaciones, bases de datos en SQL Server y PostgreSQL, y una app Android con lector RFID para inventario en campo."
+      },
+      "junior": {
+        "title": "Junior Fullstack Developer",
+        "summary": "Módulos web, APIs internas y mantenimiento de bases de datos."
+      },
+      "webdev": {
+        "title": "Junior Web Developer",
+        "summary": "Sitios y soporte en WordPress, Joomla y OpenCart, más la administración de hosting, certificados y dominios."
+      }
+    }
+  },
+  "speaking": {
+    "title": "Charlas",
+    "text": "Doy charlas sobre IA generativa, RAG y MLOps, con sistemas que ya están en producción y sus números. Unas cien personas por sesión, en Data Day 2025, EGADE Business School, UPVM Tultitlán y TESCo."
+  },
+  "education": {
+    "title": "Formación",
+    "list": {
+      "platzi": {
+        "degree": "Industria de la Tecnología",
+        "institution": "Platzi - Escuela de Tecnología"
+      },
+      "tesco": {
+        "degree": "Ing. en Tecnologías de la Información & Comunicaciones",
+        "institution": "Tecnológico de Estudios Superiores de Coacalco (TESCo) - TecNM"
+      },
+      "cecytem": {
+        "degree": "Técnico en Programación",
+        "institution": "CECyTEM - Tultepec"
       }
     }
   },
   "contact": {
-    "headerTitle": "Hablemos",
-    "description": "Si tienes alguna idea o simplemente quieres saludar, escríbeme. Suelo responder el mismo día.",
-    "note": "GMT-6"
+    "title": "Contacto",
+    "text": "Si tienes alguna idea o simplemente quieres saludar, escríbeme. Suelo responder el mismo día, en horario de Ciudad de México."
   },
   "common": {
+    "ongoing": "Actualidad",
     "skipToContent": "Saltar al contenido",
     "channels": {
       "github": "GitHub",

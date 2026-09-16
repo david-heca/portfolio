@@ -1,7 +1,6 @@
 ---
-import { Icon } from "astro-icon/components";
 import { useTranslations, type Lang } from "@i18n/utils";
-import { studies, certifications } from "@/data/education";
+import { studies } from "@/data/education";
 
 export interface Props {
   lang: Lang;
@@ -9,77 +8,32 @@ export interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
+const ongoing = t("common.ongoing");
 
-const ongoing = t("education.ongoing");
-
-interface Row {
-  period: string;
-  title: string;
-  meta: string;
-  current?: boolean;
-}
-
-const academic: Row[] = studies.map(({ key, from, to }) => ({
+const items = studies.map(({ key, from, to }) => ({
   period: `${from} - ${to ?? ongoing}`,
-  title: t(`education.list.${key}.degree`),
-  meta: [t(`education.list.${key}.institution`), t(`education.list.${key}.description`)].join(" · "),
   current: to === undefined,
+  title: t(`education.list.${key}.degree`),
+  institution: t(`education.list.${key}.institution`),
 }));
-
-const certs: Row[] = certifications.map(({ key, year }) => ({
-  period: String(year),
-  title: t(`education.certifications.${key}.name`),
-  meta: t(`education.certifications.${key}.issuer`),
-}));
-
-const groups = [
-  { label: t("education.academicTitle"), icon: "ph:graduation-cap", entries: academic },
-  { label: t("education.certsTitle"), icon: "ph:certificate", entries: certs },
-];
 ---
 
 <section id="education" class="section container">
-  <header class="sec-head">
-    <h2 class="section-title">{t("education.headerTitle")}</h2>
-    <p class="prose">{t("education.description")}</p>
-  </header>
+  <h2 class="section-title">{t("education.title")}</h2>
 
-  <div class="edu">
-    {groups.map((g) => (
-      <div>
-        <h3 class="label edu__label">
-          <Icon name={g.icon} aria-hidden="true" />
-          {g.label}
-        </h3>
-        <ul class="rows">
-          {g.entries.map((e) => (
-            <li class="row">
-              <span class:list={["rail", e.current && "edu__current"]}>{e.period}</span>
-              <div>
-                <h4 class="card-title">{e.title}</h4>
-                <p class="meta edu__meta">{e.meta}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+  <ul class="rows">
+    {items.map((e) => (
+      <li class="row">
+        <span class:list={["rail", e.current && "rail--current"]}>{e.period}</span>
+        <div>
+          <h3 class="card-title">{e.title}</h3>
+          <p class="prose-sm edu__institution">{e.institution}</p>
+        </div>
+      </li>
     ))}
-  </div>
+  </ul>
 </section>
 
 <style>
-  .edu { display: flex; flex-direction: column; gap: 40px; }
-
-  .edu__label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--color-line);
-  }
-  .edu__label [data-icon] { font-size: var(--icon); color: var(--color-ink-3); }
-
-  /* Lo que sigue abierto sube a tinta: es el único dato vivo de la lista. */
-  .edu__current { color: var(--color-ink); }
-  .edu__meta { margin-top: 4px; }
+  .edu__institution { margin-top: 4px; }
 </style>

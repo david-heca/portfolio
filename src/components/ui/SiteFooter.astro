@@ -53,13 +53,11 @@ const year = new Date().getFullYear();
     border-top: 1px solid var(--color-line);
   }
 
-  /* Fuera de rejilla: dentro de una frase el hueco tiene que leerse como espacio
-     de palabra, y 6px ya separa. */
   .footer__made {
     display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 6px;
+    gap: var(--gap-glyph);
   }
   /* Duotone sigue siendo una tinta: las dos capas son currentColor, la de relleno
      al 20%. */

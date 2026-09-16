@@ -1,7 +1,6 @@
 ---
 import { email } from "@/data/contact";
 import { useTranslations, type Lang } from "@i18n/utils";
-import { Icon } from "astro-icon/components";
 
 export interface Props {
   lang: Lang;
@@ -12,16 +11,13 @@ const t = useTranslations(lang);
 ---
 
 <section id="contact" class="section container">
-  <header class="sec-head">
-    <h2 class="section-title">{t("contact.headerTitle")}</h2>
-    <p class="prose">{t("contact.description")}</p>
-  </header>
-
-  <p class="facts">
-    <span>
-      <Icon name="ph:paper-plane-tilt" aria-hidden="true" />
-      <a href={`mailto:${email}`} class="link">{email}</a>
-    </span>
-    <span><Icon name="ph:clock" aria-hidden="true" />{t("contact.note")}</span>
+  <h2 class="section-title">{t("contact.title")}</h2>
+  <p class="prose">{t("contact.text")}</p>
+  <p class="contact__email">
+    <a href={`mailto:${email}`} class="link">{email}</a>
   </p>
 </section>
+
+<style>
+  .contact__email { margin-top: 16px; }
+</style>

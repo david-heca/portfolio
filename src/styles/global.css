@@ -30,8 +30,7 @@
   --t-base: 0.2s;
 
   /* escala tipográfica - se elige por rol */
-  --text-label-sm: 11px;   /* mono micro: claves de spec */
-  --text-label: 12px;      /* etiquetas mono, periodos, tags */
+  --text-label: 12px;      /* periodos y tags, en mono */
   --text-meta: 13.5px;     /* frase de apoyo: institución, emisor, notas, pie */
   --text-sm: 14.5px;       /* prosa secundaria: descripciones, logros */
   --text-body: 16px;       /* prosa principal y títulos de fila */
@@ -47,7 +46,6 @@
   --track-tight: -0.02em;  /* display */
   --track-snug: -0.01em;   /* subhead y título de fila */
   --track-tag: 0.04em;     /* cifras y tags */
-  --track-label-sm: 0.08em;
 
   --leading: 1.65;         /* prosa */
   --leading-snug: 1.5;     /* entradilla */
@@ -67,6 +65,10 @@
   --container: 688px;
   --pad: 24px;
   --section-y: 64px;
+  --gap-row: 24px;         /* del raíl o la miniatura al cuerpo */
+  /* Fuera de la rejilla de 4 a propósito: junto a una palabra el hueco tiene
+     que leerse como espacio de palabra, y 8 ya separa. */
+  --gap-glyph: 6px;        /* del glifo a la palabra que acompaña */
   --radius: 0;
   --radius-sm: 0;
   --radius-xs: 2px;        /* solo lo que envuelve una palabra: código en línea */
@@ -167,18 +169,7 @@ img, svg { display: block; max-width: 100%; }
 
 .section + .section { margin-top: var(--section-y); }
 
-.sec-head { margin-bottom: 24px; }
-.sec-head .prose { margin-top: 8px; }
-
 /* ----- type primitives ----- */
-.label {
-  font-family: var(--font-mono);
-  font-size: var(--text-label-sm);
-  letter-spacing: var(--track-label-sm);
-  text-transform: uppercase;
-  color: var(--color-ink-2);
-}
-
 /* El h1 de cada página: el nombre en la portada, el título en las demás. */
 .page-title {
   font-weight: var(--weight-medium);
@@ -189,6 +180,8 @@ img, svg { display: block; max-width: 100%; }
   text-wrap: balance;
 }
 
+/* Siempre abre una sección y va solo -sin párrafo debajo-, así que el hueco
+   hasta la lista vive aquí y no en cada sección. */
 .section-title {
   font-weight: var(--weight-medium);
   letter-spacing: var(--track-snug);
@@ -196,6 +189,7 @@ img, svg { display: block; max-width: 100%; }
   font-size: var(--text-subhead);
   color: var(--color-ink);
   text-wrap: balance;
+  margin-bottom: 24px;
 }
 
 .card-title {
@@ -239,13 +233,15 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-ink-2);
   font-variant-numeric: tabular-nums;
 }
+/* Lo que sigue abierto sube a tinta: es el único dato vivo de la lista. */
+.rail--current { color: var(--color-ink); }
 
 /* Enlace corto -una etiqueta, no una frase-: sin tono que lo separe, lo señala
    el subrayado. Inline-flex para que el glifo, si lo lleva, se centre solo. */
 .link {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--gap-glyph);
   color: var(--color-ink);
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -254,6 +250,21 @@ img, svg { display: block; max-width: 100%; }
 }
 .link:hover { text-decoration-color: currentColor; }
 .link [data-icon] { font-size: var(--icon-sm); }
+
+/* Título que es enlace: sin subrayado, lo señala la flecha, que sube a tinta al
+   pasar. Va dentro del título y no en una columna aparte porque señala al
+   título, no a la caja. El gesto de la flecha lo pone cada uso. */
+.card-link [data-icon] {
+  display: inline-block;
+  /* Alineación óptica contra la mayúscula del título. Fuera de rejilla a propósito. */
+  vertical-align: -0.1em;
+  margin-left: var(--gap-glyph);
+  font-size: var(--icon);
+  color: var(--color-ink-3);
+  transition: color var(--t-fast) ease, transform var(--t-base) ease;
+}
+.card-link:hover [data-icon],
+.card-link:focus-visible [data-icon] { color: var(--color-ink); }
 
 /* ----- fila de datos con icono -----
    Periodo, lugar, modalidad, correo: cada dato lleva su glifo delante y la
@@ -265,7 +276,7 @@ img, svg { display: block; max-width: 100%; }
   font-size: var(--text-meta);
   color: var(--color-ink-2);
 }
-.facts > * { display: inline-flex; align-items: center; gap: 6px; }
+.facts > * { display: inline-flex; align-items: center; gap: var(--gap-glyph); }
 .facts [data-icon] { font-size: var(--icon-sm); color: var(--color-ink-3); }
 
 /* ----- lista con raíl -----
@@ -280,10 +291,14 @@ img, svg { display: block; max-width: 100%; }
   grid-column: 1 / -1;
   display: grid;
   grid-template-columns: subgrid;
-  gap: 4px 24px;
+  gap: 4px var(--gap-row);
   padding-block: 20px;
 }
 .row + .row { border-top: 1px solid var(--color-line); }
+/* La lista empieza y acaba en texto: el aire contra el título lo pone el
+   título, y el de cierre lo pone la sección. */
+.row:first-child { padding-top: 0; }
+.row:last-child { padding-bottom: 0; }
 /* Alineación óptica: la mono del raíl se apoya en la primera línea del título,
    que tiene más cuerpo. Fuera de rejilla a propósito. */
 @media (min-width: 640px) { .row > .rail { padding-top: 3px; } }
@@ -456,15 +471,6 @@ img, svg { display: block; max-width: 100%; }
   white-space: nowrap;
 }
 .tag-row { display: flex; flex-wrap: wrap; gap: 4px 16px; }
-
-/* ----- punto de estado ----- */
-.dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-ink);
-  flex-shrink: 0;
-}
 
 /* ----- miniatura -----
    Avatar y miniaturas de proyecto son la misma caja: a escuadra y con filo. El

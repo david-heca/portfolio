@@ -1,5 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
 import { useTranslations, type Lang } from "@i18n/utils";
 
 export interface Props {
@@ -8,44 +7,9 @@ export interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-
-const venues = t<string[]>("speaking.venues");
-const topics = t<string[]>("speaking.topics");
 ---
 
 <section id="speaking" class="section container">
-  <header class="sec-head">
-    <h2 class="section-title">{t("speaking.title")}</h2>
-    <p class="prose">{t("speaking.description")}</p>
-  </header>
-
-  <dl class="speaking">
-    <dt class="label">{t("speaking.venuesLabel")}</dt>
-    <dd>
-      <ul class="speaking__venues">
-        {venues.map((v) => (
-          <li class="meta speaking__venue"><Icon name="ph:map-pin" aria-hidden="true" />{v}</li>
-        ))}
-      </ul>
-    </dd>
-
-    <dt class="label">{t("speaking.topicsLabel")}</dt>
-    <dd class="tag-row">{topics.map((tp) => <span class="tag">{tp}</span>)}</dd>
-  </dl>
+  <h2 class="section-title">{t("speaking.title")}</h2>
+  <p class="prose">{t("speaking.text")}</p>
 </section>
-
-<style>
-  .speaking {
-    display: grid;
-    grid-template-columns: max-content minmax(0, 1fr);
-    gap: 16px 24px;
-    align-items: start;
-  }
-  /* Alineación óptica: la mono micro se apoya en la primera línea de la sans,
-     que tiene más cuerpo. Fuera de rejilla a propósito. */
-  .speaking dt { padding-top: 4px; }
-
-  .speaking__venues { display: flex; flex-direction: column; gap: 8px; }
-  .speaking__venue { display: inline-flex; align-items: center; gap: 6px; }
-  .speaking__venue [data-icon] { font-size: var(--icon-sm); color: var(--color-ink-3); }
-</style>

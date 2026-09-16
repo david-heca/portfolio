@@ -13,10 +13,7 @@ const items = await localizedEntries("notes", lang);
 ---
 
 <section class="section container">
-  <header class="sec-head">
-    <h1 class="page-title">{t("notes.title")}</h1>
-    <p class="prose">{t("notes.description")}</p>
-  </header>
+  <h1 class="page-title notes-index__title">{t("notes.title")}</h1>
 
   {items.length === 0 ? (
     <p class="prose">{t("notes.empty")}</p>
@@ -24,3 +21,7 @@ const items = await localizedEntries("notes", lang);
     <NoteList lang={lang} items={items} />
   )}
 </section>
+
+<style>
+  .notes-index__title { margin-bottom: 24px; }
+</style>

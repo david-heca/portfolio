@@ -19,10 +19,7 @@ const items = all.slice(0, LIMIT);
 
 {items.length > 0 && (
   <section id="notes" class="section container">
-    <header class="sec-head">
-      <h2 class="section-title">{t("notes.title")}</h2>
-      <p class="prose">{t("notes.description")}</p>
-    </header>
+    <h2 class="section-title">{t("notes.title")}</h2>
 
     <NoteList lang={lang} items={items} />
 

@@ -22,26 +22,8 @@
   },
   "notes": {
     "title": "Notes",
-    "description": "Field notes on what I run into taking AI to production.",
     "empty": "No notes published yet.",
     "all": "All notes"
-  },
-  "speaking": {
-    "title": "On stage",
-    "description": "Around a hundred people per session. I bring systems that are already in production, with their numbers.",
-    "venuesLabel": "Where",
-    "venues": [
-      "Data Day 2025",
-      "EGADE Business School - Tecnológico de Monterrey",
-      "UPVM Tultitlán",
-      "TESCo - TecNM"
-    ],
-    "topicsLabel": "Topics",
-    "topics": [
-      "Generative AI",
-      "RAG & MLOps",
-      "Data science"
-    ]
   },
   "intro": {
     "role": "Applied AI Engineer",
@@ -52,218 +34,84 @@
       "paragraph2": "I work across the whole stack, but my job right now is <strong>RAG, MCP and MLOps</strong> over corporate data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs."
     }
   },
-  "work": {
-    "headerTitle": "Professional journey",
-    "description": "Three companies and five roles, from intern to Applied AI Engineer.",
-    "current": "Current role",
-    "companies": {
-      "hypertech": {
-        "name": "Hypertech",
-        "totalPeriod": "2026 - Present",
-        "location": "Mexico City",
-        "workMode": "Remote",
-        "roles": {
-          "appliedai": {
-            "title": "Applied AI Engineer",
-            "period": "Jul 2026 - Present",
-            "type": "Full-time",
-            "achievements": [
-              "I bring AI into the team's internal processes and into the financial software the consultancy builds for its clients."
-            ]
-          }
-        }
-      },
-      "baacc": {
-        "name": "BAACC Systems",
-        "totalPeriod": "2023 - 2026",
-        "location": "Mexico State",
-        "workMode": "On-site",
-        "roles": {
-          "architect": {
-            "title": "AI Solutions Architect",
-            "period": "Mar 2025 - Jul 2026",
-            "type": "Full-time",
-            "achievements": [
-              "Connie, from zero to production: I designed the RAG platform and wrote 80% of the system. Three of the consultancy's clients now use it daily.",
-              "End-to-end RAG pipelines on Azure: ingestion, chunking, retrieval and serving, with prompt observability.",
-              "MCP servers connecting internal data sources to LLM clients: models consume tools without bespoke glue code.",
-              "Brought MLOps practices into the team: retrieval evaluation, prompt and model versioning."
-            ]
-          },
-          "fullstack": {
-            "title": "Fullstack Developer",
-            "period": "Jan 2024 - Mar 2025",
-            "type": "Full-time",
-            "achievements": [
-              "Desktop apps in .NET and Python for the shop floor, running 24/7.",
-              "Internal web apps with .NET and DevExpress for operations workflows.",
-              "Database design and administration on SQL Server and PostgreSQL.",
-              "Android app with RFID reader for field inventory and traceability."
-            ]
-          },
-          "junior": {
-            "title": "Junior Fullstack Developer",
-            "period": "Sep 2023 - Jan 2024",
-            "type": "Internship",
-            "achievements": [
-              "Web modules and internal APIs.",
-              "Database maintenance and technical documentation of the stack."
-            ]
-          }
-        }
-      },
-      "dec": {
-        "name": "DEC Marketing",
-        "totalPeriod": "Mar 2022 - Sep 2023",
-        "location": "Mexico City",
-        "workMode": "Remote",
-        "roles": {
-          "webdev": {
-            "title": "Junior Web Developer",
-            "period": "Mar 2022 - Sep 2023",
-            "type": "Internship",
-            "achievements": [
-              "Websites and support with HTML, CSS, JavaScript and CMS: WordPress, Joomla, OpenCart.",
-              "Hosting, certificate and domain administration.",
-              "Corporate email account management."
-            ]
-          }
-        }
-      }
-    },
-    "showMore": "Show more",
-    "showLess": "Show less"
-  },
-  "education": {
-    "headerTitle": "How I learn",
-    "description": "Where I studied, and what I keep learning on my own.",
-    "ongoing": "Present",
-    "academicTitle": "Academic",
-    "certsTitle": "Certifications",
-    "list": {
-      "platzi": {
-        "institution": "Platzi - Technology School",
-        "degree": "Technology Industry",
-        "description": "Where I keep up: web development, AI and whatever comes next."
-      },
-      "tesco": {
-        "institution": "Higher Studies Institute of Coacalco (TESCo) - TecNM",
-        "degree": "Information & Communication Technologies Engineering",
-        "description": "Specialization in mobile application development."
-      },
-      "cecytem": {
-        "institution": "CECyTEM - Tultepec",
-        "degree": "Programming Technician",
-        "description": "Programming back in high school: my first real contact with code."
-      }
-    },
-    "certifications": {
-      "azure": {
-        "name": "Azure AZ-900: Microsoft Azure Fundamentals",
-        "issuer": "Microsoft"
-      },
-      "python": {
-        "name": "Python for Everybody",
-        "issuer": "U. Michigan · Coursera"
-      }
-    }
-  },
   "projects": {
-    "headerTitle": "Selected work",
-    "description": "Software someone opens in the morning to get their work done.",
-    "stackLabel": "Stack",
-    "status": {
-      "production": "In production",
-      "delivered": "Delivered",
-      "live": "Live",
-      "archived": "Archived"
-    },
-    "link": {
-      "repo": "View repo",
-      "live": "Visit",
-      "private": "Internal system"
-    },
+    "title": "Projects",
     "list": {
       "portfolio": {
         "title": "Portfolio",
-        "description": "This site. Astro, hand-written CSS and TypeScript, built from scratch. It's on its fifth version.",
-        "specs": [
-          {
-            "label": "Template",
-            "value": "None"
-          },
-          {
-            "label": "Languages",
-            "value": "ES · EN"
-          },
-          {
-            "label": "Client-side JS",
-            "value": "Almost none"
-          }
-        ]
+        "description": "This site. Astro, hand-written CSS and TypeScript, built from scratch. It's on its fifth version."
       },
       "connie": {
         "title": "Connie",
-        "description": "You ask the company's databases, PDFs and spreadsheets in plain language, and it answers citing where each figure came from. Multi-client and multi-source, with enterprise auth.",
-        "specs": [
-          {
-            "label": "Role",
-            "value": "Design + 80% of the code"
-          },
-          {
-            "label": "Clients",
-            "value": "3 in production"
-          },
-          {
-            "label": "Sources",
-            "value": "SQL · PDF · XLSX"
-          }
-        ]
+        "description": "You ask the company's databases, PDFs and spreadsheets in plain language, and it answers citing where each figure came from. Multi-client and multi-source, with enterprise auth."
       },
       "handheld": {
         "title": "HandHeld RFID",
-        "description": "Android app with a Zebra RFID reader. Inventory went from taking weeks (or never happening) to being done walking the client's warehouse.",
-        "specs": [
-          {
-            "label": "Scope",
-            "value": "End to end"
-          },
-          {
-            "label": "Before",
-            "value": "Weeks of inventory"
-          },
-          {
-            "label": "After",
-            "value": "A walk through the warehouse"
-          }
-        ]
+        "description": "Android app with a Zebra RFID reader. Inventory went from taking weeks (or never happening) to being done walking the client's warehouse."
       },
       "trace": {
         "title": "Automotive Traceability",
-        "description": "A WinForms desktop app for the shop floor. Every part gets logged as it passes the stations on the assembly line.",
-        "specs": [
-          {
-            "label": "Where",
-            "value": "Shop floor"
-          },
-          {
-            "label": "Volume",
-            "value": "Thousands of parts / day"
-          },
-          {
-            "label": "Shift",
-            "value": "24/7"
-          }
-        ]
+        "description": "A WinForms desktop app for the shop floor. Every part gets logged as it passes the stations on the assembly line."
+      }
+    }
+  },
+  "work": {
+    "title": "Experience",
+    "companies": {
+      "hypertech": "Hypertech",
+      "baacc": "BAACC Systems",
+      "dec": "DEC Marketing"
+    },
+    "roles": {
+      "appliedai": {
+        "title": "Applied AI Engineer",
+        "summary": "I bring AI into the team's internal processes and into the financial software the consultancy builds for its clients."
+      },
+      "architect": {
+        "title": "AI Solutions Architect",
+        "summary": "Connie, from zero to production: I designed the RAG platform and wrote 80% of the system, which three of the consultancy's clients now use daily. Also MCP servers over the internal data sources and MLOps practices for the team."
+      },
+      "fullstack": {
+        "title": "Fullstack Developer",
+        "summary": "Desktop and web apps in .NET and Python for the shop floor and operations, databases on SQL Server and PostgreSQL, and an Android app with an RFID reader for field inventory."
+      },
+      "junior": {
+        "title": "Junior Fullstack Developer",
+        "summary": "Web modules, internal APIs and database maintenance."
+      },
+      "webdev": {
+        "title": "Junior Web Developer",
+        "summary": "Sites and support on WordPress, Joomla and OpenCart, plus hosting, certificate and domain administration."
+      }
+    }
+  },
+  "speaking": {
+    "title": "Talks",
+    "text": "I give talks on generative AI, RAG and MLOps, with systems that are already in production and their numbers. Around a hundred people per session, at Data Day 2025, EGADE Business School, UPVM Tultitlán and TESCo."
+  },
+  "education": {
+    "title": "Education",
+    "list": {
+      "platzi": {
+        "degree": "Technology Industry",
+        "institution": "Platzi - Technology School"
+      },
+      "tesco": {
+        "degree": "Information & Communication Technologies Engineering",
+        "institution": "Higher Studies Institute of Coacalco (TESCo) - TecNM"
+      },
+      "cecytem": {
+        "degree": "Programming Technician",
+        "institution": "CECyTEM - Tultepec"
       }
     }
   },
   "contact": {
-    "headerTitle": "Let's talk",
-    "description": "If you've got an idea, or you just want to say hi, write me. I usually reply the same day.",
-    "note": "GMT-6"
+    "title": "Contact",
+    "text": "If you've got an idea, or you just want to say hi, write me. I usually reply the same day, on Mexico City time."
   },
   "common": {
+    "ongoing": "Present",
     "skipToContent": "Skip to content",
     "channels": {
       "github": "GitHub",
