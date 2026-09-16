@@ -38,7 +38,7 @@ src/
 │   ├── NotesIndex · NoteDetail
 │   └── NotFound.astro # shared 404 body
 ├── content/           # long-form prose: notes/{es,en}
-├── data/              # projects.ts, education.ts, collections.ts
+├── data/              # projects.ts, work.ts, education.ts, collections.ts
 ├── i18n/
 │   ├── locales/       # es.json, en.json — every visible UI string
 │   ├── index.ts       # locale registry; `en` is typed against `es`
@@ -80,9 +80,9 @@ Token-driven - to retune the look you edit CSS variables in
 `src/styles/global.css`, not components:
 
 - **No hue.** Pure white, pure black and neutral grays; there is no accent color anywhere. Emphasis is carried by weight, underline and inversion (ink background, paper text) for the primary action
-- **One column, and the column is the measure.** 640px of content, no two-column grids, no bleeds; what doesn't fit is listed, not laid out. Rows with a monospaced rail, fact rows with a glyph, and one box for every image
-- **Square corners** (`--radius` at 0). The only circles left are the ones that are dots
-- **One role per typeface**: Outfit for titles, reading and UI; Maple Mono for uppercase tracked labels, tags and figures; Junicode italic signs the wordmark and nothing else
+- **One column, and the column is the measure.** 640px of content, no two-column grids, no bleeds; what doesn't fit is listed, not laid out. Every row is a title and one line - a monospaced date rail or a thumbnail in front, nothing else - and a section heading stands alone
+- **Square corners** (`--radius` at 0); the only circles left are bullets
+- **One role per typeface**: Outfit for titles, reading and UI; Maple Mono for dates and tags; Junicode italic signs the wordmark and nothing else
 - 4px rhythm for the space *between* elements; the padding of anything with a background is shape, calibrated against its own text
 - Light/dark/system theme with a no-flash bootstrap, preserved across View Transitions; every animation respects `prefers-reduced-motion`
 
