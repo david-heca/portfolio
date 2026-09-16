@@ -30,13 +30,9 @@ const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
     <h1 class="page-title">{entry.data.title}</h1>
     <p class="lead note-page__summary">{entry.data.summary}</p>
 
-    <p class="facts note-page__facts">
+    <p class="note-page__facts">
       <time datetime={entry.data.date.toISOString()}>{dateFormat.format(entry.data.date)}</time>
-      {entry.data.tags.length > 0 && (
-        <span class="tag-row">
-          {entry.data.tags.map((tag) => <span class="tag">{tag}</span>)}
-        </span>
-      )}
+      {entry.data.tags.map((tag) => <span class="note-page__tag">{tag}</span>)}
     </p>
   </header>
 
@@ -54,7 +50,21 @@ const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
     border-bottom: 1px solid var(--color-line);
   }
   .note-page__summary { margin-top: 16px; }
-  .note-page__facts { margin-top: 16px; }
+
+  .note-page__facts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin-top: 16px;
+    font-size: var(--text-meta);
+    color: var(--color-ink-2);
+  }
+  .note-page__tag {
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    letter-spacing: var(--track-tag);
+    white-space: nowrap;
+  }
 
   .note-page__body { margin-top: 40px; }
 </style>

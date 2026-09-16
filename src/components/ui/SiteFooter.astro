@@ -27,8 +27,6 @@ const year = new Date().getFullYear();
       v{pkg.version}
     </p>
 
-    <!-- En el pie y no en la intro: es lo único que está en todas las páginas, y
-         quien acaba una nota es quien busca dónde seguirte. -->
     <ul class="footer__channels">
       {channels.map((c) => (
         <li>
@@ -59,19 +57,17 @@ const year = new Date().getFullYear();
     align-items: center;
     gap: var(--gap-glyph);
   }
-  /* Duotone sigue siendo una tinta: las dos capas son currentColor, la de relleno
-     al 20%. */
+  /* Duotone sigue siendo una tinta: las dos capas son currentColor. */
   .footer__heart { font-size: var(--icon); }
   .footer__sep { color: var(--color-ink-3); }
 
   .footer__channels {
     display: flex;
     align-items: center;
-    /* Fuera de rejilla: descuenta el padding del último icono para que el glifo
-       cierre contra el filo de la columna. */
+    /* Descuenta el padding del último icono: el glifo cierra contra la columna. */
     margin-right: -10px;
   }
-  /* Forma: 40px de caja para el pulgar, con el glifo de 20 centrado. */
+  /* Forma: 40px de caja para el pulgar. */
   .channel {
     display: inline-flex;
     padding: 10px;

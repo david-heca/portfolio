@@ -1,6 +1,6 @@
 export const email = "hello@davidherrera.dev";
 
-export interface Channel {
+interface Channel {
   key: "github" | "linkedin" | "x";
   href: string;
   icon: string;

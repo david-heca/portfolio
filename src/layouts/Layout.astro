@@ -136,8 +136,7 @@ const personSchema = {
     <ClientRouter />
 
     <script is:inline>
-      /* Única implementación de "pintar el tema": la clase, la preferencia y el
-         color de la barra del navegador. `ThemeToggle` solo decide cuál toca. */
+      /* Única implementación de pintar el tema; `ThemeToggle` solo decide cuál toca. */
       (function () {
         var KEY = "color-theme";
         var media = window.matchMedia("(prefers-color-scheme: dark)");
@@ -185,10 +184,8 @@ const personSchema = {
       })();
     </script>
 
-    <!-- Redirige solo con preferencia explícita: autodetectar aquí sacaría a los
-         rastreadores de "/", que es el canonical y el x-default. Las dos rutas
-         llegan resueltas para no reimplementar el mapeo es↔en en el cliente.
-         Fuera del índice no corre: convertiría el 404 en un 200 en otra URL. -->
+    <!-- Solo con preferencia explícita: autodetectar sacaría a los rastreadores
+         de "/". Fuera del índice no corre: convertiría el 404 en un 200. -->
     {!noindex && (
       <script is:inline define:vars={{ lang, esPath, enPath }}>
         var stored = localStorage.getItem("preferred-lang");

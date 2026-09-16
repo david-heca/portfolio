@@ -1,6 +1,5 @@
-/** Los años van aquí y no en el copy: el periodo se compone en el componente,
- *  así ES y EN no pueden decir fechas distintas. */
-export interface Study {
+/** Años aquí y no en el copy: así ES y EN no pueden decir fechas distintas. */
+interface Study {
   key: string;
   from: number;
   /** Ausente: sigue en curso. */

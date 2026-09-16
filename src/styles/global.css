@@ -1,5 +1,4 @@
-/* Junicode (OFL, psb1558/Junicode-font): solo la italic, subseteada a latin
-   desde el VF de 1.2 MB. */
+/* Junicode (OFL): solo la italic, subseteada a latin. */
 @font-face {
   font-family: "Junicode";
   src: url("/assets/fonts/junicode-italic.woff2") format("woff2");
@@ -25,53 +24,46 @@
   --color-line-strong: rgba(0, 0, 0, 0.3);
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05), 0 16px 40px -24px rgba(0, 0, 0, 0.25);
 
-  /* --t-fast solo para color; el resto de gestos a --t-base. */
+  /* --t-fast solo para color. */
   --t-fast: 0.15s;
   --t-base: 0.2s;
 
-  /* escala tipográfica - se elige por rol */
-  --text-label: 12px;      /* periodos y tags, en mono */
-  --text-meta: 13.5px;     /* frase de apoyo: institución, emisor, notas, pie */
-  --text-sm: 14.5px;       /* prosa secundaria: descripciones, logros */
+  /* escala tipográfica */
+  --text-label: 12px;      /* raíl y tags, en mono */
+  --text-meta: 13.5px;     /* barra, pie, rol · ciudad */
+  --text-sm: 14.5px;       /* la segunda línea de una fila */
   --text-body: 16px;       /* prosa principal y títulos de fila */
-  --text-lead: 18px;       /* entradilla: la presentación y el resumen de una nota */
+  --text-lead: 18px;       /* entradilla */
   --text-subhead: 21px;    /* título de sección */
-  --text-brand: 21px;      /* wordmark, igual en el nav y en el pie */
-  /* Solo el h1 de cada página: lo más grande que hay, y no mucho más que un
-     subhead. En una columna estrecha el cuerpo no puede llevar la jerarquía;
-     la lleva el peso y el aire. */
-  --display: clamp(28px, 4.5vw, 34px);
+  --text-brand: 21px;      /* wordmark */
+  --display: clamp(28px, 4.5vw, 34px); /* solo el h1 */
 
   /* tracking */
   --track-tight: -0.02em;  /* display */
   --track-snug: -0.01em;   /* subhead y título de fila */
-  --track-tag: 0.04em;     /* cifras y tags */
+  --track-tag: 0.04em;     /* raíl y tags */
 
   --leading: 1.65;         /* prosa */
   --leading-snug: 1.5;     /* entradilla */
   --leading-title: 1.3;    /* subhead y título de fila */
   --leading-tight: 1.15;   /* h1 */
   --leading-flat: 1;       /* una sola línea: botones, enlaces del nav */
-  /* Solo para la sans: la mono es de peso estático y el navegador la emborrona
-     con negrita sintética. */
-  --weight-medium: 500;
+  --weight-medium: 500;    /* solo la sans: la mono es de peso único */
 
   /* iconos */
   --icon-sm: 14px;
   --icon: 16px;
   --icon-lg: 20px;
 
-  /* layout: una columna, y la columna es la medida. */
+  /* layout */
   --container: 688px;
   --pad: 24px;
   --section-y: 64px;
   --gap-row: 24px;         /* del raíl o la miniatura al cuerpo */
-  /* Fuera de la rejilla de 4 a propósito: junto a una palabra el hueco tiene
-     que leerse como espacio de palabra, y 8 ya separa. */
-  --gap-glyph: 6px;        /* del glifo a la palabra que acompaña */
+  --gap-glyph: 6px;        /* del glifo a su palabra; fuera de rejilla: es espacio de palabra */
   --radius: 0;
   --radius-sm: 0;
-  --radius-xs: 2px;        /* solo lo que envuelve una palabra: código en línea */
+  --radius-xs: 2px;        /* código en línea */
   --radius-control: 2px;
   --thumb: 64px;           /* miniatura de fila; el avatar la sobreescribe */
 }
@@ -94,8 +86,7 @@ h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
 ul, ol, menu { list-style: none; }
 table { border-collapse: collapse; }
 
-/* `color-scheme` para que barras de scroll, controles nativos y el marcador de
-   <details> sigan al tema del sitio, no al del sistema. */
+/* `color-scheme`: scrollbars y controles nativos siguen al tema del sitio. */
 html { background-color: var(--color-bg); color-scheme: light; }
 html.dark { color-scheme: dark; }
 
@@ -127,8 +118,7 @@ img, svg { display: block; max-width: 100%; }
 }
 :focus:not(:focus-visible) { outline: none; }
 
-/* Fuera de la vista pero dentro del árbol de accesibilidad: `display: none`
-   lo sacaría de los dos. */
+/* Sin `display: none`: saldría también del árbol de accesibilidad. */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -138,13 +128,12 @@ img, svg { display: block; max-width: 100%; }
   white-space: nowrap;
 }
 
-/* Oculto hasta recibir el foco, pero no con `display: none`: dejaría de ser
-   tabulable. El foco se dibuja en papel porque el fondo ya es tinta. */
+/* Sin `display: none`: dejaría de ser tabulable. */
 .skip-link {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 60;             /* por encima del nav, que es lo que salta */
+  z-index: 60;
   transform: translateY(-100%);
   background: var(--color-ink);
   color: var(--color-bg);
@@ -164,13 +153,11 @@ img, svg { display: block; max-width: 100%; }
   padding-inline: var(--pad);
 }
 
-/* El pie se queda abajo en una página corta; el sobrante lo absorbe `.page`. */
 .page { flex-grow: 1; padding-block: 40px var(--section-y); }
 
 .section + .section { margin-top: var(--section-y); }
 
 /* ----- type primitives ----- */
-/* El h1 de cada página: el nombre en la portada, el título en las demás. */
 .page-title {
   font-weight: var(--weight-medium);
   letter-spacing: var(--track-tight);
@@ -180,8 +167,7 @@ img, svg { display: block; max-width: 100%; }
   text-wrap: balance;
 }
 
-/* Siempre abre una sección y va solo -sin párrafo debajo-, así que el hueco
-   hasta la lista vive aquí y no en cada sección. */
+/* Va solo, sin párrafo debajo: el hueco hasta la lista vive aquí. */
 .section-title {
   font-weight: var(--weight-medium);
   letter-spacing: var(--track-snug);
@@ -225,7 +211,6 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-ink-2);
 }
 
-/* Tabular para que las cifras del raíl casen en columna. */
 .rail {
   font-family: var(--font-mono);
   font-size: var(--text-label);
@@ -233,11 +218,8 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-ink-2);
   font-variant-numeric: tabular-nums;
 }
-/* Lo que sigue abierto sube a tinta: es el único dato vivo de la lista. */
 .rail--current { color: var(--color-ink); }
 
-/* Enlace corto -una etiqueta, no una frase-: sin tono que lo separe, lo señala
-   el subrayado. Inline-flex para que el glifo, si lo lleva, se centre solo. */
 .link {
   display: inline-flex;
   align-items: center;
@@ -251,9 +233,8 @@ img, svg { display: block; max-width: 100%; }
 .link:hover { text-decoration-color: currentColor; }
 .link [data-icon] { font-size: var(--icon-sm); }
 
-/* Título que es enlace: sin subrayado, lo señala la flecha, que sube a tinta al
-   pasar. Va dentro del título y no en una columna aparte porque señala al
-   título, no a la caja. El gesto de la flecha lo pone cada uso. */
+/* Título que es enlace: sin subrayado, lo señala la flecha. El gesto al pasar
+   lo pone cada uso. */
 .card-link [data-icon] {
   display: inline-block;
   /* Alineación óptica contra la mayúscula del título. Fuera de rejilla a propósito. */
@@ -266,23 +247,8 @@ img, svg { display: block; max-width: 100%; }
 .card-link:hover [data-icon],
 .card-link:focus-visible [data-icon] { color: var(--color-ink); }
 
-/* ----- fila de datos con icono -----
-   Periodo, lugar, modalidad, correo: cada dato lleva su glifo delante y la
-   fila se parte donde haga falta. */
-.facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 16px;
-  font-size: var(--text-meta);
-  color: var(--color-ink-2);
-}
-.facts > * { display: inline-flex; align-items: center; gap: var(--gap-glyph); }
-.facts [data-icon] { font-size: var(--icon-sm); color: var(--color-ink-3); }
-
 /* ----- lista con raíl -----
-   Subgrid: el raíl mide lo que mida el periodo más largo y las filas siguen
-   casando entre sí, sin fijar un ancho a ojo. Por debajo de 640px raíl y cuerpo
-   se apilan. */
+   Subgrid: el raíl mide el periodo más largo y las filas casan entre sí. */
 .rows { display: grid; grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 640px) {
   .rows { grid-template-columns: max-content minmax(0, 1fr); }
@@ -295,17 +261,14 @@ img, svg { display: block; max-width: 100%; }
   padding-block: 20px;
 }
 .row + .row { border-top: 1px solid var(--color-line); }
-/* La lista empieza y acaba en texto: el aire contra el título lo pone el
-   título, y el de cierre lo pone la sección. */
+/* La lista empieza y acaba en texto. */
 .row:first-child { padding-top: 0; }
 .row:last-child { padding-bottom: 0; }
 /* Alineación óptica: la mono del raíl se apoya en la primera línea del título,
    que tiene más cuerpo. Fuera de rejilla a propósito. */
 @media (min-width: 640px) { .row > .rail { padding-top: 3px; } }
 
-/* ----- prosa larga -----
-   La columna es la medida: el código y las figuras llenan lo mismo que el
-   texto. */
+/* ----- prosa larga ----- */
 .longform {
   font-size: var(--text-body);
   line-height: var(--leading);
@@ -329,7 +292,6 @@ img, svg { display: block; max-width: 100%; }
   line-height: var(--leading-title);
   margin-top: 40px;
 }
-/* Un encabezado que abre el documento no arrastra el hueco de separación. */
 .longform > :first-child { margin-top: 0; }
 
 .longform strong { color: var(--color-ink); font-weight: var(--weight-medium); }
@@ -425,11 +387,7 @@ img, svg { display: block; max-width: 100%; }
 .btn--ghost:hover { border-color: var(--color-ink); background: var(--color-bg-2); }
 .btn [data-icon] { font-size: 1.15em; }
 
-/* ----- elemento de la barra (enlace, conmutador de idioma, toggle) -----
-   Texto pelado que sube a tinta al pasar: sin caja ni fondo, la barra es una
-   línea de texto como el resto de la página. Vive aquí porque lo comparten
-   tres componentes y tienen que ser la misma cosa. El estado -`[aria-current]`-
-   lo pone cada uso, y el tamaño de un toggle también. */
+/* ----- elemento de la barra (enlace, conmutador de idioma, toggle) ----- */
 .nav-item {
   display: inline-flex;
   align-items: center;
@@ -442,8 +400,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .nav-item:hover,
 .nav-item:focus-visible { color: var(--color-ink); }
-/* Solo el glifo que acompaña a una palabra: el toggle, que también es
-   `.nav-item`, es icono y nada más y va en la tinta del texto. */
+/* Solo junto a una palabra: el glifo del toggle va en la tinta del texto. */
 .nav-item__icon {
   font-size: var(--icon);
   color: var(--color-ink-3);
@@ -452,21 +409,7 @@ img, svg { display: block; max-width: 100%; }
 .nav-item:hover .nav-item__icon,
 .nav-item:focus-visible .nav-item__icon { color: var(--color-ink-2); }
 
-/* ----- tag -----
-   Texto en mono y nada más: la caja con borde era la única decoración que le
-   quedaba a una palabra. */
-.tag {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--track-tag);
-  color: var(--color-ink-2);
-  white-space: nowrap;
-}
-.tag-row { display: flex; flex-wrap: wrap; gap: 4px 16px; }
-
-/* ----- miniatura -----
-   Avatar y miniaturas de proyecto son la misma caja: a escuadra y con filo. El
-   tamaño va por `--thumb` para que una instancia lo cambie sin otra clase. */
+/* ----- miniatura ----- */
 .thumb {
   width: var(--thumb);
   height: var(--thumb);

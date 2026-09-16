@@ -15,9 +15,7 @@ const t = useTranslations(lang);
 const home = getHome(lang);
 const path = Astro.url.pathname;
 
-/** Solo rutas reales. La portada se recorre sola: en una columna no hay nada
- *  que merezca un ancla. El prefijo de idioma sale de `localizePath`, la única
- *  implementación del mapeo. */
+/** Solo rutas reales. */
 const items = [
   { href: localizePath("/notes/", lang), label: t("nav.notes"), icon: "ph:article" },
 ];
@@ -70,7 +68,5 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
 
   .nav__links { display: inline-flex; align-items: center; gap: 20px; }
 
-  /* En la página donde ya estás no hay nada que previsualizar: el enlace queda
-     en tinta, como al pasar. */
   .nav-item[aria-current="page"] { color: var(--color-ink); }
 </style>

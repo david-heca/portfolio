@@ -1,9 +1,8 @@
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
 
-/** La carpeta de primer nivel es el idioma, así que el `id` que emite el loader
- *  llega como `<lang>/<slug>`. El slug es idéntico en los dos idiomas: es lo que
- *  deja `localizePath()` como única implementación del mapeo es↔en. */
+/** El `id` del loader llega como `<lang>/<slug>`; el slug es el mismo en los
+ *  dos idiomas. */
 
 const notes = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/notes" }),

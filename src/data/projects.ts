@@ -4,7 +4,7 @@ import handheld from "@/assets/projects/handheld.webp";
 import trace from "@/assets/projects/trace.webp";
 import portfolio from "@/assets/projects/portfolio.webp";
 
-export interface Project {
+interface Project {
   slug: string;
   year: string;
   /** Importada, no una ruta de `public/`: así el build emite la miniatura al

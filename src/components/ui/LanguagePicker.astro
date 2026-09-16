@@ -4,8 +4,8 @@ import { Icon } from "astro-icon/components";
 
 export interface Props {
   lang: Lang;
-  /** Lo resuelve `Layout`, que ya calcula el mapeo para el hreflang: derivarlo aquí
-   *  de la URL sería la segunda copia que acaba divergiendo. */
+  /** Llega resuelto desde `Layout`, que ya lo calcula para el hreflang:
+   *  derivarlo aquí de la URL sería la segunda copia del mapeo. */
   href: string;
 }
 

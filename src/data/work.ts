@@ -1,6 +1,6 @@
-/** Los años van aquí y no en el copy, igual que en `education.ts`: el periodo
- *  se compone en el componente, así ES y EN no pueden decir fechas distintas. */
-export interface Role {
+/** Años aquí y no en el copy, como en `education.ts`: así ES y EN no pueden
+ *  decir fechas distintas. */
+interface Role {
   key: string;
   company: "hypertech" | "baacc" | "dec";
   from: number;

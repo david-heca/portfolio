@@ -25,7 +25,7 @@ const t = useTranslations(lang);
 </button>
 
 <style>
-  /* Forma: 32px de caja para el pulgar, con el glifo de 16 centrado. */
+  /* Forma: 32px de caja para el pulgar. */
   .theme-toggle { position: relative; justify-content: center; width: 32px; height: 32px; }
 
   .theme-toggle__glyph {
@@ -72,8 +72,7 @@ const t = useTranslations(lang);
       });
     }
 
-    /** El cambio es seco a propósito: un fundido entre paletas invertidas pasa
-     *  por gris sobre gris, y lo oscuro parece llegar tarde. Solo gira el glifo. */
+    /** Sin fundido a propósito: entre paletas invertidas pasa por gris sobre gris. */
     function cycle() {
       const next = CYCLE[(CYCLE.indexOf(theme!.pref()) + 1) % CYCLE.length];
       try {
