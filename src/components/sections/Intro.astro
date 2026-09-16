@@ -1,0 +1,44 @@
+---
+import { Image } from "astro:assets";
+import { useTranslations, type Lang } from "@i18n/utils";
+import photo from "@/assets/profile-photo.webp";
+
+export interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section class="section container">
+  <div class="intro__who">
+    <div class="thumb intro__photo">
+      <Image src={photo} alt="David Herrera" width={192} height={192} loading="eager" />
+    </div>
+    <div>
+      <h1 class="page-title">David Herrera</h1>
+      <p class="meta intro__role">
+        {t("intro.role")}
+        <span class="intro__sep" aria-hidden="true">·</span>
+        {t("intro.location")}
+      </p>
+    </div>
+  </div>
+
+  <div class="intro__text">
+    <p class="lead">{t("intro.lead")}</p>
+    <p class="prose" set:html={t("intro.bio.paragraph1")}></p>
+    <p class="prose" set:html={t("intro.bio.paragraph2")}></p>
+  </div>
+</section>
+
+<style>
+  .intro__who { display: flex; align-items: center; gap: 20px; }
+  /* La foto es de cuerpo entero, sin recorte: a 64px no se leería. */
+  .intro__photo { --thumb: 96px; }
+  .intro__role { margin-top: 4px; }
+  .intro__sep { color: var(--color-ink-3); margin-inline: 4px; }
+
+  .intro__text { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+</style>

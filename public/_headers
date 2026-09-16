@@ -18,7 +18,7 @@
   Cache-Control: public, max-age=31536000, immutable
 
 # Sin hash, pero el subset de Junicode solo cambia si se renombra el archivo.
-# Las imágenes se quedan con el default de Workers -revalidación por etag-: ahí
-# sí se reemplaza el archivo sin tocar el nombre.
+# La imagen social (`dh.webp`) se queda con el default de Workers -revalidación
+# por etag-: ahí sí se reemplaza el archivo sin tocar el nombre.
 /assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable

@@ -11,44 +11,17 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<section id="contact" class="contact section container">
-  <div class="contact__intro reveal">
-    <h2 class="section-title contact__title">{t("contact.headerTitle")}</h2>
-    <p class="lead contact__lead">{t("contact.description")}</p>
+<section id="contact" class="section container">
+  <header class="sec-head">
+    <h2 class="section-title">{t("contact.headerTitle")}</h2>
+    <p class="prose">{t("contact.description")}</p>
+  </header>
 
-    <div class="contact__cta">
-      <a href={`mailto:${email}`} class="btn btn--primary">
-        <Icon name="ph:paper-plane-tilt" aria-hidden="true" />
-        {t("contact.cta.button")}
-      </a>
-      <!-- Texto, no enlace: el botón de al lado ya es este mismo `mailto:`. Está
-           para poder leerla y copiarla a otro cliente. -->
-      <span class="contact__email">{email}</span>
-    </div>
-
-    <p class="meta contact__note">
-      <Icon name="ph:clock" aria-hidden="true" />
-      {t("contact.cta.note")}
-    </p>
-  </div>
+  <p class="facts">
+    <span>
+      <Icon name="ph:paper-plane-tilt" aria-hidden="true" />
+      <a href={`mailto:${email}`} class="link">{email}</a>
+    </span>
+    <span><Icon name="ph:clock" aria-hidden="true" />{t("contact.note")}</span>
+  </p>
 </section>
-
-<style>
-  .contact__title { --display-size: var(--display-lg); --display-leading: 0.98; }
-  .contact__lead { margin-top: 20px; }
-  .contact__cta {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px 20px;
-    margin-top: 32px;
-  }
-  .contact__email { font-size: var(--text-sm); color: var(--color-ink-2); }
-  .contact__note {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin: 16px 0 0;
-  }
-  .contact__note [data-icon] { font-size: var(--icon-sm); color: var(--color-ink-3); }
-</style>

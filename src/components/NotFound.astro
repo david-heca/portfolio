@@ -12,8 +12,8 @@ const home = getHome(lang);
 ---
 
 <section class="notfound section container">
-  <p class="section-title notfound__num">404</p>
-  <h1 class="section-title notfound__title">{t("notFound.subtitle")}</h1>
+  <p class="rail">{t("notFound.heading")}</p>
+  <h1 class="page-title notfound__title">{t("notFound.subtitle")}</h1>
   <p class="prose notfound__desc">{t("notFound.description")}</p>
   <div class="notfound__actions">
     <a href={home} class="btn btn--primary">
@@ -29,25 +29,13 @@ const home = getHome(lang);
 </section>
 
 <style>
-  /* Lleva `.section` solo por la línea de cierre; el aire es suyo. */
-  .notfound {
-    padding-top: clamp(80px, 14vw, 160px);
-    padding-bottom: clamp(80px, 14vw, 160px);
-    max-width: 640px;
-  }
-  .notfound__num {
-    --display-size: var(--display-2xl);
-    --display-leading: 0.85;
-    color: var(--color-accent);
-    margin: 0;
-  }
-  .notfound__title { margin-top: 24px; }
-  .notfound__desc { margin-top: 16px; max-width: 48ch; }
+  .notfound__title { margin-top: 8px; }
+  .notfound__desc { margin-top: 12px; }
   .notfound__actions {
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-top: 40px;
+    margin-top: 32px;
   }
   .notfound__actions .btn[hidden] { display: none; }
 </style>

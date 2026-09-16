@@ -95,36 +95,36 @@ const companies: Company[] = [
 ];
 ---
 
-<section id="work" class="work section container">
-  <header class="sec-head reveal">
+<section id="work" class="section container">
+  <header class="sec-head">
     <h2 class="section-title">{t("work.headerTitle")}</h2>
-    <p class="lead">{t("work.description")}</p>
+    <p class="prose">{t("work.description")}</p>
   </header>
 
-  <div class="work__list">
+  <div class="companies">
     {companies.map((co) => (
-      <article class="work__company reveal">
-        <div class="work__company-head">
-          <h3 class="section-title work__company-name">{co.name}</h3>
-          <p class="meta work__company-meta">
+      <article class="company">
+        <header class="company__head">
+          <h3 class="card-title">{co.name}</h3>
+          <p class="facts">
             <span><Icon name="ph:calendar-blank" aria-hidden="true" />{co.span}</span>
             {co.loc && <span><Icon name="ph:map-pin" aria-hidden="true" />{co.loc}</span>}
             {co.mode && co.modeIcon && (
               <span><Icon name={co.modeIcon} aria-hidden="true" />{co.mode}</span>
             )}
           </p>
-        </div>
+        </header>
 
-        <div class="work__roles">
+        <ol class="rows">
           {co.roles.map((r) => (
-            <div class="role">
+            <li class="row">
               <div class="role__aside">
                 <span class="rail">{r.period}</span>
                 {r.current && (
-                  <span class="status"><span class="dot"></span>{t("work.current")}</span>
+                  <span class="label role__current"><span class="dot"></span>{t("work.current")}</span>
                 )}
               </div>
-              <div class="role__main">
+              <div>
                 <h4 class="card-title">{r.title}</h4>
                 <span class="label role__type">{r.type}</span>
                 <ul class="prose-sm role__achievements">
@@ -139,7 +139,7 @@ const companies: Company[] = [
                       <span class="role__more-label role__more-label--less">{t("work.showLess")}</span>
                       <Icon name="ph:caret-down" class="role__more-caret" aria-hidden="true" />
                     </summary>
-                    <ul class="prose-sm role__achievements role__achievements--extra">
+                    <ul class="prose-sm role__achievements">
                       {r.achievements.slice(1).map((a) => <li>{a}</li>)}
                     </ul>
                   </details>
@@ -150,89 +150,67 @@ const companies: Company[] = [
                   </div>
                 )}
               </div>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </article>
     ))}
   </div>
 </section>
 
 <style>
-  .work__list { display: flex; flex-direction: column; gap: 56px; }
+  .companies { display: flex; flex-direction: column; gap: 40px; }
 
-  .work__company-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px 20px;
-    padding-bottom: 16px;
-    margin-bottom: 28px;
-    border-bottom: 1px solid var(--color-line);
-  }
-  .work__company-name { --display-size: var(--display-sm); margin: 0; }
-
-  /* En flujo, no en flex: la cabecera alinea por línea base y un SVG como primer
-     ítem flex no tiene, así que la sintetiza y descuadra la fila contra el título. */
-  .work__company-meta span { white-space: nowrap; }
-  .work__company-meta span:not(:last-child) { margin-right: 16px; }
-  .work__company-meta [data-icon] {
-    display: inline-block;
-    /* Alineación óptica contra la minúscula del texto. Fuera de rejilla a propósito. */
-    vertical-align: -0.15em;
-    margin-right: 8px;
-    font-size: var(--icon-sm);
-    color: var(--color-ink-3);
-  }
-
-  .work__roles { display: flex; flex-direction: column; gap: 36px; }
-
-  .role {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  @media (min-width: 768px) {
-    .role { grid-template-columns: 170px 1fr; gap: 32px; }
-  }
-  .role__aside { display: flex; flex-direction: column; gap: 12px; }
-  .role__type { display: inline-block; margin-top: 8px; }
-  .role__achievements {
-    margin: 16px 0 0;
+  .company__head {
     display: flex;
     flex-direction: column;
-    gap: 12px;
-    max-width: var(--measure);
+    gap: 4px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--color-line);
   }
-  .role__achievements li { position: relative; padding-left: 24px; }
+
+  .role__aside { display: flex; flex-direction: column; gap: 8px; }
+  /* El raíl va dentro de un aside con el estado: el ajuste óptico que `.row`
+     le da al raíl directo se replica aquí. Fuera de rejilla a propósito. */
+  @media (min-width: 640px) { .role__aside { padding-top: 3px; } }
+
+  .role__current { display: inline-flex; align-items: center; gap: 8px; }
+
+  .role__type { display: block; margin-top: 4px; }
+
+  .role__achievements {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .role__achievements li { position: relative; padding-left: 20px; }
+  /* Fuera de rejilla a propósito: la viñeta se centra contra la primera línea. */
   .role__achievements li::before {
     content: "";
     position: absolute;
     left: 2px;
-    top: 10px;
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
+    top: calc(var(--leading) * 0.5em);
+    width: 6px;
+    height: 1px;
     background: var(--color-ink-3);
   }
   /* <details> nativo: el contenido plegado sigue en el DOM para Cmd+F y SEO. */
-  .role__more { margin-top: 16px; }
+  .role__more { margin-top: 12px; }
   .role__more-toggle {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
     cursor: pointer;
     transition: color var(--t-fast) ease;
   }
   .role__more-toggle::-webkit-details-marker { display: none; }
-  .role__more-toggle:hover { color: var(--color-accent); }
+  .role__more-toggle:hover { color: var(--color-ink); }
   .role__more-caret { font-size: var(--icon-sm); transition: transform var(--t-base) ease; }
   .role__more[open] .role__more-caret { transform: rotate(180deg); }
   .role__more-label--less { display: none; }
   .role__more[open] .role__more-label--more { display: none; }
   .role__more[open] .role__more-label--less { display: inline; }
-  .role__achievements--extra { margin-top: 16px; }
 
-  .role__stack { margin-top: 16px; }
+  .role__stack { margin-top: 12px; }
 </style>

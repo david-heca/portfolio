@@ -1,0 +1,58 @@
+---
+import { Icon } from "astro-icon/components";
+import type { LocalizedEntry } from "@/data/collections";
+import { localizePath, type Lang } from "@i18n/utils";
+
+export interface Props {
+  lang: Lang;
+  items: LocalizedEntry<"notes">[];
+}
+
+const { lang, items } = Astro.props;
+const base = localizePath("/notes/", lang);
+
+const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
+  year: "numeric",
+  month: "short",
+});
+---
+
+<ul class="rows">
+  {items.map(({ slug, entry }) => (
+    <li class="row">
+      <time class="rail" datetime={entry.data.date.toISOString()}>
+        {dateFormat.format(entry.data.date)}
+      </time>
+      <a class="note" href={`${base}${slug}/`}>
+        <span class="card-title note__title">
+          {entry.data.title}
+          <Icon name="ph:arrow-right" aria-hidden="true" />
+        </span>
+        <span class="prose-sm note__summary">{entry.data.summary}</span>
+      </a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .note { display: block; }
+  .note__title { display: block; }
+  .note__summary { display: block; margin-top: 4px; }
+
+  /* Dentro del título y no en una columna aparte: la flecha señala al título,
+     no a la caja. */
+  .note__title [data-icon] {
+    display: inline-block;
+    /* Alineación óptica contra la mayúscula del título. Fuera de rejilla a propósito. */
+    vertical-align: -0.1em;
+    margin-left: 6px;
+    font-size: var(--icon);
+    color: var(--color-ink-3);
+    transition: color var(--t-fast) ease, transform var(--t-base) ease;
+  }
+  .note:hover .note__title [data-icon],
+  .note:focus-visible .note__title [data-icon] {
+    color: var(--color-ink);
+    transform: translateX(4px);
+  }
+</style>

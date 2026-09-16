@@ -1,19 +1,19 @@
-/** Los años son estructura: sitúan cada fila en el eje. Escribirlos también en el
- *  copy dejaría que la frase y el tramo pintado dijeran cosas distintas. */
+/** Los años van aquí y no en el copy: el periodo se compone en el componente,
+ *  así ES y EN no pueden decir fechas distintas. */
 export interface Study {
   key: string;
   from: number;
-  /** Ausente: sigue en curso. El tramo llega hasta hoy y se desvanece. */
+  /** Ausente: sigue en curso. */
   to?: number;
 }
 
-/** Un certificado es una fecha, no un periodo: en el eje es un punto. */
+/** Un certificado es una fecha, no un periodo. */
 export interface Certification {
   key: string;
   year: number;
 }
 
-/** De lo más reciente a lo más antiguo: así los tramos bajan en escalera. */
+/** De lo más reciente a lo más antiguo. */
 export const studies: Study[] = [
   { key: "platzi", from: 2022 },
   { key: "tesco", from: 2019, to: 2024 },

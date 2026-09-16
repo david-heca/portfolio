@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-import { getHome, useTranslations, type Lang } from "@i18n/utils";
+import { useTranslations, type Lang } from "@i18n/utils";
 import { channels } from "@/data/contact";
 import pkg from "../../../package.json";
 
@@ -10,94 +10,78 @@ export interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const home = getHome(lang);
 
 const year = new Date().getFullYear();
-
 ---
 
 <footer class="footer">
   <div class="footer__inner container">
-    <a href={`${home}#top`} class="footer__brand">david<span>herrera</span></a>
-
     <p class="meta footer__made">
       {t("common.footer.madeWith")}
       <Icon name="ph:heart-duotone" class="footer__heart" aria-hidden="true" />
       <span class="sr-only">{t("common.footer.love")}</span>
       {t("common.footer.madeFrom")}
+      <span class="footer__sep" aria-hidden="true">·</span>
+      © {year}
+      <span class="footer__sep" aria-hidden="true">·</span>
+      v{pkg.version}
     </p>
 
-    <p class="meta">© {year} · v{pkg.version}</p>
-
-    <div class="footer__channels">
+    <!-- En el pie y no en la intro: es lo único que está en todas las páginas, y
+         quien acaba una nota es quien busca dónde seguirte. -->
+    <ul class="footer__channels">
       {channels.map((c) => (
-        <a href={c.href} target="_blank" rel="noopener noreferrer" class="channel">
-          <Icon name={c.icon} aria-hidden="true" />
-          <span class="sr-only">{t(`common.channels.${c.key}`)}</span>
-        </a>
+        <li>
+          <a href={c.href} target="_blank" rel="noopener noreferrer" class="channel">
+            <Icon name={c.icon} aria-hidden="true" />
+            <span class="sr-only">{t(`common.channels.${c.key}`)}</span>
+          </a>
+        </li>
       ))}
-    </div>
+    </ul>
   </div>
 </footer>
 
 <style>
-  /* Más aire arriba que abajo: el notch de los canales se come el borde. */
   .footer__inner {
-    position: relative;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    padding-block: 52px 32px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 24px;
+    padding-block: 24px 40px;
+    border-top: 1px solid var(--color-line);
   }
-  @media (min-width: 640px) {
-    .footer__inner {
-      flex-direction: row;
-      align-items: baseline;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px 24px;
-      padding-block: 40px 32px;
-    }
-  }
-  .footer__brand {
-    font-family: var(--font-display);
-    font-style: italic;
-    font-size: var(--text-brand);
-    color: var(--color-ink);
-  }
-  .footer__brand span { color: var(--color-ink-2); }
 
   /* Fuera de rejilla: dentro de una frase el hueco tiene que leerse como espacio
-     de palabra, y 8px ya separa. */
+     de palabra, y 6px ya separa. */
   .footer__made {
     display: inline-flex;
+    flex-wrap: wrap;
     align-items: center;
     gap: 6px;
   }
   /* Duotone sigue siendo una tinta: las dos capas son currentColor, la de relleno
      al 20%. */
   .footer__heart { font-size: var(--icon); }
+  .footer__sep { color: var(--color-ink-3); }
 
   .footer__channels {
-    position: absolute;
-    top: 0;
-    right: calc(var(--pad) - 20px);
-    transform: translateY(-50%);
     display: flex;
     align-items: center;
-    gap: 24px;
-    padding-inline: 20px;
-    background: var(--color-bg);
+    /* Fuera de rejilla: descuenta el padding del último icono para que el glifo
+       cierre contra el filo de la columna. */
+    margin-right: -10px;
   }
-
+  /* Forma: 40px de caja para el pulgar, con el glifo de 20 centrado. */
   .channel {
-    display: grid;
+    display: inline-flex;
+    padding: 10px;
     color: var(--color-ink-2);
+    border-radius: var(--radius-control);
     transition: color var(--t-fast) ease;
   }
-  .channel [data-icon] { font-size: var(--icon-xl); }
-
+  .channel [data-icon] { font-size: var(--icon-lg); }
   .channel:hover,
   .channel:focus-visible { color: var(--color-ink); }
 </style>

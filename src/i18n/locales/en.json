@@ -17,20 +17,14 @@
     }
   },
   "nav": {
-    "about": "About",
-    "work": "Experience",
-    "projects": "Projects",
-    "contact": "Contact",
     "notes": "Notes",
-    "primaryLabel": "Primary navigation",
-    "mobileLabel": "Mobile navigation",
-    "menuLabel": "Menu"
+    "primaryLabel": "Primary navigation"
   },
   "notes": {
     "title": "Notes",
     "description": "Field notes on what I run into taking AI to production.",
     "empty": "No notes published yet.",
-    "backToIndex": "All notes"
+    "all": "All notes"
   },
   "speaking": {
     "title": "On stage",
@@ -47,22 +41,15 @@
       "Generative AI",
       "RAG & MLOps",
       "Data science"
-    ],
-    "photoAlt": "David giving a talk"
+    ]
   },
-  "hero": {
+  "intro": {
     "role": "Applied AI Engineer",
-    "thesis": "The hard part is almost never the model.",
-    "intro": "I like building crazy ideas and making them survive production.",
-    "ctaProjects": "See projects",
-    "ctaContact": "Let's talk"
-  },
-  "about": {
-    "heading": "Software, data <em>&</em> AI",
+    "location": "Mexico City",
+    "lead": "The hard part is almost never the model. I like building crazy ideas and making them survive production.",
     "bio": {
       "paragraph1": "I started out building WordPress sites and managing traditional hosting. Today I design and ship systems with <strong>applied AI</strong>.",
-      "paragraph2": "I work across the whole stack, but my job right now is <strong>RAG, MCP and MLOps</strong> over corporate data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs.",
-      "paragraph3": "I also give talks on applied AI and data science, at conferences and universities."
+      "paragraph2": "I work across the whole stack, but my job right now is <strong>RAG, MCP and MLOps</strong> over corporate data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs."
     }
   },
   "work": {
@@ -184,8 +171,7 @@
   "projects": {
     "headerTitle": "Selected work",
     "description": "Software someone opens in the morning to get their work done.",
-    "countLabel": "cases",
-    "specLink": "Link",
+    "stackLabel": "Stack",
     "status": {
       "production": "In production",
       "delivered": "Delivered",
@@ -200,7 +186,7 @@
     "list": {
       "portfolio": {
         "title": "Portfolio",
-        "description": "This site. Astro, hand-written CSS and TypeScript, built from scratch. It's on its fourth version.",
+        "description": "This site. Astro, hand-written CSS and TypeScript, built from scratch. It's on its fifth version.",
         "specs": [
           {
             "label": "Template",
@@ -275,10 +261,7 @@
   "contact": {
     "headerTitle": "Let's talk",
     "description": "If you've got an idea, or you just want to say hi, write me. I usually reply the same day.",
-    "cta": {
-      "button": "Send me a message",
-      "note": "Mexico City, GMT-6"
-    }
+    "note": "GMT-6"
   },
   "common": {
     "skipToContent": "Skip to content",

@@ -25,55 +25,51 @@ const items = projects.map((p) => ({
   href: p.link.kind === "private" ? undefined : p.link.href,
   linkLabel: t(`projects.link.${p.link.kind}`),
 }));
-
-const years = projects.map((p) => Number(p.year));
-const span = [...new Set([Math.min(...years), Math.max(...years)])].join(" - ");
-const summary = `${projects.length} ${t("projects.countLabel")} · ${span}`;
 ---
 
-<section id="projects" class="projects section container">
-  <header class="projects__head reveal">
+<section id="projects" class="section container">
+  <header class="sec-head">
     <h2 class="section-title">{t("projects.headerTitle")}</h2>
-    <p class="label projects__summary">{summary}</p>
+    <p class="prose">{t("projects.description")}</p>
   </header>
-  <p class="lead projects__lead reveal">{t("projects.description")}</p>
 
-  <ol class="projects__list">
-    {items.map((p, i) => (
-      <li class:list={["project", "reveal", `reveal-${Math.min(i + 1, 3)}`, i % 2 === 1 && "project--flip"]}>
-        <div class="project__body">
-          <div class="project__head">
-            <h3 class="card-title project__title">{p.title}</h3>
-            <span class="status"><span class="dot"></span>{p.statusLabel}</span>
-          </div>
-          <p class="prose project__desc">{p.desc}</p>
-          <div class="tag-row project__tags">
-            {p.tags.map((tag) => <span class="tag">{tag}</span>)}
-          </div>
+  <ol class="projects">
+    {items.map((p) => (
+      <li class="project">
+        <div class="thumb">
+          <Image src={p.image} alt="" width={128} height={128} loading="lazy" />
         </div>
 
-        <div class="project__media">
-          <div class="project__frame">
-            <Image src={p.image} alt={p.title} width={800} height={600} loading="lazy" quality={80} />
+        <div class="project__body">
+          <div class="project__head">
+            <h3 class="card-title">{p.title}</h3>
+            <span class="rail">{p.year}</span>
           </div>
+          <p class="prose-sm project__desc">{p.desc}</p>
+
           <dl class="spec">
             {p.specs.map((s) => (
               <>
                 <dt class="label">{s.label}</dt>
-                <dd class="label spec__value">{s.value}</dd>
+                <dd class="meta spec__value">{s.value}</dd>
               </>
             ))}
-            <dt class="label">{t("projects.specLink")}</dt>
-            <dd class="label spec__link">
-              {p.href ? (
-                <a href={p.href} target="_blank" rel="noopener noreferrer">
-                  {p.linkLabel}<Icon name="ph:arrow-up-right" aria-hidden="true" />
-                </a>
-              ) : (
-                p.linkLabel
-              )}
+            <dt class="label">{t("projects.stackLabel")}</dt>
+            <dd class="tag-row">
+              {p.tags.map((tag) => <span class="tag">{tag}</span>)}
             </dd>
           </dl>
+
+          <p class="facts project__facts">
+            <span><span class="dot"></span>{p.statusLabel}</span>
+            {p.href ? (
+              <a href={p.href} target="_blank" rel="noopener noreferrer" class="link">
+                {p.linkLabel}<Icon name="ph:arrow-up-right" aria-hidden="true" />
+              </a>
+            ) : (
+              <span><Icon name="ph:lock-simple" aria-hidden="true" />{p.linkLabel}</span>
+            )}
+          </p>
         </div>
       </li>
     ))}
@@ -81,75 +77,42 @@ const summary = `${projects.length} ${t("projects.countLabel")} · ${span}`;
 </section>
 
 <style>
-  .projects__head {
+  .projects { display: flex; flex-direction: column; }
+
+  .project {
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
+    align-items: flex-start;
+    gap: 20px;
+    padding-block: 24px;
+  }
+  .project + .project { border-top: 1px solid var(--color-line); }
+
+  .project__body { flex: 1; min-width: 0; }
+
+  .project__head {
+    display: flex;
+    align-items: baseline;
     justify-content: space-between;
-    gap: 16px 40px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--color-line);
+    gap: 16px;
   }
-  /* Alineación óptica: sube la etiqueta hasta la línea base de la display, que
-     apoya por encima del borde de su caja. Fuera de rejilla a propósito. */
-  .projects__summary { padding-bottom: 6px; }
+  .project__desc { margin-top: 8px; }
 
-  .projects__lead { margin-top: 24px; max-width: 46ch; }
-
-  .projects__list { display: flex; flex-direction: column; gap: 72px; margin-top: 72px; }
-
-  .project { display: grid; gap: 24px; }
-  @media (min-width: 900px) {
-    .project {
-      grid-template-columns: minmax(0, 1fr) 36%;
-      gap: 40px;
-      align-items: center;
-    }
-    .project--flip { grid-template-columns: 36% minmax(0, 1fr); }
-    .project--flip .project__media { order: -1; }
-    .project--flip .project__body { text-align: right; }
-    .project--flip .project__head { flex-direction: row-reverse; }
-    .project--flip .project__desc { margin-inline: auto 0; }
-    .project--flip .project__tags { justify-content: flex-end; }
-    .projects__list { gap: 88px; }
-  }
-
-  .project__head { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
-  .project__title { font-size: var(--text-subhead); }
-  .project__desc { margin-top: 12px; max-width: 46ch; }
-  .project__tags { margin-top: 20px; }
-
-  .project__media { position: relative; }
-  .project__frame {
-    overflow: hidden;
-    border-radius: var(--radius-sm);
-    background: var(--color-bg-2);
-    aspect-ratio: 4 / 3;
-  }
-  .project__frame img { width: 100%; height: 100%; object-fit: cover; }
-
+  /* Las claves en mono y los valores en sans, a la misma altura: es una ficha,
+     no una tabla, así que no lleva filos entre pares. */
   .spec {
     display: grid;
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 0 16px;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 4px 16px;
     margin-top: 16px;
   }
-  .spec dd { text-align: right; }
-  .spec dt,
-  .spec dd {
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--color-line);
-  }
-  .spec > :nth-last-child(-n + 2) { padding-bottom: 0; border-bottom: 0; }
+  /* Alineación óptica: la mono micro se apoya en la línea base de la sans, que
+     tiene más cuerpo. Fuera de rejilla a propósito. */
+  .spec dt { padding-top: 3px; }
   .spec__value { color: var(--color-ink); }
-  .spec__link a {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--color-accent);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-  .spec__link [data-icon] { font-size: var(--icon-sm); }
 
+  /* Los tags son una fila más de la ficha: mismo cuerpo que el resto de valores.
+     Alineación óptica contra la mono micro. Fuera de rejilla a propósito. */
+  .spec .tag-row { gap: 4px 12px; padding-top: 2px; }
+
+  .project__facts { margin-top: 16px; }
 </style>

@@ -11,32 +11,18 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 
 const ongoing = t("education.ongoing");
-const axisFrom = Math.min(...studies.map((s) => s.from), ...certifications.map((c) => c.year));
-const axisTo = Math.max(
-  new Date().getFullYear(),
-  ...studies.map((s) => s.to ?? 0),
-  ...certifications.map((c) => c.year),
-);
-
-/** Posición de un año sobre el eje, en porcentaje del ancho de la fila. */
-const at = (year: number) => ((year - axisFrom) / (axisTo - axisFrom)) * 100;
-const track = (from: number, to: number) =>
-  `--from:${at(from).toFixed(2)}%;--span:${(at(to) - at(from)).toFixed(2)}%`;
 
 interface Row {
   period: string;
   title: string;
   meta: string;
-  track: string;
   current?: boolean;
-  point?: boolean;
 }
 
 const academic: Row[] = studies.map(({ key, from, to }) => ({
   period: `${from} - ${to ?? ongoing}`,
   title: t(`education.list.${key}.degree`),
   meta: [t(`education.list.${key}.institution`), t(`education.list.${key}.description`)].join(" · "),
-  track: track(from, to ?? axisTo),
   current: to === undefined,
 }));
 
@@ -44,8 +30,6 @@ const certs: Row[] = certifications.map(({ key, year }) => ({
   period: String(year),
   title: t(`education.certifications.${key}.name`),
   meta: t(`education.certifications.${key}.issuer`),
-  track: track(year, year),
-  point: true,
 }));
 
 const groups = [
@@ -54,29 +38,26 @@ const groups = [
 ];
 ---
 
-<section id="education" class="edu section container">
-  <header class="sec-head reveal">
+<section id="education" class="section container">
+  <header class="sec-head">
     <h2 class="section-title">{t("education.headerTitle")}</h2>
-    <p class="lead">{t("education.description")}</p>
+    <p class="prose">{t("education.description")}</p>
   </header>
 
-  <div class="edu__groups">
-    {groups.map((g, i) => (
-      <div class:list={["edu__group", "reveal", `reveal-${Math.min(i + 1, 3)}`]}>
+  <div class="edu">
+    {groups.map((g) => (
+      <div>
         <h3 class="label edu__label">
           <Icon name={g.icon} aria-hidden="true" />
           {g.label}
         </h3>
-        <ul class="edu__list">
+        <ul class="rows">
           {g.entries.map((e) => (
-            <li
-              class:list={["edu-item", e.current && "edu-item--current", e.point && "edu-item--point"]}
-              style={e.track}
-            >
-              <span class="rail edu-item__period">{e.period}</span>
-              <div class="edu-item__body">
-                <h4 class="card-title edu-item__title">{e.title}</h4>
-                <p class="meta edu-item__meta">{e.meta}</p>
+            <li class="row">
+              <span class:list={["rail", e.current && "edu__current"]}>{e.period}</span>
+              <div>
+                <h4 class="card-title">{e.title}</h4>
+                <p class="meta edu__meta">{e.meta}</p>
               </div>
             </li>
           ))}
@@ -84,15 +65,10 @@ const groups = [
       </div>
     ))}
   </div>
-
-  <p class="edu__scale reveal reveal-3" aria-hidden="true">
-    <span class="label">{axisFrom}</span>
-    <span class="label">{axisTo}</span>
-  </p>
 </section>
 
 <style>
-  .edu__groups { display: flex; flex-direction: column; gap: 48px; }
+  .edu { display: flex; flex-direction: column; gap: 40px; }
 
   .edu__label {
     display: flex;
@@ -103,58 +79,7 @@ const groups = [
   }
   .edu__label [data-icon] { font-size: var(--icon); color: var(--color-ink-3); }
 
-  .edu__list { display: flex; flex-direction: column; }
-
-  .edu-item {
-    position: relative;
-    display: grid;
-    gap: 4px;
-    padding-block: 20px;
-    border-bottom: 1px solid var(--color-line);
-    transition: background-color var(--t-fast) ease;
-  }
-  .edu-item:hover { background: var(--color-accent-soft); }
-
-  /* Subgrid: el raíl mide lo que mida el periodo más largo y las filas siguen
-     casando entre sí, sin fijar un ancho a ojo. */
-  @media (min-width: 640px) {
-    .edu__list { display: grid; grid-template-columns: max-content minmax(0, 1fr); }
-    .edu-item { grid-column: 1 / -1; grid-template-columns: subgrid; gap: 32px; }
-  }
-
-  /* El tramo se mide sobre una escala que comparten todas las filas, así que
-     manda el ancho de la fila y no la medida del texto. */
-  .edu-item::after {
-    content: "";
-    position: absolute;
-    bottom: -1px;
-    left: var(--from);
-    width: var(--span);
-    height: 2px;
-    background: var(--color-accent);
-  }
-  /* Lo que sigue abierto no topa con nada: se desvanece. */
-  .edu-item--current::after {
-    -webkit-mask-image: linear-gradient(to right, #000 85%, transparent);
-    mask-image: linear-gradient(to right, #000 85%, transparent);
-  }
-  /* Un certificado es una fecha, no un periodo: en el eje es un punto. */
-  .edu-item--point::after {
-    width: 7px;
-    height: 7px;
-    bottom: -3px;
-    margin-left: -3px;
-    border-radius: 50%;
-  }
-
-  /* Alineación óptica: cuadra la base del periodo con la del título, que es más
-     grande. Fuera de rejilla a propósito. */
-  .edu-item__period { padding-top: 3px; }
-  .edu-item--current .edu-item__period { color: var(--color-accent); }
-
-  .edu-item__body { max-width: var(--measure); }
-  .edu-item__title { text-wrap: balance; }
-  .edu-item__meta { margin-top: 4px; }
-
-  .edu__scale { display: flex; justify-content: space-between; margin-top: 12px; }
+  /* Lo que sigue abierto sube a tinta: es el único dato vivo de la lista. */
+  .edu__current { color: var(--color-ink); }
+  .edu__meta { margin-top: 4px; }
 </style>

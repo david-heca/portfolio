@@ -1,3 +1,9 @@
+import type { ImageMetadata } from "astro";
+import connie from "@/assets/projects/connie.webp";
+import handheld from "@/assets/projects/handheld.webp";
+import trace from "@/assets/projects/trace.webp";
+import portfolio from "@/assets/projects/portfolio.webp";
+
 /** Las etiquetas de `status`/`link` viven en los locales, no aquí, para que ES y EN no diverjan. */
 export type Status = "production" | "delivered" | "live" | "archived";
 
@@ -11,7 +17,9 @@ export interface Project {
   status: Status;
   year: string;
   tags: string[];
-  image: string;
+  /** Importada, no una ruta de `public/`: así el build emite la miniatura al
+   *  tamaño que se pinta en vez de servir el original entero. */
+  image: ImageMetadata;
   link: Link;
 }
 
@@ -22,7 +30,7 @@ export const projects: Project[] = [
     status: "production",
     year: "2025",
     tags: ["RAG", "MCP", "Azure", "Python", "SQL"],
-    image: "/assets/projects/connie.webp",
+    image: connie,
     link: { kind: "private" },
   },
   {
@@ -30,7 +38,7 @@ export const projects: Project[] = [
     status: "production",
     year: "2024",
     tags: ["Java", "Android", "SQL"],
-    image: "/assets/projects/handheld.webp",
+    image: handheld,
     link: { kind: "private" },
   },
   {
@@ -38,7 +46,7 @@ export const projects: Project[] = [
     status: "delivered",
     year: "2024",
     tags: ["C#", "DevExpress", "SQL"],
-    image: "/assets/projects/trace.webp",
+    image: trace,
     link: { kind: "private" },
   },
   {
@@ -46,7 +54,7 @@ export const projects: Project[] = [
     status: "live",
     year: "2026",
     tags: ["Astro", "CSS", "TS"],
-    image: "/assets/projects/portfolio.webp",
+    image: portfolio,
     link: { kind: "repo", href: "https://github.com/david-heca/portfolio" },
   },
 ];

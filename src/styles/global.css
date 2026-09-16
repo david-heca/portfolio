@@ -23,72 +23,55 @@
   --color-ink-3: #b0b0b0;   /* ~2.2:1: viñetas, hairlines e iconos en reposo */
   --color-line: rgba(0, 0, 0, 0.14);
   --color-line-strong: rgba(0, 0, 0, 0.3);
-  --color-accent: var(--color-ink);
-  --color-accent-soft: color-mix(in srgb, var(--color-ink) 8%, transparent);
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05), 0 16px 40px -24px rgba(0, 0, 0, 0.25);
-  /* No cambia con el tema: debajo está la foto, no el fondo de la página. */
-  --color-scrim: rgba(0, 0, 0, 0.8);
-  --color-on-scrim: #ffffff;
 
   /* --t-fast solo para color; el resto de gestos a --t-base. */
   --t-fast: 0.15s;
   --t-base: 0.2s;
 
   /* escala tipográfica - se elige por rol */
-  --text-label-sm: 11px;   /* mono micro: claves de spec, meta de card */
+  --text-label-sm: 11px;   /* mono micro: claves de spec */
   --text-label: 12px;      /* etiquetas mono, periodos, tags */
   --text-meta: 13.5px;     /* frase de apoyo: institución, emisor, notas, pie */
-  --text-sm: 14.5px;       /* prosa secundaria: descripciones, notas, logros */
-  --text-body: 16px;       /* prosa principal: bio, descripción destacada, canales */
-  /* Mismo cuerpo que .card-title a propósito: los separa el peso y el color. */
-  --text-lead: clamp(19px, 2.1vw, 22px);
-  --text-subhead: clamp(20px, 2.6vw, 28px);  /* único tier sans por encima de .card-title */
+  --text-sm: 14.5px;       /* prosa secundaria: descripciones, logros */
+  --text-body: 16px;       /* prosa principal y títulos de fila */
+  --text-lead: 18px;       /* entradilla: la presentación y el resumen de una nota */
+  --text-subhead: 21px;    /* título de sección */
   --text-brand: 21px;      /* wordmark, igual en el nav y en el pie */
-
-  /* tier display */
-  --display-2xl: clamp(96px, 22vw, 220px);  /* solo el numeral del 404 */
-  --display-lg: clamp(48px, 8vw, 96px);
-  --display: clamp(38px, 6vw, 58px);
-  --display-sm: clamp(28px, 4vw, 40px);
+  /* Solo el h1 de cada página: lo más grande que hay, y no mucho más que un
+     subhead. En una columna estrecha el cuerpo no puede llevar la jerarquía;
+     la lleva el peso y el aire. */
+  --display: clamp(28px, 4.5vw, 34px);
 
   /* tracking */
   --track-tight: -0.02em;  /* display */
-  --track-snug: -0.01em;   /* título de card y subhead */
+  --track-snug: -0.01em;   /* subhead y título de fila */
   --track-tag: 0.04em;     /* cifras y tags */
   --track-label-sm: 0.08em;
-  --track-label: 0.16em;
 
   --leading: 1.65;         /* prosa */
   --leading-snug: 1.5;     /* entradilla */
-  --leading-title: 1.25;   /* subhead */
-  --leading-tight: 1.1;    /* título de card */
+  --leading-title: 1.3;    /* subhead y título de fila */
+  --leading-tight: 1.15;   /* h1 */
   --leading-flat: 1;       /* una sola línea: botones, enlaces del nav */
   /* Solo para la sans: la mono es de peso estático y el navegador la emborrona
      con negrita sintética. */
   --weight-medium: 500;
-  --measure: 60ch;
 
   /* iconos */
   --icon-sm: 14px;
   --icon: 16px;
-  --icon-lg: 19px;
-  --icon-xl: 22px;
+  --icon-lg: 20px;
 
-  /* layout */
-  --container: 1180px;
-  /* El armazón cae en el borde exterior del contenedor, así que esto es también
-     el aire entre el filo y el texto. */
+  /* layout: una columna, y la columna es la medida. */
+  --container: 688px;
   --pad: 24px;
-  --frame-inset: 16px;     /* lo mínimo entre el armazón y el borde de la ventana */
-  /* La misma cantidad en dos sistemas de coordenadas: `.page` no incluye la barra
-     de scroll -de ahí el `50%`-; la banda de las marcas se mide contra la ventana. */
-  --frame-x: max(var(--frame-inset), 50% - var(--container) / 2);
-  --frame-x-vw: max(var(--frame-inset), 50vw - var(--container) / 2);
-  --section-y: clamp(72px, 11vw, 140px);
+  --section-y: 64px;
   --radius: 0;
   --radius-sm: 0;
   --radius-xs: 2px;        /* solo lo que envuelve una palabra: código en línea */
   --radius-control: 2px;
+  --thumb: 64px;           /* miniatura de fila; el avatar la sobreescribe */
 }
 
 :root.dark {
@@ -100,7 +83,6 @@
   --color-ink-3: #4d4d4d;   /* ~2.4:1: mismo papel que en claro */
   --color-line: rgba(255, 255, 255, 0.16);
   --color-line-strong: rgba(255, 255, 255, 0.32);
-  --color-accent-soft: color-mix(in srgb, var(--color-ink) 12%, transparent);
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.6), 0 16px 40px -24px rgba(0, 0, 0, 0.9);
 }
 
@@ -110,12 +92,7 @@ h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
 ul, ol, menu { list-style: none; }
 table { border-collapse: collapse; }
 
-html {
-  scroll-behavior: smooth;
-  scroll-padding-top: 72px;  /* alto de la barra, que ya no flota */
-  overflow-x: clip;
-  background-color: var(--color-bg);
-}
+html { background-color: var(--color-bg); }
 
 html, body {
   margin: 0;
@@ -136,7 +113,7 @@ button { font: inherit; color: inherit; background: none; cursor: pointer; }
 img, svg { display: block; max-width: 100%; }
 [data-icon] { flex-shrink: 0; }
 
-::selection { background: var(--color-accent); color: var(--color-bg); }
+::selection { background: var(--color-ink); color: var(--color-bg); }
 
 :focus-visible {
   outline: 2px solid var(--color-ink);
@@ -175,9 +152,6 @@ img, svg { display: block; max-width: 100%; }
 .skip-link:focus-visible { outline-color: var(--color-bg); outline-offset: -6px; }
 
 /* ----- layout ----- */
-@media (min-width: 768px) { :root { --pad: 40px; } }
-@media (min-width: 1024px) { :root { --pad: 56px; } }
-
 .container {
   width: 100%;
   max-width: var(--container);
@@ -185,144 +159,61 @@ img, svg { display: block; max-width: 100%; }
   padding-inline: var(--pad);
 }
 
-/* ----- el armazón visible -----
-   Un solo pseudoelemento con bordes, no dos cajas de 1px: a `.nav` no le queda el
-   otro -su `::after` es la marca de registro-.
-   Por debajo de 768px no se dibujan: con `--pad` en 24 el aire no da. */
-.page { display: flex; flex-direction: column; flex-grow: 1; position: relative; }
-.footer { position: relative; }
-@media (min-width: 768px) {
-  .nav::before,
-  .page::before,
-  .footer::before {
-    content: "";
-    position: absolute;
-    inset: 0 var(--frame-x);
-    border-left: 1px solid var(--color-line);
-    border-right: 1px solid var(--color-line);
-    pointer-events: none;
-  }
-}
+/* El pie se queda abajo en una página corta; el sobrante lo absorbe `.page`. */
+.page { flex-grow: 1; padding-block: 40px var(--section-y); }
 
-/* En una página corta, sin esto el sobrante del flex se acumula al final: la línea
-   de cierre queda a media altura y los filos llegan al pie sin nada que los cruce. */
-.page > :last-child { flex-grow: 1; }
+.section + .section { margin-top: var(--section-y); }
 
-.section { padding-block: var(--section-y); }
-
-/* El desbordamiento lo recorta el `overflow-x: clip` del html.
-   `.hero` no lleva `.section` -tiene su propia altura- pero cierra igual. */
-.section,
-.hero { position: relative; }
-.section::after,
-.hero::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0;
-  margin-inline: calc(50% - 50vw);
-  height: 1px;
-  background: var(--color-line);
-  pointer-events: none;
-}
-
-/* Marca de registro donde la línea de cierre cruza un filo vertical. Los 9px son
-   4+1+4: simétricos alrededor de la línea de 1px.
-
-   Va en `background-image` porque `::after` ya es la línea y a una sección no le
-   quedan más pseudoelementos. Las longitudes son `vw` y no `%`: un porcentaje en
-   `background-position` se mide contra el hueco que deja la imagen, no contra la
-   caja, y descuadraría cada marca su propio ancho.
-
-   El borde del nav cruza los mismos filos, así que lleva la misma marca. */
-@media (min-width: 768px) {
-  .section::before,
-  .hero::before,
-  .nav::after {
-    content: "";
-    position: absolute;
-    inset: auto 0 -4px;
-    margin-inline: calc(50% - 50vw);
-    height: 9px;
-    background-image:
-      linear-gradient(var(--color-ink-3), var(--color-ink-3)),
-      linear-gradient(var(--color-ink-3), var(--color-ink-3)),
-      linear-gradient(var(--color-ink-3), var(--color-ink-3)),
-      linear-gradient(var(--color-ink-3), var(--color-ink-3));
-    background-size: 1px 9px, 9px 1px, 1px 9px, 9px 1px;
-    background-position:
-      left var(--frame-x-vw) top 0,
-      left calc(var(--frame-x-vw) - 4px) top 4px,
-      right var(--frame-x-vw) top 0,
-      right calc(var(--frame-x-vw) - 4px) top 4px;
-    background-repeat: no-repeat;
-    pointer-events: none;
-  }
-  /* Los offsets se miden contra la caja de padding y el borde del nav queda fuera
-     de ella: un pixel más abajo que el cierre de una sección, que no lleva borde. */
-  .nav::after { bottom: -5px; }
-}
-
-.sec-head { max-width: 720px; margin-bottom: 56px; }
-.sec-head .lead { margin-top: 20px; }
+.sec-head { margin-bottom: 24px; }
+.sec-head .prose { margin-top: 8px; }
 
 /* ----- type primitives ----- */
-.label,
-.status {
+.label {
   font-family: var(--font-mono);
   font-size: var(--text-label-sm);
   letter-spacing: var(--track-label-sm);
   text-transform: uppercase;
-}
-.label { color: var(--color-ink-2); }
-
-.status {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
   color: var(--color-ink-2);
 }
 
-/* El escalón se elige con --display-size entre los cuatro tokens; --display-leading
-   es óptico y se ajusta por instancia. */
-.section-title {
-  font-family: var(--font-text);
+/* El h1 de cada página: el nombre en la portada, el título en las demás. */
+.page-title {
   font-weight: var(--weight-medium);
   letter-spacing: var(--track-tight);
-  line-height: var(--display-leading, var(--leading-flat));
-  font-size: var(--display-size, var(--display));
+  line-height: var(--leading-tight);
+  font-size: var(--display);
   color: var(--color-ink);
-  margin: 0;
   text-wrap: balance;
 }
 
-.section-title em {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-weight: 400;
+.section-title {
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--track-snug);
+  line-height: var(--leading-title);
+  font-size: var(--text-subhead);
+  color: var(--color-ink);
+  text-wrap: balance;
 }
 
 .card-title {
-  font-family: var(--font-text);
   font-weight: var(--weight-medium);
   letter-spacing: var(--track-snug);
-  font-size: var(--text-lead);
-  line-height: var(--leading-tight);
+  font-size: var(--text-body);
+  line-height: var(--leading-title);
   color: var(--color-ink);
-  margin: 0;
 }
 
 .lead {
   font-size: var(--text-lead);
   line-height: var(--leading-snug);
-  color: var(--color-ink-2);
-  max-width: 52ch;
+  color: var(--color-ink);
 }
+.lead strong { font-weight: var(--weight-medium); }
 
 .prose {
   font-size: var(--text-body);
   line-height: var(--leading);
   color: var(--color-ink-2);
-  max-width: var(--measure);
 }
 .prose strong { color: var(--color-ink); font-weight: var(--weight-medium); }
 
@@ -332,15 +223,76 @@ img, svg { display: block; max-width: 100%; }
   color: var(--color-ink-2);
 }
 
+.meta {
+  font-size: var(--text-meta);
+  color: var(--color-ink-2);
+}
+
+/* Tabular para que las cifras del raíl casen en columna. */
+.rail {
+  font-family: var(--font-mono);
+  font-size: var(--text-label);
+  letter-spacing: var(--track-tag);
+  color: var(--color-ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Enlace corto -una etiqueta, no una frase-: sin tono que lo separe, lo señala
+   el subrayado. Inline-flex para que el glifo, si lo lleva, se centre solo. */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--color-ink-3);
+  transition: text-decoration-color var(--t-fast) ease;
+}
+.link:hover { text-decoration-color: currentColor; }
+.link [data-icon] { font-size: var(--icon-sm); }
+
+/* ----- fila de datos con icono -----
+   Periodo, lugar, modalidad, correo: cada dato lleva su glifo delante y la
+   fila se parte donde haga falta. */
+.facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+  font-size: var(--text-meta);
+  color: var(--color-ink-2);
+}
+.facts > * { display: inline-flex; align-items: center; gap: 6px; }
+.facts [data-icon] { font-size: var(--icon-sm); color: var(--color-ink-3); }
+
+/* ----- lista con raíl -----
+   Subgrid: el raíl mide lo que mida el periodo más largo y las filas siguen
+   casando entre sí, sin fijar un ancho a ojo. Por debajo de 640px raíl y cuerpo
+   se apilan. */
+.rows { display: grid; grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 640px) {
+  .rows { grid-template-columns: max-content minmax(0, 1fr); }
+}
+.row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  gap: 4px 24px;
+  padding-block: 20px;
+}
+.row + .row { border-top: 1px solid var(--color-line); }
+/* Alineación óptica: la mono del raíl se apoya en la primera línea del título,
+   que tiene más cuerpo. Fuera de rejilla a propósito. */
+@media (min-width: 640px) { .row > .rail { padding-top: 3px; } }
+
 /* ----- prosa larga -----
-   El ancho lo fija cada hijo y no el contenedor: así el código y las figuras se
-   salen del `--measure` sin arrastrar al texto. */
+   La columna es la medida: el código y las figuras llenan lo mismo que el
+   texto. */
 .longform {
   font-size: var(--text-body);
   line-height: var(--leading);
   color: var(--color-ink-2);
 }
-.longform > * { max-width: var(--measure); }
 .longform > * + * { margin-top: 20px; }
 
 .longform h2,
@@ -355,8 +307,8 @@ img, svg { display: block; max-width: 100%; }
   margin-top: 56px;
 }
 .longform h3 {
-  font-size: var(--text-lead);
-  line-height: var(--leading-tight);
+  font-size: var(--text-body);
+  line-height: var(--leading-title);
   margin-top: 40px;
 }
 /* Un encabezado que abre el documento no arrastra el hueco de separación. */
@@ -365,9 +317,9 @@ img, svg { display: block; max-width: 100%; }
 .longform strong { color: var(--color-ink); font-weight: var(--weight-medium); }
 
 .longform a {
-  color: var(--color-accent);
+  color: var(--color-ink);
   text-decoration: underline;
-  text-underline-offset: 2px;
+  text-underline-offset: 3px;
 }
 
 .longform li { position: relative; padding-left: 24px; }
@@ -409,7 +361,6 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .longform pre {
-  max-width: none;
   overflow-x: auto;
   background: var(--color-bg-2);
   border: 1px solid var(--color-line);
@@ -424,31 +375,15 @@ img, svg { display: block; max-width: 100%; }
 }
 
 .longform hr {
-  max-width: none;
   border-top: 1px solid var(--color-line);
   margin-block: 48px;
 }
 
-.longform figure { max-width: none; }
 .longform img { border-radius: var(--radius-sm); border: 1px solid var(--color-line); }
 .longform figcaption {
   font-size: var(--text-meta);
   color: var(--color-ink-2);
   margin-top: 10px;
-}
-
-.meta {
-  font-size: var(--text-meta);
-  color: var(--color-ink-2);
-}
-
-/* Tabular para que las cifras del rail casen en columna. */
-.rail {
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  letter-spacing: var(--track-tag);
-  color: var(--color-ink-2);
-  font-variant-numeric: tabular-nums;
 }
 
 /* ----- buttons ----- */
@@ -457,7 +392,6 @@ img, svg { display: block; max-width: 100%; }
   align-items: center;
   justify-content: center;
   gap: 8px;
-  font-family: var(--font-text);
   font-weight: var(--weight-medium);
   font-size: var(--text-sm);
   line-height: var(--leading-flat);
@@ -465,18 +399,15 @@ img, svg { display: block; max-width: 100%; }
   border-radius: var(--radius-control);
   border: 1px solid transparent;
   cursor: pointer;
-  transition: transform var(--t-base) ease,
-    background-color var(--t-base) ease, border-color var(--t-base) ease,
+  transition: background-color var(--t-base) ease, border-color var(--t-base) ease,
     color var(--t-base) ease;
 }
 .btn--primary { background: var(--color-ink); color: var(--color-bg); }
-.btn--primary:hover { transform: translateY(-2px); }
 .btn--ghost { border-color: var(--color-line-strong); color: var(--color-ink); }
-.btn--ghost:hover { border-color: var(--color-accent); color: var(--color-accent); background: var(--color-accent-soft); }
-.btn:active { transform: translateY(0) scale(0.98); }
+.btn--ghost:hover { border-color: var(--color-ink); background: var(--color-bg-2); }
 .btn [data-icon] { font-size: 1.15em; }
 
-/* ----- píldora interactiva (enlaces del nav, toggles, menú) -----
+/* ----- píldora interactiva (enlaces del nav, toggles) -----
    Solo comportamiento: el tamaño lo pone cada uso. */
 .pill {
   display: inline-flex;
@@ -494,13 +425,13 @@ img, svg { display: block; max-width: 100%; }
 
 /* Forma del enlace del nav. Vive aquí porque la comparten los enlaces de la barra
    y el conmutador de idioma, y tienen que ser la misma caja: una segunda copia
-   divergiría en el padding. El estado -spy, `[aria-current]`- lo pone cada uso. */
+   divergiría en el padding. El estado -`[aria-current]`- lo pone cada uso. */
 .pill--nav {
   gap: 8px;
   font-size: var(--text-meta);
   line-height: var(--leading-flat);
   font-weight: var(--weight-medium);
-  padding: 8px 13px;
+  padding: 8px 12px;
 }
 .pill--nav [data-icon] {
   width: var(--icon);
@@ -511,64 +442,48 @@ img, svg { display: block; max-width: 100%; }
 }
 .pill--nav:hover [data-icon] { color: var(--color-ink-2); }
 
-/* ----- tag (single style) ----- */
+/* ----- tag -----
+   Texto en mono y nada más: la caja con borde era la única decoración que le
+   quedaba a una palabra. */
 .tag {
-  display: inline-flex;
-  align-items: center;
   font-family: var(--font-mono);
   font-size: var(--text-label);
   letter-spacing: var(--track-tag);
-  padding: 5px 11px;
-  border-radius: var(--radius-control);
-  border: 1px solid var(--color-line);
   color: var(--color-ink-2);
   white-space: nowrap;
-  transition: border-color var(--t-fast) ease, color var(--t-fast) ease,
-    background-color var(--t-fast) ease;
 }
-.tag:hover {
-  border-color: var(--color-accent);
-  color: var(--color-accent);
-  background: var(--color-accent-soft);
-}
-.tag--key {
-  border-color: color-mix(in srgb, var(--color-accent) 40%, transparent);
-  color: var(--color-accent);
-}
-
-.tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 4px 16px; }
 
 /* ----- punto de estado ----- */
 .dot {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: var(--color-ink);
   flex-shrink: 0;
 }
 
+/* ----- miniatura -----
+   Avatar y miniaturas de proyecto son la misma caja: a escuadra y con filo. El
+   tamaño va por `--thumb` para que una instancia lo cambie sin otra clase. */
+.thumb {
+  width: var(--thumb);
+  height: var(--thumb);
+  flex-shrink: 0;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-2);
+  overflow: hidden;
+}
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+
 /* Sin esto el estado inicial del toggle entra rotando al recargar. */
 html:not(.theme-ready) .theme-toggle__glyph { transition: none; }
 
-/* ----- reveal al hacer scroll -----
-   Solo bajo `.js`: sin JS el contenido nace visible. */
-.js .reveal {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.js .reveal.visible { opacity: 1; transform: none; }
-.reveal-1 { transition-delay: 0.08s; }
-.reveal-2 { transition-delay: 0.16s; }
-.reveal-3 { transition-delay: 0.24s; }
-
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  /* `.js` para igualar especificidad con la regla de arriba. */
-  .js .reveal { opacity: 1; transform: none; }
 }

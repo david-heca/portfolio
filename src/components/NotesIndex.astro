@@ -1,6 +1,6 @@
 ---
-import { Icon } from "astro-icon/components";
-import { localizePath, useTranslations, type Lang } from "@i18n/utils";
+import NoteList from "@ui/NoteList.astro";
+import { useTranslations, type Lang } from "@i18n/utils";
 import { localizedEntries } from "@/data/collections";
 
 export interface Props {
@@ -10,86 +10,17 @@ export interface Props {
 const { lang } = Astro.props;
 const t = useTranslations(lang);
 const items = await localizedEntries("notes", lang);
-const base = localizePath("/notes/", lang);
-
-const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
-  year: "numeric",
-  month: "short",
-});
 ---
 
 <section class="section container">
-  <header class="sec-head reveal">
-    <h1 class="section-title">{t("notes.title")}</h1>
-    <p class="lead">{t("notes.description")}</p>
+  <header class="sec-head">
+    <h1 class="page-title">{t("notes.title")}</h1>
+    <p class="prose">{t("notes.description")}</p>
   </header>
 
   {items.length === 0 ? (
-    <p class="prose reveal">{t("notes.empty")}</p>
+    <p class="prose">{t("notes.empty")}</p>
   ) : (
-    <ul class="index-list">
-      {items.map(({ slug, entry }, i) => (
-        <li class:list={["index-row", "reveal", `reveal-${Math.min(i + 1, 3)}`]}>
-          <a class="index-row__link" href={`${base}${slug}/`}>
-            <time class="rail index-row__rail" datetime={entry.data.date.toISOString()}>
-              {dateFormat.format(entry.data.date)}
-            </time>
-
-            <span class="index-row__body">
-              <span class="card-title index-row__title">
-                {entry.data.title}
-                <Icon name="ph:arrow-right" aria-hidden="true" />
-              </span>
-              <span class="prose-sm index-row__summary">{entry.data.summary}</span>
-            </span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <NoteList lang={lang} items={items} />
   )}
 </section>
-
-<style>
-  .index-list { display: flex; flex-direction: column; }
-
-  .index-row + .index-row { border-top: 1px solid var(--color-line); }
-
-  .index-row__link {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-    padding-block: 28px;
-    align-items: start;
-  }
-  @media (min-width: 768px) {
-    .index-row__link { grid-template-columns: 96px minmax(0, 1fr); gap: 32px; }
-  }
-
-  /* Alineación óptica: la fecha se apoya en la primera línea del título, que
-     tiene más cuerpo. Fuera de rejilla a propósito. */
-  .index-row__rail { padding-top: 6px; }
-
-  .index-row__body { display: block; }
-  .index-row__title { display: block; transition: color var(--t-fast) ease; }
-  .index-row__summary { display: block; margin-top: 10px; max-width: var(--measure); }
-
-  /* Dentro del título y no en una columna aparte: en móvil la fila solo tiene una,
-     y la flecha señala al título, no a la caja. */
-  .index-row__title [data-icon] {
-    display: inline-block;
-    /* Alineación óptica contra la mayúscula del título. Fuera de rejilla a propósito. */
-    vertical-align: -0.1em;
-    margin-left: 8px;
-    font-size: var(--icon);
-    color: var(--color-ink-3);
-    transition: color var(--t-fast) ease, transform var(--t-base) ease;
-  }
-
-  .index-row__link:hover .index-row__title,
-  .index-row__link:focus-visible .index-row__title { color: var(--color-accent); }
-  .index-row__link:hover .index-row__title [data-icon],
-  .index-row__link:focus-visible .index-row__title [data-icon] {
-    color: var(--color-accent);
-    transform: translateX(4px);
-  }
-</style>

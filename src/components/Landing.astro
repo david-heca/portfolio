@@ -1,10 +1,10 @@
 ---
-import Hero from "@sections/Hero.astro";
-import About from "@sections/About.astro";
-import Work from "@sections/Work.astro";
+import Intro from "@sections/Intro.astro";
 import Projects from "@sections/Projects.astro";
-import Education from "@sections/Education.astro";
+import Work from "@sections/Work.astro";
+import Notes from "@sections/Notes.astro";
 import Speaking from "@sections/Speaking.astro";
+import Education from "@sections/Education.astro";
 import Contact from "@sections/Contact.astro";
 import { type Lang } from "@i18n/utils";
 
@@ -15,10 +15,10 @@ export interface Props {
 const { lang } = Astro.props;
 ---
 
-<Hero lang={lang} />
-<About lang={lang} />
-<Work lang={lang} />
+<Intro lang={lang} />
 <Projects lang={lang} />
-<Education lang={lang} />
+<Work lang={lang} />
+<Notes lang={lang} />
 <Speaking lang={lang} />
+<Education lang={lang} />
 <Contact lang={lang} />

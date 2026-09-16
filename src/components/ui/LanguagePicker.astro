@@ -7,18 +7,16 @@ export interface Props {
   /** Lo resuelve `Layout`, que ya calcula el mapeo para el hreflang: derivarlo aquí
    *  de la URL sería la segunda copia que acaba divergiendo. */
   href: string;
-  /** Muestra el nombre nativo completo ("English") en vez del código ("EN"). */
-  expanded?: boolean;
 }
 
-const { lang, href, expanded = false } = Astro.props;
+const { lang, href } = Astro.props;
 const target = otherLang(lang);
 
 // La etiqueta se lee en el idioma que ofrece, no en el de la página.
 const tt = useTranslations(target);
 
 const nativeName = tt("common.langHint.nativeName");
-const label = expanded ? nativeName : target.toUpperCase();
+const label = target.toUpperCase();
 ---
 
 <a
@@ -26,19 +24,13 @@ const label = expanded ? nativeName : target.toUpperCase();
   hreflang={target}
   lang={target}
   data-target-lang={target}
-  class:list={["pill", "pill--nav", "lang-switch", expanded && "lang-switch--expanded"]}
+  class="pill pill--nav"
   aria-label={tt("common.langHint.cta")}
   title={nativeName}
 >
   <Icon name="ph:globe-simple" aria-hidden="true" />
   <span>{label}</span>
 </a>
-
-<style>
-  /* Toda la caja sale de `.pill--nav`: aquí solo lo que no comparte con un enlace
-     del nav. En sans y sin tracking, así que no hace falta compensar nada. */
-  .lang-switch--expanded { font-size: var(--text-sm); }
-</style>
 
 <script>
   function setupLangSwitch() {

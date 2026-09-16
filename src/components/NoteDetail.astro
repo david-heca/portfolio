@@ -21,24 +21,23 @@ const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
 ---
 
 <article class="note-page section container">
-  <a class="note-page__back" href={index}>
+  <a class="link note-page__back" href={index}>
     <Icon name="ph:arrow-left" aria-hidden="true" />
-    {t("notes.backToIndex")}
+    {t("notes.all")}
   </a>
 
   <header class="note-page__head">
-    <h1 class="section-title note-page__title">{entry.data.title}</h1>
+    <h1 class="page-title">{entry.data.title}</h1>
     <p class="lead note-page__summary">{entry.data.summary}</p>
 
-    <p class="meta note-page__meta">
+    <p class="facts note-page__facts">
       <time datetime={entry.data.date.toISOString()}>{dateFormat.format(entry.data.date)}</time>
+      {entry.data.tags.length > 0 && (
+        <span class="tag-row">
+          {entry.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+        </span>
+      )}
     </p>
-
-    {entry.data.tags.length > 0 && (
-      <div class="tag-row note-page__tags">
-        {entry.data.tags.map((tag) => <span class="tag">{tag}</span>)}
-      </div>
-    )}
   </header>
 
   <div class="longform note-page__body">
@@ -47,28 +46,15 @@ const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
 </article>
 
 <style>
-  .note-page__back {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: var(--text-meta);
-    line-height: var(--leading-flat);
-    color: var(--color-ink-2);
-    transition: color var(--t-fast) ease;
-  }
-  .note-page__back:hover { color: var(--color-accent); }
-  .note-page__back [data-icon] { font-size: var(--icon); }
+  .note-page__back { font-size: var(--text-meta); }
 
   .note-page__head {
-    max-width: 720px;
-    margin-top: 32px;
-    padding-bottom: 40px;
+    margin-top: 24px;
+    padding-bottom: 32px;
     border-bottom: 1px solid var(--color-line);
   }
-  .note-page__title { --display-size: var(--display); --display-leading: 1.04; }
-  .note-page__summary { margin-top: 20px; }
-  .note-page__meta { margin-top: 20px; }
-  .note-page__tags { margin-top: 24px; }
+  .note-page__summary { margin-top: 16px; }
+  .note-page__facts { margin-top: 16px; }
 
-  .note-page__body { margin-top: 56px; }
+  .note-page__body { margin-top: 40px; }
 </style>

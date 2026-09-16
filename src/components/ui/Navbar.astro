@@ -13,24 +13,12 @@ export interface Props {
 const { lang, switchTo } = Astro.props;
 const t = useTranslations(lang);
 const home = getHome(lang);
-
-// Fuera de la landing no hay anclas: el enlace tiene que apuntar a la landing.
 const path = Astro.url.pathname;
-const onLanding = path === "/" || path === "/en" || path === "/en/";
-const anchor = (id: string) => (onLanding ? `#${id}` : `${home}#${id}`);
 
-/** Anclas de la portada. Formación y Charlas quedan fuera a propósito: el nav no
- *  aguanta ocho entradas a 1024px. */
-const sectionItems = [
-  { id: "about", label: t("nav.about"), icon: "ph:user" },
-  { id: "work", label: t("nav.work"), icon: "ph:briefcase" },
-  { id: "projects", label: t("nav.projects"), icon: "ph:squares-four" },
-  { id: "contact", label: t("nav.contact"), icon: "ph:paper-plane-tilt" },
-];
-
-/** Rutas reales: sin `data-spy`, que solo vale para secciones de la portada. El
- *  prefijo de idioma sale de `localizePath`, la única implementación del mapeo. */
-const routeItems = [
+/** Solo rutas reales. La portada se recorre sola: en una columna no hay nada
+ *  que merezca un ancla. El prefijo de idioma sale de `localizePath`, la única
+ *  implementación del mapeo. */
+const items = [
   { href: localizePath("/notes/", lang), label: t("nav.notes"), icon: "ph:article" },
 ];
 
@@ -40,18 +28,12 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
 
 <header class="nav">
   <div class="nav__inner container">
-    <a href={`${home}#top`} class="nav__brand" aria-label="David Herrera">
+    <a href={home} class="nav__brand" aria-label="David Herrera">
       david<span>herrera</span>
     </a>
 
     <nav class="nav__links" aria-label={t("nav.primaryLabel")}>
-      {sectionItems.map((item) => (
-        <a href={anchor(item.id)} class="pill pill--nav nav__link" data-spy={item.id}>
-          <Icon name={item.icon} aria-hidden="true" />
-          {item.label}
-        </a>
-      ))}
-      {routeItems.map((item) => (
+      {items.map((item) => (
         <a
           href={item.href}
           class="pill pill--nav nav__link"
@@ -61,63 +43,20 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
           {item.label}
         </a>
       ))}
-    </nav>
-
-    <div class="nav__utils">
-      <div class="nav__utils-desktop">
-        <LanguagePicker lang={lang} href={switchTo} />
-        <ThemeToggle lang={lang} />
-      </div>
-      <button id="menu-btn" class="pill menu-btn" aria-label={t("nav.menuLabel")} aria-expanded="false">
-        <Icon name="ph:list" aria-hidden="true" />
-      </button>
-    </div>
-  </div>
-
-  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
-    <div class="mobile-menu__inner container">
-    <nav aria-label={t("nav.mobileLabel")}>
-      {sectionItems.map((item) => (
-        <a href={anchor(item.id)} class="mobile-menu__link" data-spy={item.id}>
-          <Icon name={item.icon} aria-hidden="true" />
-          {item.label}
-        </a>
-      ))}
-      {routeItems.map((item) => (
-        <a
-          href={item.href}
-          class="mobile-menu__link"
-          aria-current={isCurrent(item.href) ? "page" : undefined}
-        >
-          <Icon name={item.icon} aria-hidden="true" />
-          {item.label}
-        </a>
-      ))}
-    </nav>
-    <div class="mobile-menu__footer">
-      <LanguagePicker lang={lang} href={switchTo} expanded />
+      <LanguagePicker lang={lang} href={switchTo} />
       <ThemeToggle lang={lang} />
-    </div>
-    </div>
+    </nav>
   </div>
 </header>
 
 <style>
-  /* El borde inferior es la primera línea del armazón. */
-  .nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: var(--color-bg);
-    border-bottom: 1px solid var(--color-line);
-  }
-
   .nav__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding-block: 11px;
+    padding-block: 20px;
+    border-bottom: 1px solid var(--color-line);
   }
 
   .nav__brand {
@@ -129,15 +68,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
   }
   .nav__brand span { color: var(--color-ink-2); }
 
-  .nav__links {
-    display: none;
-    gap: 4px;
-    align-items: center;
-  }
-  @media (min-width: 1024px) { .nav__links { display: inline-flex; } }
-  /* Spy de la portada: cambia en cada scroll, así que solo sube de gris a tinta.
-     Mover o pintar algo más convierte el nav en un semáforo. */
-  .nav__link.active { color: var(--color-ink); }
+  .nav__links { display: inline-flex; align-items: center; gap: 4px; }
 
   /* Gana al hover a propósito: en la página donde ya estás no hay nada que
      previsualizar. */
@@ -145,163 +76,5 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
     background: var(--color-ink);
     color: var(--color-bg);
   }
-
-  .nav__link.active [data-icon] { color: var(--color-ink); }
   .nav__link[aria-current="page"] [data-icon] { color: var(--color-bg); }
-
-  .nav__utils { display: inline-flex; align-items: center; gap: 12px; }
-  .nav__utils-desktop { display: none; align-items: center; gap: 4px; }
-  @media (min-width: 1024px) { .nav__utils-desktop { display: inline-flex; } }
-
-  .menu-btn { width: 40px; height: 40px; }
-  .menu-btn [data-icon] { font-size: var(--icon-xl); }
-  @media (min-width: 1024px) { .menu-btn { display: none; } }
-
-  .mobile-menu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--color-bg);
-    border-bottom: 1px solid var(--color-line);
-    overflow: hidden;
-    transform: translateY(-8px);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform var(--t-base) ease, opacity var(--t-base) ease;
-  }
-  .mobile-menu.open { transform: none; opacity: 1; pointer-events: auto; }
-  .mobile-menu__inner { padding-block: 8px 0; }
-  .mobile-menu nav { display: flex; flex-direction: column; }
-  .mobile-menu__link {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 13px 12px;
-    margin-inline: -12px;
-    font-size: var(--text-body);
-    line-height: var(--leading-flat);
-    font-weight: var(--weight-medium);
-    color: var(--color-ink);
-    border-radius: var(--radius-sm);
-  }
-  .mobile-menu__link:hover { background: var(--color-bg-2); color: var(--color-ink); }
-  .mobile-menu__link [data-icon] {
-    width: var(--icon-lg);
-    height: var(--icon-lg);
-    font-size: var(--icon-lg);
-    color: var(--color-ink-3);
-    transition: color var(--t-fast) ease;
-  }
-  .mobile-menu__link:hover [data-icon] { color: var(--color-ink-2); }
-  .mobile-menu__link.active [data-icon] { color: var(--color-ink); }
-  .mobile-menu__link[aria-current="page"] {
-    background: var(--color-ink);
-    color: var(--color-bg);
-  }
-  .mobile-menu__link[aria-current="page"] [data-icon] { color: var(--color-bg); }
-
-  .mobile-menu__footer {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 8px;
-    padding-block: 14px;
-    border-top: 1px solid var(--color-line);
-  }
 </style>
-
-<script>
-  /** El <header> se reemplaza en cada navegación; `document` no. */
-  let closeMenu: (() => void) | null = null;
-
-  function setupMenu() {
-    // Antes de cualquier salida: los listeners de `document` siguen llamando a
-    // `closeMenu`, y si la página nueva no trae menú apuntaría al nodo anterior.
-    closeMenu = null;
-
-    const btn = document.getElementById("menu-btn");
-    const menu = document.getElementById("mobile-menu");
-    if (!btn || !menu) return;
-
-    let open = false;
-    const set = (v: boolean) => {
-      open = v;
-      menu.classList.toggle("open", v);
-      btn.setAttribute("aria-expanded", String(v));
-      menu.setAttribute("aria-hidden", String(!v));
-    };
-    closeMenu = () => set(false);
-
-    if (btn.dataset.ready) return;
-    btn.addEventListener("click", (e) => { e.stopPropagation(); set(!open); });
-    menu.querySelectorAll("a").forEach((l) => l.addEventListener("click", () => set(false)));
-    btn.dataset.ready = "true";
-  }
-
-  function setupSpy() {
-    // Antes de cualquier salida: si la página nueva no tiene secciones, los
-    // listeners de la anterior se quedarían vivos apuntando a nodos muertos.
-    window.__spyCleanup?.();
-    window.__spyCleanup = undefined;
-
-    const links = [...document.querySelectorAll<HTMLElement>("[data-spy]")];
-    if (!links.length) return;
-
-    const ids = [...new Set(links.map((l) => l.dataset.spy!))];
-    const targets = ids
-      .map((id) => ({ id, el: document.getElementById(id) }))
-      .filter((t): t is { id: string; el: HTMLElement } => !!t.el);
-    if (!targets.length) return;
-
-    const HIGHLIGHT_FIRST_AT_TOP = true;
-
-    let queued = false;
-
-    function update() {
-      queued = false;
-      const line = window.scrollY + window.innerHeight * 0.35;
-
-      let currentId: string | null = HIGHLIGHT_FIRST_AT_TOP ? targets[0].id : null;
-      for (const t of targets) {
-        if (t.el.getBoundingClientRect().top + window.scrollY <= line) currentId = t.id;
-      }
-
-      // La última sección puede ser demasiado corta para cruzar la línea.
-      const atBottom =
-        window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
-      if (atBottom) currentId = targets[targets.length - 1].id;
-
-      links.forEach((l) => l.classList.toggle("active", l.dataset.spy === currentId));
-    }
-
-    function onScroll() {
-      if (queued) return;
-      queued = true;
-      requestAnimationFrame(update);
-    }
-
-    window.__spyCleanup = () => {
-      window.removeEventListener("scroll", onScroll);
-      window.removeEventListener("resize", onScroll);
-    };
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll);
-    update();
-  }
-
-  // Sobre `document`, así que se registran una sola vez por sesión.
-  document.addEventListener("click", (e) => {
-    const menu = document.getElementById("mobile-menu");
-    if (!menu?.classList.contains("open")) return;
-    if (menu.contains(e.target as Node)) return;
-    if ((e.target as HTMLElement).closest?.("#menu-btn")) return;
-    closeMenu?.();
-  });
-  document.addEventListener("keydown", (e) => { if (e.key === "Escape") closeMenu?.(); });
-
-  setupMenu();
-  setupSpy();
-  document.addEventListener("astro:after-swap", () => { setupMenu(); setupSpy(); });
-</script>

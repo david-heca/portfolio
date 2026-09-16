@@ -17,20 +17,14 @@
     }
   },
   "nav": {
-    "about": "Sobre mí",
-    "work": "Experiencia",
-    "projects": "Proyectos",
-    "contact": "Contacto",
     "notes": "Notas",
-    "primaryLabel": "Navegación principal",
-    "mobileLabel": "Navegación móvil",
-    "menuLabel": "Menú"
+    "primaryLabel": "Navegación principal"
   },
   "notes": {
     "title": "Notas",
     "description": "Notas de campo sobre lo que me encuentro llevando IA a producción.",
     "empty": "Todavía no hay notas publicadas.",
-    "backToIndex": "Todas las notas"
+    "all": "Todas las notas"
   },
   "speaking": {
     "title": "En el escenario",
@@ -47,22 +41,15 @@
       "IA generativa",
       "RAG & MLOps",
       "Ciencia de datos"
-    ],
-    "photoAlt": "David dando una charla"
+    ]
   },
-  "hero": {
+  "intro": {
     "role": "Applied AI Engineer",
-    "thesis": "La parte difícil casi nunca es el modelo.",
-    "intro": "Me gusta desarrollar ideas locas y que sobrevivan a producción.",
-    "ctaProjects": "Ver proyectos",
-    "ctaContact": "Hablemos"
-  },
-  "about": {
-    "heading": "Software, datos <em>&</em> IA",
+    "location": "Ciudad de México",
+    "lead": "La parte difícil casi nunca es el modelo. Me gusta desarrollar ideas locas y que sobrevivan a producción.",
     "bio": {
       "paragraph1": "Empecé desarrollando sitios en WordPress y administrando hosting tradicional. Hoy diseño y llevo a producción sistemas con <strong>IA aplicada</strong>.",
-      "paragraph2": "Me muevo por todo el stack, pero hoy mi trabajo es <strong>RAG, MCP y MLOps</strong> sobre datos corporativos: bases que nadie documentó, PDFs escaneados, Excels con quince pestañas.",
-      "paragraph3": "También doy charlas de IA y ciencia de datos aplicada, en conferencias y en universidades."
+      "paragraph2": "Me muevo por todo el stack, pero hoy mi trabajo es <strong>RAG, MCP y MLOps</strong> sobre datos corporativos: bases que nadie documentó, PDFs escaneados, Excels con quince pestañas."
     }
   },
   "work": {
@@ -184,8 +171,7 @@
   "projects": {
     "headerTitle": "Trabajo seleccionado",
     "description": "Software que alguien abre por la mañana para hacer su trabajo.",
-    "countLabel": "casos",
-    "specLink": "Enlace",
+    "stackLabel": "Stack",
     "status": {
       "production": "En producción",
       "delivered": "Entregado",
@@ -200,7 +186,7 @@
     "list": {
       "portfolio": {
         "title": "Portafolio",
-        "description": "Este sitio. Astro, CSS propio y TypeScript, escrito desde cero. Va por la cuarta versión.",
+        "description": "Este sitio. Astro, CSS propio y TypeScript, escrito desde cero. Va por la quinta versión.",
         "specs": [
           {
             "label": "Plantilla",
@@ -275,10 +261,7 @@
   "contact": {
     "headerTitle": "Hablemos",
     "description": "Si tienes alguna idea o simplemente quieres saludar, escríbeme. Suelo responder el mismo día.",
-    "cta": {
-      "button": "Escríbeme",
-      "note": "Ciudad de México, GMT-6"
-    }
+    "note": "GMT-6"
   },
   "common": {
     "skipToContent": "Saltar al contenido",

@@ -1,5 +1,4 @@
 ---
-import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import { useTranslations, type Lang } from "@i18n/utils";
 
@@ -14,76 +13,39 @@ const venues = t<string[]>("speaking.venues");
 const topics = t<string[]>("speaking.topics");
 ---
 
-<section id="speaking" class="speaking section container">
-  <header class="sec-head reveal">
+<section id="speaking" class="section container">
+  <header class="sec-head">
     <h2 class="section-title">{t("speaking.title")}</h2>
-    <p class="lead">{t("speaking.description")}</p>
+    <p class="prose">{t("speaking.description")}</p>
   </header>
 
-  <figure class="speaking__media reveal reveal-1">
-    <Image
-      src="/assets/speaking.webp"
-      alt={t("speaking.photoAlt")}
-      width={889}
-      height={1185}
-      loading="lazy"
-      quality={80}
-    />
-    <ul class="speaking__venues" aria-label={t("speaking.venuesLabel")}>
-      {venues.map((v) => (
-        <li class="label speaking__venue"><Icon name="ph:map-pin" aria-hidden="true" />{v}</li>
-      ))}
-    </ul>
-  </figure>
+  <dl class="speaking">
+    <dt class="label">{t("speaking.venuesLabel")}</dt>
+    <dd>
+      <ul class="speaking__venues">
+        {venues.map((v) => (
+          <li class="meta speaking__venue"><Icon name="ph:map-pin" aria-hidden="true" />{v}</li>
+        ))}
+      </ul>
+    </dd>
 
-  <div class="speaking__topics reveal reveal-2">
-    <p class="label speaking__topics-label">
-      <Icon name="ph:hash" aria-hidden="true" />
-      {t("speaking.topicsLabel")}
-    </p>
-    <div class="tag-row">{topics.map((tp) => <span class="tag">{tp}</span>)}</div>
-  </div>
+    <dt class="label">{t("speaking.topicsLabel")}</dt>
+    <dd class="tag-row">{topics.map((tp) => <span class="tag">{tp}</span>)}</dd>
+  </dl>
 </section>
 
 <style>
-  .speaking__media {
-    position: relative;
-    margin-top: 44px;
-    overflow: hidden;
-    border-radius: var(--radius);
-    background: var(--color-bg-2);
-    aspect-ratio: 16 / 10;
+  .speaking {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    gap: 16px 24px;
+    align-items: start;
   }
-  @media (min-width: 768px) { .speaking__media { aspect-ratio: 21 / 8; } }
-  /* El original es vertical y el marco apaisado se come casi todo: el encuadre
-     se ancla arriba para que el recorte caiga sobre la cara, no sobre el torso. */
-  .speaking__media img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 35%;
-  }
+  /* Alineación óptica: la mono micro se apoya en la primera línea de la sans,
+     que tiene más cuerpo. Fuera de rejilla a propósito. */
+  .speaking dt { padding-top: 4px; }
 
-  .speaking__venues {
-    position: absolute;
-    inset: auto 0 0;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px 28px;
-    padding: 20px 24px;
-    background: linear-gradient(to top, var(--color-scrim), transparent);
-  }
-  .speaking__venue { display: inline-flex; align-items: center; gap: 8px; color: var(--color-on-scrim); }
-  .speaking__venue [data-icon] { font-size: var(--icon-sm); }
-
-  .speaking__topics-label { display: inline-flex; align-items: center; gap: 8px; }
-  .speaking__topics-label [data-icon] { font-size: var(--icon-sm); color: var(--color-ink-3); }
-
-  .speaking__topics {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 12px 16px;
-    margin-top: 24px;
-  }
+  .speaking__venues { display: flex; flex-direction: column; gap: 8px; }
+  .speaking__venue { display: inline-flex; align-items: center; gap: 6px; }
+  .speaking__venue [data-icon] { font-size: var(--icon-sm); color: var(--color-ink-3); }
 </style>

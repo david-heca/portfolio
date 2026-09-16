@@ -1,0 +1,41 @@
+---
+import { Icon } from "astro-icon/components";
+import NoteList from "@ui/NoteList.astro";
+import { localizedEntries } from "@/data/collections";
+import { localizePath, useTranslations, type Lang } from "@i18n/utils";
+
+export interface Props {
+  lang: Lang;
+}
+
+/** Las que caben en la portada; el índice tiene el resto. */
+const LIMIT = 5;
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+const all = await localizedEntries("notes", lang);
+const items = all.slice(0, LIMIT);
+---
+
+{items.length > 0 && (
+  <section id="notes" class="section container">
+    <header class="sec-head">
+      <h2 class="section-title">{t("notes.title")}</h2>
+      <p class="prose">{t("notes.description")}</p>
+    </header>
+
+    <NoteList lang={lang} items={items} />
+
+    {all.length > items.length && (
+      <p class="notes__all">
+        <a href={localizePath("/notes/", lang)} class="link">
+          {t("notes.all")}<Icon name="ph:arrow-right" aria-hidden="true" />
+        </a>
+      </p>
+    )}
+  </section>
+)}
+
+<style>
+  .notes__all { margin-top: 20px; font-size: var(--text-meta); }
+</style>

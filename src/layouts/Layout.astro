@@ -132,9 +132,6 @@ const personSchema = {
 
     <title>{tabTitle}</title>
 
-    <!-- `.reveal` solo se esconde bajo `.js`: sin JS el contenido se ve entero. -->
-    <script is:inline>document.documentElement.classList.add("js");</script>
-
     <ClientRouter />
 
     <script is:inline>
@@ -163,7 +160,6 @@ const personSchema = {
           e.newDocument.documentElement.classList.add("dark");
         }
         // Los scripts inline de <head> no se reejecutan al hacer swap.
-        e.newDocument.documentElement.classList.add("js");
         e.newDocument.documentElement.dataset.themePref =
           document.documentElement.dataset.themePref || "system";
       });
@@ -215,83 +211,5 @@ const personSchema = {
     <slot name="footer" />
 
     <LanguageHint lang={lang} href={switchTo} />
-
-    <script>
-      // Sin desconectar el anterior se acumulan observers sobre nodos desmontados.
-      let revealObserver: IntersectionObserver | undefined;
-
-      function setupRevealAnimations() {
-        revealObserver?.disconnect();
-        revealObserver = new IntersectionObserver(
-          (entries) => {
-            for (const entry of entries) {
-              if (!entry.isIntersecting) continue;
-              entry.target.classList.add("visible");
-              revealObserver?.unobserve(entry.target);
-            }
-          },
-          { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
-        );
-
-        document.querySelectorAll(".reveal").forEach((el) => revealObserver!.observe(el));
-      }
-
-      /** Las secciones se enlazan con anclas -sin JS, y para un rastreador, tienen
-       *  que serlo-, pero al pulsarlas el fragmento no llega a la URL. Un destino en
-       *  otra página no se toca: navega con fragmento y se limpia al aterrizar. */
-      function sectionFor(link: HTMLAnchorElement): HTMLElement | null {
-        const url = new URL(link.href);
-        if (url.origin !== location.origin) return null;
-        if (url.pathname !== location.pathname || url.search !== location.search) return null;
-        const id = decodeURIComponent(url.hash.slice(1));
-        return id ? document.getElementById(id) : null;
-      }
-
-      function goToSection(section: HTMLElement) {
-        // Sin opciones: el suavizado y el offset bajo el navbar salen de `global.css`.
-        section.scrollIntoView();
-        // El foco lo movía el fragmento; sin reponerlo, teclado y lector de pantalla
-        // se quedan al principio de la página.
-        section.setAttribute("tabindex", "-1");
-        section.focus({ preventScroll: true });
-      }
-
-      // Sobre `document`, así que se registra una sola vez por sesión. La captura no
-      // es opcional: el ClientRouter escucha el mismo clic en burbujeo y solo se
-      // aparta si le llega ya con `preventDefault`.
-      document.addEventListener(
-        "click",
-        (e) => {
-          if (e.defaultPrevented || e.button !== 0) return;
-          if (e.metaKey || e.ctrlKey || e.altKey || e.shiftKey) return;
-          const link = (e.target as Element | null)?.closest?.("a");
-          if (!(link instanceof HTMLAnchorElement)) return;
-          if (link.hasAttribute("download") || (link.target && link.target !== "_self")) return;
-          const section = sectionFor(link);
-          if (!section) return;
-          e.preventDefault();
-          goToSection(section);
-        },
-        { capture: true },
-      );
-
-      /** Un enlace compartido sí trae fragmento, y una navegación entre páginas lo
-       *  arrastra. El salto va instantáneo porque se llega ya colocado, y
-       *  `history.state` se reescribe tal cual: el router guarda ahí el scroll. */
-      function dropHash() {
-        if (!location.hash) return;
-        document
-          .getElementById(decodeURIComponent(location.hash.slice(1)))
-          ?.scrollIntoView({ behavior: "instant" });
-        history.replaceState(history.state, "", location.pathname + location.search);
-      }
-
-      setupRevealAnimations();
-      dropHash();
-      document.addEventListener("astro:page-load", () => {
-        setupRevealAnimations();
-        dropHash();
-      });
-    </script>
   </body>
 </html>
