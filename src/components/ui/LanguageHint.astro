@@ -23,7 +23,7 @@ const tt = useTranslations(target);
     {tt("common.langHint.cta")}
     <Icon name="ph:arrow-right" aria-hidden="true" />
   </a>
-  <button class="pill hint__close" type="button" data-lang-hint-close aria-label={tt("common.langHint.dismiss")}>
+  <button class="hint__close" type="button" data-lang-hint-close aria-label={tt("common.langHint.dismiss")}>
     <Icon name="ph:x" aria-hidden="true" />
   </button>
 </div>
@@ -56,7 +56,15 @@ const tt = useTranslations(target);
 
   .hint__cta { flex-shrink: 0; }
 
-  .hint__close { flex-shrink: 0; padding: 6px; color: var(--color-ink-3); }
+  .hint__close {
+    display: inline-flex;
+    flex-shrink: 0;
+    padding: 6px;
+    color: var(--color-ink-3);
+    transition: color var(--t-fast) ease;
+  }
+  .hint__close:hover,
+  .hint__close:focus-visible { color: var(--color-ink); }
   .hint__close [data-icon] { font-size: var(--icon); }
 
   @media (max-width: 560px) {

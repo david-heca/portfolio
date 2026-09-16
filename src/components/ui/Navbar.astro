@@ -36,10 +36,10 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
       {items.map((item) => (
         <a
           href={item.href}
-          class="pill pill--nav nav__link"
+          class="nav-item"
           aria-current={isCurrent(item.href) ? "page" : undefined}
         >
-          <Icon name={item.icon} aria-hidden="true" />
+          <Icon name={item.icon} class="nav-item__icon" aria-hidden="true" />
           {item.label}
         </a>
       ))}
@@ -68,13 +68,9 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
   }
   .nav__brand span { color: var(--color-ink-2); }
 
-  .nav__links { display: inline-flex; align-items: center; gap: 4px; }
+  .nav__links { display: inline-flex; align-items: center; gap: 20px; }
 
-  /* Gana al hover a propósito: en la página donde ya estás no hay nada que
-     previsualizar. */
-  .nav__link[aria-current="page"] {
-    background: var(--color-ink);
-    color: var(--color-bg);
-  }
-  .nav__link[aria-current="page"] [data-icon] { color: var(--color-bg); }
+  /* En la página donde ya estás no hay nada que previsualizar: el enlace queda
+     en tinta, como al pasar. */
+  .nav-item[aria-current="page"] { color: var(--color-ink); }
 </style>

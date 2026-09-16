@@ -12,7 +12,7 @@ const t = useTranslations(lang);
 
 <button
   type="button"
-  class="pill theme-toggle"
+  class="nav-item theme-toggle"
   aria-label={t("theme.toDark")}
   title={t("theme.toDark")}
   data-to-light={t("theme.toLight")}
@@ -25,7 +25,8 @@ const t = useTranslations(lang);
 </button>
 
 <style>
-  .theme-toggle { position: relative; width: 32px; height: 32px; }
+  /* Forma: 32px de caja para el pulgar, con el glifo de 16 centrado. */
+  .theme-toggle { position: relative; justify-content: center; width: 32px; height: 32px; }
 
   .theme-toggle__glyph {
     position: absolute;
