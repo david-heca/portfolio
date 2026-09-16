@@ -6,4 +6,5 @@ onlyBuiltDependencies:
   - sharp
 
 allowBuilds:
+  esbuild: false
   workerd: false
