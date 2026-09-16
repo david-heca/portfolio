@@ -19,7 +19,7 @@
   --color-surface: #fafafa;
   --color-ink: #000000;
   --color-ink-2: #6b6b6b;   /* 5.2:1 sobre el fondo */
-  --color-ink-3: #b0b0b0;   /* ~2.2:1: viñetas, hairlines e iconos en reposo */
+  --color-ink-3: #b0b0b0;   /* ~2.2:1: viñetas, hairlines y la onda; nunca un glifo */
   --color-line: rgba(0, 0, 0, 0.14);
   --color-line-strong: rgba(0, 0, 0, 0.3);
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05), 0 16px 40px -24px rgba(0, 0, 0, 0.25);
@@ -58,7 +58,7 @@
   /* layout */
   --container: 688px;
   --pad: 24px;
-  --section-y: 64px;
+  --section-y: 72px;
   --gap-row: 24px;         /* del raíl o la miniatura al cuerpo */
   --gap-glyph: 6px;        /* del glifo a su palabra; fuera de rejilla: es espacio de palabra */
   --radius: 0;
@@ -66,6 +66,12 @@
   --radius-xs: 2px;        /* código en línea */
   --radius-control: 2px;
   --thumb: 64px;           /* miniatura de fila; el avatar la sobreescribe */
+
+  /* la onda: una tesela con tamaño intrínseco para que `mask` la repita sin
+     `mask-size`. El trazo sigue medio periodo por fuera de cada borde: si acabara
+     justo en él, el remate recortado dejaría un hueco en cada empalme. */
+  --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8'%3E%3Cpath d='M-8 4C-5.6 7.2 -2.4 7.2 0 4S5.6 .8 8 4S13.6 7.2 16 4S21.6 .8 24 4' fill='none' stroke='%23000' stroke-width='1.25'/%3E%3C/svg%3E");
+  --wave-sm: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4'%3E%3Cpath d='M-4 2C-2.8 3.6 -1.2 3.6 0 2S2.8 .4 4 2S6.8 3.6 8 2S10.8 .4 12 2' fill='none' stroke='%23000'/%3E%3C/svg%3E");
 }
 
 :root.dark {
@@ -155,7 +161,19 @@ img, svg { display: block; max-width: 100%; }
 
 .page { flex-grow: 1; padding-block: 40px var(--section-y); }
 
-.section + .section { margin-top: var(--section-y); }
+/* ----- onda -----
+   El único ornamento: una pausa en la lectura, no un borde. Parte el hueco entre
+   secciones y hace de `hr` en la prosa. */
+.section + .section { margin-top: calc(var(--section-y) / 2); }
+.section + .section::before { content: ""; margin-bottom: calc(var(--section-y) / 2); }
+.section + .section::before,
+.longform hr {
+  display: block;
+  width: 64px;
+  height: 8px;
+  background-color: var(--color-ink-3);
+  mask: var(--wave) repeat-x;
+}
 
 /* ----- type primitives ----- */
 .page-title {
@@ -220,18 +238,42 @@ img, svg { display: block; max-width: 100%; }
 }
 .rail--current { color: var(--color-ink); }
 
+/* Enlace de una línea que es una acción: correo, «ver todas», volver. La onda
+   hace de subrayado; el glifo, delante o detrás, queda fuera de ella. */
 .link {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: var(--gap-glyph);
+  line-height: var(--leading-flat);
   color: var(--color-ink);
+}
+.link::after {
+  content: "";
+  position: absolute;
+  /* Donde iba el subrayado: la cresta a ~2px bajo la base, el valle entre los
+     descendentes. Fuera de rejilla a propósito. */
+  inset: auto 0 -4px;
+  height: 4px;
+  background-color: var(--color-ink-3);
+  mask: var(--wave-sm) repeat-x;
+  transition: background-color var(--t-fast) ease;
+}
+.link:has(> [data-icon]:first-child)::after { left: calc(var(--icon-sm) + var(--gap-glyph)); }
+.link:has(> [data-icon]:last-child)::after { right: calc(var(--icon-sm) + var(--gap-glyph)); }
+.link [data-icon] { font-size: var(--icon-sm); }
+.link:hover::after,
+.link:focus-visible::after { background-color: currentColor; }
+/* Un dato que es enlace -el correo- lleva raya recta: la onda es para la acción. */
+.link--plain {
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-color: var(--color-ink-3);
   transition: text-decoration-color var(--t-fast) ease;
 }
-.link:hover { text-decoration-color: currentColor; }
-.link [data-icon] { font-size: var(--icon-sm); }
+.link--plain::after { content: none; }
+.link--plain:hover,
+.link--plain:focus-visible { text-decoration-color: currentColor; }
 
 /* Título que es enlace: sin subrayado, lo señala la flecha. El gesto al pasar
    lo pone cada uso. */
@@ -241,11 +283,8 @@ img, svg { display: block; max-width: 100%; }
   vertical-align: -0.1em;
   margin-left: var(--gap-glyph);
   font-size: var(--icon);
-  color: var(--color-ink-3);
-  transition: color var(--t-fast) ease, transform var(--t-base) ease;
+  transition: transform var(--t-base) ease;
 }
-.card-link:hover [data-icon],
-.card-link:focus-visible [data-icon] { color: var(--color-ink); }
 
 /* ----- lista con raíl -----
    Subgrid: el raíl mide el periodo más largo y las filas casan entre sí. */
@@ -354,10 +393,7 @@ img, svg { display: block; max-width: 100%; }
   font-size: var(--text-sm);
 }
 
-.longform hr {
-  border-top: 1px solid var(--color-line);
-  margin-block: 48px;
-}
+.longform hr { margin-block: 48px; }
 
 .longform img { border-radius: var(--radius-sm); border: 1px solid var(--color-line); }
 .longform figcaption {
@@ -400,14 +436,7 @@ img, svg { display: block; max-width: 100%; }
 }
 .nav-item:hover,
 .nav-item:focus-visible { color: var(--color-ink); }
-/* Solo junto a una palabra: el glifo del toggle va en la tinta del texto. */
-.nav-item__icon {
-  font-size: var(--icon);
-  color: var(--color-ink-3);
-  transition: color var(--t-fast) ease;
-}
-.nav-item:hover .nav-item__icon,
-.nav-item:focus-visible .nav-item__icon { color: var(--color-ink-2); }
+.nav-item__icon { font-size: var(--icon); }
 
 /* ----- miniatura ----- */
 .thumb {

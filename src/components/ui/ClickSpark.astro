@@ -1,0 +1,60 @@
+---
+/** Chispa en el punto de click. Sin marcado propio: cada click crea la suya y la destruye al acabar. */
+---
+
+<script>
+  const COUNT = 8;
+  const RADIUS = 15; // hasta dónde viaja cada rayita, en px
+  const DURATION = 400;
+
+  const reduced = matchMedia("(prefers-reduced-motion: reduce)");
+
+  function spark(e: MouseEvent) {
+    // `detail` es 0 en el click sintético del teclado, que no tiene coordenadas.
+    if (reduced.matches || e.detail === 0) return;
+
+    const root = document.createElement("div");
+    root.className = "spark";
+    root.style.left = `${e.clientX}px`;
+    root.style.top = `${e.clientY}px`;
+    root.setAttribute("aria-hidden", "true");
+
+    let last: Animation | undefined;
+    for (let i = 0; i < COUNT; i++) {
+      const line = document.createElement("i");
+      const angle = (360 / COUNT) * i;
+      last = line.animate(
+        [
+          { transform: `rotate(${angle}deg) translateX(0) scaleX(1)` },
+          { transform: `rotate(${angle}deg) translateX(${RADIUS}px) scaleX(0)` },
+        ],
+        { duration: DURATION, easing: "ease-out", fill: "forwards" },
+      );
+      root.append(line);
+    }
+    last!.onfinish = () => root.remove();
+
+    // Colgada de <html>, no de <body>: el swap de View Transitions reemplaza el
+    // body y se llevaría la chispa a medio vuelo en cada click sobre un enlace.
+    document.documentElement.append(root);
+  }
+
+  document.addEventListener("click", spark);
+</script>
+
+<style is:global>
+  .spark {
+    position: fixed;
+    z-index: 70; /* por encima del skip-link */
+    pointer-events: none;
+  }
+  .spark i {
+    position: absolute;
+    top: -0.75px; /* centra el grosor sobre el punto */
+    left: 0;
+    width: 10px;
+    height: 1.5px;
+    background: currentColor;
+    transform-origin: left center;
+  }
+</style>

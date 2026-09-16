@@ -4,6 +4,7 @@ import { getHome, localizePath, useTranslations, type Lang } from "@i18n/utils";
 import Navbar from "@ui/Navbar.astro";
 import { channels, email } from "@/data/contact";
 import LanguageHint from "@ui/LanguageHint.astro";
+import ClickSpark from "@ui/ClickSpark.astro";
 // Junicode se autoaloja (no está en Fontsource): su @font-face vive en global.css.
 import "@fontsource-variable/outfit/wght.css";
 import "@fontsource/maple-mono/latin-400.css";
@@ -208,5 +209,6 @@ const personSchema = {
     <slot name="footer" />
 
     <LanguageHint lang={lang} href={switchTo} />
+    <ClickSpark />
   </body>
 </html>
