@@ -1,6 +1,6 @@
 ---
 import { useTranslations, type Lang } from "@i18n/utils";
-import { roles } from "@/data/work";
+import { companies } from "@/data/work";
 
 export interface Props {
   lang: Lang;
@@ -10,27 +10,45 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 const ongoing = t("common.ongoing");
 
-const items = roles.map((r) => ({
-  period: `${r.from} - ${r.to ?? ongoing}`,
-  current: r.to === undefined,
-  title: t(`work.roles.${r.key}.title`),
-  company: t(`work.companies.${r.company}`),
-  summary: t(`work.roles.${r.key}.summary`),
-}));
+const span = (from: number, to?: number) => `${from} - ${to ?? ongoing}`;
+
+const items = companies.map(({ key, roles }) => {
+  const current = roles.some((r) => r.to === undefined);
+  const first = roles[roles.length - 1];
+  const last = roles[0];
+  return {
+    period: span(first.from, current ? undefined : last.to),
+    current,
+    name: t(`work.companies.${key}`),
+    stages: roles.map((r) => ({
+      title: t(`work.roles.${r.key}.title`),
+      /* Con una sola etapa el raíl ya dice los años; repetirlos sobra. */
+      period: roles.length > 1 ? span(r.from, r.to) : undefined,
+      summary: t(`work.roles.${r.key}.summary`),
+    })),
+  };
+});
 ---
 
 <section id="work" class="section container">
   <h2 class="section-title">{t("work.title")}</h2>
 
   <ol class="rows">
-    {items.map((r) => (
+    {items.map((c) => (
       <li class="row">
-        <span class:list={["rail", r.current && "rail--current"]}>{r.period}</span>
+        <span class:list={["rail", c.current && "rail--current"]}>{c.period}</span>
         <div>
-          <h3 class="card-title">
-            {r.title}<span class="role__company"> · {r.company}</span>
-          </h3>
-          <p class="prose-sm role__summary">{r.summary}</p>
+          <h3 class="card-title">{c.name}</h3>
+          <ol class="stages">
+            {c.stages.map((s) => (
+              <li>
+                <h4 class="card-title">
+                  {s.title}{s.period && <span class="stage__period"> · {s.period}</span>}
+                </h4>
+                <p class="prose-sm stage__summary">{s.summary}</p>
+              </li>
+            ))}
+          </ol>
         </div>
       </li>
     ))}
@@ -38,6 +56,7 @@ const items = roles.map((r) => ({
 </section>
 
 <style>
-  .role__company { color: var(--color-ink-2); }
-  .role__summary { margin-top: 4px; }
+  .stages { margin-top: 8px; display: flex; flex-direction: column; gap: 16px; }
+  .stage__period { color: var(--color-ink-2); }
+  .stage__summary { margin-top: 4px; }
 </style>
