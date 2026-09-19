@@ -54,6 +54,7 @@
   --icon-sm: 14px;
   --icon: 16px;
   --icon-lg: 20px;
+  --icon-tilt: -8deg;      /* al pasar sobre un canal o un control; una flecha se desplaza */
 
   /* layout */
   --container: 688px;
@@ -71,7 +72,6 @@
      `mask-size`. El trazo sigue medio periodo por fuera de cada borde: si acabara
      justo en él, el remate recortado dejaría un hueco en cada empalme. */
   --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8'%3E%3Cpath d='M-8 4C-5.6 7.2 -2.4 7.2 0 4S5.6 .8 8 4S13.6 7.2 16 4S21.6 .8 24 4' fill='none' stroke='%23000' stroke-width='1.25'/%3E%3C/svg%3E");
-  --wave-sm: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='4'%3E%3Cpath d='M-4 2C-2.8 3.6 -1.2 3.6 0 2S2.8 .4 4 2S6.8 3.6 8 2S10.8 .4 12 2' fill='none' stroke='%23000'/%3E%3C/svg%3E");
 }
 
 :root.dark {
@@ -238,42 +238,22 @@ img, svg { display: block; max-width: 100%; }
 }
 .rail--current { color: var(--color-ink); }
 
-/* Enlace de una línea que es una acción: correo, «ver todas», volver. La onda
-   hace de subrayado; el glifo, delante o detrás, queda fuera de ella. */
+/* Enlace de una línea: «ver todas», volver, el correo. La raya es la nativa
+   sobre un inline-flex: cada ítem pinta la suya, así que el glifo queda fuera. */
 .link {
-  position: relative;
   display: inline-flex;
   align-items: center;
   gap: var(--gap-glyph);
   line-height: var(--leading-flat);
   color: var(--color-ink);
-}
-.link::after {
-  content: "";
-  position: absolute;
-  /* Donde iba el subrayado: la cresta a ~2px bajo la base, el valle entre los
-     descendentes. Fuera de rejilla a propósito. */
-  inset: auto 0 -4px;
-  height: 4px;
-  background-color: var(--color-ink-3);
-  mask: var(--wave-sm) repeat-x;
-  transition: background-color var(--t-fast) ease;
-}
-.link:has(> [data-icon]:first-child)::after { left: calc(var(--icon-sm) + var(--gap-glyph)); }
-.link:has(> [data-icon]:last-child)::after { right: calc(var(--icon-sm) + var(--gap-glyph)); }
-.link [data-icon] { font-size: var(--icon-sm); }
-.link:hover::after,
-.link:focus-visible::after { background-color: currentColor; }
-/* Un dato que es enlace -el correo- lleva raya recta: la onda es para la acción. */
-.link--plain {
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-color: var(--color-ink-3);
   transition: text-decoration-color var(--t-fast) ease;
 }
-.link--plain::after { content: none; }
-.link--plain:hover,
-.link--plain:focus-visible { text-decoration-color: currentColor; }
+.link [data-icon] { font-size: var(--icon-sm); }
+.link:hover,
+.link:focus-visible { text-decoration-color: currentColor; }
 
 /* Título que es enlace: sin subrayado, lo señala la flecha. El gesto al pasar
    lo pone cada uso. */
@@ -436,7 +416,9 @@ img, svg { display: block; max-width: 100%; }
 }
 .nav-item:hover,
 .nav-item:focus-visible { color: var(--color-ink); }
-.nav-item__icon { font-size: var(--icon); }
+.nav-item__icon { font-size: var(--icon); transition: transform var(--t-base) ease; }
+.nav-item:hover .nav-item__icon,
+.nav-item:focus-visible .nav-item__icon { transform: rotate(var(--icon-tilt)); }
 
 /* ----- miniatura ----- */
 .thumb {

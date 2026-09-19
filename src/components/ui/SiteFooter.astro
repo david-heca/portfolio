@@ -75,7 +75,9 @@ const year = new Date().getFullYear();
     border-radius: var(--radius-control);
     transition: color var(--t-fast) ease;
   }
-  .channel [data-icon] { font-size: var(--icon-lg); }
+  .channel [data-icon] { font-size: var(--icon-lg); transition: transform var(--t-base) ease; }
   .channel:hover,
   .channel:focus-visible { color: var(--color-ink); }
+  .channel:hover [data-icon],
+  .channel:focus-visible [data-icon] { transform: rotate(var(--icon-tilt)); }
 </style>

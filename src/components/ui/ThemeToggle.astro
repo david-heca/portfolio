@@ -27,6 +27,8 @@ const t = useTranslations(lang);
 <style>
   /* Forma: 32px de caja para el pulgar. */
   .theme-toggle { position: relative; justify-content: center; width: 32px; height: 32px; }
+  .theme-toggle:hover,
+  .theme-toggle:focus-visible { --glyph-tilt: var(--icon-tilt); }
 
   .theme-toggle__glyph {
     position: absolute;
@@ -40,7 +42,7 @@ const t = useTranslations(lang);
   :global(html[data-theme-pref="system"]) .theme-toggle__glyph--system,
   :global(html:not([data-theme-pref])) .theme-toggle__glyph--system {
     opacity: 1;
-    transform: none;
+    transform: rotate(var(--glyph-tilt, 0deg));
   }
 </style>
 
