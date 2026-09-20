@@ -28,7 +28,7 @@
   "intro": {
     "role": "Applied AI Engineer",
     "location": "Mexico City",
-    "lead": "The hard part is almost never the model. I like building crazy ideas and making them survive production.",
+    "lead": "The hard part is almost never the model.",
     "bio": {
       "paragraph1": "I started out building WordPress sites and managing traditional hosting. Today I design and ship systems with <strong>applied AI</strong>.",
       "paragraph2": "I work across the whole stack, but my job right now is <strong>RAG, MCP and MLOps</strong> over corporate data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs."
@@ -92,10 +92,6 @@
   "education": {
     "title": "Education",
     "list": {
-      "platzi": {
-        "degree": "Technology Industry",
-        "institution": "Platzi - Technology School"
-      },
       "tesco": {
         "degree": "Information & Communication Technologies Engineering",
         "institution": "Higher Studies Institute of Coacalco (TESCo) - TecNM"

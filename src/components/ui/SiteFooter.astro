@@ -46,8 +46,8 @@ const year = new Date().getFullYear();
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 12px 24px;
-    padding-block: 24px 40px;
+    gap: 16px 24px;
+    padding-block: 24px 32px;
     border-top: 1px solid var(--color-line);
   }
 
@@ -64,8 +64,10 @@ const year = new Date().getFullYear();
   .footer__channels {
     display: flex;
     align-items: center;
-    /* Descuenta el padding del último icono: el glifo cierra contra la columna. */
-    margin-right: -10px;
+    /* Descuenta la caja de pulgar por los cuatro lados: los glifos cierran contra
+       la columna -a la derecha en una fila, a la izquierda al saltar de línea- y
+       la altura de la fila la mide el texto, no la caja. */
+    margin: -10px;
   }
   /* Forma: 40px de caja para el pulgar. */
   .channel {

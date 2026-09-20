@@ -22,11 +22,13 @@
   --color-ink-3: #b0b0b0;   /* ~2.2:1: viñetas, hairlines y la onda; nunca un glifo */
   --color-line: rgba(0, 0, 0, 0.14);
   --color-line-strong: rgba(0, 0, 0, 0.3);
+  --color-glass: rgba(255, 255, 255, 0.72); /* la barra fija sobre lo que pasa debajo; el blur pone el resto */
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05), 0 16px 40px -24px rgba(0, 0, 0, 0.25);
 
   /* --t-fast solo para color. */
   --t-fast: 0.15s;
   --t-base: 0.2s;
+  --nav-settle: 48px;      /* scroll en el que la barra fija asienta velo y hairline */
 
   /* escala tipográfica */
   --text-label: 12px;      /* raíl y tags, en mono */
@@ -59,6 +61,8 @@
   /* layout */
   --container: 688px;
   --pad: 24px;
+  --nav-h: 64px;           /* la barra es fija: su altura la lee `scroll-padding-top` */
+  --blur: 12px;            /* velo de la barra fija */
   --section-y: 72px;
   --gap-row: 24px;         /* del raíl o la miniatura al cuerpo */
   --gap-glyph: 6px;        /* del glifo a su palabra; fuera de rejilla: es espacio de palabra */
@@ -83,6 +87,7 @@
   --color-ink-3: #4d4d4d;   /* ~2.4:1: mismo papel que en claro */
   --color-line: rgba(255, 255, 255, 0.16);
   --color-line-strong: rgba(255, 255, 255, 0.32);
+  --color-glass: rgba(0, 0, 0, 0.72);
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.6), 0 16px 40px -24px rgba(0, 0, 0, 0.9);
 }
 
@@ -95,6 +100,9 @@ table { border-collapse: collapse; }
 /* `color-scheme`: scrollbars y controles nativos siguen al tema del sitio. */
 html { background-color: var(--color-bg); color-scheme: light; }
 html.dark { color-scheme: dark; }
+
+/* La barra es fija: sin esto el salto del skip-link deja el destino debajo de ella. */
+html { scroll-padding-top: var(--nav-h); }
 
 html, body {
   margin: 0;
@@ -159,7 +167,7 @@ img, svg { display: block; max-width: 100%; }
   padding-inline: var(--pad);
 }
 
-.page { flex-grow: 1; padding-block: 40px var(--section-y); }
+.page { flex-grow: 1; padding-block: 40px; }
 
 /* ----- onda -----
    El único ornamento: una pausa en la lectura, no un borde. Parte el hueco entre

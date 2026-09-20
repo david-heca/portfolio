@@ -8,7 +8,6 @@ interface Study {
 
 /** De lo más reciente a lo más antiguo. */
 export const studies: Study[] = [
-  { key: "platzi", from: 2022 },
   { key: "tesco", from: 2019, to: 2024 },
   { key: "cecytem", from: 2015, to: 2018 },
 ];

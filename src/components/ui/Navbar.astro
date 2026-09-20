@@ -48,13 +48,40 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
 </header>
 
 <style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 30; /* bajo el aviso de idioma y el skip-link */
+  }
+
+  /* Velo y hairline van en la columna, no en el header: nada se sale de ella. */
   .nav__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding-block: 20px;
+    height: var(--nav-h);
+    background: var(--color-glass);
+    backdrop-filter: blur(var(--blur));
     border-bottom: 1px solid var(--color-line);
+  }
+
+  /* Arriba del todo la barra no tiene superficie: velo y hairline los pone el
+     propio scroll, sin listener -el header se reemplaza en cada navegación y así
+     no hay estado que perder-. Sin scroll-timeline, o con reduced-motion, la
+     superficie está siempre. */
+  @supports (animation-timeline: scroll()) {
+    .nav__inner {
+      animation: nav-settle linear both;
+      animation-timeline: scroll(root);
+      animation-range: 0px var(--nav-settle);
+    }
+    @keyframes nav-settle {
+      from { background-color: transparent; border-color: transparent; }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .nav__inner { animation: none; }
   }
 
   .nav__brand {

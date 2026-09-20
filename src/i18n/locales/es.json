@@ -28,7 +28,7 @@
   "intro": {
     "role": "Applied AI Engineer",
     "location": "Ciudad de México",
-    "lead": "La parte difícil casi nunca es el modelo. Me gusta desarrollar ideas locas y que sobrevivan a producción.",
+    "lead": "La parte difícil casi nunca es el modelo.",
     "bio": {
       "paragraph1": "Empecé desarrollando sitios en WordPress y administrando hosting tradicional. Hoy diseño y llevo a producción sistemas con <strong>IA aplicada</strong>.",
       "paragraph2": "Me muevo por todo el stack, pero hoy mi trabajo es <strong>RAG, MCP y MLOps</strong> sobre datos corporativos: bases que nadie documentó, PDFs escaneados, Excels con quince pestañas."
@@ -92,10 +92,6 @@
   "education": {
     "title": "Formación",
     "list": {
-      "platzi": {
-        "degree": "Industria de la Tecnología",
-        "institution": "Platzi - Escuela de Tecnología"
-      },
       "tesco": {
         "degree": "Ing. en Tecnologías de la Información & Comunicaciones",
         "institution": "Tecnológico de Estudios Superiores de Coacalco (TESCo) - TecNM"

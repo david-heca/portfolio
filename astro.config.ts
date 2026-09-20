@@ -50,4 +50,14 @@ export default defineConfig({
   build: {
     inlineStylesheets: "auto",
   },
+
+  /* Astro fija `build.target: "esnext"` y Vite lo hereda como `cssTarget`, así que
+     Lightning CSS minifica sin navegador de referencia y pliega `animation-timeline`
+     dentro del shorthand `animation`, que ningún navegador acepta: la declaración
+     entera se descarta. Es la lista `baseline-widely-available` de Vite. */
+  vite: {
+    build: {
+      cssTarget: ["chrome111", "edge111", "firefox114", "safari16.4", "ios16.4"],
+    },
+  },
 });
