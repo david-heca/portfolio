@@ -15,49 +15,17 @@ const home = getHome(lang);
   <p class="rail">{t("notFound.heading")}</p>
   <h1 class="page-title notfound__title">{t("notFound.subtitle")}</h1>
   <p class="prose notfound__desc">{t("notFound.description")}</p>
-  <div class="notfound__actions">
-    <a href={home} class="btn btn--primary">
-      <Icon name="ph:house" aria-hidden="true" />
+  <p class="notfound__home">
+    <a href={home} class="link">
+      <Icon name="ph:arrow-left" aria-hidden="true" />
       {t("notFound.homeButton")}
     </a>
-    <!-- Oculto salvo que el referrer sea de este sitio: si no, "volver" no lleva a ninguna parte. -->
-    <button type="button" data-back class="btn btn--ghost" hidden>
-      <Icon name="ph:arrow-left" aria-hidden="true" />
-      {t("notFound.backButton")}
-    </button>
-  </div>
+  </p>
 </section>
 
 <style>
   .notfound__title { margin-top: 8px; }
   .notfound__desc { margin-top: 12px; }
-  .notfound__actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-top: 32px;
-  }
-  .notfound__actions .btn[hidden] { display: none; }
+  .notfound__home { margin-top: 24px; font-size: var(--text-meta); }
 </style>
 
-<script>
-  function setupBack() {
-    const btn = document.querySelector<HTMLButtonElement>("[data-back]");
-    if (!btn || btn.dataset.ready) return;
-
-    let sameOrigin = false;
-    try {
-      sameOrigin =
-        !!document.referrer &&
-        new URL(document.referrer).origin === window.location.origin;
-    } catch {}
-    if (!sameOrigin) return;
-
-    btn.hidden = false;
-    btn.addEventListener("click", () => history.back());
-    btn.dataset.ready = "true";
-  }
-
-  setupBack();
-  document.addEventListener("astro:page-load", setupBack);
-</script>

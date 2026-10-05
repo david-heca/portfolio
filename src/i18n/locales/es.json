@@ -23,7 +23,8 @@
   "notes": {
     "title": "Notas",
     "empty": "Todavía no hay notas publicadas.",
-    "all": "Todas las notas"
+    "all": "Todas las notas",
+    "home": "Inicio"
   },
   "intro": {
     "role": "Applied AI Engineer",
@@ -85,10 +86,6 @@
       }
     }
   },
-  "speaking": {
-    "title": "Charlas",
-    "text": "Doy charlas sobre IA generativa, RAG y MLOps, con sistemas que ya están en producción y sus números. Unas cien personas por sesión, en Data Day 2025, EGADE Business School, UPVM Tultitlán y TESCo."
-  },
   "education": {
     "title": "Formación",
     "list": {
@@ -132,7 +129,6 @@
     "heading": "404",
     "subtitle": "Creo que te perdiste",
     "description": "Esta página no existe. Puede que la haya movido de sitio.",
-    "backButton": "Volver atrás",
     "homeButton": "Ir al inicio"
   }
 }

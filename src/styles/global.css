@@ -186,7 +186,7 @@ img, svg { display: block; max-width: 100%; }
 
 /* ----- grano -----
    Una capa fija sobre todo, barra y avisos incluidos, como el grano de una
-   impresión: por eso va por encima del skip-link y de las chispas. */
+   impresión: por eso va por encima del skip-link. */
 body::after {
   content: "";
   position: fixed;
@@ -422,8 +422,6 @@ body::after {
     color var(--t-base) ease;
 }
 .btn--primary { background: var(--color-ink); color: var(--color-bg); }
-.btn--ghost { border-color: var(--color-line-strong); color: var(--color-ink); }
-.btn--ghost:hover { border-color: var(--color-ink); background: var(--color-bg-2); }
 .btn [data-icon] { font-size: 1.15em; }
 
 /* ----- elemento de la barra (enlace, conmutador de idioma, toggle) ----- */

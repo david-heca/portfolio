@@ -13,7 +13,7 @@
     "notes": {
       "title": "Notes - David Herrera",
       "tabTitle": "Notes",
-      "description": "Technical notes on RAG, MCP and corporate data."
+      "description": "Technical notes on RAG, MCP and enterprise data."
     }
   },
   "nav": {
@@ -23,15 +23,16 @@
   "notes": {
     "title": "Notes",
     "empty": "No notes published yet.",
-    "all": "All notes"
+    "all": "All notes",
+    "home": "Home"
   },
   "intro": {
     "role": "Applied AI Engineer",
     "location": "Mexico City",
     "lead": "The hard part is almost never the model.",
     "bio": {
-      "paragraph1": "I started out building WordPress sites and managing traditional hosting. Today I design and ship systems with <strong>applied AI</strong>.",
-      "paragraph2": "I work across the whole stack, but my job right now is <strong>RAG, MCP and MLOps</strong> over corporate data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs."
+      "paragraph1": "I started out building WordPress sites and managing shared hosting. Today I design and ship systems with <strong>applied AI</strong>.",
+      "paragraph2": "I work across the whole stack, but my focus right now is <strong>RAG, MCP and MLOps</strong> over enterprise data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs."
     }
   },
   "projects": {
@@ -39,15 +40,15 @@
     "list": {
       "portfolio": {
         "title": "Portfolio",
-        "description": "This site. Astro, hand-written CSS and TypeScript, built from scratch. It's on its fifth version."
+        "description": "This site. Astro, hand-written CSS and TypeScript, built from scratch. Now in its fifth version."
       },
       "connie": {
         "title": "Connie",
-        "description": "You ask the company's databases, PDFs and spreadsheets in plain language, and it answers citing where each figure came from. Multi-client and multi-source, with enterprise auth."
+        "description": "You ask the company's databases, PDFs and spreadsheets in plain language, and it answers citing where each figure came from. Multi-tenant and multi-source, with enterprise auth."
       },
       "handheld": {
         "title": "HandHeld RFID",
-        "description": "Android app with a Zebra RFID reader. Inventory went from taking weeks (or never happening) to being done walking the client's warehouse."
+        "description": "Android app with a Zebra RFID reader. Inventory went from taking weeks (or never happening) to a single walk through the client's warehouse."
       },
       "trace": {
         "title": "Automotive Traceability",
@@ -72,11 +73,11 @@
         "summary": "Connie, from zero to production: I designed the RAG platform and wrote 80% of the system, which three of the consultancy's clients now use daily. Also MCP servers over the internal data sources and MLOps practices for the team."
       },
       "fullstack": {
-        "title": "Fullstack Developer",
+        "title": "Full-Stack Developer",
         "summary": "Desktop and web apps in .NET and Python for the shop floor and operations, databases on SQL Server and PostgreSQL, and an Android app with an RFID reader for field inventory."
       },
       "junior": {
-        "title": "Junior Fullstack Developer",
+        "title": "Junior Full-Stack Developer",
         "summary": "Web modules, internal APIs and database maintenance."
       },
       "webdev": {
@@ -85,19 +86,15 @@
       }
     }
   },
-  "speaking": {
-    "title": "Talks",
-    "text": "I give talks on generative AI, RAG and MLOps, with systems that are already in production and their numbers. Around a hundred people per session, at Data Day 2025, EGADE Business School, UPVM Tultitlán and TESCo."
-  },
   "education": {
     "title": "Education",
     "list": {
       "tesco": {
-        "degree": "Information & Communication Technologies Engineering",
-        "institution": "Higher Studies Institute of Coacalco (TESCo) - TecNM"
+        "degree": "Bachelor of Engineering in Information & Communication Technologies",
+        "institution": "Tecnológico de Estudios Superiores de Coacalco (TESCo) - TecNM"
       },
       "cecytem": {
-        "degree": "Programming Technician",
+        "degree": "Technical High School Diploma in Programming",
         "institution": "CECyTEM - Tultepec"
       }
     }
@@ -130,9 +127,8 @@
   "notFound": {
     "title": "Page not found",
     "heading": "404",
-    "subtitle": "I think you're lost",
+    "subtitle": "Looks like you're lost",
     "description": "This page doesn't exist. I may have moved it somewhere else.",
-    "backButton": "Go back",
-    "homeButton": "Go to home"
+    "homeButton": "Back to home"
   }
 }

@@ -1,6 +1,7 @@
 ---
+import { Icon } from "astro-icon/components";
 import NoteList from "@ui/NoteList.astro";
-import { useTranslations, type Lang } from "@i18n/utils";
+import { getHome, useTranslations, type Lang } from "@i18n/utils";
 import { localizedEntries } from "@/data/collections";
 
 export interface Props {
@@ -13,6 +14,11 @@ const items = await localizedEntries("notes", lang);
 ---
 
 <section class="section container">
+  <a class="link notes-index__back" href={getHome(lang)}>
+    <Icon name="ph:arrow-left" aria-hidden="true" />
+    {t("notes.home")}
+  </a>
+
   <h1 class="page-title notes-index__title">{t("notes.title")}</h1>
 
   {items.length === 0 ? (
@@ -23,5 +29,6 @@ const items = await localizedEntries("notes", lang);
 </section>
 
 <style>
-  .notes-index__title { margin-bottom: 24px; }
+  .notes-index__back { font-size: var(--text-meta); }
+  .notes-index__title { margin-top: 24px; margin-bottom: 24px; }
 </style>

@@ -47,7 +47,7 @@ Astro estático con CSS propio sobre Cloudflare Workers, con `pnpm`. Sin React, 
 - **`--weight-medium` es solo para la sans.** La mono se carga en un único peso estático, así que aplicárselo da negrita sintética del navegador.
 - **El ritmo va en rejilla de 4px; la forma no.** `gap` y `margin` -el espacio *entre* elementos- son múltiplos de 4. El `padding` de algo con fondo, borde o radio es **forma**: está calibrado contra el texto que envuelve, y llevarlo a rejilla cambia la silueta del control, no lo unifica. Un `padding` sobre un bloque pelado sí es ritmo y sí va en rejilla.
 - Lo que se sale de la rejilla por alineación óptica lleva comentario diciéndolo. Sin esa nota, el siguiente que pase lo "arregla".
-- Una sola acción primaria por vista; el resto en `.btn--ghost` o en `.link`.
+- Una sola acción primaria por vista; el resto en `.link`.
 - **Las fechas van en `src/data/`, en años, y el periodo se compone en el componente.** Así ES y EN no pueden decir fechas distintas, y el raíl mide lo mismo en todas las listas.
 - Imágenes en WebP, importadas desde `src/assets/` para que el build emita la miniatura al tamaño que se pinta. Toda animación respeta `prefers-reduced-motion`.
 - Antes de añadir decoración, agotar el espacio y la jerarquía.
