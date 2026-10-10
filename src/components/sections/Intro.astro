@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { useTranslations, type Lang } from "@i18n/utils";
+import { Icon } from "astro-icon/components";
 import photo from "@/assets/profile-photo.webp";
 
 export interface Props {
@@ -19,9 +20,14 @@ const t = useTranslations(lang);
     <div>
       <h1 class="page-title">David Herrera</h1>
       <p class="meta intro__role">
-        {t("intro.role")}
-        <span class="intro__sep" aria-hidden="true">·</span>
-        {t("intro.location")}
+        <span class="intro__fact">
+          <Icon name="ph:cpu" aria-hidden="true" />
+          {t("intro.role")}
+        </span>
+        <span class="intro__fact">
+          <Icon name="ph:map-pin" aria-hidden="true" />
+          {t("intro.location")}
+        </span>
       </p>
     </div>
   </div>
@@ -37,8 +43,9 @@ const t = useTranslations(lang);
   .intro__who { display: flex; align-items: center; gap: var(--gap-row); }
   /* Cuerpo entero, sin recorte: a 64px no se leería. */
   .intro__photo { --thumb: 96px; }
-  .intro__role { margin-top: 4px; }
-  .intro__sep { color: var(--color-ink-3); margin-inline: 4px; }
+  .intro__role { margin-top: 4px; display: flex; flex-wrap: wrap; column-gap: 16px; row-gap: 4px; }
+  .intro__fact { display: inline-flex; align-items: center; gap: var(--gap-glyph); }
+  .intro__fact [data-icon] { font-size: var(--icon-sm); flex-shrink: 0; }
 
   .intro__text { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
 </style>

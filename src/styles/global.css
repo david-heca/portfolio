@@ -5,6 +5,13 @@
   font-style: italic;
   font-display: swap;
 }
+@font-face {
+  font-family: "Junicode";
+  src: url("/assets/fonts/junicode-roman.woff2") format("woff2");
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   /* tipografías */
@@ -30,6 +37,7 @@
   --t-fast: 0.15s;
   --t-base: 0.2s;
   --nav-settle: 48px;      /* scroll en el que la barra fija asienta velo y hairline */
+  --brand-reveal: 64px;    /* scroll en la portada a partir del cual aparece el wordmark: el h1 ya pasó bajo la barra */
 
   /* escala tipográfica */
   --text-label: 12px;      /* raíl y tags, en mono */
@@ -38,7 +46,7 @@
   --text-body: 16px;       /* prosa principal y títulos de fila */
   --text-lead: 18px;       /* entradilla */
   --text-subhead: 21px;    /* título de sección */
-  --text-brand: 21px;      /* wordmark */
+  --text-brand: 24px;      /* wordmark */
   --display: clamp(28px, 4.5vw, 34px); /* solo el h1 */
 
   /* tracking */
@@ -200,8 +208,8 @@ body::after {
 
 /* ----- type primitives ----- */
 .page-title {
+  font-family: var(--font-display);
   font-weight: var(--weight-medium);
-  letter-spacing: var(--track-tight);
   line-height: var(--leading-tight);
   font-size: var(--display);
   color: var(--color-ink);
@@ -210,8 +218,8 @@ body::after {
 
 /* Va solo, sin párrafo debajo: el hueco hasta la lista vive aquí. */
 .section-title {
+  font-family: var(--font-display);
   font-weight: var(--weight-medium);
-  letter-spacing: var(--track-snug);
   line-height: var(--leading-title);
   font-size: var(--text-subhead);
   color: var(--color-ink);

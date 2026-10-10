@@ -31,8 +31,8 @@
     "location": "Ciudad de México",
     "lead": "La parte difícil casi nunca es el modelo.",
     "bio": {
-      "paragraph1": "Empecé desarrollando sitios en WordPress y administrando hosting tradicional. Hoy diseño y llevo a producción sistemas con <strong>IA aplicada</strong>.",
-      "paragraph2": "Me muevo por todo el stack, pero hoy mi trabajo es <strong>RAG, MCP y MLOps</strong> sobre datos corporativos: bases que nadie documentó, PDFs escaneados, Excels con quince pestañas."
+      "paragraph1": "Comencé haciendo sitios en WordPress y administrando hosting tradicional. Hoy diseño sistemas con <strong>IA aplicada</strong> y los saco a producción.",
+      "paragraph2": "Programo en todo el stack, principalmente con <strong>Python, C# y TypeScript</strong>, y casi todo lo que escribo termina en <strong>RAG, MCP y MLOps</strong> sobre datos corporativos: bases que nadie documentó, PDFs escaneados, Excels con quince pestañas."
     }
   },
   "projects": {
@@ -44,7 +44,7 @@
       },
       "connie": {
         "title": "Connie",
-        "description": "Le preguntas en español a las bases de datos, PDFs y hojas de cálculo de la empresa, y responde citando de dónde salió cada dato. Multicliente y multifuente, con autenticación enterprise."
+        "description": "Le preguntas en español a las bases de datos, PDFs y hojas de cálculo de tu empresa, y responde citando de dónde salió cada dato. Multitenant y multifuente, con autenticación enterprise."
       },
       "handheld": {
         "title": "HandHeld RFID",
@@ -101,7 +101,7 @@
   },
   "contact": {
     "title": "Contacto",
-    "text": "Si tienes alguna idea o simplemente quieres saludar, escríbeme. Suelo responder el mismo día, en horario de Ciudad de México."
+    "text": "Si tienes alguna idea o simplemente quieres saludar, escríbeme. Suelo responder el mismo día."
   },
   "common": {
     "ongoing": "Actualidad",

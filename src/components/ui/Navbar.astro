@@ -6,7 +6,6 @@ import LanguagePicker from "@ui/LanguagePicker.astro";
 
 export interface Props {
   lang: Lang;
-  /** Solo de paso hacia `LanguagePicker`: la ruta equivalente en el otro idioma. */
   switchTo: string;
 }
 
@@ -14,6 +13,8 @@ const { lang, switchTo } = Astro.props;
 const t = useTranslations(lang);
 const home = getHome(lang);
 const path = Astro.url.pathname;
+/** En la portada el nombre ya es el h1: el wordmark espera a que salga de vista. */
+const isHome = path === home;
 
 /** Solo rutas reales. */
 const items = [
@@ -26,7 +27,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
 
 <header class="nav">
   <div class="nav__inner container">
-    <a href={home} class="nav__brand" aria-label="David Herrera">
+    <a href={home} class:list={["nav__brand", { "nav__brand--late": isHome }]} aria-label="David Herrera">
       david<span>herrera</span>
     </a>
 
@@ -66,27 +67,39 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
     border-bottom: 1px solid var(--color-line);
   }
 
-  /* Arriba del todo la barra no tiene superficie: velo y hairline los pone el
-     propio scroll, sin listener -el header se reemplaza en cada navegación y así
-     no hay estado que perder-. Sin scroll-timeline, o con reduced-motion, la
-     superficie está siempre. */
   @supports (animation-timeline: scroll()) {
     .nav__inner {
+      background-color: transparent;
+      border-color: transparent;
       animation: nav-settle linear both;
       animation-timeline: scroll(root);
       animation-range: 0px var(--nav-settle);
     }
     @keyframes nav-settle {
-      from { background-color: transparent; border-color: transparent; }
+      to { background-color: var(--color-glass); border-color: var(--color-line); }
+    }
+  }
+  @supports (animation-timeline: scroll()) {
+    .nav__brand--late {
+      animation: brand-reveal linear both;
+      animation-timeline: scroll(root);
+      animation-range: var(--brand-reveal) calc(var(--brand-reveal) + var(--nav-settle));
+    }
+    @keyframes brand-reveal {
+      from { opacity: 0; visibility: hidden; }
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    .nav__inner { animation: none; }
+    .nav__brand--late { animation: none; }
+    .nav__inner {
+      animation: none;
+      background-color: var(--color-glass);
+      border-color: var(--color-line);
+    }
   }
 
   .nav__brand {
     font-family: var(--font-display);
-    font-style: italic;
     font-size: var(--text-brand);
     color: var(--color-ink);
     flex-shrink: 0;

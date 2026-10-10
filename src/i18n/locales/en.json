@@ -31,8 +31,8 @@
     "location": "Mexico City",
     "lead": "The hard part is almost never the model.",
     "bio": {
-      "paragraph1": "I started out building WordPress sites and managing shared hosting. Today I design and ship systems with <strong>applied AI</strong>.",
-      "paragraph2": "I work across the whole stack, but my focus right now is <strong>RAG, MCP and MLOps</strong> over enterprise data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs."
+      "paragraph1": "I started out building WordPress sites and managing shared hosting. These days I design <strong>applied AI</strong> systems and ship them to production.",
+      "paragraph2": "I code across the whole stack, mainly in <strong>Python, C# and TypeScript</strong>, and most of what I write ends up in <strong>RAG, MCP and MLOps</strong> on enterprise data: databases nobody documented, scanned PDFs, spreadsheets with fifteen tabs."
     }
   },
   "projects": {
@@ -44,7 +44,7 @@
       },
       "connie": {
         "title": "Connie",
-        "description": "You ask the company's databases, PDFs and spreadsheets in plain language, and it answers citing where each figure came from. Multi-tenant and multi-source, with enterprise auth."
+        "description": "You ask your company's databases, PDFs and spreadsheets questions in plain language, and it answers citing where each figure came from. Multi-tenant and multi-source, with enterprise auth."
       },
       "handheld": {
         "title": "HandHeld RFID",
@@ -101,7 +101,7 @@
   },
   "contact": {
     "title": "Contact",
-    "text": "If you've got an idea, or you just want to say hi, write me. I usually reply the same day, on Mexico City time."
+    "text": "If you've got an idea, or you just want to say hi, write me. I usually reply the same day."
   },
   "common": {
     "ongoing": "Present",
