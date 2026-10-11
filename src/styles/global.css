@@ -29,6 +29,9 @@
   /* --t-fast solo para color. */
   --t-fast: 0.15s;
   --t-base: 0.2s;
+  --t-enter: 0.5s;         /* entrada del h1, por palabra, y de la entradilla */
+  --enter-blur: 6px;
+  --enter-lead: 0.4s;      /* la entradilla llega cuando el h1 ya se asienta */
   --nav-settle: 48px;      /* scroll en el que la barra fija asienta velo y hairline */
   --brand-reveal: 64px;    /* scroll en la portada a partir del cual aparece el wordmark: el h1 ya pasó bajo la barra */
 
@@ -200,6 +203,18 @@ body::after {
 }
 
 /* ----- type primitives ----- */
+/* Entrada del h1 y la entradilla al cargar; nunca al hacer scroll. Sin opacidad 0
+   de partida: el h1 es el LCP y un elemento invisible no cuenta. */
+.enter { animation: enter var(--t-enter) ease-out both; animation-delay: var(--enter-delay, 0s); }
+.enter--word { display: inline-block; }
+.enter--lead { --enter-delay: var(--enter-lead); }
+@keyframes enter {
+  from { filter: blur(var(--enter-blur)); opacity: 0.3; transform: translateY(4px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .enter { animation: none; }
+}
+
 .page-title {
   font-family: var(--font-display);
   font-weight: var(--weight-medium);

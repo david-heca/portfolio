@@ -1,4 +1,5 @@
 ---
+import EnterWords from "@ui/EnterWords.astro";
 import { Icon } from "astro-icon/components";
 import NoteList from "@ui/NoteList.astro";
 import { getHome, useTranslations, type Lang } from "@i18n/utils";
@@ -19,7 +20,7 @@ const items = await localizedEntries("notes", lang);
     {t("notes.home")}
   </a>
 
-  <h1 class="page-title notes-index__title">{t("notes.title")}</h1>
+  <h1 class="page-title notes-index__title"><EnterWords text={t("notes.title")} /></h1>
 
   {items.length === 0 ? (
     <p class="prose">{t("notes.empty")}</p>

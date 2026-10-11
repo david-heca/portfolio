@@ -18,7 +18,7 @@ const t = useTranslations(lang);
       <Image src={photo} alt="David Herrera" width={192} height={192} loading="eager" />
     </div>
     <div>
-      <h1 class="page-title">David <span class="intro__surname">Herrera</span></h1>
+      <h1 class="page-title"><span class="enter enter--word">David</span> <span class="enter enter--word intro__surname" style="--enter-delay: 0.12s">Herrera</span></h1>
       <p class="meta intro__role">
         <span class="intro__fact">
           <Icon name="ph:cpu" aria-hidden="true" />
@@ -33,7 +33,7 @@ const t = useTranslations(lang);
   </div>
 
   <div class="intro__text">
-    <p class="lead">{t("intro.lead")}</p>
+    <p class="lead enter enter--lead">{t("intro.lead")}</p>
     <p class="prose" set:html={t("intro.bio.paragraph1")}></p>
     <p class="prose" set:html={t("intro.bio.paragraph2")}></p>
   </div>

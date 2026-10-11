@@ -1,4 +1,5 @@
 ---
+import EnterWords from "@ui/EnterWords.astro";
 import { Icon } from "astro-icon/components";
 import { render, type CollectionEntry } from "astro:content";
 import { localizePath, useTranslations, type Lang } from "@i18n/utils";
@@ -27,8 +28,8 @@ const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
   </a>
 
   <header class="note-page__head">
-    <h1 class="page-title">{entry.data.title}</h1>
-    <p class="lead note-page__summary">{entry.data.summary}</p>
+    <h1 class="page-title"><EnterWords text={entry.data.title} /></h1>
+    <p class="lead enter enter--lead note-page__summary">{entry.data.summary}</p>
 
     <p class="note-page__facts">
       <time class="rail" datetime={entry.data.date.toISOString()}>{dateFormat.format(entry.data.date)}</time>

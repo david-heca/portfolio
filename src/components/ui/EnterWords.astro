@@ -1,0 +1,18 @@
+---
+/* Parte un título en palabras para la entrada de `.enter`. El escalonado se
+   reparte en un tope fijo: un título largo no tarda más en asentarse. */
+export interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+const words = text.split(" ");
+const step = Math.min(0.12, 0.36 / Math.max(words.length - 1, 1));
+---
+
+{words.map((word, i) => (
+  <>
+    <span class="enter enter--word" style={`--enter-delay: ${(i * step).toFixed(3)}s`}>{word}</span>
+    {i < words.length - 1 && " "}
+  </>
+))}
