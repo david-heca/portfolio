@@ -12,11 +12,11 @@ const home = getHome(lang);
 ---
 
 <section class="notfound section container">
-  <p class="rail">{t("notFound.heading")}</p>
+  <p class="meta">{t("notFound.heading")}</p>
   <h1 class="page-title notfound__title">{t("notFound.subtitle")}</h1>
   <p class="prose notfound__desc">{t("notFound.description")}</p>
   <p class="notfound__home">
-    <a href={home} class="link">
+    <a href={home} class="link link--back">
       <Icon name="ph:arrow-left" aria-hidden="true" />
       {t("notFound.homeButton")}
     </a>
@@ -26,6 +26,6 @@ const home = getHome(lang);
 <style>
   .notfound__title { margin-top: 8px; }
   .notfound__desc { margin-top: 12px; }
-  .notfound__home { margin-top: 24px; font-size: var(--text-meta); }
+  .notfound__home { margin-top: 24px; }
 </style>
 

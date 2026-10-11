@@ -14,7 +14,7 @@ const items = await localizedEntries("notes", lang);
 ---
 
 <section class="section container">
-  <a class="link notes-index__back" href={getHome(lang)}>
+  <a class="link link--back" href={getHome(lang)}>
     <Icon name="ph:arrow-left" aria-hidden="true" />
     {t("notes.home")}
   </a>
@@ -29,6 +29,5 @@ const items = await localizedEntries("notes", lang);
 </section>
 
 <style>
-  .notes-index__back { font-size: var(--text-meta); }
   .notes-index__title { margin-top: 24px; margin-bottom: 24px; }
 </style>

@@ -42,7 +42,7 @@ const items = companies.map(({ key, roles }) => {
           <ol class="stages">
             {c.stages.map((s) => (
               <li>
-                <h4 class="card-title">
+                <h4 class="card-title stage__title">
                   {s.title}{s.period && <span class="stage__period"> · {s.period}</span>}
                 </h4>
                 <p class="prose-sm stage__summary">{s.summary}</p>
@@ -57,6 +57,7 @@ const items = companies.map(({ key, roles }) => {
 
 <style>
   .stages { margin-top: 8px; display: flex; flex-direction: column; gap: 16px; }
+  .stage__title { font-weight: normal; }
   .stage__period { color: var(--color-ink-2); }
   .stage__summary { margin-top: 4px; }
 </style>

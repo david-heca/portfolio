@@ -21,7 +21,7 @@ const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
 ---
 
 <article class="note-page section container">
-  <a class="link note-page__back" href={index}>
+  <a class="link link--back" href={index}>
     <Icon name="ph:arrow-left" aria-hidden="true" />
     {t("notes.all")}
   </a>
@@ -31,8 +31,8 @@ const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
     <p class="lead note-page__summary">{entry.data.summary}</p>
 
     <p class="note-page__facts">
-      <time datetime={entry.data.date.toISOString()}>{dateFormat.format(entry.data.date)}</time>
-      {entry.data.tags.map((tag) => <span class="note-page__tag">{tag}</span>)}
+      <time class="rail" datetime={entry.data.date.toISOString()}>{dateFormat.format(entry.data.date)}</time>
+      {entry.data.tags.map((tag) => <span class="rail note-page__tag">{tag}</span>)}
     </p>
   </header>
 
@@ -42,8 +42,6 @@ const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
 </article>
 
 <style>
-  .note-page__back { font-size: var(--text-meta); }
-
   .note-page__head {
     margin-top: 24px;
     padding-bottom: 32px;
@@ -56,15 +54,8 @@ const dateFormat = new Intl.DateTimeFormat(lang === "es" ? "es-MX" : "en-US", {
     flex-wrap: wrap;
     gap: 4px 16px;
     margin-top: 16px;
-    font-size: var(--text-meta);
-    color: var(--color-ink-2);
   }
-  .note-page__tag {
-    font-family: var(--font-mono);
-    font-size: var(--text-label);
-    letter-spacing: var(--track-tag);
-    white-space: nowrap;
-  }
+  .note-page__tag { white-space: nowrap; }
 
   .note-page__body { margin-top: 40px; }
 </style>

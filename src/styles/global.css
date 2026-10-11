@@ -41,8 +41,8 @@
 
   /* escala tipográfica */
   --text-label: 12px;      /* raíl y tags, en mono */
-  --text-meta: 13.5px;     /* barra, pie, rol · ciudad */
-  --text-sm: 14.5px;       /* la segunda línea de una fila */
+  --text-meta: 13px;       /* barra, pie, rol · ciudad */
+  --text-sm: 15px;         /* la segunda línea de una fila */
   --text-body: 16px;       /* prosa principal y títulos de fila */
   --text-lead: 18px;       /* entradilla */
   --text-subhead: 21px;    /* título de sección */
@@ -50,8 +50,7 @@
   --display: clamp(28px, 4.5vw, 34px); /* solo el h1 */
 
   /* tracking */
-  --track-tight: -0.02em;  /* display */
-  --track-snug: -0.01em;   /* subhead y título de fila */
+  --track-snug: -0.01em;   /* título de fila y h2 de nota: la sans */
   --track-tag: 0.04em;     /* raíl y tags */
 
   --leading: 1.65;         /* prosa */
@@ -284,6 +283,7 @@ body::after {
   transition: color var(--t-fast) ease, text-decoration-color var(--t-fast) ease;
 }
 .link [data-icon] { font-size: var(--icon-sm); }
+.link--back { font-size: var(--text-meta); }
 .link:hover,
 .link:focus-visible { color: var(--color-accent); text-decoration-color: currentColor; }
 
@@ -381,9 +381,7 @@ body::after {
   content: counter(longform-item) ".";
   position: absolute;
   left: 0;
-  font-family: var(--font-mono);
-  font-size: var(--text-label);
-  color: var(--color-ink-3);
+  color: var(--color-ink-2);
 }
 
 .longform blockquote {
@@ -393,7 +391,7 @@ body::after {
 
 .longform code {
   font-family: var(--font-mono);
-  font-size: 0.9em;
+  font-size: var(--text-sm);
   color: var(--color-ink);
   background: var(--color-bg-2);
   border-radius: var(--radius-xs);
@@ -440,7 +438,7 @@ body::after {
     color var(--t-base) ease;
 }
 .btn--primary { background: var(--color-ink); color: var(--color-bg); }
-.btn [data-icon] { font-size: 1.15em; }
+.btn [data-icon] { font-size: var(--icon); }
 
 /* ----- elemento de la barra (enlace, conmutador de idioma, toggle) ----- */
 .nav-item {
