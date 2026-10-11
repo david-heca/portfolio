@@ -18,7 +18,7 @@ const t = useTranslations(lang);
       <Image src={photo} alt="David Herrera" width={192} height={192} loading="eager" />
     </div>
     <div>
-      <h1 class="page-title">David Herrera</h1>
+      <h1 class="page-title">David <span class="intro__surname">Herrera</span></h1>
       <p class="meta intro__role">
         <span class="intro__fact">
           <Icon name="ph:cpu" aria-hidden="true" />
@@ -40,6 +40,7 @@ const t = useTranslations(lang);
 </section>
 
 <style>
+  .intro__surname { color: var(--color-accent); }
   .intro__who { display: flex; align-items: center; gap: var(--gap-row); }
   /* Cuerpo entero, sin recorte: a 64px no se leería. */
   .intro__photo { --thumb: 96px; }

@@ -28,7 +28,7 @@
   --color-ink-3: #b0b0b0;   /* ~2.2:1: viñetas, hairlines y la onda; nunca un glifo */
   --color-line: rgba(0, 0, 0, 0.14);
   --color-line-strong: rgba(0, 0, 0, 0.3);
-  --color-accent: #2b6399;  /* la firma: solo el «herrera» del wordmark. 6.3:1 sobre blanco, 3.4:1 sobre negro: no vale para texto */
+  --color-accent: #2b6399;  /* 6.3:1 sobre el fondo */
   --color-glass: rgba(255, 255, 255, 0.72); /* la barra fija sobre lo que pasa debajo; el blur pone el resto */
   --grain: 0.1;             /* opacidad del grano; 0 lo apaga */
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05), 0 16px 40px -24px rgba(0, 0, 0, 0.25);
@@ -93,6 +93,7 @@
   --color-ink: #ffffff;
   --color-ink-2: #9a9a9a;   /* 7.5:1 sobre el fondo */
   --color-ink-3: #4d4d4d;   /* ~2.4:1: mismo papel que en claro */
+  --color-accent: #5b8fc7;  /* 6.2:1: el mismo contraste que en claro */
   --color-line: rgba(255, 255, 255, 0.16);
   --color-line-strong: rgba(255, 255, 255, 0.32);
   --color-glass: rgba(0, 0, 0, 0.72);
@@ -132,7 +133,7 @@ button { font: inherit; color: inherit; background: none; cursor: pointer; }
 img, svg { display: block; max-width: 100%; }
 [data-icon] { flex-shrink: 0; }
 
-::selection { background: var(--color-ink); color: var(--color-bg); }
+::selection { background: var(--color-accent); color: var(--color-bg); }
 
 :focus-visible {
   outline: 2px solid var(--color-ink);
@@ -280,11 +281,11 @@ body::after {
   text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-color: var(--color-ink-3);
-  transition: text-decoration-color var(--t-fast) ease;
+  transition: color var(--t-fast) ease, text-decoration-color var(--t-fast) ease;
 }
 .link [data-icon] { font-size: var(--icon-sm); }
 .link:hover,
-.link:focus-visible { text-decoration-color: currentColor; }
+.link:focus-visible { color: var(--color-accent); text-decoration-color: currentColor; }
 
 /* Título que es enlace: sin subrayado, lo señala la flecha. El gesto al pasar
    lo pone cada uso. */
@@ -296,6 +297,12 @@ body::after {
   font-size: var(--icon);
   transition: transform var(--t-base) ease;
 }
+.card-link,
+.card-link .card-title { transition: color var(--t-fast) ease; }
+.card-link:hover,
+.card-link:focus-visible,
+.card-link:hover .card-title,
+.card-link:focus-visible .card-title { color: var(--color-accent); }
 
 /* ----- lista con raíl -----
    Subgrid: el raíl mide el periodo más largo y las filas casan entre sí. */
@@ -350,7 +357,10 @@ body::after {
   color: var(--color-ink);
   text-decoration: underline;
   text-underline-offset: 3px;
+  transition: color var(--t-fast) ease;
 }
+.longform a:hover,
+.longform a:focus-visible { color: var(--color-accent); }
 
 .longform li { position: relative; padding-left: 24px; }
 .longform li + li { margin-top: 8px; }
@@ -444,7 +454,7 @@ body::after {
   transition: color var(--t-fast) ease;
 }
 .nav-item:hover,
-.nav-item:focus-visible { color: var(--color-ink); }
+.nav-item:focus-visible { color: var(--color-accent); }
 .nav-item__icon { font-size: var(--icon); transition: transform var(--t-base) ease; }
 .nav-item:hover .nav-item__icon,
 .nav-item:focus-visible .nav-item__icon { transform: rotate(var(--icon-tilt)); }

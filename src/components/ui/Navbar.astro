@@ -109,4 +109,6 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
   .nav__links { display: inline-flex; align-items: center; gap: 20px; }
 
   .nav-item[aria-current="page"] { color: var(--color-ink); }
+  .nav-item[aria-current="page"]:hover,
+  .nav-item[aria-current="page"]:focus-visible { color: var(--color-accent); }
 </style>
