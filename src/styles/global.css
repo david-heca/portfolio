@@ -9,7 +9,7 @@
 :root {
   /* tipografías */
   --font-display: "Junicode", Georgia, serif;
-  --font-text: "Outfit Variable", system-ui, sans-serif;
+  --font-text: "Instrument Sans Variable", system-ui, sans-serif;
   --font-mono: "Maple Mono", "SF Mono", ui-monospace, monospace;
 
   /* paleta */
@@ -36,14 +36,14 @@
   --brand-reveal: 64px;    /* scroll en la portada a partir del cual aparece el wordmark: el h1 ya pasó bajo la barra */
 
   /* escala tipográfica */
-  --text-label: 12px;      /* raíl y tags, en mono */
-  --text-meta: 13px;       /* barra, pie, rol · ciudad */
-  --text-sm: 15px;         /* la segunda línea de una fila */
-  --text-body: 16px;       /* prosa principal y títulos de fila */
-  --text-lead: 18px;       /* entradilla */
-  --text-subhead: 21px;    /* título de sección */
-  --text-brand: 24px;      /* wordmark */
-  --display: clamp(28px, 4.5vw, 34px); /* solo el h1 */
+  --text-label: 13px;      /* raíl y tags, en mono */
+  --text-meta: 14px;       /* barra, pie, rol · ciudad */
+  --text-sm: 16px;         /* la segunda línea de una fila */
+  --text-body: 18px;       /* prosa principal y títulos de fila */
+  --text-lead: 20px;       /* entradilla */
+  --text-subhead: 23px;    /* título de sección */
+  --text-brand: 26px;      /* wordmark */
+  --display: clamp(30px, 5vw, 38px); /* solo el h1 */
 
   /* tracking */
   --track-snug: -0.01em;   /* título de fila y h2 de nota: la sans */
@@ -54,12 +54,13 @@
   --leading-title: 1.3;    /* subhead y título de fila */
   --leading-tight: 1.15;   /* h1 */
   --leading-flat: 1;       /* una sola línea: botones, enlaces del nav */
+  --weight-text: 400;      /* toda la sans que no es medium */
   --weight-medium: 500;    /* solo la sans: la mono es de peso único */
 
   /* iconos */
-  --icon-sm: 14px;
-  --icon: 16px;
-  --icon-lg: 20px;
+  --icon-sm: 15px;
+  --icon: 18px;
+  --icon-lg: 22px;
   --icon-tilt: -8deg;      /* al pasar sobre un canal o un control; una flecha se desplaza */
 
   /* layout */
@@ -115,6 +116,7 @@ html, body {
   color: var(--color-ink);
   font-family: var(--font-text);
   font-size: var(--text-body);
+  font-weight: var(--weight-text);
   line-height: var(--leading);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
