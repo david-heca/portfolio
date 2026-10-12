@@ -13,10 +13,8 @@ const { lang, switchTo } = Astro.props;
 const t = useTranslations(lang);
 const home = getHome(lang);
 const path = Astro.url.pathname;
-/** En la portada el nombre ya es el h1: el wordmark espera a que salga de vista. */
 const isHome = path === home;
 
-/** Solo rutas reales. */
 const items = [
   { href: localizePath("/notes/", lang), label: t("nav.notes"), icon: "ph:article" },
 ];
@@ -55,7 +53,6 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
     z-index: 30; /* bajo el aviso de idioma y el skip-link */
   }
 
-  /* Velo y hairline van en la columna, no en el header: nada se sale de ella. */
   .nav__inner {
     display: flex;
     align-items: center;

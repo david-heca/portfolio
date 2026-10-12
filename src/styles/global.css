@@ -176,9 +176,7 @@ img, svg { display: block; max-width: 100%; }
 
 .page { flex-grow: 1; padding-block: 40px; }
 
-/* ----- onda -----
-   El único ornamento: una pausa en la lectura, no un borde. Parte el hueco entre
-   secciones y hace de `hr` en la prosa. */
+/* ----- onda ----- */
 .section + .section { margin-top: calc(var(--section-y) / 2); }
 .section + .section::before { content: ""; margin-bottom: calc(var(--section-y) / 2); }
 .section + .section::before,
@@ -191,8 +189,7 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ----- grano -----
-   Una capa fija sobre todo, barra y avisos incluidos, como el grano de una
-   impresión: por eso va por encima del skip-link. */
+   Por encima de todo, skip-link incluido. */
 body::after {
   content: "";
   position: fixed;
@@ -226,7 +223,7 @@ body::after {
   text-wrap: balance;
 }
 
-/* Va solo, sin párrafo debajo: el hueco hasta la lista vive aquí. */
+/* El hueco hasta la lista vive aquí. */
 .section-title {
   font-family: var(--font-display);
   font-weight: var(--weight-medium);
@@ -279,8 +276,8 @@ body::after {
 }
 .rail--current { color: var(--color-ink); }
 
-/* Enlace de una línea: «ver todas», volver, el correo. La raya es la nativa
-   sobre un inline-flex: cada ítem pinta la suya, así que el glifo queda fuera. */
+/* La raya es la nativa sobre un inline-flex: cada ítem pinta la suya, así que
+   el glifo queda fuera. */
 .link {
   display: inline-flex;
   align-items: center;
@@ -297,8 +294,7 @@ body::after {
 .link:hover,
 .link:focus-visible { color: var(--color-accent); text-decoration-color: currentColor; }
 
-/* Título que es enlace: sin subrayado, lo señala la flecha. El gesto al pasar
-   lo pone cada uso. */
+/* El gesto al pasar lo pone cada uso. */
 .card-link [data-icon] {
   display: inline-block;
   /* Alineación óptica contra la mayúscula del título. Fuera de rejilla a propósito. */

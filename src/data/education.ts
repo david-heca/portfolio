@@ -1,8 +1,6 @@
-/** Años aquí y no en el copy: así ES y EN no pueden decir fechas distintas. */
 interface Study {
   key: string;
   from: number;
-  /** Ausente: sigue en curso. */
   to?: number;
 }
 

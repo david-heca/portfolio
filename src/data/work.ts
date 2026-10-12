@@ -1,5 +1,3 @@
-/** Años aquí y no en el copy, como en `education.ts`: así ES y EN no pueden
- *  decir fechas distintas. */
 interface Role {
   key: string;
   from: number;
@@ -7,7 +5,6 @@ interface Role {
   to?: number;
 }
 
-/** La unidad es la empresa: sus etapas van dentro y el raíl mide el total. */
 interface Company {
   key: "hypertech" | "baacc" | "dec";
   /** De la más reciente a la más antigua. */
