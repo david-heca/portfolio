@@ -38,9 +38,9 @@
   /* escala tipográfica */
   --text-label: 13px;      /* raíl y tags, en mono */
   --text-meta: 14px;       /* barra, pie, rol · ciudad */
-  --text-sm: 16px;         /* la segunda línea de una fila */
-  --text-body: 18px;       /* prosa principal y títulos de fila */
-  --text-lead: 20px;       /* entradilla */
+  --text-sm: 15px;         /* la segunda línea de una fila */
+  --text-body: 17px;       /* prosa principal y títulos de fila */
+  --text-lead: 19px;       /* entradilla */
   --text-subhead: 23px;    /* título de sección */
   --text-brand: 26px;      /* wordmark */
   --display: clamp(30px, 5vw, 38px); /* solo el h1 */
