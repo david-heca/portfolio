@@ -36,6 +36,7 @@
   --text-subhead: 22px;    /* título de sección */
   --text-brand: 24px;      /* wordmark */
   --display: clamp(40px, 9vw, 56px); /* solo el h1 */
+  --display-xl: clamp(120px, 34vw, 200px); /* solo el 404: la cifra es el titular */
 
   /* tracking */
   --track-display: -0.035em; /* h1 y wordmark */
@@ -75,8 +76,8 @@
   --radius-xs: 2px;        /* código en línea */
   --radius-control: 2px;
   --thread-dot: 7px;       /* nudo del hilo de Experiencia */
-  --preview: 240px;       /* captura flotante de un proyecto */
   --bar-h: 6px;            /* barra del eje de Formación */
+  --preview: 240px;       /* captura flotante de un proyecto */
   --thumb: 64px;           /* miniatura de fila; el avatar la sobreescribe */
 
   --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8'%3E%3Cpath d='M-8 4C-5.6 7.2 -2.4 7.2 0 4S5.6 .8 8 4S13.6 7.2 16 4S21.6 .8 24 4' fill='none' stroke='%23000' stroke-width='1.25'/%3E%3C/svg%3E");
@@ -191,7 +192,6 @@ img, svg { display: block; max-width: 100%; }
   mask: var(--wave) repeat-x;
 }
 
-/* ----- grano -----
 /* El scroll dibuja la onda: crece desde la izquierda mientras su sección entra. */
 @supports (animation-timeline: view()) {
   .section { view-timeline: --section; }
@@ -208,6 +208,7 @@ img, svg { display: block; max-width: 100%; }
   .section ~ .section::before { animation: none; }
 }
 
+/* ----- grano -----
    Por encima de todo, skip-link incluido. */
 body::after {
   content: "";

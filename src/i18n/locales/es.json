@@ -129,6 +129,7 @@
     "heading": "404",
     "subtitle": "Creo que te perdiste",
     "description": "Esta página no existe. Puede que la haya movido de sitio.",
-    "homeButton": "Ir al inicio"
+    "homeButton": "Ir al inicio",
+    "missing": "no existe"
   }
 }

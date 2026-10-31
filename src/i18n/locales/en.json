@@ -129,6 +129,7 @@
     "heading": "404",
     "subtitle": "Looks like you're lost",
     "description": "This page doesn't exist. I may have moved it somewhere else.",
-    "homeButton": "Back to home"
+    "homeButton": "Back to home",
+    "missing": "doesn't exist"
   }
 }

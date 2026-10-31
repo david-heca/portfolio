@@ -12,21 +12,59 @@ const t = useTranslations(lang);
 const home = getHome(lang);
 ---
 
-<section class="notfound section container">
-  <p class="meta">{t("notFound.heading")}</p>
-  <h1 class="page-title notfound__title"><EnterWords text={t("notFound.subtitle")} /></h1>
+<section class="notfound container">
+  <p class="notfound__code" aria-hidden="true">{t("notFound.heading")}</p>
+  <h1 class="notfound__title"><EnterWords text={t("notFound.subtitle")} /></h1>
   <p class="prose notfound__desc">{t("notFound.description")}</p>
-  <p class="notfound__home">
-    <a href={home} class="link link--back">
-      <Icon name="hugeicons:arrow-left-02" aria-hidden="true" />
-      {t("notFound.homeButton")}
-    </a>
-  </p>
+  <!-- La ruta la pone el script: el build congela un solo HTML para todas. -->
+  <p class="rail notfound__path" data-missing={t("notFound.missing")} hidden></p>
+  <a href={home} class="link link--back notfound__home">
+    <Icon name="hugeicons:arrow-left-02" aria-hidden="true" />
+    {t("notFound.homeButton")}
+  </a>
 </section>
 
 <style>
-  .notfound__title { margin-top: 8px; }
-  .notfound__desc { margin-top: 12px; }
-  .notfound__home { margin-top: 24px; }
+  /* Centrado en el hueco entre barra y pie, en los dos ejes. */
+  :global(.page:has(.notfound)) { display: flex; }
+  .notfound {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .notfound__code {
+    font-size: var(--display-xl);
+    font-weight: var(--weight-display);
+    letter-spacing: var(--track-display);
+    line-height: var(--leading-flat);
+    color: var(--color-ink);
+    font-variant-numeric: tabular-nums;
+  }
+  .notfound__title {
+    margin-top: 24px;
+    font-size: var(--text-subhead);
+    font-weight: var(--weight-title);
+    letter-spacing: var(--track-title);
+    line-height: var(--leading-title);
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+  .notfound__desc { margin-top: 8px; text-wrap: balance; }
+  .notfound__path { margin-top: 24px; overflow-wrap: anywhere; }
+  .notfound__home { margin-top: 32px; }
 </style>
 
+<script>
+  function showPath() {
+    const el = document.querySelector<HTMLElement>(".notfound__path");
+    if (!el) return;
+    el.textContent = `${decodeURI(location.pathname)} · ${el.dataset.missing}`;
+    el.hidden = false;
+  }
+
+  showPath();
+  document.addEventListener("astro:page-load", showPath);
+</script>
