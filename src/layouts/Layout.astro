@@ -89,7 +89,7 @@ const personSchema = {
     />
     <!-- Sin media query: lo pinta el script del tema, para que la barra del
          navegador siga al tema elegido y no al del sistema. -->
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#000000" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png" />
@@ -142,12 +142,13 @@ const personSchema = {
         var media = window.matchMedia("(prefers-color-scheme: dark)");
         var root = document.documentElement;
 
+        // Oscuro por defecto: el sistema solo manda si el usuario lo eligió.
         function pref() {
           try {
             var v = localStorage.getItem(KEY);
-            return v === "light" || v === "dark" ? v : "system";
+            return v === "light" || v === "dark" || v === "system" ? v : "dark";
           } catch (e) {
-            return "system";
+            return "dark";
           }
         }
 
@@ -168,7 +169,7 @@ const personSchema = {
         document.addEventListener("astro:before-swap", function (e) {
           var next = e.newDocument.documentElement;
           if (root.classList.contains("dark")) next.classList.add("dark");
-          next.dataset.themePref = root.dataset.themePref || "system";
+          next.dataset.themePref = root.dataset.themePref || "dark";
         });
         document.addEventListener("astro:after-swap", function () { paint(pref()); });
 

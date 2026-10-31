@@ -12,7 +12,7 @@ const { lang } = Astro.props;
 const t = useTranslations(lang);
 ---
 
-<section class="section container">
+<section class="section container intro">
   <div class="intro__who">
     <div class="thumb intro__photo">
       <Image src={photo} alt="David Herrera" width={192} height={192} loading="eager" />
@@ -41,12 +41,14 @@ const t = useTranslations(lang);
 
 <style>
   .intro__surname { color: var(--color-accent); }
-  .intro__who { display: flex; align-items: center; gap: var(--gap-row); }
+  /* El nombre va solo en su línea: la foto encima, el rol debajo. */
+  .intro { padding-top: 40px; }
+  .intro__who { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; }
   /* Cuerpo entero, sin recorte: a 64px no se leería. */
   .intro__photo { --thumb: 96px; }
-  .intro__role { margin-top: 4px; display: flex; flex-wrap: wrap; column-gap: 16px; row-gap: 4px; }
+  .intro__role { margin-top: 16px; display: flex; flex-wrap: wrap; column-gap: 16px; row-gap: 4px; }
   .intro__fact { display: inline-flex; align-items: center; gap: var(--gap-glyph); }
   .intro__fact [data-icon] { font-size: var(--icon-sm); flex-shrink: 0; }
 
-  .intro__text { margin-top: 32px; display: flex; flex-direction: column; gap: 16px; }
+  .intro__text { margin-top: 48px; display: flex; flex-direction: column; gap: 16px; }
 </style>

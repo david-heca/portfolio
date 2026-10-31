@@ -39,8 +39,8 @@ const t = useTranslations(lang);
   }
   :global(html[data-theme-pref="light"]) .theme-toggle__glyph--light,
   :global(html[data-theme-pref="dark"]) .theme-toggle__glyph--dark,
-  :global(html[data-theme-pref="system"]) .theme-toggle__glyph--system,
-  :global(html:not([data-theme-pref])) .theme-toggle__glyph--system {
+  :global(html:not([data-theme-pref])) .theme-toggle__glyph--dark,
+  :global(html[data-theme-pref="system"]) .theme-toggle__glyph--system {
     opacity: 1;
     transform: rotate(var(--glyph-tilt, 0deg));
   }
@@ -78,8 +78,7 @@ const t = useTranslations(lang);
     function cycle() {
       const next = CYCLE[(CYCLE.indexOf(theme!.pref()) + 1) % CYCLE.length];
       try {
-        if (next === "system") localStorage.removeItem(theme!.key);
-        else localStorage.setItem(theme!.key, next);
+        localStorage.setItem(theme!.key, next);
       } catch {}
 
       theme!.paint(next);

@@ -21,28 +21,23 @@ const items = projects.map((p) => ({
 <section id="projects" class="section container">
   <h2 class="section-title">{t("projects.title")}</h2>
 
-  <ol class="projects">
+  <ol class="projects" data-previews>
     {items.map((p) => (
       <li class="project">
-        <div class="thumb">
-          <Image src={p.image} alt="" width={128} height={128} loading="lazy" />
+        <div class="project__head">
+          <h3 class="card-title">
+            {p.href ? (
+              <a href={p.href} target="_blank" rel="noopener noreferrer" class="card-link project__link">
+                {p.title}<Icon name="hugeicons:arrow-up-right-01" aria-hidden="true" />
+              </a>
+            ) : (
+              p.title
+            )}
+          </h3>
+          <span class="rail">{p.year}</span>
         </div>
-
-        <div class="project__body">
-          <div class="project__head">
-            <h3 class="card-title">
-              {p.href ? (
-                <a href={p.href} target="_blank" rel="noopener noreferrer" class="card-link project__link">
-                  {p.title}<Icon name="hugeicons:arrow-up-right-01" aria-hidden="true" />
-                </a>
-              ) : (
-                p.title
-              )}
-            </h3>
-            <span class="rail">{p.year}</span>
-          </div>
-          <p class="prose-sm project__desc">{p.desc}</p>
-        </div>
+        <p class="prose-sm project__desc">{p.desc}</p>
+        <Image src={p.image} alt="" width={480} loading="lazy" class="project__preview" />
       </li>
     ))}
   </ol>
@@ -52,16 +47,11 @@ const items = projects.map((p) => ({
   .projects { display: flex; flex-direction: column; }
 
   .project {
-    display: flex;
-    align-items: flex-start;
-    gap: var(--gap-row);
-    padding-block: 20px;
+    position: relative;
+    padding-block: var(--row-y);
   }
-  .project + .project { border-top: 1px solid var(--color-line); }
   .project:first-child { padding-top: 0; }
   .project:last-child { padding-bottom: 0; }
-
-  .project__body { flex: 1; min-width: 0; }
 
   .project__head {
     display: flex;
@@ -73,4 +63,65 @@ const items = projects.map((p) => ({
 
   .project__link:hover [data-icon],
   .project__link:focus-visible [data-icon] { transform: translate(2px, -2px); }
+
+  /* Sin miniatura en la fila: la captura flota junto al cursor mientras se pasa
+     por el proyecto. Sin puntero que pase, no aparece. */
+  .project__preview {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: var(--preview);
+    height: auto;
+    pointer-events: none;
+    border: 1px solid var(--color-line);
+    box-shadow: var(--shadow-soft);
+    opacity: 0;
+    translate: var(--px, 0) var(--py, 0);
+    rotate: var(--tilt, 0deg);
+    scale: 0.92;
+    transition: opacity var(--t-base) ease, scale var(--t-base) ease, rotate var(--t-enter) ease;
+  }
+  @media (hover: hover) {
+    .project[data-hover] .project__preview { opacity: 1; scale: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .project__preview { transition: opacity var(--t-base) ease; }
+  }
 </style>
+
+<script>
+  // La captura sigue al cursor y se inclina según hacia dónde se mueve.
+  function setupPreviews() {
+    const list = document.querySelector<HTMLElement>("[data-previews]");
+    if (!list || list.dataset.ready) return;
+    list.dataset.ready = "true";
+    if (!matchMedia("(hover: hover)").matches) return;
+    const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    list.querySelectorAll<HTMLElement>(".project").forEach((row) => {
+      const preview = row.querySelector<HTMLElement>(".project__preview")!;
+      let lastX = 0;
+      let settle = 0;
+      row.addEventListener("pointerenter", () => (row.dataset.hover = ""));
+      row.addEventListener("pointerleave", () => delete row.dataset.hover);
+      row.addEventListener("pointermove", (event) => {
+        const rect = row.getBoundingClientRect();
+        const x = event.clientX - rect.left;
+        const y = event.clientY - rect.top;
+        // A la derecha del cursor mientras quepa en la columna; si no, a la izquierda.
+        const right = x + 24 + preview.offsetWidth <= rect.width;
+        row.style.setProperty("--px", `${right ? x + 24 : x - 24 - preview.offsetWidth}px`);
+        row.style.setProperty("--py", `${y - preview.offsetHeight / 2}px`);
+        if (still) return;
+        row.style.setProperty("--tilt", `${Math.max(-6, Math.min(6, (event.clientX - lastX) * 0.4))}deg`);
+        lastX = event.clientX;
+        clearTimeout(settle);
+        settle = window.setTimeout(() => row.style.setProperty("--tilt", "0deg"), 120);
+      });
+    });
+  }
+
+  setupPreviews();
+  document.addEventListener("astro:page-load", setupPreviews);
+</script>
