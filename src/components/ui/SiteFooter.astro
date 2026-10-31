@@ -58,6 +58,11 @@ const year = new Date().getFullYear();
     gap: var(--gap-glyph);
   }
   .footer__heart { font-size: var(--icon); }
+  /* En móvil las dos mitades no caben en una fila: se apilan centradas. */
+  @media (max-width: 639px) {
+    .footer__inner { flex-direction: column; justify-content: center; }
+    .footer__made { justify-content: center; text-align: center; }
+  }
   .footer__sep { color: var(--color-ink-3); }
 
   .footer__channels {
