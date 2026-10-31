@@ -21,7 +21,7 @@
   --color-ink-3: #b0b0b0;   /* ~2.2:1: viñetas, hairlines y la onda; nunca un glifo */
   --color-line: rgba(0, 0, 0, 0.14);
   --color-line-strong: rgba(0, 0, 0, 0.3);
-  --color-accent: #2b6399;  /* 6.3:1 sobre el fondo */
+  --color-accent: #2f5d46;  /* 7.6:1 sobre el fondo */
   --color-glass: rgba(255, 255, 255, 0.72); /* la barra fija sobre lo que pasa debajo; el blur pone el resto */
   --grain: 0.1;             /* opacidad del grano; 0 lo apaga */
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05), 0 16px 40px -24px rgba(0, 0, 0, 0.25);
@@ -89,7 +89,7 @@
   --color-ink: #ffffff;
   --color-ink-2: #9a9a9a;   /* 7.5:1 sobre el fondo */
   --color-ink-3: #4d4d4d;   /* ~2.4:1: mismo papel que en claro */
-  --color-accent: #5b8fc7;  /* 6.2:1: el mismo contraste que en claro */
+  --color-accent: #6fb08c;  /* 8.3:1: casi el mismo contraste que en claro */
   --color-line: rgba(255, 255, 255, 0.16);
   --color-line-strong: rgba(255, 255, 255, 0.32);
   --color-glass: rgba(0, 0, 0, 0.72);
