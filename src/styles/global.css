@@ -9,7 +9,7 @@
 :root {
   /* tipografías */
   --font-display: "Junicode", Georgia, serif;
-  --font-text: "Geist Variable", system-ui, sans-serif;
+  --font-text: "Inter Variable", system-ui, sans-serif;
   --font-mono: "Maple Mono", "SF Mono", ui-monospace, monospace;
 
   /* paleta */
