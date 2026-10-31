@@ -90,12 +90,12 @@
     "title": "Formación",
     "list": {
       "tesco": {
-        "degree": "Ing. en Tecnologías de la Información & Comunicaciones",
-        "institution": "Tecnológico de Estudios Superiores de Coacalco (TESCo) - TecNM"
+        "degree": "Ingeniería en TIC",
+        "at": "TESCo"
       },
       "cecytem": {
         "degree": "Técnico en Programación",
-        "institution": "CECyTEM - Tultepec"
+        "at": "CECyTEM"
       }
     }
   },

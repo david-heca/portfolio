@@ -76,6 +76,7 @@
   --radius-control: 2px;
   --thread-dot: 7px;       /* nudo del hilo de Experiencia */
   --preview: 240px;       /* captura flotante de un proyecto */
+  --bar-h: 6px;            /* barra del eje de Formación */
   --thumb: 64px;           /* miniatura de fila; el avatar la sobreescribe */
 
   --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8'%3E%3Cpath d='M-8 4C-5.6 7.2 -2.4 7.2 0 4S5.6 .8 8 4S13.6 7.2 16 4S21.6 .8 24 4' fill='none' stroke='%23000' stroke-width='1.25'/%3E%3C/svg%3E");

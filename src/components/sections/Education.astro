@@ -8,32 +8,95 @@ export interface Props {
 
 const { lang } = Astro.props;
 const t = useTranslations(lang);
-const ongoing = t("common.ongoing");
 
-const items = studies.map(({ key, from, to }) => ({
-  period: `${from} - ${to ?? ongoing}`,
-  current: to === undefined,
-  title: t(`education.list.${key}.degree`),
-  institution: t(`education.list.${key}.institution`),
+// Un eje de años con una barra por estudio.
+const now = new Date().getFullYear();
+const first = Math.min(...studies.map((s) => s.from));
+const years = Array.from({ length: now - first + 1 }, (_, i) => first + i);
+const at = (year: number) => (year - first) / years.length;
+
+const bars = [...studies].reverse().map((s) => ({
+    title: t(`education.list.${s.key}.degree`),
+    place: t(`education.list.${s.key}.at`),
+    period: `${s.from}–${s.to ?? ""}`,
+    start: at(s.from),
+    end: at((s.to ?? now) + 1),
 }));
 ---
 
 <section id="education" class="section container">
   <h2 class="section-title">{t("education.title")}</h2>
 
-  <ul class="rows">
-    {items.map((e) => (
-      <li class="row">
-        <span class:list={["rail", e.current && "rail--current"]}>{e.period}</span>
-        <div>
-          <h3 class="card-title">{e.title}</h3>
-          <p class="prose-sm edu__institution">{e.institution}</p>
-        </div>
-      </li>
-    ))}
-  </ul>
+  <div class="span" style={`--years: ${years.length}`}>
+    <ol class="bars">
+      {bars.map((b) => (
+        <li
+          class:list={["bar", b.start > 0.5 && "bar--late"]}
+          style={`--start: ${b.start}; --end: ${b.end}`}
+        >
+          <span class="bar__label"><strong>{b.title}</strong> {b.place} <span class="sr-only">{b.period}</span></span>
+          <span class="bar__line" aria-hidden="true"></span>
+        </li>
+      ))}
+    </ol>
+    <ol class="axis" aria-hidden="true">
+      {years.map((y) => <li>{`'${String(y).slice(2)}`}</li>)}
+    </ol>
+  </div>
 </section>
 
 <style>
-  .edu__institution { margin-top: 4px; }
+  .span { display: flex; flex-direction: column; gap: 24px; }
+
+  .bars { display: flex; flex-direction: column; gap: 20px; }
+  .bar {
+    position: relative;
+    margin-left: calc(var(--start) * 100%);
+    width: calc((var(--end) - var(--start)) * 100%);
+  }
+  .bar__label {
+    display: block;
+    white-space: nowrap;
+    font-size: var(--text-sm);
+    color: var(--color-ink-2);
+  }
+  .bar__label strong { color: var(--color-ink); font-weight: var(--weight-medium); }
+  /* Una barra que empieza pasada la mitad cuelga su etiqueta del final. */
+  .bar--late .bar__label { direction: rtl; text-align: right; }
+  .bar--late .bar__label > * { direction: ltr; unicode-bidi: isolate; }
+
+  .bar__line {
+    display: block;
+    height: var(--bar-h);
+    margin-top: 8px;
+    border-radius: calc(var(--bar-h) / 2);
+    background: var(--color-ink);
+    transform-origin: left;
+  }
+  .axis {
+    display: grid;
+    grid-template-columns: repeat(var(--years), 1fr);
+    font-family: var(--font-mono);
+    font-size: var(--text-label);
+    color: var(--color-ink-2);
+  }
+  /* En móvil, un año sí y otro no: los doce no caben. */
+  @media (max-width: 639px) {
+    .axis li:nth-child(even) { visibility: hidden; }
+  }
+
+  /* Las barras crecen desde su año al entrar en pantalla. */
+  @supports (animation-timeline: view()) {
+    .bar__line {
+      animation: grow linear both;
+      animation-timeline: view();
+      animation-range: entry 10% cover 35%;
+    }
+    @keyframes grow {
+      from { transform: scaleX(0); }
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bar__line { animation: none; }
+  }
 </style>

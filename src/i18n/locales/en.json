@@ -90,12 +90,12 @@
     "title": "Education",
     "list": {
       "tesco": {
-        "degree": "Bachelor of Engineering in Information & Communication Technologies",
-        "institution": "Tecnológico de Estudios Superiores de Coacalco (TESCo) - TecNM"
+        "degree": "B.Eng. in ICT",
+        "at": "TESCo"
       },
       "cecytem": {
-        "degree": "Technical High School Diploma in Programming",
-        "institution": "CECyTEM - Tultepec"
+        "degree": "Programming diploma",
+        "at": "CECyTEM"
       }
     }
   },
