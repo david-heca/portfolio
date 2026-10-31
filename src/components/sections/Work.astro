@@ -88,7 +88,37 @@ const items = companies.map(({ key, roles }) => {
     from { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-accent) 60%, transparent); }
     to { box-shadow: 0 0 0 8px transparent; }
   }
+
+  /* El scroll dibuja el hilo: cada tramo baja desde su nudo y el nudo aparece
+     cuando su empresa entra. */
+  @supports (animation-timeline: view()) {
+    .row { view-timeline: --row; }
+    .thread::before {
+      transform-origin: top;
+      animation: thread-draw linear both;
+      animation-timeline: --row;
+      animation-range: entry 20% cover 55%;
+    }
+    .thread::after {
+      animation: knot linear both;
+      animation-timeline: --row;
+      animation-range: entry 15% entry 45%;
+    }
+    .thread--current::after {
+      animation: knot linear both, pulse 2.4s ease-out infinite;
+      animation-timeline: --row, auto;
+      animation-range: entry 15% entry 45%, normal;
+    }
+    @keyframes thread-draw {
+      from { transform: scaleY(0); }
+    }
+    @keyframes knot {
+      from { scale: 0; }
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
+    .thread::before,
+    .thread::after,
     .thread--current::after { animation: none; }
   }
 

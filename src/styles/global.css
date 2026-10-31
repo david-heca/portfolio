@@ -192,6 +192,22 @@ img, svg { display: block; max-width: 100%; }
 }
 
 /* ----- grano -----
+/* El scroll dibuja la onda: crece desde la izquierda mientras su sección entra. */
+@supports (animation-timeline: view()) {
+  .section { view-timeline: --section; }
+  .section ~ .section::before {
+    animation: wave-draw linear both;
+    animation-timeline: --section;
+    animation-range: entry 0% entry 40%;
+  }
+  @keyframes wave-draw {
+    from { width: 0; }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .section ~ .section::before { animation: none; }
+}
+
    Por encima de todo, skip-link incluido. */
 body::after {
   content: "";
