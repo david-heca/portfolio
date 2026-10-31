@@ -4,7 +4,6 @@ import { getHome, localizePath, useTranslations, type Lang } from "@i18n/utils";
 import Navbar from "@ui/Navbar.astro";
 import { channels, email } from "@/data/contact";
 import LanguageHint from "@ui/LanguageHint.astro";
-// Junicode se autoaloja (no está en Fontsource): su @font-face vive en global.css.
 import "@fontsource-variable/inter/wght.css";
 import "@fontsource/maple-mono/latin-400.css";
 import "@styles/global.css";
@@ -93,7 +92,6 @@ const personSchema = {
     <meta name="theme-color" content="#ffffff" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
-    <link rel="preload" href="/assets/fonts/junicode-roman.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     {!noindex && (

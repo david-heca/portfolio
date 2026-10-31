@@ -1,14 +1,6 @@
-@font-face {
-  font-family: "Junicode";
-  src: url("/assets/fonts/junicode-roman.woff2") format("woff2");
-  font-weight: 300 700;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   /* tipografías */
-  --font-display: "Junicode", Georgia, serif;
+  --font-display: var(--font-text); /* una sola familia: la jerarquía la ponen peso y tracking */
   --font-text: "Inter Variable", system-ui, sans-serif;
   --font-mono: "Maple Mono", "SF Mono", ui-monospace, monospace;
 
@@ -46,7 +38,10 @@
   --display: clamp(28px, 4.5vw, 34px); /* solo el h1 */
 
   /* tracking */
-  --track-snug: -0.01em;   /* título de fila y h2 de nota: la sans */
+  --track-display: -0.035em; /* h1 y wordmark */
+  --track-title: -0.025em; /* título de sección */
+  --track-lead: -0.012em;  /* entradilla */
+  --track-snug: -0.01em;   /* título de fila y h2 de nota */
   --track-tag: 0.04em;     /* raíl y tags */
 
   --leading: 1.6;         /* prosa */
@@ -56,6 +51,9 @@
   --leading-flat: 1;       /* una sola línea: botones, enlaces del nav */
   --weight-text: 400;      /* toda la sans que no es medium */
   --weight-medium: 500;    /* solo la sans: la mono es de peso único */
+  --weight-strong: 550;    /* negrita dentro de la prosa */
+  --weight-title: 600;     /* título de sección */
+  --weight-display: 650;   /* h1 y wordmark */
 
   /* iconos */
   --icon-sm: 14px;
@@ -216,7 +214,8 @@ body::after {
 
 .page-title {
   font-family: var(--font-display);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-display);
+  letter-spacing: var(--track-display);
   line-height: var(--leading-tight);
   font-size: var(--display);
   color: var(--color-ink);
@@ -226,7 +225,8 @@ body::after {
 /* El hueco hasta la lista vive aquí. */
 .section-title {
   font-family: var(--font-display);
-  font-weight: var(--weight-medium);
+  font-weight: var(--weight-title);
+  letter-spacing: var(--track-title);
   line-height: var(--leading-title);
   font-size: var(--text-subhead);
   color: var(--color-ink);
@@ -244,17 +244,19 @@ body::after {
 
 .lead {
   font-size: var(--text-lead);
+  font-weight: var(--weight-medium);
+  letter-spacing: var(--track-lead);
   line-height: var(--leading-snug);
   color: var(--color-ink);
 }
-.lead strong { font-weight: var(--weight-medium); }
+.lead strong { font-weight: var(--weight-title); }
 
 .prose {
   font-size: var(--text-body);
   line-height: var(--leading);
   color: var(--color-ink-2);
 }
-.prose strong { color: var(--color-ink); font-weight: var(--weight-medium); }
+.prose strong { color: var(--color-ink); font-weight: var(--weight-strong); }
 
 .prose-sm {
   font-size: var(--text-sm);
@@ -357,7 +359,7 @@ body::after {
 }
 .longform > :first-child { margin-top: 0; }
 
-.longform strong { color: var(--color-ink); font-weight: var(--weight-medium); }
+.longform strong { color: var(--color-ink); font-weight: var(--weight-strong); }
 
 .longform a {
   color: var(--color-ink);
