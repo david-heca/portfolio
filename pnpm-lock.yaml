@@ -17,9 +17,9 @@ importers:
       '@fontsource/maple-mono':
         specifier: ^5.3.0
         version: 5.3.0
-      '@iconify-json/ph':
-        specifier: ^1.2.2
-        version: 1.2.2
+      '@iconify-json/hugeicons':
+        specifier: ^1.2.35
+        version: 1.2.35
       astro:
         specifier: 7.3.2
         version: 7.3.2(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.3)(@types/node@24.13.4)
@@ -579,8 +579,8 @@ packages:
   '@fontsource/maple-mono@5.3.0':
     resolution: {integrity: sha512-8N3FVDWphO/971tZIig9D558j9jf09fWYIXFjgv7DKJEvDjtgfATx1ScWHdTCsf+tufFS5M1bAa4AumVBKPhSQ==}
 
-  '@iconify-json/ph@1.2.2':
-    resolution: {integrity: sha512-PgkEZNtqa8hBGjHXQa4pMwZa93hmfu8FUSjs/nv4oUU6yLsgv+gh9nu28Kqi8Fz9CCVu4hj1MZs9/60J57IzFw==}
+  '@iconify-json/hugeicons@1.2.35':
+    resolution: {integrity: sha512-c06tY90JZnKhOLBAKoQ1z2pqXMRdATuYXslTKwaaIAjLzKsTIsE+GGknY6+qo/SP0U/NG9xQjr4N+zfDqOeQiQ==}
 
   '@iconify/tools@5.0.14':
     resolution: {integrity: sha512-wJ4ZE3/HZh2iBqLwG+8FOMHe7CMJAJqwSXZSpPwMdj1gZM3Z4t2hbQMVw4Vm45oQ985qn0g89PUIcDEdKTheBA==}
@@ -2119,7 +2119,7 @@ snapshots:
 
   '@fontsource/maple-mono@5.3.0': {}
 
-  '@iconify-json/ph@1.2.2':
+  '@iconify-json/hugeicons@1.2.35':
     dependencies:
       '@iconify/types': 2.0.0
 
