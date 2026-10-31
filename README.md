@@ -18,7 +18,11 @@ pnpm run deploy   # `pnpm deploy` is a pnpm built-in
 - Language is suggested, never redirected, so crawlers always land on `/`.
 - One function, `localizePath()`, maps es ↔ en for hreflang and the switcher.
 - A note only ships if it exists in both languages.
-- Junicode self-hosted and subset: 1 MB → 43 KB.
+- Dark by default; the theme script paints before first paint, so there is no
+  flash, and every choice (light, dark or system) is remembered.
+- Experience is joined by one vertical thread instead of a divider per row.
+- Project rows carry no thumbnail: the screenshot follows the cursor, and
+  without a pointer the list is plain text.
 
 Design rules and their reasons live in [`CLAUDE.md`](CLAUDE.md), in Spanish.
 
