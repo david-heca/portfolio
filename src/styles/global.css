@@ -15,7 +15,7 @@
   --color-line-strong: rgba(0, 0, 0, 0.3);
   --color-accent: #2f5d46;  /* 7.6:1 sobre el fondo */
   --color-glass: rgba(255, 255, 255, 0.72); /* la barra fija sobre lo que pasa debajo; el blur pone el resto */
-  --grain: 0.1;             /* opacidad del grano; 0 lo apaga */
+  --grain: 0.16;          /* opacidad del grano; 0 lo apaga */
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05), 0 16px 40px -24px rgba(0, 0, 0, 0.25);
 
   /* --t-fast solo para color. */
@@ -82,7 +82,7 @@
 
   --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='8'%3E%3Cpath d='M-8 4C-5.6 7.2 -2.4 7.2 0 4S5.6 .8 8 4S13.6 7.2 16 4S21.6 .8 24 4' fill='none' stroke='%23000' stroke-width='1.25'/%3E%3C/svg%3E");
 
-  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --noise: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3 -1.1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 :root.dark {
@@ -96,7 +96,7 @@
   --color-line: rgba(255, 255, 255, 0.16);
   --color-line-strong: rgba(255, 255, 255, 0.32);
   --color-glass: rgba(0, 0, 0, 0.72);
-  --grain: 0.12;
+  --grain: 0.2;
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.6), 0 16px 40px -24px rgba(0, 0, 0, 0.9);
 }
 
@@ -217,7 +217,7 @@ body::after {
   z-index: 80;
   pointer-events: none;
   opacity: var(--grain);
-  background-color: var(--color-ink);
+  background-color: var(--color-ink-2);
   mask: var(--noise) repeat;
 }
 
