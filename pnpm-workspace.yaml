@@ -8,3 +8,5 @@ onlyBuiltDependencies:
 allowBuilds:
   esbuild: false
   workerd: false
+
+minimumReleaseAge: 4320
