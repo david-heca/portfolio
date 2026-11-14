@@ -80,7 +80,7 @@ const items = projects.map((p) => ({
     translate: var(--px, 0) var(--py, 0);
     rotate: var(--tilt, 0deg);
     scale: 0.92;
-    transition: opacity var(--t-base) ease, scale var(--t-base) ease, rotate var(--t-enter) ease;
+    transition: opacity var(--t-base) ease, scale var(--t-base) ease, rotate var(--t-slow) ease;
   }
   @media (hover: hover) {
     .project[data-hover] .project__preview { opacity: 1; scale: 1; }

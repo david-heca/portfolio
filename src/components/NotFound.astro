@@ -1,5 +1,4 @@
 ---
-import EnterWords from "@ui/EnterWords.astro";
 import { Icon } from "astro-icon/components";
 import { getHome, useTranslations, type Lang } from "@i18n/utils";
 
@@ -14,7 +13,7 @@ const home = getHome(lang);
 
 <section class="notfound container">
   <p class="notfound__code" aria-hidden="true">{t("notFound.heading")}</p>
-  <h1 class="notfound__title"><EnterWords text={t("notFound.subtitle")} /></h1>
+  <h1 class="notfound__title">{t("notFound.subtitle")}</h1>
   <p class="prose notfound__desc">{t("notFound.description")}</p>
   <!-- La ruta la pone el script: el build congela un solo HTML para todas. -->
   <p class="rail notfound__path" data-missing={t("notFound.missing")} hidden></p>
