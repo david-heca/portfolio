@@ -14,9 +14,11 @@ const t = useTranslations(lang);
 const home = getHome(lang);
 const path = Astro.url.pathname;
 const isHome = path === home;
+const notesHref = localizePath("/notes/", lang);
+const isNote = path.startsWith(notesHref) && path !== notesHref;
 
 const items = [
-  { href: localizePath("/notes/", lang), label: t("nav.notes"), icon: "hugeicons:news" },
+  { href: notesHref, label: t("nav.notes"), icon: "hugeicons:news" },
 ];
 
 /** Una ruta está activa también en sus páginas de detalle, no solo en el índice. */
@@ -24,7 +26,7 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
 ---
 
 <header class="nav">
-  <div class="nav__inner container">
+  <div class:list={["nav__inner container", { "nav__inner--read": isNote }]}>
     <a href={home} class:list={["nav__brand", { "nav__brand--late": isHome }]} aria-label="David Herrera">
       david<span>herrera</span>
     </a>
@@ -86,8 +88,26 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
       from { opacity: 0; visibility: hidden; }
     }
   }
+  /* En una nota, el hilo de la barra se traza con la lectura. */
+  @supports (animation-timeline: scroll()) {
+    .nav__inner--read { position: relative; }
+    .nav__inner--read::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 -1px; /* sobre el hairline, que es borde de 1px */
+      height: 1px;
+      background: var(--color-ink-2);
+      transform-origin: left;
+      animation: read-draw linear both;
+      animation-timeline: scroll(root);
+    }
+    @keyframes read-draw {
+      from { transform: scaleX(0); }
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
     .nav__brand--late { animation: none; }
+    .nav__inner--read::after { display: none; }
     .nav__inner {
       animation: none;
       background-color: var(--color-glass);
