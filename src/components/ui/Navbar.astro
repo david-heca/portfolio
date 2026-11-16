@@ -78,11 +78,11 @@ const isCurrent = (href: string) => path === href || path.startsWith(href);
       to { background-color: var(--color-glass); border-color: var(--color-line); }
     }
   }
-  @supports (animation-timeline: scroll()) {
+  @supports (animation-timeline: view()) {
     .nav__brand--late {
       animation: brand-reveal linear both;
-      animation-timeline: scroll(root);
-      animation-range: var(--brand-reveal) calc(var(--brand-reveal) + var(--nav-settle));
+      animation-timeline: --name;
+      animation-range: exit 0% exit 100%;
     }
     @keyframes brand-reveal {
       from { opacity: 0; visibility: hidden; }

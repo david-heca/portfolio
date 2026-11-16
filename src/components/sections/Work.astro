@@ -68,6 +68,7 @@ const items = companies.map(({ key, roles }) => {
     width: 1px;
     background: var(--color-line);
   }
+  .row:first-child .thread::before { top: calc(1lh / 2); }
   .row:last-child .thread::before { bottom: 0; }
   /* Alineación óptica: el nudo se centra en la primera línea del título. */
   .thread::after {
@@ -89,25 +90,26 @@ const items = companies.map(({ key, roles }) => {
     to { box-shadow: 0 0 0 8px transparent; }
   }
 
-  /* El scroll dibuja el hilo: cada tramo baja desde su nudo y el nudo aparece
-     cuando su empresa entra. */
+  /* El scroll dibuja el hilo con una línea de lectura fija (`--draw-line`): cada
+     tramo sale de donde acabó el anterior y el nudo aparece cuando lo alcanza. */
   @supports (animation-timeline: view()) {
-    .row { view-timeline: --row; }
+    .thread { view-timeline: --thread; view-timeline-inset: 0 var(--draw-line); }
     .thread::before {
       transform-origin: top;
       animation: thread-draw linear both;
-      animation-timeline: --row;
-      animation-range: entry 20% cover 55%;
+      animation-timeline: --thread;
+      animation-range: entry 0% entry calc(100% + 2 * var(--row-y));
     }
+    .row:last-child .thread::before { animation-range: entry 0% entry 100%; }
     .thread::after {
       animation: knot linear both;
-      animation-timeline: --row;
-      animation-range: entry 15% entry 45%;
+      animation-timeline: --thread;
+      animation-range: entry 0% entry calc(2 * var(--thread-dot));
     }
     .thread--current::after {
       animation: knot linear both, pulse 2.4s ease-out infinite;
-      animation-timeline: --row, auto;
-      animation-range: entry 15% entry 45%, normal;
+      animation-timeline: --thread, auto;
+      animation-range: entry 0% entry calc(2 * var(--thread-dot)), normal;
     }
     @keyframes thread-draw {
       from { transform: scaleY(0); }

@@ -22,8 +22,8 @@
   --t-fast: 0.15s;
   --t-base: 0.2s;
   --t-slow: 0.5s;          /* giro de la captura flotante de Proyectos */
+  --draw-line: 40%;        /* el scroll dibuja hasta aquí: 40% sobre el borde inferior de la vista */
   --nav-settle: 48px;      /* scroll en el que la barra fija asienta velo y hairline */
-  --brand-reveal: 64px;    /* scroll en la portada a partir del cual aparece el wordmark: el h1 ya pasó bajo la barra */
 
   /* escala tipográfica */
   --text-label: 12px;      /* raíl y tags, en mono */
@@ -109,7 +109,8 @@ html { background-color: var(--color-bg); color-scheme: light; }
 html.dark { color-scheme: dark; }
 
 /* La barra es fija: sin esto el salto del skip-link deja el destino debajo de ella. */
-html { scroll-padding-top: var(--nav-h); }
+/* Deja que la barra siga la línea de tiempo del h1 de la portada. */
+html { scroll-padding-top: var(--nav-h); timeline-scope: --name; }
 
 html, body {
   margin: 0;

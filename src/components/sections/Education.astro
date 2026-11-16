@@ -71,7 +71,6 @@ const bars = [...studies].reverse().map((s) => ({
     margin-top: 8px;
     border-radius: calc(var(--bar-h) / 2);
     background: var(--color-ink);
-    transform-origin: left;
   }
   .axis {
     display: grid;
@@ -92,8 +91,10 @@ const bars = [...studies].reverse().map((s) => ({
       animation-timeline: view();
       animation-range: entry 10% cover 35%;
     }
+    /* Recorte y no escala: estirar la barra aplastaría sus puntas redondas. */
     @keyframes grow {
-      from { transform: scaleX(0); }
+      from { clip-path: inset(0 100% 0 0 round calc(var(--bar-h) / 2)); }
+      to { clip-path: inset(0 0 0 0 round calc(var(--bar-h) / 2)); }
     }
   }
   @media (prefers-reduced-motion: reduce) {
