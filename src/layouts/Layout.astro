@@ -142,13 +142,13 @@ const personSchema = {
         var media = window.matchMedia("(prefers-color-scheme: dark)");
         var root = document.documentElement;
 
-        // Oscuro por defecto: el sistema solo manda si el usuario lo eligió.
+        // Sin preferencia guardada manda el sistema.
         function pref() {
           try {
             var v = localStorage.getItem(KEY);
-            return v === "light" || v === "dark" || v === "system" ? v : "dark";
+            return v === "light" || v === "dark" || v === "system" ? v : "system";
           } catch (e) {
-            return "dark";
+            return "system";
           }
         }
 
@@ -169,7 +169,7 @@ const personSchema = {
         document.addEventListener("astro:before-swap", function (e) {
           var next = e.newDocument.documentElement;
           if (root.classList.contains("dark")) next.classList.add("dark");
-          next.dataset.themePref = root.dataset.themePref || "dark";
+          next.dataset.themePref = root.dataset.themePref || "system";
         });
         document.addEventListener("astro:after-swap", function () { paint(pref()); });
 
