@@ -15,7 +15,7 @@
   --color-line-strong: rgba(0, 0, 0, 0.3);
   --color-accent: #2f5d46;  /* 7.6:1 sobre el fondo */
   --color-glass: rgba(255, 255, 255, 0.72); /* la barra fija sobre lo que pasa debajo; el blur pone el resto */
-  --grain: 0.16;          /* opacidad del grano; 0 lo apaga */
+  --grain: 0.08;          /* opacidad del grano; 0 lo apaga */
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.05), 0 16px 40px -24px rgba(0, 0, 0, 0.25);
 
   /* --t-fast solo para color. */
@@ -94,7 +94,7 @@
   --color-line: rgba(255, 255, 255, 0.16);
   --color-line-strong: rgba(255, 255, 255, 0.32);
   --color-glass: rgba(0, 0, 0, 0.72);
-  --grain: 0.2;
+  --grain: 0.08;
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.6), 0 16px 40px -24px rgba(0, 0, 0, 0.9);
 }
 
